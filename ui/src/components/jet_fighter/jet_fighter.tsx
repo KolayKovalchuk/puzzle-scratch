@@ -14,11 +14,12 @@ function useLoadFrames(app: Application<ICanvas>) {
 
         // Load the spritesheet using PIXI.Assets
         Assets.load(spritesheet).then((resource) => {
-            setFrames(
-                Object.keys(resource.data.frames).map(frame =>
+            const frames = Object
+                .keys(resource.data.frames)
+                .map(frame =>
                     Texture.from(frame)
                 )
-            );
+            setFrames(frames);
         });
 
         // Cleanup if necessary
@@ -57,7 +58,7 @@ function useHandleBlurTick() {
 
             blurFilter.blur = newBlurValue;
 
-            if (!blurFilter.blur){
+            if (!blurFilter.blur) {
                 blurFilter.blur = 0.0001
             }
 
@@ -73,7 +74,7 @@ function useHandleBlurTick() {
 export const JetFighter = () => {
     const app = useApp();
     const [rot] = useHandleRotationTick()
-    // const [blurFilter] = useHandleBlurTick()
+    const [blurFilter] = useHandleBlurTick()
     const frames = useLoadFrames(app)
 
     if (frames.length === 0) {
@@ -89,7 +90,7 @@ export const JetFighter = () => {
                 anchor={0.5}
                 x={0}
                 y={0}
-                // filters={[blurFilter]} // Apply the blur filter to the sprite
+                filters={[blurFilter]} // Apply the blur filter to the sprite
             />
         </Container>
     );

@@ -1,6 +1,6 @@
 import { Text } from '@pixi/react';
 import { TextStyle } from 'pixi.js';
-import { IMatrixCellProps } from './GameMatrix.models';
+import { IMatrixCellProps } from './GameMatrix/GameMatrix.models';
 
 export interface ITextCellProps extends IMatrixCellProps<string> {
 

@@ -1,18 +1,21 @@
 import WebApp from '@twa-dev/sdk';
 import './App.css';
 
-import Main from './components/Main/Main';
-import { useEffect } from 'react';
+import { FC, useEffect } from 'react';
+import { MainView } from './components/MainView/MainView';
+import { useLoadIcons } from './hooks/loadIcons';
 
-const App = () => {
+const App: FC = () => {
     useEffect(() => {
         WebApp.ready();
     })
 
+    useLoadIcons();
+
     return (
-        <>
-            <Main></Main>
-        </>
+        <div>
+            <MainView></MainView>
+        </div>
     );
 };
 

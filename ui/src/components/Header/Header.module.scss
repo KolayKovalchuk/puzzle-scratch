@@ -1,0 +1,40 @@
+.mainContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100px;
+    padding: 0 20px;
+    position: fixed;
+}
+
+.profileContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100px;
+    width: 100px;
+}
+
+.centeredDropdown {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+}
+
+.icon {
+    // border-radius: 50%;
+    // padding: 12px;
+    background-color: #34075E;
+    box-shadow: 0 0 0px #BE2BDB99, 0 0 20px #BE2BDB99;
+}
+
+.icon:hover {
+    background-color: #561394;
+}

@@ -3,7 +3,7 @@ import './App.css';
 
 import { FC, useEffect } from 'react';
 import { MainView } from './components/MainView/MainView';
-import { useLoadIcons } from './hooks/loadIcons';
+import { useLoadIcons } from './hooks/useLoadIcons';
 
 const App: FC = () => {
     useEffect(() => {

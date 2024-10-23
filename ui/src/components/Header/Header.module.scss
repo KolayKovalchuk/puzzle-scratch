@@ -1,3 +1,6 @@
+@import '../../styles/colors';
+@import '../../styles/mixins';
+
 .mainContainer {
     display: flex;
     align-items: center;
@@ -16,25 +19,18 @@
     width: 100px;
 }
 
-.centeredDropdown {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+.dropdown {
+    width: 100px;
 }
 
 .logo {
-    width: 100px;
-    height: 100px;
+    width: 50px;
 }
 
 .icon {
-    // border-radius: 50%;
-    // padding: 12px;
-    background-color: #34075E;
-    box-shadow: 0 0 0px #BE2BDB99, 0 0 20px #BE2BDB99;
-}
+    @include icon-shadown;
 
-.icon:hover {
-    background-color: #561394;
+    &:first-child {
+        margin-right: 8px;
+    }
 }

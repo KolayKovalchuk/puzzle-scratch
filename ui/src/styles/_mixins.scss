@@ -1,0 +1,12 @@
+@mixin icon-shadown {
+    background-color: $dark-violet;
+    box-shadow: $pink-shadow;
+
+    &:first-child {
+        margin-right: 8px;
+    }
+
+    &:hover {
+        background-color: $light-violet;
+    }
+}

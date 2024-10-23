@@ -8,20 +8,20 @@ export const Header: FC = () => {
     return (
         <div className={styles.mainContainer}>
             <div className={styles.logo}>
-                {/* <Icon
-                    src="./icons/tocken.png"
-                    alt="logo"
-                    className={`${styles.icon}`}></Icon> */}
-                <Icon name='robo_token' className={styles.icon}></Icon>
+                <Icon name='robo_token' iconSize='70%' className={styles.icon}></Icon>
             </div>
-            <Dropdown className={styles.centeredDropdown}></Dropdown>
+            <Dropdown
+                items={[
+                    { text: 'Item 1', icon: 'robo_token' },
+                    { text: 'Item 2', icon: 'wallet' },
+                    { text: 'Item 3', icon: 'avatar_placeholder' },
+                ]}
+                onSelect={(item) => console.log(item)}
+                className={styles.dropdown}
+            ></Dropdown>
             <div className={styles.profileContainer}>
-                {/* <Icon
-                    src="./icons/wallet.svg"
-                    alt="wallet"
-                    className={styles.icon}
-                ></Icon> */}
-                <Icon name='wallet' size={'70%'} className={styles.icon}></Icon>
+                <Icon name='wallet' iconSize='58%' className={styles.icon}></Icon>
+                <Icon name='avatar_placeholder' iconSize='85%' className={styles.icon}></Icon>
             </div>
         </div>
     )

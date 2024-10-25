@@ -1,0 +1,37 @@
+stages:
+  - build
+  - deploy
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+
+build:
+  stage: build
+  image: node:16
+  script:
+    - npm install
+    - VITE_BASE_URL=https://storage.googleapis.com/rb-puzzle-game-ui npm run build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 week
+  only:
+    - main
+    - development
+
+deploy:
+  stage: deploy
+  image: google/cloud-sdk:latest
+  dependencies:
+    - build
+  script:
+    - export GOOGLE_CLOUD_CREDENTIALS=$(echo $BASE64_GOOGLE_CLOUD_CREDENTIALS | base64 -d)
+    - echo $GOOGLE_CLOUD_CREDENTIALS > service-account-key.json
+    - gcloud auth activate-service-account --key-file service-account-key.json
+    - gcloud config set project $GCP_PROJECT_ID
+    - gsutil rsync -r dist gs://rb-puzzle-game-ui
+  only:
+    - main
+    - development

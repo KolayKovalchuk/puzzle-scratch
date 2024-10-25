@@ -10,9 +10,19 @@ cache:
 build:
   stage: build
   image: node:16
+  before_script:
+    # Set VITE_BASE_URL based on the branch
+    - |
+      if [ "$CI_COMMIT_REF_NAME" = "main" ]; then
+        export VITE_BASE_URL="https://storage.googleapis.com/puzzle-ui-main"
+      elif [ "$CI_COMMIT_REF_NAME" = "development" ]; then
+        export VITE_BASE_URL="https://storage.googleapis.com/puzzle-ui-dev"
+      else
+        echo "No matching branch for build"; exit 1
+      fi
   script:
     - npm install
-    - VITE_BASE_URL=https://storage.googleapis.com/rb-puzzle-game-ui npm run build
+    - VITE_BASE_URL=$VITE_BASE_URL npm run build
   artifacts:
     paths:
       - dist/
@@ -26,13 +36,23 @@ deploy:
   image: google/cloud-sdk:latest
   dependencies:
     - build
+  before_script:
+    # Set DEPLOY_BUCKET based on the branch
+    - |
+      if [ "$CI_COMMIT_REF_NAME" = "main" ]; then
+        export DEPLOY_BUCKET="gs://puzzle-ui-qa"
+      elif [ "$CI_COMMIT_REF_NAME" = "development" ]; then
+        export DEPLOY_BUCKET="gs://puzzle-ui-dev"
+      else
+        echo "No matching branch for deployment"; exit 1
+      fi
   script:
     - export GOOGLE_CLOUD_CREDENTIALS=$(echo $BASE64_GOOGLE_CLOUD_CREDENTIALS | base64 -d)
     - echo $GOOGLE_CLOUD_CREDENTIALS > service-account-key.json
     - gcloud auth activate-service-account --key-file service-account-key.json
     - gcloud config set project $GCP_PROJECT_ID
-    - gsutil rsync -r dist gs://rb-puzzle-game-ui
-    - gsutil setmeta -h "Cache-Control:no-cache, max-age=0" gs://rb-puzzle-game-ui/index.html
+    - gsutil rsync -r dist gs://puzzle-ui-dev
+    - gsutil setmeta -h "Cache-Control:no-cache, max-age=0" gs://puzzle-ui-dev/index.html
   only:
     - main
     - development

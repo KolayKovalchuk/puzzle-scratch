@@ -1,21 +1,21 @@
+import WebApp from '@twa-dev/sdk';
 import './App.css';
-import { useEffect } from 'react';
 
-import { Stage } from '@pixi/react';
-import { JetFighter } from './components/jet_fighter/jet_fighter';
+import { FC, useEffect } from 'react';
+import { MainView } from './components/MainView/MainView';
+import { useLoadIcons } from './hooks/useLoadIcons';
 
-import WebApp from '@twa-dev/sdk'
-
-const App = () => {
+const App: FC = () => {
     useEffect(() => {
-        WebApp.ready()
-    }, [])
+        WebApp.ready();
+    })
+
+    useLoadIcons();
+
     return (
-        <>
-            <Stage width={430} height={1000} options={{ background: 0x1099bb }}>
-                <JetFighter />
-            </Stage>
-        </>
+        <div>
+            <MainView></MainView>
+        </div>
     );
 };
 

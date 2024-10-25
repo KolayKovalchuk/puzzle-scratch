@@ -12,7 +12,7 @@ interface IconProps {
 
 export const Icon: React.FC<IconProps> = ({ name, style = {}, iconSize = "100%", title, className }) => {
     return (
-        <div className={`${styles.iconContainer} ${className}`} style={style}>
+        <div className={`${styles.iconContainer} ${className || ''}`} style={style}>
             <div className={styles.iconContent}>
                 <svg
                     width={iconSize}

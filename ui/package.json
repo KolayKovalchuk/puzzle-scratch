@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate:sprite": "svg-sprite-generate -d src/assets/icons -o src/assets/icons-sprite.svg"
   },
   "dependencies": {
     "@pixi/react": "^7.1.2",
@@ -26,8 +27,9 @@
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.12",
     "globals": "^15.9.0",
+    "svg-sprite-generator": "^0.0.7",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.7.0",
-    "vite": "^5.4.8"
+    "vite": "^5.4.10"
   }
 }

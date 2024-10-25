@@ -1,24 +1,19 @@
 import { FC } from 'react'
 
-import styles from './Header.module.scss'
 import { Icon } from '../shared/Icon/Icon'
-import { Dropdown } from '../shared/Dropdown/Dropdown'
+import styles from './Header.module.scss'
+import { formatNumber } from '../../utils/formatters/numberFormatter'
 
 export const Header: FC = () => {
     return (
         <div className={styles.mainContainer}>
             <div className={styles.logo}>
-                <Icon name='robo_token' iconSize='70%' className={styles.icon}></Icon>
+                <Icon name='logo' className={styles.logoIcon}></Icon>
             </div>
-            <Dropdown
-                items={[
-                    { text: 'Item 1', icon: 'robo_token' },
-                    { text: 'Item 2', icon: 'wallet' },
-                    { text: 'Item 3', icon: 'avatar_placeholder' },
-                ]}
-                onSelect={(item) => console.log(item)}
-                className={styles.dropdown}
-            ></Dropdown>
+            <div className={styles.currency_info_container}>
+                <Icon name='robo_token' className={styles.token_icon}></Icon>
+                <span className={styles.amount_value}>{formatNumber(10000)}</span>
+            </div>
             <div className={styles.profileContainer}>
                 <Icon name='wallet' iconSize='58%' className={styles.icon}></Icon>
                 <Icon name='avatar_placeholder' iconSize='85%' className={styles.icon}></Icon>

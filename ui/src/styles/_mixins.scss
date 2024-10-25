@@ -1,12 +1,14 @@
+@use './colors';
+
 @mixin icon-shadown {
-    background-color: $dark-violet;
-    box-shadow: $pink-shadow;
+    background-color: colors.$dark-violet;
+    box-shadow: colors.$pink-shadow;
 
     &:first-child {
         margin-right: 8px;
     }
 
     &:hover {
-        background-color: $light-violet;
+        background-color: colors.$light-violet;
     }
 }

@@ -10,13 +10,13 @@ interface IconProps {
     style?: React.CSSProperties;
 }
 
-export const Icon: React.FC<IconProps> = ({ name, style = {}, iconSize, title, className }) => {
+export const Icon: React.FC<IconProps> = ({ name, style = {}, iconSize = "100%", title, className }) => {
     return (
         <div className={`${styles.iconContainer} ${className}`} style={style}>
             <div className={styles.iconContent}>
                 <svg
                     width={iconSize}
-                    height='auto'
+                    height={iconSize}
                     aria-label={title ? title : name}
                     role="img"
                 >

@@ -10,16 +10,6 @@ cache:
 build:
   stage: build
   image: node:16
-  before_script:
-    # Set VITE_BASE_URL based on the branch
-    - |
-      if [ "$CI_COMMIT_REF_NAME" = "main" ]; then
-        export VITE_BASE_URL="https://storage.googleapis.com/puzzle-ui-qa-0"
-      elif [ "$CI_COMMIT_REF_NAME" = "development" ]; then
-        export VITE_BASE_URL="https://storage.googleapis.com/puzzle-ui-dev-0"
-      else
-        echo "No matching branch for build"; exit 1
-      fi
   script:
     - npm install
     - npm run build

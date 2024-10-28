@@ -10,9 +10,18 @@ cache:
 build:
   stage: build
   image: node:16
-  script:
+  script: #TODO for prod
     - npm install
-    - npm run build
+    - |
+      if [ "$CI_COMMIT_REF_NAME" = "main" ]; then
+        npm run build:qa
+      elif [ "$CI_COMMIT_REF_NAME" = "development" ]; then
+        npm run build:dev
+      elif [ "$CI_COMMIT_REF_NAME" = "qa" ]; then
+        npm run build:qa
+      else
+        echo "No matching branch for build"; exit 1
+      fi
   artifacts:
     paths:
       - dist/

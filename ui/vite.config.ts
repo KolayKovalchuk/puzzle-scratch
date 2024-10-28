@@ -17,5 +17,4 @@ export default defineConfig({
             include: '**/src/assets/icons/**/*.svg',
         }),
     ],
-    base: process.env.VITE_BASE_URL || '/',
 })

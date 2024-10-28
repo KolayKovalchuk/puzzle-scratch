@@ -10,7 +10,7 @@ upload_config_and_localisation:
     - export GOOGLE_CLOUD_CREDENTIALS=$(echo $BASE64_GOOGLE_CLOUD_CREDENTIALS | base64 -d)
     - echo $GOOGLE_CLOUD_CREDENTIALS > service-account-key.json
     - gcloud auth activate-service-account --key-file service-account-key.json
-    - gcloud config set project $GCP_PROJECT_ID
+    - gcloud config set project cryptoscratch
 
     # Sync the config and localisation directories to the GCS bucket
     - gsutil -m rsync -r config gs://puzzle-config/config

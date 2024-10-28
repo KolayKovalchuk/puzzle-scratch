@@ -4,10 +4,14 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:dev": "vite build --mode development",
+    "build:prod": "vite build --mode production",
+    "build:qa": "vite build --mode qa",
+    "serve:dev": "vite --mode development",
+    "serve:prod": "vite --mode production",
+    "serve:qa": "vite --mode qa"
   },
   "dependencies": {
     "@pixi/react": "^7.1.2",

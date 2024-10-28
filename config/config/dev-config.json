@@ -1,0 +1,19 @@
+{
+  "API_URL": "https://puzzle-dev-api-ke8734.rebelbots.com",
+  "LOCALISATION": "https://puzzle-config.storage.googleapis.com/localisation/v1.json",
+  "MAINTENANCE": "false,",
+  "AFFILIATE_BONUS": 1,
+  "SYSTEM_MSG": null,
+  "SYSTEM_MSG_ONE_TIME": true,
+  "DAILY_BONUS": [
+    10,
+    20,
+    30,
+    50,
+    100
+  ],
+  "FRINDS_BOMUS": {
+    "FRIEND_TO_INVITE": 5,
+    "RBAX": 5
+  }
+}

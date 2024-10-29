@@ -1,5 +1,5 @@
 import { FC, useRef, useState } from 'react'
-import { useHandleClickOutside } from '../../../hooks/useHandleClickOutside'
+import { useHandleClickOutside } from '@hooks/useHandleClickOutside'
 import { IDropdownItem, IDropdownProps } from './Dropdown.models'
 import styles from './Dropdown.module.scss'
 import { DropdownItem } from './DropdownItem'

@@ -2,7 +2,9 @@ import WebApp from '@twa-dev/sdk';
 import './App.css';
 
 import { FC, useEffect } from 'react';
-import { MainView } from './components/MainView/MainView';
+
+import { MainView } from '@components/MainView';
+
 
 const App: FC = () => {
     useEffect(() => {

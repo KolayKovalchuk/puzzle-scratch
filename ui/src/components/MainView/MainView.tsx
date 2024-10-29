@@ -1,8 +1,8 @@
 import styles from './MainView.module.scss';
 
+import { BatchCard } from '@components/BatchCard';
+import { Header } from '@components/Header';
 import { FC } from 'react';
-import { Header } from '../Header/Header';
-import { BatchCard } from '../BatchCard/BatchCard';
 
 export const MainView: FC = () => {
 

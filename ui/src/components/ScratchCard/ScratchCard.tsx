@@ -1,9 +1,9 @@
-// import useAppLoader from "../hooks/useAppLoader";
+// import useAppLoader from "@hooks/useAppLoader";
 import "@pixi/events";
 import { Container, Sprite, Text, useApp } from '@pixi/react';
 import { FederatedPointerEvent, Graphics, Sprite as OriginSprite, RenderTexture, Texture } from "pixi.js";
 import { FC, useMemo } from 'react';
-import { useLoadBundle } from '../../hooks/useAssetsBundleLoader';
+import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
 
 export type ScratchCardAssetsNames = 'cover' | 'revealed'
 

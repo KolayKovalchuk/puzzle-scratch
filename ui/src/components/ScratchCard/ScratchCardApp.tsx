@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { IScratchCardProps, ScratchCard } from './ScratchCard';
-import { useContainerDimensions } from '../../hooks/useContainerDimensions';
+import { useContainerDimensions } from '@hooks/useContainerDimensions';
 import { Stage } from '@pixi/react';
 
 export const ScratchCardApp: FC<IScratchCardProps> = ({ bundleName }) => {

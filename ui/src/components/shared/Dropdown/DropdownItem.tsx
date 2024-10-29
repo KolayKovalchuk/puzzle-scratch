@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Icon } from '../Icon/Icon'
+import { Icon } from '@Icon'
 import { IDropdownItemProps } from './Dropdown.models'
 import styles from './Dropdown.module.scss'
 

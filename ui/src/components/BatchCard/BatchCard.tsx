@@ -1,11 +1,9 @@
+import { Icon } from '@components/shared/Icon';
+import { PriceLabel } from '@components/shared/PriceLabel/PriceLabel';
 import { FC } from 'react';
-import styles from './BatchCard.module.scss'
-// import { Icon } from '../shared/Icon/Icon';
-import { PriceLabel } from '../shared/PriceLabel/PriceLabel';
-import { Icon } from '../shared/Icon/Icon';
+import styles from './BatchCard.module.scss';
 
-
-import play_text from '../../assets/icons/play_text.svg';
+import play_text from '@icons/play_text.svg';
 
 
 export interface IBatchCardProps { }

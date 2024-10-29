@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import styles from './PriceLabel.module.scss'
-import { Icon } from '../Icon/Icon';
-import { formatNumber } from '../../../utils/formatters/formatNumber';
+import { Icon } from '@components/shared/Icon';
+import { formatNumber } from '@utils/formatters/formatNumber';
 
-import robo_token_no_bg from '../../../assets/icons/robo_token_no_bg.svg';
+import robo_token_no_bg from '@icons/robo_token_no_bg.svg';
 
 
 export interface IPriceLabelProps {

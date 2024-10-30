@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 // loadIcons.ts
 const svgContainerId = 'svg-icons';
 
-export const useLoadIcons = () => {
+export function useLoadIcons() {
     useEffect(() => {
         const loadIcons = async () => {
             try {

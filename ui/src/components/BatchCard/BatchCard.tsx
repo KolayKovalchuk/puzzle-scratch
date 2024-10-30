@@ -1,6 +1,5 @@
 import { Icon } from '@components/shared/Icon';
 import { PriceLabel } from '@components/shared/PriceLabel/PriceLabel';
-import { FC } from 'react';
 import styles from './BatchCard.module.scss';
 
 import play_text from '@icons/play_text.svg';
@@ -8,7 +7,7 @@ import play_text from '@icons/play_text.svg';
 
 export interface IBatchCardProps { }
 
-export const BatchCard: FC<IBatchCardProps> = ({ }) => {
+export function BatchCard() {
     return (
         <div className={styles.container}>
             <div className={styles.mainCover}>

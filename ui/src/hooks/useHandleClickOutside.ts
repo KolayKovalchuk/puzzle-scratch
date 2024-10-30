@@ -1,6 +1,6 @@
 import { RefObject, useEffect } from 'react'
 
-export const useHandleClickOutside = (dropdownRef: RefObject<HTMLElement>, callback: () => void) => {
+export function useHandleClickOutside(dropdownRef: RefObject<HTMLElement>, callback: () => void) {
     const handleClickOutside = (event: MouseEvent) => {
         if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
             callback()

@@ -1,15 +1,14 @@
-import { FC } from 'react'
 
 import { Icon } from '@components/shared/Icon'
-import styles from './Header.module.scss'
 import { formatNumber } from '@utils/formatters/formatNumber'
+import styles from './Header.module.scss'
 
+import avatar_placeholder from '@icons/avatar_placeholder.svg'
 import logo from '@icons/logo.svg'
 import robo_token from '@icons/robo_token.svg'
 import wallet from '@icons/wallet.svg'
-import avatar_placeholder from '@icons/avatar_placeholder.svg'
 
-export const Header: FC = () => {
+export function Header() {
     return (
         <div className={styles.mainContainer}>
             <div className={styles.logo}>

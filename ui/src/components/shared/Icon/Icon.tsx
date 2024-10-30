@@ -10,7 +10,7 @@ interface IconProps {
     style?: React.CSSProperties;
 }
 
-export const Icon: React.FC<IconProps> = ({ name, style = {}, iconSize = "100%", title, className }) => {
+export function Icon({ name, style = {}, iconSize = "100%", title, className }: IconProps) {
     return (
         <div className={`${styles.iconContainer} ${className || ''}`} style={style}>
             <div className={styles.iconContent}>

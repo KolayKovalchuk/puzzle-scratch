@@ -2,9 +2,8 @@ import styles from './MainView.module.scss';
 
 import { BatchCard } from '@components/BatchCard';
 import { Header } from '@components/Header';
-import { FC } from 'react';
 
-export const MainView: FC = () => {
+export function MainView() {
 
     return (
         <div className={styles.mainContainer}>

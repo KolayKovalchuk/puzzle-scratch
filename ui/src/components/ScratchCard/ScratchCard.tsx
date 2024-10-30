@@ -1,9 +1,8 @@
-// import useAppLoader from "@hooks/useAppLoader";
+import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
 import "@pixi/events";
 import { Container, Sprite, Text, useApp } from '@pixi/react';
 import { FederatedPointerEvent, Graphics, Sprite as OriginSprite, RenderTexture, Texture } from "pixi.js";
-import { FC, useMemo } from 'react';
-import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
+import { useMemo } from 'react';
 
 export type ScratchCardAssetsNames = 'cover' | 'revealed'
 
@@ -19,7 +18,7 @@ export interface IScratchCardProps {
     bundleName: string,
 }
 
-export const ScratchCard: FC<IScratchCardProps> = ({ bundleName }) => {
+export function ScratchCard({ bundleName }: IScratchCardProps) {
     const app = useApp();
     const { width, height } = app.screen;
 

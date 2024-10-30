@@ -1,11 +1,11 @@
-import { FC, useRef, useState } from 'react'
 import { useHandleClickOutside } from '@hooks/useHandleClickOutside'
+import { useRef, useState } from 'react'
 import { IDropdownItem, IDropdownProps } from './Dropdown.models'
 import styles from './Dropdown.module.scss'
 import { DropdownItem } from './DropdownItem'
 import { DropdownList } from './DropdownList'
 
-export const Dropdown: FC<IDropdownProps> = ({ className, items, onSelect }: IDropdownProps) => {
+export function Dropdown({ className, items, onSelect }: IDropdownProps) {
     const [selectedItem, setSelectedItem] = useState<IDropdownItem | null>(null)
     const [isOpen, setIsOpen] = useState(false)
     const dropdownRef = useRef<HTMLDivElement>(null)

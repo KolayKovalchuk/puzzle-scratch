@@ -1,12 +1,12 @@
 import WebApp from '@twa-dev/sdk';
 import './App.css';
 
-import { FC, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { MainView } from '@components/MainView';
 
 
-const App: FC = () => {
+function App() {
     useEffect(() => {
         WebApp.ready();
     })

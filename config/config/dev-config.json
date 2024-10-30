@@ -12,8 +12,8 @@
     50,
     100
   ],
-  "FRINDS_BOMUS": {
-    "FRIEND_TO_INVITE": 5,
+  "FRIENDS_BONUS": {
+    "FRIENDS_TO_INVITE": 5,
     "RBAX": 5
   }
 }

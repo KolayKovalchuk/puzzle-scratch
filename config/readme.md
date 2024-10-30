@@ -110,3 +110,7 @@ To validate manually, open the respective environment’s URL (see Step 11 above
 --- 
 
 This process ensures that localisation and configuration updates are applied consistently and reliably across environments.
+
+gsutil cors set /Users/vtyrin/madskil/repo/puzzle-ui-config/cors-config.json gs://puzzle-config
+
+//gcloud storage buckets update gs://puzzle-config --cors-file=/Users/vtyrin/madskil/repo/puzzle-ui-config/cors-config.json

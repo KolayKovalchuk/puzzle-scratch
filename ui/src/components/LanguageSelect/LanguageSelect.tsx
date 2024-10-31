@@ -1,12 +1,14 @@
 import { Dropdown, IDropdownItem } from '@components/shared/Dropdown';
-import styles from './LanguageSelect.module.scss';
-import { useSelector } from 'react-redux';
+import { selectUserLocale } from '@services/api/user.service';
 import { selectSupportedLocales } from '@store/selectors/localization.selectors';
 import { selectPreferredLocale } from '@store/selectors/user.selectors';
-import { postUserLocale } from '@services/api/user.service';
+import { useSelector } from 'react-redux';
+import styles from './LanguageSelect.module.scss';
+import WebApp from '@twa-dev/sdk';
 
 export interface ILanguageSelectProps {
-    onLangSelected: (lang: string) => void | Promise<void>
+    onLangSelected?: (lang: string) => void | Promise<void>,
+    isPreferredLocaleSelected: boolean
 }
 
 function getSupportLocalesItems(supportLocales: string[]): IDropdownItem[] {
@@ -19,24 +21,22 @@ function getSupportLocalesItems(supportLocales: string[]): IDropdownItem[] {
     })
 }
 
-function getPreselectedLocale(supportLocaleItems: IDropdownItem[], preferredLocale: string): IDropdownItem {
+function getPreselectedLocale(
+    supportLocaleItems: IDropdownItem[],
+    preferredLocale: string,
+): IDropdownItem {
     const preselectedLocale = supportLocaleItems.find((item) => item.data.toLowerCase() === preferredLocale.toLowerCase())
 
     return preselectedLocale || supportLocaleItems[0]
 }
 
-export function LanguageSelect({ onLangSelected }: ILanguageSelectProps) {
+export function LanguageSelect({ onLangSelected, isPreferredLocaleSelected }: ILanguageSelectProps) {
     const onLangSelect = async (lang: IDropdownItem) => {
         try {
-            console.log('lang selected:', lang);
-            const result = await postUserLocale(lang.data)
-    
-            if (!result) {
-                console.error('Failed to update locale:', lang);
-            }
-    
-            onLangSelected(lang.data)
-        
+            const result = await selectUserLocale(lang.data)
+            if (!result) return
+
+            if (onLangSelected) onLangSelected(lang.data)
         } catch (error) {
             console.error('Error updating locale:', error);
         }
@@ -45,7 +45,12 @@ export function LanguageSelect({ onLangSelected }: ILanguageSelectProps) {
     const supportLocales = useSelector(selectSupportedLocales)
     const supportLocaleItems = getSupportLocalesItems(supportLocales)
     const preferredLocale = useSelector(selectPreferredLocale)
-    const preselectedLocale = getPreselectedLocale(supportLocaleItems, preferredLocale || '')
+    const telegramLocale = WebApp.initDataUnsafe.user?.language_code
+
+    const preselectedLocale = getPreselectedLocale(
+        supportLocaleItems,
+        (isPreferredLocaleSelected ? preferredLocale : telegramLocale) || '',
+    )
 
     return (
         <div className={styles.container}>

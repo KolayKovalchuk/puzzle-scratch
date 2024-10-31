@@ -1,3 +1,4 @@
+@use '@styles/colors';
 @use '@styles/header_size';
 
 .mainContainer {
@@ -7,6 +8,7 @@
     justify-content: flex-start;
     height: 100vh;
     padding-top: header_size.$base_header_height;
+    background: colors.$main_bg;
 }
 
 @media (max-width: 768px) {

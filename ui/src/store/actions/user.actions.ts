@@ -19,3 +19,10 @@ export const fetchUserError = (error: string) => ({
     type: FETCH_USER_ERROR,
     payload: error,
 });
+
+export const UPDATE_USER_LOCALE = 'UPDATE_USER_LOCALE';
+
+export const updateUserLocale = (locale: string) => ({
+    type: UPDATE_USER_LOCALE,
+    payload: locale,
+});

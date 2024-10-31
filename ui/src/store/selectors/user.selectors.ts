@@ -6,7 +6,9 @@ export const selectUser = (state: RootState) => {
     return state.user?.user;
 }
 
-export const preferredLocaleSelector = createSelector(
+export const selectPreferredLocale = createSelector(
     selectUser,
-    (queryState) => queryState?.preferredLocale
+    (queryState) => {
+        return queryState?.preferredLocale
+    }
 )

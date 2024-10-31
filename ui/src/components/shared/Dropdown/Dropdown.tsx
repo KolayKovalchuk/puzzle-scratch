@@ -1,14 +1,26 @@
 import { useHandleClickOutside } from '@hooks/useHandleClickOutside'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { IDropdownItem, IDropdownProps } from './Dropdown.models'
 import styles from './Dropdown.module.scss'
 import { DropdownItem } from './DropdownItem'
 import { DropdownList } from './DropdownList'
 
-export function Dropdown({ className, items, onSelect }: IDropdownProps) {
+export function Dropdown({
+    className,
+    items,
+    placeholder = 'Select: ',
+    selectedItem: selectedItemProp,
+    onSelect
+}: IDropdownProps) {
     const [selectedItem, setSelectedItem] = useState<IDropdownItem | null>(null)
     const [isOpen, setIsOpen] = useState(false)
     const dropdownRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        if (selectedItemProp && selectedItemProp !== selectedItem) {
+            setSelectedItem(selectedItemProp)
+        }
+    }, [selectedItemProp])
 
     const handleSelect = (item: IDropdownItem) => {
         setSelectedItem(item)
@@ -26,12 +38,17 @@ export function Dropdown({ className, items, onSelect }: IDropdownProps) {
         >
             <div className={styles.dropdownSelected}>
                 {selectedItem ? (
-                    <DropdownItem selectedItem={selectedItem}/>
+                    <DropdownItem item={selectedItem} />
                 ) : (
-                    <span>Select: </span>
+                    <span>{placeholder}</span>
                 )}
             </div>
-            {isOpen && (<DropdownList items={items} handleSelect={handleSelect} />)}
+            {isOpen &&
+                (<DropdownList
+                    items={items}
+                    selectedItem={selectedItem}
+                    handleSelect={handleSelect} />)
+            }
         </div>
     )
 }

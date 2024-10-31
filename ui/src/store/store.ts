@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { configApi } from '@services/api/apiService';
+import { configApi } from '@services/api/apiLogin.service';
 import { userReducer } from './reducers/user.reducer';
 import { localizationReducer } from './reducers/localization.reducer';
 

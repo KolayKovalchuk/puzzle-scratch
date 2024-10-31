@@ -2,7 +2,7 @@ import { setLocalizationData } from '@store/actions/localization.actions';
 import { selectLocalizationUrl } from '@store/selectors/config.selectors';
 import store from '@store/store';
 import axios from 'axios';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 export async function fetchLocalizationFile(localization_url: string): Promise<any> {
@@ -32,10 +32,19 @@ export async function fetchLocalizationData(localization_url: string): Promise<o
 }
 
 export function useFetchLocalizationData() {
+    const [isLoaded, setIsLoaded ] = useState<boolean>(false);
+
     const localization_url = useSelector(selectLocalizationUrl);
     useEffect(() => {
-        if (!localization_url) return;
+        const fetch = async () => {
+            if (!localization_url) return;
+            
+            fetchLocalizationData(localization_url);
+            setIsLoaded(true);
+        }
 
-        fetchLocalizationData(localization_url);
+        fetch();
     }, [localization_url]);
+
+    return [isLoaded];
 }

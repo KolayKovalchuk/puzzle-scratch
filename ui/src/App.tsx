@@ -1,73 +1,65 @@
-import './App.css';
-
+import { LanguageSelect } from '@components/LanguageSelect/LanguageSelect';
+import styles from './App.module.scss';
 
 import { MainView } from '@components/MainView';
 import { useInitWebApp } from '@hooks/useInitWebApp';
-import { useFetchLocalizationData } from '@services/api/localizationService';
-import { useLoginUser } from '@services/authService';
+import { useFetchLocalizationData } from '@services/api/localization.service';
+import { useLoginUser } from '@services/auth.service';
+import { setIsPreferredLocaleSelectedToCloud, useGetIsPreferredLocaleSelectedFromCloud } from '@services/telegramCloud/preferredLocale.service';
 import store from '@store/store';
 import { Provider } from 'react-redux';
 
 
 
 function App() {
+    const [, isUserLoggedIn] = useLoginUser();
+    const [isLocLoaded] = useFetchLocalizationData()
+    const [isPreferredLocaleSelected, setIsPreferredLocaleSelected, isPrefLocLoaded] = useGetIsPreferredLocaleSelectedFromCloud()
     useInitWebApp();
-    useLoginUser();
-    useFetchLocalizationData()
 
-    // const langKey = useSelector(selectLocalizationDataKey('lang.en'));
+    const isLoaded = isUserLoggedIn && isLocLoaded && isPrefLocLoaded;
 
+    const onLangSelected = async () => {
+        const result = await setIsPreferredLocaleSelectedToCloud(true)
 
-    // WebApp.CloudStorage.removeItem('jwt_token', (error, result) => {
-    //     console.log('jwt_token removed', error, result);
-    // })
+        if (!result) {
+            console.error('Failed to set isPreferredLocaleSelected to cloud');
+            return;
+        }
 
-    // const [apiClient, isSuccess] = useApiClient();
-    // console.log('after hook', isSuccess, apiClient?.defaults.baseURL);
+        setIsPreferredLocaleSelected(true)
+    }
 
+    if (!isLoaded) {
+        return <div  className={`${styles.mainContainer} ${styles.loading}`}><span>Loading...</span></div>
+    }
 
-    function onTestBtnClick() {
-        // console.log('baseURL', apiClient?.defaults.baseURL);
-        // console.log('headers', apiClient?.defaults.headers);
-        // console.log('common', apiClient?.defaults.headers.common['Authorization']);
+    // TODO: remove test code when done
+    const onTestBtnClick = async () => {
+        const result = await setIsPreferredLocaleSelectedToCloud(false)
+        setIsPreferredLocaleSelected(false)
+        console.log('testbtn setIsPreferredLocaleSelectedToCloud result:', result);
 
-        // apiClient?.get('/api/batches', {
-        //     headers: {
-        //         Authorization: `Bearer ${jwt_token}`
-        //     }
-        // })
-        //     .then((response) => {
-        //         console.log('response', response);
-        //     }).catch((error) => {
-        //         console.log('error', error);
-        //     });
-
-        // fetchLocalizationData()
-        //     .then((data) => {
-        //         console.log('fetchLocalizationFile', data);
-
-        //         const state = store.getState();
-        //         const test = selectLocalizationDataKey('lang.en')(state);
-        //         console.log('test', test);
-                
-        //     })
-        //     .catch((error) => {
-        //         console.error('fetchLocalizationFile error', error);
-        //     })
     }
 
     return (
-        <div>
-            <MainView></MainView>
+        <div className={styles.mainContainer}>
+            {!isPreferredLocaleSelected
+                ? <LanguageSelect onLangSelected={() => onLangSelected()}></LanguageSelect>
+                : <>
+                    <MainView></MainView>
 
-            <div style={{
-                width: '100%',
-                height: '100px',
-                backgroundColor: 'lightgreen',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-            }} onClick={() => onTestBtnClick()}>Test button</div>
+                    // TODO: remove test code when done
+                    <div style={{
+                        width: '100%',
+                        height: '100px',
+                        backgroundColor: 'lightgreen',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }} onClick={() => onTestBtnClick()}>Reset(only for test)</div>
+                </>
+            }
         </div>
     );
 };

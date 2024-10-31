@@ -1,6 +1,6 @@
 import { AppConfig } from '@models/AppConfig.model'
 import { createSelector } from '@reduxjs/toolkit'
-import { configApi } from '@services/api/apiService'
+import { configApi } from '@services/api/apiLogin.service'
 import { RootState } from '@store/store'
 
 // Base selector to access the query state

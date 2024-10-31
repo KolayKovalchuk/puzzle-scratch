@@ -1,19 +1,6 @@
-import { AppConfig } from '@models/AppConfig.model';
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import axios, { AxiosError, AxiosInstance } from 'axios';
 import axiosRetry from 'axios-retry';
-
-const VITE_CONFIG_URL = import.meta.env.VITE_CONFIG_URL;
-
-export const configApi = createApi({
-    reducerPath: 'configApi',
-    baseQuery: fetchBaseQuery({ baseUrl: VITE_CONFIG_URL }),
-    endpoints: (builder) => ({
-        getAppConfig: builder.query<AppConfig, void>({
-            query: () => '',
-        }),
-    }),
-})
+import { configApi } from './apiLogin.service';
 
 export const apiClient: AxiosInstance = axios.create({
     headers: {
@@ -40,8 +27,8 @@ export function useApiClient(): [AxiosInstance | null, boolean] {
     const { data, isSuccess } = configApi.useGetAppConfigQuery();
     const apiUrl = data?.API_URL;
 
-    if (isSuccess && apiUrl !== apiClient.defaults.baseURL) {
-        apiClient.defaults.baseURL = apiUrl;
+    if (isSuccess && apiUrl) {
+        apiClient.defaults.baseURL = `${apiUrl}/api`;
     }
 
     if (isSuccess) {

@@ -1,7 +1,7 @@
 import { LocalizationModel } from '@models/LocalizationDataKey.model';
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '@store/store';
-import { preferredLocaleSelector } from './user.selectors';
+import { selectPreferredLocale } from './user.selectors';
 
 // Base selector to access the query state
 const selectLocalizationState = (state: RootState) => state.localization;
@@ -11,13 +11,22 @@ export const selectLocalizationData = createSelector(
     (queryState) => queryState.localizationData
 )
 
-export const selectLocalizationDataItem = (localizationKey: string) => createSelector(
+export const selectSupportedLocales = createSelector(
     selectLocalizationData,
-    (queryState) => queryState.find((data) => data.Key === localizationKey)
+    (queryState) => {
+        if (!queryState?.length) return []
+
+        return Object.keys(queryState[0]).filter((key) => key.toLowerCase() !== 'Key'.toLowerCase())
+    }
 )
 
-export const selectLocalizationDataKey = (localizationKey: string) => createSelector(
-    [selectLocalizationDataItem(localizationKey), preferredLocaleSelector],
+export const selectLocalizationDataItem = (localizationKey: string) => createSelector(
+    selectLocalizationData,
+    (queryState) => queryState.find((data) => data.Key.toLowerCase() === localizationKey.toLowerCase())
+)
+
+export const selectLocalValue = (localizationKey: string) => createSelector(
+    [selectLocalizationDataItem(localizationKey), selectPreferredLocale],
     (localizationDataItem, preferredLocale) => {
 
         if (!localizationDataItem) return ''
@@ -25,7 +34,7 @@ export const selectLocalizationDataKey = (localizationKey: string) => createSele
         const localizationKeyList = Object.keys(localizationDataItem)
         const localizationKey = localizationKeyList
             .find((key) =>
-                key.toLocaleLowerCase() === preferredLocale?.toLocaleLowerCase()
+                key.toLowerCase() === preferredLocale?.toLowerCase()
             )
             || 'EN'
 

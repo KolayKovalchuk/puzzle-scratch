@@ -4,6 +4,7 @@ $border-radius: 30px;
 
 .dropdown {
     height: 40px;
+    min-width: 150px;
 
     position: relative;
     display: flex;
@@ -71,8 +72,13 @@ $border-radius: 30px;
     background-color: colors.$dark-violet;
     color: #fff;
     white-space: nowrap;
+
+    &:not(:last-child) {
+        border-bottom: 1px solid colors.$light-violet;
+    }
 }
 
+.dropdownListItem.selected,
 .dropdownListItem:hover {
     background-color: colors.$light-violet;
 }

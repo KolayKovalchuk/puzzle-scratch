@@ -2,12 +2,13 @@ import { User } from '@models/User.model';
 import { fetchUser, fetchUserError, fetchUserSuccess } from '@store/actions/user.actions';
 import { selectUser } from '@store/selectors/user.selectors';
 import store from '@store/store';
+import WebApp from '@twa-dev/sdk';
 import { AxiosInstance } from 'axios';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { apiClient, useApiClient } from './api/apiService';
-import { setJwtTokenToCloud, useGetJwtTokenFromCloud } from './telegramCloudService';
-import WebApp from '@twa-dev/sdk';
+import { apiClient, useApiClient } from './api/api.service';
+import { apiLoginClient, useLoginApiClient } from './api/apiLogin.service';
+import { setJwtTokenToCloud, useGetJwtTokenFromCloud } from './telegramCloud/jwtToken.service';
 
 
 let requestAuthInterceptor: number | null = null;
@@ -45,22 +46,34 @@ export function addAuthInterceptor(apiClient: AxiosInstance, jwt_token: string) 
     )
 }
 
+interface ILoginBody {
+    initData: string,
+    local?: boolean
+}
+
 export async function loginUser() {
     try {
         store.dispatch(fetchUser());
-        if (!apiClient) return;
+        if (!apiLoginClient) return;
 
-        const data = await apiClient.post('/login', {
-            // TODO: remove mock
-            initData: WebApp.initData || 'test-test'
-            // initData: 'test-test'
-        })
+        const isDevMode = import.meta.env.MODE === 'development'
+        const body: ILoginBody = {
+            initData: WebApp.initData
+        }
+
+        if (isDevMode) {
+            body.initData = WebApp.initData || 'test-test';
+            body.local = true;
+        }
+
+        const data = await apiLoginClient.post('/login', body);
 
         if (data?.status !== 200) {
             throw new Error('Failed to login. User data is empty');
         }
 
         const user = new User(data.data);
+
         store.dispatch(fetchUserSuccess({ ...user }));
 
         if (user.authToken) {
@@ -77,24 +90,22 @@ export async function loginUser() {
 }
 
 export function useLoginUser() {
-    const [, jwt_token] = useGetJwtTokenFromCloud();
+    const [isJwtLoaded] = useGetJwtTokenFromCloud();
 
-    const [apiClient, isSuccess] = useApiClient();
+    const [, isLoginApiLoaded] = useLoginApiClient();
+    const [, isApiLoaded] = useApiClient();
+
     const user = useSelector(selectUser);
 
     useEffect(() => {
-        if (isSuccess && !jwt_token) {
+        if (isLoginApiLoaded) {
             loginUser()
         }
     }, [
-        apiClient,
-        isSuccess,
-        jwt_token,
+        isLoginApiLoaded,
         loginUser,
-        fetchUser,
-        fetchUserError,
-        fetchUserSuccess
     ]);
 
-    return user;
+    const isLoaded = isJwtLoaded && isLoginApiLoaded && isApiLoaded && !!user;
+    return [user, isLoaded];
 }

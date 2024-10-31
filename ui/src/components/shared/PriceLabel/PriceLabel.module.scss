@@ -1,0 +1,35 @@
+.price {
+    display: flex;
+    align-items: center;
+
+    max-width: 115px;
+    max-height: 45px;
+}
+
+.token_icon {
+    width: 40%;
+    margin-right: 2px;
+}
+
+.priceValue {
+    font-size: 40px;
+    font-weight: 900;
+
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .priceValue {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 576px) {
+    .priceValue {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+
+}

@@ -1,19 +1,75 @@
-import WebApp from '@twa-dev/sdk';
-import './App.css';
+import { LanguageSelect } from '@components/LanguageSelect/LanguageSelect';
+import styles from './App.module.scss';
 
-import { FC, useEffect } from 'react';
-import { MainView } from './components/MainView/MainView';
+import { MainView } from '@components/MainView';
+import { useInitWebApp } from '@hooks/useInitWebApp';
+import { useFetchLocalizationData } from '@services/api/localization.service';
+import { useLoginUser } from '@services/auth.service';
+import { setIsPreferredLocaleSelectedToCloud, useGetIsPreferredLocaleSelectedFromCloud } from '@services/telegramCloud/preferredLocale.service';
+import store from '@store/store';
+import { Provider } from 'react-redux';
 
-const App: FC = () => {
-    useEffect(() => {
-        WebApp.ready();
-    })
+
+
+function App() {
+    const [, isUserLoggedIn] = useLoginUser();
+    const [isLocLoaded] = useFetchLocalizationData()
+    const [isPreferredLocaleSelected, setIsPreferredLocaleSelected, isPrefLocLoaded] = useGetIsPreferredLocaleSelectedFromCloud()
+    useInitWebApp();
+
+    const isLoaded = isUserLoggedIn && isLocLoaded && isPrefLocLoaded;
+
+    const onLangSelected = async () => {
+        const result = await setIsPreferredLocaleSelectedToCloud(true)
+
+        if (!result) {
+            console.error('Failed to set isPreferredLocaleSelected to cloud');
+            return;
+        }
+
+        setIsPreferredLocaleSelected(true)
+    }
+
+    if (!isLoaded) {
+        return <div  className={`${styles.mainContainer} ${styles.loading}`}><span>Loading...</span></div>
+    }
+
+    // TODO: remove test code when done
+    const onTestBtnClick = async () => {
+        const result = await setIsPreferredLocaleSelectedToCloud(false)
+        setIsPreferredLocaleSelected(false)
+        console.log('testbtn setIsPreferredLocaleSelectedToCloud result:', result);
+
+    }
 
     return (
-        <div>
-            <MainView></MainView>
+        <div className={styles.mainContainer}>
+            {!isPreferredLocaleSelected
+                ? <LanguageSelect onLangSelected={() => onLangSelected()}></LanguageSelect>
+                : <>
+                    <MainView></MainView>
+
+                    // TODO: remove test code when done
+                    <div style={{
+                        width: '100%',
+                        height: '100px',
+                        backgroundColor: 'lightgreen',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }} onClick={() => onTestBtnClick()}>Reset(only for test)</div>
+                </>
+            }
         </div>
     );
 };
 
-export default App;
+function Root() {
+    return (
+        <Provider store={store}>
+            <App />
+        </Provider>
+    )
+};
+
+export default Root;

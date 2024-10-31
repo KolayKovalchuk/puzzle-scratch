@@ -6,7 +6,7 @@ export interface IAddBundleData<BundleConfig extends AssetsBundle["assets"]> {
     bundle: BundleConfig
 }
 
-export const useAddBundle = <BundleConfig extends AssetsBundle["assets"]>({ bundleName, bundle }: IAddBundleData<BundleConfig>) => {
+export function useAddBundle<BundleConfig extends AssetsBundle["assets"]>({ bundleName, bundle }: IAddBundleData<BundleConfig>) {
     useEffect(() => {
         const addAssets = () => {
             try {
@@ -25,7 +25,7 @@ export const useAddBundle = <BundleConfig extends AssetsBundle["assets"]>({ bund
     }, [bundleName, bundle]);
 };
 
-export const useLoadBundle = <Bundle>(bundleName: string) => {
+export function useLoadBundle<Bundle>(bundleName: string) {
     const [bundle, setBundle] = useState<Bundle | null>(null);
     const [error, setError] = useState<Error | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
@@ -53,7 +53,7 @@ export const useLoadBundle = <Bundle>(bundleName: string) => {
 };
 
 
-export const useLoadAssets = (bundle: { [key: string]: string }) => {
+export function useLoadAssets(bundle: { [key: string]: string }) {
     const [assets, setAssets] = useState<{ [key: string]: Texture }>({});
     const [loading, setLoading] = useState(true);
 

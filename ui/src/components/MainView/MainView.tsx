@@ -1,9 +1,8 @@
 import styles from './MainView.module.scss';
 
-import { FC } from 'react';
-import { Header } from '../Header/Header';
+import { Header } from '@components/Header';
 
-export const MainView: FC = () => {
+export function MainView() {
 
     return (
         <div className={styles.mainContainer}>

@@ -30,6 +30,15 @@
             "@hooks/*": [
                 "src/hooks/*"
             ],
+            "@services/*": [
+                "src/services/*"
+            ],
+            "@models/*": [
+                "src/models/*"
+            ],
+            "@store/*": [
+                "src/store/*"
+            ],
             "@utils/*": [
                 "src/utils/*"
             ],

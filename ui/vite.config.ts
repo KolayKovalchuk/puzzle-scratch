@@ -23,9 +23,14 @@ export default defineConfig({
         alias: {
             '@components': path.resolve(__dirname, 'src/components'),
             '@hooks': path.resolve(__dirname, 'src/hooks'),
+            '@services': path.resolve(__dirname, 'src/services'),
+            '@models': path.resolve(__dirname, 'src/models'),
+            '@store': path.resolve(__dirname, 'src/store'),
             '@utils': path.resolve(__dirname, 'src/utils'),
             '@assets': path.resolve(__dirname, 'src/assets'),
             '@icons': path.resolve(__dirname, 'src/assets/icons'),
+
+            //SCSS styles
             '@styles': path.resolve(__dirname, 'src/styles')
         }
     }

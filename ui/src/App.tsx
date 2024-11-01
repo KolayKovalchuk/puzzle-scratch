@@ -2,48 +2,25 @@ import { LanguageSelect } from '@components/LanguageSelect/LanguageSelect';
 import styles from './App.module.scss';
 
 import { MainView } from '@components/MainView';
+import { TosApprovePopup } from '@components/TosApprovePopup/TosApprovePopup';
 import { useInitWebApp } from '@hooks/useInitWebApp';
 import { useFetchLocalizationData } from '@services/api/localization.service';
+import { aprooveUserTerms } from '@services/api/user.service';
 import { useLoginUser } from '@services/auth.service';
 import { setIsPreferredLocaleSelectedToCloud, useGetIsPreferredLocaleSelectedFromCloud } from '@services/telegramCloud/preferredLocale.service';
 import { selectPreferredLocale, selectUserAcceptedTerms } from '@store/selectors/user.selectors';
 import store from '@store/store';
-import { Assets } from 'pixi.js';
+import WebApp from '@twa-dev/sdk';
 import { useEffect, useState } from 'react';
 import { Provider, useSelector } from 'react-redux';
-import { TosApprovePopup } from '@components/TosApprovePopup/TosApprovePopup';
-import { aprooveUserTerms } from '@services/api/user.service';
-import WebApp from '@twa-dev/sdk';
-
-Assets.addBundle('fonts', [
-    { alias: 'Nunito', src: '/src/assets/fonts/Nunito-VariableFont_wght.ttf' },
-]);
-
-function useLoadFonts() {
-    const [isFontLoaded, setIsFontLoaded] = useState<boolean>(false);
-
-    useEffect(() => {
-        const loadFont = async () => {
-            return await Assets.loadBundle('fonts');
-        }
-
-        loadFont().then(() => {
-            console.log('[MyText] Font loaded');
-            setIsFontLoaded(true);
-        });
-    }, []);
-
-    return [isFontLoaded]
-}
 
 function useInitApp() {
     const [, isUserLoggedIn] = useLoginUser();
     const [isLocLoaded] = useFetchLocalizationData()
     const [isPreferredLocaleSelected, setIsPreferredLocaleSelected, isPrefLocLoaded] = useGetIsPreferredLocaleSelectedFromCloud()
-    const [isFontLoaded] = useLoadFonts()
     useInitWebApp();
 
-    const isLoaded = isFontLoaded && isUserLoggedIn && isLocLoaded && isPrefLocLoaded;
+    const isLoaded = isUserLoggedIn && isLocLoaded && isPrefLocLoaded;
 
     return [isLoaded, isPreferredLocaleSelected, setIsPreferredLocaleSelected] as const;
 }

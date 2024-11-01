@@ -62,9 +62,9 @@ export async function loginUser() {
         }
 
         if (isDevMode) {
-            body.initData = WebApp.initData || 'test-test';
+            body.initData = WebApp.initData;
             // body.local = !WebApp.initData
-            body.local = true
+            // body.local = true
         }
 
         const data = await apiLoginClient.post('/login', body);

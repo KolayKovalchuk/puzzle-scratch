@@ -26,3 +26,11 @@ export const updateUserLocale = (locale: string) => ({
     type: UPDATE_USER_LOCALE,
     payload: locale,
 });
+
+
+export const UPDATE_USER_ToS = 'UPDATE_USER_ToS';
+
+export const updateUserTos = (isAprooved: boolean) => ({
+    type: UPDATE_USER_ToS,
+    payload: isAprooved,
+});

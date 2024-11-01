@@ -12,3 +12,10 @@ export const selectPreferredLocale = createSelector(
         return queryState?.preferredLocale
     }
 )
+
+export const selectUserAcceptedTerms = createSelector(
+    selectUser,
+    (queryState) => {
+        return queryState?.acceptedTerms
+    }
+)

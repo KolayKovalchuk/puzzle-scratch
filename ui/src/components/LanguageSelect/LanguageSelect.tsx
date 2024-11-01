@@ -25,7 +25,11 @@ function getPreselectedLocale(
     supportLocaleItems: IDropdownItem[],
     preferredLocale: string,
 ): IDropdownItem {
-    const preselectedLocale = supportLocaleItems.find((item) => item.data.toLowerCase() === preferredLocale.toLowerCase())
+    if (!preferredLocale) return supportLocaleItems[0]
+
+    const preselectedLocale = supportLocaleItems.find((item) => {
+        return item.data.toLowerCase() === preferredLocale.toLowerCase()
+    })
 
     return preselectedLocale || supportLocaleItems[0]
 }
@@ -44,12 +48,13 @@ export function LanguageSelect({ onLangSelected, isPreferredLocaleSelected }: IL
 
     const supportLocales = useSelector(selectSupportedLocales)
     const supportLocaleItems = getSupportLocalesItems(supportLocales)
-    const preferredLocale = useSelector(selectPreferredLocale)
+    const preferredLocaleState = useSelector(selectPreferredLocale)
     const telegramLocale = WebApp.initDataUnsafe.user?.language_code
+    const preferredLocale: string | undefined = isPreferredLocaleSelected ? preferredLocaleState : telegramLocale
 
     const preselectedLocale = getPreselectedLocale(
         supportLocaleItems,
-        (isPreferredLocaleSelected ? preferredLocale : telegramLocale) || '',
+        preferredLocale || '',
     )
 
     return (

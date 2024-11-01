@@ -1,6 +1,5 @@
 import { User } from '@models/User.model';
-import { FETCH_USER, FETCH_USER_ERROR, FETCH_USER_SUCCESS, UPDATE_USER_LOCALE } from '../actions/user.actions';
-import { stat } from 'fs';
+import { FETCH_USER, FETCH_USER_ERROR, FETCH_USER_SUCCESS, UPDATE_USER_LOCALE, UPDATE_USER_ToS } from '../actions/user.actions';
 
 // Initial State
 export interface UserState {
@@ -43,6 +42,15 @@ export const userReducer = (state = initialState, action: any): UserState => {
                 user: {
                     ...state.user as User,
                     preferredLocale: action.payload,
+                },
+            }
+
+        case UPDATE_USER_ToS:
+            return {
+                ...state,
+                user: {
+                    ...state.user as User,
+                    acceptedTerms: action.payload,
                 },
             }
         default:

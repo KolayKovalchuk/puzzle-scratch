@@ -1,11 +1,28 @@
 $dark-violet: #34075E;
 $light-violet: #561394;
 $light-yellow: #FFDD56;
+$lime-green: #97DB01;
+$forest-green: #57B205;
 
-$main_bg: linear-gradient(180deg, #41055F 0%, #180132 100%);
+$coral-red: #FE5E5E;
+$burnt-orange: #B23305;
+// background: #FB12D033;
+
+$main_bg: linear-gradient(180deg, #380850 0%, #180132 100%);
+$main_radial_bg_gradient:
+            radial-gradient(65% 50% at 50% 15%, #FB12D033 0%, #180132 100%),
+            linear-gradient(180deg, #380850 0%, #180132 100%);
+
 
 $batch_card_background: linear-gradient(180deg, #911DAD 0%, #6D15A3 100%);
-$play_btn_bg: linear-gradient(180deg, #97DB01 -20.98%, #57B205 79.02%);
+$play_btn_bg: linear-gradient(180deg, $lime-green -20.98%, $forest-green 79.02%);
+$modal_dialog_bg: linear-gradient(180deg, #8458DB 0%, #585FCE 100%);
+
+$modal_accept_btn_bg: linear-gradient(180deg, $lime-green -20.98%, $forest-green 79.02%);
+$modal_accept_btn_bg_hover: linear-gradient(180deg, darken($lime-green, 5%) -20.98%, darken($forest-green, 5%) 79.02%);
+
+$modal_cancel_btn_bg: linear-gradient(180deg, $coral-red -20.98%, $burnt-orange 79.02%);
+$modal_cancel_btn_bg_hover: linear-gradient(180deg, darken($coral-red, 5%) -20.98%, darken($burnt-orange, 5%) 79.02%);
 
 
 $pink-shadow: 0 0 0px #BE2BDB99, 0 0 20px #BE2BDB99, 0px -6px 4px 0px #00000040 inset, 0px 6px 4px 0px #00000040 inset;

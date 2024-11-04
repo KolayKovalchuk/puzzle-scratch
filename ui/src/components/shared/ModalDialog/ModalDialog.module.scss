@@ -40,7 +40,7 @@
 .modalActions {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    margin-top: 20px;
 
     .btn {
         min-width: 100px;
@@ -51,6 +51,10 @@
         color: white;
         font-weight: bold;
         cursor: pointer;
+
+        &:first-child {
+            margin-right: 10px;
+        }
 
         &.confirm {
             background: colors.$modal_accept_btn_bg;

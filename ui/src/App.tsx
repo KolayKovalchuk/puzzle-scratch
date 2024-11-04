@@ -8,7 +8,6 @@ import { aprooveUserTerms } from '@services/api/user.service';
 import { setIsPreferredLocaleSelectedToCloud } from '@services/telegramCloud/preferredLocale.service';
 import { selectPreferredLocale, selectUserAcceptedTerms } from '@store/selectors/user.selectors';
 import store from '@store/store';
-import WebApp from '@twa-dev/sdk';
 import { useEffect, useState } from 'react';
 import { Provider, useSelector } from 'react-redux';
 
@@ -51,7 +50,6 @@ function App() {
 
     const onTosDecline = () => {
         setIsTosApprovePopupOpen(false)
-        WebApp.close();
     }
 
 

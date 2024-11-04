@@ -1,3 +1,5 @@
+import DOMPurify from 'dompurify';
+
 import { LocalizationModel } from '@models/LocalizationDataKey.model';
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '@store/store';
@@ -43,6 +45,30 @@ export const selectLocalValue = (localizationKey: string) => createSelector(
             )
             || 'EN'
 
-        return localizationDataItem[localizationKey as keyof LocalizationModel] || '';
+        return localizationDataItem[localizationKey as keyof LocalizationModel] || localizationKey;
+    }
+)
+
+const linkTagStr = '<link url="'
+const linkTagStrEnd = '">'
+const linkTagClose = '</link>'
+
+export const selectLocalValueWithLinkHTML = (localizationKey: string) => createSelector(
+    [selectLocalValue(localizationKey)],
+    (localizationValue) => {
+        const str = localizationValue.replace(linkTagStr, '<a href="').replace(linkTagClose, '</a>')
+        return DOMPurify.sanitize(str)
+    }
+)
+
+export const selectLocalValueWithLinkConfig = (localizationKey: string) => createSelector(
+    [selectLocalValue(localizationKey)],
+    (localizationValue) => {
+        const linkUrlRegEx = `${linkTagStr}(.*)${linkTagStrEnd}`
+        const linkUrl = localizationValue.match(linkUrlRegEx)?.[1] || ''
+
+        const linkTextRegex = `${linkTagStrEnd}(.*)${linkTagClose}`
+        const linkText = localizationValue.match(linkTextRegex)?.[1] || localizationKey
+        return { linkUrl, linkText }
     }
 )

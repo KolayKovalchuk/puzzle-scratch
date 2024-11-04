@@ -1,3 +1,5 @@
+@use "sass:color";
+
 $dark-violet: #34075E;
 $light-violet: #561394;
 $light-yellow: #FFDD56;
@@ -19,10 +21,10 @@ $play_btn_bg: linear-gradient(180deg, $lime-green -20.98%, $forest-green 79.02%)
 $modal_dialog_bg: linear-gradient(180deg, #8458DB 0%, #585FCE 100%);
 
 $modal_accept_btn_bg: linear-gradient(180deg, $lime-green -20.98%, $forest-green 79.02%);
-$modal_accept_btn_bg_hover: linear-gradient(180deg, darken($lime-green, 5%) -20.98%, darken($forest-green, 5%) 79.02%);
+$modal_accept_btn_bg_hover: linear-gradient(180deg, color.adjust($lime-green, $lightness: -5%) -20.98%, color.adjust($forest-green, $lightness: -5%) 79.02%);
 
 $modal_cancel_btn_bg: linear-gradient(180deg, $coral-red -20.98%, $burnt-orange 79.02%);
-$modal_cancel_btn_bg_hover: linear-gradient(180deg, darken($coral-red, 5%) -20.98%, darken($burnt-orange, 5%) 79.02%);
+$modal_cancel_btn_bg_hover: linear-gradient(180deg, color.adjust($coral-red, $lightness: -5%) -20.98%, color.adjust($burnt-orange, $lightness: -5%) 79.02%);
 
 
 $pink-shadow: 0 0 0px #BE2BDB99, 0 0 20px #BE2BDB99, 0px -6px 4px 0px #00000040 inset, 0px 6px 4px 0px #00000040 inset;

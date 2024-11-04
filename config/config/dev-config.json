@@ -1,6 +1,6 @@
 {
   "API_URL": "https://puzzle-dev-api-ke8734.rebelbots.com",
-  "LOCALISATION": "https://puzzle-config.storage.googleapis.com/localisation/v1.json",
+  "LOCALISATION": "https://puzzle-config.storage.googleapis.com/localisation/v2.json",
   "MAINTENANCE": false,
   "AFFILIATE_BONUS": 1,
   "SYSTEM_MSG": null,
@@ -15,5 +15,11 @@
   "FRIENDS_BONUS": {
     "FRIENDS_TO_INVITE": 5,
     "RBAX": 5
+  },
+  "SEND_RBAX": {
+    "RBAX": 5,
+    "COOLDOWN_MS": 600,
+    "EXPIRATION_MS": 130921304,
+    "MAX_USES": 5
   }
 }

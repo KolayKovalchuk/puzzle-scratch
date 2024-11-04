@@ -3,27 +3,14 @@ import styles from './App.module.scss';
 
 import { MainView } from '@components/MainView';
 import { TosApprovePopup } from '@components/TosApprovePopup/TosApprovePopup';
-import { useInitWebApp } from '@hooks/useInitWebApp';
-import { useFetchLocalizationData } from '@services/api/localization.service';
+import { useInitApp } from '@hooks/useInitApp';
 import { aprooveUserTerms } from '@services/api/user.service';
-import { useLoginUser } from '@services/auth.service';
-import { setIsPreferredLocaleSelectedToCloud, useGetIsPreferredLocaleSelectedFromCloud } from '@services/telegramCloud/preferredLocale.service';
+import { setIsPreferredLocaleSelectedToCloud } from '@services/telegramCloud/preferredLocale.service';
 import { selectPreferredLocale, selectUserAcceptedTerms } from '@store/selectors/user.selectors';
 import store from '@store/store';
 import WebApp from '@twa-dev/sdk';
 import { useEffect, useState } from 'react';
 import { Provider, useSelector } from 'react-redux';
-
-function useInitApp() {
-    const [, isUserLoggedIn] = useLoginUser();
-    const [isLocLoaded] = useFetchLocalizationData()
-    const [isPreferredLocaleSelected, setIsPreferredLocaleSelected, isPrefLocLoaded] = useGetIsPreferredLocaleSelectedFromCloud()
-    useInitWebApp();
-
-    const isLoaded = isUserLoggedIn && isLocLoaded && isPrefLocLoaded;
-
-    return [isLoaded, isPreferredLocaleSelected, setIsPreferredLocaleSelected] as const;
-}
 
 function App() {
     const [isLoaded, isPreferredLocaleSelected, setIsPreferredLocaleSelected] = useInitApp();

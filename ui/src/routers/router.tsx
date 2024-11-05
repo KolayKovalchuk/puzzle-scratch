@@ -1,7 +1,7 @@
-import { MainView } from '@components/MainView';
+import { ILanguageSelectProps, LanguageSelect } from '@pages/LanguageSelect';
+import { MainView } from '@pages/MainView';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { ROUTES } from './routerConfig';
-import { ILanguageSelectProps, LanguageSelect } from '@components/LanguageSelect/LanguageSelect';
 
 export interface IAppRouterProps {
     languageSelectProps: ILanguageSelectProps;

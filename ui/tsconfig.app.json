@@ -39,6 +39,9 @@
             "@routers/*": [
                 "src/routers/*"
             ],
+            "@pages/*": [
+                "src/pages/*"
+            ],
             "@store/*": [
                 "src/store/*"
             ],

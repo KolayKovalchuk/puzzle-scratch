@@ -56,15 +56,15 @@ export async function loginUser() {
         store.dispatch(fetchUser());
         if (!apiLoginClient) return;
 
-        const isDevMode = import.meta.env.MODE === 'development'
+        
         const body: ILoginBody = {
             initData: WebApp.initData
         }
 
-        if (isDevMode) {
-            body.initData = WebApp.initData;
-            // body.local = !WebApp.initData
-            // body.local = true
+        const isLocalDevMode = import.meta.env.VITE_IS_LOCAL_DEV_MODE
+        if (isLocalDevMode) {
+            body.initData = WebApp.initData || 'test-test';
+            body.local = !!WebApp.initData
         }
 
         const data = await apiLoginClient.post('/login', body);

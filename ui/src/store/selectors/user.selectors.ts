@@ -19,3 +19,10 @@ export const selectUserAcceptedTerms = createSelector(
         return queryState?.acceptedTerms
     }
 )
+
+export const selectUserToken = createSelector(
+    selectUser,
+    (queryState) => {
+        return queryState?.authToken
+    }
+)

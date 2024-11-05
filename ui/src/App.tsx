@@ -1,14 +1,14 @@
 import styles from './App.module.scss';
 
 import { useInitApp } from '@hooks/useInitApp';
+import { AppRouter } from '@routers/router';
+import { ROUTES } from '@routers/routerConfig';
 import { setIsPreferredLocaleSelectedToCloud } from '@services/telegramCloud/preferredLocale.service';
 import { selectPreferredLocale, selectUserAcceptedTerms } from '@store/selectors/user.selectors';
 import store from '@store/store';
 import { useEffect } from 'react';
 import { Provider, useSelector } from 'react-redux';
 import { BrowserRouter, useNavigate } from 'react-router-dom';
-import { AppRouter } from '@routers/router';
-import { ROUTES } from '@routers/routerConfig';
 
 // TODO: remove test code when done
 function TestBtn({ click }: { click: () => void }) {

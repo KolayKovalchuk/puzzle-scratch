@@ -1,7 +1,9 @@
+import { IUserAcceptTermsResponse } from '@models/IUserAcceptTermsResponse';
+import { updateToken } from '@services/auth.service';
 import { setIsPreferredLocaleSelectedToCloud } from '@services/telegramCloud/preferredLocale.service';
-import { apiClient } from './api.service';
-import store from '@store/store';
 import { updateUserLocale, updateUserTos } from '@store/actions/user.actions';
+import store from '@store/store';
+import { apiClient } from './api.service';
 
 export async function patchUserLocale(locale: string): Promise<boolean> {
     try {
@@ -17,8 +19,7 @@ export async function patchUserLocale(locale: string): Promise<boolean> {
     }
 }
 
-
-export async function patchUserAcceptTerms(): Promise<any> {
+export async function patchUserAcceptTerms(): Promise<IUserAcceptTermsResponse | null> {
     try {
         const response = await apiClient.patch('/user/accept-tos');
 
@@ -27,7 +28,7 @@ export async function patchUserAcceptTerms(): Promise<any> {
         return response?.data;
     } catch (error) {
         console.error('Error updating user terms:', error);
-        return false;
+        return null;
     }
 }
 
@@ -52,7 +53,7 @@ export async function selectUserLocale(locale: string) {
 }
 
 export async function aprooveUserTerms() {
-    const  patchUserAcceptTermsResult = await patchUserAcceptTerms()
+    const patchUserAcceptTermsResult = await patchUserAcceptTerms()
 
     console.log('patchUserAcceptTermsResult', patchUserAcceptTermsResult);
     
@@ -63,6 +64,6 @@ export async function aprooveUserTerms() {
     }
 
     store.dispatch(updateUserTos(true));
-
+    await updateToken(patchUserAcceptTermsResult);
     return true
 }

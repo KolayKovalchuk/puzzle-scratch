@@ -1,5 +1,5 @@
 import { User } from '@models/User.model';
-import { fetchUser, fetchUserError, fetchUserSuccess } from '@store/actions/user.actions';
+import { fetchUser, fetchUserError, fetchUserSuccess, updateUserToken } from '@store/actions/user.actions';
 import { selectUser } from '@store/selectors/user.selectors';
 import store from '@store/store';
 import WebApp from '@twa-dev/sdk';
@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { apiClient, useApiClient } from './api/api.service';
 import { apiLoginClient, useLoginApiClient } from './api/apiLogin.service';
 import { setJwtTokenToCloud, useGetJwtTokenFromCloud } from './telegramCloud/jwtToken.service';
+import { IUserAcceptTermsResponse } from '@models/IUserAcceptTermsResponse';
 
 
 let requestAuthInterceptor: number | null = null;
@@ -51,6 +52,14 @@ interface ILoginBody {
     local?: boolean
 }
 
+export async function updateToken(tokenData: IUserAcceptTermsResponse) {
+    if (apiClient) {
+        addAuthInterceptor(apiClient, tokenData.authToken);
+        await setJwtTokenToCloud(tokenData.authToken);
+        store.dispatch(updateUserToken(tokenData));
+    }
+}
+
 export async function loginUser() {
     try {
         store.dispatch(fetchUser());
@@ -79,7 +88,7 @@ export async function loginUser() {
 
         if (user.authToken) {
             addAuthInterceptor(apiClient, user.authToken);
-            setJwtTokenToCloud(user.authToken);
+            await setJwtTokenToCloud(user.authToken);
         }
     } catch (error) {
         if (error instanceof Error) {

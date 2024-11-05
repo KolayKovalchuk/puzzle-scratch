@@ -1,4 +1,5 @@
 import { User } from '@models/User.model';
+import { IUserAcceptTermsResponse } from '@models/IUserAcceptTermsResponse';
 
 // Action Types
 export const FETCH_USER = 'FETCH_USER';
@@ -33,4 +34,11 @@ export const UPDATE_USER_ToS = 'UPDATE_USER_ToS';
 export const updateUserTos = (isAprooved: boolean) => ({
     type: UPDATE_USER_ToS,
     payload: isAprooved,
+});
+
+export const UPDATE_USER_TOKEN = 'UPDATE_USER_TOKEN';
+
+export const updateUserToken = (payload: IUserAcceptTermsResponse) => ({
+    type: UPDATE_USER_TOKEN,
+    payload,
 });

@@ -36,6 +36,9 @@
             "@models/*": [
                 "src/models/*"
             ],
+            "@routers/*": [
+                "src/routers/*"
+            ],
             "@store/*": [
                 "src/store/*"
             ],

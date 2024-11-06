@@ -39,14 +39,15 @@ const ModalDialog: React.FC<ModalDialogProps> = ({
     return (
         <div className={styles.modalOverlay}>
             <div className={styles.modalContent}>
-                <StyledHeader title={title}></StyledHeader>
-                <div className={styles.modalBody}>
-                    {children ? children : <p>{content}</p>}
-                    <div className={styles.modalActions}>
-                        <div className={`${styles.btn} ${styles.cancel}`} onClick={() => handleClose()}>{cancelText}</div>
-                        <div className={`${styles.btn} ${styles.confirm}`} onClick={() => handleConfirm()}>{confirmText}</div>
+                <StyledHeader title={title}>
+                    <div className={styles.modalBody}>
+                        {children ? children : <p>{content}</p>}
+                        <div className={styles.modalActions}>
+                            <div className={`${styles.btn} ${styles.cancel}`} onClick={() => handleClose()}>{cancelText}</div>
+                            <div className={`${styles.btn} ${styles.confirm}`} onClick={() => handleConfirm()}>{confirmText}</div>
+                        </div>
                     </div>
-                </div>
+                </StyledHeader>
             </div>
         </div>
     );

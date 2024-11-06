@@ -1,24 +1,87 @@
 @use '@styles/colors';
+@use '@styles/mixins';
+
+$shadow_blur_radius: 10px;
+$shadow_spread_radius: 0.1px;
+$shadow_size: 0.1px;
+
+@mixin card-shadown($shadow_color: colors.$dark-violet) {
+    box-shadow: 0px $shadow_size $shadow_blur_radius $shadow_color, // bottom shadow
+        0px calc($shadow_size * -1) $shadow_blur_radius $shadow_spread_radius $shadow_color, // top shadow
+        $shadow_size 0px $shadow_blur_radius $shadow_spread_radius $shadow_color, // right shadow
+        calc($shadow_size * -1) 0px $shadow_blur_radius $shadow_spread_radius $shadow_color; // left shadow
+}
 
 .container {
+    min-width: 175px;
+    max-width: 225px;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    border-radius: 20px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+
+    transition: all 0.2s ease-in-out;
+
+    &.blue {
+        background: colors.$sky-blue;
+
+        &:hover {
+            @include card-shadown(colors.$sky-blue);
+        }
+
+        .content {
+            background: colors.$sky-blue;
+        }
+    }
+
+    &.pink {
+        background: colors.$light-orchid;
+
+        &:hover {
+            @include card-shadown(colors.$vivid-violet);
+        }
+
+        .content {
+            background: colors.$light-orchid;
+        }
+    }
+
+    &.green {
+        background: colors.$mint-green;
+
+        &:hover {
+            @include card-shadown(colors.$mint-green);
+        }
+
+        .content {
+            background: colors.$mint-green;
+        }
+    }
+}
+
+.content {
+    flex: 1;
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
 
-    // width: 382px;
-    // height: 628px;
-    width: 35.37%;
-    min-width: 300px;
-    aspect-ratio: 382 / 628;
+    padding: 0 4px;
 
-    border-radius: 50px;
-    background: colors.$batch_card_background;
+    border-radius: 20px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 .mainCover {
+    flex: 1;
     width: 100%;
-    height: 66%;
 
     display: flex;
     position: relative;
@@ -30,42 +93,66 @@
     img {
         width: 100%;
         height: 100%;
+        // height: 210px;
     }
 }
 
-.priceLabel {
-    transform: translate(-50%, -50%);
+.prizePool {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 34px;
+
+    font-size: 21px;
+    font-weight: bold;
+    text-align: center;
+    color: #ffffff;
+
+    background: colors.$deep-purple;
+    opacity: 0.8;
+
     position: absolute;
-    top: 100%;
-    left: 50%;
+    bottom: 0;
+
+    & span {
+        font-family: Nunito;
+        text-transform: uppercase;
+        white-space: nowrap;
+    }
 }
+
+$hint_icon_size: 22px;
 
 .footer {
-    flex: 1;
     width: 100%;
-    padding: 20px;
+    height: 50px;
+    padding: 8px;
 
     display: flex;
     justify-content: center;
     align-items: center;
-}
 
-.playButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    .token_icon {
+        width: 30px;
+    }
 
-    width: 82%;
-    height: 65%;
+    .amount {
+        height: 50px;
+        width: 41%;
 
-    text-align: center;
-    background: colors.$play_btn_bg;
+        position: relative;
+        top: 4px;
+    }
 
-    padding: 12px;
-    border-radius: 30px;
+    .hint_icon {
+        width: $hint_icon_size;
+        height: $hint_icon_size;
+        position: absolute;
+        right: 16px;
 
-    .playIcon {
-        aspect-ratio: auto;
-        width: 80%;
+        padding: 4px;
+
+        @include mixins.icon-shadown;
     }
 }

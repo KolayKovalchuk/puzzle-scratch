@@ -1,6 +1,14 @@
+export enum BatchCardType {
+    ICE_BOX = 'ICE_BOX',
+    CANDY_MAZE = 'CANDY_MAZE',
+    SANTA_SAC = 'SANTA_SAC'
+}
+
+
 export class BatchCard {
     batchId: string;
     batchName: string;
+    cardType: BatchCardType;
     cardsCount: number;
     scratchedCards: number;
     totalCardsInBatch: number;
@@ -13,6 +21,7 @@ export class BatchCard {
     constructor(data: BatchCard) {
         this.batchId = data.batchId;
         this.batchName = data.batchName;
+        this.cardType = data.cardType;
         this.cardsCount = data.cardsCount;
         this.scratchedCards = data.scratchedCards;
         this.totalCardsInBatch = data.totalCardsInBatch;

@@ -1,38 +1,59 @@
 $wing_size: 55px;
-$wing_top: -20px;
-$wing_left: -7%;
+$wing_top: 5px;
+$wing_left: -22px;
 
-.dialogHeader {
+
+.container {
+    position: relative;
+    width: 100%;
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.mainHeaderBanner {
     min-width: 104%;
     height: $wing_size;
     position: absolute;
-    top: -25px;
     left: -2%;
     z-index: 2;
+    top: -6px;
+
 }
 
 .leftDialogWing {
     width: $wing_size;
-    max-height: $wing_size;
     position: absolute;
-    top: $wing_top;
     left: $wing_left;
     z-index: 0;
 }
 
 .rightDialogWing {
     width: $wing_size;
-    max-height: $wing_size;
     position: absolute;
-    top: $wing_top;
     right: $wing_left;
     z-index: 0;
 }
 
 .headerContainer {
     position: relative;
-    top: -22px;
     z-index: 3;
+    top: -6px;
 
-    height: $wing_size
+
+    height: $wing_size;
+    width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    top: -12px;
+
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }

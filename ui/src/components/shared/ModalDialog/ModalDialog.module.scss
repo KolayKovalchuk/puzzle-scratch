@@ -32,9 +32,10 @@
     position: relative;
     z-index: 1;
     height: 100%;
-    margin-top: -40px;
     background: colors.$modal_dialog_bg;
     border-radius: 16px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 .modalActions {

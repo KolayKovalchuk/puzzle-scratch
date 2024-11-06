@@ -2,11 +2,20 @@ import { useContainerDimensions } from '@hooks/useContainerDimensions';
 import { Stage, Text } from '@pixi/react';
 import { TextStyle } from 'pixi.js';
 
-export function StyledHeaderText({ text }: { text: string }) {
+import styles from './StyledHeaderText.module.scss';
+
+
+export interface IStyledHeaderTextProps {
+    text: string;
+    className?: string;
+    fontSize?: number;
+}
+
+export function StyledHeaderText({ text, className, fontSize = 30 }: IStyledHeaderTextProps) {
     const { containerRef, dimensions } = useContainerDimensions();
     const textStyle = new TextStyle({
         fontFamily: 'Nunito',
-        fontSize: 34,
+        fontSize: fontSize,
         fontWeight: '900',
 
         fill: ['#FFFFAB', '#FCB213'], // Gradient colors
@@ -19,14 +28,14 @@ export function StyledHeaderText({ text }: { text: string }) {
 
         dropShadow: true,
         dropShadowColor: 'rgba(0, 0, 0, 0.25)',
-        dropShadowAlpha: 0.4,
-        dropShadowBlur: 2,
+        dropShadowAlpha: 0.1,
+        dropShadowBlur: 1,
         dropShadowAngle: Math.PI / 6,
-        dropShadowDistance: 2
+        dropShadowDistance: 4,
     });
 
     return (
-        <div ref={containerRef} style={{ width: '100%', height: '100%' }}>
+        <div ref={containerRef} className={`${styles.container} ${className || ''}`}>
             <Stage width={dimensions.width} height={dimensions.height} options={{ backgroundAlpha: 0 }}>
                 <Text
                     text={text}

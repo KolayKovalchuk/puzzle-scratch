@@ -1,6 +1,6 @@
 {
   "API_URL": "https://puzzle-dev-api-ke8734.rebelbots.com",
-  "LOCALISATION": "https://puzzle-config.storage.googleapis.com/localisation/v2.json",
+  "LOCALISATION": "https://puzzle-config.storage.googleapis.com/localisation/v3.json",
   "MAINTENANCE": false,
   "AFFILIATE_BONUS": 1,
   "SYSTEM_MSG": null,

@@ -92,6 +92,10 @@ export function LanguageSelect({ onLangSelected, isPreferredLocaleSelected }: IL
         preferredLocale || '',
     ), [supportLocaleItems, preferredLocale])
 
+    useEffect(() => {
+        store.dispatch(updateUserLocale(preselectedLocale.data));
+    }, [preselectedLocale]);
+
     const headerText = useSelector(selectLocalValue('txt.lang.title'))
     const secondHeaderText = useSelector(selectLocalValue('txt.languageSelect.selectYourLanguage'))
     const dropdownLabel = useSelector(selectLocalValue('txt.lang.language'))

@@ -34,8 +34,10 @@ export function BatchCardComponent({ className, batchCard }: IBatchCardProps) {
                         </div>
                     </div>
                     <div className={styles.footer}>
-                        <Icon name={robo_token_no_bg} className={styles.token_icon}></Icon>
-                        <StyledHeaderText fontSize={fontSize} className={styles.amount} text='1500'></StyledHeaderText>
+                        <div className={styles.priceLabel}>
+                            <Icon name={robo_token_no_bg} className={styles.token_icon}></Icon>
+                            <StyledHeaderText fontSize={fontSize} className={styles.amount} text='1500'></StyledHeaderText>
+                        </div>
                         <Icon name={hint} className={styles.hint_icon}></Icon>
                     </div>
                 </div>

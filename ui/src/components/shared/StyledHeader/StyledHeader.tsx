@@ -26,7 +26,7 @@ export function StyledHeader({
     className,
     children,
     type = StyledHeaderType.DEFAULT,
-    fontSize,
+    fontSize = 30,
     height = '55px',
 }: StyledHeaderTextProps) {
     const {

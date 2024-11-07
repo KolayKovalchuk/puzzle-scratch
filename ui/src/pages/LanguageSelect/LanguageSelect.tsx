@@ -1,14 +1,18 @@
 import { Dropdown, IDropdownItem } from '@components/shared/Dropdown';
+import { SecondaryStyledText } from '@components/shared/StyledText';
 import { TosApprovePopup } from '@components/TosApprovePopup/TosApprovePopup';
 import { ROUTES } from '@routers/routerConfig';
 import { aprooveUserTerms, selectUserLocale } from '@services/api/user.service';
-import { selectSupportedLocales } from '@store/selectors/localization.selectors';
+import { selectLocalValue, selectSupportedLocales } from '@store/selectors/localization.selectors';
 import { selectPreferredLocale, selectUserAcceptedTerms } from '@store/selectors/user.selectors';
 import WebApp from '@twa-dev/sdk';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styles from './LanguageSelect.module.scss';
+import { Button } from '@components/shared/Button/Button';
+import store from '@store/store';
+import { updateUserLocale } from '@store/actions/user.actions';
 
 export interface ILanguageSelectProps {
     onLangSelected?: (lang: string) => void | Promise<void>,
@@ -78,25 +82,51 @@ export function LanguageSelect({ onLangSelected, isPreferredLocaleSelected }: IL
     }
 
     const supportLocales = useSelector(selectSupportedLocales)
-    const supportLocaleItems = getSupportLocalesItems(supportLocales)
+    const supportLocaleItems = useMemo(() => getSupportLocalesItems(supportLocales), [supportLocales])
     const preferredLocaleState = useSelector(selectPreferredLocale)
     const telegramLocale = WebApp.initDataUnsafe.user?.language_code
     const preferredLocale: string | undefined = isPreferredLocaleSelected ? preferredLocaleState : telegramLocale
 
-    const preselectedLocale = getPreselectedLocale(
+    const preselectedLocale = useMemo(() => getPreselectedLocale(
         supportLocaleItems,
         preferredLocale || '',
-    )
+    ), [supportLocaleItems, preferredLocale])
+
+    const headerText = useSelector(selectLocalValue('txt.lang.title'))
+    const secondHeaderText = useSelector(selectLocalValue('txt.languageSelect.selectYourLanguage'))
+    const dropdownLabel = useSelector(selectLocalValue('txt.lang.language'))
+    const buttonText = useSelector(selectLocalValue('txt.btn.select'))
+
+    const [selectedLocale, setSelectedLocale] = useState<IDropdownItem | null>(null)
+    const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false)
+
+    const buttonClassName = isDropdownOpen ? styles.hidden : ''
 
     return (
         <div className={styles.container}>
-            <Dropdown
-                items={supportLocaleItems}
-                selectedItem={preselectedLocale}
-                onSelect={(data) => {
-                    onLangSelect(data)
-                }}
-            />
+            <SecondaryStyledText text={headerText} className={styles.header} textStyles={{ fontSize: 40 }}></SecondaryStyledText>
+
+            <div className={styles.h2}>{secondHeaderText}</div>
+
+            <div className={styles.dropdownContainer}>
+                <span className={styles.dropdownLabel}>{dropdownLabel}</span>
+                <Dropdown
+                    items={supportLocaleItems}
+                    selectedItem={preselectedLocale}
+                    onSelect={(data) => {
+                        setSelectedLocale(data)
+                        store.dispatch(updateUserLocale(data.data));
+                    }}
+                    onOpenClose={(isOpen) => setIsDropdownOpen(isOpen)}
+                />
+            </div>
+
+            <Button className={buttonClassName} text={buttonText} isConfirm onClick={() => {
+                if (selectedLocale) {
+                    onLangSelect(selectedLocale)
+                }
+            }}></Button>
+
             <TosApprovePopup
                 isOpen={isTosApprovePopupOpen}
                 onConfirm={() => onTosApprove()}

@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-export function useContainerDimensions() {
+export function useContainerDimensions(...args: any) {
     const containerRef = useRef<HTMLDivElement>(null);
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
@@ -18,7 +18,7 @@ export function useContainerDimensions() {
         return () => {
             window.removeEventListener('resize', updateDimensions);
         };
-    }, []);
+    }, [...args]);
 
     return { containerRef, dimensions };
 };

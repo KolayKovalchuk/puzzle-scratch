@@ -1,7 +1,7 @@
 @use '@styles/colors';
 @use '@styles/mixins';
 
-$shadow_blur_radius: 10px;
+$shadow_blur_radius: 5px;
 $shadow_spread_radius: 0.1px;
 $shadow_size: 0.1px;
 
@@ -150,14 +150,14 @@ $hint_icon_size: 22px;
         align-self: stretch;
 
         position: relative;
-        top: 6px;
+        top: 4px;
     }
 
     .hint_icon {
         width: $hint_icon_size;
         height: $hint_icon_size;
         position: absolute;
-        right: 8px;
+        right: 4px;
 
         padding: 4px;
 

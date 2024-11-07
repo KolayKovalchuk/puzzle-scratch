@@ -1,8 +1,11 @@
 @use '@styles/colors';
+@use '@styles/mixins';
 
-$border-radius: 30px;
+$border-radius: 10px;
 
 .dropdown {
+    @include mixins.icon-shadown;
+
     height: 40px;
     min-width: 150px;
 
@@ -12,12 +15,10 @@ $border-radius: 30px;
     justify-content: center;
     cursor: pointer;
 
-    background-color: colors.$dark-violet;
-    box-shadow: colors.$pink-shadow;
-
     border-color: transparent;
     border-radius: $border-radius;
     color: #fff;
+    font-weight: bold;
 }
 
 .dropdownSelected {
@@ -28,7 +29,6 @@ $border-radius: 30px;
     height: 100%;
 
 
-    background-color: colors.$dark-violet;
     color: #fff;
     border-color: transparent;
     border-radius: $border-radius;
@@ -56,6 +56,10 @@ $border-radius: 30px;
     border-radius: $border-radius;
     z-index: 1000;
     overflow: hidden;
+
+    .dropdownListItem {
+        background-color: colors.$dark-violet;
+    }
 }
 
 .dropdownListItem {
@@ -69,13 +73,8 @@ $border-radius: 30px;
 
     cursor: pointer;
 
-    background-color: colors.$dark-violet;
     color: #fff;
     white-space: nowrap;
-
-    &:not(:last-child) {
-        border-bottom: 1px solid colors.$light-violet;
-    }
 }
 
 .dropdownListItem.selected,

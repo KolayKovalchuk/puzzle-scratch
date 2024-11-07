@@ -10,7 +10,8 @@ export function Dropdown({
     items,
     placeholder = 'Select: ',
     selectedItem: selectedItemProp,
-    onSelect
+    onSelect,
+    onOpenClose,
 }: IDropdownProps) {
     const [selectedItem, setSelectedItem] = useState<IDropdownItem | null>(null)
     const [isOpen, setIsOpen] = useState(false)
@@ -21,6 +22,10 @@ export function Dropdown({
             setSelectedItem(selectedItemProp)
         }
     }, [selectedItemProp])
+
+    useEffect(() => {
+        onOpenClose && onOpenClose(isOpen)
+    }, [isOpen])
 
     const handleSelect = (item: IDropdownItem) => {
         setSelectedItem(item)

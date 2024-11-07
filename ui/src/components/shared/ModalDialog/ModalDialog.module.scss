@@ -32,15 +32,16 @@
     position: relative;
     z-index: 1;
     height: 100%;
-    margin-top: -40px;
     background: colors.$modal_dialog_bg;
     border-radius: 16px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 .modalActions {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    margin-top: 20px;
 
     .btn {
         min-width: 100px;
@@ -51,6 +52,10 @@
         color: white;
         font-weight: bold;
         cursor: pointer;
+
+        &:first-child {
+            margin-right: 10px;
+        }
 
         &.confirm {
             background: colors.$modal_accept_btn_bg;

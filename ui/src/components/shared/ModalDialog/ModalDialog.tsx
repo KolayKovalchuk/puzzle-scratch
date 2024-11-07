@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import styles from './ModalDialog.module.scss';
 import { StyledHeader } from '@components/shared/StyledHeader';
+import { ReactNode } from 'react';
+import styles from './ModalDialog.module.scss';
 
 interface ModalDialogProps {
     isOpen: boolean;
@@ -9,6 +9,8 @@ interface ModalDialogProps {
 
     confirmText?: string;
     cancelText?: string;
+
+    children: ReactNode;
 
     onClose: () => void;
     onConfirm: () => void;
@@ -21,7 +23,8 @@ const ModalDialog: React.FC<ModalDialogProps> = ({
     onClose,
     onConfirm,
     confirmText,
-    cancelText
+    cancelText,
+    children
 }) => {
     if (!isOpen) return null;
 
@@ -36,14 +39,15 @@ const ModalDialog: React.FC<ModalDialogProps> = ({
     return (
         <div className={styles.modalOverlay}>
             <div className={styles.modalContent}>
-                <StyledHeader title={title}></StyledHeader>
-                <div className={styles.modalBody}>
-                    <p>{content}</p>
-                    <div className={styles.modalActions}>
-                        <div className={`${styles.btn} ${styles.cancel}`} onClick={() => handleClose()}>{cancelText}</div>
-                        <div className={`${styles.btn} ${styles.confirm}`} onClick={() => handleConfirm()}>{confirmText}</div>
+                <StyledHeader title={title}>
+                    <div className={styles.modalBody}>
+                        {children ? children : <p>{content}</p>}
+                        <div className={styles.modalActions}>
+                            <div className={`${styles.btn} ${styles.cancel}`} onClick={() => handleClose()}>{cancelText}</div>
+                            <div className={`${styles.btn} ${styles.confirm}`} onClick={() => handleConfirm()}>{confirmText}</div>
+                        </div>
                     </div>
-                </div>
+                </StyledHeader>
             </div>
         </div>
     );

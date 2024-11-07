@@ -1,6 +1,6 @@
 @use '@styles/colors';
 @use '@styles/mixins';
-@use '@styles/header_size';
+@use '@styles/variables';
 
 
 .mainContainer {
@@ -9,13 +9,15 @@
     justify-content: space-between;
     width: 100%;
 
-    max-height: header_size.$base_header_height;
-    height: header_size.$base_header_height;
-    min-height: header_size.$sx_header_height;
+    max-height: variables.$base_header_height;
+    height: variables.$base_header_height;
+    min-height: variables.$sx_header_height;
 
     padding: 25px;
     position: fixed;
     top: 0;
+
+    z-index: 1000;
 }
 
 .profileContainer {
@@ -70,6 +72,7 @@
     }
 
     .amount_value {
+        font-family: 'Roboto', sans-serif;
         color: #fff;
         font-size: 36px;
         font-weight: bold;
@@ -80,7 +83,7 @@
 @media (max-width: 768px) {
     .mainContainer {
         padding: 20px;
-        height: header_size.$md_header_height;
+        height: variables.$md_header_height;
     }
 
     .icon {
@@ -106,7 +109,7 @@
 @media (max-width: 576px) {
     .mainContainer {
         padding: 15px;
-        height: header_size.$sm_header_height;
+        height: variables.$sm_header_height;
     }
 
     .icon {
@@ -132,7 +135,7 @@
 @media (max-width: 480px) {
     .mainContainer {
         padding: 10px;
-        height: header_size.$sx_header_height;
+        height: variables.$sx_header_height;
     }
 
     .icon {

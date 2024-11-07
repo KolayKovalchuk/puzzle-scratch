@@ -1,25 +1,47 @@
 import { Icon } from '@components/shared/Icon';
-import { PriceLabel } from '@components/shared/PriceLabel/PriceLabel';
 import styles from './BatchCard.module.scss';
 
-import play_text from '@icons/play_text.svg';
+import { StyledHeader } from '@components/shared/StyledHeader';
 
+import { StyledHeaderText } from '@components/shared/StyledHeaderText';
+import hint from '@icons/hint.svg';
+import robo_token_no_bg from '@icons/robo_token_no_bg.svg';
+import { BatchCard } from '@models/BatchCard.model';
+import { useGetBatchCardConfig } from './hooks/useGetBatchCardConfig';
 
-export interface IBatchCardProps { }
+export interface IBatchCardProps {
+    className?: string;
+    batchCard: BatchCard;
+}
 
-export function BatchCard() {
+export function BatchCardComponent({ className, batchCard }: IBatchCardProps) {
+    const { headerType, batchCardClass, batchImageUrl } = useGetBatchCardConfig(batchCard.cardType, styles);
+    const fontSize = 21;
     return (
-        <div className={styles.container}>
-            <div className={styles.mainCover}>
-                <img src="/batchCoverExample1.png" alt="cover" />
-                <PriceLabel price={100} className={styles.priceLabel}></PriceLabel>
-            </div>
-            <div className={styles.footer}>
-                <div className={styles.playButton}>
-                    {/* <span className={styles.playLabel}>Play</span> */}
-                    <Icon name={play_text} className={styles.playIcon}></Icon>
+        <div className={`${styles.container} ${batchCardClass} ${className || ''}`}>
+            <StyledHeader
+                title={batchCard.batchName}
+                className={styles.styledHeader}
+                type={headerType}
+                fontSize={fontSize}
+                height='42px'
+            >
+                <div className={`${styles.content}`}>
+                    <div className={styles.mainCover}>
+                        <img src={batchImageUrl} alt="cover" />
+                        <div className={styles.prizePool}>
+                            <span>Prize pool</span>
+                        </div>
+                    </div>
+                    <div className={styles.footer}>
+                        <div className={styles.priceLabel}>
+                            <Icon name={robo_token_no_bg} className={styles.token_icon}></Icon>
+                            <StyledHeaderText fontSize={fontSize} className={styles.amount} text='1500'></StyledHeaderText>
+                        </div>
+                        <Icon name={hint} className={styles.hint_icon}></Icon>
+                    </div>
                 </div>
-            </div>
+            </StyledHeader>
         </div>
     )
 }

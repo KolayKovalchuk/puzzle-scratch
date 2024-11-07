@@ -1,73 +1,60 @@
-import { LanguageSelect } from '@components/LanguageSelect/LanguageSelect';
 import styles from './App.module.scss';
 
-import { MainView } from '@components/MainView';
-import { TosApprovePopup } from '@components/TosApprovePopup/TosApprovePopup';
-import { useInitWebApp } from '@hooks/useInitWebApp';
-import { useFetchLocalizationData } from '@services/api/localization.service';
-import { aprooveUserTerms } from '@services/api/user.service';
-import { useLoginUser } from '@services/auth.service';
-import { setIsPreferredLocaleSelectedToCloud, useGetIsPreferredLocaleSelectedFromCloud } from '@services/telegramCloud/preferredLocale.service';
+import { useInitApp } from '@hooks/useInitApp';
+import { AppRouter } from '@routers/router';
+import { ROUTES } from '@routers/routerConfig';
+import { setIsPreferredLocaleSelectedToCloud } from '@services/telegramCloud/preferredLocale.service';
 import { selectPreferredLocale, selectUserAcceptedTerms } from '@store/selectors/user.selectors';
 import store from '@store/store';
-import WebApp from '@twa-dev/sdk';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Provider, useSelector } from 'react-redux';
+import { BrowserRouter, useNavigate } from 'react-router-dom';
 
-function useInitApp() {
-    const [, isUserLoggedIn] = useLoginUser();
-    const [isLocLoaded] = useFetchLocalizationData()
-    const [isPreferredLocaleSelected, setIsPreferredLocaleSelected, isPrefLocLoaded] = useGetIsPreferredLocaleSelectedFromCloud()
-    useInitWebApp();
+// TODO: remove test code when done
+function TestBtn({ click }: { click: () => void }) {
+    const preferredLocale = useSelector(selectPreferredLocale)
 
-    const isLoaded = isUserLoggedIn && isLocLoaded && isPrefLocLoaded;
-
-    return [isLoaded, isPreferredLocaleSelected, setIsPreferredLocaleSelected] as const;
+    return (
+        <div style={{
+            width: '100%',
+            height: '100px',
+            backgroundColor: 'lightgreen',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+        }} onClick={() => click()}>Reset(only for test) Locale: {preferredLocale}</div>
+    )
 }
 
 function App() {
     const [isLoaded, isPreferredLocaleSelected, setIsPreferredLocaleSelected] = useInitApp();
 
+    const navigate = useNavigate();
     const isUserAcceptedTerms = useSelector(selectUserAcceptedTerms)
-    const isMainViewAvailable = isPreferredLocaleSelected && isUserAcceptedTerms;
-
-    const [isTosApprovePopupOpen, setIsTosApprovePopupOpen] = useState<boolean>(false);
+    const shouldRedirectToLanguageSelect = !isPreferredLocaleSelected || !isUserAcceptedTerms;
 
     useEffect(() => {
-        setIsTosApprovePopupOpen(isPreferredLocaleSelected && !isUserAcceptedTerms);
-    }, [isPreferredLocaleSelected, isUserAcceptedTerms]);
+        if (!isLoaded) return;
 
-    // TODO: remove test code when done
-    const preferredLocale = useSelector(selectPreferredLocale)
+        if (shouldRedirectToLanguageSelect) {
+            navigate(ROUTES.LanguageSelect);
+        } else {
+            navigate(ROUTES.Home);
+        }
+    }, [isLoaded, shouldRedirectToLanguageSelect, navigate]);
 
     if (!isLoaded) {
-        return <div  className={`${styles.mainContainer} ${styles.loading}`}><span>Loading...</span></div>
+        return <div className={`${styles.mainContainer} ${styles.loading}`}><span>Loading...</span></div>
     }
 
     const onLangSelected = async () => {
-        const result = await setIsPreferredLocaleSelectedToCloud(true)
-
-        if (!result) {
-            console.error('Failed to set isPreferredLocaleSelected to cloud');
-            return;
-        }
-
         setIsPreferredLocaleSelected(true)
-
-        if (!isUserAcceptedTerms) {}
     }
 
-    const onTosApprove = async () => {
-        await aprooveUserTerms();
-        setIsTosApprovePopupOpen(false)
+    const languageSelectProps = {
+        onLangSelected,
+        isPreferredLocaleSelected,
     }
-
-    const onTosDecline = () => {
-        setIsTosApprovePopupOpen(false)
-        WebApp.close();
-    }
-
-
     // TODO: remove test code when done
     const onTestBtnClick = async () => {
         const result = await setIsPreferredLocaleSelectedToCloud(false)
@@ -77,36 +64,21 @@ function App() {
 
     return (
         <div className={styles.mainContainer}>
-            {!isMainViewAvailable
-                ? <LanguageSelect onLangSelected={() => onLangSelected()} isPreferredLocaleSelected={isPreferredLocaleSelected}></LanguageSelect>
-                : <>
-                    <MainView></MainView>
-                </>
-            }
+            <AppRouter languageSelectProps={languageSelectProps} />
 
-            <TosApprovePopup
-                isOpen={isTosApprovePopupOpen}
-                onConfirm={() => onTosApprove()}
-                onClose={() => onTosDecline()}
-                ></TosApprovePopup>
             {/* // TODO: remove test code when done */}
-            <div style={{
-                width: '100%',
-                height: '100px',
-                backgroundColor: 'lightgreen',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-            }} onClick={() => onTestBtnClick()}>Reset(only for test) Locale: {preferredLocale}</div>
+            <TestBtn click={() => onTestBtnClick()}/>
         </div>
-    );
+    )
 };
 
 function Root() {
     return (
-        <Provider store={store}>
-            <App />
-        </Provider>
+        <BrowserRouter>
+            <Provider store={store}>
+                <App />
+            </Provider>
+        </BrowserRouter>
     )
 };
 

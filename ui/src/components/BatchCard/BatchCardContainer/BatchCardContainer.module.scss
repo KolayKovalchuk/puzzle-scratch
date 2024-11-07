@@ -1,0 +1,30 @@
+.container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 100%;
+
+    padding: 20px 25px;
+
+    overflow-x: auto;
+}
+
+.batchCard {
+    align-self: stretch;
+    height: inherit;
+
+    &:not(:last-child) {
+        margin-right: 48px;
+    }
+}
+
+.loadingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+
+    color: #ffffff;
+}

@@ -1,0 +1,53 @@
+@use '@styles/colors';
+@use '@styles/variables';
+
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    width: 100%;
+    padding-top: variables.$base_header_height;
+    background: colors.$main_radial_bg_gradient;
+
+    display: block;
+    overflow: auto;
+}
+
+.banner {
+    width: 100%;
+
+    padding: 0 variables.$main_side_padding;
+    cursor: pointer;
+    
+
+    img {
+        width: 100%;
+    }
+}
+
+.leaderboardContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .mainContainer {
+        padding-top: variables.$md_header_height;
+    }
+}
+
+@media (max-width: 576px) {
+    .mainContainer {
+        padding-top: variables.$sm_header_height;
+    }
+}
+
+@media (max-width: 480px) {
+    .mainContainer {
+        padding-top: variables.$sx_header_height;
+    }
+}

@@ -1,10 +1,14 @@
 import { Dropdown, IDropdownItem } from '@components/shared/Dropdown';
-import { selectUserLocale } from '@services/api/user.service';
+import { TosApprovePopup } from '@components/TosApprovePopup/TosApprovePopup';
+import { ROUTES } from '@routers/routerConfig';
+import { aprooveUserTerms, selectUserLocale } from '@services/api/user.service';
 import { selectSupportedLocales } from '@store/selectors/localization.selectors';
-import { selectPreferredLocale } from '@store/selectors/user.selectors';
-import { useSelector } from 'react-redux';
-import styles from './LanguageSelect.module.scss';
+import { selectPreferredLocale, selectUserAcceptedTerms } from '@store/selectors/user.selectors';
 import WebApp from '@twa-dev/sdk';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import styles from './LanguageSelect.module.scss';
 
 export interface ILanguageSelectProps {
     onLangSelected?: (lang: string) => void | Promise<void>,
@@ -38,12 +42,39 @@ export function LanguageSelect({ onLangSelected, isPreferredLocaleSelected }: IL
     const onLangSelect = async (lang: IDropdownItem) => {
         try {
             const result = await selectUserLocale(lang.data)
-            if (!result) return
+
+            if (!result) {
+                console.error('Failed to set isPreferredLocaleSelected to cloud');
+                return;
+            }
 
             if (onLangSelected) onLangSelected(lang.data)
         } catch (error) {
             console.error('Error updating locale:', error);
         }
+    }
+
+    const [isTosApprovePopupOpen, setIsTosApprovePopupOpen] = useState<boolean>(false);
+    const isUserAcceptedTerms = useSelector(selectUserAcceptedTerms)
+
+    useEffect(() => {
+        const isTosApprovePopupOpen = isPreferredLocaleSelected && !isUserAcceptedTerms
+        setIsTosApprovePopupOpen(isTosApprovePopupOpen);
+    }, [isPreferredLocaleSelected, isUserAcceptedTerms]);
+
+    const navigate = useNavigate();
+
+    const onTosApprove = async () => {
+        const result = await aprooveUserTerms();
+
+        if (!result) return;
+
+        setIsTosApprovePopupOpen(false)
+        navigate(ROUTES.Home)
+    }
+
+    const onTosDecline = () => {
+        setIsTosApprovePopupOpen(false)
     }
 
     const supportLocales = useSelector(selectSupportedLocales)
@@ -66,6 +97,11 @@ export function LanguageSelect({ onLangSelected, isPreferredLocaleSelected }: IL
                     onLangSelect(data)
                 }}
             />
+            <TosApprovePopup
+                isOpen={isTosApprovePopupOpen}
+                onConfirm={() => onTosApprove()}
+                onClose={() => onTosDecline()}
+            ></TosApprovePopup>
         </div>
     );
 }

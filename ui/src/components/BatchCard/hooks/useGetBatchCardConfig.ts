@@ -1,5 +1,5 @@
 import { StyledHeaderType } from '@components/shared/StyledHeader';
-import { BatchCardType } from '@models/BatchCard';
+import { BatchCardType } from '@models/BatchCard.model';
 import { useEffect, useState } from 'react';
 
 function getStyledHeaderType(cardType: BatchCardType) {

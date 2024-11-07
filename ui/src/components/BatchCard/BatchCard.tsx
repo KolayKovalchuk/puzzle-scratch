@@ -6,7 +6,7 @@ import { StyledHeader } from '@components/shared/StyledHeader';
 import { StyledHeaderText } from '@components/shared/StyledHeaderText';
 import hint from '@icons/hint.svg';
 import robo_token_no_bg from '@icons/robo_token_no_bg.svg';
-import { BatchCard } from '@models/BatchCard';
+import { BatchCard } from '@models/BatchCard.model';
 import { useGetBatchCardConfig } from './hooks/useGetBatchCardConfig';
 
 export interface IBatchCardProps {

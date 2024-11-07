@@ -33,19 +33,20 @@ export const selectLocalValue = (localizationKey: string) => createSelector(
     [selectLocalizationDataItem(localizationKey), selectPreferredLocale],
     (localizationDataItem, preferredLocale) => {
 
-        if (!localizationDataItem) return ''
+        if (!localizationDataItem) return localizationKey
 
         const localizationKeyList = Object.keys(localizationDataItem)
 
-        if (!preferredLocale) return 'EN'
+        if (!preferredLocale) return localizationKey
 
-        const localizationKey = localizationKeyList
+
+        const localeKey = localizationKeyList
             .find((key) =>
                 key.toLowerCase() === preferredLocale?.toLowerCase()
             )
             || 'EN'
 
-        return localizationDataItem[localizationKey as keyof LocalizationModel] || localizationKey;
+        return localizationDataItem[localeKey as keyof LocalizationModel] || localizationKey;
     }
 )
 

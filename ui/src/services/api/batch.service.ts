@@ -1,4 +1,4 @@
-import { BatchCard } from '@models/BatchCard';
+import { BatchCard } from '@models/BatchCard.model';
 import { apiClient } from './api.service';
 import { useEffect, useState } from 'react';
 

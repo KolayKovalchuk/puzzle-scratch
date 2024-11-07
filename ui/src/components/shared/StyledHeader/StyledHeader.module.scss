@@ -18,28 +18,28 @@ $wing_left: -22px;
     position: absolute;
     left: -2%;
     z-index: 2;
-    top: -6px;
-
 }
 
+.rightDialogWing,
 .leftDialogWing {
     width: $wing_size;
     position: absolute;
-    left: $wing_left;
+    top: $wing_top;
     z-index: 0;
+}
+
+.leftDialogWing {
+    left: $wing_left;
 }
 
 .rightDialogWing {
-    width: $wing_size;
-    position: absolute;
     right: $wing_left;
-    z-index: 0;
 }
 
 .headerContainer {
-    position: relative;
+    position: absolute;
     z-index: 3;
-    top: -6px;
+    top: 3px;
 
 
     height: $wing_size;
@@ -51,7 +51,8 @@ $wing_left: -22px;
 .content {
     position: relative;
     z-index: 1;
-    top: -12px;
+
+    margin-top: 38px;
 
     display: flex;
     flex-direction: column;

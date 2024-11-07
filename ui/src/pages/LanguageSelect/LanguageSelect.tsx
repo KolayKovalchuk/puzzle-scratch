@@ -102,30 +102,28 @@ export function LanguageSelect({ onLangSelected, isPreferredLocaleSelected }: IL
     const buttonText = useSelector(selectLocalValue('txt.btn.select'))
 
     const [selectedLocale, setSelectedLocale] = useState<IDropdownItem | null>(null)
-    const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false)
-
-    const buttonClassName = isDropdownOpen ? styles.hidden : ''
 
     return (
         <div className={styles.container}>
-            <SecondaryStyledText text={headerText} className={styles.header} textStyles={{ fontSize: 40 }}></SecondaryStyledText>
+            <div className={styles.headerContainer}>
+                <SecondaryStyledText text={headerText} className={styles.header} textStyles={{ fontSize: 40 }}></SecondaryStyledText>
 
-            <div className={styles.h2}>{secondHeaderText}</div>
+                <div className={styles.h2}>{secondHeaderText}</div>
 
-            <div className={styles.dropdownContainer}>
-                <span className={styles.dropdownLabel}>{dropdownLabel}</span>
-                <Dropdown
-                    items={supportLocaleItems}
-                    selectedItem={preselectedLocale}
-                    onSelect={(data) => {
-                        setSelectedLocale(data)
-                        store.dispatch(updateUserLocale(data.data));
-                    }}
-                    onOpenClose={(isOpen) => setIsDropdownOpen(isOpen)}
-                />
+                <div className={styles.dropdownContainer}>
+                    <span className={styles.dropdownLabel}>{dropdownLabel}</span>
+                    <Dropdown
+                        items={supportLocaleItems}
+                        selectedItem={preselectedLocale}
+                        onSelect={(data) => {
+                            setSelectedLocale(data)
+                            store.dispatch(updateUserLocale(data.data));
+                        }}
+                    />
+                </div>
             </div>
 
-            <Button className={buttonClassName} text={buttonText} isConfirm onClick={() => {
+            <Button className={`${styles.selectBtn}`} text={buttonText} isConfirm onClick={() => {
                 if (selectedLocale) {
                     onLangSelect(selectedLocale)
                 }

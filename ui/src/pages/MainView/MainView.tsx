@@ -7,40 +7,6 @@ import { LeaderBoard } from './LeaderBoard/LeaderBoard';
 import { LogoHeader } from './LogoHeader/LogoHeader';
 
 export function MainView() {
-    // const tableData: ITRowData[] = [
-    //     {
-    //         key: 1,
-    //         cellData: [
-    //             { key: 1, data: 1 },
-    //             { key: 2, data: "user1" },
-    //             { key: 3, data: 201 },
-    //         ]
-    //     },
-    //     {
-    //         key: 1,
-    //         cellData: [
-    //             { key: 1, data: 2 },
-    //             { key: 2, data: "user2" },
-    //             { key: 3, data: 200 },
-    //         ]
-    //     },
-    //     {
-    //         key: 1,
-    //         cellData: [
-    //             { key: 1, data: 3 },
-    //             { key: 2, data: "user3" },
-    //             { key: 3, data: 199 },
-    //         ]
-    //     },
-    // ]
-
-    // const tHeadData = [
-    //     { key: 1, data: 'Position' },
-    //     { key: 2, data: 'Monthly' },
-    //     { key: 3, data: 'Prizes' },
-    // ];
-
-
     return (
         <div className={styles.mainContainer}>
             <Header></Header>

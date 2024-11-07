@@ -3,39 +3,47 @@ import { Stage, Text } from '@pixi/react';
 import { ITextStyle, TextStyle } from 'pixi.js';
 
 import styles from './StyledText.module.scss';
-
+import { useFitTextSize } from '@hooks/useFitTextSize';
 
 export interface IStyledHeaderTextProps {
     text: string;
     className?: string;
     textStyles?: Partial<ITextStyle>;
+    textFitCoefficient?: number;
 }
 
-export function StyledText({ text, className, textStyles = {} }: IStyledHeaderTextProps) {
+const defaultTextStyleConfig: Partial<ITextStyle> = {
+    align: 'center',
+    fontFamily: 'Nunito',
+    fontWeight: '900',
+
+    fill: ['#FFFFAB', '#FCB213'], // Gradient colors
+    fillGradientType: 0, // Linear gradient
+    fillGradientStops: [0, 1], // Stops for the gradient
+
+    stroke: '#AD4D07',
+    strokeThickness: 4,
+    lineJoin: 'round',
+
+    dropShadow: true,
+    dropShadowColor: 'rgba(0, 0, 0, 0.25)',
+    dropShadowAlpha: 0.1,
+    dropShadowBlur: 1,
+    dropShadowAngle: Math.PI / 6,
+    dropShadowDistance: 4,
+}
+
+export function StyledText({ text, className, textStyles, textFitCoefficient = 1 }: IStyledHeaderTextProps) {
     const { containerRef, dimensions } = useContainerDimensions(text);
 
-    const textStyle = new TextStyle({
-        align: 'center',
-        fontFamily: 'Nunito',
-        fontSize: 30,
-        fontWeight: '900',
+    const textStyleConfig: Partial<ITextStyle> = {
+        ...defaultTextStyleConfig,
+        ...textStyles,
+    };
 
-        fill: ['#FFFFAB', '#FCB213'], // Gradient colors
-        fillGradientType: 0, // Linear gradient
-        fillGradientStops: [0, 1], // Stops for the gradient
+    const fittedFontSize = useFitTextSize(text, dimensions.width * textFitCoefficient, textStyleConfig);
 
-        stroke: '#AD4D07',
-        strokeThickness: 4,
-        lineJoin: 'round',
-
-        dropShadow: true,
-        dropShadowColor: 'rgba(0, 0, 0, 0.25)',
-        dropShadowAlpha: 0.1,
-        dropShadowBlur: 1,
-        dropShadowAngle: Math.PI / 6,
-        dropShadowDistance: 4,
-        ...textStyles
-    });
+    const textStyle = new TextStyle({ ...textStyleConfig, fontSize: fittedFontSize });
 
     return (
         <div ref={containerRef} className={`${styles.container} ${className || ''}`}>

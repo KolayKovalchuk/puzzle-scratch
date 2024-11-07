@@ -35,15 +35,17 @@ export function StyledHeader({
         rightWingIconName
     } = useGetIconsConfig(type)
 
-    return (<div className={`${styles.container} ${className || ''}`}>
-        <Icon name={leftWingIconName} className={styles.leftDialogWing} style={{width: height}}/>
-        <Icon name={mainHeaderBgIconName} className={styles.mainHeaderBanner} style={{height: height}}/>
-        <Icon name={rightWingIconName} className={styles.rightDialogWing} style={{width: height}}/>
-        <div className={styles.headerContainer} style={{ height: height }}>
-            <StyledText text={title} textStyles={{ fontSize }}/>
+    return (
+        <div className={`${styles.container} ${className || ''}`}>
+            <Icon name={leftWingIconName} className={styles.leftDialogWing} style={{ width: height }} />
+            <Icon name={mainHeaderBgIconName} className={styles.mainHeaderBanner} style={{ height: height }} />
+            <Icon name={rightWingIconName} className={styles.rightDialogWing} style={{ width: height }} />
+            <div className={styles.headerContainer} style={{ height: height }}>
+                <StyledText text={title} textStyles={{ fontSize }} textFitCoefficient={0.9}/>
+            </div>
+            <div className={`${styles.content}`}>
+                {children}
+            </div>
         </div>
-        <div className={`${styles.content}`}>
-            {children}
-        </div>
-    </div>)
+    )
 }

@@ -11,16 +11,17 @@
 
 @mixin button {
     min-width: 100px;
+    max-height: 50px;
 
     padding: 10px 20px;
     border: none;
-    border-radius: 8px;
+    border-radius: 14px;
     color: white;
     font-weight: bold;
     cursor: pointer;
     text-align: center;
 
-    box-shadow: 0px -3px 2px 1px #00000040 inset;;
+    box-shadow: 0px -1px 3px 1px #00000040 inset;;
 
     &:first-child {
         margin-right: 10px;

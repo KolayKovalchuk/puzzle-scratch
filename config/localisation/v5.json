@@ -121,6 +121,28 @@
     "RU": "Выберите язык"
   },
   {
+    "Key": "txt.lang.language",
+    "EN": "Language",
+    "UK": "",
+    "PT": "",
+    "VI": "",
+    "ES": "",
+    "AR": "",
+    "FIL": "",
+    "RU": ""
+  },
+  {
+    "Key": "txt.languageSelect.selectYourLanguage",
+    "EN": "Select your language",
+    "UK": "",
+    "PT": "",
+    "VI": "",
+    "ES": "",
+    "AR": "",
+    "FIL": "",
+    "RU": ""
+  },
+  {
     "Key": "txt.btn.select",
     "EN": "Select",
     "UK": "Виберіть",
@@ -151,18 +173,29 @@
     "ES": "Lo sentimos, tu ubicación no es compatible para jugar nuestro juego.",
     "AR": "عذرًا، موقعك غير مدعوم للعب لعبتنا",
     "FIL": "Paumanhin, ang iyong lokasyon ay hindi suportado para sa paglalaro ng aming laro",
-    "RU": "К сожалению, ваше местоположение не поддерживается для нашей игры."
+    "RU": "К сожалению, ваше местоположение не поддерживается для игры в нашей игре."
   },
   {
     "Key": "txt.tos.approve",
-    "EN": "By tapping ‘Agree’ you confirm you are over 18 and agree to the Terms of Service available <link url=\"www.abc.com\">here</link>.",
+    "EN": "By tapping ‘Agree’ you confirm you are over 18 and agree to the Terms of Service available <link url=\"https://www.abc.com\">here</link>.",
     "UK": "Торкнувшись «Прийняти», ви підтверджуєте, що вам виповнилося 18 років, і погоджуєтеся з Умовами використання, доступними <link url=\"www.abc.com/?=uk\">тут</link>.",
-    "PT": "Ao tocar em “Concordo”, você confirma que tem mais de 18 anos e concorda com os Termos de Serviço disponíveis <link url=\"www.abc.com\">aqui</link>.",
-    "VI": "Bằng cách nhấn vào 'Đồng ý', bạn xác nhận rằng bạn trên 18 tuổi và đồng ý với Điều khoản dịch vụ có sẵn <link url=\"www.abc.com\">tại đây</link>.",
-    "ES": "Al tocar \"Aceptar\", confirma que es mayor de 18 años y acepta los Términos de servicio disponibles <link url=\"www.abc.com\">aquí</link>.",
-    "AR": "من خلال النقر على \"أوافق\"، فإنك تؤكد أن عمرك يزيد عن 18 عامًا وتوافق على شروط الخدمة المتوفرة <link url=\"www.abc.com\">هنا</link>.",
-    "FIL": "Sa pamamagitan ng pag-tap sa ‘Sumasang-ayon’ kinukumpirma mo na ikaw ay higit sa 18 at sumasang-ayon sa Mga Tuntunin ng Serbisyo na available <link url=\"www.abc.com\">dito</link>.",
-    "RU": "Нажимая «Согласен», вы подтверждаете, что вам уже исполнилось 18 лет, и соглашаетесь с Условиями использования, доступными <link url=\"www.abc.com\">здесь</link>."
+    "PT": "Ao tocar em “Concordo”, você confirma que tem mais de 18 anos e concorda com os Termos de Serviço disponíveis <link url=\"https://www.abc.com\">aqui</link>.",
+    "VI": "Bằng cách nhấn vào 'Đồng ý', bạn xác nhận mình trên 18 tuổi và đồng ý với Điều khoản dịch vụ có sẵn <link url=\"https://www.abc.com\">tại đây</link>.",
+    "ES": "Al tocar \"Aceptar\", confirma que es mayor de 18 años y acepta los Términos de servicio disponibles <link url=\"https://www.abc.com\">aquí</link>.",
+    "AR": "من خلال النقر على \"موافقة\"، فإنك تؤكد أن عمرك يزيد عن 18 عامًا وتوافق على شروط الخدمة المتوفرة <link url=\"https://www.abc.com\">هنا</link>.",
+    "FIL": "Sa pamamagitan ng pag-tap sa ‘Sumasang-ayon’ kinukumpirma mo na ikaw ay lampas 18 at sumasang-ayon sa Mga Tuntunin ng Serbisyo na available <link url=\"https://www.abc.com\">dito</link>.",
+    "RU": "Нажимая «Согласен», вы подтверждаете, что вам уже исполнилось 18 лет, и соглашаетесь с Условиями использования, доступными <link url=\"https://www.abc.com\">здесь</link>."
+  },
+  {
+    "Key": "txt.tos.decline",
+    "EN": "<link url=\"https://google.com\">Decline</link>",
+    "UK": "Торкнувшись «Прийняти», ви підтверджуєте, що вам виповнилося 18 років, і погоджуєтеся з Умовами використання, доступними <link url=\"www.abc.com/?=uk\">тут</link>.",
+    "PT": "<link url=\"https://google.com\">Recusar</link>",
+    "VI": "<link url=\"https://google.com\">Từ chối</link>",
+    "ES": "<link url=\"https://google.com\">Rechazar</link>",
+    "AR": "<link url=\"https://google.com\">رفض</link>",
+    "FIL": "<link url=\"https://google.com\">Tanggihan</link>",
+    "RU": "<link url=\"https://google.com\">Отклонить</link>"
   },
   {
     "Key": "txt.btn.agree",
@@ -189,7 +222,7 @@
   {
     "Key": "txt.tos.title",
     "EN": "Terms of Service",
-    "UK": "Умови обслуговування",
+    "UK": "Умови надання послуг",
     "PT": "Termos de Serviço",
     "VI": "Điều khoản dịch vụ",
     "ES": "Términos de servicio",
@@ -211,7 +244,7 @@
   {
     "Key": "txt.btn.send",
     "EN": "send",
-    "UK": "відправити",
+    "UK": "надіслати",
     "PT": "enviar",
     "VI": "gửi",
     "ES": "enviar",
@@ -292,7 +325,7 @@
     "PT": "Dia <#>",
     "VI": "Ngày <#>",
     "ES": "Día <#>",
-    "AR": "يوم <#>",
+    "AR": "اليوم <#>",
     "FIL": "Araw <#>",
     "RU": "День <#>"
   },
@@ -343,7 +376,7 @@
   {
     "Key": "txt.btn.invitef",
     "EN": "Invite Friends",
-    "UK": "Запросіть друзів",
+    "UK": "Запросити друзів",
     "PT": "Convide amigos",
     "VI": "Mời bạn bè",
     "ES": "invitar amigos",
@@ -449,5 +482,93 @@
     "AR": "لا يمكنك جمع أكثر من هدية واحدة من نفس الصديق في اليوم الواحد.",
     "FIL": "Hindi ka maaaring mangolekta ng higit sa 1 regalo mula sa parehong kaibigan bawat araw.",
     "RU": "Вы не можете получить более 1 подарка от одного и того же друга в день."
+  },
+  {
+    "Key": "txt.leaderboard.daily",
+    "EN": "Daily",
+    "UK": "Щодня",
+    "PT": "Diário",
+    "VI": "Hằng ngày",
+    "ES": "A diario",
+    "AR": "يوميًا",
+    "FIL": "Araw-araw",
+    "RU": "Ежедневно"
+  },
+  {
+    "Key": "txt.leaderboard.weekly",
+    "EN": "Weekly",
+    "UK": "Щотижня",
+    "PT": "Semanalmente",
+    "VI": "hàng tuần",
+    "ES": "Semanalmente",
+    "AR": "أسبوعي",
+    "FIL": "Lingguhan",
+    "RU": "Еженедельно"
+  },
+  {
+    "Key": "txt.leaderboard.monthly",
+    "EN": "Monthly",
+    "UK": "Щомісяця",
+    "PT": "Mensal",
+    "VI": "hàng tháng",
+    "ES": "Mensual",
+    "AR": "شهريا",
+    "FIL": "Buwan-buwan",
+    "RU": "Ежемесячно"
+  },
+  {
+    "Key": "txt.leaderboard.place",
+    "EN": "Rank",
+    "UK": "ранг",
+    "PT": "Classificação",
+    "VI": "Thứ hạng",
+    "ES": "Rango",
+    "AR": "رتبة",
+    "FIL": "Ranggo",
+    "RU": "Классифицировать"
+  },
+  {
+    "Key": "txt.leaderboard.prizes",
+    "EN": "Wins",
+    "UK": "Перемоги",
+    "PT": "Vitórias",
+    "VI": "Thắng",
+    "ES": "gana",
+    "AR": "انتصارات",
+    "FIL": "Panalo",
+    "RU": "Победы"
+  },
+  {
+    "Key": "gallery.candymaze.info",
+    "EN": "game info",
+    "UK": "інформація про гру",
+    "PT": "informações do jogo",
+    "VI": "thông tin trò chơi",
+    "ES": "información del juego",
+    "AR": "معلومات اللعبة",
+    "FIL": "impormasyon ng laro",
+    "RU": "информация об игре"
+  },
+  {
+    "Key": "gallery.games.prizepool",
+    "EN": "Prize pool",
+    "UK": "Призовий фонд",
+    "PT": "Conjunto de prêmios",
+    "VI": "Nhóm giải thưởng",
+    "ES": "Bolsa de premios",
+    "AR": "تجمع الجائزة",
+    "FIL": "Prize pool",
+    "RU": "Призовой фонд"
+  },
+  {
+    "Key": "txt.limit.expired",
+    "EN": "Sorry! the bonus has expired.",
+    "UK": "Вибачте! термін дії бонусу закінчився.",
+    "PT": "Desculpe! o bônus expirou.",
+    "VI": "Lấy làm tiếc! tiền thưởng đã hết hạn.",
+    "ES": "¡Lo siento! el bono ha caducado.",
+    "AR": "آسف! انتهت صلاحية المكافأة.",
+    "FIL": "Paumanhin! ang bonus ay nag-expire na.",
+    "RU": "Извини! срок действия бонуса истек."
   }
 ]

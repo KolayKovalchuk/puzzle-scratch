@@ -23,4 +23,5 @@ export interface IDropdownProps {
     selectedItem?: IDropdownItem
     items: IDropdownItem[]
     onSelect: (item: IDropdownItem) => void
+    onOpenClose?: (isOpen: boolean) => void
 }

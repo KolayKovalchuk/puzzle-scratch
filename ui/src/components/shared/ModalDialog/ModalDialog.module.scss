@@ -1,4 +1,5 @@
 @use '@styles/colors';
+@use '@styles/mixins';
 
 .modalOverlay {
     position: fixed;
@@ -44,33 +45,6 @@
     margin-top: 20px;
 
     .btn {
-        min-width: 100px;
-
-        padding: 10px 20px;
-        border: none;
-        border-radius: 4px;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-
-        &:first-child {
-            margin-right: 10px;
-        }
-
-        &.confirm {
-            background: colors.$modal_accept_btn_bg;
-
-            &:hover {
-                background: colors.$modal_accept_btn_bg_hover;
-            }
-        }
-
-        &.cancel {
-            background: colors.$modal_cancel_btn_bg;
-
-            &:hover {
-                background: colors.$modal_cancel_btn_bg_hover;
-            }
-        }
+        @include mixins.button
     }
 }

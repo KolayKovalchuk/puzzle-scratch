@@ -3,7 +3,7 @@ import styles from './BatchCard.module.scss';
 
 import { StyledHeader } from '@components/shared/StyledHeader';
 
-import { StyledHeaderText } from '@components/shared/StyledHeaderText';
+import { StyledText } from '@components/shared/StyledText';
 import hint from '@icons/hint.svg';
 import robo_token_no_bg from '@icons/robo_token_no_bg.svg';
 import { BatchCard } from '@models/BatchCard.model';
@@ -36,7 +36,7 @@ export function BatchCardComponent({ className, batchCard }: IBatchCardProps) {
                     <div className={styles.footer}>
                         <div className={styles.priceLabel}>
                             <Icon name={robo_token_no_bg} className={styles.token_icon}></Icon>
-                            <StyledHeaderText fontSize={fontSize} className={styles.amount} text='1500'></StyledHeaderText>
+                            <StyledText textStyles={{ fontSize }} className={styles.amount} text='1500'></StyledText>
                         </div>
                         <Icon name={hint} className={styles.hint_icon}></Icon>
                     </div>

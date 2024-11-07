@@ -4,11 +4,41 @@
     background-color: colors.$dark-violet;
     box-shadow: colors.$pink-shadow;
 
-    &:first-child {
-        margin-right: 8px;
-    }
-
     &:hover {
         background-color: colors.$light-violet;
+    }
+}
+
+@mixin button {
+    min-width: 100px;
+
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+
+    box-shadow: 0px -3px 2px 1px #00000040 inset;;
+
+    &:first-child {
+        margin-right: 10px;
+    }
+
+    &.confirm {
+        background: colors.$modal_accept_btn_bg;
+
+        &:hover {
+            background: colors.$modal_accept_btn_bg_hover;
+        }
+    }
+
+    &.cancel {
+        background: colors.$modal_cancel_btn_bg;
+
+        &:hover {
+            background: colors.$modal_cancel_btn_bg_hover;
+        }
     }
 }

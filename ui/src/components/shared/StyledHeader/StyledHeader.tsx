@@ -1,6 +1,6 @@
 
-import { StyledHeaderText } from '@components/shared/StyledHeaderText';
 import { Icon } from '@components/shared/Icon';
+import { StyledText } from '@components/shared/StyledText';
 
 import styles from './StyledHeader.module.scss';
 import { useGetIconsConfig } from './hooks/useGetIconsConfig';
@@ -40,7 +40,7 @@ export function StyledHeader({
         <Icon name={mainHeaderBgIconName} className={styles.mainHeaderBanner} style={{height: height}}/>
         <Icon name={rightWingIconName} className={styles.rightDialogWing} style={{width: height}}/>
         <div className={styles.headerContainer} style={{ height: height }}>
-            <StyledHeaderText text={title} fontSize={fontSize}/>
+            <StyledText text={title} textStyles={{ fontSize }}/>
         </div>
         <div className={`${styles.content}`}>
             {children}

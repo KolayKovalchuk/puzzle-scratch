@@ -13,6 +13,7 @@ import styles from './LanguageSelect.module.scss';
 import { Button } from '@components/shared/Button/Button';
 import store from '@store/store';
 import { updateUserLocale } from '@store/actions/user.actions';
+import { useContainerDimensions } from '@hooks/useContainerDimensions';
 
 export interface ILanguageSelectProps {
     onLangSelected?: (lang: string) => void | Promise<void>,
@@ -103,10 +104,18 @@ export function LanguageSelect({ onLangSelected, isPreferredLocaleSelected }: IL
 
     const [selectedLocale, setSelectedLocale] = useState<IDropdownItem | null>(null)
 
+    const { containerRef, dimensions } = useContainerDimensions();
+
+    const headerStyles = {
+        fontSize: 40,
+        wordWrap: true,
+        wordWrapWidth: dimensions.width
+    }
+
     return (
         <div className={styles.container}>
-            <div className={styles.headerContainer}>
-                <SecondaryStyledText text={headerText} className={styles.header} textStyles={{ fontSize: 40 }}></SecondaryStyledText>
+            <div className={styles.headerContainer} ref={containerRef}>
+                <SecondaryStyledText text={headerText} className={styles.header} textStyles={headerStyles}></SecondaryStyledText>
 
                 <div className={styles.h2}>{secondHeaderText}</div>
 

@@ -15,6 +15,7 @@ export function StyledText({ text, className, textStyles = {} }: IStyledHeaderTe
     const { containerRef, dimensions } = useContainerDimensions(text);
 
     const textStyle = new TextStyle({
+        align: 'center',
         fontFamily: 'Nunito',
         fontSize: 30,
         fontWeight: '900',

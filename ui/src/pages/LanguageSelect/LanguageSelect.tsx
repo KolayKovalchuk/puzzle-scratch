@@ -132,13 +132,13 @@ export function LanguageSelect({ onLangSelected, isPreferredLocaleSelected }: IL
                 </div>
             </div>
 
-            <Button className={`${styles.selectBtn}`} text={buttonText} isConfirm onClick={() => {
+            <Button className={`${styles.selectBtn}`} text={buttonText} isConfirm onClick={async () => {
+                if (selectedLocale) {
+                    await onLangSelect(selectedLocale)
+                }
+
                 if (!isUserAcceptedTerms) {
                     setIsTosApprovePopupOpen(true)
-                } else
-
-                if (selectedLocale) {
-                    onLangSelect(selectedLocale)
                 }
             }}></Button>
 

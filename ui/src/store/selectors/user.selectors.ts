@@ -26,3 +26,25 @@ export const selectUserToken = createSelector(
         return queryState?.authToken
     }
 )
+
+export const selectUserBalanceTon = createSelector(
+    selectUser,
+    (queryState) => {
+        return queryState?.balance?.ton
+    }
+)
+
+export const selectUserBalanceRbax = createSelector(
+    selectUser,
+    (queryState) => {
+        return queryState?.balance?.rbax
+    }
+)
+
+export const selectUserNotifications = createSelector(
+    selectUser,
+    (queryState) => {
+        const notifications = queryState?.notifications || []
+        return notifications;
+    }
+)

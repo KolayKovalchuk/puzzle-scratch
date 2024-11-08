@@ -44,3 +44,10 @@ export const selectLocalizationUrl = createSelector(
         return config?.LOCALISATION
     }
 )
+
+export const selectTelegramAppUrl = createSelector(
+    selectConfigQueryData,
+    (config) => {
+        return config?.TELEGRAM_APP_URL
+    }
+)

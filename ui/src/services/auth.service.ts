@@ -1,3 +1,4 @@
+import { IUserAcceptTermsResponse } from '@models/IUserAcceptTermsResponse';
 import { User } from '@models/User.model';
 import { fetchUser, fetchUserError, fetchUserSuccess, updateUserToken } from '@store/actions/user.actions';
 import { selectUser } from '@store/selectors/user.selectors';
@@ -8,8 +9,6 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { apiClient, useApiClient } from './api/api.service';
 import { apiLoginClient, useLoginApiClient } from './api/apiLogin.service';
-import { setJwtTokenToCloud, useGetJwtTokenFromCloud } from './telegramCloud/jwtToken.service';
-import { IUserAcceptTermsResponse } from '@models/IUserAcceptTermsResponse';
 
 
 let requestAuthInterceptor: number | null = null;
@@ -49,13 +48,13 @@ export function addAuthInterceptor(apiClient: AxiosInstance, jwt_token: string) 
 
 interface ILoginBody {
     initData: string,
-    local?: boolean
+    local?: boolean,
+    linkCode?: string | null,
 }
 
 export async function updateToken(tokenData: IUserAcceptTermsResponse) {
     if (apiClient) {
         addAuthInterceptor(apiClient, tokenData.authToken);
-        await setJwtTokenToCloud(tokenData.authToken);
         store.dispatch(updateUserToken(tokenData));
     }
 }
@@ -67,7 +66,8 @@ export async function loginUser() {
 
         
         const body: ILoginBody = {
-            initData: WebApp.initData
+            initData: WebApp.initData,
+            linkCode: WebApp.initDataUnsafe.start_param || null
         }
 
         const isLocalDevMode = import.meta.env.VITE_IS_LOCAL_DEV_MODE
@@ -84,11 +84,10 @@ export async function loginUser() {
 
         const user = new User(data.data);
 
-        store.dispatch(fetchUserSuccess({ ...user }));
+        store.dispatch(fetchUserSuccess(user.toJSON()));
 
         if (user.authToken) {
             addAuthInterceptor(apiClient, user.authToken);
-            await setJwtTokenToCloud(user.authToken);
         }
     } catch (error) {
         if (error instanceof Error) {
@@ -100,8 +99,6 @@ export async function loginUser() {
 }
 
 export function useLoginUser() {
-    const [isJwtLoaded] = useGetJwtTokenFromCloud();
-
     const [, isLoginApiLoaded] = useLoginApiClient();
     const [, isApiLoaded] = useApiClient();
 
@@ -116,6 +113,6 @@ export function useLoginUser() {
         loginUser,
     ]);
 
-    const isLoaded = isJwtLoaded && isLoginApiLoaded && isApiLoaded && !!user;
+    const isLoaded = isLoginApiLoaded && isApiLoaded && !!user;
     return [user, isLoaded];
 }

@@ -7,8 +7,12 @@ import avatar_placeholder from '@icons/avatar_placeholder.svg'
 import logo from '@icons/logo.svg'
 import robo_token from '@icons/robo_token.svg'
 import wallet from '@icons/wallet.svg'
+import { useSelector } from 'react-redux'
+import { selectUserBalanceRbax } from '@store/selectors/user.selectors'
 
 export function Header() {
+    const amount = useSelector(selectUserBalanceRbax) || 0
+
     return (
         <div className={styles.mainContainer}>
             <div className={styles.logo}>
@@ -16,7 +20,7 @@ export function Header() {
             </div>
             <div className={styles.currency_info_container}>
                 <Icon name={robo_token} className={styles.token_icon}></Icon>
-                <span className={styles.amount_value}>{formatNumber(10000)}</span>
+                <span className={styles.amount_value}>{formatNumber(amount)}</span>
             </div>
             <div className={styles.profileContainer}>
                 <Icon name={wallet} iconSize='58%' className={styles.icon}></Icon>

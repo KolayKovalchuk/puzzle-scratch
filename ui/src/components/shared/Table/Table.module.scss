@@ -57,6 +57,9 @@ $header-border-radius: 20px;
 }
 
 .cell {
-    flex: 1;
     text-align: center;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

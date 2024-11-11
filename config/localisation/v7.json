@@ -121,6 +121,28 @@
     "RU": "Выберите язык"
   },
   {
+    "Key": "txt.lang.language",
+    "EN": "Language",
+    "UK": "Мова",
+    "PT": "Linguagem",
+    "VI": "Ngôn ngữ",
+    "ES": "Idioma",
+    "AR": "لغة",
+    "FIL": "Wika",
+    "RU": "Язык"
+  },
+  {
+    "Key": "txt.languageSelect.selectYourLanguage",
+    "EN": "Select your language",
+    "UK": "Виберіть свою мову",
+    "PT": "Selecione seu idioma",
+    "VI": "Chọn ngôn ngữ của bạn",
+    "ES": "Selecciona tu idioma",
+    "AR": "اختر لغتك",
+    "FIL": "Piliin ang iyong wika",
+    "RU": "Выберите свой язык"
+  },
+  {
     "Key": "txt.btn.select",
     "EN": "Select",
     "UK": "Виберіть",
@@ -151,7 +173,7 @@
     "ES": "Lo sentimos, tu ubicación no es compatible para jugar nuestro juego.",
     "AR": "عذرًا، موقعك غير مدعوم للعب لعبتنا",
     "FIL": "Paumanhin, ang iyong lokasyon ay hindi suportado para sa paglalaro ng aming laro",
-    "RU": "К сожалению, ваше местоположение не поддерживается для нашей игры."
+    "RU": "К сожалению, ваше местоположение не поддерживается для игры в нашей игре."
   },
   {
     "Key": "txt.tos.approve",
@@ -160,8 +182,8 @@
     "PT": "Ao tocar em “Concordo”, você confirma que tem mais de 18 anos e concorda com os Termos de Serviço disponíveis <link url=\"https://www.abc.com\">aqui</link>.",
     "VI": "Bằng cách nhấn vào 'Đồng ý', bạn xác nhận mình trên 18 tuổi và đồng ý với Điều khoản dịch vụ có sẵn <link url=\"https://www.abc.com\">tại đây</link>.",
     "ES": "Al tocar \"Aceptar\", confirma que es mayor de 18 años y acepta los Términos de servicio disponibles <link url=\"https://www.abc.com\">aquí</link>.",
-    "AR": "من خلال النقر على \"أوافق\"، فإنك تؤكد أن عمرك يزيد عن 18 عامًا وتوافق على شروط الخدمة المتاحة <link url=\"https://www.abc.com\">هنا</link>.",
-    "FIL": "Sa pamamagitan ng pag-tap sa ‘Sumasang-ayon’ kinukumpirma mo na ikaw ay lampas 18 at sumasang-ayon sa Mga Tuntunin ng Serbisyo na available <link url=\"https://www.abc.com\">dito</link>.",
+    "AR": "من خلال النقر على \"موافقة\"، فإنك تؤكد أن عمرك يزيد عن 18 عامًا وتوافق على شروط الخدمة المتوفرة <link url=\"https://www.abc.com\">هنا</link>.",
+    "FIL": "Sa pamamagitan ng pag-tap sa ‘Sumasang-ayon’ kinukumpirma mong ikaw ay lampas 18 at sumasang-ayon sa Mga Tuntunin ng Serbisyo na available <link url=\"https://www.abc.com\">dito</link>.",
     "RU": "Нажимая «Согласен», вы подтверждаете, что вам больше 18 лет, и соглашаетесь с Условиями обслуживания, доступными <link url=\"https://www.abc.com\">здесь</link>."
   },
   {
@@ -200,7 +222,7 @@
   {
     "Key": "txt.tos.title",
     "EN": "Terms of Service",
-    "UK": "Умови обслуговування",
+    "UK": "Умови надання послуг",
     "PT": "Termos de Serviço",
     "VI": "Điều khoản dịch vụ",
     "ES": "Términos de servicio",
@@ -407,6 +429,17 @@
     "RU": "Скопировано!"
   },
   {
+    "Key": "text.gift.rbaxGift",
+    "EN": "RBAX Gift",
+    "UK": "",
+    "PT": "",
+    "VI": "",
+    "ES": "",
+    "AR": "",
+    "FIL": "",
+    "RU": ""
+  },
+  {
     "Key": "txt.gift.sent",
     "EN": "Gift sent!",
     "UK": "Подарунок відправлено!",
@@ -431,7 +464,7 @@
   {
     "Key": "txt.gift.alreadycollected",
     "EN": "Oh snap!\nYou already collected this gift.",
-    "UK": "Ох\nВи вже отримали цей подарунок.",
+    "UK": "Ох, чорт!\nВи вже отримали цей подарунок.",
     "PT": "Ah, droga!\nVocê já coletou este presente.",
     "VI": "Ôi gãy!\nBạn đã thu thập được món quà này.",
     "ES": "¡Oh, chasquido!\nYa has recogido este regalo.",
@@ -548,5 +581,16 @@
     "AR": "آسف! انتهت صلاحية المكافأة.",
     "FIL": "Paumanhin! ang bonus ay nag-expire na.",
     "RU": "Извини! срок действия бонуса истек."
+  },
+  {
+    "Key": "txt.table.emptyData",
+    "EN": "Empty Data",
+    "UK": "",
+    "PT": "",
+    "VI": "",
+    "ES": "",
+    "AR": "",
+    "FIL": "",
+    "RU": ""
   }
 ]

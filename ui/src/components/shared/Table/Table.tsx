@@ -1,19 +1,36 @@
-import { ITableData } from './Table.models';
+
+import { ITableCellData, ITRowData } from './Table.models';
 import { TableHeadRow } from "./TableHeadRow";
 import { TableRow } from "./TableRow";
 
+import { selectLocalValue } from '@store/selectors/localization.selectors';
+import { ReactNode } from 'react';
+import { useSelector } from 'react-redux';
 import styles from './Table.module.scss';
 
-export interface ITableProps extends ITableData {
+export interface ITableProps {
+    tHeadElement?: ReactNode;
+    tHeadData?: ITableCellData[];
+
+    tBodyData: ITRowData[];
+
     customClass?: string;
 }
 
-export function Table({ tHeadData, tBodyData, customClass }: ITableProps) {
+export function Table({ tHeadData, tHeadElement, tBodyData, customClass }: ITableProps) {
+    const noData = useSelector(selectLocalValue('txt.table.emptyData'));
+
+    if (!tBodyData.length) {
+        tBodyData = [{ key: 1, cellData: [{ key: 1, data: noData }] }];
+    }
+
     return (
         <div className={`${styles.table} ${customClass}`}>
-            <TableHeadRow
-                tHeadData={tHeadData}
-            />
+            {tHeadData
+                ? <TableHeadRow
+                    tHeadData={tHeadData}
+                />
+                : tHeadElement}
             {tBodyData.map((rowData) => {
                 return <TableRow key={rowData.key} data={rowData.cellData} />;
             })}

@@ -36,7 +36,7 @@ export function MainView() {
                 <LeaderBoard />
             </div>
         </div>
-        {userNotifications.length && <NotificationPopup
+        {!!userNotifications.length && <NotificationPopup
             isOpen={userNotifications.length > 0}
             notification={userNotifications[0]}
             onConfirm={(notification) => {

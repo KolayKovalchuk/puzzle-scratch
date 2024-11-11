@@ -8,6 +8,8 @@ export interface iTableProps {
 }
 
 export function TableHeadRow({ tHeadData, className = '' }: iTableProps) {
+    if (!tHeadData) return <></>
+
     return (
         <div className={styles.headRow}>
             {tHeadData.map((headData) => {

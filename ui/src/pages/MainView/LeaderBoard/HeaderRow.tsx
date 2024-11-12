@@ -18,11 +18,11 @@ interface IArrowHeaderCellProps {
 function ArrowHeaderCell({ children, className, onNextHeaderClick, onPrevHeaderClick }: IArrowHeaderCellProps) {
     return (
         <div className={`${tableStyles.headCellContainer} ${styles.arrowHeaderCellContainer} ${className}`}>
-            <div className={`${styles.arrowIcon} ${styles.first}`} onClick={() => onNextHeaderClick()}>
+            <div className={`${styles.arrowIcon} ${styles.first}`} onClick={() => onPrevHeaderClick()}>
                 <Icon name={arrowIcon}></Icon>
             </div>
             {children}
-            <div className={`${styles.arrowIcon} ${styles.last}`} onClick={() => onPrevHeaderClick()}>
+            <div className={`${styles.arrowIcon} ${styles.last}`} onClick={() => onNextHeaderClick()}>
                 <Icon name={arrowIcon}></Icon>
             </div>
         </div>

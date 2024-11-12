@@ -1,13 +1,14 @@
 import { Table } from '@components/shared/Table';
 import { useLeaderboardData } from './hooks/useLeaderboardData';
 
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import styles from './LeaderBoard.module.scss';
 
 import { Icon } from '@components/shared/Icon';
 import leaderboardIcon from '@icons/leaderboard.svg';
 
-import { HeaderRow } from './HeaderRow';
+import { HeaderRow, useHeaderCells } from './HeaderRow';
+import { LeaderboardCell } from './LeaderboardCell';
 
 interface ILeaderBoardProps {
 }
@@ -20,9 +21,8 @@ export enum LeaderboardTableMode {
 
 export function LeaderBoard({ }: ILeaderBoardProps) {
     const [mode, setMode] = useState<LeaderboardTableMode>(LeaderboardTableMode.Monthly);
+    const { tHeadData, onNextHeaderClick, onPrevHeaderClick } = useHeaderCells(mode, setMode);
     const [tBodyData, isLoading] = useLeaderboardData(mode);
-    
-    const setModeCb = useCallback((mode: LeaderboardTableMode) => setMode(mode), [mode]);
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -38,7 +38,19 @@ export function LeaderBoard({ }: ILeaderBoardProps) {
             </div>
             <Table
                 tBodyData={tBodyData}
-                tHeadElement={<HeaderRow mode={mode} setMode={setModeCb} />}
+                tHeadElement={
+                    <HeaderRow
+                        tHeadData={tHeadData}
+                        onNextHeaderClick={onNextHeaderClick}
+                        onPrevHeaderClick={onPrevHeaderClick}
+                    />
+                }
+                renderCell={(data, index) => {
+                    return (<LeaderboardCell
+                        cellData={data.data}
+                        isLargeNumber={index === tBodyData[0]?.cellData?.length - 1}
+                    />)
+                }}
             />
         </div>
     );

@@ -69,14 +69,13 @@ export function useHeaderCells(
 }
 
 export interface IHeaderRowProps {
-    mode: LeaderboardTableMode;
-    setMode: (mode: LeaderboardTableMode) => void
     className?: string;
+    tHeadData: ILeaderboardHeaderData[];
+    onNextHeaderClick: () => void;
+    onPrevHeaderClick: () => void;
 }
 
-export function HeaderRow({ mode, setMode, className = '' }: IHeaderRowProps) {
-    const { tHeadData, onNextHeaderClick, onPrevHeaderClick } = useHeaderCells(mode, setMode);
-
+export function HeaderRow({ tHeadData, onNextHeaderClick, onPrevHeaderClick, className = '' }: IHeaderRowProps) {
     return (<div className={`${tableStyles.headRow} ${className}`}>
         {tHeadData.map((headData, index) => {
             if (headData.data.isArrowCell) {

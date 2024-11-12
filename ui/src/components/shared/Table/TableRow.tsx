@@ -3,39 +3,36 @@ import { ITableCellData } from './Table.models';
 
 import styles from './Table.module.scss';
 
-function getCellTitle(cellData: ReactNode) {
-    const cellDataType = typeof cellData;
-    return cellDataType === 'string' || cellDataType === 'number' ? cellData?.toString() : '';
-}
-
 export interface ITableCellProps {
-    data: ITableCellData;
+    data: ITableCellData['data'];
     width?: number | string;
 }
 
 export function TableCell({ data, width }: ITableCellProps) {
-    const title = getCellTitle(data.data);
-
     return <div
-        key={data.key}
         className={styles.cell}
         style={{ width: width || 'auto' }}
-        title={title}
-    >{data.data}</div>;
+        title={data?.toString()}
+    >{data}</div>;
 }
 
 export interface ITableRowProps {
     data: ITableCellData[];
+    renderCell?: (data: ITableCellData, index: number) => ReactNode;
 }
 
-export function TableRow({ data }: ITableRowProps) {
+export function TableRow({ data, renderCell }: ITableRowProps) {
     const cellWidthPercent = `${100 / data.length}%`;
 
     return (
         <div className={styles.row} >
             {
-                data.map((item) => {
-                    return <TableCell key={item.key} data={item} width={cellWidthPercent} />;
+                data.map((item, index) => {
+                    const cellData = renderCell
+                        ? renderCell(item, index)
+                        : item.data;
+
+                    return <TableCell key={item.key} data={cellData} width={cellWidthPercent} />;
                 })
             }
         </div>

@@ -13,11 +13,12 @@ export interface ITableProps {
     tHeadData?: ITableCellData[];
 
     tBodyData: ITRowData[];
+    renderCell?: (data: ITableCellData, index: number) => ReactNode;
 
     customClass?: string;
 }
 
-export function Table({ tHeadData, tHeadElement, tBodyData, customClass }: ITableProps) {
+export function Table({ tHeadData, tHeadElement, tBodyData, renderCell, customClass }: ITableProps) {
     const noData = useSelector(selectLocalValue('txt.table.emptyData'));
 
     if (!tBodyData.length) {
@@ -32,7 +33,7 @@ export function Table({ tHeadData, tHeadElement, tBodyData, customClass }: ITabl
                 />
                 : tHeadElement}
             {tBodyData.map((rowData) => {
-                return <TableRow key={rowData.key} data={rowData.cellData} />;
+                return <TableRow key={rowData.key} data={rowData.cellData} renderCell={renderCell}/>;
             })}
         </div>
     );

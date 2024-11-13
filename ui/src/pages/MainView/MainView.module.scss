@@ -2,10 +2,6 @@
 @use '@styles/variables';
 
 .mainContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
     height: 100vh;
     width: 100%;
     padding-top: variables.$base_header_height;
@@ -13,6 +9,13 @@
 
     display: block;
     overflow: auto;
+    overflow-x: clip;
+}
+
+.container {
+    &.hidden {
+        display: none;
+    }
 }
 
 .banner {

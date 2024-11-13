@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
-import { LeaderboardTableMode } from '../LeaderBoard';
-import { useSelector } from 'react-redux';
 import { selectLocalValue } from '@store/selectors/localization.selectors';
-import { ITableData } from '@components/shared/Table/Table.models';
+import { Key, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { LeaderboardTableMode } from '../LeaderBoard';
 
 export function getLeaderboardHeaderKey(mode: LeaderboardTableMode): string {
     switch (mode) {
@@ -26,20 +25,32 @@ export function useLeaderboardHeaderKey(mode: LeaderboardTableMode): string {
     return headerKey;
 }
 
-export function useLeaderboardHeaderData(mode: LeaderboardTableMode): ITableData["tHeadData"] {
-    const [ headerData, setHeaderData ] = useState<ITableData["tHeadData"]>([]);
+export interface ILeaderboardHeaderData {
+    data: {
+        text: string,
+        isArrowCell?: boolean,
+    };
+    key: Key;
+}
+
+export function useLeaderboardHeaderData(mode: LeaderboardTableMode): ILeaderboardHeaderData[] {
+    const [ headerData, setHeaderData ] = useState<ILeaderboardHeaderData[]>([]);
 
     const headerKey = useLeaderboardHeaderKey(mode);
     const columnPlaceName = useSelector(selectLocalValue('txt.leaderboard.place'));
     const columnModeName = useSelector(selectLocalValue(headerKey));
     const columnPrizesName = useSelector(selectLocalValue('txt.leaderboard.prizes'));
 
+    const columnNameList = [columnPlaceName, columnModeName, columnPrizesName];
+
     useEffect(() => {
-        const data = [
-            { key: 1, data: columnPlaceName },
-            { key: 2, data: columnModeName },
-            { key: 3, data: columnPrizesName },
-        ];
+        const data: ILeaderboardHeaderData[] = columnNameList.map((name, index) => ({
+            data: {
+                text: name,
+                isArrowCell: name === columnModeName,
+            },
+            key: index
+        }));
         setHeaderData(data);
     }, [mode, columnPlaceName, columnModeName, columnPrizesName]);
 

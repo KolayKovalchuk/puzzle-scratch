@@ -1,6 +1,7 @@
 import store from '@store/store';
 import { apiClient } from './api.service';
 import { selectTelegramAppUrl } from '@store/selectors/config.selectors';
+import { selectUserRefCode } from '@store/selectors/user.selectors';
 
 export async function postCreateShareLinkCode() {
     try {
@@ -16,7 +17,21 @@ export async function postCreateShareLinkCode() {
     }
 }
 
-export function getCollectBonusLink(code: string) {
+export const linkCodeParam = 'linkCode';
+export const refCodeParam = 'refCode';
+
+export function getAppLinkWithParam(code: string, param: string) {
     const appUrl = selectTelegramAppUrl(store.getState());
-    return appUrl + '?startapp=' + code;
+    return `${appUrl}?startapp=${param}=${code}`;
+}
+
+export function getReferralLink() {
+    const refCode = selectUserRefCode(store.getState())
+
+    if (!refCode) {
+        return null;
+    }
+
+    const url = getAppLinkWithParam(refCode, refCodeParam);
+    return url
 }

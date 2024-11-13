@@ -21,36 +21,17 @@
 $header-cell-padding: 20px;
 $arrow-margin: 2px;
 
-.headCell {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
+.arrowHeaderCellContainer {
+    justify-content: space-between;
+}
 
-    .arrowIcon {
-        width: 14px;
-        margin-right: $arrow-margin;
-    }
-
-    &.first {
-        padding-left: $header-cell-padding;
-    }
-
-    &.first,
-    &.last {
-        justify-content: flex-start;
-        cursor: pointer;
-    }
+.arrowIcon {
+    width: 14px;
+    margin-right: $arrow-margin;
 
     &.last {
-        padding-right: $header-cell-padding;
-        flex-direction: row-reverse;
-
-        .arrowIcon {
-            transform: rotate(180deg);
-            margin-right: 0;
-            margin-left: $arrow-margin;
-        }
+        transform: rotate(180deg);
+        margin-right: 0;
+        margin-left: $arrow-margin;
     }
 }

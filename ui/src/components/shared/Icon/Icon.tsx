@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import styles from './Icon.module.scss';
 
@@ -10,9 +10,9 @@ interface IconProps {
     style?: React.CSSProperties;
 }
 
-export function Icon({ name, style = {}, iconSize = "100%", title, className }: IconProps) {
+export const Icon = forwardRef<HTMLDivElement, IconProps>(({ name, style = {}, iconSize = "100%", title, className }, ref) => {
     return (
-        <div className={`${styles.iconContainer} ${className || ''}`} style={style}>
+        <div ref={ref} className={`${styles.iconContainer} ${className || ''}`} style={style}>
             <div className={styles.iconContent}>
                 <svg
                     width={iconSize}
@@ -25,4 +25,4 @@ export function Icon({ name, style = {}, iconSize = "100%", title, className }: 
             </div>
         </div>
     );
-};
+});

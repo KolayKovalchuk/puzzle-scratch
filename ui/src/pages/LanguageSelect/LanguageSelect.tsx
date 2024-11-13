@@ -93,8 +93,13 @@ export function LanguageSelect({ onLangSelected, isPreferredLocaleSelected }: IL
         preferredLocale || '',
     ), [supportLocaleItems, preferredLocale])
 
+    const [selectedLocale, setSelectedLocale] = useState<IDropdownItem | null>(null)
+
     useEffect(() => {
-        store.dispatch(updateUserLocale(preselectedLocale.data));
+        if (preselectedLocale) {
+            store.dispatch(updateUserLocale(preselectedLocale.data));
+            setSelectedLocale(preselectedLocale)
+        }
     }, [preselectedLocale]);
 
     const headerText = useSelector(selectLocalValue('txt.lang.title'))
@@ -102,7 +107,6 @@ export function LanguageSelect({ onLangSelected, isPreferredLocaleSelected }: IL
     const dropdownLabel = useSelector(selectLocalValue('txt.lang.language'))
     const buttonText = useSelector(selectLocalValue('txt.btn.select'))
 
-    const [selectedLocale, setSelectedLocale] = useState<IDropdownItem | null>(null)
 
     const { containerRef, dimensions } = useContainerDimensions();
 

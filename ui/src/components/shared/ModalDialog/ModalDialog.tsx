@@ -11,9 +11,9 @@ interface ModalDialogProps {
     confirmText?: string;
     cancelText?: string;
 
-    children: ReactNode;
+    children?: ReactNode;
 
-    onClose: () => void;
+    onClose?: () => void;
     onConfirm: () => void;
 }
 
@@ -30,7 +30,7 @@ const ModalDialog: React.FC<ModalDialogProps> = ({
     if (!isOpen) return null;
 
     const handleClose = () => {
-        onClose();
+        onClose && onClose();
     }
 
     const handleConfirm = () => {
@@ -44,8 +44,18 @@ const ModalDialog: React.FC<ModalDialogProps> = ({
                     <div className={styles.modalBody}>
                         {children ? children : <p>{content}</p>}
                         <div className={styles.modalActions}>
-                            { cancelText && <Button text={cancelText} isCancel onClick={() => handleClose()}></Button> }
-                            { confirmText && <Button text={confirmText} isConfirm onClick={() => handleConfirm()}></Button> }
+                            {cancelText && <Button
+                                className={styles.btn}
+                                text={cancelText}
+                                isCancel
+                                onClick={() => handleClose()} />
+                            }
+                            {confirmText && <Button
+                                className={styles.btn}
+                                text={confirmText}
+                                isConfirm
+                                onClick={() => handleConfirm()} />
+                            }
                         </div>
                     </div>
                 </StyledHeader>

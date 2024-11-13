@@ -27,6 +27,13 @@ export const selectUserToken = createSelector(
     }
 )
 
+export const selectUserRefCode = createSelector(
+    selectUser,
+    (queryState) => {
+        return queryState?.refCode
+    }
+)
+
 export const selectUserBalanceTon = createSelector(
     selectUser,
     (queryState) => {

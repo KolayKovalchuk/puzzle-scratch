@@ -52,9 +52,10 @@ $wing_left: -22px;
     position: relative;
     z-index: 1;
 
-    margin-top: 38px;
-
     display: flex;
     flex-direction: column;
     flex: 1;
+
+    overflow-y: auto;
+    overflow-x: clip;
 }

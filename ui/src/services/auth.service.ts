@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { apiClient, useApiClient } from './api/api.service';
 import { apiLoginClient, useLoginApiClient } from './api/apiLogin.service';
+import { linkCodeParam, refCodeParam } from './api/links.service';
 
 
 let requestAuthInterceptor: number | null = null;
@@ -50,6 +51,7 @@ interface ILoginBody {
     initData: string,
     local?: boolean,
     linkCode?: string | null,
+    refCode?: string | null,
 }
 
 export async function updateToken(tokenData: IUserAcceptTermsResponse) {
@@ -59,15 +61,27 @@ export async function updateToken(tokenData: IUserAcceptTermsResponse) {
     }
 }
 
+function extractStartparams(start_param: string, paramName: string): string {
+    const prefix = `${paramName}=`;
+    const index = start_param.indexOf(prefix);
+    if (index !== -1) {
+        return start_param.substring(index + prefix.length);
+    }
+    return '';
+}
+
 export async function loginUser() {
     try {
         store.dispatch(fetchUser());
         if (!apiLoginClient) return;
 
+        const linkCode = extractStartparams(WebApp.initDataUnsafe.start_param || '', linkCodeParam);
+        const refCode = extractStartparams(WebApp.initDataUnsafe.start_param || '', refCodeParam);
         
         const body: ILoginBody = {
             initData: WebApp.initData,
-            linkCode: WebApp.initDataUnsafe.start_param || null
+            linkCode: linkCode || null,
+            refCode: refCode || null,
         }
 
         const isLocalDevMode = import.meta.env.VITE_IS_LOCAL_DEV_MODE

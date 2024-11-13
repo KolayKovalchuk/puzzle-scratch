@@ -45,9 +45,13 @@ export const selectLocalizationUrl = createSelector(
     }
 )
 
+const VITE_TELEGRAM_APP_URL = import.meta.env.VITE_TELEGRAM_APP_URL
+
 export const selectTelegramAppUrl = createSelector(
     selectConfigQueryData,
     (config) => {
+        if (VITE_TELEGRAM_APP_URL) return VITE_TELEGRAM_APP_URL;
+
         return config?.TELEGRAM_APP_URL
     }
 )

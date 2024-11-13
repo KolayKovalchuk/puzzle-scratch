@@ -2,4 +2,9 @@
 
 .container {
     @include mixins.button;
+
+    .label {
+        position: relative;
+        top: 1px;
+    }
 }

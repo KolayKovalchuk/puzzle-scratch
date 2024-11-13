@@ -17,7 +17,6 @@ function TestBtn({ click }: { click: () => void }) {
     return (
         <div style={{
             width: '100%',
-            height: '100px',
             backgroundColor: 'lightgreen',
             display: 'flex',
             justifyContent: 'center',

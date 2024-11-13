@@ -1,5 +1,4 @@
 @use '@styles/colors';
-@use '@styles/mixins';
 
 .modalOverlay {
     position: fixed;
@@ -47,6 +46,8 @@
     margin-top: 20px;
 
     .btn {
-        @include mixins.button
+        &:not(:first-child) {
+            margin-left: 10px;
+        }
     }
 }

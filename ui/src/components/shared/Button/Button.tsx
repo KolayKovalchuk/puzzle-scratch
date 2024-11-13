@@ -15,7 +15,7 @@ export function Button({ text, onClick, className, isConfirm, isCancel }: IButto
 
     return (
         <button className={`${styles.container} ${buttonTypeClassName} ${className || ''}`} onClick={onClick}>
-            <RegularStyledText text={text} className={styles.label} textStyles={{ fontSize: 20, stroke }}></RegularStyledText>
+            <RegularStyledText text={text} className={styles.label} textStyles={{ fontSize: 20, stroke, dropShadow: false }}></RegularStyledText>
         </button>
     )
 }

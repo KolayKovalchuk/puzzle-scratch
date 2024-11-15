@@ -29,12 +29,42 @@ $modal_cancel_btn_bg: linear-gradient(180deg, $coral-red 0%, $burnt-orange 100%)
 $modal_cancel_btn_bg_hover: linear-gradient(180deg, color.adjust($coral-red, $lightness: -5%) 0%, color.adjust($burnt-orange, $lightness: -5%) 100%);
 
 
-$pink-shadow:
-    0 0 0px #BE2BDB99,
+$pink-shadow: 0 0 0px #BE2BDB99,
     0 0 5px #BE2BDB99,
     0px -2px 2px 0px #00000040 inset,
     0px 2px 2px 0px #00000040 inset;
 
-$table_row_gradient:
-    linear-gradient(to right, $midnight-purple 0%, $plum-purple 50%, $midnight-purple 100%),
+$table_row_gradient: linear-gradient(to right, $midnight-purple 0%, $plum-purple 50%, $midnight-purple 100%),
     linear-gradient(to right, $plum-purple 0%, $midnight-purple 50%, $plum-purple 100%);
+
+$candy_maze_bg: linear-gradient(to bottom,
+        #55C6EB 0%,
+        8.422938734292984%,
+        #8CE8F3 16.845877468585968%,
+        19.89247277379036%,
+        #A3F2F4 22.93906807899475%,
+        25.627240538597107%,
+        #B7EDE8 28.315412998199463%,
+        32.61648714542389%,
+        #DAE4D1 36.917561292648315%,
+        38.70967626571655%,
+        #E5E0CA 40.50179123878479%,
+        42.65232980251312%,
+        #E7DCB3 44.802868366241455%,
+        47.49104082584381%,
+        #D5D8A1 50.17921328544617%,
+        57.70609378814697%,
+        #8BCF5A 65.23297429084778%,
+        67.02508926391602%,
+        #7ACC4A 68.81720423698425%,
+        70.2508956193924%,
+        #6BCB3C 71.68458700180054%,
+        74.55196976661682%,
+        #53C725 77.4193525314331%,
+        79.03225719928741%,
+        #44B71A 80.64516186714172%,
+        82.97491073608398%,
+        #3A9F15 85.30465960502625%,
+        92.65232980251312%,
+        #1A4909 100%);
+;

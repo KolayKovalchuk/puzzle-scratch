@@ -1,15 +1,19 @@
 @use '@styles/colors';
 @use '@styles/variables';
+@use '@styles/mixins';
 
 .mainContainer {
-    height: 100vh;
-    width: 100%;
-    padding-top: variables.$base_header_height;
-    background: colors.$main_radial_bg_gradient;
+    @include mixins.fixedHeaderPadding;
 
-    display: block;
-    overflow: auto;
-    overflow-x: clip;
+    & {
+        height: 100vh;
+        width: 100%;
+        background: colors.$main_radial_bg_gradient;
+
+        display: block;
+        overflow: auto;
+        overflow-x: clip;
+    }
 }
 
 .container {
@@ -23,7 +27,7 @@
 
     padding: 0 variables.$main_side_padding;
     cursor: pointer;
-    
+
 
     img {
         width: 100%;
@@ -35,22 +39,4 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-@media (max-width: 768px) {
-    .mainContainer {
-        padding-top: variables.$md_header_height;
-    }
-}
-
-@media (max-width: 576px) {
-    .mainContainer {
-        padding-top: variables.$sm_header_height;
-    }
-}
-
-@media (max-width: 480px) {
-    .mainContainer {
-        padding-top: variables.$sx_header_height;
-    }
 }

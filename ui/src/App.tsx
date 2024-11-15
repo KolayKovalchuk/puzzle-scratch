@@ -37,8 +37,6 @@ function App() {
 
         if (shouldRedirectToLanguageSelect) {
             navigate(ROUTES.LanguageSelect);
-        } else {
-            navigate(ROUTES.Home);
         }
     }, [isLoaded, shouldRedirectToLanguageSelect, navigate]);
 

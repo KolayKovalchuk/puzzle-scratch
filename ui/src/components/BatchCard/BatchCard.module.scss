@@ -27,6 +27,8 @@ $shadow_size: 0.1px;
 
     transition: all 0.2s ease-in-out;
 
+    cursor: pointer;
+
     &.blue {
         background: colors.$sky-blue;
 

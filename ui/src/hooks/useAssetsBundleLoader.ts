@@ -1,10 +1,44 @@
 import { Assets, AssetsBundle, Texture } from 'pixi.js'; // Import Assets from pixi.js
 import { useEffect, useState } from 'react';
+import { bundleNameList, ASSETS_MANIFEST } from '@src/assetsManifest';
 
 export interface IAddBundleData<BundleConfig extends AssetsBundle["assets"]> {
     bundleName: string,
     bundle: BundleConfig
 }
+
+export function useTexture (svgName: string) {
+    const [texture, setTexture] = useState<Texture | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<Error | null>(null);
+
+    // let texture = null;
+    useEffect(() => {
+        const loadTexture = async () => {
+            try {
+                const url = `./${svgName}.svg`;
+                // const url = './assets/icons/candy_maze.png';
+                console.log('url', url);
+                
+                const loadedTexture = await Texture.fromURL(url)
+                    .then((texture) => {
+                        console.log('texture', texture);
+                        return texture;
+                    });
+                setTexture(loadedTexture);
+                // texture = loadedTexture;
+            } catch (err) {
+                setError(err as Error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        loadTexture();
+    }, [svgName]);
+
+    return { texture, loading, error };
+};
 
 export function useAddBundle<BundleConfig extends AssetsBundle["assets"]>({ bundleName, bundle }: IAddBundleData<BundleConfig>) {
     useEffect(() => {
@@ -73,3 +107,21 @@ export function useLoadAssets(bundle: { [key: string]: string }) {
 
     return { assets, loading };
 };
+
+export function useAssetsBundleLoader() {
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const loadBundles = async () => {
+            setLoading(true);
+            await Assets.init({ manifest: ASSETS_MANIFEST, basePath: '/public' });
+
+            Assets.backgroundLoadBundle(bundleNameList);
+            setLoading(false);
+        };
+
+        loadBundles();
+    }, []);
+
+    return { loading };
+}

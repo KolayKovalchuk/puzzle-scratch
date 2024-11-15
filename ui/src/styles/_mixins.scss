@@ -1,4 +1,5 @@
 @use './colors';
+@use './variables';
 
 @mixin icon-shadown {
     background-color: colors.$dark-violet;
@@ -37,5 +38,21 @@
         &:hover {
             background: colors.$modal_cancel_btn_bg_hover;
         }
+    }
+}
+
+@mixin fixedHeaderPadding {
+    padding-top: variables.$base_header_height;
+
+    @media (max-width: 768px) {
+        padding-top: variables.$md_header_height;
+    }
+
+    @media (max-width: 576px) {
+        padding-top: variables.$sm_header_height;
+    }
+
+    @media (max-width: 480px) {
+        padding-top: variables.$sx_header_height;
     }
 }

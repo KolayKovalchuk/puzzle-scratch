@@ -7,7 +7,8 @@ import { StyledText } from '@components/shared/StyledText';
 import hint from '@icons/hint.svg';
 import robo_token_no_bg from '@icons/robo_token_no_bg.svg';
 import { BatchCard } from '@models/BatchCard.model';
-import { useGetBatchCardConfig } from './hooks/useGetBatchCardConfig';
+import { useBatchCardHandler, useGetBatchCardConfig } from './hooks/useGetBatchCardConfig';
+import { useNavigate } from 'react-router-dom';
 
 export interface IBatchCardProps {
     className?: string;
@@ -16,9 +17,15 @@ export interface IBatchCardProps {
 
 export function BatchCardComponent({ className, batchCard }: IBatchCardProps) {
     const { headerType, batchCardClass, batchImageUrl } = useGetBatchCardConfig(batchCard.cardType, styles);
+
+    const navigate = useNavigate();
+    const batchClickHandler = useBatchCardHandler(batchCard.cardType, batchCard.batchId, navigate)
     const fontSize = 21;
     return (
-        <div className={`${styles.container} ${batchCardClass} ${className || ''}`}>
+        <div
+            className={`${styles.container} ${batchCardClass} ${className || ''}`}
+            onClick={batchClickHandler}
+        >
             <StyledHeader
                 title={batchCard.batchName}
                 className={styles.styledHeader}
@@ -36,7 +43,7 @@ export function BatchCardComponent({ className, batchCard }: IBatchCardProps) {
                     <div className={styles.footer}>
                         <div className={styles.priceLabel}>
                             <Icon name={robo_token_no_bg} className={styles.token_icon}></Icon>
-                            <StyledText textStyles={{ fontSize }} className={styles.amount} text='1500'></StyledText>
+                            <StyledText textStyles={{ fontSize }} className={styles.amount} text={batchCard.cardsCount + ''}></StyledText>
                         </div>
                         <Icon name={hint} className={styles.hint_icon}></Icon>
                     </div>

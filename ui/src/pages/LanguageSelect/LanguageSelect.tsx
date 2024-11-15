@@ -44,6 +44,7 @@ function getPreselectedLocale(
 }
 
 export function LanguageSelect({ onLangSelected, isPreferredLocaleSelected }: ILanguageSelectProps) {
+    const navigate = useNavigate();
     const onLangSelect = async (lang: IDropdownItem) => {
         try {
             const result = await selectUserLocale(lang.data)
@@ -54,6 +55,8 @@ export function LanguageSelect({ onLangSelected, isPreferredLocaleSelected }: IL
             }
 
             if (onLangSelected) onLangSelected(lang.data)
+
+            navigate(ROUTES.Home)
         } catch (error) {
             console.error('Error updating locale:', error);
         }
@@ -66,8 +69,6 @@ export function LanguageSelect({ onLangSelected, isPreferredLocaleSelected }: IL
         const isTosApprovePopupOpen = isPreferredLocaleSelected && !isUserAcceptedTerms
         setIsTosApprovePopupOpen(isTosApprovePopupOpen);
     }, [isPreferredLocaleSelected, isUserAcceptedTerms]);
-
-    const navigate = useNavigate();
 
     const onTosApprove = async () => {
         const result = await aprooveUserTerms();

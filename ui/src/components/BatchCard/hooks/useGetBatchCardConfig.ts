@@ -1,6 +1,10 @@
 import { StyledHeaderType } from '@components/shared/StyledHeader';
 import { BatchCardType } from '@models/BatchCard.model';
-import { useEffect, useState } from 'react';
+import { ROUTES } from '@routers/routerConfig';
+import { startPuzzleGame } from '@src/store/actions/game.actions';
+import store from '@src/store/store';
+import { useMemo } from 'react';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 
 function getStyledHeaderType(cardType: BatchCardType) {
     switch (cardType) {
@@ -50,20 +54,34 @@ function getBatchImageUrl(cardType: BatchCardType) {
     }
 }
 
+export function useBatchCardHandler(cardType: BatchCardType, batchId: string, navigate: NavigateFunction) {
+    switch (cardType) {
+        case BatchCardType.ICE_BOX:
+            return () => navigate(ROUTES.Home);
+
+        case BatchCardType.CANDY_MAZE:
+            return () => {
+                navigate(ROUTES.CandyMaze);
+                store.dispatch(startPuzzleGame({
+                    cardType,
+                    batchId,
+                }));
+            }
+
+        case BatchCardType.SANTA_SAC:
+            return () => navigate(ROUTES.Home);
+
+        default:
+            return () => navigate(ROUTES.Home);
+    }
+}
+
 export function useGetBatchCardConfig(cardType: BatchCardType, styles: CSSModuleClasses) {
-    const [headerType, setHeaderType] = useState<StyledHeaderType>(StyledHeaderType.BLUE);
-    const [batchCardClass, setBatchCardClass] = useState<string>('');
-    const [batchImageUrl, setBatchImageUrl] = useState<string>('');
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        const headerType = getStyledHeaderType(cardType);
-        const batchCardClass = getBatchCardClass(cardType, styles);
-        const batchImageUrl = getBatchImageUrl(cardType);
-
-        setHeaderType(headerType);
-        setBatchCardClass(batchCardClass);
-        setBatchImageUrl(batchImageUrl);
-    }, [cardType, styles]);
+    const headerType =  useMemo(() => getStyledHeaderType(cardType), [cardType]);
+    const batchCardClass = useMemo(() => getBatchCardClass(cardType, styles), [cardType, styles]);
+    const batchImageUrl = useMemo(() => getBatchImageUrl(cardType), [cardType]);
 
     return {
         headerType,

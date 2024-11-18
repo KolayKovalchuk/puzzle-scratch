@@ -83,10 +83,6 @@ export function ScratchCardEl({
     const isAreaScratched = useIsPercentAreaScratched(renderTexture, activateAreaPercent, dragging);
     const isScratchedEnought = isAreaScratched || scratchedPercent > activateTotalPercent;
 
-    console.log('isAreaScratched', isAreaScratched);
-    console.log('scratchedPercent > activateTotalPercent',scratchedPercent, scratchedPercent > activateTotalPercent);
-    console.log('isScratchedEnought', isScratchedEnought);
-
     useEffect(() => {
         clearTexture();
     }, [data]);

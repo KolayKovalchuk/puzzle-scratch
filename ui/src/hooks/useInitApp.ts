@@ -10,11 +10,11 @@ export function useInitApp() {
     const [isLocLoaded] = useFetchLocalizationData()
     const [isPreferredLocaleSelected, setIsPreferredLocaleSelected, isPrefLocLoaded] = useGetIsPreferredLocaleSelectedFromCloud()
     const isFontListLoaded = useFontFaceObserver(`Nunito`);
-    const isBundleLoading = useAssetsBundleLoader();
+    useAssetsBundleLoader();
 
     useInitTwaSdk();
 
-    const isLoaded = isUserLoggedIn && isLocLoaded && isPrefLocLoaded && isFontListLoaded && isBundleLoading;
+    const isLoaded = isUserLoggedIn && isLocLoaded && isPrefLocLoaded && isFontListLoaded;
 
     return [isLoaded, isPreferredLocaleSelected, setIsPreferredLocaleSelected] as const;
 }

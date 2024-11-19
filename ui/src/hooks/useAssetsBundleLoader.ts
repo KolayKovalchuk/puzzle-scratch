@@ -1,6 +1,6 @@
+import { ASSETS_MANIFEST, bundleNameList } from '@config/assetsManifest';
 import { Assets, AssetsBundle, Texture } from 'pixi.js'; // Import Assets from pixi.js
 import { useEffect, useState } from 'react';
-import { bundleNameList, ASSETS_MANIFEST } from '@src/assetsManifest';
 
 export interface IAddBundleData<BundleConfig extends AssetsBundle["assets"]> {
     bundleName: string,
@@ -16,7 +16,7 @@ export function useTexture (svgName: string) {
     useEffect(() => {
         const loadTexture = async () => {
             try {
-                const url = `./${svgName}.svg`;
+                const url = `/scratchCard/${svgName}.svg`;
                 // const url = './assets/icons/candy_maze.png';
                 console.log('url', url);
                 
@@ -59,7 +59,11 @@ export function useAddBundle<BundleConfig extends AssetsBundle["assets"]>({ bund
     }, [bundleName, bundle]);
 };
 
-export function useLoadBundle<Bundle>(bundleName: string) {
+export interface IBundle {
+    [key: string]: Texture;
+}
+
+export function useLoadBundle<Bundle extends IBundle>(bundleName: string): { bundle: Bundle | null, error: Error | null, loading: boolean } {
     const [bundle, setBundle] = useState<Bundle | null>(null);
     const [error, setError] = useState<Error | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
@@ -72,6 +76,8 @@ export function useLoadBundle<Bundle>(bundleName: string) {
                 const bundleAssets = await Assets.loadBundle(bundleName);
                 setBundle(bundleAssets);
             } catch (err) {
+
+                console.log(`Error loading bundle ${bundleName}:`, err);
                 setError(err instanceof Error ? err : new Error(String(err)));
             } finally {
                 setLoading(false);
@@ -116,7 +122,7 @@ export function useAssetsBundleLoader() {
             setLoading(true);
             await Assets.init({ manifest: ASSETS_MANIFEST, basePath: '/public' });
 
-            Assets.backgroundLoadBundle(bundleNameList);
+            await Assets.backgroundLoadBundle(bundleNameList);
             setLoading(false);
         };
 

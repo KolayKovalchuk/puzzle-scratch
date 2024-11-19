@@ -24,6 +24,9 @@ export interface IStyledHeaderTextProps {
 
     isUnderline?: boolean;
     underlineConfig?: IUnderlineConfig;
+
+    asPixiContainer?: boolean;
+    anchor?: number;
 }
 
 const defaultTextStyleConfig: Partial<ITextStyle> = {
@@ -48,6 +51,39 @@ const defaultTextStyleConfig: Partial<ITextStyle> = {
     dropShadowDistance: 4,
 }
 
+export interface IStyledTextContainer {
+    isUnderline: boolean;
+    underlineRef: any;
+    textRef: any;
+    dimensions: { width: number, height: number };
+    text: string;
+    textStyle: TextStyle;
+    anchor?: number;
+}
+
+function StyledTextContainer({
+    isUnderline,
+    underlineRef,
+    textRef,
+    dimensions,
+    text,
+    textStyle,
+    anchor = 0.5,
+}: IStyledTextContainer) {
+    return (
+        <Container>
+            {isUnderline && <Graphics ref={underlineRef} /> || null}
+            <Text
+                ref={textRef}
+                text={text}
+                style={textStyle}
+                anchor={anchor}
+                x={dimensions.width * 0.5}
+                y={dimensions.height * 0.4} />
+        </Container>
+    )
+}
+
 export function StyledText({
     text,
     className,
@@ -55,6 +91,8 @@ export function StyledText({
     textFitCoefficient = 1,
     isUnderline = false,
     underlineConfig,
+    asPixiContainer = false,
+    anchor = 0.5,
 }: IStyledHeaderTextProps) {
     const { containerRef, dimensions } = useContainerDimensions(text);
 
@@ -78,19 +116,30 @@ export function StyledText({
         isUnderline,
     );
 
+    if (asPixiContainer) {
+        return <StyledTextContainer
+            isUnderline={isUnderline}
+            underlineRef={underlineRef}
+            textRef={textRef}
+            dimensions={dimensions}
+            text={text}
+            textStyle={textStyle}
+            anchor={anchor}
+        />
+    }
+
     return (
         <div ref={containerRef} className={`${styles.container} ${className || ''}`}>
             <Stage className={styles.stageClass} width={dimensions.width} height={dimensions.height} options={{ backgroundAlpha: 0 }}>
-                <Container>
-                    {isUnderline && <Graphics ref={underlineRef} /> || null}
-                    <Text
-                        ref={textRef}
-                        text={text}
-                        style={textStyle}
-                        anchor={0.5}
-                        x={dimensions.width * 0.5}
-                        y={dimensions.height * 0.4} />
-                </Container>
+                <StyledTextContainer
+                    isUnderline={isUnderline}
+                    underlineRef={underlineRef}
+                    textRef={textRef}
+                    dimensions={dimensions}
+                    text={text}
+                    textStyle={textStyle}
+                    anchor={anchor}
+                />
             </Stage>
             <div
                 className={styles.textMock}
@@ -177,6 +226,23 @@ export function WinStyledText(props: IStyledHeaderTextProps) {
         dropShadowBlur: 0,
         dropShadowAngle: 1,
         dropShadowDistance: 2,
+        ...props.textStyles,
+    };
+
+    return (<StyledText
+        {...props}
+        textStyles={textStyle}
+    ></StyledText>)
+}
+
+export function RedStyledText(props: IStyledHeaderTextProps) {
+    const textStyle: Partial<ITextStyle> = {
+        fill: ['#B51A1A', '#E01D1D', '#FF7373', '#E02323', '#750606'], // Gradient colors
+        fillGradientStops: [0.17, 0.42, 0.60, 1], // Stops for the gradient
+
+        stroke: '#FED95F',
+        strokeThickness: 3,
+
         ...props.textStyles,
     };
 

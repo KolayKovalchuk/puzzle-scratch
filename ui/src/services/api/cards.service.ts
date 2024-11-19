@@ -1,8 +1,8 @@
-import { IBuyBatchCardData } from '@src/models/IBuyBatchCardData';
-import { apiClient } from './api.service';
+import { IBuyBatchCardData } from '@models/IBuyBatchCardData';
+import { updateUserBalanceRbax } from '@store/actions/user.actions';
+import store from '@store/store';
 import { useState } from 'react';
-import store from '@src/store/store';
-import { updateUserBalanceRbax } from '@src/store/actions/user.actions';
+import { apiClient } from './api.service';
 
 export async function postBuyCard(batchId: string) {
     try {

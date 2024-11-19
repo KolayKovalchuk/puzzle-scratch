@@ -1,16 +1,22 @@
 import { ReactElement } from 'react';
 
+export interface ISpriteCellData {
+    textureName: string;
+    bundleName: string;
+}
+
 export interface IMatrixCellProps<CellData = any> {
     x: number;
     y: number;
-    width?: number;
-    height?: number;
+    width: number;
+    height: number;
     data: CellData
 }
 
 export interface IGameMatrixConfig {
     cellSize?: number | null;
-    padding?: number;
+    cellPadding?: number;
+    containerPadding?: number;
 }
 
 export interface IGameMatrixProps<CellProps extends IMatrixCellProps = IMatrixCellProps> {

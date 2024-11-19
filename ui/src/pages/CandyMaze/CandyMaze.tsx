@@ -10,17 +10,17 @@ import styles from './CandyMaze.module.scss';
 
 import { ScratchCard } from '@components/ScratchCard';
 import { Button } from '@components/shared/Button/Button';
+import { IScrathCardBundle } from '@config/assetsManifest';
+import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
 import candy_maze from '@icons/candy_maze.svg';
 import robo_token_gold from '@icons/robo_token_gold.svg';
-import { IScrathCardBundle } from '@src/assetsManifest';
-import { ISpriteCellData } from '@src/components/shared/IconMatrix';
-import { useLoadBundle } from '@src/hooks/useAssetsBundleLoader';
-import { useBuyCard } from '@src/services/api/cards.service';
-import { selectGameBatch, selectGameBatchId } from '@src/store/selectors/game.selectors';
+import { useBuyCard } from '@services/api/cards.service';
+import { selectGameBatch, selectGameBatchId } from '@store/selectors/game.selectors';
 import { formatNumber } from '@utils/formatters/formatNumber';
-import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CandyMazeScratchItemsEnum } from './scratchItemsEnum';
+import { CandyMazeGradientCofig } from './CandyMazeGradient';
+import { CandyMazeSpriteCell } from './CandyMazeSpriteCell';
+import { useSpriteCellData } from './hooks/useSpriteCellData';
 
 // export interface ICandyMazeProps {
 //     batchId: string;
@@ -31,12 +31,10 @@ export function CandyMaze() {
     const winUptoText = useSelector(selectLocalValue('txt.game.winUpTo')).toUpperCase();
 
     const navigate = useNavigate();
-    const { buyCard, card, loading } = useBuyCard();
+    const { buyCard, card } = useBuyCard();
 
     const batch = useSelector(selectGameBatch);
     const batchId = useSelector(selectGameBatchId);
-
-    const [isScratchEnabled, setIsScratchEnabled] = useState(true);
 
     const onCancel = () => {
         navigate(-1)
@@ -52,43 +50,10 @@ export function CandyMaze() {
     }
 
 
-    // let data: IGameMatrixProps<ISpriteCellProps>['data'] = []
-    const { bundle } = useLoadBundle<IScrathCardBundle>('scratchCard')
+    const bundleName = 'scratchCard'
+    const { bundle, loading: isBundleLoading } = useLoadBundle<IScrathCardBundle>(bundleName)
 
-    console.log('bundle', bundle);
-    console.log('card', card);
-
-    const [data, setData] = useState<ISpriteCellData[][]>([])
-
-    useEffect(() => {
-
-        if (!card || !bundle) return
-
-        setIsScratchEnabled(false)
-
-        const newData = card.cardData.matrix.reduce<ISpriteCellData[][]>((acc, row) => {
-            const newRow = row.map(cell => {
-                const textureName = Object.keys(CandyMazeScratchItemsEnum).find(key => {
-                    // @ts-ignore
-                    const item = CandyMazeScratchItemsEnum[key];
-
-                    return item === cell
-                })
-
-                console.log('textureName', textureName);
-                // @ts-ignore
-                const texture = bundle[textureName]
-
-                console.log('texture', texture);
-                return { texture }
-            })
-            acc.push(newRow)
-            return acc;
-        }, []);
-
-        setData(newData)
-
-    }, [card, bundle])
+    const { data, isScratchEnabled } = useSpriteCellData(card, bundleName)
 
     const onScratchedEnought = () => {
         if (card?.winning) {
@@ -96,6 +61,14 @@ export function CandyMaze() {
         } else {
             window.alert('You lose. Your new balance is ' + card?.rbaxBalance + ' RBAX')
         }
+    }
+
+    if (isBundleLoading || !bundle) {
+        return (
+            <div className={styles.mainContainer}>
+                <span>Loading...</span>
+            </div>
+        )
     }
 
     return (
@@ -113,8 +86,10 @@ export function CandyMaze() {
                         data={data}
                         isDisabled={isScratchEnabled}
                         className={styles.scratchCard}
-                        bundleName='scratchCard'
+                        bundleName={bundleName}
                         onScratchedEnought={() => { onScratchedEnought() }}
+                        renderCell={(data) => (<CandyMazeSpriteCell {...data} />)}
+                        gradientData={CandyMazeGradientCofig}
                     />
                 </div>
                 <div className={styles.footer}>

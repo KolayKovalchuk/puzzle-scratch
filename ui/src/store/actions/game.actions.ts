@@ -1,4 +1,4 @@
-import { BatchCard, BatchCardType } from '@src/models/BatchCard.model';
+import { BatchCard, BatchCardType } from '@models/BatchCard.model';
 
 export const START_PUZZLE_GAME = 'START_PUZZLE_GAME';
 
@@ -10,5 +10,7 @@ export interface IStartPuzzleGamePayload {
 
 export const startPuzzleGame = (payload: BatchCard) => ({
     type: START_PUZZLE_GAME,
-    payload,
+    payload: {
+        ...payload,
+    },
 });

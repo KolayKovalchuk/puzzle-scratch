@@ -1,10 +1,10 @@
 import { StyledHeaderType } from '@components/shared/StyledHeader';
-import { BatchCardType } from '@models/BatchCard.model';
+import { BatchCard, BatchCardType } from '@models/BatchCard.model';
 import { ROUTES } from '@routers/routerConfig';
-import { startPuzzleGame } from '@src/store/actions/game.actions';
-import store from '@src/store/store';
-import { useMemo } from 'react';
-import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { startPuzzleGame } from '@store/actions/game.actions';
+import store from '@store/store';
+import { useCallback, useMemo } from 'react';
+import { NavigateFunction } from 'react-router-dom';
 
 function getStyledHeaderType(cardType: BatchCardType) {
     switch (cardType) {
@@ -54,31 +54,26 @@ function getBatchImageUrl(cardType: BatchCardType) {
     }
 }
 
-export function useBatchCardHandler(cardType: BatchCardType, batchId: string, navigate: NavigateFunction) {
-    switch (cardType) {
+export function useBatchCardHandler(batchCard: BatchCard, navigate: NavigateFunction) {
+    switch (batchCard.cardType) {
         case BatchCardType.ICE_BOX:
-            return () => navigate(ROUTES.Home);
+            return useCallback(() => navigate(ROUTES.Home), [navigate]);
 
         case BatchCardType.CANDY_MAZE:
-            return () => {
+            return useCallback(() => {
                 navigate(ROUTES.CandyMaze);
-                store.dispatch(startPuzzleGame({
-                    cardType,
-                    batchId,
-                }));
-            }
+                store.dispatch(startPuzzleGame(batchCard));
+            }, [navigate, batchCard]);
 
         case BatchCardType.SANTA_SAC:
-            return () => navigate(ROUTES.Home);
+            return useCallback(() => navigate(ROUTES.Home), [navigate]);
 
         default:
-            return () => navigate(ROUTES.Home);
+            return useCallback(() => navigate(ROUTES.Home), [navigate]);
     }
 }
 
 export function useGetBatchCardConfig(cardType: BatchCardType, styles: CSSModuleClasses) {
-    const navigate = useNavigate();
-
     const headerType =  useMemo(() => getStyledHeaderType(cardType), [cardType]);
     const batchCardClass = useMemo(() => getBatchCardClass(cardType, styles), [cardType, styles]);
     const batchImageUrl = useMemo(() => getBatchImageUrl(cardType), [cardType]);

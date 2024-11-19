@@ -1,14 +1,10 @@
 import { Container, useApp } from '@pixi/react';
 import { useCellOffset } from './hooks/useCellOffset';
-import { useCellSize } from './hooks/useCellSize';
+import { defaultConfig, useCellSize } from './hooks/useCellSize';
 import { IGameMatrixProps } from './IconMatrix.models';
 
-const defaultConfig = {
-    cellSize: null,
-    padding: 0
-}
-
-export function IconMatrix({ data = [], renderCell, config = defaultConfig }: IGameMatrixProps) {
+export function IconMatrix({ data = [], renderCell, config: configArg = defaultConfig }: IGameMatrixProps) {
+    const config = { ...defaultConfig, ...configArg };
     const app = useApp();
     const { width: appWidth, height: appHeight } = app.screen;
 
@@ -16,7 +12,7 @@ export function IconMatrix({ data = [], renderCell, config = defaultConfig }: IG
     const fistRowLength = fistRow?.length || 0;
 
     const cellSize = useCellSize(config, fistRowLength, data.length);
-    const { offsetX, offsetY } = useCellOffset(cellSize, config.padding, fistRowLength, data.length);
+    const { offsetX, offsetY } = useCellOffset(cellSize, config.cellPadding, fistRowLength, data.length);
 
     if (!cellSize) {
         return null;
@@ -29,8 +25,8 @@ export function IconMatrix({ data = [], renderCell, config = defaultConfig }: IG
         >
             {data.map((rowData, rowIndex) =>
                 rowData.map((cellData, colIndex) => {
-                    const x = colIndex * (cellSize + config.padding) + offsetX;
-                    const y = rowIndex * (cellSize + config.padding) + offsetY;
+                    const x = colIndex * (cellSize + config.cellPadding) + offsetX;
+                    const y = rowIndex * (cellSize + config.cellPadding) + offsetY;
                     const key = `${rowIndex}-${colIndex}`
 
                     return (

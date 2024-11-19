@@ -2,7 +2,7 @@
   "API_URL": "https://puzzle-dev-api-ke8734.rebelbots.com",
   "TELEGRAM_APP_URL": "https://t.me/PuzzleScratchDEVbot/PuzzleScratch_DEV",
   "LOCALISATION": "https://puzzle-config.storage.googleapis.com/localisation/v11.json",
-  "MAINTENANCE": false,
+  "MAINTENANCE": true,
   "AFFILIATE_BONUS": 1,
   "SYSTEM_MSG": null,
   "SYSTEM_MSG_ONE_TIME": true,
@@ -14,11 +14,11 @@
     100
   ],
   "FRIENDS_BONUS": {
-    "FRIENDS_TO_INVITE": 2,
+    "FRIENDS_TO_INVITE": 1,
     "RBAX": 10
   },
   "SEND_RBAX": {
-    "RBAX": 3,
+    "RBAX": 5,
     "MAX_RBAX_PER_USER_DAILY": 10,
     "EXPIRATION_MS": 1800000,
     "MAX_USES": 2

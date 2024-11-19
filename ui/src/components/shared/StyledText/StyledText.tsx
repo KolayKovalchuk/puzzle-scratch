@@ -25,11 +25,10 @@ export interface IStyledHeaderTextProps {
     isUnderline?: boolean;
     underlineConfig?: IUnderlineConfig;
 
-    asPixiContainer?: boolean;
     anchor?: number;
 }
 
-const defaultTextStyleConfig: Partial<ITextStyle> = {
+export const DefaultTextStyleConfig: Partial<ITextStyle> = {
     align: 'center',
     fontSize: 30,
     fontFamily: 'Nunito',
@@ -53,23 +52,46 @@ const defaultTextStyleConfig: Partial<ITextStyle> = {
 
 export interface IStyledTextContainer {
     isUnderline: boolean;
-    underlineRef: any;
-    textRef: any;
     dimensions: { width: number, height: number };
     text: string;
-    textStyle: TextStyle;
+    textStyles?: Partial<ITextStyle>;
+    textFitCoefficient?: number;
+
     anchor?: number;
+
+    underlineConfig?: IUnderlineConfig;
+
 }
 
-function StyledTextContainer({
-    isUnderline,
-    underlineRef,
-    textRef,
+export function StyledTextContainer({
     dimensions,
     text,
-    textStyle,
+    textStyles,
+    textFitCoefficient = 1,
+    isUnderline = false,
+    underlineConfig,
     anchor = 0.5,
 }: IStyledTextContainer) {
+
+    const textStyleConfig: Partial<ITextStyle> = {
+        ...DefaultTextStyleConfig,
+        ...textStyles,
+    };
+
+    const fittedFontSize = useFitTextSize(text, dimensions.width * textFitCoefficient, textStyleConfig);
+
+    textStyleConfig.fontSize = fittedFontSize || textStyleConfig.fontSize;
+    const textStyle = new TextStyle(textStyleConfig);
+    const { textRef, underlineRef } = useTextUnderline(
+        dimensions.width,
+        underlineConfig?.textUnderlineColor || '#000000',
+        underlineConfig?.textUnderlineBorderColor || '#000000',
+        underlineConfig?.textUnderlineShadowColor || '#000000',
+        underlineConfig?.lineXShift,
+        underlineConfig?.lineYShift,
+        isUnderline,
+    );
+
     return (
         <Container>
             {isUnderline && <Graphics ref={underlineRef} /> || null}
@@ -91,59 +113,29 @@ export function StyledText({
     textFitCoefficient = 1,
     isUnderline = false,
     underlineConfig,
-    asPixiContainer = false,
     anchor = 0.5,
 }: IStyledHeaderTextProps) {
     const { containerRef, dimensions } = useContainerDimensions(text);
-
-    const textStyleConfig: Partial<ITextStyle> = {
-        ...defaultTextStyleConfig,
-        ...textStyles,
-    };
-
-    const fittedFontSize = useFitTextSize(text, dimensions.width * textFitCoefficient, textStyleConfig);
-
-    textStyleConfig.fontSize = fittedFontSize || textStyleConfig.fontSize;
-
-    const textStyle = new TextStyle(textStyleConfig);
-    const { textRef, underlineRef } = useTextUnderline(
-        dimensions.width,
-        underlineConfig?.textUnderlineColor || '#000000',
-        underlineConfig?.textUnderlineBorderColor || '#000000',
-        underlineConfig?.textUnderlineShadowColor || '#000000',
-        underlineConfig?.lineXShift,
-        underlineConfig?.lineYShift,
-        isUnderline,
-    );
-
-    if (asPixiContainer) {
-        return <StyledTextContainer
-            isUnderline={isUnderline}
-            underlineRef={underlineRef}
-            textRef={textRef}
-            dimensions={dimensions}
-            text={text}
-            textStyle={textStyle}
-            anchor={anchor}
-        />
-    }
 
     return (
         <div ref={containerRef} className={`${styles.container} ${className || ''}`}>
             <Stage className={styles.stageClass} width={dimensions.width} height={dimensions.height} options={{ backgroundAlpha: 0 }}>
                 <StyledTextContainer
                     isUnderline={isUnderline}
-                    underlineRef={underlineRef}
-                    textRef={textRef}
                     dimensions={dimensions}
                     text={text}
-                    textStyle={textStyle}
+                    textStyles={textStyles}
+                    textFitCoefficient={textFitCoefficient}
                     anchor={anchor}
+                    underlineConfig={underlineConfig}
                 />
             </Stage>
             <div
                 className={styles.textMock}
-                style={{ fontSize: textStyle.fontSize, letterSpacing: '2px' }}
+                style={{
+                    fontSize: textStyles?.fontSize || DefaultTextStyleConfig.fontSize,
+                    letterSpacing: '2px'
+                }}
             >{text}</div>
         </div>
     );
@@ -235,14 +227,18 @@ export function WinStyledText(props: IStyledHeaderTextProps) {
     ></StyledText>)
 }
 
+export const RedStyledTextStyle: Partial<ITextStyle> = {
+    ...DefaultTextStyleConfig,
+    fill: ['#B51A1A', '#E01D1D', '#FF7373', '#E02323', '#750606'], // Gradient colors
+    fillGradientStops: [0.17, 0.42, 0.60, 1], // Stops for the gradient
+
+    stroke: '#FED95F',
+    strokeThickness: 3,
+};
+
 export function RedStyledText(props: IStyledHeaderTextProps) {
     const textStyle: Partial<ITextStyle> = {
-        fill: ['#B51A1A', '#E01D1D', '#FF7373', '#E02323', '#750606'], // Gradient colors
-        fillGradientStops: [0.17, 0.42, 0.60, 1], // Stops for the gradient
-
-        stroke: '#FED95F',
-        strokeThickness: 3,
-
+        ...RedStyledTextStyle,
         ...props.textStyles,
     };
 

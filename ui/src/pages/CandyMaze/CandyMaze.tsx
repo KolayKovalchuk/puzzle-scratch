@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import { selectLocalValue } from '@store/selectors/localization.selectors';
 
@@ -14,41 +15,33 @@ import { IScrathCardBundle } from '@config/assetsManifest';
 import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
 import candy_maze from '@icons/candy_maze.svg';
 import robo_token_gold from '@icons/robo_token_gold.svg';
+import { useGetBatchById } from '@services/api/batch.service';
 import { useBuyCard } from '@services/api/cards.service';
-import { selectGameBatch, selectGameBatchId } from '@store/selectors/game.selectors';
 import { formatNumber } from '@utils/formatters/formatNumber';
 import { useNavigate } from 'react-router-dom';
 import { CandyMazeGradientCofig } from './CandyMazeGradient';
 import { CandyMazeSpriteCell } from './CandyMazeSpriteCell';
 import { useSpriteCellData } from './hooks/useSpriteCellData';
 
-// export interface ICandyMazeProps {
-//     batchId: string;
-// }
-
 export function CandyMaze() {
     const playButtonText = useSelector(selectLocalValue('txt.btn.play'));
     const winUptoText = useSelector(selectLocalValue('txt.game.winUpTo')).toUpperCase();
 
     const navigate = useNavigate();
-    const { buyCard, card } = useBuyCard();
+    const { batchId } = useParams();
 
-    const batch = useSelector(selectGameBatch);
-    const batchId = useSelector(selectGameBatchId);
+    const { batch, loading: isBatchLoading } = useGetBatchById(batchId || null);
+    const { buyCard, card } = useBuyCard();
 
     const onCancel = () => {
         navigate(-1)
     }
 
     const onPlay = async () => {
-        console.log('batchId', batchId);
-
-
         if (!batchId) return
 
         await buyCard(batchId)
     }
-
 
     const bundleName = 'scratchCard'
     const { bundle, loading: isBundleLoading } = useLoadBundle<IScrathCardBundle>(bundleName)
@@ -63,7 +56,8 @@ export function CandyMaze() {
         }
     }
 
-    if (isBundleLoading || !bundle) {
+    const isLoading = isBatchLoading || isBundleLoading;
+    if (isLoading || !bundle) {
         return (
             <div className={styles.mainContainer}>
                 <span>Loading...</span>

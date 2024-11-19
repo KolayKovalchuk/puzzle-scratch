@@ -16,7 +16,7 @@ export async function getBatches(): Promise<BatchCard[]> {
     }
 }
 
-export async function getBatchById(id: number): Promise<BatchCard | null> {
+export async function getBatchById(id: number | string): Promise<BatchCard | null> {
     try {
         const response = await apiClient.get(`/batches/${id}`);
         const batch = new BatchCard(response.data);
@@ -28,6 +28,26 @@ export async function getBatchById(id: number): Promise<BatchCard | null> {
         console.error('Error fetching batch:', error);
         return null;
     }
+}
+
+export function useGetBatchById(id: number | string | null): { batch: BatchCard | null, loading: boolean } {
+    const [batch, setBatch] = useState<BatchCard | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (!id) return;
+
+        const fetch = async () => {
+            setLoading(true)
+            const batch = await getBatchById(id);
+            setBatch(batch);
+            setLoading(false);
+        };
+
+        fetch();
+    }, [id]);
+
+    return { batch, loading };
 }
 
 export function useGetBatches(): [BatchCard[], boolean] {

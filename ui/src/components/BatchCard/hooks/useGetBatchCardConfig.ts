@@ -61,8 +61,7 @@ export function useBatchCardHandler(batchCard: BatchCard, navigate: NavigateFunc
 
         case BatchCardType.CANDY_MAZE:
             return useCallback(() => {
-                navigate(ROUTES.CandyMaze);
-                store.dispatch(startPuzzleGame(batchCard));
+                navigate(`${ROUTES.CandyMaze}/${batchCard.batchId}`);
             }, [navigate, batchCard]);
 
         case BatchCardType.SANTA_SAC:

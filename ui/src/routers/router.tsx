@@ -13,7 +13,7 @@ export const AppRouter = ({ languageSelectProps }: IAppRouterProps) => {
         <Routes>
             <Route path={ROUTES.Home} element={<MainView />} />
             <Route path={ROUTES.LanguageSelect} element={<LanguageSelect {...languageSelectProps}/>} />
-            <Route path={ROUTES.CandyMaze} element={<CandyMaze />} />
+            <Route path={`${ROUTES.CandyMaze}/:batchId`} element={<CandyMaze />} />
             <Route path="*" element={<Navigate to={ROUTES.Home} />} />
         </Routes>
     );

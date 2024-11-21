@@ -18,9 +18,9 @@
     "RBAX": 10
   },
   "SEND_RBAX": {
-    "RBAX": 15,
-    "MAX_RBAX_PER_USER_DAILY": 30,
+    "RBAX": 100,
+    "MAX_RBAX_PER_USER_DAILY": 250,
     "EXPIRATION_MS": 1800000,
-    "MAX_USES": 1
+    "MAX_USES": 2
   }
 }

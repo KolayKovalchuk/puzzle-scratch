@@ -19,23 +19,13 @@
     aspect-ratio: 1000/345;
 }
 
-.winLabelContainer {
+.content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
     width: 100%;
-}
-
-.winAmountContainer {
-    display: flex;
-}
-
-.roboTokenGoldIcon {
-    max-width: 50px;
-    position: relative;
-    top: -4px;
 }
 
 $padding: 6px;
@@ -51,11 +41,6 @@ $padding: 6px;
     padding: $padding;
 
     border-radius: 20px;
-}
-
-.winAmount {
-    position: relative;
-    left: -8px;
 }
 
 .footer {

@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+}
+
+.winAmountContainer {
+    display: flex;
+}
+
+.roboTokenGoldIcon {
+    max-width: 50px;
+    position: relative;
+    top: -4px;
+}
+
+.winAmount {
+    position: relative;
+    left: -8px;
+}

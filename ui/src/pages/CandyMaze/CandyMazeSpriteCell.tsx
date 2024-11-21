@@ -1,11 +1,11 @@
-import { IMatrixCellProps } from '@components/shared/IconMatrix/IconMatrix.models';
+import { IMatrixCellProps, ISpriteCellData } from '@components/shared/IconMatrix/IconMatrix.models';
 import { RedStyledTextStyle, StyledTextContainer } from '@components/shared/StyledText';
 import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
 import { Container, Sprite } from '@pixi/react';
 import { useMemo } from 'react';
 import { CandyMazeScratchItemsEnum, CandyMazeScratchTextItems } from './scratchItemsEnum';
 
-export interface ICandyMazeSpriteCellData {
+export interface ICandyMazeSpriteCellData extends ISpriteCellData {
     textureName: CandyMazeScratchItemsEnum;
     bundleName: string;
 }

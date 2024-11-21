@@ -6,7 +6,6 @@ import { IconMatrix, IGameMatrixProps, IMatrixCellProps } from '@components/shar
 import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
 import { useContainerDimensions } from '@hooks/useContainerDimensions';
 
-import { ICandyMazeSpriteCellProps } from '@pages/CandyMaze/CandyMazeSpriteCell';
 import { ReactElement, useEffect } from 'react';
 import styles from './ScratchCard.module.scss';
 import { useCoverData } from './hooks/useCoverData';
@@ -14,11 +13,12 @@ import { GradientConfig, useGradientTexture } from './hooks/useGradientTexture';
 import { useIsPercentAreaScratched } from './hooks/useIsAreaScratched';
 import { useScratchBrash } from './hooks/useScratchBrash';
 import { useScratchedPercent } from './hooks/useScratchedPercent';
+import { ScratchCardBgGradient } from './ScratchCardBgGradient';
 
 export type ScratchCardAssetsNames = 'cover' | 'revealed'
 
 export interface IScratchCardProps<CellProps extends IMatrixCellProps = IMatrixCellProps> {
-    data: IGameMatrixProps<ICandyMazeSpriteCellProps>['data']
+    data: IGameMatrixProps<CellProps>['data'],
     bundleName: string,
     renderCell: (props: CellProps) => ReactElement<CellProps>,
     gradientData?: GradientConfig,
@@ -39,7 +39,7 @@ export function ScratchCardEl({
     coverTextureName = 'cover',
     isDisabled = false,
     data = [],
-    gradientData = [],
+    gradientData = ScratchCardBgGradient,
     onScratchedEnought,
     renderCell,
 }: IScratchCardProps) {

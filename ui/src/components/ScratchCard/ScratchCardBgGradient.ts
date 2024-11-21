@@ -1,6 +1,6 @@
 import { GradientConfig } from '@components/ScratchCard/hooks/useGradientTexture';
 
-export const CandyMazeGradientCofig: GradientConfig = [
+export const ScratchCardBgGradient: GradientConfig = [
     [0, '#0D3877'],
     [0.008960573934018612, '#0D3A7C'],
     [0.10215053614228964, '#134D9A'],

@@ -5,27 +5,25 @@ import { selectLocalValue } from '@store/selectors/localization.selectors';
 
 import { Header } from '@components/Header';
 import { Icon } from '@components/shared/Icon';
-import { WinStyledText } from '@components/shared/StyledText';
 
 import styles from './CandyMaze.module.scss';
 
 import { ScratchCard } from '@components/ScratchCard';
 import { Button } from '@components/shared/Button/Button';
-import { IScrathCardBundle } from '@config/assetsManifest';
+import { TopPrizeLabel } from '@components/TopPrizeLabel/TopPrizeLabel';
+import { CANDY_MAZE_BUNDLE, ICandyMazeBundle } from '@config/candyMazeBundleConfig';
 import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
-import candy_maze from '@icons/candy_maze.svg';
-import robo_token_gold from '@icons/robo_token_gold.svg';
 import { useGetBatchById } from '@services/api/batch.service';
 import { useBuyCard } from '@services/api/cards.service';
-import { formatNumber } from '@utils/formatters/formatNumber';
 import { useNavigate } from 'react-router-dom';
-import { CandyMazeGradientCofig } from './CandyMazeGradient';
 import { CandyMazeSpriteCell } from './CandyMazeSpriteCell';
 import { useSpriteCellData } from './hooks/useSpriteCellData';
 
+import candy_maze from '@icons/candy_maze.svg';
+
 export function CandyMaze() {
     const playButtonText = useSelector(selectLocalValue('txt.btn.play'));
-    const winUptoText = useSelector(selectLocalValue('txt.game.winUpTo')).toUpperCase();
+    // const winUptoText = useSelector(selectLocalValue('txt.game.winUpTo')).toUpperCase();
 
     const navigate = useNavigate();
     const { batchId } = useParams();
@@ -43,10 +41,10 @@ export function CandyMaze() {
         await buyCard(batchId)
     }
 
-    const bundleName = 'scratchCard'
-    const { bundle, loading: isBundleLoading } = useLoadBundle<IScrathCardBundle>(bundleName)
+    const bundleName = CANDY_MAZE_BUNDLE.name
+    const { bundle, loading: isBundleLoading } = useLoadBundle<ICandyMazeBundle>(bundleName)
 
-    const { data, isScratchEnabled } = useSpriteCellData(card, bundleName)
+    const { data } = useSpriteCellData(card, bundleName)
 
     const onScratchedEnought = () => {
         if (card?.winning) {
@@ -69,21 +67,15 @@ export function CandyMaze() {
         <div className={styles.mainContainer}>
             <Header />
             <Icon name={candy_maze} className={styles.candyMazeHeaderIcon} />
-            <div className={styles.winLabelContainer}>
-                <WinStyledText text={winUptoText} textStyles={{ fontSize: 20 }} className={styles.winUpToLabel} />
-                <div className={styles.winAmountContainer}>
-                    <Icon name={robo_token_gold} className={styles.roboTokenGoldIcon} />
-                    <WinStyledText className={styles.winAmount} text={formatNumber(batch?.totalPotentialPrizes || 0)} textStyles={{ fontSize: 26 }} />
-                </div>
+            <div className={styles.content}>
+                <TopPrizeLabel topPrize={batch?.totalPotentialPrizes || 0} />
                 <div className={styles.scratchCardContainer}>
                     <ScratchCard
                         data={data}
-                        isDisabled={isScratchEnabled}
                         className={styles.scratchCard}
                         bundleName={bundleName}
                         onScratchedEnought={() => { onScratchedEnought() }}
                         renderCell={(data) => (<CandyMazeSpriteCell {...data} />)}
-                        gradientData={CandyMazeGradientCofig}
                     />
                 </div>
                 <div className={styles.footer}>

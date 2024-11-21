@@ -1,10 +1,11 @@
 import { useContainerDimensions } from '@hooks/useContainerDimensions';
-import { Container, Graphics, Stage, Text } from '@pixi/react';
+import { Container, Graphics, Sprite, Stage, Text } from '@pixi/react';
 import { ITextStyle, TextStyle } from 'pixi.js';
 
 import { useFitTextSize } from '@hooks/useFitTextSize';
 import styles from './StyledText.module.scss';
 import { useTextUnderline } from './hooks/useTextUnderline';
+import { useTextCurved } from './hooks/useTextCurved';
 
 
 export interface IUnderlineConfig {
@@ -92,18 +93,27 @@ export function StyledTextContainer({
         isUnderline,
     );
 
-    return (
-        <Container>
-            {isUnderline && <Graphics ref={underlineRef} /> || null}
-            <Text
-                ref={textRef}
-                text={text}
-                style={textStyle}
-                anchor={anchor}
-                x={dimensions.width * 0.5}
-                y={dimensions.height * 0.4} />
-        </Container>
-    )
+    const spriteRef = useTextCurved();
+
+    try{
+        return (
+            <Container>
+                {isUnderline && <Graphics ref={underlineRef} /> || null}
+                <Text
+                    ref={textRef}
+                    text={text}
+                    style={textStyle}
+                    anchor={anchor}
+                    x={dimensions.width * 0.5}
+                    y={dimensions.height * 0.4} />
+
+                {/* <Sprite ref={spriteRef} /> */}
+            </Container>
+        )
+    }
+    catch(e){
+        console.log(e)
+    }
 }
 
 export function StyledText({
@@ -247,3 +257,19 @@ export function RedStyledText(props: IStyledHeaderTextProps) {
         textStyles={textStyle}
     ></StyledText>)
 }
+
+// const CurvedText = () => {
+    
+
+//     return <Sprite ref={spriteRef} />;
+// };
+
+// const App = () => (
+//     <Stage width={800} height={600} options={{ backgroundColor: 0x1099bb }}>
+//         <Container>
+//             <CurvedText />
+//         </Container>
+//     </Stage>
+// );
+
+// export default App;

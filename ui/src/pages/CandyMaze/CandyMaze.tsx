@@ -9,7 +9,7 @@ import { Icon } from '@components/shared/Icon';
 import styles from './CandyMaze.module.scss';
 
 import { ScratchCard } from '@components/ScratchCard';
-import { Button } from '@components/shared/Button/Button';
+import { Button, ButtonGoldBorder, ButtonType } from '@components/shared/Button/Button';
 import { TopPrizeLabel } from '@components/TopPrizeLabel/TopPrizeLabel';
 import { CANDY_MAZE_BUNDLE, ICandyMazeBundle } from '@config/candyMazeBundleConfig';
 import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
@@ -20,6 +20,8 @@ import { CandyMazeSpriteCell } from './CandyMazeSpriteCell';
 import { useSpriteCellData } from './hooks/useSpriteCellData';
 
 import candy_maze from '@icons/candy_maze.svg';
+import back_arrow from '@icons/back_arrow.svg';
+import hint from '@icons/hint.svg';
 
 export function CandyMaze() {
     const playButtonText = useSelector(selectLocalValue('txt.btn.play'));
@@ -79,8 +81,17 @@ export function CandyMaze() {
                     />
                 </div>
                 <div className={styles.footer}>
-                    <Button className={styles.playButton} isCancel text='Back' onClick={() => onCancel()} />
-                    <Button className={styles.playButton} isConfirm text={playButtonText} onClick={() => onPlay()} />
+                    <Button className={`${styles.btn} ${styles.backBtn}`} mode={ButtonType.Default} onClick={() => onCancel()}>
+                        <Icon name={back_arrow} className={styles.backIcon} />
+                    </Button>
+                    <ButtonGoldBorder className={`${styles.btn} ${styles.playButton}`} mode={ButtonType.Default} text={playButtonText} onClick={() => onPlay()} />
+                    <Button
+                        className={`${styles.btn} ${styles.backBtn}`}
+                        mode={ButtonType.Default}
+                        onClick={() => {}}
+                    >
+                        <Icon name={hint} className={styles.backIcon} />
+                    </Button>
                 </div>
             </div>
         </div>

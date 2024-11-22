@@ -14,6 +14,9 @@ export interface ISantaSacBundle extends IScrathCardBundle {
     sportsCar: Texture;
     watch: Texture;
     womanBag: Texture;
+
+    roundCover: Texture;
+    cristmasToy: Texture;
 }
 
 export const SANTA_SAC_BUNDLE: AssetsBundle = {
@@ -62,6 +65,21 @@ export const SANTA_SAC_BUNDLE: AssetsBundle = {
         {
             alias: 'womanBag',
             src: `${SANTA_SAC_BUNDLE_BASE_PATH}/womanBag.png`,
+        },
+
+
+        {
+            alias: 'roundCover',
+            src: `/roundCover.png`,
+        },
+
+        {
+            alias: 'redBallShining',
+            src: `${SANTA_SAC_BUNDLE_BASE_PATH}/redBallShining.png`,
+        },
+        {
+            alias: 'redBall',
+            src: `/red_ball.png`,
         },
     ],
 };

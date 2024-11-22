@@ -12,6 +12,8 @@
     background: colors.$candy_maze_bg;
 
     @include mixins.fixedHeaderPadding;
+
+    overflow-y: auto;
 }
 
 .candyMazeHeaderIcon {
@@ -28,8 +30,6 @@
     width: 100%;
 }
 
-$padding: 6px;
-
 .scratchCardContainer {
     display: flex;
     justify-content: center;
@@ -38,24 +38,10 @@ $padding: 6px;
     width: 85%;
     height: 100%;
 
-    padding: $padding;
-
-    border-radius: 20px;
+    @include mixins.scratchCardBg;
 }
 
 .footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding: 10px;
+    @include mixins.gameFooter;
 }
 
-.playButton {
-    width: 40%;
-    height: 100%;
-
-    &:first-child {
-        margin-right: 8px;
-    }
-}

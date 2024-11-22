@@ -7,6 +7,8 @@ $plum-purple: #4a0664;
 $vivid-violet: #A615CA;
 $light-violet: #561394;
 $sky-blue: #1578CA;
+$light-sky-blue: #97C6FD;
+$bright-blue: #2C8AF6;
 $forest-green: #57B205;
 $lime-green: #97DB01;
 $mint-green: #43EF90;
@@ -22,11 +24,32 @@ $main_radial_bg_gradient: radial-gradient(65% 50% at 50% 15%, #FB12D033 0%, #180
 
 $modal_dialog_bg: linear-gradient(180deg, #8458DB 0%, #585FCE 100%);
 
-$modal_accept_btn_bg: linear-gradient(180deg, $lime-green 0%, $forest-green 100%);
-$modal_accept_btn_bg_hover: linear-gradient(180deg, color.adjust($lime-green, $lightness: -5%) 0%, color.adjust($forest-green, $lightness: -5%) 100%);
+$modal_accept_btn_bg: linear-gradient(180deg,
+    $lime-green 0%,
+    $forest-green 100%);
+$modal_accept_btn_bg_hover: linear-gradient(180deg,
+    color.adjust($lime-green, $lightness: -5%) 0%,
+    color.adjust($forest-green, $lightness: -5%) 100%);
 
-$modal_cancel_btn_bg: linear-gradient(180deg, $coral-red 0%, $burnt-orange 100%);
-$modal_cancel_btn_bg_hover: linear-gradient(180deg, color.adjust($coral-red, $lightness: -5%) 0%, color.adjust($burnt-orange, $lightness: -5%) 100%);
+$modal_cancel_btn_bg: linear-gradient(180deg,
+    $coral-red 0%,
+    $burnt-orange 100%);
+$modal_cancel_btn_bg_hover: linear-gradient(180deg,
+    color.adjust($coral-red, $lightness: -5%) 0%,
+    color.adjust($burnt-orange, $lightness: -5%) 100%);
+
+$modal_default_btn_bg: linear-gradient(180deg,
+    $light-sky-blue 0%,
+    $bright-blue 100%);
+$modal_default_btn_bg_hover: linear-gradient(180deg,
+    color.adjust($light-sky-blue, $lightness: -5%) 0%,
+    color.adjust($bright-blue, $lightness: -5%) 100%);
+
+$btnGoldBorder: linear-gradient(
+    180deg,
+    #E7AA39 25%,
+    #FFFFAB 70%,
+    #FCB213 100%);
 
 
 $pink-shadow: 0 0 0px #BE2BDB99,
@@ -68,3 +91,35 @@ $candy_maze_bg: linear-gradient(to bottom,
         92.65232980251312%,
         #1A4909 100%);
 ;
+
+$scratchCardBGGradient: linear-gradient(
+    to bottom,
+    #EBB33E 0%,
+    3.0465949326753616%,
+    #F2C247 6.093189865350723%,
+    7.885304465889931%,
+    #F7CD4D 9.677419066429138%,
+    14.33691754937172%,
+    #FBD552 18.9964160323143%,
+    21.50537669658661%,
+    #F9D04E 24.014337360858917%,
+    24.551972001791%,
+    #F8CE4E 25.089606642723083%,
+    26.523298025131226%,
+    #F6CB4B 27.956989407539368%,
+    36.37992888689041%,
+    #EBB33E 44.802868366241455%,
+    59.49820876121521%,
+    #F5C94B 74.19354915618896%,
+    74.73118305206299%,
+    #F6CB4B 75.26881694793701%,
+    77.24014222621918%,
+    #F9D04F 79.21146750450134%,
+    79.7491043806076%,
+    #F9D24F 80.28674125671387%,
+    84.40860211849213%,
+    #FBD552 88.53046298027039%,
+    89.60573375225067%,
+    #FAD350 90.68100452423096%,
+    95.34050226211548%,
+    #F1C045 100%);

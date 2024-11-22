@@ -13,13 +13,14 @@ import { selectLocalValue } from '@store/selectors/localization.selectors';
 
 export interface ITopPrizeLabelProps {
     topPrize: number;
+    className?: string;
 }
 
-export function TopPrizeLabel({ topPrize }: ITopPrizeLabelProps) {
+export function TopPrizeLabel({ topPrize, className }: ITopPrizeLabelProps) {
     const winUptoText = useSelector(selectLocalValue('txt.game.winUpTo')).toUpperCase();
 
     return (
-        <div className={styles.container}>
+        <div className={`${styles.container} ${className || ''}`}>
             <WinStyledText text={winUptoText} textStyles={{ fontSize: 20 }} className={styles.winUpToLabel} />
             <div className={styles.winAmountContainer}>
                 <Icon name={robo_token_gold} className={styles.roboTokenGoldIcon} />

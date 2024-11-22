@@ -9,8 +9,7 @@ import { WinStyledText } from '@components/shared/StyledText';
 
 import styles from './IceBox.module.scss';
 
-import { ScratchCard } from '@components/ScratchCard';
-import { Button } from '@components/shared/Button/Button';
+import { Button, ButtonType } from '@components/shared/Button/Button';
 import { IScrathCardBundle } from '@config/assetsManifest';
 import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
 import candy_maze from '@icons/candy_maze.svg';
@@ -92,8 +91,8 @@ export function IceBox() {
                     } */}
                 </div>
                 <div className={styles.footer}>
-                    <Button className={styles.playButton} isCancel text='Back' onClick={() => onCancel()} />
-                    <Button className={styles.playButton} isConfirm text={playButtonText} onClick={() => onPlay()} />
+                    <Button className={styles.playButton} mode={ButtonType.Cancel} text='Back' onClick={() => onCancel()} />
+                    <Button className={styles.playButton} mode={ButtonType.Confirm} text={playButtonText} onClick={() => onPlay()} />
                 </div>
             </div>
         </div>

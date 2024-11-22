@@ -7,9 +7,10 @@ export function mapMatrixToSpriteCellData<CellData extends ISpriteCellData = ISp
 ) {
     return matrix.reduce<(CellData)[][]>((acc, row) => {
         const newRow = row.map(cell => {
+            const cellStr = cell.toString();
             const textureName = (textureNameList.find((_, index) => {
-                return index + 1 + '' === cell + '';
-            })) || cell + '';
+                return (index + 1).toString() === cellStr;
+            })) || cellStr;
 
             return { ...itemMapper(textureName) }
         })

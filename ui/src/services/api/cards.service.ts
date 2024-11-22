@@ -34,8 +34,6 @@ export function useBuyCard<CardData extends ICardData>(): IUseBuyCardReturn<Card
 
             if (!cardData) throw new Error('Error buying card');
 
-            console.log('Card bought succesfully:', cardData);
-
             setCard(cardData);
             setLoading(false);
 
@@ -43,7 +41,6 @@ export function useBuyCard<CardData extends ICardData>(): IUseBuyCardReturn<Card
 
             return cardData;
         } catch (error) {
-            console.error('Error buying card:', error);
             return null;
         }
     };

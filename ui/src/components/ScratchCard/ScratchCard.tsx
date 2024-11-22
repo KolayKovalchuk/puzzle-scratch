@@ -1,68 +1,103 @@
 import { IScrathCardBundle } from '@config/assetsManifest';
 import "@pixi/events";
-import { Container, Graphics, Stage, useApp } from '@pixi/react';
+import { Container, Graphics, Sprite, Stage, useApp } from '@pixi/react';
 
-import { IconMatrix, IGameMatrixProps, IMatrixCellProps } from '@components/shared/IconMatrix';
+import { IconMatrix, IGameMatrixConfig, IGameMatrixProps, IMatrixCellProps } from '@components/shared/IconMatrix';
 import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
 import { useContainerDimensions } from '@hooks/useContainerDimensions';
 
-import { ReactElement, useEffect } from 'react';
-import styles from './ScratchCard.module.scss';
+import { Application, ICanvas, Graphics as OriginGraphics, RenderTexture, Resource, Texture } from 'pixi.js';
+import { forwardRef, ReactElement, Ref, useCallback, useEffect, useImperativeHandle, useRef } from 'react';
+import { CoverSpriteCell } from './CoverCell';
 import { useCoverData } from './hooks/useCoverData';
-import { GradientConfig, useGradientTexture } from './hooks/useGradientTexture';
+import { GradientConfig } from './hooks/useGradientTexture';
 import { useIsPercentAreaScratched } from './hooks/useIsAreaScratched';
+import { useRenderBgGraphics } from './hooks/useRenderBgGraphics';
 import { useScratchBrash } from './hooks/useScratchBrash';
 import { useScratchedPercent } from './hooks/useScratchedPercent';
 import { ScratchCardBgGradient } from './ScratchCardBgGradient';
 
-export type ScratchCardAssetsNames = 'cover' | 'revealed'
+import styles from './ScratchCard.module.scss';
+
+export interface IScratchCardHandle {
+    reset: () => void;
+    reveal: () => void;
+    getBrush: () => OriginGraphics | undefined;
+    getRenderTexture: () => RenderTexture | undefined;
+    getApp: () => Application<ICanvas> | undefined;
+}
+
+export interface IBgTextureConfig {
+    textureName: string,
+    xShift?: number,
+    yShift?: number,
+    padding?: number,
+}
 
 export interface IScratchCardProps<CellProps extends IMatrixCellProps = IMatrixCellProps> {
     data: IGameMatrixProps<CellProps>['data'],
-    bundleName: string,
     renderCell: (props: CellProps) => ReactElement<CellProps>,
-    gradientData?: GradientConfig,
+    renderCoverCell?: (props: CellProps) => ReactElement<CellProps>,
+    bundleName: string,
+
+    className?: string,
+
     isDisabled?: boolean,
     activateAreaPercent?: number,
     activateTotalPercent?: number,
+
+    brushSizeCoef?: number,
     matrixSize?: number,
     coverTextureName?: string,
-    className?: string,
+
+    onScratchStarted?: () => void
     onScratchedEnought?: () => void
+
+    gradientData?: GradientConfig,
+    renderBg?(graphics: OriginGraphics, gradientTexture: Texture<Resource>, width: number, height: number): void
+
+    bgTextureConfig?: IBgTextureConfig
+
+    matrixConfig?: IGameMatrixConfig
 }
 
-export function ScratchCardEl({
+function ScratchCardElComponent({
     bundleName,
     activateAreaPercent = 0.75,
     activateTotalPercent = 0.95,
+    brushSizeCoef = 0.35,
     matrixSize = 6,
     coverTextureName = 'cover',
     isDisabled = false,
     data = [],
     gradientData = ScratchCardBgGradient,
+    bgTextureConfig,
+    matrixConfig,
     onScratchedEnought,
+    onScratchStarted,
     renderCell,
-}: IScratchCardProps) {
+    renderCoverCell,
+    renderBg
+}: IScratchCardProps, ref: Ref<IScratchCardHandle>) {
     const app = useApp();
     const { width, height } = app.screen;
 
     const {
         dragging,
+        // isScratched,
+        brush,
         renderTexture,
         renderTextureSprite,
         pointerMove,
         pointerDown,
         pointerUp,
-        clearTexture
-    } = useScratchBrash(isDisabled);
+        resetTexture,
+        revealTexture,
+    } = useScratchBrash(isDisabled, brushSizeCoef, onScratchStarted);
 
     const scratchedPercent = useScratchedPercent(renderTexture, dragging);
     const isAreaScratched = useIsPercentAreaScratched(renderTexture, activateAreaPercent, dragging);
     const isScratchedEnought = isAreaScratched || scratchedPercent > activateTotalPercent;
-
-    useEffect(() => {
-        clearTexture();
-    }, [data]);
 
     useEffect(() => {
         if (isScratchedEnought && onScratchedEnought) {
@@ -71,23 +106,52 @@ export function ScratchCardEl({
         }
     }, [isScratchedEnought]);
 
-    const gradientTexture = useGradientTexture(width, height, gradientData);
+    const { bundle } = useLoadBundle<IScrathCardBundle>(bundleName)
+    const coverTexture = bundle?.[coverTextureName];
 
     const coverData = useCoverData({ bundleName, textureName: coverTextureName }, matrixSize);
+    const defaultRenderCoverCell = useCallback((props: IMatrixCellProps) => (<CoverSpriteCell {...props} />), []);
 
-    const { bundle } = useLoadBundle<IScrathCardBundle>(bundleName)
-    const coverTexture = bundle?.cover
+    useImperativeHandle(ref, () => {
+        return {
+            reset: () => {
+                resetTexture();
+            },
+            reveal: () => {
+                revealTexture();
+                onScratchedEnought && onScratchedEnought();
+            },
+            getBrush: () => brush,
+            getApp: () => app,
+            getRenderTexture: () => renderTexture,
+        }
+    });
+
+    const bgTexture = bundle?.[bgTextureConfig?.textureName || ''];
+    const renderBgGraphics = useRenderBgGraphics(width, height, gradientData, renderBg);
+    const renderCardBg = useCallback(() => {
+        if (bgTexture) {
+            const x = (bgTextureConfig?.xShift || 0) + (bgTextureConfig?.padding || 0);
+            const y = (bgTextureConfig?.yShift || 0) + (bgTextureConfig?.padding || 0);
+
+            return (<Sprite
+                x={x}
+                y={y}
+                width={width - (bgTextureConfig?.padding || 0) * 2}
+                height={height - (bgTextureConfig?.padding || 0) * 2}
+                texture={bgTexture}
+            />)
+        }
+
+        return (<Graphics draw={renderBgGraphics} />)
+    }, [bgTexture, bgTextureConfig, renderBgGraphics, width]);
 
     if (!bundle || !coverTexture) return null
+
     return (
         <Container width={width} height={height}>
-            <Graphics draw={(g) => {
-                g.clear();
-                g.beginTextureFill({ texture: gradientTexture });
-                g.drawRoundedRect(0, 0, width, height, 20);
-                g.endFill();
-            }} />
-            <IconMatrix data={coverData} renderCell={renderCell}/>
+            {renderCardBg()}
+            <IconMatrix data={coverData} renderCell={renderCoverCell || defaultRenderCoverCell} config={matrixConfig} />
             <Container
                 mask={renderTextureSprite}
                 pointermove={pointerMove}
@@ -95,29 +159,38 @@ export function ScratchCardEl({
                 pointerup={pointerUp}
                 eventMode='static'
             >
-                <Graphics draw={(g) => {
-                    g.clear();
-                    g.beginTextureFill({ texture: gradientTexture });
-                    g.drawRoundedRect(0, 0, width, height, 20);
-                    g.endFill();
-                }} />
-                <IconMatrix data={data} config={{ cellPadding: 8 }} renderCell={renderCell} />
+                {renderCardBg()}
+                <IconMatrix data={data} config={{ cellPadding: 8, ...matrixConfig }} renderCell={renderCell} />
             </Container>
         </Container>
     );
 };
 
-export function ScratchCard(props: IScratchCardProps) {
-    const { containerRef, dimensions } = useContainerDimensions()
+export const ScratchCardEl = forwardRef<IScratchCardHandle, IScratchCardProps>(ScratchCardElComponent);
 
+function ScratchCardComponent(props: IScratchCardProps, ref: Ref<IScratchCardHandle>) {
+    const scratchCardElRef = useRef<IScratchCardHandle>(null);
+
+    useImperativeHandle(ref, () => {
+        return {
+            reset: () => scratchCardElRef.current?.reset(),
+            reveal: () => scratchCardElRef.current?.reveal(),
+            getBrush: () => scratchCardElRef.current?.getBrush(),
+            getApp: () => scratchCardElRef.current?.getApp(),
+            getRenderTexture: () => scratchCardElRef.current?.getRenderTexture(),
+        };
+    });
+
+    const { containerRef, dimensions } = useContainerDimensions()
     const size = dimensions.width;
 
     return (
         <div className={`${styles.container} ${props.className || ''}`} ref={containerRef}>
             {!!size && <Stage width={dimensions.width} height={dimensions.width} options={{ backgroundAlpha: 0 }}>
-                <ScratchCardEl {...props} />
+                <ScratchCardEl {...props} ref={scratchCardElRef}/>
             </Stage>}
         </div>
     );
 }
 
+export const ScratchCard = forwardRef<IScratchCardHandle, IScratchCardProps>(ScratchCardComponent);

@@ -7,7 +7,6 @@ import { DefaultTextStyleConfig } from '../DefaultTextStyleConfig';
 
 
 export interface IStyledTextPixiElProps {
-    isUnderline: boolean;
     dimensions: { width: number, height: number };
     text: string;
     textStyles?: Partial<ITextStyle>;
@@ -15,6 +14,7 @@ export interface IStyledTextPixiElProps {
 
     anchor?: number;
 
+    isUnderline?: boolean;
     underlineConfig?: IUnderlineConfig;
 }
 

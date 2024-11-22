@@ -12,7 +12,7 @@ export interface ISantaSacSpriteCellData extends ISpriteCellData {
     itemPrize: number;
 }
 
-export interface ICandyMazeSpriteCellProps extends IMatrixCellProps<ISantaSacSpriteCellData> {
+export interface ISantaSacSpriteCellProps extends IMatrixCellProps<ISantaSacSpriteCellData> {
 }
 
 export const ItemPrizeTextStyles = new TextStyle({
@@ -23,18 +23,17 @@ export const ItemPrizeTextStyles = new TextStyle({
     strokeThickness: 2,
 })
 
-export function SantaSacSpriteCell({ x, y, width, height, data }: ICandyMazeSpriteCellProps) {
+export function SantaSacSpriteCell({ x, y, width, height, data }: ISantaSacSpriteCellProps) {
     const { bundle, loading: isBundleLoading } = useLoadBundle(data.bundleName);
-    const texture = bundle?.[data.textureName];
 
-
-    const itemPrize = data.itemPrize + '' || '0';
-
+    const itemPrize = data.itemPrize?.toString() || '0';
     const { x: itemPrizeTextX, y: itemPrizeTextY } = useItemPrizePosition(data.itemPrize, width, height);
 
     if (!bundle) return null
 
-    if (isBundleLoading || !texture || texture.baseTexture.width === 0) {
+    const texture = bundle[data.textureName];
+
+    if (isBundleLoading || !texture) {
         return null;
     }
 

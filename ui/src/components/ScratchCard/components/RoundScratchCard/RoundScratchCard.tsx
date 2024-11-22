@@ -50,7 +50,8 @@ function RoundScratchCardComponent(props: IRoundScratchCardProps, ref: Ref<IRoun
             className={`${styles.container} ${props.className || ''}`}
             renderCell={(data) => (<RoundSpriteCell {...data} />)}
             coverTextureName='roundCover'
-            matrixSize={1}
+            sizeX={1}
+            sizeY={1}
             renderBg={renderBg}
             activateAreaPercent={0.6}
             activateTotalPercent={0.5}

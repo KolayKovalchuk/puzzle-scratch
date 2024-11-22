@@ -4,11 +4,12 @@ import { useMemo } from 'react';
 
 export function useCoverData<CellData extends ISpriteCellData = ISpriteCellData>(
     cellData: CellData,
-    matrixSize: number
+    sizeX: number,
+    sizeY: number,
 ): IGameMatrixProps<IMatrixCellProps<CellData>>['data'] {
     return useMemo(() => {
-        return Array.from({ length: matrixSize }, () => {
-            return Array.from({ length: matrixSize }, () => (cellData))
+        return Array.from({ length: sizeX }, () => {
+            return Array.from({ length: sizeY }, () => (cellData))
         });
-    }, [cellData.bundleName, cellData.textureName, matrixSize]);
+    }, [cellData.bundleName, cellData.textureName, sizeX, sizeY ]);
 }

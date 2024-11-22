@@ -17,6 +17,8 @@ export class BatchCard {
     totalPotentialPrizes: number;
     availablePrizes: number;
     pricePerCard: number;
+    sizeX: number;
+    sizeY: number;
 
     constructor(data: BatchCard) {
         this.batchId = data.batchId;
@@ -30,5 +32,7 @@ export class BatchCard {
         this.totalPotentialPrizes = data.totalPotentialPrizes;
         this.availablePrizes = data.availablePrizes;
         this.pricePerCard = data.pricePerCard;
+        this.sizeX = data.sizeX;
+        this.sizeY = data.sizeY;
     }
 }

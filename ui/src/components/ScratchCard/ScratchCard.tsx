@@ -47,7 +47,8 @@ export interface IScratchCardProps<CellProps extends IMatrixCellProps = IMatrixC
     activateTotalPercent?: number,
 
     brushSizeCoef?: number,
-    matrixSize?: number,
+    sizeX?: number;
+    sizeY?: number;
     coverTextureName?: string,
 
     onScratchStarted?: () => void
@@ -66,7 +67,8 @@ function ScratchCardElComponent({
     activateAreaPercent = 0.75,
     activateTotalPercent = 0.95,
     brushSizeCoef = 0.35,
-    matrixSize = 6,
+    sizeX = 6,
+    sizeY = 6,
     coverTextureName = 'cover',
     isDisabled = false,
     data = [],
@@ -109,7 +111,7 @@ function ScratchCardElComponent({
     const { bundle } = useLoadBundle<IScrathCardBundle>(bundleName)
     const coverTexture = bundle?.[coverTextureName];
 
-    const coverData = useCoverData({ bundleName, textureName: coverTextureName }, matrixSize);
+    const coverData = useCoverData({ bundleName, textureName: coverTextureName }, sizeX, sizeY);
     const defaultRenderCoverCell = useCallback((props: IMatrixCellProps) => (<CoverSpriteCell {...props} />), []);
 
     useImperativeHandle(ref, () => {

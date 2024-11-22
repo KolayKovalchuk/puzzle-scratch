@@ -102,8 +102,9 @@ export function CandyMaze() {
             <Icon name={candy_maze} className={styles.candyMazeHeaderIcon} />
             <div className={styles.content}>
                 <Icon name={candy_clouds} className={styles.candyCloudes} />
-                <Icon name={shining} className={styles.candyMazeShining} />
                 <Icon name={candy_stars_bg} className={styles.candyStarsBg} />
+                <Icon name={shining} className={styles.candyMazeShining} />
+                <div className={styles.radialShining}></div>
                 <TopPrizeLabel topPrize={batch?.totalPotentialPrizes || 0} />
                 <div className={styles.potentialPrizeContainer}>
                     <ScratchCard

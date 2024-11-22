@@ -1,36 +1,32 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ICandyMazeSpriteCellData } from '../CandyMazeSpriteCell';
 import { IBuyBatchCardData } from '@models/IBuyBatchCardData';
 import { CandyMazeScratchItemsEnum } from '../scratchItemsEnum';
+import { mapMatrixToSpriteCellData } from '@utils/mapMatrixToSpriteCellData';
+
+const CandyMazeScratchItemsEnumEntries = Object.values(CandyMazeScratchItemsEnum)
 
 export function useSpriteCellData(card: IBuyBatchCardData | null, bundleName: string) {
-    const [isScratchEnabled, setIsScratchEnabled] = useState(true);
-    const [data, setData] = useState<ICandyMazeSpriteCellData[][]>([])
+    const [data, setData] = useState<(ICandyMazeSpriteCellData)[][]>([])
+
+    const itemMapper = useCallback((textureName: string) => {
+        return {
+            textureName: textureName as CandyMazeScratchItemsEnum,
+            bundleName
+        }
+    }, [bundleName])
+
+    const newData = useMemo(() => mapMatrixToSpriteCellData<ICandyMazeSpriteCellData>(
+        card?.cardData.matrix || [],
+        CandyMazeScratchItemsEnumEntries,
+        itemMapper,
+    ), [card?.cardData.matrix, itemMapper, CandyMazeScratchItemsEnumEntries])
 
     useEffect(() => {
-
         if (!card) return
 
-        setIsScratchEnabled(false)
-
-        const newData = card.cardData.matrix.reduce<ICandyMazeSpriteCellData[][]>((acc, row) => {
-            const newRow = row.map(cell => {
-                const textureName = (Object.keys(CandyMazeScratchItemsEnum).find(key => {
-                    const item = CandyMazeScratchItemsEnum[key as keyof typeof CandyMazeScratchItemsEnum];
-
-                    return item === cell
-                }) || '') as CandyMazeScratchItemsEnum
-
-                console.log('textureName', textureName);
-                return { textureName, bundleName }
-            })
-            acc.push(newRow)
-            return acc;
-        }, []);
-
         setData(newData)
+    }, [card, newData])
 
-    }, [card])
-
-    return { data, isScratchEnabled }
+    return { data }
 }

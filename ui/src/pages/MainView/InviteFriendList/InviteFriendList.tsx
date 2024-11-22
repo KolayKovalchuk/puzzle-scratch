@@ -13,7 +13,7 @@ import styles from './InviteFriendList.module.scss';
 import header_projectors_light from '@icons/header_projectors_light.svg'
 import invite_friends_coins_heder from '@icons/invite_friends_coins_heder.svg'
 import { useGetUserReferrals } from '@services/api/referrals.service';
-import { Button } from '@components/shared/Button/Button';
+import { Button, ButtonType } from '@components/shared/Button/Button';
 
 export interface InviteFriendListProps {
     className?: string;
@@ -93,7 +93,7 @@ export function InviteFriendList({ className, onCloseClick }: InviteFriendListPr
                 </div>
             </StyledHeader>
 
-            <Button className={styles.closeBtn} text={btnCloseTxt} isCancel onClick={() => onCloseClick()}/>
+            <Button className={styles.closeBtn} text={btnCloseTxt} mode={ButtonType.Cancel} onClick={() => onCloseClick()}/>
         </div>
 
         <ModalDialog

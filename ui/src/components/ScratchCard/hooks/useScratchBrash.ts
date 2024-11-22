@@ -1,20 +1,28 @@
 import { useApp } from '@pixi/react';
 import { FederatedPointerEvent, Graphics, RenderTexture, Sprite } from 'pixi.js';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
-export function useScratchBrash(isDisabled = false, brushSizeCoef: number = 0.15) {
+export function useScratchBrash(
+    isDisabled = false,
+    brushSizeCoef: number = 0.15,
+    onScratchStarted?: () => void
+) {
     const app = useApp();
-    const { width } = app.screen;
+    const { width, height } = app.screen;
+    const brushRadius = width * brushSizeCoef;
 
     // brush
     const brush = useMemo(() => new Graphics(), []);
 
-    useEffect(() => {
-        const brushRadius = width * brushSizeCoef;
+    const setBrush = useCallback(() => {
+        brush.clear();
         brush.beginFill(0xffffff);
         brush.drawCircle(0, 0, brushRadius);
         brush.endFill();
-    }, [brush, width, brushSizeCoef]);
+    }, [brush, brushRadius]);
+
+
+    useEffect(() => setBrush(), [brush, brushRadius]);
 
     // mask
     const renderTexture = useMemo(() => RenderTexture.create({
@@ -43,6 +51,7 @@ export function useScratchBrash(isDisabled = false, brushSizeCoef: number = 0.15
 
         setDragging(true);
         pointerMove(e, true);
+        onScratchStarted && onScratchStarted();
     };
 
     const pointerUp = () => {
@@ -55,20 +64,42 @@ export function useScratchBrash(isDisabled = false, brushSizeCoef: number = 0.15
         })
     };
 
-    const clearTexture = () => {
+    const resetTexture = () => {
+        setBrush();
         app.renderer.render(new Graphics(), {
             renderTexture,
             clear: true,
         });
     };
 
+    const revealTexture = () => {
+        const brushRadius = width;
+        brush.clear();
+
+        brush.beginFill(0xffffff);
+        brush.drawRect(0, 0, width, height);
+        brush.endFill();
+
+        for (let x = 0; x < app.screen.width; x += brushRadius) {
+            for (let y = 0; y < app.screen.height; y += brushRadius) {
+                brush.position.set(x, y);
+                app.renderer.render(brush, {
+                    renderTexture,
+                    clear: false,
+                });
+            }
+        }
+    };
+
     return {
         dragging,
         renderTexture,
         renderTextureSprite,
+        brush,
         pointerMove,
         pointerDown,
         pointerUp,
-        clearTexture
+        resetTexture,
+        revealTexture
     }
 }

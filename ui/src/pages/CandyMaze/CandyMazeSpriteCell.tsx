@@ -1,11 +1,11 @@
-import { IMatrixCellProps } from '@components/shared/IconMatrix/IconMatrix.models';
-import { RedStyledTextStyle, StyledTextContainer } from '@components/shared/StyledText';
+import { IMatrixCellProps, ISpriteCellData } from '@components/shared/IconMatrix/IconMatrix.models';
+import { RedStyledTextStyle, StyledTextPixiEl } from '@components/shared/StyledText';
 import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
 import { Container, Sprite } from '@pixi/react';
 import { useMemo } from 'react';
 import { CandyMazeScratchItemsEnum, CandyMazeScratchTextItems } from './scratchItemsEnum';
 
-export interface ICandyMazeSpriteCellData {
+export interface ICandyMazeSpriteCellData extends ISpriteCellData {
     textureName: CandyMazeScratchItemsEnum;
     bundleName: string;
 }
@@ -42,7 +42,7 @@ export function CandyMazeSpriteCell({ x, y, width, height, data }: ICandyMazeSpr
                     g.drawRect(0 - 4, 0 - 4, width + 5, height + 6.5);
                     g.endFill();
                 }} /> */}
-                <StyledTextContainer
+                <StyledTextPixiEl
                     isUnderline={false}
                     dimensions={dimensions}
                     text={text}

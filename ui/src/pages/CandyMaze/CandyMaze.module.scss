@@ -12,6 +12,8 @@
     background: colors.$candy_maze_bg;
 
     @include mixins.fixedHeaderPadding;
+
+    overflow-y: auto;
 }
 
 .candyMazeHeaderIcon {
@@ -19,7 +21,7 @@
     aspect-ratio: 1000/345;
 }
 
-.winLabelContainer {
+.content {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -27,18 +29,6 @@
 
     width: 100%;
 }
-
-.winAmountContainer {
-    display: flex;
-}
-
-.roboTokenGoldIcon {
-    max-width: 50px;
-    position: relative;
-    top: -4px;
-}
-
-$padding: 6px;
 
 .scratchCardContainer {
     display: flex;
@@ -48,29 +38,10 @@ $padding: 6px;
     width: 85%;
     height: 100%;
 
-    padding: $padding;
-
-    border-radius: 20px;
-}
-
-.winAmount {
-    position: relative;
-    left: -8px;
+    @include mixins.scratchCardBg;
 }
 
 .footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding: 10px;
+    @include mixins.gameFooter;
 }
 
-.playButton {
-    width: 40%;
-    height: 100%;
-
-    &:first-child {
-        margin-right: 8px;
-    }
-}

@@ -8,7 +8,7 @@ import { selectPreferredLocale, selectUserAcceptedTerms } from '@store/selectors
 import store from '@store/store';
 import { useEffect } from 'react';
 import { Provider, useSelector } from 'react-redux';
-import { BrowserRouter, useNavigate } from 'react-router-dom';
+import { BrowserRouter, useLocation, useNavigate } from 'react-router-dom';
 
 // TODO: remove test code when done
 function TestBtn({ click }: { click: () => void }) {
@@ -40,6 +40,8 @@ function App() {
         }
     }, [isLoaded, shouldRedirectToLanguageSelect, navigate]);
 
+    const location = useLocation();
+
     if (!isLoaded) {
         return <div className={`${styles.mainContainer} ${styles.loading}`}><span>Loading...</span></div>
     }
@@ -64,7 +66,7 @@ function App() {
             <AppRouter languageSelectProps={languageSelectProps} />
 
             {/* // TODO: remove test code when done */}
-            <TestBtn click={() => onTestBtnClick()}/>
+            { location.pathname === ROUTES.Home && <TestBtn click={() => onTestBtnClick()}/>}
         </div>
     )
 };

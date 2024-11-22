@@ -1,7 +1,7 @@
 import { StyledHeader } from '@components/shared/StyledHeader';
 import { ReactNode } from 'react';
 import styles from './ModalDialog.module.scss';
-import { Button } from '../Button/Button';
+import { Button, ButtonType } from '../Button/Button';
 
 interface ModalDialogProps {
     isOpen: boolean;
@@ -47,13 +47,13 @@ const ModalDialog: React.FC<ModalDialogProps> = ({
                             {cancelText && <Button
                                 className={styles.btn}
                                 text={cancelText}
-                                isCancel
+                                mode={ButtonType.Cancel}
                                 onClick={() => handleClose()} />
                             }
                             {confirmText && <Button
                                 className={styles.btn}
                                 text={confirmText}
-                                isConfirm
+                                mode={ButtonType.Confirm}
                                 onClick={() => handleConfirm()} />
                             }
                         </div>

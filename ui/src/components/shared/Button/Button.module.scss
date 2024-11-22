@@ -1,10 +1,65 @@
-@use '@styles/mixins';
+@use '@styles/colors';
+
+$borderRadius: 14px;
+$minWidth: 100px;
+$maxHeight: 50px;
 
 .container {
-    @include mixins.button;
+    min-width: $minWidth;
+    max-height: $maxHeight;
+
+    padding: 10px 20px;
+    border: none;
+    border-radius: $borderRadius;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+
+    box-shadow: 0px -1px 3px 1px #00000040 inset;
+
+    &.confirm {
+        background: colors.$modal_accept_btn_bg;
+
+        &:hover {
+            background: colors.$modal_accept_btn_bg_hover;
+        }
+    }
+
+    &.cancel {
+        background: colors.$modal_cancel_btn_bg;
+
+        &:hover {
+            background: colors.$modal_cancel_btn_bg_hover;
+        }
+    }
+
+    &.default {
+        background: colors.$modal_default_btn_bg;
+
+        &:hover {
+            background: colors.$modal_default_btn_bg_hover;
+        }
+    }
 
     .label {
         position: relative;
         top: 1px;
+    }
+}
+
+.goldBorder {
+    display: flex;
+
+    min-width: $minWidth;
+    max-height: $maxHeight;
+
+    padding: 4px;
+    background: colors.$btnGoldBorder;
+    border-radius: $borderRadius;
+
+    .container {
+        width: 100%;
+        height: 100%;
     }
 }

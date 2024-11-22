@@ -1,8 +1,6 @@
 import { StyledHeaderType } from '@components/shared/StyledHeader';
 import { BatchCard, BatchCardType } from '@models/BatchCard.model';
 import { ROUTES } from '@routers/routerConfig';
-import { startPuzzleGame } from '@store/actions/game.actions';
-import store from '@store/store';
 import { useCallback, useMemo } from 'react';
 import { NavigateFunction } from 'react-router-dom';
 
@@ -57,16 +55,19 @@ function getBatchImageUrl(cardType: BatchCardType) {
 export function useBatchCardHandler(batchCard: BatchCard, navigate: NavigateFunction) {
     switch (batchCard.cardType) {
         case BatchCardType.ICE_BOX:
-            return useCallback(() => navigate(ROUTES.Home), [navigate]);
+            return useCallback(() => {
+                navigate(`${ROUTES.IceBox}/${batchCard.batchId}`)
+            }, [navigate]);
 
         case BatchCardType.CANDY_MAZE:
             return useCallback(() => {
-                navigate(ROUTES.CandyMaze);
-                store.dispatch(startPuzzleGame(batchCard));
+                navigate(`${ROUTES.CandyMaze}/${batchCard.batchId}`);
             }, [navigate, batchCard]);
 
         case BatchCardType.SANTA_SAC:
-            return useCallback(() => navigate(ROUTES.Home), [navigate]);
+            return useCallback(() => {
+                navigate(`${ROUTES.SantaSac}/${batchCard.batchId}`)
+            }, [navigate]);
 
         default:
             return useCallback(() => navigate(ROUTES.Home), [navigate]);

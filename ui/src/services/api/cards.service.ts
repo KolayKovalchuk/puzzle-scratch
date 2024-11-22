@@ -1,13 +1,13 @@
-import { IBuyBatchCardData } from '@models/IBuyBatchCardData';
+import { IBuyBatchCardData, ICardData } from '@models/IBuyBatchCardData';
 import { updateUserBalanceRbax } from '@store/actions/user.actions';
 import store from '@store/store';
 import { useState } from 'react';
 import { apiClient } from './api.service';
 
-export async function postBuyCard(batchId: string) {
+export async function postBuyCard<CardData extends ICardData>(batchId: string) {
     try {
         const response = await apiClient.post('/cards/buy', { batchId });
-        const data: IBuyBatchCardData = response.data;
+        const data: IBuyBatchCardData<CardData> = response.data;
 
         console.log('Card bought succesfully:', data);
 
@@ -18,18 +18,21 @@ export async function postBuyCard(batchId: string) {
     }
 }
 
-export function useBuyCard(): { card: IBuyBatchCardData | null, loading: boolean, buyCard: (batchId: string) => Promise<IBuyBatchCardData | null> } {
-    const [card, setCard] = useState<IBuyBatchCardData | null>(null);
+export interface IUseBuyCardReturn<CardData extends ICardData> {
+    card: IBuyBatchCardData<CardData> | null;
+    loading: boolean;
+    buyCard: (batchId: string) => Promise<IBuyBatchCardData<CardData> | null>;
+}
+
+export function useBuyCard<CardData extends ICardData>(): IUseBuyCardReturn<CardData> {
+    const [card, setCard] = useState<IBuyBatchCardData<CardData> | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
     const buyCard = async (batchId: string) => {
         try {
-            const cardData = await postBuyCard(batchId);
+            const cardData = await postBuyCard<CardData>(batchId);
 
             if (!cardData) throw new Error('Error buying card');
-
-            console.log('Card bought succesfully:', cardData);
-            
 
             setCard(cardData);
             setLoading(false);
@@ -38,7 +41,6 @@ export function useBuyCard(): { card: IBuyBatchCardData | null, loading: boolean
 
             return cardData;
         } catch (error) {
-            console.error('Error buying card:', error);
             return null;
         }
     };

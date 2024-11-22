@@ -1,59 +1,52 @@
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import { selectLocalValue } from '@store/selectors/localization.selectors';
 
 import { Header } from '@components/Header';
 import { Icon } from '@components/shared/Icon';
-import { WinStyledText } from '@components/shared/StyledText';
 
 import styles from './CandyMaze.module.scss';
 
 import { ScratchCard } from '@components/ScratchCard';
-import { Button } from '@components/shared/Button/Button';
-import { IScrathCardBundle } from '@config/assetsManifest';
+import { Button, ButtonGoldBorder, ButtonType } from '@components/shared/Button/Button';
+import { TopPrizeLabel } from '@components/TopPrizeLabel/TopPrizeLabel';
+import { CANDY_MAZE_BUNDLE, ICandyMazeBundle } from '@config/candyMazeBundleConfig';
 import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
-import candy_maze from '@icons/candy_maze.svg';
-import robo_token_gold from '@icons/robo_token_gold.svg';
+import { useGetBatchById } from '@services/api/batch.service';
 import { useBuyCard } from '@services/api/cards.service';
-import { selectGameBatch, selectGameBatchId } from '@store/selectors/game.selectors';
-import { formatNumber } from '@utils/formatters/formatNumber';
 import { useNavigate } from 'react-router-dom';
-import { CandyMazeGradientCofig } from './CandyMazeGradient';
 import { CandyMazeSpriteCell } from './CandyMazeSpriteCell';
 import { useSpriteCellData } from './hooks/useSpriteCellData';
 
-// export interface ICandyMazeProps {
-//     batchId: string;
-// }
+import candy_maze from '@icons/candy_maze.svg';
+import back_arrow from '@icons/back_arrow.svg';
+import hint from '@icons/hint.svg';
 
 export function CandyMaze() {
     const playButtonText = useSelector(selectLocalValue('txt.btn.play'));
-    const winUptoText = useSelector(selectLocalValue('txt.game.winUpTo')).toUpperCase();
+    // const winUptoText = useSelector(selectLocalValue('txt.game.winUpTo')).toUpperCase();
 
     const navigate = useNavigate();
-    const { buyCard, card } = useBuyCard();
+    const { batchId } = useParams();
 
-    const batch = useSelector(selectGameBatch);
-    const batchId = useSelector(selectGameBatchId);
+    const { batch, loading: isBatchLoading } = useGetBatchById(batchId || null);
+    const { buyCard, card } = useBuyCard();
 
     const onCancel = () => {
         navigate(-1)
     }
 
     const onPlay = async () => {
-        console.log('batchId', batchId);
-
-
         if (!batchId) return
 
         await buyCard(batchId)
     }
 
+    const bundleName = CANDY_MAZE_BUNDLE.name
+    const { bundle, loading: isBundleLoading } = useLoadBundle<ICandyMazeBundle>(bundleName)
 
-    const bundleName = 'scratchCard'
-    const { bundle, loading: isBundleLoading } = useLoadBundle<IScrathCardBundle>(bundleName)
-
-    const { data, isScratchEnabled } = useSpriteCellData(card, bundleName)
+    const { data } = useSpriteCellData(card, bundleName)
 
     const onScratchedEnought = () => {
         if (card?.winning) {
@@ -63,7 +56,8 @@ export function CandyMaze() {
         }
     }
 
-    if (isBundleLoading || !bundle) {
+    const isLoading = isBatchLoading || isBundleLoading;
+    if (isLoading || !bundle) {
         return (
             <div className={styles.mainContainer}>
                 <span>Loading...</span>
@@ -75,26 +69,29 @@ export function CandyMaze() {
         <div className={styles.mainContainer}>
             <Header />
             <Icon name={candy_maze} className={styles.candyMazeHeaderIcon} />
-            <div className={styles.winLabelContainer}>
-                <WinStyledText text={winUptoText} textStyles={{ fontSize: 20 }} className={styles.winUpToLabel} />
-                <div className={styles.winAmountContainer}>
-                    <Icon name={robo_token_gold} className={styles.roboTokenGoldIcon} />
-                    <WinStyledText className={styles.winAmount} text={formatNumber(batch?.totalPotentialPrizes || 0)} textStyles={{ fontSize: 26 }} />
-                </div>
+            <div className={styles.content}>
+                <TopPrizeLabel topPrize={batch?.totalPotentialPrizes || 0} />
                 <div className={styles.scratchCardContainer}>
                     <ScratchCard
                         data={data}
-                        isDisabled={isScratchEnabled}
                         className={styles.scratchCard}
                         bundleName={bundleName}
                         onScratchedEnought={() => { onScratchedEnought() }}
                         renderCell={(data) => (<CandyMazeSpriteCell {...data} />)}
-                        gradientData={CandyMazeGradientCofig}
                     />
                 </div>
                 <div className={styles.footer}>
-                    <Button className={styles.playButton} isCancel text='Back' onClick={() => onCancel()} />
-                    <Button className={styles.playButton} isConfirm text={playButtonText} onClick={() => onPlay()} />
+                    <Button className={`${styles.btn} ${styles.backBtn}`} mode={ButtonType.Default} onClick={() => onCancel()}>
+                        <Icon name={back_arrow} className={styles.backIcon} />
+                    </Button>
+                    <ButtonGoldBorder className={`${styles.btn} ${styles.playButton}`} mode={ButtonType.Default} text={playButtonText} onClick={() => onPlay()} />
+                    <Button
+                        className={`${styles.btn} ${styles.backBtn}`}
+                        mode={ButtonType.Default}
+                        onClick={() => {}}
+                    >
+                        <Icon name={hint} className={styles.backIcon} />
+                    </Button>
                 </div>
             </div>
         </div>

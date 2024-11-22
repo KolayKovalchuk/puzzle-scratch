@@ -10,7 +10,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styles from './LanguageSelect.module.scss';
-import { Button } from '@components/shared/Button/Button';
+import { Button, ButtonType } from '@components/shared/Button/Button';
 import store from '@store/store';
 import { updateUserLocale } from '@store/actions/user.actions';
 import { useContainerDimensions } from '@hooks/useContainerDimensions';
@@ -137,7 +137,7 @@ export function LanguageSelect({ onLangSelected, isPreferredLocaleSelected }: IL
                 </div>
             </div>
 
-            <Button className={`${styles.selectBtn}`} text={buttonText} isConfirm onClick={async () => {
+            <Button className={`${styles.selectBtn}`} text={buttonText} mode={ButtonType.Confirm} onClick={async () => {
                 if (selectedLocale) {
                     await onLangSelect(selectedLocale)
                 }

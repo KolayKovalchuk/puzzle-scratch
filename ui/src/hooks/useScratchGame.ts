@@ -3,6 +3,10 @@ import { IRoundScratchCardHandle } from '@components/ScratchCard/components/Roun
 import { IBuyBatchCardData, ICardData } from '@models/IBuyBatchCardData';
 import { useEffect, useRef, useState } from 'react';
 
+let timeout: NodeJS.Timeout | null = null;
+
+const BIG_WIN_TIMEOUT = 2.5 * 1000;
+
 export function useScratchGame<CardData extends ICardData = ICardData>(
     batchId: string | undefined,
     card: IBuyBatchCardData<CardData> | null,
@@ -12,6 +16,8 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
     const mainScratchCardRef = useRef<IScratchCardHandle>(null);
     
     const [lastAction, setLastAction] = useState<'playBtnClick' | 'swipe' | 'scratch' | null>(null);
+    const [ isBigWinVisible, setIsBigWinVisible ] = useState(false);
+
 
     const [isMainCardScratched, setMainCardScratched] = useState(false);
     const [isMaltiplierCardScratched, setMaltiplierCardScratched] = useState(false);
@@ -28,12 +34,12 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
         const mainScratch = mainScratchCardRef.current;
         const roundScratch = roundScratchCardRef.current;
         
-        if (!batchId || !roundScratch || ! mainScratch) return
+        if (!batchId || !roundScratch || ! mainScratch || isBigWinVisible) return
 
         mainScratch.reset();
         roundScratch.reset();
         
-        await buyCard(batchId)
+        const card = await buyCard(batchId)
 
         mainScratch.reveal();
         setMainCardScratched(true);
@@ -43,7 +49,7 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
 
         setLastAction('playBtnClick');
 
-        onScratchedEnought();
+        onScratchedEnought(card);
     }
 
     const onSwipe = async () => {
@@ -63,11 +69,27 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
         }
     }
 
-    const onScratchedEnought = () => {
-        if (card?.winning) {
-            console.log('You win ' + card.winning + ' RBAX. Your new balance is ' + card.rbaxBalance + ' RBAX')
-        } else if (card) {
-            console.log('You lose. Your balance is ' + card?.rbaxBalance + ' RBAX')
+    const onScratchedEnought = (cardDataArg?: IBuyBatchCardData<CardData> | null) => {
+        const cardData = cardDataArg || card;
+
+        if (cardData?.winning) {
+
+            if (timeout) {
+                clearTimeout(timeout);
+                timeout = null;
+            }
+
+            setIsBigWinVisible(true);
+            console.log('onScratchedEnought', cardData);
+            
+
+            timeout = setTimeout(() => {
+                setIsBigWinVisible(false);
+            }, BIG_WIN_TIMEOUT);
+
+            console.log('You win ' + cardData.winning + ' RBAX. Your new balance is ' + cardData.rbaxBalance + ' RBAX')
+        } else if (cardData) {
+            console.log('You lose. Your balance is ' + cardData?.rbaxBalance + ' RBAX')
         };
     }
 
@@ -89,6 +111,7 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
     return {
         roundScratchCardRef,
         mainScratchCardRef,
+        isBigWinVisible,
         onMainCardScratched,
         onMaltiplierCardScratched,
         onPlay,

@@ -24,12 +24,13 @@ import { SantaSacSpriteCell } from './SantaSacSpriteCell';
 
 import { RoundScratchCard } from '@components/ScratchCard/components/RoundScratchCard/RoundScratchCard';
 
+import { BigWinScreen } from '@components/BigWinScreen/BigWinScreen';
+import { useScratchGame } from '@hooks/useScratchGame';
 import { useSwipeAria } from '@hooks/useSwipeAria';
 import back_arrow from '@icons/back_arrow.svg';
 import hint from '@icons/hint.svg';
 import santa_sac from '@icons/santa_sac.svg';
 import satna_sac_shining from '@icons/satna_sac_shining.svg';
-import { useScratchGame } from '@hooks/useScratchGame';
 
 const bgTextureConfig: IBgTextureConfig = {
     textureName: 'redBallShining',
@@ -59,6 +60,7 @@ export function SantaSac() {
     const {
         mainScratchCardRef,
         roundScratchCardRef,
+        isBigWinVisible,
         onMainCardScratched,
         onMaltiplierCardScratched,
         onPlay,
@@ -148,6 +150,7 @@ export function SantaSac() {
                     </Button>
                 </div>
             </div>
+            {isBigWinVisible && <BigWinScreen winAmount={card?.winning} />}
         </div>
     );
 }

@@ -15,14 +15,14 @@ import { useGetBatchById } from '@services/api/batch.service';
 import { useBuyCard } from '@services/api/cards.service';
 import { useNavigate } from 'react-router-dom';
 
-import { IBgTextureConfig, ScratchCard } from '@components/ScratchCard';
+import { IBgTextureConfig, IScratchCardHandle, ScratchCard } from '@components/ScratchCard';
 import { TopPrizeLabel } from '@components/TopPrizeLabel/TopPrizeLabel';
 import { SANTA_SAC_BUNDLE } from '@config/santaSacBundleConfig';
 import { useSpriteCellData } from './hooks/useSpriteCellData';
 import { ISantaSacCardData } from './SantaSac.model';
 import { SantaSacSpriteCell } from './SantaSacSpriteCell';
 
-import { RoundScratchCard } from '@components/ScratchCard/components/RoundScratchCard/RoundScratchCard';
+import { IRoundScratchCardHandle, RoundScratchCard } from '@components/ScratchCard/components/RoundScratchCard/RoundScratchCard';
 
 import { BigWinScreen } from '@components/BigWinScreen/BigWinScreen';
 import { useScratchGame } from '@hooks/useScratchGame';
@@ -31,6 +31,7 @@ import back_arrow from '@icons/back_arrow.svg';
 import hint from '@icons/hint.svg';
 import santa_sac from '@icons/santa_sac.svg';
 import satna_sac_shining from '@icons/satna_sac_shining.svg';
+import { useMemo, useRef } from 'react';
 
 const bgTextureConfig: IBgTextureConfig = {
     textureName: 'redBallShining',
@@ -57,16 +58,21 @@ export function SantaSac() {
 
     const { data } = useSpriteCellData(card, bundleName)
 
+    const roundScratchCardRef = useRef<IRoundScratchCardHandle>(null);
+    const mainScratchCardRef = useRef<IScratchCardHandle>(null);
+
+    const scratchCardsRefConfig = useMemo(() => ({
+        'roundScratchCard': roundScratchCardRef,
+        'mainScratchCard': mainScratchCardRef,
+    }), [roundScratchCardRef, mainScratchCardRef]);
+
     const {
-        mainScratchCardRef,
-        roundScratchCardRef,
         isBigWinVisible,
-        onMainCardScratched,
-        onMaltiplierCardScratched,
+        onCardScratched,
         onPlay,
         onSwipe,
         onScratchStarted,
-    } = useScratchGame(batchId, card, buyCard);
+    } = useScratchGame(batchId, card, buyCard, scratchCardsRefConfig);
 
      const {
         onTouchEnd,
@@ -110,7 +116,7 @@ export function SantaSac() {
                         className={styles.roundScratchCard}
                         bundleName={SANTA_SAC_BUNDLE.name}
                         bgTextureConfig={bgTextureConfig}
-                        onScratchedEnought={() => { onMaltiplierCardScratched() }}
+                        onScratchedEnought={() => { onCardScratched('roundScratchCard') }}
                         matrixConfig={{ containerPadding: 14, cellPadding: 0 }}
                         onScratchStarted={() => onScratchStarted()}
                     />
@@ -135,7 +141,7 @@ export function SantaSac() {
                         sizeX={batch?.sizeX}
                         sizeY={batch?.sizeY}
 
-                        onScratchedEnought={() => { onMainCardScratched() }}
+                        onScratchedEnought={() => { onCardScratched('mainScratchCard') }}
                         onScratchStarted={() => onScratchStarted()}
                     />
                 </div>

@@ -86,12 +86,12 @@ function ScratchCardElComponent({
 
     const {
         dragging,
-        // isScratched,
         brush,
         renderTexture,
         renderTextureSprite,
         pointerMove,
         pointerDown,
+        pointerOut,
         pointerUp,
         resetTexture,
         revealTexture,
@@ -158,6 +158,7 @@ function ScratchCardElComponent({
                 mask={renderTextureSprite}
                 pointermove={pointerMove}
                 pointerdown={pointerDown}
+                pointerout={pointerOut}
                 pointerup={pointerUp}
                 eventMode='static'
             >

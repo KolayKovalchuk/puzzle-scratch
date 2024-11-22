@@ -27,6 +27,10 @@ export const CANDY_MAZE_BUNDLE: AssetsBundle = {
             src: `/cover.png`,
         },
         {
+            alias: 'wideCover',
+            src: `${CANDY_MAZE_BUNDLE_BASE_PATH}/wideCover.png`,
+        },
+        {
             alias: 'greenCandy',
             src: `${CANDY_MAZE_BUNDLE_BASE_PATH}/greenCandy.png`,
         },

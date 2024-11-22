@@ -2,42 +2,58 @@ import { useApp } from '@pixi/react';
 import { useEffect, useState } from 'react';
 import { IGameMatrixConfig } from '../IconMatrix.models';
 
-export const defaultConfig = {
-    cellSize: null,
+interface IGameMatrixDefaultConfig extends IGameMatrixConfig {
+    cellWidth: number | null;
+    cellHeight: number | null;
+    cellPadding: number;
+    containerPadding: number;
+    paddintBottom: number;
+}
+
+export const defaultConfig: IGameMatrixDefaultConfig = {
+    cellWidth: null,
+    cellHeight: null,
     cellPadding: 0,
     containerPadding: 8,
+    paddintBottom: 0,
 }
 
 export function useCellSize(configArg: IGameMatrixConfig, rowDataLength: number, columnDataLength: number) {
     const app = useApp();
     const { width: appWidth, height: appHeight } = app.screen;
 
-    const config = { ...defaultConfig, ...configArg };
-
+    const config: IGameMatrixDefaultConfig = {
+        ...defaultConfig,
+        ...configArg
+    };
 
     const width = appWidth - config.containerPadding * 2;
     const height = appHeight - config.containerPadding * 2;
 
-    const [cellSize, setCellSize] = useState<number | null>(config.cellSize);
+    const [cellWidth, setCellWidth] = useState<number | null>(config.cellWidth);
+    const [cellHeight, setCellHeight] = useState<number | null>(config.cellHeight);
 
 
     useEffect(() => {
-        if (config.cellSize) {
-            return;
+        if (!config.cellWidth) {
+            const newCellWidth = config.cellWidth ?? width / rowDataLength - config.cellPadding;
+            setCellWidth(newCellWidth);
         }
 
-        const cellWidth = config.cellSize ?? width / rowDataLength - config.cellPadding;
-        const cellHeight = config.cellSize ?? height / columnDataLength - config.cellPadding;
-        setCellSize(Math.min(cellWidth, cellHeight));
+        if (!config.cellHeight) {
+            const newCellHeight = config.cellHeight ?? height / columnDataLength - config.cellPadding;
+            setCellHeight(newCellHeight);
+        }
     }, [
         width,
         height,
         rowDataLength,
         columnDataLength,
-        config.cellSize,
+        config.cellWidth,
+        config.cellHeight,
         config.cellPadding,
     ]);
 
 
-    return cellSize;
+    return {  width: cellWidth, height: cellHeight };
 }

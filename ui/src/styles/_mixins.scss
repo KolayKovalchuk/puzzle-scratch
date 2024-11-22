@@ -29,7 +29,8 @@
 @mixin scratchCardBg {
     background: colors.$scratchCardBGGradient;
     padding: 6px;
-    border-radius: 26px;
+    border-radius: 20px;
+    border: 1px solid #632507;
 }
 
 @mixin gameFooter {

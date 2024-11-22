@@ -86,12 +86,12 @@ function ScratchCardElComponent({
 
     const {
         dragging,
-        // isScratched,
         brush,
         renderTexture,
         renderTextureSprite,
         pointerMove,
         pointerDown,
+        pointerOut,
         pointerUp,
         resetTexture,
         revealTexture,
@@ -158,6 +158,7 @@ function ScratchCardElComponent({
                 mask={renderTextureSprite}
                 pointermove={pointerMove}
                 pointerdown={pointerDown}
+                pointerout={pointerOut}
                 pointerup={pointerUp}
                 eventMode='static'
             >
@@ -184,11 +185,12 @@ function ScratchCardComponent(props: IScratchCardProps, ref: Ref<IScratchCardHan
     });
 
     const { containerRef, dimensions } = useContainerDimensions()
-    const size = dimensions.width;
+    const width = dimensions.width;
+    const height = dimensions.height || dimensions.width;
 
     return (
         <div className={`${styles.container} ${props.className || ''}`} ref={containerRef}>
-            {!!size && <Stage width={dimensions.width} height={dimensions.width} options={{ backgroundAlpha: 0 }}>
+            {!!width && <Stage width={width} height={height} options={{ backgroundAlpha: 0 }}>
                 <ScratchCardEl {...props} ref={scratchCardElRef}/>
             </Stage>}
         </div>

@@ -28,13 +28,13 @@
 
 .winAmountContainer {
     display: flex;
-    max-height: 25%;
 }
 
 .roboTokenGoldIcon {
     height: 100%;
     position: relative;
-    top: -4px;
+    top: -2px;
+    max-width: 85px;
 }
 
 .winAmount {

@@ -11,14 +11,17 @@
 
     background: colors.$candy_maze_bg;
 
-    @include mixins.fixedHeaderPadding;
-
     overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+
+    @include mixins.fixedHeaderPadding;
 }
 
 .candyMazeHeaderIcon {
     width: 74%;
     aspect-ratio: 1000/345;
+    z-index: 2;
 }
 
 .content {
@@ -37,8 +40,63 @@
 
     width: 85%;
     height: 100%;
+    z-index: 2;
 
     @include mixins.scratchCardBg;
+}
+
+.candyCloudes {
+    position: absolute;
+    top: -36%;
+    left: 44%;
+    width: 186%;
+    z-index: 0;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.candyStarsBg {
+    position: absolute;
+    top: 15%;
+    width: 105%;
+    z-index: 1;
+}
+
+
+.candyMazeShining {
+    position: absolute;
+    top: 0%;
+
+    width: 130vw;
+    z-index: 1;
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.7) 0%,
+        rgba(255, 255, 255, 0) 50%
+    );
+}
+
+.potentialPrizeContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 50%;
+    height: 80px;
+
+    position: relative;
+    top: 20px;
+    margin-top: -20px;
+
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    z-index: 2;
+
+    position: relative;
+    
+    @include mixins.scratchCardBg;
+    
+    padding: 4px;
 }
 
 .footer {

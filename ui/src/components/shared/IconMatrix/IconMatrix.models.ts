@@ -14,9 +14,11 @@ export interface IMatrixCellProps<CellData = any> {
 }
 
 export interface IGameMatrixConfig {
-    cellSize?: number | null;
+    cellWidth?: number | null;
+    cellHeight?: number | null;
     cellPadding?: number;
     containerPadding?: number;
+    paddintBottom?: number;
 }
 
 export interface IGameMatrixProps<CellProps extends IMatrixCellProps = IMatrixCellProps> {

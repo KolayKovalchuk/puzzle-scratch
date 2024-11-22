@@ -1,51 +1,63 @@
 import { IScratchCardHandle } from '@components/ScratchCard';
-import { IRoundScratchCardHandle } from '@components/ScratchCard/components/RoundScratchCard/RoundScratchCard';
 import { IBuyBatchCardData, ICardData } from '@models/IBuyBatchCardData';
-import { useEffect, useRef, useState } from 'react';
+import { RefObject, useEffect, useState } from 'react';
 
 let timeout: NodeJS.Timeout | null = null;
 
 const BIG_WIN_TIMEOUT = 2.5 * 1000;
 
+function _applyForEachScratchCardRef<T extends IScratchCardHandle = IScratchCardHandle>(
+    scratchCardsRefConfig: {[key: string]: RefObject<T> },
+    callback: (ref: T, index: number) => void
+) {
+    const scratchCardsRefList = Object.values(scratchCardsRefConfig);
+
+    for (let index = 0; index < scratchCardsRefList.length; index++) {
+        const scratchCardRef = scratchCardsRefList[index];
+        if (scratchCardRef.current) {
+            callback(scratchCardRef.current, index);
+        }
+    }
+}
+
+function _getScratchedStateConfig(config: {[key: string]: RefObject<IScratchCardHandle> }, value: boolean) {
+    // return Array.from({ length: arrayLength }, () => value)
+    return Object.keys(config).reduce((acc: {[key: string]: boolean}, key) => {
+        acc[key] = value;
+        return acc;
+    }, {})
+}
+
 export function useScratchGame<CardData extends ICardData = ICardData>(
     batchId: string | undefined,
     card: IBuyBatchCardData<CardData> | null,
-    buyCard: (batchId: string) => Promise<IBuyBatchCardData<CardData> | null>
+    buyCard: (batchId: string) => Promise<IBuyBatchCardData<CardData> | null>,
+    scratchCardsRefConfig: {[key: string]: RefObject<IScratchCardHandle> },
 ) {
-    const roundScratchCardRef = useRef<IRoundScratchCardHandle>(null);
-    const mainScratchCardRef = useRef<IScratchCardHandle>(null);
-    
     const [lastAction, setLastAction] = useState<'playBtnClick' | 'swipe' | 'scratch' | null>(null);
-    const [ isBigWinVisible, setIsBigWinVisible ] = useState(false);
+    const [isBigWinVisible, setIsBigWinVisible] = useState(false);
 
+    const [isCardsScratched, setIsCardsScratched] = useState(_getScratchedStateConfig(scratchCardsRefConfig, false));
+    const isAllCardsScratched = Object.values(isCardsScratched).every((v) => v);
 
-    const [isMainCardScratched, setMainCardScratched] = useState(false);
-    const [isMaltiplierCardScratched, setMaltiplierCardScratched] = useState(false);
-
-    const onMainCardScratched = () => {
-        setMainCardScratched(true);
-    }
-
-    const onMaltiplierCardScratched = () => {
-        setMaltiplierCardScratched(true);
+    const onCardScratched = (name: string) => {
+        setIsCardsScratched({
+            ...isCardsScratched,
+            [name]: true,
+        });
     }
 
     const onPlay = async () => {
-        const mainScratch = mainScratchCardRef.current;
-        const roundScratch = roundScratchCardRef.current;
-        
-        if (!batchId || !roundScratch || ! mainScratch || isBigWinVisible) return
+        if (!batchId || isBigWinVisible) return
 
-        mainScratch.reset();
-        roundScratch.reset();
-        
+        _applyForEachScratchCardRef(scratchCardsRefConfig, (card) => card.reset());
+
         const card = await buyCard(batchId)
 
-        mainScratch.reveal();
-        setMainCardScratched(true);
-
-        roundScratch.reveal();
-        setMaltiplierCardScratched(true);
+        _applyForEachScratchCardRef(scratchCardsRefConfig, (card) => {
+            card.reveal();
+        });
+        setIsCardsScratched(_getScratchedStateConfig(scratchCardsRefConfig, true))
 
         setLastAction('playBtnClick');
 
@@ -53,20 +65,12 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
     }
 
     const onSwipe = async () => {
-        const mainScratch = mainScratchCardRef.current;
-        const roundScratch = roundScratchCardRef.current;
-        
-        if (!batchId || !roundScratch || ! mainScratch) return
+        if (!batchId || !isAllCardsScratched) return
 
-        if (isMainCardScratched && isMaltiplierCardScratched) {
-            mainScratch.reset();
-            roundScratch.reset();
+        _applyForEachScratchCardRef(scratchCardsRefConfig, (card) => card.reset());
+        setLastAction('swipe');
+        setIsCardsScratched(_getScratchedStateConfig(scratchCardsRefConfig, false));
 
-            setLastAction('swipe');
-
-            setMainCardScratched(false);
-            setMaltiplierCardScratched(false);
-        }
     }
 
     const onScratchedEnought = (cardDataArg?: IBuyBatchCardData<CardData> | null) => {
@@ -80,8 +84,6 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
             }
 
             setIsBigWinVisible(true);
-            console.log('onScratchedEnought', cardData);
-            
 
             timeout = setTimeout(() => {
                 setIsBigWinVisible(false);
@@ -95,25 +97,21 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
 
     const onScratchStarted = () => {
         if (batchId && (!lastAction || lastAction == 'swipe')) {
-            console.log('onScratchStarted buyCard');
-            
             buyCard(batchId)
             setLastAction('scratch');
         }
     }
 
+    
     useEffect(() => {
-        if (isMainCardScratched && isMaltiplierCardScratched) {
+        if (isAllCardsScratched) {
             onScratchedEnought();
         }
-    }, [isMainCardScratched, isMaltiplierCardScratched]);
+    }, [isAllCardsScratched]);
 
     return {
-        roundScratchCardRef,
-        mainScratchCardRef,
         isBigWinVisible,
-        onMainCardScratched,
-        onMaltiplierCardScratched,
+        onCardScratched,
         onPlay,
         onSwipe,
         onScratchStarted,

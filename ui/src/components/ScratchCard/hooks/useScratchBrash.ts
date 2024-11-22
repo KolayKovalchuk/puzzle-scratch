@@ -64,6 +64,12 @@ export function useScratchBrash(
         })
     };
 
+    const pointerOut = () => {
+        if (isDisabled) return;
+
+        setDragging(false);
+    }
+
     const resetTexture = () => {
         setBrush();
         app.renderer.render(new Graphics(), {
@@ -99,6 +105,7 @@ export function useScratchBrash(
         pointerMove,
         pointerDown,
         pointerUp,
+        pointerOut,
         resetTexture,
         revealTexture
     }

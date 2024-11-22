@@ -132,6 +132,9 @@ export function SantaSac() {
                         bundleName={bundleName}
                         renderCell={(data) => (<SantaSacSpriteCell {...data} />)}
 
+                        sizeX={batch?.sizeX}
+                        sizeY={batch?.sizeY}
+
                         onScratchedEnought={() => { onMainCardScratched() }}
                         onScratchStarted={() => onScratchStarted()}
                     />

@@ -78,6 +78,8 @@ export function CandyMaze() {
                         bundleName={bundleName}
                         onScratchedEnought={() => { onScratchedEnought() }}
                         renderCell={(data) => (<CandyMazeSpriteCell {...data} />)}
+                        sizeX={batch?.sizeX}
+                        sizeY={batch?.sizeY}
                     />
                 </div>
                 <div className={styles.footer}>

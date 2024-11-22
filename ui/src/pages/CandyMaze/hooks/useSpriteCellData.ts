@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ICandyMazeSpriteCellData } from '../CandyMazeSpriteCell';
+import { ICandyMazeSpriteCellData } from '../components/CandyMazeSpriteCell/CandyMazeSpriteCell';
 import { IBuyBatchCardData } from '@models/IBuyBatchCardData';
 import { CandyMazeScratchItemsEnum } from '../scratchItemsEnum';
 import { mapMatrixToSpriteCellData } from '@utils/mapMatrixToSpriteCellData';

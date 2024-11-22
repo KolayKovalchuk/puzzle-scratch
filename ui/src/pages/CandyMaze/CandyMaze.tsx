@@ -8,7 +8,7 @@ import { Icon } from '@components/shared/Icon';
 
 import styles from './CandyMaze.module.scss';
 
-import { ScratchCard } from '@components/ScratchCard';
+import { IScratchCardHandle, ScratchCard } from '@components/ScratchCard';
 import { Button, ButtonGoldBorder, ButtonType } from '@components/shared/Button/Button';
 import { TopPrizeLabel } from '@components/TopPrizeLabel/TopPrizeLabel';
 import { CANDY_MAZE_BUNDLE, ICandyMazeBundle } from '@config/candyMazeBundleConfig';
@@ -16,31 +16,34 @@ import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
 import { useGetBatchById } from '@services/api/batch.service';
 import { useBuyCard } from '@services/api/cards.service';
 import { useNavigate } from 'react-router-dom';
-import { CandyMazeSpriteCell } from './CandyMazeSpriteCell';
+import { CandyMazeSpriteCell, ICandyMazeSpriteCellData } from './components/CandyMazeSpriteCell/CandyMazeSpriteCell';
 import { useSpriteCellData } from './hooks/useSpriteCellData';
+import { ICandyMazeCardData } from './ICandyMaze.model';
 
-import candy_maze from '@icons/candy_maze.svg';
+import { BigWinScreen } from '@components/BigWinScreen/BigWinScreen';
+import { useScratchGame } from '@hooks/useScratchGame';
+import { useSwipeAria } from '@hooks/useSwipeAria';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { TopScratchSpriteCell } from './components/TopScratchSpriteCell/TopScratchSpriteCell';
+
 import back_arrow from '@icons/back_arrow.svg';
+import candy_clouds from '@icons/candy_clouds.svg';
+import candy_maze from '@icons/candy_maze.svg';
+import candy_stars_bg from '@icons/candy_stars_bg.svg';
 import hint from '@icons/hint.svg';
+import shining from '@icons/shining.svg';
 
 export function CandyMaze() {
     const playButtonText = useSelector(selectLocalValue('txt.btn.play'));
-    // const winUptoText = useSelector(selectLocalValue('txt.game.winUpTo')).toUpperCase();
 
-    const navigate = useNavigate();
     const { batchId } = useParams();
 
     const { batch, loading: isBatchLoading } = useGetBatchById(batchId || null);
-    const { buyCard, card } = useBuyCard();
+    const { buyCard, card } = useBuyCard<ICandyMazeCardData>();
 
+    const navigate = useNavigate();
     const onCancel = () => {
         navigate(-1)
-    }
-
-    const onPlay = async () => {
-        if (!batchId) return
-
-        await buyCard(batchId)
     }
 
     const bundleName = CANDY_MAZE_BUNDLE.name
@@ -48,13 +51,41 @@ export function CandyMaze() {
 
     const { data } = useSpriteCellData(card, bundleName)
 
-    const onScratchedEnought = () => {
-        if (card?.winning) {
-            window.alert('You win ' + card.winning + ' RBAX. Your new balance is ' + card?.rbaxBalance + ' RBAX')
-        } else {
-            window.alert('You lose. Your new balance is ' + card?.rbaxBalance + ' RBAX')
-        }
-    }
+    const topScratchCardRef = useRef<IScratchCardHandle>(null);
+    const mainScratchCardRef = useRef<IScratchCardHandle>(null);
+
+    const scratchCardsRefConfig = useMemo(() => ({
+        'topScratchCard': topScratchCardRef,
+        'mainScratchCard': mainScratchCardRef,
+    }), [topScratchCardRef, mainScratchCardRef]);
+
+    const {
+        isBigWinVisible,
+        onCardScratched,
+        onPlay,
+        onSwipe,
+        onScratchStarted,
+    } = useScratchGame(batchId, card, buyCard, scratchCardsRefConfig);
+
+    const {
+        onTouchEnd,
+        onTouchMove,
+        onTouchStart,
+        onMouseDown,
+        onMouseMove,
+        onMouseUp,
+    } = useSwipeAria({
+        onSwipedLeft: () => { onSwipe() },
+        onSwipedRight: () => { onSwipe() },
+    });
+
+    const [topScratchCardData, setTopScratchCardData] = useState<ICandyMazeSpriteCellData[][]>([]);
+
+    useEffect(() => {
+        if (!card) return;
+
+        setTopScratchCardData([[{ textureName: card.cardData.potentialWin + '' || '0', bundleName }]])
+    }, [card]);
 
     const isLoading = isBatchLoading || isBundleLoading;
     if (isLoading || !bundle) {
@@ -70,16 +101,55 @@ export function CandyMaze() {
             <Header />
             <Icon name={candy_maze} className={styles.candyMazeHeaderIcon} />
             <div className={styles.content}>
+                <Icon name={candy_clouds} className={styles.candyCloudes} />
+                <Icon name={shining} className={styles.candyMazeShining} />
+                <Icon name={candy_stars_bg} className={styles.candyStarsBg} />
                 <TopPrizeLabel topPrize={batch?.totalPotentialPrizes || 0} />
-                <div className={styles.scratchCardContainer}>
+                <div className={styles.potentialPrizeContainer}>
                     <ScratchCard
+                            ref={topScratchCardRef}
+                            data={topScratchCardData}
+                            className={styles.scratchCard}
+                            bundleName={bundleName}
+                            renderCell={(data) => (<TopScratchSpriteCell {...data} />)}
+
+                            sizeX={1}
+                            sizeY={1}
+
+                            coverTextureName='wideCover'
+
+                            matrixConfig={{
+                                cellHeight: 50,
+                                cellPadding: 0,
+                                containerPadding: 4,
+                                paddintBottom: 5,
+                            }}
+
+                            onScratchedEnought={() => { onCardScratched('topScratchCard') }}
+                            onScratchStarted={() => onScratchStarted()}
+                        />
+                </div>
+                <div
+                    className={styles.scratchCardContainer}
+                    onTouchStart={onTouchStart}
+                    onTouchEnd={onTouchEnd}
+                    onTouchMove={onTouchMove}
+                    onMouseDown={onMouseDown}
+                    onMouseUp={onMouseUp}
+                    onMouseMove={onMouseMove}
+                >
+                    <ScratchCard
+                        ref={mainScratchCardRef}
                         data={data}
                         className={styles.scratchCard}
                         bundleName={bundleName}
-                        onScratchedEnought={() => { onScratchedEnought() }}
                         renderCell={(data) => (<CandyMazeSpriteCell {...data} />)}
+
                         sizeX={batch?.sizeX}
                         sizeY={batch?.sizeY}
+
+                        onScratchedEnought={() => { onCardScratched('mainScratchCard') }}
+                        onScratchStarted={() => onScratchStarted()}
                     />
                 </div>
                 <div className={styles.footer}>
@@ -90,12 +160,13 @@ export function CandyMaze() {
                     <Button
                         className={`${styles.btn} ${styles.backBtn}`}
                         mode={ButtonType.Default}
-                        onClick={() => {}}
+                        onClick={() => { }}
                     >
                         <Icon name={hint} className={styles.backIcon} />
                     </Button>
                 </div>
             </div>
+            {isBigWinVisible && <BigWinScreen winAmount={card?.winning} />}
         </div>
     );
 }

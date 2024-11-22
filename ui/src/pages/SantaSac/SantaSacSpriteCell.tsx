@@ -1,10 +1,9 @@
 import { IMatrixCellProps, ISpriteCellData } from '@components/shared/IconMatrix/IconMatrix.models';
 import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
 import { Container, Sprite, Text } from '@pixi/react';
-import { SantaSacScratchItemsEnum } from './scratchItemsEnum';
-import { TextMetrics, TextStyle } from 'pixi.js';
-import { useEffect, useState } from 'react';
+import { TextStyle } from 'pixi.js';
 import { useItemPrizePosition } from './hooks/useItemPrizePosition';
+import { SantaSacScratchItemsEnum } from './scratchItemsEnum';
 
 export interface ISantaSacSpriteCellData extends ISpriteCellData {
     textureName: SantaSacScratchItemsEnum;

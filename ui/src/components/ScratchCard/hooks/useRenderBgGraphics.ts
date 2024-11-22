@@ -15,7 +15,7 @@ export function useRenderBgGraphics(
     const defaultRenderBg = useCallback((g: Graphics) => {
         g.clear();
         g.beginTextureFill({ texture: gradientTexture });
-        g.drawRoundedRect(0, 0, width, height, 20);
+        g.drawRoundedRect(0, 0, width, height, 14);
         g.endFill();
     }, [gradientTexture, width, height]);
     const renderBgCb = useCallback((g: Graphics) => {

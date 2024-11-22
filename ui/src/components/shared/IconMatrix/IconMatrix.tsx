@@ -11,10 +11,10 @@ export function IconMatrix({ data = [], renderCell, config: configArg = defaultC
     const fistRow = data[0] || [];
     const fistRowLength = fistRow?.length || 0;
 
-    const cellSize = useCellSize(config, fistRowLength, data.length);
-    const { offsetX, offsetY } = useCellOffset(cellSize, config.cellPadding, fistRowLength, data.length);
+    const {  width: cellWidth, height: cellHeight } = useCellSize(config, fistRowLength, data.length);
+    const { offsetX, offsetY } = useCellOffset(cellWidth, cellHeight, config.cellPadding, fistRowLength, data.length);
 
-    if (!cellSize) {
+    if (!cellWidth || !cellHeight) {
         return null;
     }
 
@@ -25,13 +25,14 @@ export function IconMatrix({ data = [], renderCell, config: configArg = defaultC
         >
             {data.map((rowData, rowIndex) =>
                 rowData.map((cellData, colIndex) => {
-                    const x = colIndex * (cellSize + config.cellPadding) + offsetX;
-                    const y = rowIndex * (cellSize + config.cellPadding) + offsetY;
+                    
+                    const x = colIndex * (cellWidth + config.cellPadding) + offsetX;
+                    const y = rowIndex * (cellHeight + config.cellPadding) + offsetY - config.paddintBottom;
                     const key = `${rowIndex}-${colIndex}`
 
                     return (
                         <Container key={key}>
-                            {renderCell({ data: cellData, x, y, width: cellSize, height: cellSize })}
+                            {renderCell({ data: cellData, x, y, width: cellWidth, height: cellHeight })}
                         </Container>
                     )
                 }

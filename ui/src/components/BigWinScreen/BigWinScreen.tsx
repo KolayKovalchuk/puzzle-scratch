@@ -17,15 +17,20 @@ export interface IBigWinScreenProps {
     winAmount: number;
     topPrize: number;
     className?: string;
+    onClick?: () => void;
 }
 
-export function BigWinScreen({ winAmount, topPrize, className }: IBigWinScreenProps) {
+export function BigWinScreen({ winAmount, topPrize, className, onClick }: IBigWinScreenProps) {
     if (!winAmount) return null
 
     const coinAnimationName = getCoinAnimationName(winAmount, topPrize)
     const isBigWinIconVisible = coinAnimationName === CoinAnimationName.coint_l
 
-    return <div className={`${styles.container} ${className || ''}`}  style={{ animationDuration: `${BIG_WIN_TIMEOUT}ms` }}>
+    return <div
+        className={`${styles.container} ${className || ''}`}
+        style={{ animationDuration: `${BIG_WIN_TIMEOUT}ms` }}
+        onClick={onClick}
+        >
         <div className={styles.animatedContainer} style={{ animationDuration: `${BIG_WIN_TIMEOUT}ms` }}>
             { isBigWinIconVisible && <Icon name={big_win} className={styles.bigWinIcon} /> }
             <div className={styles.winAmountContainer}>

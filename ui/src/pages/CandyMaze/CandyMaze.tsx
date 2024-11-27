@@ -49,6 +49,7 @@ export function CandyMaze() {
 
     const {
         isBigWinVisible,
+        setIsBigWinVisible,
         onCardScratched,
         onPlay,
         onSwipe,
@@ -139,7 +140,12 @@ export function CandyMaze() {
                 </div>
                 <GameFooterBtn onPlay={onPlay}/>
             </div>
-            {isBigWinVisible && <BigWinScreen winAmount={card?.winning || 0} topPrize={batch?.totalPotentialPrizes || 0} />}
+            {isBigWinVisible
+                && <BigWinScreen
+                    winAmount={card?.winning || 0}
+                    topPrize={batch?.totalPotentialPrizes || 0}
+                    onClick={() => setIsBigWinVisible(false)}
+                />}
         </div>
     );
 }

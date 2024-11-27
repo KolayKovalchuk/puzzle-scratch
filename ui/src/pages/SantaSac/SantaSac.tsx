@@ -55,6 +55,7 @@ export function SantaSac() {
 
     const {
         isBigWinVisible,
+        setIsBigWinVisible,
         onCardScratched,
         onPlay,
         onSwipe,
@@ -131,7 +132,12 @@ export function SantaSac() {
                 </div>
                 <GameFooterBtn onPlay={onPlay}/>
             </div>
-            {isBigWinVisible && <BigWinScreen winAmount={card?.winning || 0} topPrize={batch?.totalPotentialPrizes || 0} />}
+            {isBigWinVisible
+                && <BigWinScreen
+                    winAmount={card?.winning || 0}
+                    topPrize={batch?.totalPotentialPrizes || 0}
+                    onClick={() => setIsBigWinVisible(false)}
+                />}
         </div>
     );
 }

@@ -110,6 +110,7 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
 
     return {
         isBigWinVisible,
+        setIsBigWinVisible,
         onCardScratched,
         onPlay,
         onSwipe,

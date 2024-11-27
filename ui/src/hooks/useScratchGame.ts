@@ -4,7 +4,7 @@ import { RefObject, useCallback, useEffect, useState } from 'react';
 
 let timeout: NodeJS.Timeout | null = null;
 
-const BIG_WIN_TIMEOUT = 2.5 * 1000;
+export const BIG_WIN_TIMEOUT = 1.5 * 1000;
 
 function _applyForEachScratchCardRef<T extends IScratchCardHandle = IScratchCardHandle>(
     scratchCardsRefConfig: {[key: string]: RefObject<T> },
@@ -110,6 +110,7 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
 
     return {
         isBigWinVisible,
+        setIsBigWinVisible,
         onCardScratched,
         onPlay,
         onSwipe,

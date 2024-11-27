@@ -1,6 +1,5 @@
-
 import { Icon } from '@components/shared/Icon'
-import { formatNumber } from '@utils/formatters/formatNumber'
+import { useMemo } from 'react'
 import styles from './Header.module.scss'
 
 import avatar_placeholder from '@icons/avatar_placeholder.svg'
@@ -10,8 +9,23 @@ import wallet from '@icons/wallet.svg'
 import { useSelector } from 'react-redux'
 import { selectUserBalanceRbax } from '@store/selectors/user.selectors'
 
+import AnimatedNumbers from "react-animated-numbers"
+
 export function Header() {
-    const amount = useSelector(selectUserBalanceRbax) || 0
+    const amount = useSelector(selectUserBalanceRbax) || 0;
+
+    const animatedNumbers = useMemo(() => (
+        <AnimatedNumbers
+            includeComma
+            className={styles.amount_value}
+            animateToNumber={amount}
+            fontStyle={{
+                fontSize: 18,
+                color: "#fff",
+            }}
+        />
+    ), [amount]);
+
 
     return (
         <div className={styles.mainContainer}>
@@ -20,7 +34,7 @@ export function Header() {
             </div>
             <div className={styles.currency_info_container}>
                 <Icon name={robo_token} className={styles.token_icon}></Icon>
-                <span className={styles.amount_value}>{formatNumber(amount)}</span>
+                {animatedNumbers}
             </div>
             <div className={styles.profileContainer}>
                 <Icon name={wallet} iconSize='58%' className={styles.icon}></Icon>

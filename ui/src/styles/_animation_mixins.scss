@@ -1,0 +1,47 @@
+@keyframes bigWinContainerAnimation {
+    0% {
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    75% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes bigWinAnimation {
+    0% {
+        transform: scale(0.7);
+        opacity: 1;
+    }
+
+    20% {
+        transform: scale(1);
+    }
+
+    75% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@mixin bigWinAnimation {
+    opacity: 0;
+    animation: bigWinContainerAnimation 1s ease-in-out;
+
+
+    .animatedContainer {
+        opacity: 0;
+        animation: bigWinAnimation 1s ease-in-out;
+    }
+}

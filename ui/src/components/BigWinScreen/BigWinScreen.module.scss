@@ -1,11 +1,12 @@
+@use '@styles/animation_mixins';
+
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    
     position: fixed;
-    top: 25%;
+    top: 15%;
     bottom: 0;
     left: 0;
     right: 0;
@@ -20,10 +21,30 @@
         rgba(0, 0, 0, 0) 0%,
         rgba(0, 0, 0, 0.7) 5%,
         rgba(0, 0, 0, 0.7) 100%);
+
+    @include animation_mixins.bigWinAnimation;
+}
+
+.animatedContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 1;
+
+    position: relative;
+    top: -20%;
 }
 
 .bigWinIcon {
     aspect-ratio: 980/575;
+    width: 90%;
 }
 
 .winAmountContainer {

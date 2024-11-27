@@ -35,7 +35,11 @@ $maxHeight: 50px;
     }
 
     &.default {
+        // border: 1px solid #132F00;
         background: colors.$modal_default_btn_bg;
+
+        box-shadow: 0px -2px 2px 0px #00000044 inset,
+            0px 2px 2px 0px #ffffffdd inset;
 
         &:hover {
             background: colors.$modal_default_btn_bg_hover;

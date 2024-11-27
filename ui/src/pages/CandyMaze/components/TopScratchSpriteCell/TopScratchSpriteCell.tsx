@@ -1,10 +1,9 @@
 import { IMatrixCellProps } from '@components/shared/IconMatrix';
 import { DefaultTextStyleConfig, StyledTextPixiEl, WinStyledTextConfig } from '@components/shared/StyledText';
 import { ICandyMazeSpriteCellData } from '@pages/CandyMaze/components/CandyMazeSpriteCell/CandyMazeSpriteCell';
-import { Container } from '@pixi/react';
 import { ITextStyle } from 'pixi.js';
 
-const topScratchCardTextStyles: Partial<ITextStyle> ={
+const topScratchCardTextStyles: Partial<ITextStyle> = {
     ...DefaultTextStyleConfig,
     ...WinStyledTextConfig,
     fontSize: 40,
@@ -19,13 +18,12 @@ export function TopScratchSpriteCell({ x, y, width, height, data }: ICandyMazeSp
     if (!value) return null;
 
     return (
-        <Container x={x} y={y}>
-            <StyledTextPixiEl
-                dimensions={{ width, height }}
-                text={value}
-                textStyles={topScratchCardTextStyles}
-                textFitCoefficient={2}
-            />
-        </Container>
+        <StyledTextPixiEl
+            dimensions={{ width, height }}
+            text={value}
+            textStyles={topScratchCardTextStyles}
+            textFitCoefficient={2}
+            x={x} y={y}
+        />
     )
 };

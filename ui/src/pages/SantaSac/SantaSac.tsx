@@ -1,36 +1,31 @@
-import { useSelector } from 'react-redux';
+import { useMemo, useRef } from 'react';
 import { useParams } from 'react-router-dom';
-
-import { selectLocalValue } from '@store/selectors/localization.selectors';
 
 import { Header } from '@components/Header';
 import { Icon } from '@components/shared/Icon';
 
 import styles from './SantaSac.module.scss';
 
-import { Button, ButtonGoldBorder, ButtonType } from '@components/shared/Button/Button';
 import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
 import { useGetBatchById } from '@services/api/batch.service';
 import { useBuyCard } from '@services/api/cards.service';
-import { useNavigate } from 'react-router-dom';
 
+import { BigWinScreen } from '@components/BigWinScreen/BigWinScreen';
+import { GameFooterBtn } from '@components/GameFooterBtn/GameFooterBtn';
 import { IBgTextureConfig, IScratchCardHandle, ScratchCard } from '@components/ScratchCard';
+import { IRoundScratchCardHandle, RoundScratchCard } from '@components/ScratchCard/components/RoundScratchCard/RoundScratchCard';
 import { TopPrizeLabel } from '@components/TopPrizeLabel/TopPrizeLabel';
 import { ISantaSacBundle, SANTA_SAC_BUNDLE } from '@config/santaSacBundleConfig';
+import { useScratchGame } from '@hooks/useScratchGame';
+import { useSwipeAria } from '@hooks/useSwipeAria';
+
 import { useSpriteCellData } from './hooks/useSpriteCellData';
 import { ISantaSacCardData } from './SantaSac.model';
 import { SantaSacSpriteCell } from './SantaSacSpriteCell';
 
-import { IRoundScratchCardHandle, RoundScratchCard } from '@components/ScratchCard/components/RoundScratchCard/RoundScratchCard';
-
-import { BigWinScreen } from '@components/BigWinScreen/BigWinScreen';
-import { useScratchGame } from '@hooks/useScratchGame';
-import { useSwipeAria } from '@hooks/useSwipeAria';
-import back_arrow from '@icons/back_arrow.svg';
-import hint from '@icons/hint.svg';
 import santa_sac from '@icons/santa_sac.svg';
 import shining from '@icons/shining.svg';
-import { useMemo, useRef } from 'react';
+import round_multiplier from '@icons/round_multiplier.svg';
 
 const bgTextureConfig: IBgTextureConfig = {
     textureName: 'redBallShining',
@@ -40,17 +35,10 @@ const bgTextureConfig: IBgTextureConfig = {
 }
 
 export function SantaSac() {
-    const playButtonText = useSelector(selectLocalValue('txt.btn.play'));
-
     const { batchId } = useParams();
 
     const { batch, loading: isBatchLoading } = useGetBatchById(batchId || null);
     const { buyCard, card } = useBuyCard<ISantaSacCardData>();
-
-    const navigate = useNavigate();
-    const onCancel = () => {
-        navigate(-1)
-    }
 
     const bundleName = SANTA_SAC_BUNDLE.name
     const { bundle, loading: isBundleLoading } = useLoadBundle<ISantaSacBundle>(bundleName)
@@ -86,21 +74,15 @@ export function SantaSac() {
      });
 
     const isLoading = isBatchLoading || isBundleLoading;
-    if (isLoading || !bundle) {
-        return (
-            <div className={styles.mainContainer}>
-                <span>Loading...</span>
-            </div>
-        )
-    }
+    const hiddenClass = isLoading || !bundle ? 'hidden' : '';
 
     const multiplier = card?.cardData.multiplier;
     const multiplierText = multiplier ? 'x' + multiplier : '';
 
     return (
-        <div className={styles.mainContainer}>
+        <div className={`${styles.mainContainer} ${hiddenClass}`}>
             <Header />
-            <div className={styles.headerIconContainer}>
+            <div className={styles.headerLogoContainer}>
                 <Icon name={santa_sac} className={styles.headerIcon} />
             </div>
             <div className={styles.content}>
@@ -109,15 +91,18 @@ export function SantaSac() {
                     <div className={styles.toyChainContainer}>
                         <img className={styles.toyChainImg} src="/santaSac/christmassToyChain.png" />
                     </div>
+                    <Icon name={round_multiplier} className={styles.roundMulriplierIcon} />
                     <RoundScratchCard
                         ref={roundScratchCardRef}
                         cellData={multiplierText}
                         className={styles.roundScratchCard}
                         bundleName={SANTA_SAC_BUNDLE.name}
                         bgTextureConfig={bgTextureConfig}
+                        matrixConfig={{ containerPadding: 14, cellPadding: 2 }}
                         onScratchedEnought={() => { onCardScratched('roundScratchCard') }}
-                        matrixConfig={{ containerPadding: 14, cellPadding: 0 }}
                         onScratchStarted={() => onScratchStarted()}
+                        xShift={0.52}
+                        yShift={0.45}
                     />
                 </div>
                 <div
@@ -129,7 +114,7 @@ export function SantaSac() {
                     onMouseUp={onMouseUp}
                     onMouseMove={onMouseMove}
                 >
-                    <Icon name={shining} className={styles.satnaSacShiningIcon} />
+                    <Icon name={shining} className={styles.shiningIcon} />
                     <ScratchCard
                         ref={mainScratchCardRef}
                         data={data}
@@ -144,19 +129,7 @@ export function SantaSac() {
                         onScratchStarted={() => onScratchStarted()}
                     />
                 </div>
-                <div className={styles.footer}>
-                    <Button className={`${styles.btn} ${styles.backBtn}`} mode={ButtonType.Default} onClick={() => onCancel()}>
-                        <Icon name={back_arrow} className={styles.backIcon} />
-                    </Button>
-                    <ButtonGoldBorder className={`${styles.btn} ${styles.playButton}`} mode={ButtonType.Default} text={playButtonText} onClick={() => onPlay()} />
-                    <Button
-                        className={`${styles.btn} ${styles.backBtn}`}
-                        mode={ButtonType.Default}
-                        onClick={() => { }}
-                    >
-                        <Icon name={hint} className={styles.backIcon} />
-                    </Button>
-                </div>
+                <GameFooterBtn onPlay={onPlay}/>
             </div>
             {isBigWinVisible && <BigWinScreen winAmount={card?.winning} />}
         </div>

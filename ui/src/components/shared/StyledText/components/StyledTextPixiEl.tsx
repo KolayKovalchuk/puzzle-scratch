@@ -13,6 +13,10 @@ export interface IStyledTextPixiElProps {
     textFitCoefficient?: number;
 
     anchor?: number;
+    x?: number;
+    y?: number;
+    xShift?: number;
+    yShift?: number;
 
     isUnderline?: boolean;
     underlineConfig?: IUnderlineConfig;
@@ -27,6 +31,10 @@ export function StyledTextPixiEl({
     isUnderline = false,
     underlineConfig,
     anchor = 0.5,
+    x = 0,
+    y = 0,
+    xShift = 0.5,
+    yShift = 0.35,
 }: IStyledTextPixiElProps) {
 
     const textStyleConfig: Partial<ITextStyle> = {
@@ -52,15 +60,15 @@ export function StyledTextPixiEl({
 
     try{
         return (
-            <Container>
+            <Container x={x} y={y}>
                 {isUnderline && <Graphics ref={underlineRef} /> || null}
                 <Text
                     ref={textRef}
                     text={text}
                     style={textStyle}
                     anchor={anchor}
-                    x={dimensions.width * 0.5}
-                    y={dimensions.height * 0.4} />
+                    x={dimensions.width * xShift}
+                    y={dimensions.height * yShift} />
 
                 {/* <Sprite ref={spriteRef} /> */}
             </Container>

@@ -1,13 +1,15 @@
 import { IMatrixCellProps, ISpriteCellData } from '@components/shared/IconMatrix/IconMatrix.models';
 import { StyledTextPixiEl, WinStyledTextConfig } from '@components/shared/StyledText';
-import { Container } from '@pixi/react';
-import { ITextStyle } from 'pixi.js';
+import { useFitTextSize } from '@hooks/useFitTextSize';
+import { ITextStyle, TextStyle } from 'pixi.js';
 
 export interface IRoundSpriteCellData extends ISpriteCellData {
     textureName: string;
 }
 
 export interface IRoundSpriteCellProps extends IMatrixCellProps<IRoundSpriteCellData> {
+    xShift?: number;
+    yShift?: number;
 }
 
 const textStyles: Partial<ITextStyle> = {
@@ -15,17 +17,22 @@ const textStyles: Partial<ITextStyle> = {
     fontSize: 100,
 }
 
-export function RoundSpriteCell({ x, y, width, height, data }: IRoundSpriteCellProps) {
+const textStyle = new TextStyle(textStyles);
+
+export function RoundSpriteCell({ x, y, width, height, data, xShift = 0.5, yShift = 0.5 }: IRoundSpriteCellProps) {
+    const fontSize = useFitTextSize(data.textureName, width, textStyle);
+    textStyle.fontSize = fontSize;
+
     return (
-        <Container
+        <StyledTextPixiEl
+            dimensions={{ width, height }}
+            text={data.textureName}
+            textStyles={WinStyledTextConfig}
+            textFitCoefficient={0.8}
             x={x}
-            y={y}>
-            <StyledTextPixiEl
-                dimensions={{ width, height }}
-                text={data.textureName}
-                textStyles={textStyles}
-                textFitCoefficient={0.8}
-            />
-        </Container>
+            y={y}
+            xShift={xShift}
+            yShift={yShift}
+        />
     );
 };

@@ -1,7 +1,5 @@
-import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { selectLocalValue } from '@store/selectors/localization.selectors';
 
 import { Header } from '@components/Header';
 import { Icon } from '@components/shared/Icon';
@@ -9,13 +7,11 @@ import { Icon } from '@components/shared/Icon';
 import styles from './CandyMaze.module.scss';
 
 import { IScratchCardHandle, ScratchCard } from '@components/ScratchCard';
-import { Button, ButtonGoldBorder, ButtonType } from '@components/shared/Button/Button';
 import { TopPrizeLabel } from '@components/TopPrizeLabel/TopPrizeLabel';
 import { CANDY_MAZE_BUNDLE, ICandyMazeBundle } from '@config/candyMazeBundleConfig';
 import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
 import { useGetBatchById } from '@services/api/batch.service';
 import { useBuyCard } from '@services/api/cards.service';
-import { useNavigate } from 'react-router-dom';
 import { CandyMazeSpriteCell, ICandyMazeSpriteCellData } from './components/CandyMazeSpriteCell/CandyMazeSpriteCell';
 import { useSpriteCellData } from './hooks/useSpriteCellData';
 import { ICandyMazeCardData } from './ICandyMaze.model';
@@ -26,25 +22,17 @@ import { useSwipeAria } from '@hooks/useSwipeAria';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { TopScratchSpriteCell } from './components/TopScratchSpriteCell/TopScratchSpriteCell';
 
-import back_arrow from '@icons/back_arrow.svg';
+import { GameFooterBtn } from '@components/GameFooterBtn/GameFooterBtn';
 import candy_clouds from '@icons/candy_clouds.svg';
 import candy_maze from '@icons/candy_maze.svg';
 import candy_stars_bg from '@icons/candy_stars_bg.svg';
-import hint from '@icons/hint.svg';
 import shining from '@icons/shining.svg';
 
 export function CandyMaze() {
-    const playButtonText = useSelector(selectLocalValue('txt.btn.play'));
-
     const { batchId } = useParams();
 
     const { batch, loading: isBatchLoading } = useGetBatchById(batchId || null);
     const { buyCard, card } = useBuyCard<ICandyMazeCardData>();
-
-    const navigate = useNavigate();
-    const onCancel = () => {
-        navigate(-1)
-    }
 
     const bundleName = CANDY_MAZE_BUNDLE.name
     const { bundle, loading: isBundleLoading } = useLoadBundle<ICandyMazeBundle>(bundleName)
@@ -88,18 +76,14 @@ export function CandyMaze() {
     }, [card]);
 
     const isLoading = isBatchLoading || isBundleLoading;
-    if (isLoading || !bundle) {
-        return (
-            <div className={styles.mainContainer}>
-                <span>Loading...</span>
-            </div>
-        )
-    }
+    const hiddenClass = isLoading || !bundle ? 'hidden' : '';
 
     return (
-        <div className={styles.mainContainer}>
+        <div className={`${styles.mainContainer} ${hiddenClass}`}>
             <Header />
-            <Icon name={candy_maze} className={styles.candyMazeHeaderIcon} />
+            <div className={styles.headerLogoContainer}>
+                <Icon name={candy_maze} className={styles.headerIcon} />
+            </div>
             <div className={styles.content}>
                 <Icon name={candy_clouds} className={styles.candyCloudes} />
                 <Icon name={candy_stars_bg} className={styles.candyStarsBg} />
@@ -153,19 +137,7 @@ export function CandyMaze() {
                         onScratchStarted={() => onScratchStarted()}
                     />
                 </div>
-                <div className={styles.footer}>
-                    <Button className={`${styles.btn} ${styles.backBtn}`} mode={ButtonType.Default} onClick={() => onCancel()}>
-                        <Icon name={back_arrow} className={styles.backIcon} />
-                    </Button>
-                    <ButtonGoldBorder className={`${styles.btn} ${styles.playButton}`} mode={ButtonType.Default} text={playButtonText} onClick={() => onPlay()} />
-                    <Button
-                        className={`${styles.btn} ${styles.backBtn}`}
-                        mode={ButtonType.Default}
-                        onClick={() => { }}
-                    >
-                        <Icon name={hint} className={styles.backIcon} />
-                    </Button>
-                </div>
+                <GameFooterBtn onPlay={onPlay}/>
             </div>
             {isBigWinVisible && <BigWinScreen winAmount={card?.winning} />}
         </div>

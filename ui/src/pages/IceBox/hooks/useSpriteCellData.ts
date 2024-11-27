@@ -1,0 +1,31 @@
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { IBuyBatchCardData } from '@models/IBuyBatchCardData';
+import { mapMatrixToSpriteCellData } from '@utils/mapMatrixToSpriteCellData';
+import { IIceBoxSpriteCellData } from '../components/IceBoxSpriteCell/IceBoxSpriteCell';
+
+// const IceBoxScratchItemsEnumEntries = Object.values(IceBoxScratchItemsEnum)
+
+export function useSpriteCellData(card: IBuyBatchCardData | null, bundleName: string) {
+    const [data, setData] = useState<(IIceBoxSpriteCellData)[][]>([])
+
+    const itemMapper = useCallback((textureName: string) => {
+        return {
+            textureName: textureName,
+            bundleName
+        }
+    }, [bundleName])
+
+    const newData = useMemo(() => mapMatrixToSpriteCellData<IIceBoxSpriteCellData>(
+        card?.cardData.matrix || [],
+        [],
+        itemMapper,
+    ), [card?.cardData.matrix, itemMapper])
+
+    useEffect(() => {
+        if (!card) return
+
+        setData(newData)
+    }, [card, newData])
+
+    return { data }
+}

@@ -1,6 +1,6 @@
 import { IScratchCardHandle } from '@components/ScratchCard';
 import { IBuyBatchCardData, ICardData } from '@models/IBuyBatchCardData';
-import { RefObject, useEffect, useState } from 'react';
+import { RefObject, useCallback, useEffect, useState } from 'react';
 
 let timeout: NodeJS.Timeout | null = null;
 
@@ -40,14 +40,14 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
     const [isCardsScratched, setIsCardsScratched] = useState(_getScratchedStateConfig(scratchCardsRefConfig, false));
     const isAllCardsScratched = Object.values(isCardsScratched).every((v) => v);
 
-    const onCardScratched = (name: string) => {
+    const onCardScratched = useCallback((name: string) => {
         setIsCardsScratched({
             ...isCardsScratched,
             [name]: true,
         });
-    }
+    }, [isCardsScratched]);
 
-    const onPlay = async () => {
+    const onPlay = useCallback(async () => {
         if (!batchId || isBigWinVisible) return
 
         _applyForEachScratchCardRef(scratchCardsRefConfig, (card) => card.reset());
@@ -62,18 +62,17 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
         setLastAction('playBtnClick');
 
         onScratchedEnought(card);
-    }
+    }, [batchId, buyCard, scratchCardsRefConfig, isBigWinVisible]);
 
-    const onSwipe = async () => {
+    const onSwipe = useCallback(async () => {
         if (!batchId || !isAllCardsScratched) return
 
         _applyForEachScratchCardRef(scratchCardsRefConfig, (card) => card.reset());
         setLastAction('swipe');
         setIsCardsScratched(_getScratchedStateConfig(scratchCardsRefConfig, false));
+    }, [batchId, isAllCardsScratched, scratchCardsRefConfig]);
 
-    }
-
-    const onScratchedEnought = (cardDataArg?: IBuyBatchCardData<CardData> | null) => {
+    const onScratchedEnought = useCallback((cardDataArg?: IBuyBatchCardData<CardData> | null) => {
         const cardData = cardDataArg || card;
 
         if (cardData?.winning) {
@@ -93,14 +92,14 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
         } else if (cardData) {
             console.log('You lose. Your balance is ' + cardData?.rbaxBalance + ' RBAX')
         };
-    }
+    }, [card]);
 
-    const onScratchStarted = () => {
+    const onScratchStarted = useCallback(() => {
         if (batchId && (!lastAction || lastAction == 'swipe')) {
             buyCard(batchId)
             setLastAction('scratch');
         }
-    }
+    }, [batchId, buyCard, lastAction]);
 
     
     useEffect(() => {

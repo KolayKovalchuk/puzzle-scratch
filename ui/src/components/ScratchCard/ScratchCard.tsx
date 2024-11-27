@@ -7,7 +7,7 @@ import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
 import { useContainerDimensions } from '@hooks/useContainerDimensions';
 
 import { Application, ICanvas, Graphics as OriginGraphics, RenderTexture, Resource, Texture } from 'pixi.js';
-import { forwardRef, ReactElement, Ref, useCallback, useEffect, useImperativeHandle, useRef } from 'react';
+import { forwardRef, ReactElement, Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef } from 'react';
 import { CoverSpriteCell } from './CoverCell';
 import { useCoverData } from './hooks/useCoverData';
 import { GradientConfig } from './hooks/useGradientTexture';
@@ -32,6 +32,13 @@ export interface IBgTextureConfig {
     xShift?: number,
     yShift?: number,
     padding?: number,
+}
+
+const defaultBgTextureConfig: IBgTextureConfig = {
+    textureName: '',
+    xShift: 0,
+    yShift: 0,
+    padding: 0,
 }
 
 export interface IScratchCardProps<CellProps extends IMatrixCellProps = IMatrixCellProps> {
@@ -73,7 +80,7 @@ function ScratchCardElComponent({
     isDisabled = false,
     data = [],
     gradientData = ScratchCardBgGradient,
-    bgTextureConfig,
+    bgTextureConfig: bgTextureConfigArg = defaultBgTextureConfig,
     matrixConfig,
     onScratchedEnought,
     onScratchStarted,
@@ -129,9 +136,14 @@ function ScratchCardElComponent({
         }
     });
 
-    const bgTexture = bundle?.[bgTextureConfig?.textureName || ''];
+
     const renderBgGraphics = useRenderBgGraphics(width, height, gradientData, renderBg);
-    const renderCardBg = useCallback(() => {
+    const renderCardBg = useMemo(() => {
+        const bgTextureConfig = {
+            ...defaultBgTextureConfig,
+            ...bgTextureConfigArg,
+        }
+        const bgTexture = bundle?.[bgTextureConfig.textureName];
         if (bgTexture) {
             const x = (bgTextureConfig?.xShift || 0) + (bgTextureConfig?.padding || 0);
             const y = (bgTextureConfig?.yShift || 0) + (bgTextureConfig?.padding || 0);
@@ -146,13 +158,13 @@ function ScratchCardElComponent({
         }
 
         return (<Graphics draw={renderBgGraphics} />)
-    }, [bgTexture, bgTextureConfig, renderBgGraphics, width]);
+    }, [renderBgGraphics, width, height, bundle, bgTextureConfigArg]);
 
     if (!bundle || !coverTexture) return null
 
     return (
         <Container width={width} height={height}>
-            {renderCardBg()}
+            {renderCardBg}
             <IconMatrix data={coverData} renderCell={renderCoverCell || defaultRenderCoverCell} config={matrixConfig} />
             <Container
                 mask={renderTextureSprite}
@@ -162,7 +174,7 @@ function ScratchCardElComponent({
                 pointerup={pointerUp}
                 eventMode='static'
             >
-                {renderCardBg()}
+                {renderCardBg}
                 <IconMatrix data={data} config={{ cellPadding: 8, ...matrixConfig }} renderCell={renderCell} />
             </Container>
         </Container>

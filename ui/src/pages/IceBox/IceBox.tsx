@@ -1,100 +1,180 @@
-import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { selectLocalValue } from '@store/selectors/localization.selectors';
 
 import { Header } from '@components/Header';
 import { Icon } from '@components/shared/Icon';
-import { WinStyledText } from '@components/shared/StyledText';
 
 import styles from './IceBox.module.scss';
 
-import { Button, ButtonType } from '@components/shared/Button/Button';
-import { IScrathCardBundle } from '@config/assetsManifest';
+import { IBgTextureConfig, IScratchCardHandle, ScratchCard } from '@components/ScratchCard';
+import { TopPrizeLabel } from '@components/TopPrizeLabel/TopPrizeLabel';
+import { ICE_BOX_BUNDLE, IIceBoxBundle } from '@config/iceBoxBundleConfig';
 import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
-import candy_maze from '@icons/candy_maze.svg';
-import robo_token_gold from '@icons/robo_token_gold.svg';
 import { useGetBatchById } from '@services/api/batch.service';
 import { useBuyCard } from '@services/api/cards.service';
-import { formatNumber } from '@utils/formatters/formatNumber';
-import { useNavigate } from 'react-router-dom';
-// import { CandyMazeGradientCofig } from './CandyMazeGradient';
-// import { CandyMazeSpriteCell } from './CandyMazeSpriteCell';
-// import { useSpriteCellData } from './hooks/useSpriteCellData';
+
+import { BigWinScreen } from '@components/BigWinScreen/BigWinScreen';
+import { useScratchGame } from '@hooks/useScratchGame';
+import { useSwipeAria } from '@hooks/useSwipeAria';
+import { useMemo, useRef } from 'react';
+
+import { GameFooterBtn } from '@components/GameFooterBtn/GameFooterBtn';
+import { RoundScratchCard } from '@components/ScratchCard/components/RoundScratchCard/RoundScratchCard';
+import { IGameMatrixConfig } from '@components/shared/IconMatrix';
+import { IceBoxSpriteCell } from './components/IceBoxSpriteCell/IceBoxSpriteCell';
+import { useSpriteCellData } from './hooks/useSpriteCellData';
+import { IIceBoxCardData } from './IceBox.model';
+
+import twoX_multiplaier from '@icons/iceBox/2x_multiplaier.svg';
+import fiveX_multiplaier from '@icons/iceBox/5x_multiplaier.svg';
+import ice_box_header_diamonds_stars from '@icons/iceBox/ice_box_header_diamonds_stars.svg';
+import ice_box_logo from '@icons/iceBox/ice_box_logo.svg';
+import ice_box_logo_shining from '@icons/iceBox/ice_box_logo_shining.svg';
+
+import blue_daimond from '@icons/diamonds/blue_daimond.svg';
+import green_diamond from '@icons/diamonds/green_diamond.svg';
+import orange_diamond from '@icons/diamonds/orange_diamond.svg';
+import pink_diamond from '@icons/diamonds/pink_diamond.svg';
+import red_diamond from '@icons/diamonds/red_diamond.svg';
+
+import footer_stars from '@icons/iceBox/footer_stars.svg';
+import ice_box_shining from '@icons/iceBox/ice_box_shining.svg';
+
+
+const bgTextureConfig: IBgTextureConfig = {
+    textureName: 'redBall',
+}
+
+const roundMatrixConfig: IGameMatrixConfig = {
+    containerPadding: 8,
+    cellPadding: 8,
+}
 
 export function IceBox() {
-    const playButtonText = useSelector(selectLocalValue('txt.btn.play'));
-    const winUptoText = useSelector(selectLocalValue('txt.game.winUpTo')).toUpperCase();
-
-    const navigate = useNavigate();
     const { batchId } = useParams();
 
     const { batch, loading: isBatchLoading } = useGetBatchById(batchId || null);
-    const { buyCard, card } = useBuyCard();
+    const { buyCard, card } = useBuyCard<IIceBoxCardData>();
 
-    const onCancel = () => {
-        navigate(-1)
-    }
+    const bundleName = ICE_BOX_BUNDLE.name
+    const { bundle, loading: isBundleLoading } = useLoadBundle<IIceBoxBundle>(bundleName)
 
-    const onPlay = async () => {
-        if (!batchId) return
+    const { data } = useSpriteCellData(card, bundleName)
 
-        await buyCard(batchId)
-    }
+    const x2MultyplierScratchCardRef = useRef<IScratchCardHandle>(null);
+    const x5MultyplierScratchCardRef = useRef<IScratchCardHandle>(null);
+    const mainScratchCardRef = useRef<IScratchCardHandle>(null);
 
-    const bundleName = 'scratchCard'
-    const { bundle, loading: isBundleLoading } = useLoadBundle<IScrathCardBundle>(bundleName)
+    const scratchCardsRefConfig = useMemo(() => ({
+        'x2MultyplierScratchCard': x2MultyplierScratchCardRef,
+        'x5MultyplierScratchCard': x5MultyplierScratchCardRef,
+        'mainScratchCard': mainScratchCardRef,
+    }), [x2MultyplierScratchCardRef, mainScratchCardRef]);
 
-    // const { data, isScratchEnabled } = useSpriteCellData(card, bundleName)
+    const {
+        isBigWinVisible,
+        onCardScratched,
+        onPlay,
+        onSwipe,
+        onScratchStarted,
+    } = useScratchGame(batchId, card, buyCard, scratchCardsRefConfig);
 
-    const onScratchedEnought = () => {
-        if (card?.winning) {
-            window.alert('You win ' + card.winning + ' RBAX. Your new balance is ' + card?.rbaxBalance + ' RBAX')
-        } else {
-            window.alert('You lose. Your new balance is ' + card?.rbaxBalance + ' RBAX')
-        }
-    }
+    const {
+        onTouchEnd,
+        onTouchMove,
+        onTouchStart,
+        onMouseDown,
+        onMouseMove,
+        onMouseUp,
+    } = useSwipeAria({
+        onSwipedLeft: () => { onSwipe() },
+        onSwipedRight: () => { onSwipe() },
+    });
 
     const isLoading = isBatchLoading || isBundleLoading;
-    if (isLoading || !bundle) {
-        return (
-            <div className={styles.mainContainer}>
-                <span>Loading...</span>
-            </div>
-        )
-    }
+    const hiddenClass = isLoading || !bundle ? 'hidden' : '';
+
+    const x2Multiplier = card?.cardData.x2;
+    const x2MultiplierText = x2Multiplier ? 'x' + x2Multiplier : '';
+    const x5Multiplier = card?.cardData.x5;
+    const x5MultiplierText = x5Multiplier ? 'x' + x5Multiplier : '';
 
     return (
-        <div className={styles.mainContainer}>
+        <div className={`${styles.mainContainer} ${hiddenClass}`}>
             <Header />
-            <Icon name={candy_maze} className={styles.candyMazeHeaderIcon} />
-            <div className={styles.winLabelContainer}>
-                <WinStyledText text={winUptoText} textStyles={{ fontSize: 20 }} className={styles.winUpToLabel} />
-                <div className={styles.winAmountContainer}>
-                    <Icon name={robo_token_gold} className={styles.roboTokenGoldIcon} />
-                    <WinStyledText className={styles.winAmount} text={formatNumber(batch?.totalPotentialPrizes || 0)} textStyles={{ fontSize: 26 }} />
-                </div>
-                <div className={styles.scratchCardContainer}>
-                    {/* <ScratchCard
-                        data={data}
-                        isDisabled={isScratchEnabled}
-                        className={styles.scratchCard}
-                        bundleName={bundleName}
-                        onScratchedEnought={() => { onScratchedEnought() }}
-                        renderCell={(data) => (<IceBoxSpriteCell {...data} />)}
-                        gradientData={CandyMazeGradientCofig}
-                    /> */}
-
-                    {/* {Object.keys(card || {}).map((key) => {
-                        return (<div key={key}>{key}: {card[key]?.toString()}</div>)
-                    })
-                    } */}
-                </div>
-                <div className={styles.footer}>
-                    <Button className={styles.playButton} mode={ButtonType.Cancel} text='Back' onClick={() => onCancel()} />
-                    <Button className={styles.playButton} mode={ButtonType.Confirm} text={playButtonText} onClick={() => onPlay()} />
-                </div>
+            <div className={styles.headerLogoContainer}>
+                <Icon name={ice_box_logo_shining} className={styles.iceBoxHeaderShining} />
+                <Icon name={ice_box_logo} className={styles.iceBoxHeaderIcon} />
+                <Icon name={ice_box_header_diamonds_stars} className={styles.iceBoxHeaderIconDiamonds} />
             </div>
+            <div className={styles.content}>
+                <TopPrizeLabel topPrize={batch?.totalPotentialPrizes || 0} className={styles.topPrizeLabel} />
+                <div className={styles.multiplierContainer}>
+                    <div className={styles.roundScratchCard}>
+                        <Icon name={twoX_multiplaier} className={styles.multiplierLabel} />
+                        <RoundScratchCard
+                            ref={x2MultyplierScratchCardRef}
+                            cellData={x2MultiplierText}
+                            bundleName={ICE_BOX_BUNDLE.name}
+                            bgTextureConfig={bgTextureConfig}
+                            matrixConfig={roundMatrixConfig}
+                            onScratchedEnought={() => { onCardScratched('x2MultyplierScratchCard') }}
+                            onScratchStarted={() => onScratchStarted()}
+                        />
+                    </div>
+                    <div className={styles.diamondsRowContainer}>
+                        <div className={styles.redLayer}>
+                            <Icon name={blue_daimond} className={styles.diamondIcon} />
+                            <Icon name={pink_diamond} className={styles.diamondIcon} />
+                            <Icon name={red_diamond} className={styles.diamondIcon} />
+                            <Icon name={orange_diamond} className={styles.diamondIcon} />
+                            <Icon name={green_diamond} className={styles.diamondIcon} />
+                        </div>
+                    </div>
+                    <div className={styles.roundScratchCard}>
+                        <Icon name={fiveX_multiplaier} className={styles.multiplierLabel} />
+                        <RoundScratchCard
+                            ref={x5MultyplierScratchCardRef}
+                            cellData={x5MultiplierText}
+                            bundleName={ICE_BOX_BUNDLE.name}
+                            bgTextureConfig={bgTextureConfig}
+                            matrixConfig={roundMatrixConfig}
+                            onScratchedEnought={() => { onCardScratched('x5MultyplierScratchCard') }}
+                            onScratchStarted={() => onScratchStarted()}
+                        />
+                    </div>
+                </div>
+                <div className={styles.shiningContainer}>
+                    <Icon name={ice_box_shining} className={styles.shiningIcon} />
+                    <div
+                        className={styles.scratchCardContainer}
+                        onTouchStart={onTouchStart}
+                        onTouchEnd={onTouchEnd}
+                        onTouchMove={onTouchMove}
+                        onMouseDown={onMouseDown}
+                        onMouseUp={onMouseUp}
+                        onMouseMove={onMouseMove}
+                    >
+                        <ScratchCard
+                            ref={mainScratchCardRef}
+                            data={data}
+                            className={styles.scratchCard}
+                            bundleName={bundleName}
+                            renderCell={(data) => (<IceBoxSpriteCell {...data} />)}
+
+                            sizeX={batch?.sizeX}
+                            sizeY={batch?.sizeY}
+
+                            onScratchedEnought={() => { onCardScratched('mainScratchCard') }}
+                            onScratchStarted={() => onScratchStarted()}
+                        />
+                    </div>
+                </div>
+                <GameFooterBtn onPlay={onPlay}>
+                    <Icon name={footer_stars} className={styles.footerStars} />
+                </GameFooterBtn>
+            </div>
+            {isBigWinVisible && <BigWinScreen winAmount={card?.winning} />}
         </div>
     );
 }

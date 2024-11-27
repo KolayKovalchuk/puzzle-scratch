@@ -30,9 +30,6 @@ export function useSpriteCellData(card: IBuyBatchCardData<ISantaSacCardData> | n
     useEffect(() => {
         if (!card) return
 
-        console.log('Setting new data:', newData);
-        
-
         setData(newData)
     }, [card, newData])
 

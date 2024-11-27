@@ -26,10 +26,12 @@ export interface IUseBuyCardReturn<CardData extends ICardData> {
 
 export function useBuyCard<CardData extends ICardData>(): IUseBuyCardReturn<CardData> {
     const [card, setCard] = useState<IBuyBatchCardData<CardData> | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const buyCard = async (batchId: string) => {
         try {
+            setLoading(true);
+            setCard(null);
             const cardData = await postBuyCard<CardData>(batchId);
 
             if (!cardData) throw new Error('Error buying card');

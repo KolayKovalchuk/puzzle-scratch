@@ -77,9 +77,9 @@ export const SANTA_SAC_BUNDLE: AssetsBundle = {
             alias: 'redBallShining',
             src: `${SANTA_SAC_BUNDLE_BASE_PATH}/redBallShining.png`,
         },
-        {
-            alias: 'redBall',
-            src: `/red_ball.png`,
-        },
+        // {
+        //     alias: 'redBall',
+        //     src: `/red_ball.png`,
+        // },
     ],
 };

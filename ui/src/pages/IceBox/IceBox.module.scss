@@ -2,75 +2,121 @@
 @use '@styles/variables';
 @use '@styles/mixins';
 
+@include mixins.gameMixin;
+
 .mainContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-
-    background: colors.$candy_maze_bg;
-
-    @include mixins.fixedHeaderPadding;
+    background: url('/iceBox/ice_box_bg.png') no-repeat;
+    background-size: 100% 100%;
 }
 
-.candyMazeHeaderIcon {
-    width: 74%;
-    aspect-ratio: 1000/345;
-}
-
-.winLabelContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    width: 100%;
-}
-
-.winAmountContainer {
-    display: flex;
-}
-
-.roboTokenGoldIcon {
-    max-width: 50px;
+.headerLogoContainer {
     position: relative;
-    top: -4px;
-}
+    width: 100%;
+    
+    .iceBoxHeaderIcon {
+        position: relative;
+        aspect-ratio: 833/239;
+        z-index: 3;
+        width: 100%;
 
-$padding: 6px;
-
-.scratchCardContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 85%;
-    height: 100%;
-
-    padding: $padding;
-
-    border-radius: 20px;
-}
-
-.winAmount {
-    position: relative;
-    left: -8px;
-}
-
-.footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding: 10px;
-}
-
-.playButton {
-    width: 40%;
-    height: 100%;
-
-    &:first-child {
-        margin-right: 8px;
+        aspect-ratio: 833/224;
     }
+    
+    .iceBoxHeaderShining {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 0;
+    }
+
+    .iceBoxHeaderIconDiamonds {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        // aspect-ratio: 1030/495;
+    }
+}
+
+$sidePosition: 12%;
+$vertivalPosition: 14%;
+
+.multiplierContainer {
+    flex-direction: row;
+    justify-content: space-between;
+
+    position: relative;
+
+    .roundScratchCard {
+        width: 26%;
+        min-width: 80px;
+        
+        position: relative;
+    }
+
+    .multiplierLabel {
+        position: absolute;
+        top: -58%;
+        z-index: 2;
+    }
+
+    .diamondsRowContainer {
+        display: flex;
+        align-items: flex-end;
+
+        position: absolute;
+        top: $vertivalPosition;
+        left: $sidePosition;
+        bottom: 20%;
+        right: $sidePosition;
+
+        background: colors.$grayGradient;
+
+        .redLayer {
+            width: 100%;
+            height: calc(100% - 4px);
+            background: colors.$redGradient;
+
+            display: flex;
+
+            padding: 0 18%;
+
+            .diamondIcon {
+                flex: 1;
+            }
+        }
+    }
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+}
+
+.shiningContainer {
+    position: relative;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scratchCard {
+    z-index: 1;
+}
+
+.footerStars {
+    width: 104vw;
+    position: absolute;
+    top: -6px;
+    
+    aspect-ratio: 1030/348;
+    z-index: 0;
 }

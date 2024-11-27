@@ -1,0 +1,40 @@
+.footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 85%;
+
+    margin-top: 8px;
+    padding: 8px 0;
+
+    z-index: 1;
+
+    position: relative;
+    min-height: 66px;
+    overflow-y: hidden;
+
+    .btn {
+        height: 100%;
+    
+        &:not(:last-child) {
+            margin-right: 6px;
+        }
+        z-index: 1;
+    }
+    
+    .playButton {
+        width: 50%;
+    }
+    
+    .backBtn {
+        width: 45px;
+        max-width: 45px;
+        min-width: 45px;
+        height: 45px;
+        padding: 8px;
+    }
+    
+    .backIcon {
+        width: 100%
+    }
+}

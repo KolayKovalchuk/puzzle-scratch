@@ -131,7 +131,7 @@ export function SantaSac() {
                 </div>
                 <GameFooterBtn onPlay={onPlay}/>
             </div>
-            {isBigWinVisible && <BigWinScreen winAmount={card?.winning} />}
+            {isBigWinVisible && <BigWinScreen winAmount={card?.winning || 0} topPrize={batch?.totalPotentialPrizes || 0} />}
         </div>
     );
 }

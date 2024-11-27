@@ -174,7 +174,7 @@ export function IceBox() {
                     <Icon name={footer_stars} className={styles.footerStars} />
                 </GameFooterBtn>
             </div>
-            {isBigWinVisible && <BigWinScreen winAmount={card?.winning} />}
+            {isBigWinVisible && <BigWinScreen winAmount={card?.winning || 0} topPrize={batch?.totalPotentialPrizes || 0} />}
         </div>
     );
 }

@@ -23,11 +23,11 @@ export function BigWinScreen({ winAmount, topPrize, className }: IBigWinScreenPr
     if (!winAmount) return null
 
     const coinAnimationName = getCoinAnimationName(winAmount, topPrize)
-    const isBigWinVisible = coinAnimationName === CoinAnimationName.coint_l
+    const isBigWinIconVisible = coinAnimationName === CoinAnimationName.coint_l
 
     return <div className={`${styles.container} ${className || ''}`}  style={{ animationDuration: `${BIG_WIN_TIMEOUT}ms` }}>
         <div className={styles.animatedContainer} style={{ animationDuration: `${BIG_WIN_TIMEOUT}ms` }}>
-            { isBigWinVisible && <Icon name={big_win} className={styles.bigWinIcon} /> }
+            { isBigWinIconVisible && <Icon name={big_win} className={styles.bigWinIcon} /> }
             <div className={styles.winAmountContainer}>
                 <Icon name={robo_token_gold} className={styles.roboTokenGoldIcon} />
                 <WinStyledText

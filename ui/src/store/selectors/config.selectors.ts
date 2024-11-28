@@ -55,3 +55,10 @@ export const selectTelegramAppUrl = createSelector(
         return config?.TELEGRAM_APP_URL
     }
 )
+
+export const selectScratchCardTransitionTimeout = createSelector(
+    selectConfigQueryData,
+    (config) => {
+        return config?.SCRATCH_CARD_TRANSITION_TIMEOUT_MS || 1500
+    }
+)

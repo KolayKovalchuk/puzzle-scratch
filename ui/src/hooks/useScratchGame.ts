@@ -1,13 +1,13 @@
 import { IScratchCardHandle } from '@components/ScratchCard';
 import { IBuyBatchCardData, ICardData } from '@models/IBuyBatchCardData';
-import { RefObject, useCallback, useEffect, useState } from 'react';
+import { selectScratchCardTransitionTimeout } from '@store/selectors/config.selectors';
+import { RefObject, useCallback, useEffect, useMemo, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 let timeout: NodeJS.Timeout | null = null;
 
-export const BIG_WIN_TIMEOUT = 1.5 * 1000;
-
 function _applyForEachScratchCardRef<T extends IScratchCardHandle = IScratchCardHandle>(
-    scratchCardsRefConfig: {[key: string]: RefObject<T> },
+    scratchCardsRefConfig: { [key: string]: RefObject<T> },
     callback: (ref: T, index: number) => void
 ) {
     const scratchCardsRefList = Object.values(scratchCardsRefConfig);
@@ -20,30 +20,37 @@ function _applyForEachScratchCardRef<T extends IScratchCardHandle = IScratchCard
     }
 }
 
-function _getScratchedStateConfig(config: {[key: string]: RefObject<IScratchCardHandle> }, value: boolean) {
-    // return Array.from({ length: arrayLength }, () => value)
-    return Object.keys(config).reduce((acc: {[key: string]: boolean}, key) => {
+function _getScratchedStateConfig(config: { [key: string]: RefObject<IScratchCardHandle> }, value: boolean) {
+    return Object.keys(config).reduce((acc: { [key: string]: boolean }, key) => {
         acc[key] = value;
         return acc;
     }, {})
 }
 
+let swipeTimeout: NodeJS.Timeout | null = null;
+
 export function useScratchGame<CardData extends ICardData = ICardData>(
     batchId: string | undefined,
     card: IBuyBatchCardData<CardData> | null,
     buyCard: (batchId: string) => Promise<IBuyBatchCardData<CardData> | null>,
-    scratchCardsRefConfig: {[key: string]: RefObject<IScratchCardHandle> },
+    scratchCardsRefConfig: { [key: string]: RefObject<IScratchCardHandle> },
 ) {
     const [lastAction, setLastAction] = useState<'playBtnClick' | 'swipe' | 'scratch' | null>(null);
     const [isBigWinVisible, setIsBigWinVisible] = useState(false);
 
-    const [isCardsScratched, setIsCardsScratched] = useState(_getScratchedStateConfig(scratchCardsRefConfig, false));
+    const defultScratchConfig = useMemo(() => _getScratchedStateConfig(scratchCardsRefConfig, false), [scratchCardsRefConfig]);
+
+    const [isCardsScratched, setIsCardsScratched] = useState(defultScratchConfig);
     const isAllCardsScratched = Object.values(isCardsScratched).every((v) => v);
 
+    const scratchCardTransitionTimeout = useSelector(selectScratchCardTransitionTimeout);
+
     const onCardScratched = useCallback((name: string) => {
-        setIsCardsScratched({
-            ...isCardsScratched,
-            [name]: true,
+        setIsCardsScratched((prevStat) => {
+            return {
+                ...prevStat,
+                [name]: true,
+            }
         });
     }, [isCardsScratched]);
 
@@ -86,13 +93,13 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
 
             timeout = setTimeout(() => {
                 setIsBigWinVisible(false);
-            }, BIG_WIN_TIMEOUT);
+            }, scratchCardTransitionTimeout);
 
             console.log('You win ' + cardData.winning + ' RBAX. Your new balance is ' + cardData.rbaxBalance + ' RBAX')
         } else if (cardData) {
             console.log('You lose. Your balance is ' + cardData?.rbaxBalance + ' RBAX')
         };
-    }, [card]);
+    }, [card, scratchCardTransitionTimeout]);
 
     const onScratchStarted = useCallback(() => {
         if (batchId && (!lastAction || lastAction == 'swipe')) {
@@ -104,10 +111,19 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
     const onBigWinClicked = useCallback(() => {
         setIsBigWinVisible(false);
     }, []);
-    
+
     useEffect(() => {
         if (isAllCardsScratched) {
             onScratchedEnought();
+
+            if (swipeTimeout) {
+                clearTimeout(swipeTimeout);
+                swipeTimeout = null;
+            }
+
+            swipeTimeout = setTimeout(() => {
+                onSwipe();
+            }, scratchCardTransitionTimeout);
         }
     }, [isAllCardsScratched]);
 

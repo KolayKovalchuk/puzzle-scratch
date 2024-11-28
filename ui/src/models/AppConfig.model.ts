@@ -2,6 +2,7 @@ export class AppConfig {
     API_URL: string;
     TELEGRAM_APP_URL: string;
     LOCALISATION: string;
+    SCRATCH_CARD_TRANSITION_TIMEOUT_MS: number;
     MAINTENANCE: boolean;
     AFFILIATE_BONUS: number;
     SYSTEM_MSG: string | null;
@@ -13,6 +14,7 @@ export class AppConfig {
         this.API_URL = data.API_URL;
         this.TELEGRAM_APP_URL = data.TELEGRAM_APP_URL;
         this.LOCALISATION = data.LOCALISATION;
+        this.SCRATCH_CARD_TRANSITION_TIMEOUT_MS = data.SCRATCH_CARD_TRANSITION_TIMEOUT_MS;
         this.MAINTENANCE = !!data.MAINTENANCE;
         this.AFFILIATE_BONUS = data.AFFILIATE_BONUS;
         this.SYSTEM_MSG = data.SYSTEM_MSG;

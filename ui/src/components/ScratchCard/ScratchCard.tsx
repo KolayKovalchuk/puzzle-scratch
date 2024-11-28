@@ -201,9 +201,6 @@ function ScratchCardComponent(props: IScratchCardProps, ref: Ref<IScratchCardHan
     const height = dimensions.height || dimensions.width;
 
     const card = useMemo(() => {
-        console.log('ScratchCard render', width, height);
-        
-
         return (
             <div className={`${styles.container} ${props.className || ''}`} ref={containerRef}>
                 {!!width && <Stage width={width} height={height} options={{ backgroundAlpha: 0 }}>

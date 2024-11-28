@@ -3,7 +3,7 @@ import { updateUserBalanceRbax } from '@store/actions/user.actions';
 import store from '@store/store';
 import { useCallback, useState } from 'react';
 import { apiClient } from './api.service';
-import { updateLastWin } from '@store/actions/game.actions';
+import { showAmountChangeLabel } from '@store/actions/game.actions';
 
 export async function postBuyCard<CardData extends ICardData>(batchId: string) {
     try {
@@ -41,7 +41,7 @@ export function useBuyCard<CardData extends ICardData>(): IUseBuyCardReturn<Card
             setLoading(false);
 
             store.dispatch(updateUserBalanceRbax(cardData.rbaxBalance));
-            store.dispatch(updateLastWin(cardData.cardData.winAmount));
+            store.dispatch(showAmountChangeLabel(cardData.cardData.winAmount));
 
             return cardData;
         } catch (error) {

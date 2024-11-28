@@ -1,10 +1,6 @@
-export const UPDATE_LAST_WIN = 'UPDATE_LAST_WIN';
+export const SHOW_AMOUNT_CHANGE_LABEL = 'SHOW_AMOUNT_CHANGE_LABEL';
 
-export interface IUpdateLastWinPayload {
-    lastWin: number;
-}
-
-export const updateLastWin = (lastWin: number) => ({
-    type: UPDATE_LAST_WIN,
-    payload: lastWin,
-});
+export const showAmountChangeLabel = (lastAmountIncrease: number) => ({
+    type: SHOW_AMOUNT_CHANGE_LABEL,
+    payload: lastAmountIncrease,
+})

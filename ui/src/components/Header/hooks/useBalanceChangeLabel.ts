@@ -1,39 +1,28 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
-import { selectScratchCardTransitionTimeout } from '@store/selectors/config.selectors';
-import { selectLastWin } from '@store/selectors/game.selectors';
-import { selectUserBalanceRbax } from '@store/selectors/user.selectors';
+import { selectLastAmountIncrease, selectPrizeLabelCounter } from '@store/selectors/game.selectors';
 
-let timeout: NodeJS.Timeout | null = null
+export function useBalanceChangeLabel(className: string) {
+    const lastAmountIncrease = useSelector(selectLastAmountIncrease);
+    const prizeLabelCounter = useSelector(selectPrizeLabelCounter);
 
-export function useBalanceChangeLabel() {
-    const scratchCardTransitionTimeout = useSelector(selectScratchCardTransitionTimeout);
-    const lastWin = useSelector(selectLastWin);
-
-    const amount = useSelector(selectUserBalanceRbax) || 0;
-
-    const [isLabelVisible, setIsLabelVisible] = useState(false);
+    const labelRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        console.log('lastWin', lastWin);
-        
-        if (lastWin) {
-            setIsLabelVisible(true);
+        if (!labelRef.current) return;
+        if (!lastAmountIncrease) return;
 
-            if (timeout) {
-                clearTimeout(timeout);
-                timeout = null;
-            }
+        labelRef.current.classList.remove(className);
+        setTimeout(() => {
+            if (!labelRef.current) return;
+            labelRef.current.classList.add(className);
+        }, 0);
 
-            timeout = setTimeout(() => {
-                setIsLabelVisible(false);
-            }, scratchCardTransitionTimeout);
-        }
-    }, [lastWin, amount]);
+    }, [prizeLabelCounter]);
 
     return {
-        lastWinLabel: '+' + lastWin,
-        isLabelVisible,
+        lastWinLabel: '+' + lastAmountIncrease,
+        labelRef,
     }
 }

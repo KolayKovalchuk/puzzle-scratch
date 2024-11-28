@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 
 
-import { Header } from '@components/Header';
 import { Icon } from '@components/shared/Icon';
 
 import styles from './IceBox.module.scss';
@@ -16,12 +15,12 @@ import { useBuyCard } from '@services/api/cards.service';
 import { BigWinScreen } from '@components/BigWinScreen/BigWinScreen';
 import { useScratchGame } from '@hooks/useScratchGame';
 import { useSwipeAria } from '@hooks/useSwipeAria';
-import { useMemo, useRef } from 'react';
+import { useCallback, useMemo, useRef } from 'react';
 
 import { GameFooterBtn } from '@components/GameFooterBtn/GameFooterBtn';
 import { RoundScratchCard } from '@components/ScratchCard/components/RoundScratchCard/RoundScratchCard';
 import { IGameMatrixConfig } from '@components/shared/IconMatrix';
-import { IceBoxSpriteCell } from './components/IceBoxSpriteCell/IceBoxSpriteCell';
+import { IceBoxSpriteCell, IIceBoxSpriteCellProps } from './components/IceBoxSpriteCell/IceBoxSpriteCell';
 import { useSpriteCellData } from './hooks/useSpriteCellData';
 import { IIceBoxCardData } from './IceBox.model';
 
@@ -73,12 +72,18 @@ export function IceBox() {
 
     const {
         isBigWinVisible,
-        setIsBigWinVisible,
+        onBigWinClicked,
         onCardScratched,
         onPlay,
         onSwipe,
         onScratchStarted,
     } = useScratchGame(batchId, card, buyCard, scratchCardsRefConfig);
+
+    const onMainCardScratched = useCallback(() => { onCardScratched('mainScratchCard') }, [])
+    const onX2CardScratched = useCallback(() => { onCardScratched('x2MultyplierScratchCard') }, [])
+    const onX5CardScratched = useCallback(() => { onCardScratched('x5MultyplierScratchCard') }, [])
+
+    const renderCell = useCallback((data: IIceBoxSpriteCellProps) => (<IceBoxSpriteCell {...data} />), []);
 
     const {
         onTouchEnd,
@@ -88,8 +93,8 @@ export function IceBox() {
         onMouseMove,
         onMouseUp,
     } = useSwipeAria({
-        onSwipedLeft: () => { onSwipe() },
-        onSwipedRight: () => { onSwipe() },
+        onSwipedLeft: onSwipe,
+        onSwipedRight: onSwipe
     });
 
     const isLoading = isBatchLoading || isBundleLoading;
@@ -102,7 +107,6 @@ export function IceBox() {
 
     return (
         <div className={`${styles.mainContainer} ${hiddenClass}`}>
-            <Header />
             <div className={styles.headerLogoContainer}>
                 <Icon name={ice_box_logo_shining} className={styles.iceBoxHeaderShining} />
                 <Icon name={ice_box_logo} className={styles.iceBoxHeaderIcon} />
@@ -119,8 +123,8 @@ export function IceBox() {
                             bundleName={ICE_BOX_BUNDLE.name}
                             bgTextureConfig={bgTextureConfig}
                             matrixConfig={roundMatrixConfig}
-                            onScratchedEnought={() => { onCardScratched('x2MultyplierScratchCard') }}
-                            onScratchStarted={() => onScratchStarted()}
+                            onScratchedEnought={onX2CardScratched}
+                            onScratchStarted={onScratchStarted}
                         />
                     </div>
                     <div className={styles.diamondsRowContainer}>
@@ -140,8 +144,8 @@ export function IceBox() {
                             bundleName={ICE_BOX_BUNDLE.name}
                             bgTextureConfig={bgTextureConfig}
                             matrixConfig={roundMatrixConfig}
-                            onScratchedEnought={() => { onCardScratched('x5MultyplierScratchCard') }}
-                            onScratchStarted={() => onScratchStarted()}
+                            onScratchedEnought={onX5CardScratched}
+                            onScratchStarted={onScratchStarted}
                         />
                     </div>
                 </div>
@@ -161,13 +165,13 @@ export function IceBox() {
                             data={data}
                             className={styles.scratchCard}
                             bundleName={bundleName}
-                            renderCell={(data) => (<IceBoxSpriteCell {...data} />)}
+                            renderCell={renderCell}
 
                             sizeX={batch?.sizeX}
                             sizeY={batch?.sizeY}
 
-                            onScratchedEnought={() => { onCardScratched('mainScratchCard') }}
-                            onScratchStarted={() => onScratchStarted()}
+                            onScratchedEnought={onMainCardScratched}
+                            onScratchStarted={onScratchStarted}
                         />
                     </div>
                 </div>
@@ -179,7 +183,7 @@ export function IceBox() {
                 && <BigWinScreen
                     winAmount={card?.winning || 0}
                     topPrize={batch?.totalPotentialPrizes || 0}
-                    onClick={() => setIsBigWinVisible(false)}
+                    onClick={onBigWinClicked}
                 />}
         </div>
     );

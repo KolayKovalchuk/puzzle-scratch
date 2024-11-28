@@ -8,5 +8,6 @@ export interface IBuyBatchCardData<CardData extends ICardData = ICardData> {
     cardData: CardData;
     batchId: string;
     rbaxBalance: number;
+    rbaxBalanceBefore: number;
     winType: string;
 }

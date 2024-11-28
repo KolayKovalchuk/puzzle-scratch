@@ -1,7 +1,6 @@
-import { useMemo, useRef } from 'react';
+import { useCallback, useMemo, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Header } from '@components/Header';
 import { Icon } from '@components/shared/Icon';
 
 import styles from './SantaSac.module.scss';
@@ -21,17 +20,23 @@ import { useSwipeAria } from '@hooks/useSwipeAria';
 
 import { useSpriteCellData } from './hooks/useSpriteCellData';
 import { ISantaSacCardData } from './SantaSac.model';
-import { SantaSacSpriteCell } from './SantaSacSpriteCell';
+import { ISantaSacSpriteCellProps, SantaSacSpriteCell } from './SantaSacSpriteCell';
 
+import { IGameMatrixConfig } from '@components/shared/IconMatrix';
+import round_multiplier from '@icons/round_multiplier.svg';
 import santa_sac from '@icons/santa_sac.svg';
 import shining from '@icons/shining.svg';
-import round_multiplier from '@icons/round_multiplier.svg';
 
 const bgTextureConfig: IBgTextureConfig = {
     textureName: 'redBallShining',
     xShift: 0,
     yShift: 0,
     padding: 0,
+}
+
+const roundScratchCardMatrixConfig: IGameMatrixConfig = {
+    containerPadding: 14,
+    cellPadding: 2
 }
 
 export function SantaSac() {
@@ -55,12 +60,17 @@ export function SantaSac() {
 
     const {
         isBigWinVisible,
-        setIsBigWinVisible,
+        onBigWinClicked,
         onCardScratched,
         onPlay,
         onSwipe,
         onScratchStarted,
     } = useScratchGame(batchId, card, buyCard, scratchCardsRefConfig);
+
+    const onMainCardScratched = useCallback(() => { onCardScratched('mainScratchCard') }, [])
+    const onRoundCardScratched = useCallback(() => { onCardScratched('roundScratchCard') }, [])
+
+    const renderSantaSacSpriteCell = useCallback((data: ISantaSacSpriteCellProps) => (<SantaSacSpriteCell {...data} />), []);
 
      const {
         onTouchEnd,
@@ -70,8 +80,8 @@ export function SantaSac() {
         onMouseMove,
         onMouseUp,
      } = useSwipeAria({
-        onSwipedLeft: () => { onSwipe() },
-        onSwipedRight: () => { onSwipe() },
+        onSwipedLeft: onSwipe,
+        onSwipedRight: onSwipe
      });
 
     const isLoading = isBatchLoading || isBundleLoading;
@@ -82,7 +92,6 @@ export function SantaSac() {
 
     return (
         <div className={`${styles.mainContainer} ${hiddenClass}`}>
-            <Header />
             <div className={styles.headerLogoContainer}>
                 <Icon name={santa_sac} className={styles.headerIcon} />
             </div>
@@ -99,9 +108,9 @@ export function SantaSac() {
                         className={styles.roundScratchCard}
                         bundleName={SANTA_SAC_BUNDLE.name}
                         bgTextureConfig={bgTextureConfig}
-                        matrixConfig={{ containerPadding: 14, cellPadding: 2 }}
-                        onScratchedEnought={() => { onCardScratched('roundScratchCard') }}
-                        onScratchStarted={() => onScratchStarted()}
+                        matrixConfig={roundScratchCardMatrixConfig}
+                        onScratchedEnought={onRoundCardScratched}
+                        onScratchStarted={onScratchStarted}
                         xShift={0.52}
                         yShift={0.45}
                     />
@@ -121,13 +130,13 @@ export function SantaSac() {
                         data={data}
                         className={styles.scratchCard}
                         bundleName={bundleName}
-                        renderCell={(data) => (<SantaSacSpriteCell {...data} />)}
+                        renderCell={renderSantaSacSpriteCell}
 
                         sizeX={batch?.sizeX}
                         sizeY={batch?.sizeY}
 
-                        onScratchedEnought={() => { onCardScratched('mainScratchCard') }}
-                        onScratchStarted={() => onScratchStarted()}
+                        onScratchedEnought={onMainCardScratched}
+                        onScratchStarted={onScratchStarted}
                     />
                 </div>
                 <GameFooterBtn onPlay={onPlay}/>
@@ -136,7 +145,7 @@ export function SantaSac() {
                 && <BigWinScreen
                     winAmount={card?.winning || 0}
                     topPrize={batch?.totalPotentialPrizes || 0}
-                    onClick={() => setIsBigWinVisible(false)}
+                    onClick={onBigWinClicked}
                 />}
         </div>
     );

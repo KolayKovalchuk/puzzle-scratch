@@ -8,7 +8,8 @@ import { Spine } from 'pixi-spine';
 import { useEffect } from 'react';
 
 import styles from './CoinAnimation.module.scss';
-import { BIG_WIN_TIMEOUT } from '@hooks/useScratchGame';
+import { useSelector } from 'react-redux';
+import { selectScratchCardTransitionTimeout } from '@store/selectors/config.selectors';
 
 export enum CoinAnimationName {
     coint_l = 'coint_l',
@@ -20,9 +21,10 @@ export interface ICoinAnimationSpriteProps {
     width: number;
     height: number;
     animationName: CoinAnimationName;
+    scratchCardTransitionTimeout: number;
 }
 
-export function CoinAnimationSprite({ width, height, animationName }: ICoinAnimationSpriteProps) {
+export function CoinAnimationSprite({ width, height, animationName, scratchCardTransitionTimeout }: ICoinAnimationSpriteProps) {
     const app = useApp();
 
     const bundleName = ICE_BOX_BUNDLE.name
@@ -46,7 +48,7 @@ export function CoinAnimationSprite({ width, height, animationName }: ICoinAnima
 
         setTimeout(() => {
             animation.state.setAnimation(0, animationName, false); // Replace 'animation' with your animation name
-        }, BIG_WIN_TIMEOUT * 0.1);
+        }, scratchCardTransitionTimeout * 0.1);
     }, [app, coinJson, width, height, animationName]);
 
     return null;
@@ -63,13 +65,21 @@ export function CoinAnimation({ animationName, width: widthArg, height: heigthAr
     const width = widthArg || dimensions.width;
     const height = heigthArg || dimensions.height;
 
+    const scratchCardTransitionTimeout = useSelector(selectScratchCardTransitionTimeout);
+
+
     return (<div className={styles.container} ref={containerRef}>
         <Stage
             width={width}
             height={height}
             options={{ backgroundAlpha: 0 }}
         >
-            <CoinAnimationSprite width={width} height={height} animationName={animationName} />
+            <CoinAnimationSprite
+                width={width}
+                height={height}
+                animationName={animationName}
+                scratchCardTransitionTimeout={scratchCardTransitionTimeout}
+            />
         </Stage>
     </div>
     );

@@ -38,7 +38,7 @@ export function CoinAnimationSprite({ width, height, animationName, scratchCardT
 
         app.stage.removeChildren();
         const animation = new Spine(coinJson.spineData);
-        const animationSize = width / 10;
+        const animationSize = width / 5;
         animation.x = width / 2;
         animation.y = width / 1.5;
         animation.width = animationSize;
@@ -46,9 +46,7 @@ export function CoinAnimationSprite({ width, height, animationName, scratchCardT
 
         app.stage.addChild(animation);
 
-        setTimeout(() => {
-            animation.state.setAnimation(0, animationName, false); // Replace 'animation' with your animation name
-        }, scratchCardTransitionTimeout * 0.1);
+        animation.state.setAnimation(0, animationName, false); // Replace 'animation' with your animation name
     }, [app, coinJson, width, height, animationName]);
 
     return null;

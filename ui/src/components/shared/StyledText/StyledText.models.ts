@@ -1,4 +1,5 @@
 import { ITextStyle } from 'pixi.js';
+import { CSSProperties } from 'react';
 
 export interface IUnderlineConfig {
     textUnderlineColor?: string;
@@ -12,6 +13,7 @@ export interface IUnderlineConfig {
 export interface IStyledTextProps {
     text: string;
     className?: string;
+    styles?: Partial<CSSProperties>;
     textStyles?: Partial<ITextStyle>;
     textFitCoefficient?: number;
 

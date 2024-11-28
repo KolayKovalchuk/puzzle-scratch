@@ -1,6 +1,7 @@
 @use '@styles/colors';
 @use '@styles/mixins';
 @use '@styles/variables';
+@use '@styles/animation_mixins';
 
 
 .mainContainer {
@@ -77,6 +78,14 @@
         font-size: 36px;
         font-weight: bold;
         cursor: default;
+    }
+    
+    .balanceChangeLabel {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        opacity: 0;
+        animation: bigWinAnimation 1s ease-in-out;
     }
 }
 

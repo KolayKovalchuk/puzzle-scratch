@@ -9,6 +9,7 @@ import styles from './StyledText.module.scss';
 export function StyledText({
     text,
     className,
+    styles: styleArg,
     textStyles,
     textFitCoefficient = 1,
     isUnderline = false,
@@ -18,7 +19,7 @@ export function StyledText({
     const { containerRef, dimensions } = useContainerDimensions(text);
 
     return (
-        <div ref={containerRef} className={`${styles.container} ${className || ''}`}>
+        <div ref={containerRef} className={`${styles.container} ${className || ''}`} style={styleArg}>
             <Stage className={styles.stageClass} width={dimensions.width} height={dimensions.height} options={{ backgroundAlpha: 0 }}>
                 <StyledTextPixiEl
                     isUnderline={isUnderline}

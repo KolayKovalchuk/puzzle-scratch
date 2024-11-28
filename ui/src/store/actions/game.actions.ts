@@ -1,16 +1,10 @@
-import { BatchCard, BatchCardType } from '@models/BatchCard.model';
+export const UPDATE_LAST_WIN = 'UPDATE_LAST_WIN';
 
-export const START_PUZZLE_GAME = 'START_PUZZLE_GAME';
-
-// TODO: move to models
-export interface IStartPuzzleGamePayload {
-    cardType: BatchCardType;
-    batchId: string;
+export interface IUpdateLastWinPayload {
+    lastWin: number;
 }
 
-export const startPuzzleGame = (payload: BatchCard) => ({
-    type: START_PUZZLE_GAME,
-    payload: {
-        ...payload,
-    },
+export const updateLastWin = (lastWin: number) => ({
+    type: UPDATE_LAST_WIN,
+    payload: lastWin,
 });

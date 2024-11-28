@@ -1,24 +1,21 @@
-import { BatchCard } from '@models/BatchCard.model';
-import { START_PUZZLE_GAME } from '../actions/game.actions';
+import { UPDATE_LAST_WIN } from '@store/actions/game.actions';
 
 // Initial State
 export interface IPuzzleGameState {
-    batchCard: BatchCard | null;
+    lastWin: number;
 }
 
 const initialState: IPuzzleGameState = {
-    batchCard: null,
+    lastWin: 0,
 };
 
 // Reducer
 export const gameReducer = (state = initialState, action: any): IPuzzleGameState => {
     switch (action.type) {
-        case START_PUZZLE_GAME:
+        case UPDATE_LAST_WIN:
             return {
                 ...state,
-                batchCard: {
-                    ...action.payload
-                },
+                lastWin: action.payload,
             };
         default:
             return state;

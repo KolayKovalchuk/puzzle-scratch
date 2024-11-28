@@ -9,7 +9,10 @@ import wallet from '@icons/wallet.svg'
 import { selectUserBalanceRbax } from '@store/selectors/user.selectors'
 import { useSelector } from 'react-redux'
 
+import { WinStyledText } from '@components/shared/StyledText'
+import { selectScratchCardTransitionTimeout } from '@store/selectors/config.selectors'
 import AnimatedNumbers from "react-animated-numbers"
+import { useBalanceChangeLabel } from './hooks/useBalanceChangeLabel'
 
 function renderAnimatedNumbers(amount: number) {
     return <AnimatedNumbers
@@ -26,6 +29,9 @@ function renderAnimatedNumbers(amount: number) {
 export function Header() {
     const amount = useSelector(selectUserBalanceRbax) || 0;
 
+    const { lastWinLabel, isLabelVisible } = useBalanceChangeLabel();
+    const scratchCardTransitionTimeout = useSelector(selectScratchCardTransitionTimeout);
+
     const animatedNumbers = useMemo(() => renderAnimatedNumbers(amount), [amount]);
 
     return (
@@ -36,6 +42,14 @@ export function Header() {
             <div className={styles.currency_info_container}>
                 <Icon name={robo_token} className={styles.token_icon}></Icon>
                 {animatedNumbers}
+
+                { isLabelVisible && <WinStyledText
+                    className={styles.balanceChangeLabel}
+                    text={lastWinLabel}
+                    textStyles={{ fontSize: 20 }}
+                    styles={{ animationDuration: `${scratchCardTransitionTimeout}ms` }}
+                    />
+                }
             </div>
             <div className={styles.profileContainer}>
                 <Icon name={wallet} iconSize='58%' className={styles.icon}></Icon>

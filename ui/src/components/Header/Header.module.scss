@@ -81,11 +81,17 @@
     }
     
     .balanceChangeLabel {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         position: absolute;
         top: 100%;
-        left: 50%;
+        left: 80%;
         opacity: 0;
-        animation: bigWinAnimation 1s ease-in-out;
+
+        &.animate {
+            animation: bigWinAnimation 1s ease-in-out;
+        }
     }
 }
 

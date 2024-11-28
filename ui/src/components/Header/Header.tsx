@@ -16,20 +16,20 @@ import { useBalanceChangeLabel } from './hooks/useBalanceChangeLabel'
 
 function renderAnimatedNumbers(amount: number) {
     return <AnimatedNumbers
-            includeComma
-            className={styles.amount_value}
-            animateToNumber={amount}
-            fontStyle={{
-                fontSize: 18,
-                color: "#fff",
-            }}
-        />
+        includeComma
+        className={styles.amount_value}
+        animateToNumber={amount}
+        fontStyle={{
+            fontSize: 18,
+            color: "#fff",
+        }}
+    />
 }
 
 export function Header() {
     const amount = useSelector(selectUserBalanceRbax) || 0;
 
-    const { lastWinLabel, isLabelVisible } = useBalanceChangeLabel();
+    const { lastWinLabel, labelRef } = useBalanceChangeLabel(styles.animate);
     const scratchCardTransitionTimeout = useSelector(selectScratchCardTransitionTimeout);
 
     const animatedNumbers = useMemo(() => renderAnimatedNumbers(amount), [amount]);
@@ -43,13 +43,17 @@ export function Header() {
                 <Icon name={robo_token} className={styles.token_icon}></Icon>
                 {animatedNumbers}
 
-                { isLabelVisible && <WinStyledText
-                    className={styles.balanceChangeLabel}
-                    text={lastWinLabel}
-                    textStyles={{ fontSize: 20 }}
-                    styles={{ animationDuration: `${scratchCardTransitionTimeout}ms` }}
+                <div
+                    ref={labelRef}
+                    className={`${styles.balanceChangeLabel}`}
+                    style={{ animationDuration: `${scratchCardTransitionTimeout}ms` }}
+                >
+                    <WinStyledText
+                        text={lastWinLabel}
+                        textStyles={{ fontSize: 20 }}
                     />
-                }
+                </div>
+
             </div>
             <div className={styles.profileContainer}>
                 <Icon name={wallet} iconSize='58%' className={styles.icon}></Icon>

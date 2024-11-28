@@ -1,21 +1,24 @@
-import { UPDATE_LAST_WIN } from '@store/actions/game.actions';
+import { SHOW_AMOUNT_CHANGE_LABEL } from '@store/actions/game.actions';
 
 // Initial State
 export interface IPuzzleGameState {
-    lastWin: number;
+    lastAmountIncrease: number;
+    prizeLabelCounter: number;
 }
 
 const initialState: IPuzzleGameState = {
-    lastWin: 0,
+    lastAmountIncrease: 0,
+    prizeLabelCounter: 0,
 };
 
 // Reducer
 export const gameReducer = (state = initialState, action: any): IPuzzleGameState => {
     switch (action.type) {
-        case UPDATE_LAST_WIN:
+        case SHOW_AMOUNT_CHANGE_LABEL:
             return {
                 ...state,
-                lastWin: action.payload,
+                lastAmountIncrease: action.payload,
+                prizeLabelCounter: state.prizeLabelCounter + 1,
             };
         default:
             return state;

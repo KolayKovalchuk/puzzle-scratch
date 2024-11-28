@@ -6,9 +6,16 @@ export const selectGame = (state: RootState) => {
     return state.game;
 }
 
-export const selectLastWin = createSelector(
+export const selectLastAmountIncrease = createSelector(
     selectGame,
     (queryState) => {
-        return queryState?.lastWin;
+        return queryState?.lastAmountIncrease;
+    }
+)
+
+export const selectPrizeLabelCounter = createSelector(
+    selectGame,
+    (queryState) => {
+        return queryState?.prizeLabelCounter;
     }
 )

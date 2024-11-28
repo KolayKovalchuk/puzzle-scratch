@@ -1,3 +1,4 @@
+import { Header } from '@components/Header';
 import styles from './App.module.scss';
 
 import { useInitApp } from '@hooks/useInitApp';
@@ -63,6 +64,7 @@ function App() {
 
     return (
         <div className={styles.mainContainer}>
+            <Header />
             <AppRouter languageSelectProps={languageSelectProps} />
 
             {/* // TODO: remove test code when done */}

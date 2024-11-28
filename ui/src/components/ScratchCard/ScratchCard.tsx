@@ -200,13 +200,43 @@ function ScratchCardComponent(props: IScratchCardProps, ref: Ref<IScratchCardHan
     const width = dimensions.width;
     const height = dimensions.height || dimensions.width;
 
-    return (
-        <div className={`${styles.container} ${props.className || ''}`} ref={containerRef}>
-            {!!width && <Stage width={width} height={height} options={{ backgroundAlpha: 0 }}>
-                <ScratchCardEl {...props} ref={scratchCardElRef}/>
-            </Stage>}
-        </div>
-    );
+    const card = useMemo(() => {
+        console.log('ScratchCard render', width, height);
+        
+
+        return (
+            <div className={`${styles.container} ${props.className || ''}`} ref={containerRef}>
+                {!!width && <Stage width={width} height={height} options={{ backgroundAlpha: 0 }}>
+                    <ScratchCardEl {...props} ref={scratchCardElRef}/>
+                </Stage>}
+            </div>
+        );
+    }, [
+        width,
+        height,
+
+        props.renderCell,
+        props.renderCoverCell,
+        props.renderBg,
+        props.data,
+        props.bundleName,
+        props.className,
+        props.isDisabled,
+        props.activateAreaPercent,
+        props.activateTotalPercent,
+        props.brushSizeCoef,
+        props.sizeX,
+        props.sizeY,
+        props.coverTextureName,
+        props.gradientData,
+        props.bgTextureConfig,
+        props.matrixConfig,
+
+        props.onScratchStarted,
+        props.onScratchedEnought,
+    ]);
+
+    return card;
 }
 
 export const ScratchCard = forwardRef<IScratchCardHandle, IScratchCardProps>(ScratchCardComponent);

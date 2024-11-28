@@ -6,16 +6,13 @@ import avatar_placeholder from '@icons/avatar_placeholder.svg'
 import logo from '@icons/logo.svg'
 import robo_token from '@icons/robo_token.svg'
 import wallet from '@icons/wallet.svg'
-import { useSelector } from 'react-redux'
 import { selectUserBalanceRbax } from '@store/selectors/user.selectors'
+import { useSelector } from 'react-redux'
 
 import AnimatedNumbers from "react-animated-numbers"
 
-export function Header() {
-    const amount = useSelector(selectUserBalanceRbax) || 0;
-
-    const animatedNumbers = useMemo(() => (
-        <AnimatedNumbers
+function renderAnimatedNumbers(amount: number) {
+    return <AnimatedNumbers
             includeComma
             className={styles.amount_value}
             animateToNumber={amount}
@@ -24,8 +21,12 @@ export function Header() {
                 color: "#fff",
             }}
         />
-    ), [amount]);
+}
 
+export function Header() {
+    const amount = useSelector(selectUserBalanceRbax) || 0;
+
+    const animatedNumbers = useMemo(() => renderAnimatedNumbers(amount), [amount]);
 
     return (
         <div className={styles.mainContainer}>

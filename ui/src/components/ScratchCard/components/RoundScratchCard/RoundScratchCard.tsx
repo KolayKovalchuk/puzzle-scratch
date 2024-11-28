@@ -3,7 +3,7 @@ import { IScratchCardHandle, IScratchCardProps, ScratchCard } from '../../Scratc
 import { Graphics, Resource, Texture } from 'pixi.js';
 import { forwardRef, Ref, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import styles from './RoundScratchCard.module.scss';
-import { RoundSpriteCell } from './RoundSpriteCell';
+import { IRoundSpriteCellProps, RoundSpriteCell } from './RoundSpriteCell';
 
 export interface IRoundScratchCardProps extends Omit<IScratchCardProps, 'data' | 'renderCell'> {
     cellData: string;
@@ -21,6 +21,10 @@ function RoundScratchCardComponent(props: IRoundScratchCardProps, ref: Ref<IRoun
     useEffect(() => {
         setData([[{ textureName: props.cellData }]])
     }, [props.cellData])
+
+    const renderCell = useCallback((data: IRoundSpriteCellProps) => (
+        <RoundSpriteCell {...data} xShift={props.xShift} yShift={props.yShift}/>
+    ), [props.xShift, props.yShift]);
 
     const renderBg = useCallback((g: Graphics, gradientTexture: Texture<Resource>, width: number, height: number) => {
         g.clear();
@@ -46,7 +50,7 @@ function RoundScratchCardComponent(props: IRoundScratchCardProps, ref: Ref<IRoun
             ref={scratchCardElRef}
             data={data}
             className={`${styles.container} ${props.className || ''}`}
-            renderCell={(data) => (<RoundSpriteCell {...data} xShift={props.xShift} yShift={props.yShift}/>)}
+            renderCell={renderCell}
             coverTextureName='roundCover'
             sizeX={1}
             sizeY={1}

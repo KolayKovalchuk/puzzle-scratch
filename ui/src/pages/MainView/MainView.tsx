@@ -1,6 +1,5 @@
 import styles from './MainView.module.scss';
 
-import { Header } from '@components/Header';
 
 import { BatchCardContainer } from '@components/BatchCard';
 import { NotificationPopup } from '@components/NotificationPopup/NotificationPopup';
@@ -39,7 +38,6 @@ export function MainView() {
 
     return (<>
         <div className={styles.mainContainer}>
-            <Header></Header>
             {isInviteFriendVisible && <InviteFriendList onCloseClick={() => setIsInviteFriendVisible(false)} />}
             <div className={containerClassName}>
                 <LogoHeader></LogoHeader>

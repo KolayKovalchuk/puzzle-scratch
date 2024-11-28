@@ -1,7 +1,7 @@
 import { IBuyBatchCardData, ICardData } from '@models/IBuyBatchCardData';
 import { updateUserBalanceRbax } from '@store/actions/user.actions';
 import store from '@store/store';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { apiClient } from './api.service';
 
 export async function postBuyCard<CardData extends ICardData>(batchId: string) {
@@ -28,7 +28,7 @@ export function useBuyCard<CardData extends ICardData>(): IUseBuyCardReturn<Card
     const [card, setCard] = useState<IBuyBatchCardData<CardData> | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
 
-    const buyCard = async (batchId: string) => {
+    const buyCard = useCallback(async (batchId: string) => {
         try {
             setLoading(true);
             setCard(null);
@@ -45,7 +45,7 @@ export function useBuyCard<CardData extends ICardData>(): IUseBuyCardReturn<Card
         } catch (error) {
             return null;
         }
-    };
+    }, []);
 
     return { card, loading, buyCard };
 }

@@ -101,6 +101,9 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
         }
     }, [batchId, buyCard, lastAction]);
 
+    const onBigWinClicked = useCallback(() => {
+        setIsBigWinVisible(false);
+    }, []);
     
     useEffect(() => {
         if (isAllCardsScratched) {
@@ -110,7 +113,7 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
 
     return {
         isBigWinVisible,
-        setIsBigWinVisible,
+        onBigWinClicked,
         onCardScratched,
         onPlay,
         onSwipe,

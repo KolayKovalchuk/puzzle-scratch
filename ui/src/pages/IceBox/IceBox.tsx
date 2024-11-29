@@ -120,7 +120,7 @@ export function IceBox() {
     const x2MultiplierText = typeof x2Multiplier === 'number' ? 'x' + x2Multiplier : '';
     const x5Multiplier = card?.cardData.multi[1];
     const x5MultiplierText = typeof x5Multiplier === 'number' ? 'x' + x5Multiplier : '';
-    
+
     const diamondScratchCardData: IDiamondSpriteCellData[][] = useMemo(() => {
         if (!card) return [[]];
 
@@ -154,27 +154,6 @@ export function IceBox() {
                             onScratchStarted={onScratchStarted}
                         />
                     </div>
-                    <div className={styles.diamondsRowContainer}>
-                        <div className={styles.redLayer} ref={redlayerRef}>
-                            <ScratchCard
-                                ref={diamondScratchCardRef}
-                                data={diamondScratchCardData}
-                                className={styles.daimondScratchCard}
-                                bundleName={bundleName}
-                                renderCell={renderDaimondCell}
-
-                                coverTextureName={diamondCardCoverTextureName}
-                                matrixConfig={daimondMatrixConfig}
-                                gradientData={redCardBgGradient}
-
-                                sizeX={diamondCardSizeX}
-                                sizeY={diamondCardSizeY}
-
-                                onScratchedEnought={onDiamondCardScratched}
-                                onScratchStarted={onScratchStarted}
-                            />
-                        </div>
-                    </div>
                     <div className={styles.roundScratchCard}>
                         <Icon name={fiveX_multiplaier} className={styles.multiplierLabel} />
                         <RoundScratchCard
@@ -185,6 +164,27 @@ export function IceBox() {
                             bgTextureConfig={bgTextureConfig}
                             matrixConfig={roundMatrixConfig}
                             onScratchedEnought={onX5CardScratched}
+                            onScratchStarted={onScratchStarted}
+                        />
+                    </div>
+                </div>
+                <div className={styles.diamondsRowContainer}>
+                    <div className={styles.redLayer} ref={redlayerRef}>
+                        <ScratchCard
+                            ref={diamondScratchCardRef}
+                            data={diamondScratchCardData}
+                            className={styles.daimondScratchCard}
+                            bundleName={bundleName}
+                            renderCell={renderDaimondCell}
+
+                            coverTextureName={diamondCardCoverTextureName}
+                            matrixConfig={daimondMatrixConfig}
+                            gradientData={redCardBgGradient}
+
+                            sizeX={diamondCardSizeX}
+                            sizeY={diamondCardSizeY}
+
+                            onScratchedEnought={onDiamondCardScratched}
                             onScratchStarted={onScratchStarted}
                         />
                     </div>

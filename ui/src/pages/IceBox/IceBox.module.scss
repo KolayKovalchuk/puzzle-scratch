@@ -12,7 +12,7 @@
 .headerLogoContainer {
     position: relative;
     width: 100%;
-    
+
     .iceBoxHeaderIcon {
         position: relative;
         aspect-ratio: 833/239;
@@ -21,7 +21,7 @@
 
         aspect-ratio: 833/224;
     }
-    
+
     .iceBoxHeaderShining {
         position: absolute;
         top: 50%;
@@ -40,9 +40,6 @@
     }
 }
 
-$sidePosition: 12%;
-$vertivalPosition: 14%;
-
 .multiplierContainer {
     flex-direction: row;
     justify-content: space-between;
@@ -56,7 +53,7 @@ $vertivalPosition: 14%;
     .roundScratchCard {
         width: 26%;
         min-width: 80px;
-        
+
         position: relative;
     }
 
@@ -65,34 +62,42 @@ $vertivalPosition: 14%;
         top: -58%;
         z-index: 2;
     }
+}
 
-    .diamondsRowContainer {
+
+.diamondsRowContainer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    position: relative;
+    top: 0%;
+    
+    width: 58%;
+
+    $minHeight: 12%;
+    min-height: $minHeight;
+    margin-top: -$minHeight;
+
+    background: colors.$grayGradient;
+    z-index: 2;
+
+    .redLayer {
         display: flex;
-        align-items: flex-end;
+        justify-content: center;
+        align-items: center;
 
         position: absolute;
-        top: $vertivalPosition;
-        left: $sidePosition;
-        bottom: 20%;
-        right: $sidePosition;
+        top: 4px;
 
-        background: colors.$grayGradient;
+        width: 100%;
+        height: calc(100% - 4px);
 
-        z-index: 0;
-        .redLayer {
-            width: 100%;
-            height: calc(100% - 4px);
-            background: colors.$redGradient;
+        background: colors.$redGradient;
+        padding: 0 11%;
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            padding: 0 14%;
-
-            .diamondIcon {
-                flex: 1;
-            }
+        .diamondIcon {
+            flex: 1;
         }
     }
 }
@@ -139,7 +144,7 @@ $vertivalPosition: 14%;
     width: 104vw;
     position: absolute;
     top: -6px;
-    
+
     aspect-ratio: 1030/348;
     z-index: 0;
 }

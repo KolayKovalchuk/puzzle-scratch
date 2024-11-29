@@ -49,6 +49,10 @@ $vertivalPosition: 14%;
 
     position: relative;
 
+    height: 16%;
+    min-height: 16%;
+    max-height: 16%;
+
     .roundScratchCard {
         width: 26%;
         min-width: 80px;
@@ -74,14 +78,17 @@ $vertivalPosition: 14%;
 
         background: colors.$grayGradient;
 
+        z-index: 0;
         .redLayer {
             width: 100%;
             height: calc(100% - 4px);
             background: colors.$redGradient;
 
             display: flex;
+            justify-content: center;
+            align-items: center;
 
-            padding: 0 18%;
+            padding: 0 14%;
 
             .diamondIcon {
                 flex: 1;
@@ -99,6 +106,15 @@ $vertivalPosition: 14%;
     width: 100%;
 }
 
+.multiplierScratchCard {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .shiningContainer {
     position: relative;
     width: 100%;
@@ -106,6 +122,13 @@ $vertivalPosition: 14%;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.daimondScratchCard {
+    width: 100%;
+    align-self: stretch;
+    height: 100%;
+    min-height: 58px;
 }
 
 .scratchCard {

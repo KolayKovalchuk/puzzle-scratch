@@ -26,7 +26,7 @@ export function IconMatrix({ data = [], renderCell, config: configArg = defaultC
             {data.map((rowData, rowIndex) =>
                 rowData.map((cellData, colIndex) => {
                     
-                    const x = colIndex * (cellWidth + config.cellPadding) + offsetX;
+                    const x = colIndex * (cellWidth + config.cellPadding) + offsetX - config.paddintLeft;
                     const y = rowIndex * (cellHeight + config.cellPadding) + offsetY - config.paddintBottom;
                     const key = `${rowIndex}-${colIndex}`
 

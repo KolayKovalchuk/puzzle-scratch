@@ -20,23 +20,19 @@ import { useCallback, useMemo, useRef } from 'react';
 import { GameFooterBtn } from '@components/GameFooterBtn/GameFooterBtn';
 import { RoundScratchCard } from '@components/ScratchCard/components/RoundScratchCard/RoundScratchCard';
 import { IGameMatrixConfig } from '@components/shared/IconMatrix';
+import { useContainerDimensions } from '@hooks/useContainerDimensions';
+import { DiamondSpriteCell, IDiamondSpriteCellData, IDiamondSpriteCellProps } from './components/DiamondSpriteCell/DiamondSpriteCell';
 import { IceBoxSpriteCell, IIceBoxSpriteCellProps } from './components/IceBoxSpriteCell/IceBoxSpriteCell';
 import { useSpriteCellData } from './hooks/useSpriteCellData';
 import { IIceBoxCardData } from './IceBox.model';
 
+import { redCardBgGradient } from '@components/ScratchCard/ScratchCardBgGradient';
 import twoX_multiplaier from '@icons/iceBox/2x_multiplaier.svg';
 import fiveX_multiplaier from '@icons/iceBox/5x_multiplaier.svg';
+import footer_stars from '@icons/iceBox/footer_stars.svg';
 import ice_box_header_diamonds_stars from '@icons/iceBox/ice_box_header_diamonds_stars.svg';
 import ice_box_logo from '@icons/iceBox/ice_box_logo.svg';
 import ice_box_logo_shining from '@icons/iceBox/ice_box_logo_shining.svg';
-
-import blue_daimond from '@icons/diamonds/blue_daimond.svg';
-import green_diamond from '@icons/diamonds/green_diamond.svg';
-import orange_diamond from '@icons/diamonds/orange_diamond.svg';
-import pink_diamond from '@icons/diamonds/pink_diamond.svg';
-import red_diamond from '@icons/diamonds/red_diamond.svg';
-
-import footer_stars from '@icons/iceBox/footer_stars.svg';
 import ice_box_shining from '@icons/iceBox/ice_box_shining.svg';
 
 
@@ -48,6 +44,17 @@ const roundMatrixConfig: IGameMatrixConfig = {
     containerPadding: 8,
     cellPadding: 8,
 }
+
+const daimondMatrixConfig: IGameMatrixConfig = {
+    containerPadding: 0,
+    cellPadding: -6,
+}
+
+const diamondCardCoverTextureName: string[][] = [
+    ['blueDaimond', 'redDaimond', 'pinkDaimond', 'orangeDaimond', 'greenDaimond'],
+]
+const diamondCardSizeX = diamondCardCoverTextureName[0]?.length || 0;
+const diamondCardSizeY = diamondCardCoverTextureName.length;
 
 export function IceBox() {
     const { batchId } = useParams();
@@ -62,13 +69,20 @@ export function IceBox() {
 
     const x2MultyplierScratchCardRef = useRef<IScratchCardHandle>(null);
     const x5MultyplierScratchCardRef = useRef<IScratchCardHandle>(null);
+    const diamondScratchCardRef = useRef<IScratchCardHandle>(null);
     const mainScratchCardRef = useRef<IScratchCardHandle>(null);
 
     const scratchCardsRefConfig = useMemo(() => ({
         'x2MultyplierScratchCard': x2MultyplierScratchCardRef,
         'x5MultyplierScratchCard': x5MultyplierScratchCardRef,
+        'diamondScratchCardRef': diamondScratchCardRef,
         'mainScratchCard': mainScratchCardRef,
-    }), [x2MultyplierScratchCardRef, mainScratchCardRef]);
+    }), [
+        x2MultyplierScratchCardRef,
+        x5MultyplierScratchCardRef,
+        diamondScratchCardRef,
+        mainScratchCardRef
+    ]);
 
     const {
         isBigWinVisible,
@@ -80,10 +94,12 @@ export function IceBox() {
     } = useScratchGame(batchId, card, buyCard, scratchCardsRefConfig);
 
     const onMainCardScratched = useCallback(() => { onCardScratched('mainScratchCard') }, [])
+    const onDiamondCardScratched = useCallback(() => { onCardScratched('diamondScratchCard') }, [])
     const onX2CardScratched = useCallback(() => { onCardScratched('x2MultyplierScratchCard') }, [])
     const onX5CardScratched = useCallback(() => { onCardScratched('x5MultyplierScratchCard') }, [])
 
     const renderCell = useCallback((data: IIceBoxSpriteCellProps) => (<IceBoxSpriteCell {...data} />), []);
+    const renderDaimondCell = useCallback((data: IDiamondSpriteCellProps) => (<DiamondSpriteCell {...data} />), []);
 
     const {
         onTouchEnd,
@@ -100,10 +116,20 @@ export function IceBox() {
     const isLoading = isBatchLoading || isBundleLoading;
     const hiddenClass = isLoading || !bundle ? 'hidden' : '';
 
-    const x2Multiplier = card?.cardData.x2;
-    const x2MultiplierText = x2Multiplier ? 'x' + x2Multiplier : '';
-    const x5Multiplier = card?.cardData.x5;
-    const x5MultiplierText = x5Multiplier ? 'x' + x5Multiplier : '';
+    const x2Multiplier = card?.cardData.multi[0];
+    const x2MultiplierText = typeof x2Multiplier === 'number' ? 'x' + x2Multiplier : '';
+    const x5Multiplier = card?.cardData.multi[1];
+    const x5MultiplierText = typeof x5Multiplier === 'number' ? 'x' + x5Multiplier : '';
+    
+    const diamondScratchCardData: IDiamondSpriteCellData[][] = useMemo(() => {
+        if (!card) return [[]];
+
+        return [card?.cardData.bonus.map((textureName) => ({ textureName: textureName.toString(), bundleName }))];
+    }, [card?.cardData.bonus]);
+
+    const { containerRef: redlayerRef, dimensions } = useContainerDimensions();
+    daimondMatrixConfig.cellWidth = (dimensions.width / diamondCardSizeX) * 1.1;
+    daimondMatrixConfig.cellHeight = daimondMatrixConfig.cellWidth;
 
     return (
         <div className={`${styles.mainContainer} ${hiddenClass}`}>
@@ -119,6 +145,7 @@ export function IceBox() {
                         <Icon name={twoX_multiplaier} className={styles.multiplierLabel} />
                         <RoundScratchCard
                             ref={x2MultyplierScratchCardRef}
+                            className={styles.multiplierScratchCard}
                             cellData={x2MultiplierText}
                             bundleName={ICE_BOX_BUNDLE.name}
                             bgTextureConfig={bgTextureConfig}
@@ -128,18 +155,31 @@ export function IceBox() {
                         />
                     </div>
                     <div className={styles.diamondsRowContainer}>
-                        <div className={styles.redLayer}>
-                            <Icon name={blue_daimond} className={styles.diamondIcon} />
-                            <Icon name={pink_diamond} className={styles.diamondIcon} />
-                            <Icon name={red_diamond} className={styles.diamondIcon} />
-                            <Icon name={orange_diamond} className={styles.diamondIcon} />
-                            <Icon name={green_diamond} className={styles.diamondIcon} />
+                        <div className={styles.redLayer} ref={redlayerRef}>
+                            <ScratchCard
+                                ref={diamondScratchCardRef}
+                                data={diamondScratchCardData}
+                                className={styles.daimondScratchCard}
+                                bundleName={bundleName}
+                                renderCell={renderDaimondCell}
+
+                                coverTextureName={diamondCardCoverTextureName}
+                                matrixConfig={daimondMatrixConfig}
+                                gradientData={redCardBgGradient}
+
+                                sizeX={diamondCardSizeX}
+                                sizeY={diamondCardSizeY}
+
+                                onScratchedEnought={onDiamondCardScratched}
+                                onScratchStarted={onScratchStarted}
+                            />
                         </div>
                     </div>
                     <div className={styles.roundScratchCard}>
                         <Icon name={fiveX_multiplaier} className={styles.multiplierLabel} />
                         <RoundScratchCard
                             ref={x5MultyplierScratchCardRef}
+                            className={styles.multiplierScratchCard}
                             cellData={x5MultiplierText}
                             bundleName={ICE_BOX_BUNDLE.name}
                             bgTextureConfig={bgTextureConfig}

@@ -8,6 +8,7 @@ interface IGameMatrixDefaultConfig extends IGameMatrixConfig {
     cellPadding: number;
     containerPadding: number;
     paddintBottom: number;
+    paddintLeft: number;
 }
 
 export const defaultConfig: IGameMatrixDefaultConfig = {
@@ -16,6 +17,7 @@ export const defaultConfig: IGameMatrixDefaultConfig = {
     cellPadding: 0,
     containerPadding: 8,
     paddintBottom: 0,
+    paddintLeft: 0,
 }
 
 export function useCellSize(configArg: IGameMatrixConfig, rowDataLength: number, columnDataLength: number) {

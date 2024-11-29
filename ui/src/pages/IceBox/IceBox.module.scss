@@ -13,6 +13,8 @@
     position: relative;
     width: 100%;
 
+    margin-bottom: 20px;
+
     .iceBoxHeaderIcon {
         position: relative;
         aspect-ratio: 833/239;
@@ -36,32 +38,41 @@
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 1;
-        // aspect-ratio: 1030/495;
     }
 }
 
-.multiplierContainer {
-    flex-direction: row;
-    justify-content: space-between;
-
+.roundScratchCard {
     position: relative;
 
-    height: 16%;
-    min-height: 16%;
-    max-height: 16%;
+    top: 4.5%;
+    width: 26%;
+    min-width: 82px;
 
-    .roundScratchCard {
-        width: 26%;
-        min-width: 80px;
+    $sidePosition: 32%;
+    left: $sidePosition;
 
-        position: relative;
+    &.right {
+        top: -14.5%;
+        left: auto;
+        right: $sidePosition;
     }
 
-    .multiplierLabel {
-        position: absolute;
-        top: -58%;
-        z-index: 2;
+    @media screen and (max-width: 375px) {
+        top: 4px;
+
+        &.right {
+            top: -93px;
+        }
     }
+}
+
+.multiplierLabel {
+    position: absolute;
+    top: -58%;
+    left: 49%;
+    z-index: 2;
+
+    transform: translateX(-50%);
 }
 
 
@@ -73,14 +84,14 @@
     position: relative;
     top: 0%;
     
-    width: 58%;
+    width: 57%;
 
     $minHeight: 12%;
     min-height: $minHeight;
-    margin-top: -$minHeight;
+    margin-top: -170px;
 
     background: colors.$grayGradient;
-    z-index: 2;
+    z-index: 3;
 
     .redLayer {
         display: flex;

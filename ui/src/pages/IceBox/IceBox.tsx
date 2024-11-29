@@ -140,7 +140,6 @@ export function IceBox() {
             </div>
             <div className={styles.content}>
                 <TopPrizeLabel topPrize={batch?.totalPotentialPrizes || 0} className={styles.topPrizeLabel} />
-                <div className={styles.multiplierContainer}>
                     <div className={styles.roundScratchCard}>
                         <Icon name={twoX_multiplaier} className={styles.multiplierLabel} />
                         <RoundScratchCard
@@ -154,7 +153,7 @@ export function IceBox() {
                             onScratchStarted={onScratchStarted}
                         />
                     </div>
-                    <div className={styles.roundScratchCard}>
+                    <div className={`${styles.roundScratchCard} ${styles.right}`}>
                         <Icon name={fiveX_multiplaier} className={styles.multiplierLabel} />
                         <RoundScratchCard
                             ref={x5MultyplierScratchCardRef}
@@ -167,7 +166,6 @@ export function IceBox() {
                             onScratchStarted={onScratchStarted}
                         />
                     </div>
-                </div>
                 <div className={styles.diamondsRowContainer}>
                     <div className={styles.redLayer} ref={redlayerRef}>
                         <ScratchCard

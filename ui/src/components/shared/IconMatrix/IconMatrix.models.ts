@@ -19,6 +19,7 @@ export interface IGameMatrixConfig {
     cellPadding?: number;
     containerPadding?: number;
     paddintBottom?: number;
+    paddintLeft?: number;
 }
 
 export interface IGameMatrixProps<CellProps extends IMatrixCellProps = IMatrixCellProps> {

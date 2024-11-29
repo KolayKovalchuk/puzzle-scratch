@@ -20,7 +20,7 @@ export function useRenderBgGraphics(
     }, [gradientTexture, width, height]);
     const renderBgCb = useCallback((g: Graphics) => {
         renderBg && renderBg(g, gradientTexture, width, height);
-    }, [renderBg, gradientTexture]);
+    }, [renderBg, gradientTexture, width, height]);
     const renderBgGraphics = renderBg ? renderBgCb : defaultRenderBg;
 
     return renderBgGraphics

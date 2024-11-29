@@ -56,7 +56,7 @@ export interface IScratchCardProps<CellProps extends IMatrixCellProps = IMatrixC
     brushSizeCoef?: number,
     sizeX?: number;
     sizeY?: number;
-    coverTextureName?: string,
+    coverTextureName?: string | string[][],
 
     onScratchStarted?: () => void
     onScratchedEnought?: () => void
@@ -67,6 +67,7 @@ export interface IScratchCardProps<CellProps extends IMatrixCellProps = IMatrixC
     bgTextureConfig?: IBgTextureConfig
 
     matrixConfig?: IGameMatrixConfig
+    coverMatrixConfig?: IGameMatrixConfig
 }
 
 function ScratchCardElComponent({
@@ -82,6 +83,7 @@ function ScratchCardElComponent({
     gradientData = ScratchCardBgGradient,
     bgTextureConfig: bgTextureConfigArg = defaultBgTextureConfig,
     matrixConfig,
+    coverMatrixConfig,
     onScratchedEnought,
     onScratchStarted,
     renderCell,
@@ -116,9 +118,7 @@ function ScratchCardElComponent({
     }, [isScratchedEnought]);
 
     const { bundle } = useLoadBundle<IScrathCardBundle>(bundleName)
-    const coverTexture = bundle?.[coverTextureName];
-
-    const coverData = useCoverData({ bundleName, textureName: coverTextureName }, sizeX, sizeY);
+    const coverData = useCoverData(bundleName, coverTextureName, sizeX, sizeY);
     const defaultRenderCoverCell = useCallback((props: IMatrixCellProps) => (<CoverSpriteCell {...props} />), []);
 
     useImperativeHandle(ref, () => {
@@ -160,12 +160,12 @@ function ScratchCardElComponent({
         return (<Graphics draw={renderBgGraphics} />)
     }, [renderBgGraphics, width, height, bundle, bgTextureConfigArg]);
 
-    if (!bundle || !coverTexture) return null
+    if (!bundle || !coverData.length) return null
 
     return (
         <Container width={width} height={height}>
             {renderCardBg}
-            <IconMatrix data={coverData} renderCell={renderCoverCell || defaultRenderCoverCell} config={matrixConfig} />
+            <IconMatrix data={coverData} renderCell={renderCoverCell || defaultRenderCoverCell} config={coverMatrixConfig || matrixConfig} />
             <Container
                 mask={renderTextureSprite}
                 pointermove={pointerMove}
@@ -228,6 +228,12 @@ function ScratchCardComponent(props: IScratchCardProps, ref: Ref<IScratchCardHan
         props.gradientData,
         props.bgTextureConfig,
         props.matrixConfig,
+        props.coverMatrixConfig,
+
+        props.matrixConfig?.cellWidth,
+        props.matrixConfig?.cellHeight,
+        props.coverMatrixConfig?.cellWidth,
+        props.coverMatrixConfig?.cellHeight,
 
         props.onScratchStarted,
         props.onScratchedEnought,

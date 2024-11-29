@@ -88,7 +88,7 @@ export function SantaSac() {
     const hiddenClass = isLoading || !bundle ? 'hidden' : '';
 
     const multiplier = card?.cardData.multiplier;
-    const multiplierText = multiplier ? 'x' + multiplier : '';
+    const multiplierText = typeof multiplier === 'number' ? 'x' + multiplier : '';
 
     return (
         <div className={`${styles.mainContainer} ${hiddenClass}`}>

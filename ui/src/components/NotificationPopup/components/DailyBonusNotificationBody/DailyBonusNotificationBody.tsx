@@ -71,10 +71,14 @@ export function DailyBonusNotificationBody() {
 
     return (
         <div className={styles.container}>
-            <div>{mainContentText}</div>
+            <div className={styles.mainContentText}>{mainContentText}</div>
             <div className={styles.dayRowContainer}>
                 {config.map((item, index) => {
                     const dayContainerStyle = getDailyContainerStyles(index, config.length);
+
+                    const footerFontSize =  isMiddleDay(index, config.length) ? 18 : 12;
+                    const textFitCoefficient =  isMiddleDay(index, config.length) ? 0.9 : 1;
+
 
                     return (<div
                         key={index}
@@ -85,6 +89,7 @@ export function DailyBonusNotificationBody() {
                             className={styles.headerText}
                             text={item.headerText}
                             textStyles={headerTextStyles}
+                            textFitCoefficient={textFitCoefficient}
                         />
                         <Icon name={item.coinIconName} className={styles.coinIcon} />
                         <div className={styles.dayContainerBonus}>
@@ -93,7 +98,7 @@ export function DailyBonusNotificationBody() {
                                 className={styles.bonusAmount}
                                 text={item.bonus + ''}
                                 shouldFitFontSize={false}
-                                textStyles={{ fontSize: 12, dropShadow: false, strokeThickness: 1 }}
+                                textStyles={{ fontSize: footerFontSize, dropShadow: false, strokeThickness: 1 }}
                             ></StyledText>
                         </div>
                     </div>)

@@ -20,6 +20,8 @@ export interface IStyledTextPixiElProps {
 
     isUnderline?: boolean;
     underlineConfig?: IUnderlineConfig;
+
+    shouldFitFontSize?: boolean;
 }
 
 
@@ -35,6 +37,8 @@ export function StyledTextPixiEl({
     y = 0,
     xShift = 0.5,
     yShift = 0.35,
+
+    shouldFitFontSize = true,
 }: IStyledTextPixiElProps) {
 
     const textStyleConfig: Partial<ITextStyle> = {
@@ -44,7 +48,10 @@ export function StyledTextPixiEl({
 
     const fittedFontSize = useFitTextSize(text, dimensions.width * textFitCoefficient, textStyleConfig);
 
-    textStyleConfig.fontSize = fittedFontSize || textStyleConfig.fontSize;
+    if (shouldFitFontSize) {
+        textStyleConfig.fontSize = fittedFontSize || textStyleConfig.fontSize;
+    }
+
     const textStyle = new TextStyle(textStyleConfig);
     const { textRef, underlineRef } = useTextUnderline(
         dimensions.width,

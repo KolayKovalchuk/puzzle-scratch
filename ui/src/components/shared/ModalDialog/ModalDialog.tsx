@@ -1,7 +1,7 @@
 import { StyledHeader } from '@components/shared/StyledHeader';
-import { ReactNode } from 'react';
-import styles from './ModalDialog.module.scss';
+import { FC, ReactNode } from 'react';
 import { Button, ButtonType } from '../Button/Button';
+import styles from './ModalDialog.module.scss';
 
 interface ModalDialogProps {
     isOpen: boolean;
@@ -17,7 +17,7 @@ interface ModalDialogProps {
     onConfirm: () => void;
 }
 
-const ModalDialog: React.FC<ModalDialogProps> = ({
+const ModalDialog: FC<ModalDialogProps> = ({
     isOpen,
     title,
     content,

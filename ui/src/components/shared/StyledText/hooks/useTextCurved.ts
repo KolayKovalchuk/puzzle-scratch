@@ -2,7 +2,6 @@ import { useApp } from '@pixi/react';
 import { BaseTexture, Container, Matrix, Point, RenderTexture, SimpleRope, Sprite, Text, Texture } from 'pixi.js';
 import { useEffect, useRef } from 'react';
 
-// export function useTextCurved(spriteRef: React.RefObject<Sprite> | null) {
 export function useTextCurved() {
     const app = useApp();
     const spriteRef = useRef<Sprite>(null);

@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { RegularStyledText } from '../StyledText';
 import styles from './Button.module.scss';
 import { useButtonConfig } from './hooks/useButtonConfig';
@@ -13,7 +14,7 @@ export interface IButtonProps {
     onClick: () => void;
     className?: string;
     mode?: ButtonType;
-    children?: React.ReactNode;
+    children?: ReactNode;
 }
 
 export function Button({ text, onClick, className, mode = ButtonType.Default, children }: IButtonProps) {

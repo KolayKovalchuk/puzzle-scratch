@@ -73,3 +73,17 @@ export const selectLocalValueWithLinkConfig = (localizationKey: string) => creat
         return { linkUrl, linkText }
     }
 )
+
+export const selectLocalValueWithVars = (localizationKey: string, ...vars: (string | number)[]) => createSelector(
+    [selectLocalValue(localizationKey)],
+    (localizationValue) => {
+        const valueStr = vars.reduce<string>((acc, varName, index) => {
+            const varNameStr = varName.toString();
+            const replaceTarget = `<$var${index + 1}>`
+
+            return acc.replace(replaceTarget, varNameStr)
+        }, localizationValue)
+
+        return valueStr;
+    }
+)

@@ -39,3 +39,22 @@ export async function postCollectRefferalGift() {
         return null
     }
 }
+
+export interface ICollectDailyBonusResponse {
+    amount: number;
+    newBalance: number;
+}
+
+export async function postCollectDailyGift() {
+    try {
+        const response = await apiClient.post('/bonus/daily/collect');
+        const data: ICollectDailyBonusResponse = response.data;
+
+        console.log('Daily bonus collected successfully:', data);
+
+        return data;
+    } catch (error) {
+        console.error('Error collecting daily gift bonus:', error);
+        return null
+    }
+}

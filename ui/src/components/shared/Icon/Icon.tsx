@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import { CSSProperties, forwardRef } from 'react';
 
 import styles from './Icon.module.scss';
 
@@ -7,7 +7,7 @@ interface IconProps {
     title?: string;
     className?: string;
     iconSize?: number | string;
-    style?: React.CSSProperties;
+    style?: CSSProperties;
 }
 
 export const Icon = forwardRef<HTMLDivElement, IconProps>(({ name, style = {}, iconSize = "100%", title, className }, ref) => {

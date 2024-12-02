@@ -16,7 +16,8 @@ const selectConfigQueryCache = createSelector(
         if (!queryKeyList.length) return null
     
         const queryKey = queryKeyList[queryKeyList.length - 1]
-        return queryState.queries[queryKey]
+        const config = queryState.queries[queryKey];
+        return config;
     }
 )
 
@@ -60,5 +61,12 @@ export const selectScratchCardTransitionTimeout = createSelector(
     selectConfigQueryData,
     (config) => {
         return config?.SCRATCH_CARD_TRANSITION_TIMEOUT_MS || 1500
+    }
+)
+
+export const selectDailyBonusConfig = createSelector(
+    selectConfigQueryData,
+    (config) => {
+        return config?.DAILY_BONUS
     }
 )

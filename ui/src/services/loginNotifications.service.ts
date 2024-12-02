@@ -4,7 +4,7 @@ import { selectUserNotifications } from '@store/selectors/user.selectors';
 import store from '@store/store';
 import { useSelector } from 'react-redux';
 
-export function useShowNotificationsPopups(): [INotification[], (notification: INotification) => void] {
+export function useShowLoginNotificationsPopups(): [INotification[], (notification: INotification) => void] {
     const notifications = useSelector(selectUserNotifications);
 
     const removeNotification = (notification: INotification) => {

@@ -2,9 +2,10 @@
 import { Icon } from '@components/shared/Icon';
 import { StyledText } from '@components/shared/StyledText';
 
+import { useContainerDimensions } from '@hooks/useContainerDimensions';
+import { ReactNode } from 'react';
 import styles from './StyledHeader.module.scss';
 import { useGetIconsConfig } from './hooks/useGetIconsConfig';
-import { useContainerDimensions } from '@hooks/useContainerDimensions';
 
 export enum StyledHeaderType {
     BLUE = 'Blue',
@@ -15,7 +16,7 @@ export enum StyledHeaderType {
 
 export interface StyledHeaderTextProps {
     title: string;
-    children: React.ReactNode;
+    children: ReactNode;
     className?: string;
     type?: StyledHeaderType;
     fontSize?: number;

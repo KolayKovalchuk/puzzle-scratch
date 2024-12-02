@@ -1,0 +1,145 @@
+@use '@styles/colors';
+@use '@styles/variables';
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+
+$paddingBottom: 10px;
+
+
+.dayRowContainer {
+    display: flex;
+    justify-content: space-between;
+
+    padding: $paddingBottom * 2 0px;
+
+    width: 108%;
+    position: relative;
+    right: 4.4%;
+}
+
+.dayContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    position: relative;
+    flex: 1;
+
+    background: no-repeat center;
+    background-size: 100% 100%;
+
+    font-size: 15px;
+
+    white-space: nowrap;
+
+    // aspect-ratio: 258/200;
+
+    padding: $paddingBottom 10px;
+
+    &:not(:first-child) {
+        left: -5%;
+    }
+
+    &.leftArrowBlock {
+        background-image: url('/arrowBlocks/leftArrowBlock.png');
+
+        .headerText,
+        .dayContainerBonus {
+            position: relative;
+            left: -10%;
+        }
+
+        .coinIcon {
+            left: 2%;
+        }
+    }
+
+    &.rightArrowBlock {
+        background-image: url('/arrowBlocks/rightArrowBlock.png');
+
+        .coinIcon {
+            left: 5%;
+        }
+    }
+
+    &.centerArrowBlock {
+        background-image: url('/arrowBlocks/centerArrowBlock.png');
+
+        .coinIcon {
+            left: 8%;
+        }
+
+        .dayContainerBonus,
+        .headerText {
+            position: relative;
+            right: 10%;
+        }
+    }
+
+    &.todayArrowBlock {
+        background-image: url('/arrowBlocks/todayArrowBlock.png');
+        margin: -$paddingBottom 0px;
+        padding-top: $paddingBottom * 2;
+        padding-bottom: $paddingBottom * 2;
+        padding-right: 5.2%;
+
+        .headerText {
+            position: relative;
+            left: 5%;
+            width: 110%;
+        }
+
+        .dayContainerBonus {
+            border-radius: 50px;
+        }
+
+        .coinIcon {
+            left: 15%;
+        }
+    }
+}
+
+.headerText,
+.dayContainerBonus {
+    width: 88%;
+}
+
+.headerText {
+    max-height: 34px;
+}
+
+.coinIcon {
+    height: 50%;
+    position: relative;
+
+    top: -5%;
+}
+
+$roboIconSize: 18px;
+
+.dayContainerBonus {
+    display: flex;
+    align-items: center;
+
+    background-color: colors.$soft-blue;
+    border-radius: 8px;
+
+    max-height: 20px;
+
+    .roboTokenIcon {
+        min-width: $roboIconSize;
+    }
+}
+
+.bonusAmount {
+    width: calc(100% - $roboIconSize);
+    height: initial;
+
+    position: relative;
+    top: 1px;
+}

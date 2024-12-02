@@ -21,4 +21,8 @@ export interface IStyledTextProps {
     underlineConfig?: IUnderlineConfig;
 
     anchor?: number;
+
+    shouldFitFontSize?: boolean;
+    xShift?: number
+    yShift?: number
 }

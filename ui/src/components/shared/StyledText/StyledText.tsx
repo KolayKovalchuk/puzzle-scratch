@@ -15,8 +15,11 @@ export function StyledText({
     isUnderline = false,
     underlineConfig,
     anchor = 0.5,
+    shouldFitFontSize = true,
+    xShift = 0.5,
+    yShift = 0.35,
 }: IStyledTextProps) {
-    const { containerRef, dimensions } = useContainerDimensions(text);
+    const { containerRef, dimensions } = useContainerDimensions();
 
     return (
         <div ref={containerRef} className={`${styles.container} ${className || ''}`} style={styleArg}>
@@ -29,6 +32,9 @@ export function StyledText({
                     textFitCoefficient={textFitCoefficient}
                     anchor={anchor}
                     underlineConfig={underlineConfig}
+                    shouldFitFontSize={shouldFitFontSize}
+                    xShift={xShift}
+                    yShift={yShift}
                 />
             </Stage>
             <div

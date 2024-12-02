@@ -23,7 +23,7 @@ export function isMiddleDay(index: number, length: number) {
 export function getDailyContainerStyles(index: number, length: number): CSSProperties {
     const shiftPercent = 2;
     const todayContainerShiftPercent = 2.5;
-    const todayContainerDiff = 20;
+    const todayContainerDiff = 14;
     const dayContainerWidth = 100 / length + shiftPercent - todayContainerDiff / length;
 
     const mainDayIndex = getMainDayIndex(length);

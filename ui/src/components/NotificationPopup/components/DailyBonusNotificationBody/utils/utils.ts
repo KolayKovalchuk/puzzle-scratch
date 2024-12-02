@@ -23,7 +23,8 @@ export function isMiddleDay(index: number, length: number) {
 export function getDailyContainerStyles(index: number, length: number): CSSProperties {
     const shiftPercent = 2;
     const todayContainerShiftPercent = 2.5;
-    const dayContainerWidth = 100 / length + shiftPercent + '%';
+    const todayContainerDiff = 20;
+    const dayContainerWidth = 100 / length + shiftPercent - todayContainerDiff / length;
 
     const mainDayIndex = getMainDayIndex(length);
 
@@ -31,26 +32,26 @@ export function getDailyContainerStyles(index: number, length: number): CSSPrope
         const left = shiftPercent * index * -1 + '%';
 
         return {
-            minWidth: dayContainerWidth,
+            minWidth: dayContainerWidth + '%',
             left,
         }
     }
 
     if (index === mainDayIndex) {
-        const left = todayContainerShiftPercent * index * -1 + '%';
+        const left = todayContainerShiftPercent * index * -1 - ((todayContainerDiff - 4) / length) + '%';
 
         return {
-            minWidth: dayContainerWidth,
+            minWidth: 100 / length + shiftPercent + todayContainerDiff + '%',
             left: left,
         }
     }
 
     if (index > mainDayIndex) {
         const todayContainerAdjust = todayContainerShiftPercent * 0.5;
-        const left = shiftPercent * index * -1 + -todayContainerAdjust + '%';
+        const left = shiftPercent * index * -1 - todayContainerAdjust - (todayContainerDiff / length) + '%';
 
         return {
-            minWidth: dayContainerWidth,
+            minWidth: dayContainerWidth + '%',
             left,
         }
     }

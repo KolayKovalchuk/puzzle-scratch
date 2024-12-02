@@ -9,12 +9,17 @@
 
 $paddingBottom: 10px;
 
+.mainContentText {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
 
 .dayRowContainer {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
-    padding: $paddingBottom * 2 0px;
+    padding: $paddingBottom 0px;
 
     width: 108%;
     position: relative;
@@ -41,6 +46,9 @@ $paddingBottom: 10px;
 
     padding: $paddingBottom 10px;
 
+    height: 60%;
+    max-height: 60%;
+
     &:not(:first-child) {
         left: -5%;
     }
@@ -52,10 +60,6 @@ $paddingBottom: 10px;
         .dayContainerBonus {
             position: relative;
             left: -10%;
-        }
-
-        .coinIcon {
-            left: 2%;
         }
     }
 
@@ -83,30 +87,27 @@ $paddingBottom: 10px;
 
     &.todayArrowBlock {
         background-image: url('/arrowBlocks/todayArrowBlock.png');
-        margin: -$paddingBottom 0px;
-        padding-top: $paddingBottom * 2;
         padding-bottom: $paddingBottom * 2;
-        padding-right: 5.2%;
 
-        .headerText {
-            position: relative;
-            left: 5%;
-            width: 110%;
-        }
+        height: 100%;
+        padding-right: 8%;
 
         .dayContainerBonus {
             border-radius: 50px;
+            width: 60%;
         }
 
         .coinIcon {
-            left: 15%;
+            left: 12%;
+            width: 84%;
+
         }
     }
 }
 
 .headerText,
 .dayContainerBonus {
-    width: 88%;
+    width: 100%;
 }
 
 .headerText {
@@ -114,10 +115,9 @@ $paddingBottom: 10px;
 }
 
 .coinIcon {
-    height: 50%;
     position: relative;
 
-    top: -5%;
+    top: -6px;
 }
 
 $roboIconSize: 18px;
@@ -133,6 +133,7 @@ $roboIconSize: 18px;
 
     .roboTokenIcon {
         min-width: $roboIconSize;
+        width: $roboIconSize;
     }
 }
 

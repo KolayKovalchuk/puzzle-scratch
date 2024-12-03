@@ -222,8 +222,8 @@
     "pt-BR": "Ao tocar em “Concordo”, você confirma que tem mais de 18 anos e concorda com os Termos de Serviço disponíveis <link url=\"https://www.abc.com\">aqui</link>.",
     "VI": "Bằng cách nhấn vào 'Đồng ý', bạn xác nhận mình trên 18 tuổi và đồng ý với Điều khoản dịch vụ có sẵn <link url=\"https://www.abc.com\">tại đây</link>.",
     "ES": "Al tocar \"Aceptar\", confirma que es mayor de 18 años y acepta los Términos de servicio disponibles <link url=\"https://www.abc.com\">aquí</link>.",
-    "AR": "من خلال النقر على \"موافقة\"، فإنك تؤكد أن عمرك يزيد عن 18 عامًا وتوافق على شروط الخدمة المتوفرة <link url=\"https://www.abc.com\">هنا</link>.",
-    "FIL": "Sa pamamagitan ng pag-tap sa ‘Sumasang-ayon’ kinukumpirma mo na ikaw ay lampas 18 at sumasang-ayon sa Mga Tuntunin ng Serbisyo na available <link url=\"https://www.abc.com\">dito</link>.",
+    "AR": "من خلال النقر على \"أوافق\"، فإنك تؤكد أن عمرك يزيد عن 18 عامًا وتوافق على شروط الخدمة المتاحة <link url=\"https://www.abc.com\">هنا</link>.",
+    "FIL": "Sa pamamagitan ng pag-tap sa ‘Sumasang-ayon,’ kinukumpirma mong ikaw ay lampas 18 at sumasang-ayon sa Mga Tuntunin ng Serbisyo na available <link url=\"https://www.abc.com\">dito</link>.",
     "RU": "Нажимая «Согласен», вы подтверждаете, что вам больше 18 лет, и соглашаетесь с Условиями обслуживания, доступными <link url=\"https://www.abc.com\">здесь</link>.",
     "HI": "'सहमत' पर टैप करके आप पुष्टि करते हैं कि आपकी उम्र 18 वर्ष से अधिक है और आप <link url=\"https://www.abc.com\">यहां</link> उपलब्ध सेवा की शर्तों से सहमत हैं।"
   },
@@ -283,14 +283,14 @@
     "VI": "Quá chậm! Chỉ những người bạn <$var> mới có thể thu thập RBAX từ món quà này. Thu thập nhanh hơn vào lần sau.",
     "ES": "¡Demasiado lento! Solo los amigos de <$var> pueden recibir RBAX de este regalo. Recoge más rápido la próxima vez.",
     "AR": "بطيء جدًا! يمكن لأصدقاء <$var> فقط جمع RBAX من هذه الهدية. اجمع بشكل أسرع في المرة القادمة.",
-    "FIL": "Masyadong mabagal! Mga <$var> na kaibigan lang ang makakakolekta ng RBAX mula sa regalong ito. Mangolekta ng mas mabilis sa susunod.",
+    "FIL": "Masyadong mabagal! Mga <$var> na kaibigan lang ang makakakolekta ng RBAX mula sa regalong ito. Mangolekta ng mas mabilis sa susunod na pagkakataon.",
     "RU": "Слишком медленно! Только друзья <$var> могут получить RBAX из этого подарка. В следующий раз собирайте быстрее.",
     "HI": "बहुत धीमा! केवल <$var> मित्र ही इस उपहार से RBAX प्राप्त कर सकते हैं। अगली बार तेजी से संग्रह करें."
   },
   {
     "Key": "txt.btn.send",
     "EN": "send",
-    "UK": "надіслати",
+    "UK": "відправити",
     "pt-BR": "enviar",
     "VI": "gửi",
     "ES": "enviar",
@@ -720,6 +720,18 @@
     "HI": "शीर्ष पुरस्कार"
   },
   {
+    "Key": "txt.wallet.wallet",
+    "EN": "Wallet",
+    "UK": "Гаманець",
+    "pt-BR": "Carteira",
+    "VI": "Cái ví",
+    "ES": "Billetera",
+    "AR": "محفظة",
+    "FIL": "Wallet",
+    "RU": "Кошелек",
+    "HI": "बटुआ"
+  },
+  {
     "Key": "txt.wallet.balance",
     "EN": "Balance",
     "UK": "Баланс",
@@ -908,14 +920,14 @@
     "ES": "El depósito falló. Asegúrese de tener suficiente RBAX y bandeja nuevamente.",
     "AR": "فشل الإيداع. تأكد من أن لديك ما يكفي من RBAX والصينية مرة أخرى.",
     "FIL": "Nabigo ang deposito. Tiyaking mayroon kang sapat na RBAX at tray muli.",
-    "RU": "Депозит не удался. Снова убедитесь, что у вас достаточно RBAX и лотка.",
-    "HI": "जमा विफल रहा. सुनिश्चित करें कि आपके पास फिर से पर्याप्त आरबीएक्स और ट्रे है।"
+    "RU": "Депозит не состоялся. Снова убедитесь, что у вас достаточно RBAX и лотка.",
+    "HI": "जमा विफल रहा. सुनिश्चित करें कि आपके पास फिर से पर्याप्त RBAX और ट्रे है।"
   },
   {
     "Key": "txt.invite.terms",
     "EN": "You will recieve te invite friend bonus pf <var1> with every <var2> frineds who accpeted your invite and never played before.",
     "UK": "Ви отримаєте бонус за запрошення друга pf <var1> за кожного <var2> друга, який прийняв ваше запрошення і ніколи раніше не грав.",
-    "pt-BR": "Você receberá um bônus de convite de amigo pf <var1> com todos os <var2> amigos que aceitaram seu convite e nunca jogaram antes.",
+    "pt-BR": "Você receberá o bônus de convite de amigo pf <var1> com todos os amigos <var2> que aceitaram seu convite e nunca jogaram antes.",
     "VI": "Bạn sẽ nhận được phần thưởng mời kết bạn pf <var1> với mọi người bạn <var2> đã chấp nhận lời mời của bạn và chưa từng chơi trước đó.",
     "ES": "Recibirás el bono de invitación de amigo pf <var1> con cada amigo <var2> que haya aceptado tu invitación y nunca haya jugado antes.",
     "AR": "سوف تتلقى مكافأة دعوة الأصدقاء pf <var1> مع كل أصدقاء <var2> الذين قبلوا دعوتك ولم يلعبوا من قبل.",
@@ -930,7 +942,7 @@
     "pt-BR": "<Var1> enviou RBAX para você! Jogue no CryptoScratch com seu presente e converta diversão em dinheiro!",
     "VI": "<Var1> đã gửi cho bạn RBAX! Chơi trong CryptoScratch với quà tặng của bạn và chuyển đổi niềm vui thành tiền mặt!",
     "ES": "¡<Var1> te envió RBAX! ¡Juega en CryptoScratch con tu regalo y convierte la diversión en dinero en efectivo!",
-    "AR": "<Var1> أرسل إليك RBAX! العب في CryptoScratch مع هديتك وقم بتحويل المتعة إلى أموال!",
+    "AR": "<Var1> أرسل إليك RBAX! العب في CryptoScratch مع هديتك وحوّل المتعة إلى أموال!",
     "FIL": "<Var1> nagpadala sa iyo ng RBAX! Maglaro sa CryptoScratch sa gamit ang iyong regalo at i-convert ang saya sa cash!",
     "RU": "<Var1> отправил вам RBAX! Играйте в CryptoScratch со своим подарком и конвертируйте удовольствие в деньги!",
     "HI": "<Var1> ने आपको RBAX भेजा है! अपने उपहार के साथ क्रिप्टोस्क्रैच खेलें और मनोरंजन को नकदी में बदलें!"
@@ -956,7 +968,7 @@
     "ES": "Transferencia de billetera",
     "AR": "نقل المحفظة",
     "FIL": "Paglipat ng Wallet",
-    "RU": "Перевод на кошелек",
+    "RU": "Перевод кошелька",
     "HI": "वॉलेट ट्रांसफर"
   },
   {
@@ -991,9 +1003,9 @@
     "VI": "•$1 = (RBAX) <var1>\n•RBAX, USDT/C, TON Chỉ trên mạng TON\n•Số tiền rút lại tối thiểu là <var2>.\n•Gửi tiền vào ví sau. Hãy chắc chắn rằng bạn chỉ định thẻ.\n•Chuyển đổi được ước tính và chuyển đổi cuối cùng sẽ được quyết định vào thời điểm xử lý.",
     "ES": "•$1 = (RBAX) <var1>\n•RBAX, USDT/C, TON en la red TON únicamente\n•La cantidad mínima de redibujo es <var2>.\n•Enviar fondos a la siguiente billetera. Asegúrese de especificar la etiqueta.\n•La conversión se estima y la conversión final se decidirá en el momento del procesamiento.",
     "AR": "•1$ = (RBAX) <var1>\n•RBAX، USDT/C، TON على شبكة TON فقط\n• الحد الأدنى لمبلغ إعادة السحب هو <var2>.\n• إرسال الأموال إلى المحفظة التالية. تأكد من تحديد العلامة.\n• التحويل مقدر وسيتم تحديد التحويل النهائي لحظة المعالجة.",
-    "FIL": "•$1 = (RBAX) <var1>\n•RBAX, USDT/C, TON sa TON network Lang\n•Ang minimum na halaga ng redraw ay <var2>.\n•Magpadala ng mga pondo sa sumusunod na wallet. Tiyaking tinukoy mo ang tag.\n• Tinatantya ang conversion at pagpapasya ang panghuling conversion sa sandali ng pagproseso.",
+    "FIL": "•$1 = (RBAX) <var1>\n•RBAX, USDT/C, TON sa TON network Lang\n•Ang minimum na halaga ng redraw ay <var2>.\n•Magpadala ng mga pondo sa sumusunod na wallet. Tiyaking tinukoy mo ang tag.\n• Tinatantya ang conversion at pagpapasya ang huling conversion sa sandali ng pagproseso.",
     "RU": "•$1 = (RBAX) <var1>\n•RBAX, USDT/C, TON только в сети TON.\n•Минимальная сумма перерисовки — <var2>.\n•Отправьте средства на следующий кошелек. Обязательно укажите тег.\n•Конверсия оценивается, и окончательное решение о конверсии будет принято в момент обработки.",
-    "HI": "•$1 = (RBAX) <var1>\n•RBAX, USDT/C, TON केवल TON नेटवर्क पर\n•न्यूनतम पुनर्निर्धारण राशि <var2> है।\n•निम्नलिखित वॉलेट में धनराशि भेजें। सुनिश्चित करें कि आपने टैग निर्दिष्ट किया है.\n•रूपांतरण का अनुमान लगाया गया है और अंतिम रूपांतरण प्रसंस्करण के समय तय किया जाएगा।"
+    "HI": "•$1 = (आरबीएएक्स) <var1>\n•RBAX, USDT/C, TON केवल TON नेटवर्क पर\n•न्यूनतम पुनर्निर्धारण राशि <var2> है।\n•निम्नलिखित वॉलेट में धनराशि भेजें। सुनिश्चित करें कि आपने टैग निर्दिष्ट किया है.\n•रूपांतरण का अनुमान लगाया गया है और अंतिम रूपांतरण प्रसंस्करण के समय तय किया जाएगा।"
   },
   {
     "Key": "txt.withdrawal.title",

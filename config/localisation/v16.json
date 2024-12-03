@@ -222,8 +222,8 @@
     "pt-BR": "Ao tocar em “Concordo”, você confirma que tem mais de 18 anos e concorda com os Termos de Serviço disponíveis <link url=\"https://www.abc.com\">aqui</link>.",
     "VI": "Bằng cách nhấn vào 'Đồng ý', bạn xác nhận mình trên 18 tuổi và đồng ý với Điều khoản dịch vụ có sẵn <link url=\"https://www.abc.com\">tại đây</link>.",
     "ES": "Al tocar \"Aceptar\", confirma que es mayor de 18 años y acepta los Términos de servicio disponibles <link url=\"https://www.abc.com\">aquí</link>.",
-    "AR": "من خلال النقر على \"أوافق\"، فإنك تؤكد أن عمرك يزيد عن 18 عامًا وتوافق على شروط الخدمة المتاحة <link url=\"https://www.abc.com\">هنا</link>.",
-    "FIL": "Sa pamamagitan ng pag-tap sa ‘Sumasang-ayon,’ kinukumpirma mong ikaw ay lampas 18 at sumasang-ayon sa Mga Tuntunin ng Serbisyo na available <link url=\"https://www.abc.com\">dito</link>.",
+    "AR": "من خلال النقر على \"أوافق\"، فإنك تؤكد أن عمرك يزيد عن 18 عامًا وتوافق على شروط الخدمة المتوفرة <link url=\"https://www.abc.com\">هنا</link>.",
+    "FIL": "Sa pamamagitan ng pag-tap sa ‘Sumasang-ayon’ kinukumpirma mo na ikaw ay lampas 18 at sumasang-ayon sa Mga Tuntunin ng Serbisyo na available <link url=\"https://www.abc.com\">dito</link>.",
     "RU": "Нажимая «Согласен», вы подтверждаете, что вам больше 18 лет, и соглашаетесь с Условиями обслуживания, доступными <link url=\"https://www.abc.com\">здесь</link>.",
     "HI": "'सहमत' पर टैप करके आप पुष्टि करते हैं कि आपकी उम्र 18 वर्ष से अधिक है और आप <link url=\"https://www.abc.com\">यहां</link> उपलब्ध सेवा की शर्तों से सहमत हैं।"
   },
@@ -290,7 +290,7 @@
   {
     "Key": "txt.btn.send",
     "EN": "send",
-    "UK": "відправити",
+    "UK": "надіслати",
     "pt-BR": "enviar",
     "VI": "gửi",
     "ES": "enviar",
@@ -816,6 +816,54 @@
     "HI": "डिस्कनेक्ट"
   },
   {
+    "Key": "txt.wallet.history",
+    "EN": "History",
+    "UK": "історія",
+    "pt-BR": "História",
+    "VI": "Lịch sử",
+    "ES": "Historia",
+    "AR": "تاريخ",
+    "FIL": "Kasaysayan",
+    "RU": "История",
+    "HI": "इतिहास"
+  },
+  {
+    "Key": "txt.wallet.history.action",
+    "EN": "Action",
+    "UK": "Дія",
+    "pt-BR": "Ação",
+    "VI": "Hoạt động",
+    "ES": "Acción",
+    "AR": "فعل",
+    "FIL": "Aksyon",
+    "RU": "Действие",
+    "HI": "कार्रवाई"
+  },
+  {
+    "Key": "txt.wallet.history.date",
+    "EN": "Date",
+    "UK": "Дата",
+    "pt-BR": "Data",
+    "VI": "Ngày",
+    "ES": "Fecha",
+    "AR": "تاريخ",
+    "FIL": "Petsa",
+    "RU": "Дата",
+    "HI": "तारीख"
+  },
+  {
+    "Key": "txt.wallet.history.amount",
+    "EN": "Amount",
+    "UK": "Сума",
+    "pt-BR": "Quantia",
+    "VI": "Số lượng",
+    "ES": "Cantidad",
+    "AR": "كمية",
+    "FIL": "Halaga",
+    "RU": "Количество",
+    "HI": "मात्रा"
+  },
+  {
     "Key": "deposit.select.title",
     "EN": "Deposit With",
     "UK": "Депозит С",
@@ -848,7 +896,7 @@
     "ES": "Depósito de billetera",
     "AR": "إيداع المحفظة",
     "FIL": "Deposito sa Wallet",
-    "RU": "Депозит в кошельке",
+    "RU": "Депозит в кошелек",
     "HI": "बटुआ जमा"
   },
   {
@@ -931,7 +979,7 @@
     "VI": "Bạn sẽ nhận được phần thưởng mời kết bạn pf <var1> với mọi người bạn <var2> đã chấp nhận lời mời của bạn và chưa từng chơi trước đó.",
     "ES": "Recibirás el bono de invitación de amigo pf <var1> con cada amigo <var2> que haya aceptado tu invitación y nunca haya jugado antes.",
     "AR": "سوف تتلقى مكافأة دعوة الأصدقاء pf <var1> مع كل أصدقاء <var2> الذين قبلوا دعوتك ولم يلعبوا من قبل.",
-    "FIL": "Makakatanggap ka ng bonus ng imbitasyon ng kaibigan pf <var1> sa bawat <var2> frined na tumanggap ng iyong imbitasyon at hindi kailanman naglaro dati.",
+    "FIL": "Makakatanggap ka ng bonus ng imbitasyon sa kaibigan na pf <var1> sa bawat <var2> frined na tumanggap ng iyong imbitasyon at hindi kailanman naglaro dati.",
     "RU": "Вы получите бонус за приглашение друга pf <var1> за каждого друга <var2>, который принял ваше приглашение и никогда раньше не играл.",
     "HI": "आपको प्रत्येक <var2> मित्र के साथ आमंत्रण मित्र बोनस पीएफ <var1> प्राप्त होगा, जिन्होंने आपका निमंत्रण स्वीकार किया और पहले कभी नहीं खेला।"
   },
@@ -974,7 +1022,7 @@
   {
     "Key": "txt.transfer.wallet",
     "EN": "Wallet:",
-    "UK": "гаманець:",
+    "UK": "Гаманець:",
     "pt-BR": "Carteira:",
     "VI": "Cái ví:",
     "ES": "Billetera:",
@@ -1123,7 +1171,7 @@
     "VI": "Mô tả trò chơi hộp băng\nMô tả trò chơi hộp băng\nMô tả trò chơi hộp băng\nMô tả trò chơi hộp băng",
     "ES": "Descripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo",
     "AR": "وصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج",
-    "FIL": "Ang paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo",
+    "FIL": "Ang paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box",
     "RU": "Описание игры Ледяной ящик\nОписание игры Ледяной ящик\nОписание игры Ледяной ящик\nОписание игры Ледяной ящик",
     "HI": "आइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण"
   },
@@ -1135,7 +1183,7 @@
     "VI": "Mô tả trò chơi hộp băng\nMô tả trò chơi hộp băng\nMô tả trò chơi hộp băng\nMô tả trò chơi hộp băng",
     "ES": "Descripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo",
     "AR": "وصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج",
-    "FIL": "Ang paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo",
+    "FIL": "Ang paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box",
     "RU": "Описание игры Ледяной ящик\nОписание игры Ледяной ящик\nОписание игры Ледяной ящик\nОписание игры Ледяной ящик",
     "HI": "आइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण"
   },
@@ -1147,7 +1195,7 @@
     "VI": "Mô tả trò chơi hộp đá\nMô tả trò chơi hộp băng\nMô tả trò chơi hộp băng\nMô tả trò chơi hộp băng",
     "ES": "Descripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo",
     "AR": "وصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج ",
-    "FIL": "Ang paglalarawan ng laro ng ice box\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo",
+    "FIL": "Ang paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box\nAng paglalarawan ng larong kahon ng yelo",
     "RU": "«Описание игры Ледяной ящик»\nОписание игры Ледяной ящик\nОписание игры Ледяной ящик\nОписание игры «Ледяной ящик»",
     "HI": "आइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण"
   },

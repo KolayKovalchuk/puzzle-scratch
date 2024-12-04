@@ -19,13 +19,16 @@ export function TableCell({ data, width }: ITableCellProps) {
 export interface ITableRowProps {
     data: ITableCellData[];
     renderCell?: (data: ITableCellData, index: number) => ReactNode;
+    noRowBg?: boolean;
 }
 
-export function TableRow({ data, renderCell }: ITableRowProps) {
+export function TableRow({ data, renderCell, noRowBg = false }: ITableRowProps) {
     const cellWidthPercent = `${100 / data.length}%`;
 
+    const rowClassName = `${styles.row} ${ noRowBg ? '' : styles.defaultRowBg }`;
+
     return (
-        <div className={styles.row} >
+        <div className={rowClassName} >
             {
                 data.map((item, index) => {
                     const cellData = renderCell

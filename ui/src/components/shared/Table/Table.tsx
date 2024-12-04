@@ -15,10 +15,11 @@ export interface ITableProps {
     tBodyData: ITRowData[];
     renderCell?: (data: ITableCellData, index: number) => ReactNode;
 
-    customClass?: string;
+    className?: string;
+    noRowBg?: boolean;
 }
 
-export function Table({ tHeadData, tHeadElement, tBodyData, renderCell, customClass }: ITableProps) {
+export function Table({ tHeadData, tHeadElement, tBodyData, renderCell, className, noRowBg = false }: ITableProps) {
     const noData = useSelector(selectLocalValue('txt.table.emptyData'));
 
     if (!tBodyData.length) {
@@ -26,15 +27,17 @@ export function Table({ tHeadData, tHeadElement, tBodyData, renderCell, customCl
     }
 
     return (
-        <div className={`${styles.table} ${customClass}`}>
+        <div className={`${styles.table} ${className}`}>
             {tHeadData
                 ? <TableHeadRow
                     tHeadData={tHeadData}
                 />
                 : tHeadElement}
-            {tBodyData.map((rowData) => {
-                return <TableRow key={rowData.key} data={rowData.cellData} renderCell={renderCell}/>;
-            })}
+            <div className={`${styles.tBody} tBody`}>
+                {tBodyData.map((rowData) => {
+                    return <TableRow key={rowData.key} data={rowData.cellData} renderCell={renderCell} noRowBg={noRowBg} />;
+                })}
+            </div>
         </div>
     );
 };

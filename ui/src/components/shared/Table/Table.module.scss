@@ -34,7 +34,7 @@ $header-border-radius: 20px;
     text-align: center;
 
     font-size: 20px;
-    font-weight: 800;
+    font-weight: bold;
     color: colors.$light-yellow;
 
 
@@ -53,7 +53,10 @@ $header-border-radius: 20px;
     display: flex;
     margin-top: 2px;
     width: 100%;
-    background: colors.$table_row_gradient
+}
+
+.defaultRowBg {
+    background: colors.$table_row_gradient;
 }
 
 .cell {

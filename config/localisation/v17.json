@@ -222,9 +222,9 @@
     "pt-BR": "Ao tocar em “Concordo”, você confirma que tem mais de 18 anos e concorda com os Termos de Serviço disponíveis <link url=\"https://www.abc.com\">aqui</link>.",
     "VI": "Bằng cách nhấn vào 'Đồng ý', bạn xác nhận mình trên 18 tuổi và đồng ý với Điều khoản dịch vụ có sẵn <link url=\"https://www.abc.com\">tại đây</link>.",
     "ES": "Al tocar \"Aceptar\", confirma que es mayor de 18 años y acepta los Términos de servicio disponibles <link url=\"https://www.abc.com\">aquí</link>.",
-    "AR": "من خلال النقر على \"أوافق\"، فإنك تؤكد أن عمرك يزيد عن 18 عامًا وتوافق على شروط الخدمة المتوفرة <link url=\"https://www.abc.com\">هنا</link>.",
+    "AR": "من خلال النقر على \"موافقة\"، فإنك تؤكد أن عمرك يزيد عن 18 عامًا وتوافق على شروط الخدمة المتوفرة <link url=\"https://www.abc.com\">هنا</link>.",
     "FIL": "Sa pamamagitan ng pag-tap sa ‘Sumasang-ayon’ kinukumpirma mo na ikaw ay lampas 18 at sumasang-ayon sa Mga Tuntunin ng Serbisyo na available <link url=\"https://www.abc.com\">dito</link>.",
-    "RU": "Нажимая «Согласен», вы подтверждаете, что вам больше 18 лет, и соглашаетесь с Условиями обслуживания, доступными <link url=\"https://www.abc.com\">здесь</link>.",
+    "RU": "Нажимая «Согласен», вы подтверждаете, что вам уже исполнилось 18 лет, и соглашаетесь с Условиями использования, доступными <link url=\"https://www.abc.com\">здесь</link>.",
     "HI": "'सहमत' पर टैप करके आप पुष्टि करते हैं कि आपकी उम्र 18 वर्ष से अधिक है और आप <link url=\"https://www.abc.com\">यहां</link> उपलब्ध सेवा की शर्तों से सहमत हैं।"
   },
   {
@@ -446,7 +446,7 @@
   {
     "Key": "txt.btn.invitef",
     "EN": "Invite Friends",
-    "UK": "Запросіть друзів",
+    "UK": "Запросити друзів",
     "pt-BR": "Convide amigos",
     "VI": "Mời bạn bè",
     "ES": "invitar amigos",
@@ -458,7 +458,7 @@
   {
     "Key": "txt.invite.link",
     "EN": "Sharable Link",
-    "UK": "Посилання для спільного доступу",
+    "UK": "Посилання для спільного використання",
     "pt-BR": "Link compartilhável",
     "VI": "Liên kết có thể chia sẻ",
     "ES": "Enlace para compartir",
@@ -896,7 +896,7 @@
     "ES": "Depósito de billetera",
     "AR": "إيداع المحفظة",
     "FIL": "Deposito sa Wallet",
-    "RU": "Депозит в кошелек",
+    "RU": "Депозит в кошельке",
     "HI": "बटुआ जमा"
   },
   {
@@ -910,6 +910,18 @@
     "FIL": "Piliin ang iyong gustong paraan para makakuha ng RBAX.",
     "RU": "Выберите предпочитаемый способ получения RBAX.",
     "HI": "RBAX प्राप्त करने के लिए अपनी पसंदीदा विधि चुनें।"
+  },
+  {
+    "Key": "deposit.select.transfer",
+    "EN": "Transfer",
+    "UK": "Трансфер",
+    "pt-BR": "Transferir",
+    "VI": "Chuyển khoản",
+    "ES": "Transferir",
+    "AR": "تحويل",
+    "FIL": "Paglipat",
+    "RU": "Передача",
+    "HI": "स्थानांतरण"
   },
   {
     "Key": "txt.btn.cancel",
@@ -969,13 +981,13 @@
     "AR": "فشل الإيداع. تأكد من أن لديك ما يكفي من RBAX والصينية مرة أخرى.",
     "FIL": "Nabigo ang deposito. Tiyaking mayroon kang sapat na RBAX at tray muli.",
     "RU": "Депозит не состоялся. Снова убедитесь, что у вас достаточно RBAX и лотка.",
-    "HI": "जमा विफल रहा. सुनिश्चित करें कि आपके पास फिर से पर्याप्त RBAX और ट्रे है।"
+    "HI": "जमा विफल रहा. सुनिश्चित करें कि आपके पास फिर से पर्याप्त आरबीएक्स और ट्रे है।"
   },
   {
     "Key": "txt.invite.terms",
     "EN": "You will recieve te invite friend bonus pf <var1> with every <var2> frineds who accpeted your invite and never played before.",
     "UK": "Ви отримаєте бонус за запрошення друга pf <var1> за кожного <var2> друга, який прийняв ваше запрошення і ніколи раніше не грав.",
-    "pt-BR": "Você receberá o bônus de convite de amigo pf <var1> com todos os amigos <var2> que aceitaram seu convite e nunca jogaram antes.",
+    "pt-BR": "Você receberá um bônus de convite de amigo pf <var1> com todos os <var2> amigos que aceitaram seu convite e nunca jogaram antes.",
     "VI": "Bạn sẽ nhận được phần thưởng mời kết bạn pf <var1> với mọi người bạn <var2> đã chấp nhận lời mời của bạn và chưa từng chơi trước đó.",
     "ES": "Recibirás el bono de invitación de amigo pf <var1> con cada amigo <var2> que haya aceptado tu invitación y nunca haya jugado antes.",
     "AR": "سوف تتلقى مكافأة دعوة الأصدقاء pf <var1> مع كل أصدقاء <var2> الذين قبلوا دعوتك ولم يلعبوا من قبل.",
@@ -1016,13 +1028,13 @@
     "ES": "Transferencia de billetera",
     "AR": "نقل المحفظة",
     "FIL": "Paglipat ng Wallet",
-    "RU": "Перевод кошелька",
+    "RU": "Перевод на кошелек",
     "HI": "वॉलेट ट्रांसफर"
   },
   {
     "Key": "txt.transfer.wallet",
     "EN": "Wallet:",
-    "UK": "Гаманець:",
+    "UK": "гаманець:",
     "pt-BR": "Carteira:",
     "VI": "Cái ví:",
     "ES": "Billetera:",
@@ -1052,7 +1064,7 @@
     "ES": "•$1 = (RBAX) <var1>\n•RBAX, USDT/C, TON en la red TON únicamente\n•La cantidad mínima de redibujo es <var2>.\n•Enviar fondos a la siguiente billetera. Asegúrese de especificar la etiqueta.\n•La conversión se estima y la conversión final se decidirá en el momento del procesamiento.",
     "AR": "•1$ = (RBAX) <var1>\n•RBAX، USDT/C، TON على شبكة TON فقط\n• الحد الأدنى لمبلغ إعادة السحب هو <var2>.\n• إرسال الأموال إلى المحفظة التالية. تأكد من تحديد العلامة.\n• التحويل مقدر وسيتم تحديد التحويل النهائي لحظة المعالجة.",
     "FIL": "•$1 = (RBAX) <var1>\n•RBAX, USDT/C, TON sa TON network Lang\n•Ang minimum na halaga ng redraw ay <var2>.\n•Magpadala ng mga pondo sa sumusunod na wallet. Tiyaking tinukoy mo ang tag.\n• Tinatantya ang conversion at pagpapasya ang huling conversion sa sandali ng pagproseso.",
-    "RU": "•$1 = (RBAX) <var1>\n•RBAX, USDT/C, TON только в сети TON.\n•Минимальная сумма перерисовки — <var2>.\n•Отправьте средства на следующий кошелек. Обязательно укажите тег.\n•Конверсия оценивается, и окончательное решение о конверсии будет принято в момент обработки.",
+    "RU": "•$1 = (RBAX) <var1>\n•RBAX, USDT/C, TON только в сети TON.\n•Минимальная сумма перерисовки — <var2>.\n•Отправьте средства на следующий кошелек. Обязательно укажите тег.\n• Конверсия оценивается, и окончательное решение о конверсии будет принято в момент обработки.",
     "HI": "•$1 = (आरबीएएक्स) <var1>\n•RBAX, USDT/C, TON केवल TON नेटवर्क पर\n•न्यूनतम पुनर्निर्धारण राशि <var2> है।\n•निम्नलिखित वॉलेट में धनराशि भेजें। सुनिश्चित करें कि आपने टैग निर्दिष्ट किया है.\n•रूपांतरण का अनुमान लगाया गया है और अंतिम रूपांतरण प्रसंस्करण के समय तय किया जाएगा।"
   },
   {
@@ -1171,7 +1183,7 @@
     "VI": "Mô tả trò chơi hộp băng\nMô tả trò chơi hộp băng\nMô tả trò chơi hộp băng\nMô tả trò chơi hộp băng",
     "ES": "Descripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo",
     "AR": "وصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج",
-    "FIL": "Ang paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box",
+    "FIL": "Ang paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo",
     "RU": "Описание игры Ледяной ящик\nОписание игры Ледяной ящик\nОписание игры Ледяной ящик\nОписание игры Ледяной ящик",
     "HI": "आइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण"
   },
@@ -1183,7 +1195,7 @@
     "VI": "Mô tả trò chơi hộp băng\nMô tả trò chơi hộp băng\nMô tả trò chơi hộp băng\nMô tả trò chơi hộp băng",
     "ES": "Descripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo",
     "AR": "وصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج",
-    "FIL": "Ang paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box",
+    "FIL": "Ang paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo",
     "RU": "Описание игры Ледяной ящик\nОписание игры Ледяной ящик\nОписание игры Ледяной ящик\nОписание игры Ледяной ящик",
     "HI": "आइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण"
   },
@@ -1195,7 +1207,7 @@
     "VI": "Mô tả trò chơi hộp đá\nMô tả trò chơi hộp băng\nMô tả trò chơi hộp băng\nMô tả trò chơi hộp băng",
     "ES": "Descripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo",
     "AR": "وصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج ",
-    "FIL": "Ang paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box\nAng paglalarawan ng larong kahon ng yelo",
+    "FIL": "Ang paglalarawan ng laro ng ice box\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo",
     "RU": "«Описание игры Ледяной ящик»\nОписание игры Ледяной ящик\nОписание игры Ледяной ящик\nОписание игры «Ледяной ящик»",
     "HI": "आइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण"
   },

@@ -8,11 +8,25 @@ interface IconProps {
     className?: string;
     iconSize?: number | string;
     style?: CSSProperties;
+
+    onClick?: () => void;
 }
 
-export const Icon = forwardRef<HTMLDivElement, IconProps>(({ name, style = {}, iconSize = "100%", title, className }, ref) => {
+export const Icon = forwardRef<HTMLDivElement, IconProps>(({
+    name,
+    style = {},
+    iconSize = "100%",
+    title,
+    className,
+    onClick,
+}, ref) => {
     return (
-        <div ref={ref} className={`${styles.iconContainer} ${className || ''}`} style={style}>
+        <div
+            ref={ref}
+            className={`${styles.iconContainer}
+            ${className || ''}`} style={style}
+            onClick={onClick}
+        >
             <div className={styles.iconContent}>
                 <svg
                     width={iconSize}

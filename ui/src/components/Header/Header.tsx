@@ -1,5 +1,5 @@
 import { Icon } from '@components/shared/Icon'
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import styles from './Header.module.scss'
 
 import avatar_placeholder from '@icons/avatar_placeholder.svg'
@@ -13,6 +13,8 @@ import { WinStyledText } from '@components/shared/StyledText'
 import { selectScratchCardTransitionTimeout } from '@store/selectors/config.selectors'
 import AnimatedNumbers from "react-animated-numbers"
 import { useBalanceChangeLabel } from './hooks/useBalanceChangeLabel'
+import { useNavigate } from 'react-router-dom'
+import { ROUTES } from '@routers/routerConfig'
 
 function renderAnimatedNumbers(amount: number) {
     return <AnimatedNumbers
@@ -34,12 +36,18 @@ export function Header() {
 
     const animatedNumbers = useMemo(() => renderAnimatedNumbers(amount), [amount]);
 
+    const navigate = useNavigate();
+
+    const openWallet = useCallback(() => {
+        navigate(ROUTES.Wallet);
+    }, [navigate]);
+
     return (
         <div className={styles.mainContainer}>
             <div className={styles.logo}>
                 <Icon name={logo} className={styles.logoIcon}></Icon>
             </div>
-            <div className={styles.currency_info_container}>
+            <div className={styles.currency_info_container} onClick={openWallet}>
                 <Icon name={robo_token} className={styles.token_icon}></Icon>
                 {animatedNumbers}
 
@@ -56,7 +64,7 @@ export function Header() {
 
             </div>
             <div className={styles.profileContainer}>
-                <Icon name={wallet} iconSize='58%' className={styles.icon}></Icon>
+                <Icon name={wallet} iconSize='58%' className={styles.icon} onClick={openWallet}></Icon>
                 <Icon name={avatar_placeholder} iconSize='85%' className={styles.icon}></Icon>
             </div>
         </div>

@@ -145,15 +145,15 @@
     },
     {
       "Key": "txt.footer.website",
-      "EN": "<link url=\"https://preytv.atlassian.net/wiki/spaces/RBS/pages/2983460865\">Website</link>",
-      "UK": "<link url=\"https://preytv.atlassian.net/wiki/spaces/RBS/pages/2983460865\">Website</link>",
-      "RU": "<link url=\"https://preytv.atlassian.net/wiki/spaces/RBS/pages/2983460865\">Website</link>",
-      "pt-BR": "<link url=\"https://preytv.atlassian.net/wiki/spaces/RBS/pages/2983460865\">Website</link>",
-      "VI": "<link url=\"https://preytv.atlassian.net/wiki/spaces/RBS/pages/2983460865\">Website</link>",
-      "ES": "<link url=\"https://preytv.atlassian.net/wiki/spaces/RBS/pages/2983460865\">Website</link>",
-      "AR": "<link url=\"https://preytv.atlassian.net/wiki/spaces/RBS/pages/2983460865\">Website</link>",
-      "FIL": "<link url=\"https://preytv.atlassian.net/wiki/spaces/RBS/pages/2983460865\">Website</link>",
-      "HI": "<link url=\"https://preytv.atlassian.net/wiki/spaces/RBS/pages/2983460865\">Website</link>"
+      "EN": "<link url=\"https://www.cryptoscratch.gg\">Website</link>",
+      "UK": "<link url=\"https://www.cryptoscratch.gg\">Website</link>",
+      "RU": "<link url=\"https://www.cryptoscratch.gg\">Website</link>",
+      "pt-BR": "<link url=\"https://www.cryptoscratch.gg\">Website</link>",
+      "VI": "<link url=\"https://www.cryptoscratch.gg\">Website</link>",
+      "ES": "<link url=\"https://www.cryptoscratch.gg\">Website</link>",
+      "AR": "<link url=\"https://www.cryptoscratch.gg\">Website</link>",
+      "FIL": "<link url=\"https://www.cryptoscratch.gg\">Website</link>",
+      "HI": "<link url=\"https://www.cryptoscratch.gg\">Website</link>"
     },
     {
       "Key": "txt.footer.allRightReserved",
@@ -326,7 +326,7 @@
     {
       "Key": "txt.tos.title",
       "EN": "Terms of Service",
-      "UK": "Умови надання послуг",
+      "UK": "Умови обслуговування",
       "RU": "Условия обслуживания",
       "pt-BR": "Termos de Serviço",
       "VI": "Điều khoản dịch vụ",
@@ -650,50 +650,50 @@
     {
       "Key": "txt.leaderboard.daily",
       "EN": "Daily",
-      "UK": "Щодня",
-      "RU": "Ежедневно",
-      "pt-BR": "Diário",
-      "VI": "Hằng ngày",
-      "ES": "A diario",
-      "AR": "يوميًا",
+      "UK": "Щод.",
+      "RU": "Ежед.",
+      "pt-BR": "Diár.",
+      "VI": "H. ngày",
+      "ES": "Diar.",
+      "AR": "يومي",
       "FIL": "Araw-araw",
       "HI": "दैनिक"
     },
     {
       "Key": "txt.leaderboard.weekly",
       "EN": "Weekly",
-      "UK": "Щотижня",
-      "RU": "Еженедельно",
-      "pt-BR": "Semanalmente",
-      "VI": "hàng tuần",
-      "ES": "Semanalmente",
+      "UK": "Щот.",
+      "RU": "Ежен.",
+      "pt-BR": "Sem.",
+      "VI": "H. tuần",
+      "ES": "Sem.",
       "AR": "أسبوعي",
-      "FIL": "Lingguhan",
-      "HI": "साप्ताहिक"
+      "FIL": "Linggu.",
+      "HI": "साप्त."
     },
     {
       "Key": "txt.leaderboard.monthly",
       "EN": "Monthly",
-      "UK": "Щомісяця",
-      "RU": "Ежемесячно",
-      "pt-BR": "Mensal",
-      "VI": "hàng tháng",
-      "ES": "Mensual",
-      "AR": "شهريا",
-      "FIL": "Buwan-buwan",
-      "HI": "महीने के"
+      "UK": "Щом.",
+      "RU": "Ежеме.",
+      "pt-BR": "Men.",
+      "VI": "H. th.",
+      "ES": "Men.",
+      "AR": "شهري",
+      "FIL": "Buwan.",
+      "HI": "मासिक"
     },
     {
       "Key": "txt.leaderboard.place",
       "EN": "Rank",
-      "UK": "ранг",
-      "RU": "Классифицировать",
-      "pt-BR": "Classificação",
-      "VI": "Thứ hạng",
-      "ES": "Rango",
-      "AR": "رتبة",
-      "FIL": "Ranggo",
-      "HI": "पद"
+      "UK": "Місце",
+      "RU": "Место",
+      "pt-BR": "Pos.",
+      "VI": "Vị trí",
+      "ES": "Pos.",
+      "AR": "المركز",
+      "FIL": "Posisyon",
+      "HI": "रैंक"
     },
     {
       "Key": "txt.leaderboard.prizes",
@@ -806,7 +806,7 @@
     {
       "Key": "txt.button.deposit",
       "EN": "Deposit",
-      "UK": "депозит",
+      "UK": "Депозит",
       "RU": "Депозит",
       "pt-BR": "Depósito",
       "VI": "Tiền gửi",
@@ -1041,7 +1041,7 @@
       "ES": "El depósito falló. Asegúrese de tener suficiente RBAX y bandeja nuevamente.",
       "AR": "فشل الإيداع. تأكد من أن لديك ما يكفي من RBAX والصينية مرة أخرى.",
       "FIL": "Nabigo ang deposito. Tiyaking mayroon kang sapat na RBAX at tray muli.",
-      "HI": "जमा विफल रहा. सुनिश्चित करें कि आपके पास फिर से पर्याप्त RBAX और ट्रे है।"
+      "HI": "जमा विफल रहा. सुनिश्चित करें कि आपके पास फिर से पर्याप्त आरबीएक्स और ट्रे है।"
     },
     {
       "Key": "txt.invite.terms",
@@ -1125,7 +1125,7 @@
       "ES": "•$1 = (RBAX) <var1>\n•RBAX, USDT/C, TON en la red TON únicamente\n•La cantidad mínima de redibujo es <var2>.\n•Enviar fondos a la siguiente billetera. Asegúrese de especificar la etiqueta.\n•La conversión se estima y la conversión final se decidirá en el momento del procesamiento.",
       "AR": "•1$ = (RBAX) <var1>\n•RBAX، USDT/C، TON على شبكة TON فقط\n• الحد الأدنى لمبلغ إعادة السحب هو <var2>.\n• إرسال الأموال إلى المحفظة التالية. تأكد من تحديد العلامة.\n• التحويل مقدر وسيتم تحديد التحويل النهائي لحظة المعالجة.",
       "FIL": "•$1 = (RBAX) <var1>\n•RBAX, USDT/C, TON sa TON network Lang\n•Ang minimum na halaga ng redraw ay <var2>.\n•Magpadala ng mga pondo sa sumusunod na wallet. Tiyaking tinukoy mo ang tag.\n• Tinatantya ang conversion at pagpapasya ang huling conversion sa sandali ng pagproseso.",
-      "HI": "•$1 = (RBAX) <var1>\n•RBAX, USDT/C, TON केवल TON नेटवर्क पर\n•न्यूनतम पुनर्निर्धारण राशि <var2> है।\n•निम्नलिखित वॉलेट में धनराशि भेजें। सुनिश्चित करें कि आपने टैग निर्दिष्ट किया है.\n•रूपांतरण का अनुमान लगाया गया है और अंतिम रूपांतरण प्रसंस्करण के समय तय किया जाएगा।"
+      "HI": "•$1 = (आरबीएएक्स) <var1>\n•RBAX, USDT/C, TON केवल TON नेटवर्क पर\n•न्यूनतम पुनर्निर्धारण राशि <var2> है।\n•निम्नलिखित वॉलेट में धनराशि भेजें। सुनिश्चित करें कि आपने टैग निर्दिष्ट किया है.\n•रूपांतरण का अनुमान लगाया गया है और अंतिम रूपांतरण प्रसंस्करण के समय तय किया जाएगा।"
     },
     {
       "Key": "txt.withdrawal.title",
@@ -1244,7 +1244,7 @@
       "VI": "Mô tả trò chơi hộp băng\nMô tả trò chơi hộp băng\nMô tả trò chơi hộp băng\nMô tả trò chơi hộp băng",
       "ES": "Descripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo",
       "AR": "وصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج",
-      "FIL": "Ang paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng laro ng ice box",
+      "FIL": "Ang paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo",
       "HI": "आइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण"
     },
     {
@@ -1256,7 +1256,7 @@
       "VI": "Mô tả trò chơi hộp băng\nMô tả trò chơi hộp băng\nMô tả trò chơi hộp băng\nMô tả trò chơi hộp băng",
       "ES": "Descripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo",
       "AR": "وصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج",
-      "FIL": "Ang paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng laro ng ice box",
+      "FIL": "Ang paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo",
       "HI": "आइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण"
     },
     {
@@ -1268,7 +1268,7 @@
       "VI": "Mô tả trò chơi hộp đá\nMô tả trò chơi hộp băng\nMô tả trò chơi hộp băng\nMô tả trò chơi hộp băng",
       "ES": "Descripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo",
       "AR": "وصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج ",
-      "FIL": "Ang paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box\nAng paglalarawan ng larong kahon ng yelo",
+      "FIL": "Ang paglalarawan ng laro ng ice box\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo",
       "HI": "आइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण"
     },
     {
@@ -1281,7 +1281,7 @@
       "ES": "¡Los premios suman hasta 1.000.000 RBAX!",
       "AR": "مجموع الجوائز يصل إلى 1,000,000 RBAX!",
       "FIL": "Ang mga premyo ay sum hanggang 1,000,000 RBAX!",
-      "HI": "पुरस्कारों की राशि 1,000,000 RBAX तक है!"
+      "HI": "पुरस्कारों की राशि 1,000,000 आरबीएक्स तक है!"
     },
     {
       "Key": "puzzle.gallery.santasac",
@@ -1293,7 +1293,7 @@
       "ES": "¡Los premios suman hasta 1.000.000 RBAX!",
       "AR": "مجموع الجوائز يصل إلى 1,000,000 RBAX!",
       "FIL": "Ang mga premyo ay sum hanggang 1,000,000 RBAX!",
-      "HI": "पुरस्कारों की राशि 1,000,000 RBAX तक है!"
+      "HI": "पुरस्कारों की राशि 1,000,000 आरबीएक्स तक है!"
     },
     {
       "Key": "puzzle.gallery.candymaze",
@@ -1305,7 +1305,7 @@
       "ES": "¡Los premios suman hasta 1.000.000 RBAX!",
       "AR": "مجموع الجوائز يصل إلى 1,000,000 RBAX!",
       "FIL": "Ang mga premyo ay sum hanggang 1,000,000 RBAX!",
-      "HI": "पुरस्कारों की राशि 1,000,000 RBAX तक है!"
+      "HI": "पुरस्कारों की राशि 1,000,000 आरबीएक्स तक है!"
     },
     {
       "Key": "txt.invite.roles",

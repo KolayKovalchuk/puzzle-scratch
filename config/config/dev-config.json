@@ -15,8 +15,8 @@
     100
   ],
   "FRIENDS_BONUS": {
-    "FRIENDS_TO_INVITE": 1,
-    "RBAX": 10
+    "FRIENDS_TO_INVITE": 2,
+    "RBAX": 300
   },
   "SEND_RBAX": {
     "RBAX": 100,

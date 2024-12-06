@@ -16,6 +16,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { DepositWithDialog } from './components/DepositWithDialog/DepositWithDialog'
 import { WalletHistoryTable } from './components/WalletHistoryTable/WalletHistoryTable'
+import { Footer } from '@components/Footer/Footer'
 
 const headerStyles: Partial<ITextStyle> = {
     fontSize: 40,
@@ -113,6 +114,8 @@ export function Wallet() {
 
             <WalletHistoryTable />
             <DepositWithDialog isOpen={isDepositDialogOpen} onCancel={onCancel} />
+            <Footer />
+
         </div>
     )
 }

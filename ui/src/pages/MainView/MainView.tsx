@@ -13,6 +13,7 @@ import { InviteFriendList } from './InviteFriendList/InviteFriendList';
 import { LeaderBoard } from './LeaderBoard/LeaderBoard';
 import { LogoHeader } from './LogoHeader/LogoHeader';
 import { useGetNotifications } from '@services/api/notificationAPI.service';
+import { Footer } from '@components/Footer/Footer';
 
 export function MainView() {
     const shareLinkText = useSelector(selectLocalValue('txt.invite.msg'))
@@ -60,6 +61,7 @@ export function MainView() {
                     <LeaderBoard />
                 </div>
             </div>
+            <Footer />
         </div>
         {!isUserLoginNotificationsEmpty && <NotificationPopup
             isOpen={userLoginNotifications.length > 0}

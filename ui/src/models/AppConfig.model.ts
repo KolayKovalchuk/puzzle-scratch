@@ -9,6 +9,7 @@ export class AppConfig {
     SYSTEM_MSG_ONE_TIME: boolean;
     DAILY_BONUS: number[];
     FRIENDS_BONUS: FriendsBonus;
+    SEND_RBAX: SendRbax;
 
     constructor(data: AppConfig) {
         this.API_URL = data.API_URL;
@@ -21,6 +22,7 @@ export class AppConfig {
         this.SYSTEM_MSG_ONE_TIME = data.SYSTEM_MSG_ONE_TIME;
         this.DAILY_BONUS = data.DAILY_BONUS;
         this.FRIENDS_BONUS = new FriendsBonus(data.FRIENDS_BONUS);
+        this.SEND_RBAX = new SendRbax(data.SEND_RBAX);
     }
 }
 
@@ -28,8 +30,22 @@ export class FriendsBonus {
     FRIEND_TO_INVITE: number;
     RBAX: number;
 
-    constructor(data: any) {
+    constructor(data: FriendsBonus) {
         this.FRIEND_TO_INVITE = data.FRIEND_TO_INVITE;
         this.RBAX = data.RBAX;
+    }
+}
+
+export class SendRbax {
+    RBAX: number;
+    MAX_RBAX_PER_USER_DAILY: number;
+    EXPIRATION_MS: number;
+    MAX_USES: number;
+
+    constructor(data: SendRbax) {
+        this.RBAX = data.RBAX;
+        this.MAX_RBAX_PER_USER_DAILY = data.MAX_RBAX_PER_USER_DAILY;
+        this.EXPIRATION_MS = data.EXPIRATION_MS;
+        this.MAX_USES = data.MAX_USES;
     }
 }

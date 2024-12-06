@@ -6,7 +6,7 @@ import styles from './ModalDialog.module.scss';
 interface ModalDialogProps {
     isOpen: boolean;
     title: string;
-    content: string;
+    content?: string;
 
     confirmText?: string;
     cancelText?: string;
@@ -14,7 +14,9 @@ interface ModalDialogProps {
     children?: ReactNode;
 
     onClose?: () => void;
-    onConfirm: () => void;
+    onConfirm?: () => void;
+
+    className?: string;
 }
 
 const ModalDialog: FC<ModalDialogProps> = ({
@@ -25,7 +27,8 @@ const ModalDialog: FC<ModalDialogProps> = ({
     onConfirm,
     confirmText,
     cancelText,
-    children
+    children,
+    className,
 }) => {
     if (!isOpen) return null;
 
@@ -34,16 +37,16 @@ const ModalDialog: FC<ModalDialogProps> = ({
     }
 
     const handleConfirm = () => {
-        onConfirm();
+        onConfirm && onConfirm();
     }
 
     return (
-        <div className={styles.modalOverlay}>
-            <div className={styles.modalContent}>
+        <div className={`${styles.modalOverlay} ${className}`}>
+            <div className={`${styles.modalContent} modalContent`}>
                 <StyledHeader title={title}>
-                    <div className={styles.modalBody}>
+                    <div className={`${styles.modalBody} modalBody`}>
                         {children ? children : <p>{content}</p>}
-                        <div className={styles.modalActions}>
+                        <div className={`${styles.modalActions} modalActions`}>
                             {cancelText && <Button
                                 className={styles.btn}
                                 text={cancelText}

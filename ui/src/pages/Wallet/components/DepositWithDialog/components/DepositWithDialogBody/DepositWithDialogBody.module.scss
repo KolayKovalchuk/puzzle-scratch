@@ -1,0 +1,14 @@
+
+@use '../../DepositWithDialog.module.scss' as *;
+
+.contentText {
+    margin-bottom: 20px;
+}
+
+.btn {
+    @include depositBtn;
+}
+
+.iconContainerBtnContent {
+    padding-left: 20px;
+}

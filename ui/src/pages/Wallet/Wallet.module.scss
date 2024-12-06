@@ -20,8 +20,6 @@
 
 }
 
-$sectionsMargin: 30px;
-
 .headerContianer {
     display: flex;
     justify-content: space-between;
@@ -52,7 +50,7 @@ $sectionsMargin: 30px;
     display: flex;
     flex-direction: column;
 
-    margin-top: $sectionsMargin;
+    margin-top: 30px;
 
     width: 100%;
 }
@@ -92,40 +90,4 @@ $sectionsMargin: 30px;
     .roboTokenGoldIcon {
         width: 14%;
     }
-}
-
-.historyTableContainer {
-    margin-top: $sectionsMargin;
-
-    width: 100%;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    padding: 0 10px;
-}
-
-.amountCellContianer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .roboTokenGoldIcon {
-        width: 20%;
-        margin-right: 2px;
-    }
-}
-
-.historyTable {
-    :global {
-        .tBody {
-            background: colors.$historyTableGraient;
-        }
-    }
-}
-
-    
-.tBody {
-    background: colors.$historyTableGraient;
 }

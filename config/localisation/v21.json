@@ -504,7 +504,7 @@
     "HI": "इस गेम को खेलकर मनोरंजन को नकदी में बदलें! नये खिलाड़ियों के लिए निःशुल्क बोनस!"
   },
   {
-    "Key": "txt.btn.invitef",
+    "Key": "txt.btn.inviteFriends",
     "EN": "Invite Friends",
     "UK": "Запросити друзів",
     "RU": "Пригласить друзей",
@@ -514,18 +514,6 @@
     "AR": "دعوة الأصدقاء",
     "FIL": "Mag-imbita ng mga Kaibigan",
     "HI": "दोस्तों को आमंत्रित करें"
-  },
-  {
-    "Key": "txt.invite.link",
-    "EN": "Sharable Link",
-    "UK": "Посилання для спільного доступу",
-    "RU": "Общая ссылка",
-    "pt-BR": "Link compartilhável",
-    "VI": "Liên kết có thể chia sẻ",
-    "ES": "Enlace para compartir",
-    "AR": "رابط قابل للمشاركة",
-    "FIL": "Naibabahaging Link",
-    "HI": "साझा करने योग्य लिंक"
   },
   {
     "Key": "txt.invite.invited",
@@ -1035,13 +1023,13 @@
     "Key": "shop.stars.popup.fail",
     "EN": "The deposit failed. Make sure you have enough RBAX and tray again.",
     "UK": "Депозит не вдалося. Переконайтеся, що у вас достатньо RBAX і знову лоток.",
-    "RU": "Депозит не состоялся. Снова убедитесь, что у вас достаточно RBAX и лотка.",
+    "RU": "Депозит не удался. Снова убедитесь, что у вас достаточно RBAX и лотка.",
     "pt-BR": "O depósito falhou. Certifique-se de ter RBAX e bandeja suficientes novamente.",
     "VI": "Việc gửi tiền không thành công. Đảm bảo bạn có đủ RBAX và khay lại.",
     "ES": "El depósito falló. Asegúrese de tener suficiente RBAX y bandeja nuevamente.",
     "AR": "فشل الإيداع. تأكد من أن لديك ما يكفي من RBAX والصينية مرة أخرى.",
     "FIL": "Nabigo ang deposito. Tiyaking mayroon kang sapat na RBAX at tray muli.",
-    "HI": "जमा विफल रहा. सुनिश्चित करें कि आपके पास फिर से पर्याप्त आरबीएक्स और ट्रे है।"
+    "HI": "जमा विफल रहा. सुनिश्चित करें कि आपके पास फिर से पर्याप्त RBAX और ट्रे है।"
   },
   {
     "Key": "txt.invite.terms",
@@ -1052,7 +1040,7 @@
     "VI": "Bạn sẽ nhận được phần thưởng mời kết bạn pf <$var1> với mọi người bạn <$var2> đã chấp nhận lời mời của bạn và chưa từng chơi trước đây.",
     "ES": "Recibirás el bono de invitación de amigo de <$var1> con cada amigo <$var2> que haya aceptado tu invitación y nunca haya jugado antes.",
     "AR": "سوف تتلقى مكافأة دعوة الأصدقاء pf <$var1> مع كل أصدقاء <$var2> الذين قبلوا دعوتك ولم يلعبوا من قبل.",
-    "FIL": "Makakatanggap ka ng bonus ng imbitasyon ng kaibigan na pf <$var1> sa bawat <$var2> na mga kaibigan na tumanggap ng iyong imbitasyon at hindi kailanman naglaro noon.",
+    "FIL": "Makakatanggap ka ng bonus ng imbitasyon ng kaibigan pf <$var1> sa bawat <$var2> na kaibigan na tumanggap ng iyong imbitasyon at hindi kailanman naglaro noon.",
     "HI": "आपको प्रत्येक <$var2> मित्र के साथ आमंत्रण मित्र बोनस पीएफ <$var1> प्राप्त होगा, जिन्होंने आपका निमंत्रण स्वीकार किया और पहले कभी नहीं खेला।"
   },
   {
@@ -1083,7 +1071,7 @@
     "Key": "txt.transfer.title",
     "EN": "Wallet Transfer",
     "UK": "Переказ гаманця",
-    "RU": "Перевод кошелька",
+    "RU": "Перевод на кошелек",
     "pt-BR": "Transferência de carteira",
     "VI": "Chuyển ví",
     "ES": "Transferencia de billetera",
@@ -1094,7 +1082,7 @@
   {
     "Key": "txt.transfer.wallet",
     "EN": "Wallet:",
-    "UK": "Гаманець:",
+    "UK": "гаманець:",
     "RU": "Кошелек:",
     "pt-BR": "Carteira:",
     "VI": "Cái ví:",
@@ -1118,7 +1106,7 @@
   {
     "Key": "txt.transfer.terms",
     "EN": "•$1 = (RBAX) <$var1>\n•RBAX, USDT/C, TON on TON network Only\n•Minimum redraw amount is <$var2>.\n•Send funds to the following wallet. Make sure you specify the tag.\n•Conversion is estimated and final conversion will be decided on the moment of processing.",
-    "UK": "•$1 = (RBAX) <$var1>\n•RBAX, USDT/C, TON лише в мережі TON\n•Мінімальна сума перемальовування становить <$var2>.\n• Надіслати кошти на наступний гаманець. Переконайтеся, що ви вказали тег.\n•Конверсія оцінюється, і остаточна конвертація буде прийнята під час обробки.",
+    "UK": "•$1 = (RBAX) <$var1>\n•RBAX, USDT/C, TON лише в мережі TON\n•Мінімальна сума перемальовування становить <$var2>.\n• Надіслати кошти на наступний гаманець. Переконайтеся, що ви вказали тег.\n•Конверсія оцінюється, остаточна конверсія буде прийнята під час обробки.",
     "RU": "•$1 = (RBAX) <$var1>\n•RBAX, USDT/C, TON только в сети TON.\n•Минимальная сумма перерисовки составляет <$var2>.\n•Отправьте средства на следующий кошелек. Обязательно укажите тег.\n•Конверсия оценивается, и окончательное решение о конверсии будет принято в момент обработки.",
     "pt-BR": "•$1 = (RBAX) <$var1>\n• RBAX, USDT/C, TON somente na rede TON\n•O valor mínimo de saque é <$var2>.\n•Envie fundos para a seguinte carteira. Certifique-se de especificar a tag.\n•A conversão é estimada e a conversão final será decidida no momento do processamento.",
     "VI": "•$1 = (RBAX) <$var1>\n•RBAX, USDT/C, TON Chỉ trên mạng TON\n•Số tiền rút lại tối thiểu là <$var2>.\n•Gửi tiền vào ví sau. Hãy chắc chắn rằng bạn chỉ định thẻ.\n•Chuyển đổi được ước tính và chuyển đổi cuối cùng sẽ được quyết định vào thời điểm xử lý.",
@@ -1281,7 +1269,7 @@
     "ES": "¡Los premios suman hasta 1.000.000 RBAX!",
     "AR": "مجموع الجوائز يصل إلى 1,000,000 RBAX!",
     "FIL": "Ang mga premyo ay sum hanggang 1,000,000 RBAX!",
-    "HI": "पुरस्कारों की राशि 1,000,000 आरबीएक्स तक है!"
+    "HI": "पुरस्कारों की राशि 1,000,000 RBAX तक है!"
   },
   {
     "Key": "puzzle.gallery.santasac",
@@ -1293,7 +1281,7 @@
     "ES": "¡Los premios suman hasta 1.000.000 RBAX!",
     "AR": "مجموع الجوائز يصل إلى 1,000,000 RBAX!",
     "FIL": "Ang mga premyo ay sum hanggang 1,000,000 RBAX!",
-    "HI": "पुरस्कारों की राशि 1,000,000 आरबीएक्स तक है!"
+    "HI": "पुरस्कारों की राशि 1,000,000 RBAX तक है!"
   },
   {
     "Key": "puzzle.gallery.candymaze",
@@ -1305,7 +1293,7 @@
     "ES": "¡Los premios suman hasta 1.000.000 RBAX!",
     "AR": "مجموع الجوائز يصل إلى 1,000,000 RBAX!",
     "FIL": "Ang mga premyo ay sum hanggang 1,000,000 RBAX!",
-    "HI": "पुरस्कारों की राशि 1,000,000 आरबीएक्स तक है!"
+    "HI": "पुरस्कारों की राशि 1,000,000 RBAX तक है!"
   },
   {
     "Key": "txt.invite.roles",

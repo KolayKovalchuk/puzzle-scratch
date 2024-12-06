@@ -1,7 +1,7 @@
 
 import { ITableCellData, ITRowData } from './Table.models';
 import { TableHeadRow } from "./TableHeadRow";
-import { TableRow } from "./TableRow";
+import { ITableRowProps, TableRow } from "./TableRow";
 
 import { selectLocalValue } from '@store/selectors/localization.selectors';
 import { ReactNode } from 'react';
@@ -13,7 +13,7 @@ export interface ITableProps {
     tHeadData?: ITableCellData[];
 
     tBodyData: ITRowData[];
-    renderCell?: (data: ITableCellData, index: number) => ReactNode;
+    renderCell?: ITableRowProps['renderCell'];
 
     className?: string;
     noRowBg?: boolean;

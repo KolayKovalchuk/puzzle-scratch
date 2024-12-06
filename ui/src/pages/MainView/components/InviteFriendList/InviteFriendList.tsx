@@ -1,30 +1,49 @@
+import { Icon } from '@components/shared/Icon';
 import ModalDialog from '@components/shared/ModalDialog/ModalDialog';
-import { StyledHeader } from '@components/shared/StyledHeader';
-import { RegularStyledText } from '@components/shared/StyledText';
 import { getReferralLink } from '@services/api/links.service';
 import { shareLinkToFriends } from '@services/telegramWebApp/telegramWebApp.service';
 import { selectLocalValue } from '@store/selectors/localization.selectors';
+
 import { useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Icon } from '@components/shared/Icon';
+import { ITextStyle } from 'pixi.js';
 
 import styles from './InviteFriendList.module.scss';
 
-import header_projectors_light from '@icons/header_projectors_light.svg'
-import invite_friends_coins_heder from '@icons/invite_friends_coins_heder.svg'
-import { useGetUserReferrals } from '@services/api/referrals.service';
 import { Button, ButtonType } from '@components/shared/Button/Button';
+import { useButtonConfig } from '@components/shared/Button/hooks/useButtonConfig';
+import { RegularStyledText, SecondaryStyledText } from '@components/shared/StyledText';
+import { useScrollTo } from '@hooks/useScrollTo';
+import { InvitedFriendsTable } from './components/InvitedFriendsTable/InvitedFriendsTable';
+
+import back_arrow from '@icons/back_arrow.svg';
+import copy_icon from '@icons/copy_icon.svg';
+import invite_friend_icon from '@icons/invite_friend_icon.svg';
+import invite_friends_coins_header from '@icons/invite_friends_coins_header.svg';
 
 export interface InviteFriendListProps {
     className?: string;
     onCloseClick: () => void;
 }
 
+const headerLabelStyles: Partial<ITextStyle> = {
+    fontWeight: 'bold',
+    letterSpacing: 2,
+    strokeThickness: 2,
+    fontSize: 46,
+}
+
 export function InviteFriendList({ className, onCloseClick }: InviteFriendListProps) {
     const shareLinkText = useSelector(selectLocalValue('txt.invite.msg'))
-    const inviteFriendBtnText = useSelector(selectLocalValue('txt.btn.invitef'))
-    const copyLinkBtnText = useSelector(selectLocalValue('txt.invite.link'))
-    const invitedFriendsText = useSelector(selectLocalValue('txt.invite.invited'))
+    const inviteFriendBtnText = useSelector(selectLocalValue('txt.btn.inviteFriends'))
+    const btnCloseTxt = useSelector(selectLocalValue('txt.btn.close'));
+
+    const { textStyles } = useButtonConfig(ButtonType.Confirm, styles);
+    textStyles.fill = 'white';
+    textStyles.strokeThickness = 3;
+    textStyles.letterSpacing = 2;
+
+    const { targetRef } = useScrollTo();
 
     const onInviteClicked = async () => {
         const url = getReferralLink();
@@ -45,55 +64,64 @@ export function InviteFriendList({ className, onCloseClick }: InviteFriendListPr
         setIsSuccessCopiedOpen(true);
     }, []);
 
-    const { referrals, isLoading } = useGetUserReferrals({ page: 0, size: 10 });
-
-
-    const noInvitetFriendsTxt = useSelector(selectLocalValue('txt.invite.noInvitedFriendsYet'));
-    const loadingTxt = useSelector(selectLocalValue('txt.loading'));
-    const btnCloseTxt = useSelector(selectLocalValue('txt.btn.close'));
-
-    if (!referrals.length) {
-        referrals.push({ nickname: isLoading ? loadingTxt : noInvitetFriendsTxt });
-    }
+    const onBackBtnClick = useCallback(() => {
+        onCloseClick();
+    }, [onCloseClick])
 
     return (<>
-        <div className={`${styles.container} ${className}`}>
-            <div className={styles.bodyHeader}>
-                <Icon name={header_projectors_light} className={styles.projectorsIcon} />
-                <Icon name={invite_friends_coins_heder} className={styles.projectorsIcon} />
-                <div onClick={() => onInviteClicked()}>
-                    <RegularStyledText
-                        className={styles.inviteFriends}
-                        text={inviteFriendBtnText}
-                        isUnderline={true}
-                        textStyles={{ fontSize: 28 }}
-                    />
-                </div>
-                <br></br>
-                <div onClick={() => onCopyClicked()}>
-                    <RegularStyledText
-                        className={styles.copyLink}
-                        text={copyLinkBtnText}
-                        isUnderline={true}
-                        textStyles={{ fontSize: 28 }}
-                    />
-                </div>
+        <div className={`${styles.container} ${className}`} ref={targetRef}>
+            <div className={styles.header}>
+                <Button
+                    className={styles.backBtn}
+                    mode={ButtonType.Default}
+                    onClick={onBackBtnClick}
+                    iconName={back_arrow}
+                />
+
+                <SecondaryStyledText
+                    text={inviteFriendBtnText}
+                    className={styles.headerText}
+                    textStyles={headerLabelStyles}
+                ></SecondaryStyledText>
             </div>
 
-            <StyledHeader title={invitedFriendsText} className={styles.invitedFriendHeader} noWings>
-                <div className={styles.invitedFriendList}>
-                    {
-                        referrals.map((referral, index) => (
-                            <div key={index} className={styles.refferalRow}>
-                                <div className={styles.cell}>{index + 1}</div>
-                                <div className={styles.cell}>{referral.nickname}</div>
-                            </div>
-                        ))
-                    }
-                </div>
-            </StyledHeader>
+            <div className={styles.body}>
 
-            <Button className={styles.closeBtn} text={btnCloseTxt} mode={ButtonType.Cancel} onClick={() => onCloseClick()}/>
+                <Icon name={invite_friends_coins_header} className={styles.headerBgIcon} />
+
+                <div className={styles.bodyHeader}>
+                    <Button
+                        className={`${styles.btn} ${styles.inviteFriendsBtn}`}
+                        text={inviteFriendBtnText}
+                        mode={ButtonType.Confirm}
+                        onClick={() => onInviteClicked()}
+                        is3d={true}
+                    >
+                        <div className={styles.btnContent}>
+                            <RegularStyledText
+                                className={styles.btnText}
+                                textStyles={textStyles}
+                                text={inviteFriendBtnText}
+                            />
+                            <Icon name={invite_friend_icon} className={styles.inviteFriendIcon} />
+                        </div>
+                    </Button>
+                    <Button
+                        className={styles.btn}
+                        iconName={copy_icon}
+                        mode={ButtonType.Confirm}
+                        onClick={() => onCopyClicked()}
+                        is3d={true}
+                    >
+                    </Button>
+                </div>
+
+                <InvitedFriendsTable />
+
+                <div className={styles.footer}>
+                    <Button className={styles.closeBtn} text={btnCloseTxt} mode={ButtonType.Cancel} onClick={() => onCloseClick()} />
+                </div>
+            </div>
         </div>
 
         <ModalDialog

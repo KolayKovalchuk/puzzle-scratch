@@ -45,8 +45,10 @@ export function LeaderBoard({ }: ILeaderBoardProps) {
                         onPrevHeaderClick={onPrevHeaderClick}
                     />
                 }
-                renderCell={(data, index) => {
+                renderCell={(data, index, cellWidth) => {
                     return (<LeaderboardCell
+                        key={data.key}
+                        cellWidth={cellWidth}
                         cellData={data.data}
                         isLargeNumber={index === tBodyData[0]?.cellData?.length - 1}
                     />)

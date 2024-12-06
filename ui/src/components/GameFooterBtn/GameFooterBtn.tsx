@@ -1,8 +1,7 @@
 import { Button, ButtonGoldBorder, ButtonType } from '@components/shared/Button/Button';
-import { Icon } from '@components/shared/Icon';
 import { selectLocalValue } from '@store/selectors/localization.selectors';
-import { useSelector } from 'react-redux';
 import { ReactNode, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import styles from './GameFooterBtn.module.scss';
@@ -34,8 +33,8 @@ export function GameFooterBtn({ onPlay, onCancel, children }: IGameFooterBtnProp
                 className={`${styles.btn} ${styles.backBtn}`}
                 mode={ButtonType.Default}
                 onClick={() => onCancel ? onCancel() : onCancelCb()}
+                iconName={back_arrow}
             >
-                <Icon name={back_arrow} className={styles.backIcon} />
             </Button>
             <ButtonGoldBorder
                 className={`${styles.btn} ${styles.playButton}`}
@@ -47,8 +46,8 @@ export function GameFooterBtn({ onPlay, onCancel, children }: IGameFooterBtnProp
                 className={`${styles.btn} ${styles.backBtn}`}
                 mode={ButtonType.Default}
                 onClick={() => {}}
+                iconName={hint}
             >
-                <Icon name={hint} className={styles.backIcon} />
             </Button>
             {children}
         </div>

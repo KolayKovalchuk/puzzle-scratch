@@ -4,6 +4,102 @@ $borderRadius: 14px;
 $minWidth: 100px;
 $maxHeight: 50px;
 
+$paddingBottom3d: 2px;
+
+div.btn3dContainer {
+    max-height: $maxHeight;
+
+    background: colors.$btn3dBg,
+        linear-gradient(to right,
+            rgba(255,255,255,0) 3%,
+            rgba(255,255,255,0.6) 5%,
+            rgba(255,255,255,0) 7%,
+        ),
+        linear-gradient(to right,
+            rgba(255,255,255,0) 93%,
+            rgba(255,255,255,0.6) 95%,
+            rgba(255,255,255,0) 97%,
+        );
+    background-blend-mode: overlay;
+    padding: 0;
+    padding-bottom: $paddingBottom3d;
+    border-radius: $borderRadius;
+
+    position: relative;
+
+    .container {
+        min-width: auto;
+        max-height: initial;
+        width: 100%;
+        box-shadow: none;
+        height: calc(100% - $paddingBottom3d);
+        aspect-ratio: auto;
+        box-shadow: -1px -1px 6px -2px #ffffff inset;
+    }
+
+    &.iconContainer {
+        background: colors.$btn3dBg,
+        linear-gradient(to right,
+            rgba(255,255,255,0) 5%,
+            rgba(255,255,255,0.6) 15%,
+            rgba(255,255,255,0) 25%,
+        ),
+        linear-gradient(to right,
+            rgba(255,255,255,0) 75%,
+            rgba(255,255,255,0.6) 85%,
+            rgba(255,255,255,0) 95%,
+        );
+        
+        .container {
+            height: calc(100% - $paddingBottom3d * 2);
+        }
+
+        .bottomElipsContianer {
+            left: 20%;
+            bottom: -1px;
+        }
+    }
+
+    $elipsSize: 10px;
+
+    .btnElips {
+        min-width: $elipsSize;
+        position: absolute;
+        flex: 2;
+
+        &.smallElipse {
+            min-width: calc($elipsSize / 2);
+            flex: 1;
+        }
+    }
+
+    .topLeftElipse {
+        min-width: 20px;
+        top: -2px;
+        left: 0px;
+
+        width: 8%;
+
+        transform: rotate(-30deg);
+    }
+
+    .bottomElipsContianer {
+        width: 10%;
+        display: flex;
+        position: absolute;
+        left: 30px;
+        bottom: -6px;
+
+        @media screen and (max-width: 375px) {
+            bottom: -4px;
+        }
+
+        .btnElips {
+            position: relative;
+        }
+    }
+}
+
 .container {
     min-width: $minWidth;
     max-height: $maxHeight;
@@ -17,6 +113,7 @@ $maxHeight: 50px;
     text-align: center;
 
     box-shadow: 0px -1px 3px 1px #00000040 inset;
+    z-index: 10000;
 
     &.confirm {
         background: colors.$modal_accept_btn_bg;
@@ -50,6 +147,12 @@ $maxHeight: 50px;
         position: relative;
         top: 1px;
     }
+}
+
+.iconContainer {
+    aspect-ratio: 1/1;
+    min-width: auto;
+    padding: 10px;
 }
 
 .goldBorder {

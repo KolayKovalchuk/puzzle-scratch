@@ -14,9 +14,9 @@ import { ITextStyle } from 'pixi.js'
 import { useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { Footer } from '@components/Footer/Footer'
 import { DepositWithDialog } from './components/DepositWithDialog/DepositWithDialog'
 import { WalletHistoryTable } from './components/WalletHistoryTable/WalletHistoryTable'
-import { Footer } from '@components/Footer/Footer'
 
 const headerStyles: Partial<ITextStyle> = {
     fontSize: 40,
@@ -67,11 +67,11 @@ export function Wallet() {
         <div className={styles.container}>
             <div className={styles.headerContianer}>
                 <Button
-                    className={`${styles.backBtn}`}
+                    className={styles.backBtn || ''}
                     mode={ButtonType.Default}
                     onClick={onBackBtnClick}
+                    iconName={back_arrow}
                 >
-                    <Icon name={back_arrow} className={styles.backIcon} />
                 </Button>
 
                 <SecondaryStyledText

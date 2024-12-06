@@ -26,15 +26,10 @@
         width: 50%;
     }
     
+    $iconSize: 45px;
     .backBtn {
-        width: 45px;
-        max-width: 45px;
-        min-width: 45px;
-        height: 45px;
-        padding: 8px;
-    }
-    
-    .backIcon {
-        width: 100%
+        max-width: $iconSize;
+        min-width: $iconSize;
+        height: $iconSize;
     }
 }

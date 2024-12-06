@@ -14,6 +14,7 @@ $deep-navy: #070A1F;
 $medium-blue: #434DA0;
 $forest-green: #57B205;
 $lime-green: #97DB01;
+$dark-lime-green: #3D8100;
 $mint-green: #43EF90;
 $burnt-orange: #B23305;
 $coral-red: #FE5E5E;
@@ -48,6 +49,10 @@ $modal_default_btn_bg: linear-gradient(180deg,
 $modal_default_btn_bg_hover: linear-gradient(180deg,
         color.adjust($light-sky-blue, $lightness: -5%) 0%,
         color.adjust($bright-blue, $lightness: -5%) 100%);
+
+$btn3dBg: linear-gradient(to bottom,
+        $lime-green 0%,
+        $dark-lime-green 100%);
 
 $btnGoldBorder: linear-gradient(180deg,
         #E7AA39 25%,

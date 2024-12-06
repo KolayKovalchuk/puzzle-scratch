@@ -12,6 +12,7 @@ import { ITableCellData, ITRowData } from '@components/shared/Table/Table.models
 import { formatNumber } from '@utils/formatters/formatNumber'
 
 import styles from './WalletHistoryTable.module.scss'
+import { TableCell } from '@components/shared/Table/TableRow'
 
 const historyLabelStyles: Partial<ITextStyle> = {
     fontSize: 30,
@@ -43,15 +44,17 @@ export function WalletHistoryTable() {
         ],
     })), []);
 
-    const renderCell = useCallback((data: ITableCellData, index: number): ReactNode => {
+    const renderCell = useCallback((data: ITableCellData, index: number, cellWidth: string): ReactNode => {
         if (tHeadData.length - 1 === index) {
-            return (<div className={styles.amountCellContianer}>
+            const cellContent = (<div className={styles.amountCellContianer}>
                 <Icon name={robo_token_gold_no_shining} className={styles.roboTokenGoldIcon} />
                 <span>{formatNumber(data.data as number)}</span>
             </div>)
+
+            return <TableCell data={cellContent} width={cellWidth} />
         }
 
-        return data.data
+        return <TableCell data={data.data} width={cellWidth} />
     }, [tHeadData])
 
 

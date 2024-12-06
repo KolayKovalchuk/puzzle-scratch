@@ -1,7 +1,8 @@
-import { ReactNode } from 'react';
+import { CSSProperties, forwardRef, ReactNode, Ref } from 'react';
 import { RegularStyledText } from '../StyledText';
 import styles from './Button.module.scss';
 import { useButtonConfig } from './hooks/useButtonConfig';
+import { ITextStyle } from 'pixi.js';
 
 export enum ButtonType {
     Confirm = 'confirm',
@@ -15,25 +16,33 @@ export interface IButtonProps {
     className?: string;
     mode?: ButtonType;
     children?: ReactNode;
+    style?: CSSProperties;
+    shouldFitFontSize?: boolean;
+    textStyle?: Partial<ITextStyle>;
 }
 
-export function Button({ text, onClick, className, mode = ButtonType.Default, children }: IButtonProps) {
-    const { className: buttonTypeClassName, stroke, textStyles } = useButtonConfig(mode, styles);
+export function ButtonComponent({ text, onClick, className, mode = ButtonType.Default, children, style, shouldFitFontSize = true, textStyle = {} }: IButtonProps,  ref: Ref<HTMLButtonElement>) {
+    const { className: buttonTypeClassName, textStyles } = useButtonConfig(mode, styles);
 
     return (
-        <button className={`${styles.container} ${buttonTypeClassName} ${className || ''}`} onClick={onClick}>
+        <button ref={ref} className={`${styles.container} ${buttonTypeClassName} ${className || ''}`} onClick={onClick} style={style}>
             {!!children
                 ? children
-                : <RegularStyledText text={text || ''} className={styles.label} textStyles={{
-                    fontSize: 20,
-                    stroke,
-                    dropShadow: false,
-                    ...textStyles
-                }}></RegularStyledText>
+                : <RegularStyledText
+                    text={text || ''}
+                    className={styles.label}
+                    textStyles={{
+                        ...textStyles,
+                        ...textStyle,
+                    }}
+                    shouldFitFontSize={shouldFitFontSize}
+                ></RegularStyledText>
             }
         </button>
     )
 }
+
+export const Button = forwardRef(ButtonComponent);
 
 export function ButtonGoldBorder(props: IButtonProps) {
     return (

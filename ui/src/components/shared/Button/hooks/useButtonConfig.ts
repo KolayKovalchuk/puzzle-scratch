@@ -4,30 +4,40 @@ import { ButtonType } from '../Button';
 
 export interface IButtonConfig {
     className: string;
-    stroke: string;
     textStyles: Partial<TextStyle>;
 }
 
 export function getModeCondg(mode: ButtonType, styles: CSSModuleClasses): IButtonConfig {
+    const defaultTextStyles: Partial<TextStyle> = {
+        fontSize: 20,
+        dropShadow: false,
+        stroke: '#000000',
+    }
+
     switch (mode) {
         case ButtonType.Confirm:
             return {
                 className: styles.confirm,
-                stroke: '#295808',
-                textStyles: {}
+                textStyles: {
+                    ...defaultTextStyles,
+                    stroke: '#295808',
+                }
             }
         case ButtonType.Cancel:
             return {
                 className: styles.cancel,
-                stroke: '#580808',
-                textStyles: {}
+                textStyles: {
+                    ...defaultTextStyles,
+                    stroke: '#580808',
+                }
             }
 
         case ButtonType.Default:
             return {
                 className: styles.default,
-                stroke: '#105CB4',
                 textStyles: {
+                    ...defaultTextStyles,
+                    stroke: '#105CB4',
                     fill: ['#FFFFFF'],
                     fillGradientStops: [0]
                 }
@@ -36,8 +46,9 @@ export function getModeCondg(mode: ButtonType, styles: CSSModuleClasses): IButto
         default:
             return {
                 className: '',
-                stroke: '#000000',
-                textStyles: {}
+                textStyles: {
+                    ...defaultTextStyles,
+                }
             }
     }
 }

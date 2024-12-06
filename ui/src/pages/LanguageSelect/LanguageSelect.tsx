@@ -14,6 +14,7 @@ import { Button, ButtonType } from '@components/shared/Button/Button';
 import store from '@store/store';
 import { updateUserLocale } from '@store/actions/user.actions';
 import { useContainerDimensions } from '@hooks/useContainerDimensions';
+import { Footer } from '@components/Footer/Footer';
 
 export interface ILanguageSelectProps {
     onLangSelected?: (lang: string) => void | Promise<void>,
@@ -152,6 +153,7 @@ export function LanguageSelect({ onLangSelected, isPreferredLocaleSelected }: IL
                 onConfirm={() => onTosApprove()}
                 onClose={() => onTosDecline()}
             ></TosApprovePopup>
+            <Footer />
         </div>
     );
 }

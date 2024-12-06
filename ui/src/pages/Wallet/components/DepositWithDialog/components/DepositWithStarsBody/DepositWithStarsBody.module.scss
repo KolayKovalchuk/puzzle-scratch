@@ -1,0 +1,14 @@
+@use '../../DepositWithDialog.module.scss' as *;
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include depositBtn;
+}
+
+.iconContainerBtnContent {
+    width: 100%;
+    justify-content: space-between;
+}

@@ -70,3 +70,10 @@ export const selectDailyBonusConfig = createSelector(
         return config?.DAILY_BONUS
     }
 )
+
+export const selectSendRBaxAmount = createSelector(
+    selectConfigQueryData,
+    (config) => {
+        return config?.SEND_RBAX.RBAX
+    }
+)

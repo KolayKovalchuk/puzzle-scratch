@@ -1,30 +1,38 @@
-import styles from './MainView.module.scss';
+import { useCallback, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 
 import { BatchCardContainer } from '@components/BatchCard';
+import { Footer } from '@components/Footer/Footer';
 import { NotificationPopup } from '@components/NotificationPopup/NotificationPopup';
+
 import { getAppLinkWithParam, linkCodeParam, postCreateShareLinkCode } from '@services/api/links.service';
+import { useGetNotifications } from '@services/api/notificationAPI.service';
 import { useShowLoginNotificationsPopups } from '@services/loginNotifications.service';
 import { shareLinkToFriends } from '@services/telegramWebApp/telegramWebApp.service';
-import { selectLocalValue } from '@store/selectors/localization.selectors';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { InviteFriendList } from './InviteFriendList/InviteFriendList';
-import { LeaderBoard } from './LeaderBoard/LeaderBoard';
-import { LogoHeader } from './LogoHeader/LogoHeader';
-import { useGetNotifications } from '@services/api/notificationAPI.service';
+
+import { selectLocalValueWithVars } from '@store/selectors/localization.selectors';
+import { selectUserName } from '@store/selectors/user.selectors';
+
+import { InviteFriendList } from './components/InviteFriendList/InviteFriendList';
+
+import { LeaderBoard } from './components/LeaderBoard/LeaderBoard';
+import { LogoHeader } from './components/LogoHeader/LogoHeader';
+
+import styles from './MainView.module.scss';
 
 export function MainView() {
-    const shareLinkText = useSelector(selectLocalValue('txt.invite.msg'))
+    const userName = useSelector(selectUserName);
+    const shareLinkText = useSelector(selectLocalValueWithVars('txt.gift.msg', userName || ''));
     const [userLoginNotifications, removeLoginNotification] = useShowLoginNotificationsPopups();
 
     const [isInviteFriendVisible, setIsInviteFriendVisible] = useState(false);
 
-    const onInviteClicked = () => {
+    const onInviteClicked = useCallback(() => {
         setIsInviteFriendVisible(true);
-    }
+    }, []);
 
-    const onSharedClicked = async () => {
+    const onSendRbaxClicked = useCallback(async () => {
         const linkCode = await postCreateShareLinkCode();
 
         if (!linkCode) {
@@ -33,7 +41,11 @@ export function MainView() {
 
         const url = getAppLinkWithParam(linkCode, linkCodeParam);
         shareLinkToFriends(shareLinkText, url);
-    }
+    }, [shareLinkText]);
+
+    const onInviteFriendClose = useCallback(() => {
+        setIsInviteFriendVisible(false);
+    }, []);
 
     const containerClassName = `${styles.container} ${isInviteFriendVisible ? styles.hidden : ''}`;
 
@@ -44,7 +56,7 @@ export function MainView() {
 
     return (<>
         <div className={styles.mainContainer}>
-            {isInviteFriendVisible && <InviteFriendList onCloseClick={() => setIsInviteFriendVisible(false)} />}
+            {isInviteFriendVisible && <InviteFriendList onCloseClick={onInviteFriendClose} />}
             <div className={containerClassName}>
                 <LogoHeader></LogoHeader>
                 <BatchCardContainer></BatchCardContainer>
@@ -52,7 +64,7 @@ export function MainView() {
                 <div className={styles.banner} onClick={() => onInviteClicked()}>
                     <img src="/invite_frind_bunner.png" alt="Invite Friend" />
                 </div>
-                <div className={styles.banner} onClick={() => onSharedClicked()}>
+                <div className={styles.banner} onClick={() => onSendRbaxClicked()}>
                     <img src="/send_rbax_to_a_friend.png" alt="Send Rbax to a Friend" />
                 </div>
 
@@ -60,6 +72,7 @@ export function MainView() {
                     <LeaderBoard />
                 </div>
             </div>
+            <Footer />
         </div>
         {!isUserLoginNotificationsEmpty && <NotificationPopup
             isOpen={userLoginNotifications.length > 0}

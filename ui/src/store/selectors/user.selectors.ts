@@ -13,6 +13,13 @@ export const selectPreferredLocale = createSelector(
     }
 )
 
+export const selectUserName = createSelector(
+    selectUser,
+    (queryState) => {
+        return queryState?.username
+    }
+)
+
 export const selectUserAcceptedTerms = createSelector(
     selectUser,
     (queryState) => {

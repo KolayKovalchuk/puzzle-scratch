@@ -1,29 +1,45 @@
-import { SecondaryStyledText } from '@components/shared/StyledText'
-import styles from './Wallet.module.scss'
-import { useSelector } from 'react-redux'
-import { selectLocalValue } from '@store/selectors/localization.selectors'
 import { Button, ButtonType } from '@components/shared/Button/Button'
 import { Icon } from '@components/shared/Icon'
+import { SecondaryStyledText } from '@components/shared/StyledText'
+import { selectLocalValue } from '@store/selectors/localization.selectors'
+import { useSelector } from 'react-redux'
+import styles from './Wallet.module.scss'
 
-import back_arrow from '@icons/back_arrow.svg';
-import robo_token_gold_no_shining from '@icons/robo_token_gold_no_shining.svg';
+import back_arrow from '@icons/back_arrow.svg'
+import robo_token_gold_no_shining from '@icons/robo_token_gold_no_shining.svg'
 
-import { useNavigate } from 'react-router-dom'
-import { ReactNode, useCallback, useMemo } from 'react'
-import { ITextStyle } from 'pixi.js'
-import { Table } from '@components/shared/Table'
-import { ITableCellData, ITRowData } from '@components/shared/Table/Table.models'
 import { selectUserBalanceRbax } from '@store/selectors/user.selectors'
 import { formatNumber } from '@utils/formatters/formatNumber'
+import { ITextStyle } from 'pixi.js'
+import { useCallback, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+import { DepositWithDialog } from './components/DepositWithDialog/DepositWithDialog'
+import { WalletHistoryTable } from './components/WalletHistoryTable/WalletHistoryTable'
+import { Footer } from '@components/Footer/Footer'
 
 const headerStyles: Partial<ITextStyle> = {
     fontSize: 40,
     fontWeight: 'bold',
 }
 
-const historyLabelStyles: Partial<ITextStyle> = {
-    fontSize: 30,
-    fontWeight: 'bold',
+export function useDopositWithDialog() {
+    const [isDepositDialogOpen, setIsDepositDialogOpen] = useState(false);
+
+    const onDepositBtnClick = useCallback(() => {
+        console.log('Deposit button clicked');
+        setIsDepositDialogOpen(true);
+    }, [])
+
+    const onCancel = useCallback(() => {
+        setIsDepositDialogOpen(false);
+    }, [])
+
+    return {
+        isDepositDialogOpen,
+        onDepositBtnClick,
+        onCancel,
+    }
 }
 
 export function Wallet() {
@@ -33,11 +49,6 @@ export function Wallet() {
     const withdrawableLabel = useSelector(selectLocalValue('txt.wallet.withdrawable'))
     const withdrawLabel = useSelector(selectLocalValue('txt.button.withdraw'))
 
-    const historyLabel = useSelector(selectLocalValue('txt.wallet.history'))
-    const dateLabel = useSelector(selectLocalValue('txt.wallet.history.date'))
-    const actionLabel = useSelector(selectLocalValue('txt.wallet.history.action'))
-    const amountLabel = useSelector(selectLocalValue('txt.wallet.history.amount'))
-
     const amount = useSelector(selectUserBalanceRbax) || 0;
 
     const navigate = useNavigate();
@@ -46,42 +57,11 @@ export function Wallet() {
         navigate(-1)
     }, [navigate])
 
-    const onDepositBtnClick = useCallback(() => {
-        console.log('Deposit button clicked');
-    }, [])
+    const { onDepositBtnClick, onCancel, isDepositDialogOpen } = useDopositWithDialog();
 
     const onWithdrawBtnClick = useCallback(() => {
         console.log('Withdraw button clicked');
     }, [])
-
-    const tHeadData: ITableCellData[] = useMemo(() => [
-        { key: 'header-1', data: dateLabel },
-        { key: 'header-2', data: actionLabel },
-        { key: 'header-3', data: amountLabel },
-    ], [dateLabel, actionLabel, amountLabel]);
-
-    const tBodyData: ITRowData[] = useMemo(() => Array.from({ length: 20 }, (_, index) => ({
-        key: `row-${index}`,
-        cellData: [
-            { key: `cell-${index}-1`, data: `${index + 1}. ${new Date().toLocaleDateString('en-US', {
-                dateStyle: 'short',
-            })}` },
-            { key: `cell-${index}-2`, data: index % 2 ? 'Deposit' : 'Withdraw' },
-            { key: `cell-${index}-3`, data: 1000 },
-        ],
-    })), []);
-
-    const renderCell = useCallback((data: ITableCellData, index: number): ReactNode => {
-        if (tHeadData.length - 1 === index) {
-            return (<div className={styles.amountCellContianer}>
-                <Icon name={robo_token_gold_no_shining} className={styles.roboTokenGoldIcon} />
-                <span>{formatNumber(data.data as number)}</span>
-            </div>)
-        }
-
-        return data.data
-    }, [tHeadData])
-
 
     return (
         <div className={styles.container}>
@@ -110,7 +90,11 @@ export function Wallet() {
                             <span className={styles.balanceAmount}>{formatNumber(amount)}</span>
                         </div>
                     </div>
-                    <Button mode={ButtonType.Confirm} onClick={onDepositBtnClick} text={depositLabel}></Button>
+                    <Button
+                        mode={ButtonType.Confirm}
+                        onClick={onDepositBtnClick}
+                        text={depositLabel}
+                    ></Button>
                 </div>
                 <div className={styles.balanceInfoRow}>
                     <div className={styles.column}>
@@ -120,25 +104,18 @@ export function Wallet() {
                             <span className={styles.balanceAmount}>1000</span>
                         </div>
                     </div>
-                    <Button mode={ButtonType.Confirm} onClick={onWithdrawBtnClick} text={withdrawLabel}></Button>
+                    <Button
+                        mode={ButtonType.Confirm}
+                        onClick={onWithdrawBtnClick}
+                        text={withdrawLabel}
+                    ></Button>
                 </div>
             </div>
 
-            <div className={styles.historyTableContainer}>
-                <SecondaryStyledText
-                    text={historyLabel}
-                    className={styles.headerText}
-                    textStyles={historyLabelStyles}
-                ></SecondaryStyledText>
+            <WalletHistoryTable />
+            <DepositWithDialog isOpen={isDepositDialogOpen} onCancel={onCancel} />
+            <Footer />
 
-                <Table
-                    className={styles.historyTable}
-                    tHeadData={tHeadData}
-                    tBodyData={tBodyData}
-                    renderCell={renderCell}
-                    noRowBg={true}
-                />
-            </div>
         </div>
     )
 }

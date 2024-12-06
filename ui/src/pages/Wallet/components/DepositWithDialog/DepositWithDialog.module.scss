@@ -1,0 +1,57 @@
+$buttonHeight: 45px;
+
+$iconSize: calc($buttonHeight - 6px);
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+@mixin depositBtn {
+    min-height: $buttonHeight;
+
+    &:not(:last-child) {
+        margin-bottom: 10px;
+    }
+
+    &.iconContainerBtn {
+        padding: 0 10px;
+    }
+    
+    .iconContainerBtnContent {
+        display: flex;
+        align-items: center;
+    
+        position: relative;
+    }
+
+    .iconContainerBtnLabel {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .iconContainerBtnText {
+        width: initial;
+        height: initial;
+
+        position: relative;
+        top: 2px;
+    }
+
+    .icon {
+        width: $iconSize;
+        min-width: $iconSize;
+    }
+
+    .roboTokenGoldIcon {
+        transform: translateX(25%);
+    }
+
+    .starIcon {
+        transform: translateX(16%);
+    }
+}

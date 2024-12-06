@@ -1,0 +1,45 @@
+@use '@styles/colors';
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: colors.$deep-navy;
+
+    width: 100vw;
+
+    padding: 20px;
+}
+
+.row {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:not(:last-child) {
+        margin-bottom: 10px;
+    }
+}
+
+.label,
+.link {
+    color: colors.$medium-blue;
+
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+
+    margin: 0 auto;
+
+    &:not(:last-child) {
+        margin-right: 10px;
+    }
+}
+
+.link {
+    text-decoration: underline;
+    cursor: pointer;
+}

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
-export function useContainerDimensions () {
-  const containerRef = useRef<HTMLDivElement>(null);
+export function useContainerDimensions<T extends Element = HTMLDivElement>() {
+  const containerRef = useRef<T>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export function useContainerDimensions () {
         observer.unobserve(containerRef.current);
       }
     };
-  }, []);
+  }, [containerRef.current]);
 
   return { containerRef, dimensions };
 };

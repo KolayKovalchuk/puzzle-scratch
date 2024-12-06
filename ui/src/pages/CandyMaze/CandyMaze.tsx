@@ -27,7 +27,6 @@ import candy_clouds from '@icons/candy_clouds.svg';
 import candy_maze from '@icons/candy_maze.svg';
 import candy_stars_bg from '@icons/candy_stars_bg.svg';
 import shining from '@icons/shining.svg';
-import { Footer } from '@components/Footer/Footer';
 
 const topScratchCardMatrixConfig: IGameMatrixConfig = {
     cellHeight: 50,
@@ -143,7 +142,6 @@ export function CandyMaze() {
                     />
                 </div>
                 <GameFooterBtn onPlay={onPlay}/>
-                <Footer />
             </div>
             {isBigWinVisible
                 && <BigWinScreen

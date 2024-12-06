@@ -34,7 +34,6 @@ import ice_box_header_diamonds_stars from '@icons/iceBox/ice_box_header_diamonds
 import ice_box_logo from '@icons/iceBox/ice_box_logo.svg';
 import ice_box_logo_shining from '@icons/iceBox/ice_box_logo_shining.svg';
 import ice_box_shining from '@icons/iceBox/ice_box_shining.svg';
-import { Footer } from '@components/Footer/Footer';
 
 
 const bgTextureConfig: IBgTextureConfig = {
@@ -217,7 +216,6 @@ export function IceBox() {
                 <GameFooterBtn onPlay={onPlay}>
                     <Icon name={footer_stars} className={styles.footerStars} />
                 </GameFooterBtn>
-                <Footer />
             </div>
             {isBigWinVisible
                 && <BigWinScreen

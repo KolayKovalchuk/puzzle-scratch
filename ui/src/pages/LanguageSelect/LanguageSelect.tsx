@@ -1,20 +1,19 @@
+import { Button, ButtonType } from '@components/shared/Button/Button';
 import { Dropdown, IDropdownItem } from '@components/shared/Dropdown';
 import { SecondaryStyledText } from '@components/shared/StyledText';
 import { TosApprovePopup } from '@components/TosApprovePopup/TosApprovePopup';
+import { useContainerDimensions } from '@hooks/useContainerDimensions';
 import { ROUTES } from '@routers/routerConfig';
 import { aprooveUserTerms, selectUserLocale } from '@services/api/user.service';
+import { updateUserLocale } from '@store/actions/user.actions';
 import { selectLocalValue, selectSupportedLocales } from '@store/selectors/localization.selectors';
 import { selectPreferredLocale, selectUserAcceptedTerms } from '@store/selectors/user.selectors';
+import store from '@store/store';
 import WebApp from '@twa-dev/sdk';
 import { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styles from './LanguageSelect.module.scss';
-import { Button, ButtonType } from '@components/shared/Button/Button';
-import store from '@store/store';
-import { updateUserLocale } from '@store/actions/user.actions';
-import { useContainerDimensions } from '@hooks/useContainerDimensions';
-import { Footer } from '@components/Footer/Footer';
 
 export interface ILanguageSelectProps {
     onLangSelected?: (lang: string) => void | Promise<void>,
@@ -153,7 +152,6 @@ export function LanguageSelect({ onLangSelected, isPreferredLocaleSelected }: IL
                 onConfirm={() => onTosApprove()}
                 onClose={() => onTosDecline()}
             ></TosApprovePopup>
-            <Footer />
         </div>
     );
 }

@@ -10,6 +10,7 @@ import store from '@store/store';
 import { useEffect } from 'react';
 import { Provider, useSelector } from 'react-redux';
 import { BrowserRouter, useLocation, useNavigate } from 'react-router-dom';
+import { LoadingScreen } from '@components/LoadingScreen/LoadingScreen';
 
 // TODO: remove test code when done
 function TestBtn({ click }: { click: () => void }) {
@@ -27,7 +28,12 @@ function TestBtn({ click }: { click: () => void }) {
 }
 
 function App() {
-    const [isLoaded, isPreferredLocaleSelected, setIsPreferredLocaleSelected] = useInitApp();
+    const {
+        isLoaded,
+        isPreferredLocaleSelected,
+        setIsPreferredLocaleSelected,
+        isFontListLoaded,
+    } = useInitApp();
 
     const navigate = useNavigate();
     const isUserAcceptedTerms = useSelector(selectUserAcceptedTerms)
@@ -43,8 +49,8 @@ function App() {
 
     const location = useLocation();
 
-    if (!isLoaded) {
-        return <div className={`${styles.mainContainer} ${styles.loading}`}><span>Loading...</span></div>
+    if (!isFontListLoaded) {
+        return null;
     }
 
     const onLangSelected = async () => {
@@ -64,8 +70,11 @@ function App() {
 
     return (
         <div className={styles.mainContainer}>
-            <Header />
-            <AppRouter languageSelectProps={languageSelectProps} />
+            {isLoaded ? <>
+                <Header />
+                <AppRouter languageSelectProps={languageSelectProps} />
+            </> : null}
+            <LoadingScreen isLoaded={isLoaded} />
 
             {/* // TODO: remove test code when done */}
             { location.pathname === ROUTES.Home && <TestBtn click={() => onTestBtnClick()}/>}

@@ -19,6 +19,8 @@ $mint-green: #43EF90;
 $burnt-orange: #B23305;
 $coral-red: #FE5E5E;
 $light-orchid: #E878FA;
+$vivid-purple: #C431E8;
+$light-pink: #FF81F2;
 $light-yellow: #FFDD56;
 
 
@@ -223,3 +225,12 @@ $historyTableGraient: radial-gradient(65% 50% at 50% 15%,
      color.adjust(#591B6D, $lightness: -5%) 93.9393937587738%,
     96.9696968793869%,
      color.adjust(#571B6D, $lightness: -5%) 100%);
+
+$progressBorderBarBg: linear-gradient(to bottom,
+        #FB6400 0%,
+        #FFDA54 50%,
+        #FB6400 100%);
+
+$progressBarContainerBg: linear-gradient(to bottom,
+        #2B0D73 0%,
+        #4015A3 100%);

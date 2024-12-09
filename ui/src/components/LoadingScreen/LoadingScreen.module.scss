@@ -1,0 +1,55 @@
+@use '@styles/colors';
+@use '@styles/animation_mixins';
+
+.contianer {
+    display: flex;
+    background-color: red;
+
+    width: 100vw;
+    height: 100vh;
+
+    position: fixed;
+    z-index: 1000000;
+
+    display: none;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background: colors.$main_radial_bg_gradient;
+    
+    &.visible {
+        display: flex;
+    }
+}
+
+.poweredByTextContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 20%;
+    margin-bottom: 30%;
+}
+
+.poweredByText {
+    height: initial;
+
+    margin-bottom: 10px;
+}
+
+.tokenIcon {
+    width: 14vw;
+}
+
+.loadingBar {
+    margin-bottom: 10px;
+}
+
+.loadingByText {
+    height: initial;
+
+    @include animation_mixins.loadingBlinkAnimation;
+}

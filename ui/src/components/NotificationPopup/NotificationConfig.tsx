@@ -23,14 +23,13 @@ export interface NotificationConfig {
 export const NotificationConfig: NotificationConfig = {
     [NotificationType.DAILY_BONUS]: {
         title: 'txt.dailybonus.title',
-        // content: 'txt.dailybonus.text',
         children: <DailyBonusNotificationBody />,
         agreeBtn: 'txt.btn.collect',
         agreeCallback: async () => {
             const response = await postCollectDailyGift();
 
             if (response?.newBalance) {
-                console.log('Referral gift collected successfully:', response);
+                console.log('Dayily bonus gift collected successfully:', response);
                 store.dispatch(updateUserBalanceRbax(response.newBalance));
             } else {
                 // TODO: handle error

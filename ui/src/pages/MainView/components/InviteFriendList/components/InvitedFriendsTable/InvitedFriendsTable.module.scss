@@ -1,10 +1,26 @@
+@use '@styles/mixins';
+
 .table {
     height: 100%;
     width: 90%;
 
     z-index: 1000;
+
+    white-space: nowrap;
 }
 
 .nickNameCell {
     padding-right: 16%;
+}
+
+.hintIcon {
+    height: 50%;
+    width: auto;
+
+    margin-left: auto;
+    margin-right: 8px;
+
+    padding: 4px;
+
+    @include mixins.icon-shadown;
 }

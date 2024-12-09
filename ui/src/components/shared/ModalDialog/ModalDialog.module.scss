@@ -38,8 +38,6 @@
     height: 100%;
     background: colors.$modal_dialog_bg;
     border-radius: 16px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
 }
 
 .modalActions {
@@ -52,4 +50,18 @@
             margin-left: 10px;
         }
     }
+}
+
+$crossIconSize: 32px;
+
+.closeCrossIcon {
+    position: absolute;
+    top: calc($crossIconSize / 4);
+    right: calc($crossIconSize / 4);
+
+    z-index: 10000;
+
+    transform: translate(50%, -50%);
+
+    width: $crossIconSize;
 }

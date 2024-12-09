@@ -77,3 +77,24 @@ export const selectSendRBaxAmount = createSelector(
         return config?.SEND_RBAX.RBAX
     }
 )
+
+export const selectFriendsBonusConfig = createSelector(
+    selectConfigQueryData,
+    (config) => {
+        return config?.FRIENDS_BONUS
+    }
+)
+
+export const selectFriendToInvite = createSelector(
+    selectFriendsBonusConfig,
+    (config) => {
+        return config?.FRIEND_TO_INVITE
+    }
+)
+
+export const selectFriendRBax = createSelector(
+    selectFriendsBonusConfig,
+    (config) => {
+        return config?.RBAX
+    }
+)

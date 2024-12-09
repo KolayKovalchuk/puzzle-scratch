@@ -14,7 +14,12 @@ export function useInitApp() {
 
     useInitTwaSdk();
 
-    const isLoaded = isUserLoggedIn && isLocLoaded && isPrefLocLoaded && isFontListLoaded;
+    const isLoaded = Boolean(isUserLoggedIn && isLocLoaded && isPrefLocLoaded && isFontListLoaded);
 
-    return [isLoaded, isPreferredLocaleSelected, setIsPreferredLocaleSelected] as const;
+    return {
+        isLoaded,
+        isPreferredLocaleSelected,
+        setIsPreferredLocaleSelected,
+        isFontListLoaded,
+    };
 }

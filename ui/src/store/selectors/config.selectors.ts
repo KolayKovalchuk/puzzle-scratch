@@ -64,6 +64,13 @@ export const selectScratchCardTransitionTimeout = createSelector(
     }
 )
 
+export const selectSplashScreenTimeout = createSelector(
+    selectConfigQueryData,
+    (config) => {
+        return config?.SPLASH_SCREEN_TIMEOUT_MS || 2000
+    }
+)
+
 export const selectDailyBonusConfig = createSelector(
     selectConfigQueryData,
     (config) => {

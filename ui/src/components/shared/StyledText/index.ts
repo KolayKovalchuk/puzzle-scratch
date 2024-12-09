@@ -7,3 +7,5 @@ export * from './components/RedStyledText';
 export * from './components/RegularStyledText';
 export * from './components/SecondaryStyledText';
 export * from './components/WinStyledText';
+export * from './components/GameCellStyledText';
+export * from './components/LoaderStyledText';

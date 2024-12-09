@@ -3,20 +3,15 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 export function useLoadingPercentHook(isLoaded: boolean) {
-    const loadingTextAnimationIterationCount = 2;
-
     const splashScreenTimeout = useSelector(selectSplashScreenTimeout);
 
     const [isVisible, setIsVisible] = useState(true);
     const [percentage, setPercentage] = useState(0);
-    const [loadingBlinkAnimationDuration, setLoadingBlinkAnimationDuration] = useState(0);
 
     useEffect(() => {
         const setInvisibleDelay = splashScreenTimeout / 10;
         const animationDuration = (splashScreenTimeout - setInvisibleDelay);
         const interval = animationDuration / 100;
-
-        setLoadingBlinkAnimationDuration(animationDuration / loadingTextAnimationIterationCount);
 
         const timer = setInterval(() => {
             setPercentage(prev => {
@@ -47,7 +42,5 @@ export function useLoadingPercentHook(isLoaded: boolean) {
     return {
         isVisible,
         percentage,
-        loadingBlinkAnimationDuration,
-        loadingTextAnimationIterationCount
     }
 }

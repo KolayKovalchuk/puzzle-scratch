@@ -26,7 +26,6 @@ export function LoadingScreen({ isLoaded }: ILoadingScreenProps) {
     const {
         isVisible,
         percentage,
-        loadingBlinkAnimationDuration,
     } = useLoadingPercentHook(isLoaded);
 
     const containerClassName = `${styles.contianer} ${isVisible ? styles.visible : ''}`;
@@ -49,7 +48,6 @@ export function LoadingScreen({ isLoaded }: ILoadingScreenProps) {
             <LoaderStyledStyledText
                 text={'Loading...'}
                 className={styles.loadingByText}
-                styles={{ animationDuration: `${loadingBlinkAnimationDuration}ms` }}
                 textStyles={loadingTextStyles} />
         </div>
     );

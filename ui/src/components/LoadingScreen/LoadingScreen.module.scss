@@ -50,6 +50,4 @@
 
 .loadingByText {
     height: initial;
-
-    @include animation_mixins.loadingBlinkAnimation;
 }

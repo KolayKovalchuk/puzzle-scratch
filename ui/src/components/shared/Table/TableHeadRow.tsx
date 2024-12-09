@@ -14,7 +14,7 @@ export function TableHeadRow({ tHeadData, className = '' }: iTableProps) {
         <div className={styles.headRow}>
             {tHeadData.map((headData) => {
                 return (
-                    <div key={headData.key} className={`${styles.headCellContainer} ${className}`}>
+                    <div key={headData.key} className={`${styles.headCellContainer} ${className} tHeadRow`}>
                         {headData.data}
                     </div>
                 )

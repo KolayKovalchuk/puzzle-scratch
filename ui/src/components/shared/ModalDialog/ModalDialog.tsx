@@ -1,11 +1,16 @@
+import { FC, MouseEvent, ReactNode, useCallback, useMemo } from 'react';
+
 import { StyledHeader } from '@components/shared/StyledHeader';
-import { FC, ReactNode } from 'react';
-import { Button, ButtonType } from '../Button/Button';
+import { Button, ButtonType } from '@components/shared/Button';
+import { Icon } from '@components/shared/Icon';
+
+import close_cross_icon from '@icons/close_cross_icon.svg';
+
 import styles from './ModalDialog.module.scss';
 
 interface ModalDialogProps {
     isOpen: boolean;
-    title: string;
+    title?: string;
     content?: string;
 
     confirmText?: string;
@@ -15,6 +20,8 @@ interface ModalDialogProps {
 
     onClose?: () => void;
     onConfirm?: () => void;
+
+    callOnCloseOnOverlayClick?: boolean;
 
     className?: string;
 }
@@ -29,39 +36,62 @@ const ModalDialog: FC<ModalDialogProps> = ({
     cancelText,
     children,
     className,
+    callOnCloseOnOverlayClick = false,
 }) => {
     if (!isOpen) return null;
 
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
         onClose && onClose();
-    }
+    }, [onClose]);
 
-    const handleConfirm = () => {
+    const handleConfirm = useCallback(() => {
         onConfirm && onConfirm();
-    }
+    }, [onConfirm]);
+
+    const modalDialogContent = useMemo(() => {
+        return (
+            <div className={`${styles.modalBody} modalBody`}>
+                {children ? children : <p>{content}</p>}
+                <div className={`${styles.modalActions} modalActions`}>
+                    {cancelText && <Button
+                        className={styles.btn}
+                        text={cancelText}
+                        mode={ButtonType.Cancel}
+                        onClick={handleClose} />
+                    }
+                    {confirmText && <Button
+                        className={styles.btn}
+                        text={confirmText}
+                        mode={ButtonType.Confirm}
+                        onClick={handleConfirm} />
+                    }
+                </div>
+            </div>
+        );
+    }, [children, content, confirmText, cancelText, handleClose, handleConfirm]);
+
+    const onOverlayClick = useCallback(() => {
+        if (callOnCloseOnOverlayClick) {
+            onClose && onClose();
+        }
+    }, [callOnCloseOnOverlayClick, onClose]);
+
+    const onModalContentClick = useCallback((e: MouseEvent<HTMLDivElement>) => {
+        e.stopPropagation();
+    }, []);
 
     return (
-        <div className={`${styles.modalOverlay} ${className}`}>
-            <div className={`${styles.modalContent} modalContent`}>
-                <StyledHeader title={title}>
-                    <div className={`${styles.modalBody} modalBody`}>
-                        {children ? children : <p>{content}</p>}
-                        <div className={`${styles.modalActions} modalActions`}>
-                            {cancelText && <Button
-                                className={styles.btn}
-                                text={cancelText}
-                                mode={ButtonType.Cancel}
-                                onClick={() => handleClose()} />
-                            }
-                            {confirmText && <Button
-                                className={styles.btn}
-                                text={confirmText}
-                                mode={ButtonType.Confirm}
-                                onClick={() => handleConfirm()} />
-                            }
-                        </div>
-                    </div>
-                </StyledHeader>
+        <div className={`${styles.modalOverlay} ${className}`} onClick={onOverlayClick}>
+            <div className={`${styles.modalContent} modalContent`} onClick={onModalContentClick}>
+                {typeof title === 'string'
+                    ? <StyledHeader title={title}>
+                        {modalDialogContent}
+                    </StyledHeader>
+                    : <>
+                        <Icon name={close_cross_icon} className={styles.closeCrossIcon} onClick={handleClose}/>
+                        {modalDialogContent}
+                    </>
+                }
             </div>
         </div>
     );

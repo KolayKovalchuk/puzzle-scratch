@@ -1,21 +1,36 @@
-import { ReactNode, useCallback, useMemo } from 'react'
+import { ReactNode, useCallback, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 
-import { Table } from '@components/shared/Table'
-import { ITableCellData } from '@components/shared/Table/Table.models'
-import { TableCell } from '@components/shared/Table/TableRow'
-
+import { ITableCellData, Table, TableCell } from '@components/shared/Table'
 import { selectLocalValue } from '@store/selectors/localization.selectors'
-
 import { useInvitedFriendsTBodyData } from './useInvitedFriendsTBodyData'
 
 import styles from './InvitedFriendsTable.module.scss'
+import hint from '@icons/hint.svg';
+import { Icon } from '@components/shared/Icon'
+import { BonusInfoDialogPopup } from '../BonusInfoDialog/BonusInfoDialog'
 
 export function InvitedFriendsTable() {
-    const invitedFriendsText = useSelector(selectLocalValue('txt.invite.invited'))
+    const invitedFriendsText = useSelector(selectLocalValue('txt.invite.invited'));
+
+    const [isBonusInfoDialogOpen, setIsBonusInfoDialogOpen] = useState(false);
+
+    const onCloseBonusInfoDialog = useCallback(() => {
+        setIsBonusInfoDialogOpen(false);
+    }, []);
+
+    const onHintIconClick = useCallback(() => {
+        setIsBonusInfoDialogOpen(true);
+    }, []);
 
     const tHeadData: ITableCellData[] = useMemo(() => [
+        { key: 'index', data: '' },
         { key: 'userName', data: invitedFriendsText },
+        {
+            key: 'nickName', data: (
+                <Icon name={hint} className={styles.hintIcon} onClick={onHintIconClick}/>
+            )
+        },
     ], [invitedFriendsText]);
 
     const { tBodyData } = useInvitedFriendsTBodyData();
@@ -28,13 +43,16 @@ export function InvitedFriendsTable() {
         return <TableCell className={cellClassName} key={data.key} data={data.data} width={cellWidth} />
     }, [tHeadData])
 
-
-    return (
+    return (<>
         <Table
             className={styles.table}
             tHeadData={tHeadData}
             tBodyData={tBodyData}
             renderCell={renderCell}
         />
-    )
+        <BonusInfoDialogPopup
+            isOpen={isBonusInfoDialogOpen}
+            onClose={onCloseBonusInfoDialog}
+        />
+    </>)
 }

@@ -1,18 +1,16 @@
-import { Icon } from '@components/shared/Icon'
-import { SecondaryStyledText } from '@components/shared/StyledText'
-import { selectLocalValue } from '@store/selectors/localization.selectors'
 import { useSelector } from 'react-redux'
 import { ITextStyle } from 'pixi.js'
 import { ReactNode, useCallback, useMemo } from 'react'
 
-import robo_token_gold_no_shining from '@icons/robo_token_gold_no_shining.svg'
-
-import { Table } from '@components/shared/Table'
-import { ITableCellData, ITRowData } from '@components/shared/Table/Table.models'
+import { Icon } from '@components/shared/Icon'
+import { SecondaryStyledText } from '@components/shared/StyledText'
+import { Table, TableCell, ITableCellData, ITRowData } from '@components/shared/Table'
+import { selectLocalValue } from '@store/selectors/localization.selectors'
 import { formatNumber } from '@utils/formatters/formatNumber'
 
+import robo_token_gold_no_shining from '@icons/robo_token_gold_no_shining.svg'
+
 import styles from './WalletHistoryTable.module.scss'
-import { TableCell } from '@components/shared/Table/TableRow'
 
 const historyLabelStyles: Partial<ITextStyle> = {
     fontSize: 30,

@@ -1,14 +1,17 @@
-import { Icon } from '@components/shared/Icon';
 import styles from './BatchCard.module.scss';
+import { useNavigate } from 'react-router-dom';
 
+
+import { Icon } from '@components/shared/Icon';
 import { StyledHeader } from '@components/shared/StyledHeader';
-
 import { StyledText } from '@components/shared/StyledText';
-import hint from '@icons/hint.svg';
-import robo_token_no_bg from '@icons/robo_token_no_bg.svg';
+
 import { BatchCard } from '@models/BatchCard.model';
 import { useBatchCardHandler, useGetBatchCardConfig } from './hooks/useGetBatchCardConfig';
-import { useNavigate } from 'react-router-dom';
+
+import robo_token_no_bg from '@icons/robo_token_no_bg.svg';
+import hint from '@icons/hint.svg';
+
 
 export interface IBatchCardProps {
     className?: string;

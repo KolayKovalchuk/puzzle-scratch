@@ -1,9 +1,9 @@
 @use '@styles/colors';
 @use '@styles/animation_mixins';
+@use '@styles/mixins';
 
 .contianer {
     display: flex;
-    background-color: red;
 
     width: 100vw;
     height: 100vh;
@@ -14,14 +14,22 @@
     display: none;
 
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 
-    background: colors.$main_radial_bg_gradient;
+    @include colors.main_radial_bg_gradient($width: 50%, $height: 30%, $y: 40%);
+
+    @media screen and (max-width: 375px) {
+        @include colors.main_radial_bg_gradient($width: 50%, $height: 25%, $y: 35%);
+    }
     
     &.visible {
         display: flex;
     }
+}
+
+
+.logoHeader {
+    margin-top: 50%;
 }
 
 .poweredByTextContainer {
@@ -30,24 +38,33 @@
     justify-content: space-between;
     align-items: center;
 
-    margin-top: 20%;
-    margin-bottom: 30%;
+    margin-top: 20px;
 }
 
 .poweredByText {
     height: initial;
-
-    margin-bottom: 10px;
 }
 
 .tokenIcon {
     width: 14vw;
 }
 
+.loadingBarContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+
+    margin-top: auto;
+    margin-bottom: 20px;
+}
+
 .loadingBar {
     margin-bottom: 10px;
 }
 
-.loadingByText {
+.loadingText {
     height: initial;
 }

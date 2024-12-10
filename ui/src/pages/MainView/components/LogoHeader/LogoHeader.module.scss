@@ -2,7 +2,6 @@
     display: flex;
     position: relative;
     width: 100%;
-    height: 120px;
     margin-top: 4px;
 
     .puzzleLabel,
@@ -25,7 +24,6 @@
         top: 70px;
         height: 45px;
         width: 66.8%;
-
     }
 
     .gamesLabel {
@@ -36,10 +34,20 @@
     }
 
     .starsHeaderBg {
-        width: 100%;
-        height: 114%;
         position: absolute;
         top: -18px;
         z-index: 0;
+        aspect-ratio: 422 / 137;
+    }
+}
+
+.placeholder {
+    visibility: hidden;
+    width: 100%;
+
+    .starsHeaderBg,
+    .puzzleLabel,
+    .scratchLabel {
+        position: static;
     }
 }

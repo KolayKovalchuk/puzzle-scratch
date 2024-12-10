@@ -32,7 +32,7 @@ export function LoadingScreen({ isLoaded }: ILoadingScreenProps) {
 
     return (
         <div className={containerClassName}>
-            <LogoHeader />
+            <LogoHeader className={styles.logoHeader} />
 
             <div className={styles.poweredByTextContainer}>
                 <LoaderStyledStyledText
@@ -44,11 +44,13 @@ export function LoadingScreen({ isLoaded }: ILoadingScreenProps) {
                 <Icon name={robo_token_double_border} className={styles.tokenIcon}></Icon>
             </div>
 
-            <ProgressBar percentage={percentage} className={styles.loadingBar} />
-            <LoaderStyledStyledText
-                text={'Loading...'}
-                className={styles.loadingByText}
-                textStyles={loadingTextStyles} />
+            <div className={styles.loadingBarContainer}>
+                <ProgressBar percentage={percentage} className={styles.loadingBar} />
+                <LoaderStyledStyledText
+                    text={'Loading...'}
+                    className={styles.loadingText}
+                    textStyles={loadingTextStyles} />
+            </div>
         </div>
     );
 }

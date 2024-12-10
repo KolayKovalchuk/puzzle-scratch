@@ -108,18 +108,6 @@
     "HI": "हिंदू"
   },
   {
-    "Key": "txt.loader.poweredBy",
-    "EN": "Powered by $RBAX",
-    "UK": "Powered by $RBAX",
-    "RU": "Powered by $RBAX",
-    "pt-BR": "Powered by $RBAX",
-    "VI": "Powered by $RBAX",
-    "ES": "Powered by $RBAX",
-    "AR": "Powered by $RBAX",
-    "FIL": "Powered by $RBAX",
-    "HI": "Powered by $RBAX"
-  },
-  {
     "Key": "txt.footer.tos",
     "EN": "<link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">ToS</link>",
     "UK": "<link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">ToS</link>",
@@ -295,7 +283,7 @@
     "pt-BR": "Ao tocar em “Concordo”, você confirma que tem mais de 18 anos e concorda com os Termos de Serviço disponíveis <link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">aqui</link>.",
     "VI": "Bằng cách nhấn vào 'Đồng ý', bạn xác nhận rằng mình trên 18 tuổi và đồng ý với Điều khoản dịch vụ có sẵn <link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">tại đây</link>.",
     "ES": "Al tocar \"Aceptar\", confirma que es mayor de 18 años y acepta los Términos de servicio disponibles <link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">aquí</link>.",
-    "AR": "من خلال النقر على \"موافقة\"، فإنك تؤكد أن عمرك يزيد عن 18 عامًا وتوافق على شروط الخدمة المتوفرة <link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">هنا</link>.",
+    "AR": "من خلال النقر على \"موافقة\"، فإنك تؤكد أن عمرك يزيد عن 18 عامًا وتوافق على شروط الخدمة المتاحة <link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">هنا</link>.",
     "FIL": "Sa pamamagitan ng pag-tap sa ‘Sumasang-ayon,’ kinukumpirma mong lampas ka na sa 18 at sumasang-ayon sa Mga Tuntunin ng Serbisyo na available <link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">dito</link>.",
     "HI": "'सहमत' पर टैप करके आप पुष्टि करते हैं कि आपकी उम्र 18 वर्ष से अधिक है और आप <link url='https://www.cryptoscratch.gg/terms-and-conditions'>यहां</link> उपलब्ध सेवा की शर्तों से सहमत हैं।"
   },
@@ -338,7 +326,7 @@
   {
     "Key": "txt.tos.title",
     "EN": "Terms of Service",
-    "UK": "Умови обслуговування",
+    "UK": "Умови надання послуг",
     "RU": "Условия обслуживания",
     "pt-BR": "Termos de Serviço",
     "VI": "Điều khoản dịch vụ",
@@ -349,15 +337,15 @@
   },
   {
     "Key": "txt.limit.reached",
-    "EN": "Too slow! Only <$var> friends can collect RBAX from this gift. Collect faster next time.",
-    "UK": "Занадто повільно! Лише <$var> друзів можуть зібрати RBAX з цього подарунка. Збирайте швидше наступного разу",
-    "RU": "Слишком медленно! Только друзья <$var> могут получить RBAX из этого подарка. В следующий раз собирайте быстрее.",
-    "pt-BR": "Muito devagar! Apenas <$var> amigos podem coletar RBAX deste presente. Colete mais rápido da próxima vez.",
-    "VI": "Quá chậm! Chỉ <$var> bạn bè có thể thu thập RBAX từ món quà này. Thu thập nhanh hơn lần sau nhé.",
-    "ES": "¡Demasiado lento! Solo <$var> amigos pueden recoger RBAX de este regalo. Recoge más rápido la próxima vez.",
-    "AR": "بطيء جدًا! يمكن فقط <$var> أصدقاء جمع RBAX من هذه الهدية. اجمع بسرعة في المرة القادمة.",
-    "FIL": "Mabagal masyado! Tanging <$var> mga kaibigan ang makakolekta ng RBAX mula sa regalong ito. Mas mabilis sa susunod!",
-    "HI": "बहुत धीमे! केवल <$var> मित्र इस उपहार से RBAX प्राप्त कर सकते हैं। अगली बार तेजी से एकत्र करें।"
+    "EN": "Too slow! Only <$var1> friends can collect RBAX from this gift. Collect faster next time.",
+    "UK": "Занадто повільно! Лише <$var1> друзів можуть зібрати RBAX з цього подарунка. Збирайте швидше наступного разу",
+    "RU": "Слишком медленно! Только друзья <$var1> могут получить RBAX от этого подарка. В следующий раз собирайте быстрее.",
+    "pt-BR": "Muito devagar! Apenas <$var1> amigos podem coletar RBAX deste presente. Colete mais rápido da próxima vez.",
+    "VI": "Quá chậm! Chỉ <$var1> bạn bè có thể thu thập RBAX từ món quà này. Thu thập nhanh hơn lần sau nhé.",
+    "ES": "¡Demasiado lento! Solo <$var1> amigos pueden recoger RBAX de este regalo. Recoge más rápido la próxima vez.",
+    "AR": "بطيء جدًا! يمكن فقط <$var1> أصدقاء جمع RBAX من هذه الهدية. اجمع بسرعة في المرة القادمة.",
+    "FIL": "Mabagal masyado! Tanging <$var1> mga kaibigan ang makakolekta ng RBAX mula sa regalong ito. Mas mabilis sa susunod!",
+    "HI": "बहुत धीमे! केवल <$var1> मित्र इस उपहार से RBAX प्राप्त कर सकते हैं। अगली बार तेजी से एकत्र करें।"
   },
   {
     "Key": "txt.btn.send",
@@ -524,7 +512,7 @@
     "VI": "Mời bạn bè",
     "ES": "Invitar Amigos",
     "AR": "دعوة الأصدقاء",
-    "FIL": "Mag-imbita ng mga Kaibigan",
+    "FIL": "Mag-imbita",
     "HI": "दोस्तों को आमंत्रित करें"
   },
   {
@@ -625,15 +613,15 @@
   },
   {
     "Key": "txt.limit.collection",
-    "EN": "You cannot collect more than <$var> RBAX per day from gifts.",
-    "UK": "Ви не можете отримати більше ніж <$var> RBAX на день з подарунків.",
-    "RU": "Вы не можете получить более <$var> RBAX в день с подарков.",
-    "pt-BR": "Você não pode coletar mais de <$var> RBAX por dia em presentes.",
-    "VI": "Bạn không thể thu thập nhiều hơn <$var> RBAX mỗi ngày từ quà tặng.",
-    "ES": "No puedes cobrar más de <$var> RBAX por día de los regalos.",
-    "AR": "لا يمكنك جمع أكثر من <$var> RBAX يوميًا من الهدايا.",
-    "FIL": "Hindi ka maaaring mangolekta ng higit sa <$var> RBAX bawat araw mula sa mga regalo.",
-    "HI": "आप उपहारों से प्रति दिन <$var> RBAX से अधिक एकत्र नहीं कर सकते।"
+    "EN": "You cannot collect more than <$var1> RBAX per day from gifts.",
+    "UK": "Ви не можете отримати більше ніж <$var1> RBAX на день з подарунків.",
+    "RU": "Вы не можете получать более <$var1> RBAX в день с подарков.",
+    "pt-BR": "Você não pode coletar mais de <$var1> RBAX por dia em presentes.",
+    "VI": "Bạn không thể thu thập nhiều hơn <$var1> RBAX mỗi ngày từ quà tặng.",
+    "ES": "No puedes cobrar más de <$var1> RBAX por día de los regalos.",
+    "AR": "لا يمكنك جمع أكثر من <$var1> RBAX يوميًا من الهدايا.",
+    "FIL": "Hindi ka maaaring mangolekta ng higit sa <$var1> RBAX bawat araw mula sa mga regalo.",
+    "HI": "आप उपहारों से प्रति दिन <$var1> RBAX से अधिक एकत्र नहीं कर सकते।"
   },
   {
     "Key": "txt.limit.friend",
@@ -1045,13 +1033,13 @@
   },
   {
     "Key": "txt.invite.terms",
-    "EN": "You will recieve te invite friend bonus pf <$var1> with every <$var2> frineds who accpeted your invite and never played before.",
-    "UK": "Ви отримаєте бонус за запрошених друзів <$var1> за кожного <$var2> друга, який прийняв ваше запрошення та ще не грав.",
+    "EN": "You will receive the invite friend bonus of <$var1> with every <$var2> friend who accepted your invite and never played before.",
+    "UK": "Ви отримаєте бонус за запрошених друзів в розмірі <$var1> за кожного <$var2> друга, який прийняв ваше запрошення та ще не грав.",
     "RU": "Вы получите бонус за приглашение друга в размере <$var1> за каждого <$var2> друга, который принял ваше приглашение и никогда не играл.",
     "pt-BR": "Você receberá o bônus de amigo convidado de <$var1> a cada <$var2> amigos que aceitarem seu convite e nunca jogaram antes.",
     "VI": "Bạn sẽ nhận được phần thưởng bạn bè mời là <$var1> cho mỗi <$var2> người bạn đã chấp nhận lời mời của bạn và chưa bao giờ chơi trước đó.",
     "ES": "Recibirás el bono de amigo invitado de <$var1> por cada <$var2> amigos que acepten tu invitación y nunca hayan jugado antes.",
-    "AR": "ستتلقى مكافأة دعوة الأصدقاء بقيمة <var1$> عن كل <var2$> من الأصدقاء الذين قبلوا دعوتك ولم يلعبوا من قبل.",
+    "AR": "ستحصل على مكافأة دعوة الأصدقاء بقيمة <$var1> عن كل <$var2> من الأصدقاء الذين قبلوا دعوتك ولم يلعبوا من قبل.",
     "FIL": "Makakatanggap ka ng bonus sa paanyaya ng kaibigan na <$var1> sa bawat <$var2> kaibigan na tumanggap ng iyong imbitasyon at hindi pa naglalaro.",
     "HI": "आपको प्रत्येक <$var2> दोस्तों के लिए <$var1> का आमंत्रण बोनस मिलेगा, जिन्होंने आपका निमंत्रण स्वीकार किया और पहले कभी नहीं खेला।"
   },
@@ -1123,7 +1111,7 @@
     "pt-BR": "•$1 = (RBAX) <$var1> \n•RBAX, USDT/C, TON apenas na rede TON \n•O valor mínimo para retirada é <$var2>. \n•Envie fundos para a seguinte carteira. Certifique-se de especificar a tag. \n•A conversão é estimada, e a conversão final será decidida no momento do processamento.",
     "VI": "•$1 = (RBAX) <$var1> \n•RBAX, USDT/C, TON chỉ trên mạng TON \n•Số tiền rút tối thiểu là <$var2>. \n•Chuyển tiền vào ví dưới đây. Đảm bảo bạn đã chỉ định thẻ. \n•Việc chuyển đổi là ước tính và việc chuyển đổi cuối cùng sẽ được quyết định tại thời điểm xử lý.",
     "ES": "•$1 = (RBAX) <$var1> \n•RBAX, USDT/C, TON solo en la red TON \n•La cantidad mínima para retirar es <$var2>. \n•Envía fondos a la siguiente billetera. Asegúrate de especificar la etiqueta. \n•La conversión es estimada y la conversión final se decidirá en el momento del procesamiento.",
-    "AR": "•$1 = (RBAX) <var1$> \n•RBAX, USDT/C, TON فقط على شبكة TON \n•الحد الأدنى للسحب هو <var2$>. \n•أرسل الأموال إلى المحفظة التالية. تأكد من تحديد الوسم. \n•التحويل مقدر، وسيتم تحديد التحويل النهائي في لحظة المعالجة.",
+    "AR": "•$1 = (RBAX) <$var1> \n•RBAX, USDT/C, TON فقط على شبكة TON \n•الحد الأدنى للسحب هو <$var2>. \n•أرسل الأموال إلى المحفظة التالية. تأكد من تحديد الوسم. \n•التحويل مقدر، وسيتم تحديد التحويل النهائي في لحظة المعالجة.",
     "FIL": "•$1 = (RBAX) <$var1> \n•RBAX, USDT/C, TON sa TON network lamang \n•Ang pinakamababang halagang maibabalik ay <$var2>. \n•Magpadala ng pondo sa sumusunod na wallet. Tiyaking tukuyin ang tag. \n•Ang conversion ay tinatayang halaga at ang pangwakas na conversion ay magaganap sa sandaling iproseso.",
     "HI": "•$1 = (RBAX) <$var1> \n•RBAX, USDT/C, TON केवल TON नेटवर्क पर \n•न्यूनतम निकासी राशि <$var2> है। \n•निम्नलिखित वॉलेट में फंड भेजें। सुनिश्चित करें कि आपने टैग निर्दिष्ट किया है। \n•रूपांतरण का अनुमान है, और अंतिम रूपांतरण प्रसंस्करण के समय पर तय किया जाएगा।"
   },
@@ -1167,7 +1155,7 @@
     "Key": "txt.withdrawal.terms",
     "EN": "•Minimum withdrawal (rbax) <$var1>.\n•Make sure you the address is correct.\n•0 Withdrawal fee\n•Withdrawal can take a 2 minutes",
     "UK": "•Мінімальне зняття (rbax) <$var1>.\n• Переконайтеся, що адреса правильна.\n•0 Комісія за зняття\n• Виведення може зайняти 2 хвилини",
-    "RU": "•Минимальная сумма вывода (rbax) <$var1>.\n• Убедитесь, что адрес правильный.\n• 0 комиссия за снятие средств\n• Вывод средств может занять 2 минуты.",
+    "RU": "•Минимальная сумма вывода (rbax) <$var1>.\n• Убедитесь, что адрес указан правильно.\n• 0 комиссия за снятие средств\n• Вывод средств может занять 2 минуты.",
     "pt-BR": "•Saque mínimo (rbax) <$var1>.\n•Certifique-se de que o endereço esteja correto.\n•0 Taxa de retirada\n•A retirada pode levar 2 minutos",
     "VI": "•Số tiền rút tối thiểu (rbax) <$var1>.\n• Hãy chắc chắn rằng địa chỉ của bạn là chính xác.\n•0 Phí rút tiền\n•Việc rút tiền có thể mất 2 phút",
     "ES": "•Retiro mínimo (rbax) <$var1>.\n•Asegúrese de que la dirección sea correcta.\n•0 tarifa de retiro\n•La retirada puede tardar 2 minutos.",
@@ -1189,15 +1177,15 @@
   },
   {
     "Key": "pop.withdrawal.errorWallet",
-    "EN": "Введена вами адреса гаманця є недійсною.",
-    "UK": "Введенный вами адрес кошелька недействителен.",
-    "RU": "O endereço da carteira que você inseriu não é válido.",
-    "pt-BR": "Địa chỉ ví bạn nhập không hợp lệ.",
-    "VI": "La dirección de billetera que insertaste no es válida.",
-    "ES": "عنوان المحفظة الذي أدخلته غير صالح.",
-    "AR": "Ang wallet address na ipinasok mo ay hindi wasto.",
-    "FIL": "आपने जो वॉलेट पता डाला है, वह अमान्य है।",
-    "HI": "वेडेना को एड्रेस लामेनी से भी अधिक की जरूरत है।"
+    "EN": "The wallet address you inserted is not valid.",
+    "UK": "Введена вами адреса гаманця є недійсною.",
+    "RU": "Введенный вами адрес кошелька недействителен.",
+    "pt-BR": "O endereço da carteira que você inseriu não é válido.",
+    "VI": "Địa chỉ ví bạn nhập không hợp lệ.",
+    "ES": "La dirección de billetera que insertaste no es válida.",
+    "AR": "عنوان المحفظة الذي أدخلته غير صالح.",
+    "FIL": "Ang wallet address na ipinasok mo ay hindi wasto.",
+    "HI": "आपने जो वॉलेट पता डाला है, वह अमान्य है।"
   },
   {
     "Key": "pop.withdrawal.errorAmount",
@@ -1244,7 +1232,7 @@
     "VI": "Mô tả trò chơi hộp băng\nMô tả trò chơi hộp băng\nMô tả trò chơi hộp băng\nMô tả trò chơi hộp băng",
     "ES": "Descripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo",
     "AR": "وصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج",
-    "FIL": "Ang paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng laro ng ice box",
+    "FIL": "Ang paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box",
     "HI": "आइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण"
   },
   {
@@ -1256,7 +1244,7 @@
     "VI": "Mô tả trò chơi hộp băng\nMô tả trò chơi hộp băng\nMô tả trò chơi hộp băng\nMô tả trò chơi hộp băng",
     "ES": "Descripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo",
     "AR": "وصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج",
-    "FIL": "Ang paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng laro ng ice box",
+    "FIL": "Ang paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box",
     "HI": "आइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण"
   },
   {
@@ -1275,7 +1263,7 @@
     "Key": "puzzle.gallery.icebox",
     "EN": "Prizes sum up to 1,000,000 RBAX!",
     "UK": "Сума призів досягає 1 000 000 RBAX!",
-    "RU": "Сумма призов составляет до 1 000 000 RBAX!",
+    "RU": "Сумма призов достигает 1 000 000 RBAX!",
     "pt-BR": "Os prêmios somam até 1.000.000 RBAX!",
     "VI": "Tổng giải thưởng lên tới 1.000.000 RBAX!",
     "ES": "¡Los premios suman hasta 1.000.000 RBAX!",
@@ -1287,7 +1275,7 @@
     "Key": "puzzle.gallery.santasac",
     "EN": "Prizes sum up to 1,000,000 RBAX!",
     "UK": "Сума призів досягає 1 000 000 RBAX!",
-    "RU": "Сумма призов составляет до 1 000 000 RBAX!",
+    "RU": "Сумма призов достигает 1 000 000 RBAX!",
     "pt-BR": "Os prêmios somam até 1.000.000 RBAX!",
     "VI": "Tổng giải thưởng lên tới 1.000.000 RBAX!",
     "ES": "¡Los premios suman hasta 1.000.000 RBAX!",
@@ -1299,7 +1287,7 @@
     "Key": "puzzle.gallery.candymaze",
     "EN": "Prizes sum up to 1,000,000 RBAX!",
     "UK": "Сума призів досягає 1 000 000 RBAX!",
-    "RU": "Сумма призов составляет до 1 000 000 RBAX!",
+    "RU": "Сумма призов достигает 1 000 000 RBAX!",
     "pt-BR": "Os prêmios somam até 1.000.000 RBAX!",
     "VI": "Tổng giải thưởng lên tới 1.000.000 RBAX!",
     "ES": "¡Los premios suman hasta 1.000.000 RBAX!",

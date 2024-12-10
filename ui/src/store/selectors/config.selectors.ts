@@ -95,7 +95,7 @@ export const selectFriendsBonusConfig = createSelector(
 export const selectFriendToInvite = createSelector(
     selectFriendsBonusConfig,
     (config) => {
-        return config?.FRIEND_TO_INVITE
+        return config?.FRIENDS_TO_INVITE
     }
 )
 

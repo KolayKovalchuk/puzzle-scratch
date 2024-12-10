@@ -29,11 +29,11 @@ export class AppConfig {
 }
 
 export class FriendsBonus {
-    FRIEND_TO_INVITE: number;
+    FRIENDS_TO_INVITE: number;
     RBAX: number;
 
     constructor(data: FriendsBonus) {
-        this.FRIEND_TO_INVITE = data.FRIEND_TO_INVITE;
+        this.FRIENDS_TO_INVITE = data.FRIENDS_TO_INVITE;
         this.RBAX = data.RBAX;
     }
 }

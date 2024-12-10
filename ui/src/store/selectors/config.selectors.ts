@@ -78,10 +78,31 @@ export const selectDailyBonusConfig = createSelector(
     }
 )
 
-export const selectSendRBaxAmount = createSelector(
+export const selectSendRBax = createSelector(
     selectConfigQueryData,
     (config) => {
-        return config?.SEND_RBAX.RBAX
+        return config?.SEND_RBAX
+    }
+)
+
+export const selectSendRBaxAmount = createSelector(
+    selectSendRBax,
+    (config) => {
+        return config?.RBAX
+    }
+)
+
+export const selectSendRBaxMaxPerUserDaily = createSelector(
+    selectSendRBax,
+    (config) => {
+        return config?.MAX_RBAX_PER_USER_DAILY
+    }
+)
+
+export const selectSendRBaxMaxUses = createSelector(
+    selectSendRBax,
+    (config) => {
+        return config?.MAX_USES
     }
 )
 

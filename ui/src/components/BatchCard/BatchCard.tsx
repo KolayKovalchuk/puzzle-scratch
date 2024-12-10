@@ -39,9 +39,9 @@ export function BatchCardComponent({ className, batchCard }: IBatchCardProps) {
                 <div className={`${styles.content}`}>
                     <div className={styles.mainCover}>
                         <img src={batchImageUrl} alt="cover" />
-                        <div className={styles.prizePool}>
-                            <span>Prize pool</span>
-                        </div>
+                    </div>
+                    <div className={styles.prizePool}>
+                        <span>Prize pool</span>
                     </div>
                     <div className={styles.footer}>
                         <div className={styles.priceLabel}>

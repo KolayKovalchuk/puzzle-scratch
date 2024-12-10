@@ -13,7 +13,7 @@ function getStyledHeaderType(cardType: BatchCardType) {
             return StyledHeaderType.PINK;
 
         case BatchCardType.SANTA_SAC:
-            return StyledHeaderType.GREEN;
+            return StyledHeaderType.RED;
 
         default:
             return StyledHeaderType.BLUE;
@@ -29,7 +29,7 @@ function getBatchCardClass(cardType: BatchCardType, styles: CSSModuleClasses) {
             return styles.pink;
 
         case BatchCardType.SANTA_SAC:
-            return styles.green;
+            return styles.red;
 
         default:
             return styles.blue;

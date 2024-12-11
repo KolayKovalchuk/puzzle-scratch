@@ -10,25 +10,25 @@ cache:
 build:
   stage: build
   image: node:16
-  script: #TODO for prod
+  script:
     - npm install
     - |
-      if [ "$CI_COMMIT_REF_NAME" = "main" ]; then
-        npm run build:qa
-      elif [ "$CI_COMMIT_REF_NAME" = "development" ]; then
+      if [[ "$CI_COMMIT_REF_NAME" =~ ^release.*|^hotfix.* ]]; then
+        npm run build:prod
+      elif [[ "$CI_COMMIT_REF_NAME" =~ ^main$|^development$ ]]; then
         npm run build:dev
-      elif [ "$CI_COMMIT_REF_NAME" = "qa" ]; then
-        npm run build:qa
       else
-        echo "No matching branch for build"; exit 1
+        echo "No valid branch"; exit 1
       fi
   artifacts:
     paths:
       - dist/
     expire_in: 1 week
-  only:
-    - main
-    - development
+  rules:
+    - if: '$CI_COMMIT_REF_NAME =~ /^main$/'
+    - if: '$CI_COMMIT_REF_NAME =~ /^development$/'
+    - if: '$CI_COMMIT_REF_NAME =~ /^release.*$/'
+    - if: '$CI_COMMIT_REF_NAME =~ /^hotfix.*$/'
 
 deploy:
   stage: deploy
@@ -36,22 +36,24 @@ deploy:
   dependencies:
     - build
   before_script:
-    # Set DEPLOY_BUCKET based on the branch
-    - |
-      if [ "$CI_COMMIT_REF_NAME" = "main" ]; then
-        export DEPLOY_BUCKET="gs://puzzle-ui-qa-0"
-      elif [ "$CI_COMMIT_REF_NAME" = "development" ]; then
-        export DEPLOY_BUCKET="gs://puzzle-ui-dev-0"
-      else
-        echo "No matching branch for deployment"; exit 1
-      fi
-  script:
-    - export GOOGLE_CLOUD_CREDENTIALS=$(echo $BASE64_GOOGLE_CLOUD_CREDENTIALS | base64 -d)
-    - echo $GOOGLE_CLOUD_CREDENTIALS > service-account-key.json
+    - echo $BASE64_GOOGLE_CLOUD_CREDENTIALS | base64 -d > service-account-key.json
     - gcloud auth activate-service-account --key-file service-account-key.json
     - gcloud config set project $GCP_PROJECT_ID
-    - gsutil -m rsync -d -r dist $DEPLOY_BUCKET # for the prod we need to keep old ones an have some script to clean expired
+    - |
+      if [[ "$CI_COMMIT_REF_NAME" =~ ^release.*|^hotfix.* ]]; then
+        DEPLOY_BUCKET="gs://puzzle-ui"
+        RSYNC_FLAGS=""
+      elif [[ "$CI_COMMIT_REF_NAME" =~ ^main$|^development$ ]]; then
+        DEPLOY_BUCKET="gs://puzzle-ui-dev-0"
+        RSYNC_FLAGS="-d"
+      else
+        echo "No valid branch"; exit 1
+      fi
+  script:
+    - gsutil -m rsync $RSYNC_FLAGS -r dist $DEPLOY_BUCKET
     - gsutil setmeta -h "Cache-Control:no-cache, max-age=0" $DEPLOY_BUCKET/index.html
-  only:
-    - main
-    - development
+  rules:
+    - if: '$CI_COMMIT_REF_NAME =~ /^main$/'
+    - if: '$CI_COMMIT_REF_NAME =~ /^development$/'
+    - if: '$CI_COMMIT_REF_NAME =~ /^release.*$/'
+    - if: '$CI_COMMIT_REF_NAME =~ /^hotfix.*$/'

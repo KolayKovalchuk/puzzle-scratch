@@ -4,6 +4,7 @@ import { updateUserBalanceRbax } from '@store/actions/user.actions';
 import store from '@store/store';
 import { ReactNode } from 'react';
 import { DailyBonusNotificationBody } from './components/DailyBonusNotificationBody/DailyBonusNotificationBody';
+import { TooManyGifts } from './components/TooManyGiftsBody/TooManyGiftsBody';
 
 
 export interface NotificationConfigItem {
@@ -80,7 +81,7 @@ export const NotificationConfig: NotificationConfig = {
     },
     [NotificationType.RBAX_GIFT_TO_MANY]: {
         title: 'text.gift.rbaxgift',
-        content: 'txt.limit.reached',
+        children: <TooManyGifts />,
         agreeBtn: 'txt.btn.ok',
     },
     [NotificationType.RBAX_GIFT_1_PER_X]: {

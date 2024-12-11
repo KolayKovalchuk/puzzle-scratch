@@ -17,8 +17,21 @@
 }
 
 .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
     &.hidden {
         display: none;
+    }
+}
+
+.logoHeader {
+    margin-bottom: -16px;
+
+    @media screen and (max-width: 375px) {
+        margin-bottom: -8px;
     }
 }
 

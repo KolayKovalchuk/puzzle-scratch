@@ -1,45 +1,24 @@
+
 .container {
     display: flex;
     position: relative;
-    width: 100%;
-    height: 120px;
+    width: 110%;
     margin-top: 4px;
+    z-index: 100;
 
-    .puzzleLabel,
-    .scratchLabel,
-    .gamesLabel {
-        position: absolute;
-        transform: translate(-50%, -50%);
+    .logoLabel {
+        position: relative;
+        transform: translateX(-44%);
         left: 50%;
         z-index: 1;
-    }
-
-    .puzzleLabel {
-        top: 20px;
-        width: 53.7%;
-        height: 45px;
-        aspect-ratio: 580 / 133;
-    }
-
-    .scratchLabel {
-        top: 70px;
-        height: 45px;
-        width: 66.8%;
-
-    }
-
-    .gamesLabel {
-        width: 28.7%;
-        top: 90px;
-        left: 80%;
-        aspect-ratio: 107 / 72;
+        width: 100%;
+        aspect-ratio: auto;
     }
 
     .starsHeaderBg {
-        width: 100%;
-        height: 114%;
         position: absolute;
         top: -18px;
         z-index: 0;
+        aspect-ratio: 422 / 137;
     }
 }

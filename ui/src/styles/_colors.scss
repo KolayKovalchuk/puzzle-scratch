@@ -22,11 +22,27 @@ $light-orchid: #E878FA;
 $vivid-purple: #C431E8;
 $light-pink: #FF81F2;
 $light-yellow: #FFDD56;
+$deep-purple: #480978;
+$crimson-red: #dc2436;
 
 
 $main_bg: linear-gradient(180deg, #380850 0%, #180132 100%);
 $main_radial_bg_gradient: radial-gradient(65% 50% at 50% 15%, #FB12D033 0%, #180132 100%),
     linear-gradient(180deg, #380850 0%, #180132 100%);
+
+@mixin main_radial_bg_gradient($width: 65%, $height: 50%, $x: 50%, $y: 15%) {
+    background: radial-gradient(
+                $width $height at $x $y,
+                    rgba($color: #FB12D0, $alpha: 0.4) 0%,
+                    rgba($color: #FB12D0, $alpha: 0.2) 50%,
+                    rgba($color: #FB12D0, $alpha: 0.15) 60%,
+                    rgba($color: #FB12D0, $alpha: 0.1) 70%,
+                    rgba($color: #FB12D0, $alpha: 0.05) 80%,
+                    rgba($color: #FB12D0, $alpha: 0.02) 90%,
+                    rgba($color: #FB12D0, $alpha: 0.01) 100%
+                ),
+                linear-gradient(180deg, #380850 0%, #180132 100%);
+    }
 
 
 $modal_dialog_bg: linear-gradient(180deg, #8458DB 0%, #585FCE 100%);
@@ -196,35 +212,35 @@ $grayGradient: linear-gradient(to bottom,
         #8BA3AE 100%);
 
 $historyTableGraient: radial-gradient(65% 50% at 50% 15%,
-     color.adjust(#571A6D, $lightness: -5%) 0%,
-    0.6493506487458944%,
-     color.adjust(#581A6D, $lightness: -5%) 1.2987012974917889%,
-    1.7316017765551805%,
-     color.adjust(#581B6D, $lightness: -5%) 2.1645022556185722%,
-    5.411255639046431%,
-     color.adjust(#5A1D6E, $lightness: -5%) 8.658009022474289%,
-    16.017315909266472%,
-     color.adjust(#5E1D6E, $lightness: -5%) 23.376622796058655%,
-    25.32467544078827%,
-     color.adjust(#5F1E6F, $lightness: -5%) 27.272728085517883%,
-    32.68398344516754%,
-     color.adjust(#621E6F, $lightness: -5%) 38.0952388048172%,
-    42.64069348573685%,
-     color.adjust(#641F6F, $lightness: -5%) 47.186148166656494%,
-    54.76190447807312%,
-     color.adjust(#611E6F, $lightness: -5%) 62.337660789489746%,
-    67.965367436409%,
-     color.adjust(#5E1E6F, $lightness: -5%) 73.59307408332825%,
-    74.24242496490479%,
-     color.adjust(#5E1D6E, $lightness: -5%) 74.89177584648132%,
-    79.65368032455444%,
-     color.adjust(#5B1D6E, $lightness: -5%) 84.41558480262756%,
-    88.0952388048172%,
-     color.adjust(#591C6D, $lightness: -5%) 91.77489280700684%,
-    92.85714328289032%,
-     color.adjust(#591B6D, $lightness: -5%) 93.9393937587738%,
-    96.9696968793869%,
-     color.adjust(#571B6D, $lightness: -5%) 100%);
+        color.adjust(#571A6D, $lightness: -5%) 0%,
+        0.6493506487458944%,
+        color.adjust(#581A6D, $lightness: -5%) 1.2987012974917889%,
+        1.7316017765551805%,
+        color.adjust(#581B6D, $lightness: -5%) 2.1645022556185722%,
+        5.411255639046431%,
+        color.adjust(#5A1D6E, $lightness: -5%) 8.658009022474289%,
+        16.017315909266472%,
+        color.adjust(#5E1D6E, $lightness: -5%) 23.376622796058655%,
+        25.32467544078827%,
+        color.adjust(#5F1E6F, $lightness: -5%) 27.272728085517883%,
+        32.68398344516754%,
+        color.adjust(#621E6F, $lightness: -5%) 38.0952388048172%,
+        42.64069348573685%,
+        color.adjust(#641F6F, $lightness: -5%) 47.186148166656494%,
+        54.76190447807312%,
+        color.adjust(#611E6F, $lightness: -5%) 62.337660789489746%,
+        67.965367436409%,
+        color.adjust(#5E1E6F, $lightness: -5%) 73.59307408332825%,
+        74.24242496490479%,
+        color.adjust(#5E1D6E, $lightness: -5%) 74.89177584648132%,
+        79.65368032455444%,
+        color.adjust(#5B1D6E, $lightness: -5%) 84.41558480262756%,
+        88.0952388048172%,
+        color.adjust(#591C6D, $lightness: -5%) 91.77489280700684%,
+        92.85714328289032%,
+        color.adjust(#591B6D, $lightness: -5%) 93.9393937587738%,
+        96.9696968793869%,
+        color.adjust(#571B6D, $lightness: -5%) 100%);
 
 $progressBorderBarBg: linear-gradient(to bottom,
         #FB6400 0%,

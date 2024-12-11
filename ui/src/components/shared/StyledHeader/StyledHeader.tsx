@@ -11,6 +11,7 @@ export enum StyledHeaderType {
     BLUE = 'Blue',
     PINK = 'Pink',
     GREEN = 'Green',
+    RED = 'RED',
     DEFAULT = 'Default',
 }
 

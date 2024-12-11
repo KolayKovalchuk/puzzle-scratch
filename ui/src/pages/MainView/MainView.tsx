@@ -58,7 +58,7 @@ export function MainView() {
         <div className={styles.mainContainer}>
             {isInviteFriendVisible && <InviteFriendList onCloseClick={onInviteFriendClose} />}
             <div className={containerClassName}>
-                <LogoHeader></LogoHeader>
+                <LogoHeader className={styles.logoHeader}></LogoHeader>
                 <BatchCardContainer></BatchCardContainer>
 
                 <div className={styles.banner} onClick={() => onInviteClicked()}>

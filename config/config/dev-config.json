@@ -2,6 +2,7 @@
   "API_URL": "https://puzzle-dev-api-ke8734.rebelbots.com",
   "TELEGRAM_APP_URL": "https://t.me/PuzzleScratchDEVbot/PuzzleScratch_DEV",
   "LOCALISATION": "https://puzzle-config.storage.googleapis.com/localisation/v24.json",
+  "BOT_LOCALISATION": "https://puzzle-config.storage.googleapis.com/botLocalization/v1.json",
   "SCRATCH_CARD_TRANSITION_TIMEOUT_MS": 2000,
   "MAINTENANCE": false,
   "AFFILIATE_BONUS": 1,

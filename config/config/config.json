@@ -1,22 +1,26 @@
 {
   "API_URL": "https://api.cryptoscratch.gg/",
+  "TELEGRAM_BOT_URL": "https://t.me/PuzzleScratchDEVbot/",
   "TELEGRAM_APP_URL": "https://t.me/PuzzleScratchDEVbot/PuzzleScratch_DEV",
-  "LOCALISATION": "https://puzzle-config.storage.googleapis.com/localisation/v12.json",
-  "BOT_LOCALISATION": "https://puzzle-config.storage.googleapis.com/botLocalization/v1.json",
+  "TELEGRAM_APP_DOMAIN": "https://puzzle-ui-dev-291ijd.cryptoscratch.gg/",
+  "LOCALISATION": "https://puzzle-config.storage.googleapis.com/localisation/v24.json",
+  "BOT_LOCALISATION": "https://puzzle-config.storage.googleapis.com/botLocalization/v2.json",
   "SCRATCH_CARD_TRANSITION_TIMEOUT_MS": 2000,
   "MAINTENANCE": false,
   "AFFILIATE_BONUS": 1,
   "SYSTEM_MSG": null,
   "SYSTEM_MSG_ONE_TIME": true,
-  "DAILY_BONUS": [],
+  "EMOJI_BONUS": 1,
+  "DAILY_BONUS": [
+  ],
   "FRIENDS_BONUS": {
-    "FRIENDS_TO_INVITE": 1,
-    "RBAX": 10
+    "FRIENDS_TO_INVITE": 20,
+    "RBAX": 1
   },
   "SEND_RBAX": {
-    "RBAX": 100,
-    "MAX_RBAX_PER_USER_DAILY": 250,
+    "RBAX": 1,
+    "MAX_RBAX_PER_USER_DAILY": 2,
     "EXPIRATION_MS": 1800000,
-    "MAX_USES": 2
+    "MAX_USES": 1
   }
 }

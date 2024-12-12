@@ -29,7 +29,6 @@ jspm_packages/
 Thumbs.db
 
 # IDEs and editors
-.vscode/
 .idea/
 *.suo
 *.ntvs*

@@ -7,7 +7,12 @@
     "start": "nodemon --exec babel-node ./src/index.ts --extensions .ts",
     "start:dev": "NODE_ENV=development npm start",
     "start:prod": "NODE_ENV=production npm start",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:local": "functions-framework --source=dist --target=launch",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:ts": "babel src -d dist --extensions \".ts\" && cp package.json dist/",
+    "build:watch": "nodemon --exec babel src -d dist --extensions \".ts\"",
+    "deploy": "gcloud builds submit --config ./cloudfunction_config.yml .",
+    "build:deploy": "npm run build:ts && npm run deploy"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +28,9 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
+    "@google-cloud/functions-framework": "^3.4.2",
+    "axios": "^1.7.9",
+    "axios-retry": "^4.5.0",
     "dotenv": "^16.4.7",
     "telegraf": "^4.16.3"
   }

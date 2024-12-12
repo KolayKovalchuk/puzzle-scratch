@@ -1,5 +1,5 @@
 {
-  "API_URL": "https://api.cryptoscratch.gg/",
+  "API_URL": "https://api.cryptoscratch.gg",
   "TELEGRAM_BOT_URL": "https://t.me/PuzzleScratchDEVbot/",
   "TELEGRAM_APP_URL": "https://t.me/PuzzleScratchDEVbot/PuzzleScratch_DEV",
   "TELEGRAM_APP_DOMAIN": "https://puzzle-ui-dev-291ijd.cryptoscratch.gg/",

@@ -56,6 +56,12 @@ export const selectTelegramAppUrl = createSelector(
         return config?.TELEGRAM_APP_URL
     }
 )
+export const selectBotUrl = createSelector(
+    selectConfigQueryData,
+    (config) => {
+        return config?.TELEGRAM_BOT_URL
+    }
+)
 
 export const selectScratchCardTransitionTimeout = createSelector(
     selectConfigQueryData,

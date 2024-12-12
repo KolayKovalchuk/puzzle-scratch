@@ -4,7 +4,7 @@
   "TELEGRAM_APP_URL": "https://t.me/PuzzleScratchDEVbot/PuzzleScratch_DEV",
   "TELEGRAM_APP_DOMAIN": "https://puzzle-ui-dev-291ijd.cryptoscratch.gg/",
   "LOCALISATION": "https://puzzle-config.storage.googleapis.com/localisation/v24.json",
-  "BOT_LOCALISATION": "https://puzzle-config.storage.googleapis.com/botLocalization/v2.json",
+  "BOT_LOCALISATION": "https://puzzle-config.storage.googleapis.com/botLocalization/v3.json",
   "SCRATCH_CARD_TRANSITION_TIMEOUT_MS": 2000,
   "MAINTENANCE": false,
   "AFFILIATE_BONUS": 1,

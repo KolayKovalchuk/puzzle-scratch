@@ -144,6 +144,30 @@
     "HI": "हमें खुशी है कि आप हमारे प्री-लॉन्च समुदाय में शामिल हुए हैं। 🎉\n✨अभी उपलब्ध: \n🎰मुफ्त $RBAX किसी मित्र को भेजें! \n🎰दोस्तों को आमंत्रित करें और अधिक कमाएं! खेल के लॉन्च से पहले अंतिम चरणों में, आप दोस्तों को आमंत्रित कर सकते हैं और अधिक बोनस प्राप्त कर सकते हैं! \n\n🪙$RBAX गेम की इन-गेम क्रिप्टोकरेंसी है जो Crypto Scratch के केंद्र में है। यह खिलाड़ियों को कमाने, व्यापार करने और रोमांचक अवसरों को अनलॉक करने की अनुमति देता है। खेल और अतिरिक्त बोनस जल्द ही लाइव होंगे - बने रहें!"
   },
   {
+    "Key": "bot.start.msg1.3",
+    "EN": "Message 1.3",
+    "UK": "Message 1.3",
+    "RU": "Message 1.3",
+    "pt-BR": "Message 1.3",
+    "VI": "Message 1.3",
+    "ES": "Message 1.3",
+    "AR": "Message 1.3",
+    "FIL": "Message 1.3",
+    "HI": "Message 1.3"
+  },
+  {
+    "Key": "bot.cmd.start",
+    "EN": "Start",
+    "UK": "Start",
+    "RU": "Start",
+    "pt-BR": "Start",
+    "VI": "Start",
+    "ES": "Start",
+    "AR": "Start",
+    "FIL": "Start",
+    "HI": "Start"
+  },
+  {
     "Key": "bot.ctaBtn.text",
     "EN": "Play",
     "UK": "Play",
@@ -154,5 +178,29 @@
     "AR": "Play",
     "FIL": "Play",
     "HI": "Play"
+  },
+  {
+    "Key": "bot.ctaBtn.getbonus",
+    "EN": "Get Bonus",
+    "UK": "Get Bonus",
+    "RU": "Get Bonus",
+    "pt-BR": "Get Bonus",
+    "VI": "Get Bonus",
+    "ES": "Get Bonus",
+    "AR": "Get Bonus",
+    "FIL": "Get Bonus",
+    "HI": "Get Bonus"
+  },
+  {
+    "Key": "bot.ctaBtn.getstarted",
+    "EN": "Get Started",
+    "UK": "Get Started",
+    "RU": "Get Started",
+    "pt-BR": "Get Started",
+    "VI": "Get Started",
+    "ES": "Get Started",
+    "AR": "Get Started",
+    "FIL": "Get Started",
+    "HI": "Get Started"
   }
 ]

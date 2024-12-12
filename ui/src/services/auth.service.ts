@@ -77,11 +77,20 @@ export async function loginUser() {
 
         const linkCode = extractStartparams(WebApp.initDataUnsafe.start_param || '', linkCodeParam);
         const refCode = extractStartparams(WebApp.initDataUnsafe.start_param || '', refCodeParam);
-        
+
+        const urlParams = new URLSearchParams(window.location.search);
+        console.log('Current URL query params:', urlParams.toString());
+
+        const linkCodeUrl = urlParams.get(linkCodeParam);
+        const refCodeUrl = urlParams.get(refCodeParam);
+
+        console.log('Link code from URL:', linkCodeUrl);
+        console.log('Ref code from URL:', refCodeUrl);
+
         const body: ILoginBody = {
             initData: WebApp.initData,
-            linkCode: linkCode || null,
-            refCode: refCode || null,
+            linkCode: linkCode || linkCodeUrl || null,
+            refCode: refCode || refCodeUrl || null,
         }
 
         const isLocalDevMode = import.meta.env.VITE_IS_LOCAL_DEV_MODE

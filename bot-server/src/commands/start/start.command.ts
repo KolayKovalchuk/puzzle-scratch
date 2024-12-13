@@ -1,7 +1,7 @@
 import { Context, Markup } from 'telegraf';
 import { Message, Update } from 'telegraf/types';
 
-import { linkCodeParam } from '../../models/AppConfig.model';
+import { linkCodeParam, refCodeParam } from '../../models/AppConfig.model';
 import { fetchConfigData } from '../../services/api/config.service';
 import { getLocalizationData, getUserLocale } from '../../services/api/localization.service';
 import { selectLocalValue } from '../../utils/selectLocalValue';
@@ -24,9 +24,9 @@ function getIsFirstMsg(ctx: Context<Update.MessageUpdate<Message.TextMessage>>) 
 
 function getMsgKey(ctx: Context<Update.MessageUpdate<Message.TextMessage>>) {
     const [, ...params] = ctx.message.text.split(' ');
-    const isIncludeRefCode = params.some(param => param.includes(`${linkCodeParam}=`));
+    const isIncludeLinkCode = params.some(param => param.includes(`${linkCodeParam}=`));
 
-    if (isIncludeRefCode) {
+    if (isIncludeLinkCode) {
         return 'bot.start.msg1.1'
     }
 

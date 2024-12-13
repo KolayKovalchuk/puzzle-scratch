@@ -7,7 +7,6 @@ import { bot, handleWebhookUpdate, setWebhookUrl, startBot } from './bot';
 
 export const handleWebhook: HttpFunction = async (request, response) => {
     console.log('handleWebhook');
-    await startBot();
     await handleWebhookUpdate(request.body);
     response.status(200).send('Success!');
 };
@@ -22,7 +21,8 @@ if (process.env.IS_LOCAL_DEV) {
     console.log('start local bot');
     
     startBot();
+
+    process.once("SIGINT", () => bot.stop("SIGINT"));
+    process.once("SIGTERM", () => bot.stop("SIGTERM"));
 }
 
-process.once("SIGINT", () => bot.stop("SIGINT"));
-process.once("SIGTERM", () => bot.stop("SIGTERM"));

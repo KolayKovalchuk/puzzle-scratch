@@ -1,23 +1,32 @@
 stages:
   - upload
 
-
 upload_config_and_localisation:
   stage: upload
   image: google/cloud-sdk:latest
   script:
     # Decode and set up Google Cloud credentials
     - export GOOGLE_CLOUD_CREDENTIALS=$(echo $BASE64_GOOGLE_CLOUD_CREDENTIALS | base64 -d)
-    - echo $GOOGLE_CLOUD_CREDENTIALS > service-account-key.json
+    - echo "$GOOGLE_CLOUD_CREDENTIALS" > service-account-key.json
     - gcloud auth activate-service-account --key-file service-account-key.json
     - gcloud config set project cryptoscratch
 
-    # Sync the config and localisation directories to the GCS bucket
-    - gsutil -m rsync -r config gs://puzzle-config/config
+    # Conditional deployment based on branch
+    - if [ "$CI_COMMIT_BRANCH" = "main" ]; then
+        gsutil -m rsync -r config gs://puzzle-config/config;
+      elif [ "$CI_COMMIT_BRANCH" = "dev" ]; then
+        gsutil cp config/dev-config.json gs://puzzle-config/config/dev-config.json;
+        gsutil cp config/qa-config.json gs://puzzle-config/config/qa-config.json;
+      fi
+
+    # These directories are always synced
     - gsutil -m rsync -d -r localisation gs://puzzle-config/localisation
     - gsutil -m rsync -d -r avatars gs://puzzle-config/avatars
     - gsutil -m rsync -d -r botLocalization gs://puzzle-config/botLocalization
 
+    # Set no-cache headers if main branch
     - gsutil -m setmeta -h "Cache-Control:no-cache, max-age=0" gs://puzzle-config/config/**
+
   only:
     - main
+    - dev

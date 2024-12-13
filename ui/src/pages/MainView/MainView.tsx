@@ -68,7 +68,7 @@ export function MainView() {
                     <LeaderBoard />
                 </div>
             </div>
-            <Footer />
+            <Footer className={styles.footer}/>
         </div>
         {!isUserLoginNotificationsEmpty && <NotificationPopup
             isOpen={userLoginNotifications.length > 0}

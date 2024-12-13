@@ -8,6 +8,7 @@ import { aprooveUserTerms, selectUserLocale } from '@services/api/user.service';
 import { updateUserLocale } from '@store/actions/user.actions';
 import { selectLocalValue, selectSupportedLocales } from '@store/selectors/localization.selectors';
 import { selectPreferredLocale, selectUserAcceptedTerms } from '@store/selectors/user.selectors';
+import { Footer } from '@components/Footer/Footer';
 import store from '@store/store';
 import WebApp from '@twa-dev/sdk';
 import { useEffect, useMemo, useState } from 'react';
@@ -147,6 +148,7 @@ export function LanguageSelect({ onLangSelected, isPreferredLocaleSelected }: IL
                 }
             }}></Button>
 
+            <Footer />
             <TosApprovePopup
                 isOpen={isTosApprovePopupOpen}
                 onConfirm={() => onTosApprove()}

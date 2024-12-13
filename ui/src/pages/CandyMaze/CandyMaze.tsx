@@ -15,6 +15,7 @@ import { CandyMazeSpriteCell, ICandyMazeSpriteCellData, ICandyMazeSpriteCellProp
 import { useSpriteCellData } from './hooks/useSpriteCellData';
 import { ICandyMazeCardData } from './ICandyMaze.model';
 
+import { Footer } from '@components/Footer/Footer';
 import { BigWinScreen } from '@components/BigWinScreen/BigWinScreen';
 import { useScratchGame } from '@hooks/useScratchGame';
 import { useSwipeAria } from '@hooks/useSwipeAria';
@@ -142,6 +143,7 @@ export function CandyMaze() {
                     />
                 </div>
                 <GameFooterBtn onPlay={onPlay}/>
+                <Footer />
             </div>
             {isBigWinVisible
                 && <BigWinScreen

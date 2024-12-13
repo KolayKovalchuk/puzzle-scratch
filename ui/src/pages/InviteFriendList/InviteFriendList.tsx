@@ -11,6 +11,7 @@ import ModalDialog from '@components/shared/ModalDialog/ModalDialog';
 import { getReferralLink } from '@services/api/links.service';
 import { shareLinkToFriends } from '@services/telegramWebApp/telegramWebApp.service';
 import { selectLocalValue } from '@store/selectors/localization.selectors';
+import { Footer } from '@components/Footer/Footer';
 import { Button, ButtonType } from '@components/shared/Button/Button';
 import { useButtonConfig } from '@components/shared/Button/hooks/useButtonConfig';
 import { RegularStyledText, SecondaryStyledText } from '@components/shared/StyledText';
@@ -124,6 +125,7 @@ export function InviteFriendList({ className }: InviteFriendListProps) {
                     <Button className={styles.closeBtn} text={btnCloseTxt} mode={ButtonType.Cancel} onClick={onBackBtnClick} />
                 </div>
             </div>
+            <Footer />
         </div>
 
         <ModalDialog

@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
-
+import { useNavigate } from 'react-router-dom';
 
 import { BatchCardContainer } from '@components/BatchCard';
 import { Footer } from '@components/Footer/Footer';
@@ -14,22 +14,23 @@ import { shareLinkToFriends } from '@services/telegramWebApp/telegramWebApp.serv
 import { selectLocalValueWithVars } from '@store/selectors/localization.selectors';
 import { selectUserName } from '@store/selectors/user.selectors';
 
-import { InviteFriendList } from './components/InviteFriendList/InviteFriendList';
+import { InviteFriendList } from '../InviteFriendList/InviteFriendList';
 
 import { LeaderBoard } from './components/LeaderBoard/LeaderBoard';
 import { LogoHeader } from './components/LogoHeader/LogoHeader';
 
 import styles from './MainView.module.scss';
+import { ROUTES } from '@routers/routerConfig';
 
 export function MainView() {
     const userName = useSelector(selectUserName);
     const shareLinkText = useSelector(selectLocalValueWithVars('txt.gift.msg', userName || ''));
     const [userLoginNotifications, removeLoginNotification] = useShowLoginNotificationsPopups();
 
-    const [isInviteFriendVisible, setIsInviteFriendVisible] = useState(false);
+    const navigate = useNavigate()
 
     const onInviteClicked = useCallback(() => {
-        setIsInviteFriendVisible(true);
+        navigate(ROUTES.InviteFriends);
     }, []);
 
     const onSendRbaxClicked = useCallback(async () => {
@@ -43,11 +44,7 @@ export function MainView() {
         shareLinkToFriends(shareLinkText, url);
     }, [shareLinkText]);
 
-    const onInviteFriendClose = useCallback(() => {
-        setIsInviteFriendVisible(false);
-    }, []);
-
-    const containerClassName = `${styles.container} ${isInviteFriendVisible ? styles.hidden : ''}`;
+    const containerClassName = `${styles.container}`;
 
     const { notifications, removeNotification } = useGetNotifications();
 
@@ -56,7 +53,6 @@ export function MainView() {
 
     return (<>
         <div className={styles.mainContainer}>
-            {isInviteFriendVisible && <InviteFriendList onCloseClick={onInviteFriendClose} />}
             <div className={containerClassName}>
                 <LogoHeader className={styles.logoHeader}></LogoHeader>
                 <BatchCardContainer></BatchCardContainer>

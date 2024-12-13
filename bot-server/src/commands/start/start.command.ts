@@ -22,32 +22,47 @@ function getIsFirstMsg(ctx: Context<Update.MessageUpdate<Message.TextMessage>>) 
     return ctx.message?.message_id <= 1;
 }
 
-function getMsgKey(ctx: Context<Update.MessageUpdate<Message.TextMessage>>) {
+async function getMsgKey(ctx: Context<Update.MessageUpdate<Message.TextMessage>>) {
     const [, ...params] = ctx.message.text.split(' ');
     const isIncludeLinkCode = params.some(param => param.includes(`${linkCodeParam}=`));
+    const config = await fetchConfigData();
 
     if (isIncludeLinkCode) {
-        return 'bot.start.msg1.1'
+        const photoUrl = (config?.BOT_MSG_IMG_BASE_URL || '' )+ 'msg1_1.png';
+        return {
+            msg: 'bot.start.msg1.1',
+            photoUrl: photoUrl,
+        }
     }
 
     const isFirstMsg = getIsFirstMsg(ctx);
 
-    return isFirstMsg ? 'bot.start.msg1.2' : 'bot.start.msg1.3';
+    const photoUrl = (config?.BOT_MSG_IMG_BASE_URL || '' )+ 'msg1_2.png';
+
+    return isFirstMsg
+        ? {
+            msg: 'bot.start.msg1.2',
+            photoUrl: photoUrl
+         }
+        : {
+            msg: 'bot.start.msg1.3',
+            photoUrl: photoUrl
+        };
 }
 
 async function getMsgText(ctx: Context<Update.MessageUpdate<Message.TextMessage>>) {
     const localizationData = await getLocalizationData();
     const config = await fetchConfigData();
 
-    if (!config) return '';
+    if (!config) return { msg: '', photoUrl: '' };
 
 
     const userLocale = await getUserLocale(ctx.from?.id || null, config.API_URL);
-    const msgKey = getMsgKey(ctx);
+    const { msg: msgKey, photoUrl } = await getMsgKey(ctx);
 
     const msg = selectLocalValue(localizationData, msgKey, userLocale);
 
-    return msg;
+    return { msg, photoUrl };
 }
 
 export async function onStartCommand(ctx: Context<Update.MessageUpdate<Message.TextMessage>>) {
@@ -62,17 +77,21 @@ export async function onStartCommand(ctx: Context<Update.MessageUpdate<Message.T
         throw new Error('Config data is not available');
     }
 
-    const msg = await getMsgText(ctx);
-
     const localizationData = await getLocalizationData();
-
 
     const url = process.env.IS_LOCAL_DEV ? process.env.TELEGRAM_WEB_HOOK_URL || config.TELEGRAM_APP_DOMAIN : config.TELEGRAM_APP_DOMAIN;
     const urlWithParams = buildUrlWithParams(url, params);
     console.log('urlWithParams: ', urlWithParams);
     const btnTxt = selectLocalValue(localizationData, 'bot.ctaBtn.text', 'EN');
-    
-    ctx.reply(msg, Markup.inlineKeyboard([
-        Markup.button.webApp(btnTxt, urlWithParams),
-    ]));
+
+    const { msg, photoUrl } = await getMsgText(ctx);
+
+    console.log('photoUrl: ', photoUrl);
+
+    await ctx.replyWithPhoto(photoUrl, {
+        caption: msg,
+        reply_markup: Markup.inlineKeyboard([
+            Markup.button.webApp(btnTxt, urlWithParams),
+        ]).reply_markup,
+    });
 }

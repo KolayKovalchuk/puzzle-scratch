@@ -30,8 +30,6 @@ export interface InviteFriendListProps {
 
 const headerLabelStyles: Partial<ITextStyle> = {
     fontWeight: 'bold',
-    letterSpacing: 2,
-    strokeThickness: 2,
     fontSize: 46,
 }
 

@@ -87,11 +87,30 @@ $bodyTop: -10px;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+}
+
+$inviteFriendIconSize: 20px;
+
+.btnText {
+    position: absolute;
+    width: calc(100% - #{$inviteFriendIconSize});
+    left: calc($inviteFriendIconSize / -2);
+    transform: translateY(-42.5%);
+    top: 50%;
 }
 
 .inviteFriendIcon {
-    width: 20px;
-    margin-left: 4px;
+
+    position: absolute;
+    width: $inviteFriendIconSize;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    right: calc($inviteFriendIconSize / -2);
 }
 
 .invitedFriendHeader {

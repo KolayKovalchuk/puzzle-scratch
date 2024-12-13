@@ -1,5 +1,5 @@
 import { INotification, NotificationType } from '@models/Notification.model';
-import { postCollectDailyGift, postCollectGiftBonus, postCollectRefferalGift } from '@services/api/bonus.service';
+import { postCollectDailyGift, postCollectEmojiBonus, postCollectGiftBonus, postCollectRefferalGift } from '@services/api/bonus.service';
 import { updateUserBalanceRbax } from '@store/actions/user.actions';
 import store from '@store/store';
 import { ReactNode } from 'react';
@@ -49,6 +49,23 @@ export const NotificationConfig: NotificationConfig = {
 
             if (response?.newBalance) {
                 console.log('Referral gift collected successfully:', response);
+                store.dispatch(updateUserBalanceRbax(response.newBalance));
+            } else {
+                // TODO: handle error
+            }
+
+            return response;
+        },
+    },
+    [NotificationType.EMOJI_BONUS]: {
+        title: 'txt.gift.rbaxGiftRBAX',
+        content: 'txt.enojiBonus.content',
+        agreeBtn: 'txt.btn.collect',
+        agreeCallback: async () => {
+            const response = await postCollectEmojiBonus();
+
+            if (response?.newBalance) {
+                console.log('Emoji bonus collected successfully:', response);
                 store.dispatch(updateUserBalanceRbax(response.newBalance));
             } else {
                 // TODO: handle error

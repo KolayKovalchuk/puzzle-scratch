@@ -1,4 +1,5 @@
 export enum NotificationType {
+    EMOJI_BONUS = 'EMOJI_BONUS',
     REFERRALS_BONUS = 'REFERRALS_BONUS',
     DAILY_BONUS = 'DAILY_BONUS', // daily
 

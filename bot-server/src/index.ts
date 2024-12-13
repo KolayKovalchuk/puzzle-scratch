@@ -7,6 +7,7 @@ import { bot, handleWebhookUpdate, setWebhookUrl, startBot } from './bot';
 
 export const handleWebhook: HttpFunction = async (request, response) => {
     console.log('handleWebhook');
+    await startBot();
     await handleWebhookUpdate(request.body);
     response.status(200).send('Success!');
 };

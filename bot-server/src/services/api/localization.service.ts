@@ -24,7 +24,7 @@ export async function fetchLocalizationFile(localization_url: string): Promise<L
     try {
         if (!localization_url) {
             console.error('Localization url is not set');
-            return null;
+            return [];
         }
 
         if (localizationData.length > 0 || _localization_url === localization_url) {
@@ -37,7 +37,7 @@ export async function fetchLocalizationFile(localization_url: string): Promise<L
 
         if (!response.data) {
             console.error('Localization file is empty');
-            return null;
+            return [];
         }
 
         localizationData = response.data;

@@ -28,12 +28,16 @@ if (PORT) {
 
 export async function startBot() {
     console.log('Starting bot...');
-    bot.botInfo = await bot.telegram.getMe();
-    console.log("Bot started");
-    await bot.launch({ webhook: webhookConfig });
+    if (!bot.botInfo) {
+        bot.botInfo = await bot.telegram.getMe();
+        console.log('Bot info:', bot.botInfo);
 
-    const webHookInfo = await bot.telegram.getWebhookInfo()
-    console.log('Webhook info:', webHookInfo);
+        await bot.launch({ webhook: webhookConfig });
+        console.log("Bot started");
+        
+        const webHookInfo = await bot.telegram.getWebhookInfo()
+        console.log('Webhook info:', webHookInfo);
+    }
 }
 
 export function setWebhookUrl() {

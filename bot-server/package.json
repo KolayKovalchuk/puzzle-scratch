@@ -7,7 +7,7 @@
     "start": "nodemon --exec babel-node ./src/index.ts --extensions .ts",
     "start:dev": "NODE_ENV=development npm start",
     "start:prod": "NODE_ENV=production npm start",
-    "start:local": "functions-framework --source=dist --target=launch",
+    "start:local": "functions-framework --source=dist --target=handleWebhook",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:ts": "babel src -d dist --extensions \".ts\" && cp package.json dist/",
     "build:watch": "nodemon --exec babel src -d dist --extensions \".ts\"",

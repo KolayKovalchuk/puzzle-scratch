@@ -17,6 +17,7 @@ import { useScratchGame } from '@hooks/useScratchGame';
 import { useSwipeAria } from '@hooks/useSwipeAria';
 import { useCallback, useMemo, useRef } from 'react';
 
+import { Footer } from '@components/Footer/Footer';
 import { GameFooterBtn } from '@components/GameFooterBtn/GameFooterBtn';
 import { RoundScratchCard } from '@components/ScratchCard/components/RoundScratchCard/RoundScratchCard';
 import { IGameMatrixConfig } from '@components/shared/IconMatrix';
@@ -216,6 +217,7 @@ export function IceBox() {
                 <GameFooterBtn onPlay={onPlay}>
                     <Icon name={footer_stars} className={styles.footerStars} />
                 </GameFooterBtn>
+                <Footer />
             </div>
             {isBigWinVisible
                 && <BigWinScreen

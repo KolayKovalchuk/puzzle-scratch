@@ -16,6 +16,7 @@ export interface IUser {
     acceptedTerms: boolean;
     refCode: string;
     notifications: INotification[];
+    avatar: string;
 }
 
 export class User implements IUser {
@@ -29,6 +30,7 @@ export class User implements IUser {
     acceptedTerms: boolean;
     refCode: string;
     notifications: Notification[];
+    avatar: string;
 
     constructor(data: IUser) {
         this.id = data.id;
@@ -41,6 +43,7 @@ export class User implements IUser {
         this.acceptedTerms = data.acceptedTerms;
         this.refCode = data.refCode;
         this.notifications = data.notifications.map(notification => new Notification(notification));
+        this.avatar = data.avatar;
     }
 
     toJSON() {
@@ -54,7 +57,8 @@ export class User implements IUser {
             authTokenExpiresInMs: this.authTokenExpiresInMs,
             acceptedTerms: this.acceptedTerms,
             refCode: this.refCode,
-            notifications: this.notifications.map(notification => notification.toJSON())
+            notifications: this.notifications.map(notification => notification.toJSON()),
+            avatar: this.avatar,
         };
     }
 }

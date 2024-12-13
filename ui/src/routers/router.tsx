@@ -6,6 +6,7 @@ import { CandyMaze } from '@pages/CandyMaze/CandyMaze';
 import { SantaSac } from '@pages/SantaSac';
 import { IceBox } from '@pages/IceBox/IceBox';
 import { Wallet } from '@pages/Wallet/Wallet';
+import { InviteFriendList } from '@pages/InviteFriendList/InviteFriendList';
 // import { IceBox } from '@pages/IceBox';
 
 export interface IAppRouterProps {
@@ -23,6 +24,7 @@ export const AppRouter = ({ languageSelectProps }: IAppRouterProps) => {
             <Route path={`${ROUTES.IceBox}/:batchId`} element={<IceBox />} />
 
             <Route path={ROUTES.Wallet} element={<Wallet />} />
+            <Route path={ROUTES.InviteFriends} element={<InviteFriendList />} />
 
             <Route path="*" element={<Navigate to={ROUTES.Home} />} />
         </Routes>

@@ -1,4 +1,5 @@
 @use '@styles/colors';
+@use '@styles/mixins';
 
 $border_radius: 20px;
 
@@ -21,6 +22,8 @@ $border_radius: 20px;
 
     border-top-left-radius: $border_radius;
     border-top-right-radius: $border_radius;
+
+    @include mixins.fixedHeaderPadding;
 }
 
 .header {
@@ -38,6 +41,7 @@ $border_radius: 20px;
     z-index: 10000;
 }
 
+$bodyTop: -10px;
 .body {
     display: flex;
     flex-direction: column;
@@ -45,8 +49,10 @@ $border_radius: 20px;
     align-items: center;
 
     position: relative;
-    top: -10px;
+    top: $bodyTop;
     width: 100%;
+    height: 100%;
+    margin-bottom: $bodyTop;
 }
 
 .bodyHeader {
@@ -81,11 +87,30 @@ $border_radius: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+}
+
+$inviteFriendIconSize: 20px;
+
+.btnText {
+    position: absolute;
+    width: calc(100% - #{$inviteFriendIconSize});
+    left: calc($inviteFriendIconSize / -2);
+    transform: translateY(-42.5%);
+    top: 50%;
 }
 
 .inviteFriendIcon {
-    width: 20px;
-    margin-left: 4px;
+
+    position: absolute;
+    width: $inviteFriendIconSize;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    right: calc($inviteFriendIconSize / -2);
 }
 
 .invitedFriendHeader {
@@ -112,7 +137,7 @@ $border_radius: 20px;
 .footer {
     width: 100%;
 
-    position: fixed;
+    position: absolute;
     bottom: 0;
     z-index: 1000;
 
@@ -121,7 +146,8 @@ $border_radius: 20px;
     align-items: center;
     justify-content: center;
 
-    padding: 40px 0;
+    padding-top: 40px;
+    padding-bottom: 15px;
 
     background: linear-gradient(
         to bottom,

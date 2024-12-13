@@ -1,15 +1,17 @@
+
+import { useCallback, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { ITextStyle } from 'pixi.js';
+import { useNavigate } from 'react-router-dom';
+
+import styles from './InviteFriendList.module.scss';
+
 import { Icon } from '@components/shared/Icon';
 import ModalDialog from '@components/shared/ModalDialog/ModalDialog';
 import { getReferralLink } from '@services/api/links.service';
 import { shareLinkToFriends } from '@services/telegramWebApp/telegramWebApp.service';
 import { selectLocalValue } from '@store/selectors/localization.selectors';
-
-import { useCallback, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { ITextStyle } from 'pixi.js';
-
-import styles from './InviteFriendList.module.scss';
-
+import { Footer } from '@components/Footer/Footer';
 import { Button, ButtonType } from '@components/shared/Button/Button';
 import { useButtonConfig } from '@components/shared/Button/hooks/useButtonConfig';
 import { RegularStyledText, SecondaryStyledText } from '@components/shared/StyledText';
@@ -23,17 +25,15 @@ import invite_friends_coins_header from '@icons/invite_friends_coins_header.svg'
 
 export interface InviteFriendListProps {
     className?: string;
-    onCloseClick: () => void;
+    // onCloseClick: () => void;
 }
 
 const headerLabelStyles: Partial<ITextStyle> = {
     fontWeight: 'bold',
-    letterSpacing: 2,
-    strokeThickness: 2,
     fontSize: 46,
 }
 
-export function InviteFriendList({ className, onCloseClick }: InviteFriendListProps) {
+export function InviteFriendList({ className }: InviteFriendListProps) {
     const shareLinkText = useSelector(selectLocalValue('txt.invite.msg'))
     const inviteFriendBtnText = useSelector(selectLocalValue('txt.btn.inviteFriends'))
     const btnCloseTxt = useSelector(selectLocalValue('txt.btn.close'));
@@ -64,9 +64,10 @@ export function InviteFriendList({ className, onCloseClick }: InviteFriendListPr
         setIsSuccessCopiedOpen(true);
     }, []);
 
+    const navigate = useNavigate();
     const onBackBtnClick = useCallback(() => {
-        onCloseClick();
-    }, [onCloseClick])
+        navigate(-1);
+    }, [navigate]);
 
     return (<>
         <div className={`${styles.container} ${className}`} ref={targetRef}>
@@ -119,9 +120,10 @@ export function InviteFriendList({ className, onCloseClick }: InviteFriendListPr
                 <InvitedFriendsTable />
 
                 <div className={styles.footer}>
-                    <Button className={styles.closeBtn} text={btnCloseTxt} mode={ButtonType.Cancel} onClick={() => onCloseClick()} />
+                    <Button className={styles.closeBtn} text={btnCloseTxt} mode={ButtonType.Cancel} onClick={onBackBtnClick} />
                 </div>
             </div>
+            <Footer />
         </div>
 
         <ModalDialog

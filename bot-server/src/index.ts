@@ -19,8 +19,15 @@ export const setWebhook: HttpFunction = async (request, response) => {
 
 if (process.env.IS_LOCAL_DEV) {
     console.log('start local bot');
-    
-    startBot();
+
+
+    if (process.env.IS_LOCAL_DEV_WEBHOOK) {
+        console.log('start local webhook');
+        setWebhookUrl();
+    } else {
+        console.log('launch');
+        bot.launch();
+    }
 
     process.once("SIGINT", () => bot.stop("SIGINT"));
     process.once("SIGTERM", () => bot.stop("SIGTERM"));

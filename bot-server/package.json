@@ -12,7 +12,9 @@
     "build:ts": "babel src -d dist --extensions \".ts\" && cp package.json dist/",
     "build:watch": "nodemon --exec babel src -d dist --extensions \".ts\"",
     "deploy": "gcloud builds submit --config ./cloudfunction_config.yml .",
-    "build:deploy": "npm run build:ts && npm run deploy"
+    "deploy:dev": "gcloud builds submit --config ./cloudfunction_config_dev.yml .",
+    "build:deploy": "npm run build:ts && npm run deploy",
+    "build:deploy:dev": "npm run build:ts && npm run deploy:dev"
   },
   "keywords": [],
   "author": "",

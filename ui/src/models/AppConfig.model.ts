@@ -1,7 +1,10 @@
 export class AppConfig {
     API_URL: string;
+    TELEGRAM_BOT_URL: string;
     TELEGRAM_APP_URL: string;
+    TELEGRAM_APP_DOMAIN: string;
     LOCALISATION: string;
+    BOT_LOCALISATION: string;
     SCRATCH_CARD_TRANSITION_TIMEOUT_MS: number;
     SPLASH_SCREEN_TIMEOUT_MS: number;
     MAINTENANCE: boolean;
@@ -14,8 +17,11 @@ export class AppConfig {
 
     constructor(data: AppConfig) {
         this.API_URL = data.API_URL;
+        this.TELEGRAM_BOT_URL = data.TELEGRAM_BOT_URL;
         this.TELEGRAM_APP_URL = data.TELEGRAM_APP_URL;
+        this.TELEGRAM_APP_DOMAIN = data.TELEGRAM_APP_DOMAIN;
         this.LOCALISATION = data.LOCALISATION;
+        this.BOT_LOCALISATION = data.BOT_LOCALISATION;
         this.SCRATCH_CARD_TRANSITION_TIMEOUT_MS = data.SCRATCH_CARD_TRANSITION_TIMEOUT_MS;
         this.SPLASH_SCREEN_TIMEOUT_MS = data.SPLASH_SCREEN_TIMEOUT_MS;
         this.MAINTENANCE = !!data.MAINTENANCE;

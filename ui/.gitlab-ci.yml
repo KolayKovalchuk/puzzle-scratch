@@ -36,9 +36,6 @@ deploy:
   dependencies:
     - build
   before_script:
-    - echo $BASE64_GOOGLE_CLOUD_CREDENTIALS | base64 -d > service-account-key.json
-    - gcloud auth activate-service-account --key-file service-account-key.json
-    - gcloud config set project $GCP_PROJECT_ID
     - |
       if [[ "$CI_COMMIT_REF_NAME" =~ ^release.*|^hotfix.* ]]; then
         DEPLOY_BUCKET="gs://puzzle-ui"
@@ -50,6 +47,10 @@ deploy:
         echo "No valid branch"; exit 1
       fi
   script:
+    - export GOOGLE_CLOUD_CREDENTIALS=$(echo $BASE64_GOOGLE_CLOUD_CREDENTIALS | base64 -d)
+    - echo $GOOGLE_CLOUD_CREDENTIALS > service-account-key.json
+    - gcloud auth activate-service-account --key-file service-account-key.json
+    - gcloud config set project $GCP_PROJECT_ID
     - gsutil -m rsync $RSYNC_FLAGS -r dist $DEPLOY_BUCKET
     - gsutil setmeta -h "Cache-Control:no-cache, max-age=0" $DEPLOY_BUCKET/index.html
   rules:

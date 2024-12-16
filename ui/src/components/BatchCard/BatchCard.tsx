@@ -27,7 +27,8 @@ export function BatchCardComponent({ className, batchCard }: IBatchCardProps) {
     return (
         <div
             className={`${styles.container} ${batchCardClass} ${className || ''}`}
-            onClick={batchClickHandler}
+            // TODO: Uncomment this line to enable batch click
+            // onClick={batchClickHandler}
         >
             <Icon name={coming_soon} className={styles.comingSoonIcon}></Icon>
             <StyledHeader

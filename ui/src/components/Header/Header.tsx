@@ -40,7 +40,8 @@ export function Header() {
     const navigate = useNavigate();
 
     const openWallet = useCallback(() => {
-        navigate(ROUTES.Wallet);
+        // TODO: Uncomment this line to enable wallet click
+        // navigate(ROUTES.Wallet);
     }, [navigate]);
 
     const userAvatar = useSelector(selectUserAvatar);

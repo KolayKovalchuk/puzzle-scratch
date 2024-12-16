@@ -1,11 +1,18 @@
 import { ITRowData } from '@components/shared/Table/Table.models';
-import { useGetUserReferrals } from '@services/api/referrals.service';
+import { usePafination } from '@hooks/usePagination';
+import { IReferralData } from '@models/IGetReferralsResponse';
+import { getUserReferrals } from '@services/api/referrals.service';
 import { selectLocalValue } from '@store/selectors/localization.selectors';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 export function useInvitedFriendsTBodyData() {
-    const { referrals, isLoading } = useGetUserReferrals({ page: 0, size: 10 });
+    const contianerRef = useRef<HTMLDivElement>(null);
+    const { data: referrals, isLoading } = usePafination<IReferralData[] | null>({
+        size: 50,
+        dataLoaderCb: getUserReferrals,
+        ref: contianerRef
+    });
 
     const noInvitetFriendsTxt = useSelector(selectLocalValue('txt.invite.noInvitedFriendsYet'));
     const loadingTxt = useSelector(selectLocalValue('txt.loading'));
@@ -13,9 +20,7 @@ export function useInvitedFriendsTBodyData() {
     const [tBodyData, setTBodyData] = useState<ITRowData[]>([]);
 
     useEffect(() => {
-        if (!referrals.length) {
-            referrals.push({ nickname: isLoading ? loadingTxt : noInvitetFriendsTxt });
-        }
+        if (!referrals) return;
 
         const newTBodyData = referrals.map((referral, index) => {
             return {
@@ -30,7 +35,8 @@ export function useInvitedFriendsTBodyData() {
         });
 
         setTBodyData(newTBodyData);
-    }, [referrals]);
+    }, [referrals, referrals?.length, isLoading]);
 
-    return { tBodyData, isLoading };
+    const emptyText = isLoading ? loadingTxt : noInvitetFriendsTxt;
+    return { tBodyData, isLoading, emptyText, contianerRef };
 }

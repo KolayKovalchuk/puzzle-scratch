@@ -1,31 +1,30 @@
 import { Header } from '@components/Header';
 import styles from './App.module.scss';
 
+import { LoadingScreen } from '@components/LoadingScreen/LoadingScreen';
 import { useInitApp } from '@hooks/useInitApp';
 import { AppRouter } from '@routers/router';
 import { ROUTES } from '@routers/routerConfig';
-import { setIsPreferredLocaleSelectedToCloud } from '@services/telegramCloud/preferredLocale.service';
-import { selectPreferredLocale, selectUserAcceptedTerms } from '@store/selectors/user.selectors';
+import { selectUserAcceptedTerms } from '@store/selectors/user.selectors';
 import store from '@store/store';
 import { useEffect } from 'react';
 import { Provider, useSelector } from 'react-redux';
-import { BrowserRouter, useLocation, useNavigate } from 'react-router-dom';
-import { LoadingScreen } from '@components/LoadingScreen/LoadingScreen';
+import { BrowserRouter, useNavigate } from 'react-router-dom';
 
 // TODO: remove test code when done
-function TestBtn({ click }: { click: () => void }) {
-    const preferredLocale = useSelector(selectPreferredLocale)
+// function TestBtn({ click }: { click: () => void }) {
+//     const preferredLocale = useSelector(selectPreferredLocale)
 
-    return (
-        <div style={{
-            width: '100%',
-            backgroundColor: 'lightgreen',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-        }} onClick={() => click()}>Reset(only for test) Locale: {preferredLocale}</div>
-    )
-}
+//     return (
+//         <div style={{
+//             width: '100%',
+//             backgroundColor: 'lightgreen',
+//             display: 'flex',
+//             justifyContent: 'center',
+//             alignItems: 'center',
+//         }} onClick={() => click()}>Reset(only for test) Locale: {preferredLocale}</div>
+//     )
+// }
 
 function App() {
     const {
@@ -47,7 +46,7 @@ function App() {
         }
     }, [isLoaded, shouldRedirectToLanguageSelect, navigate]);
 
-    const location = useLocation();
+    // const location = useLocation();
 
     if (!isFontListLoaded) {
         return null;
@@ -62,11 +61,11 @@ function App() {
         isPreferredLocaleSelected,
     }
     // TODO: remove test code when done
-    const onTestBtnClick = async () => {
-        const result = await setIsPreferredLocaleSelectedToCloud(false)
-        setIsPreferredLocaleSelected(false)
-        console.log('testbtn setIsPreferredLocaleSelectedToCloud result:', result);
-    }
+    // const onTestBtnClick = async () => {
+    //     const result = await setIsPreferredLocaleSelectedToCloud(false)
+    //     setIsPreferredLocaleSelected(false)
+    //     console.log('testbtn setIsPreferredLocaleSelectedToCloud result:', result);
+    // }
 
     return (
         <div className={styles.mainContainer}>
@@ -77,7 +76,7 @@ function App() {
             <LoadingScreen isLoaded={isLoaded} />
 
             {/* // TODO: remove test code when done */}
-            { location.pathname === ROUTES.Home && <TestBtn click={() => onTestBtnClick()}/>}
+            {/* { location.pathname === ROUTES.Home && <TestBtn click={() => onTestBtnClick()}/>} */}
         </div>
     )
 };

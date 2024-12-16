@@ -10,7 +10,11 @@ import hint from '@icons/hint.svg';
 import { Icon } from '@components/shared/Icon'
 import { BonusInfoDialogPopup } from '../BonusInfoDialog/BonusInfoDialog'
 
-export function InvitedFriendsTable() {
+export interface IInvitedFriendsTableProps {
+    className?: string;
+}
+
+export function InvitedFriendsTable({ className }: IInvitedFriendsTableProps) {
     const invitedFriendsText = useSelector(selectLocalValue('txt.invite.invited'));
 
     const [isBonusInfoDialogOpen, setIsBonusInfoDialogOpen] = useState(false);
@@ -33,11 +37,12 @@ export function InvitedFriendsTable() {
         },
     ], [invitedFriendsText]);
 
-    const { tBodyData } = useInvitedFriendsTBodyData();
+    const { tBodyData, emptyText, contianerRef } = useInvitedFriendsTBodyData();
 
 
     const renderCell = useCallback((data: ITableCellData, index: number): ReactNode => {
-        const cellWidth = index ? '100%' : '20%';
+        const isEmptyCell = data.data === emptyText;
+        const cellWidth = isEmptyCell || index ? '100%' : '20%';
         const cellClassName = index ? styles.nickNameCell : styles.indexCell;
 
         return <TableCell className={cellClassName} key={data.key} data={data.data} width={cellWidth} />
@@ -45,10 +50,12 @@ export function InvitedFriendsTable() {
 
     return (<>
         <Table
-            className={styles.table}
+            bodyRef={contianerRef}
+            className={`${styles.table} ${className || ''}`}
             tHeadData={tHeadData}
             tBodyData={tBodyData}
             renderCell={renderCell}
+            emptyText={emptyText}
         />
         <BonusInfoDialogPopup
             isOpen={isBonusInfoDialogOpen}

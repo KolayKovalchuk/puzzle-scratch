@@ -116,14 +116,11 @@ export function InviteFriendList({ className }: InviteFriendListProps) {
                     >
                     </Button>
                 </div>
-
-                <InvitedFriendsTable />
-
-                <div className={styles.footer}>
-                    <Button className={styles.closeBtn} text={btnCloseTxt} mode={ButtonType.Cancel} onClick={onBackBtnClick} />
+                <div className={styles.tableContainer}>
+                    <InvitedFriendsTable className={styles.table}/>
                 </div>
+                <Footer />
             </div>
-            <Footer />
         </div>
 
         <ModalDialog

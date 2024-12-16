@@ -5,6 +5,7 @@ import store from '@store/store';
 import { ReactNode } from 'react';
 import { DailyBonusNotificationBody } from './components/DailyBonusNotificationBody/DailyBonusNotificationBody';
 import { TooManyGifts } from './components/TooManyGiftsBody/TooManyGiftsBody';
+import { OnePerXGiftBody } from './components/OnePerXGiftBody/OnePerXGiftBody';
 
 
 export interface NotificationConfigItem {
@@ -103,7 +104,7 @@ export const NotificationConfig: NotificationConfig = {
     },
     [NotificationType.RBAX_GIFT_1_PER_X]: {
         title: 'text.gift.rbaxgift',
-        content: 'txt.limit.collection',
+        children: <OnePerXGiftBody />,
         agreeBtn: 'txt.btn.ok',
     },
     [NotificationType.RBAX_GIFT_1_PER_FRIEND]: {

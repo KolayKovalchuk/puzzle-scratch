@@ -7,6 +7,17 @@
     z-index: 1000;
 
     white-space: nowrap;
+
+    :global {
+        .tRow {
+            display: flex;
+            justify-content: center;
+        }
+
+        .tBody {
+            overflow-y: auto;
+        }
+    }
 }
 
 .nickNameCell {

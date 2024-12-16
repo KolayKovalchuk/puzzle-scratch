@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,13 +14,12 @@ import { shareLinkToFriends } from '@services/telegramWebApp/telegramWebApp.serv
 import { selectLocalValueWithVars } from '@store/selectors/localization.selectors';
 import { selectUserName } from '@store/selectors/user.selectors';
 
-import { InviteFriendList } from '../InviteFriendList/InviteFriendList';
 
 import { LeaderBoard } from './components/LeaderBoard/LeaderBoard';
 import { LogoHeader } from './components/LogoHeader/LogoHeader';
 
-import styles from './MainView.module.scss';
 import { ROUTES } from '@routers/routerConfig';
+import styles from './MainView.module.scss';
 
 export function MainView() {
     const userName = useSelector(selectUserName);

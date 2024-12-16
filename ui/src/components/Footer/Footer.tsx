@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { selectLocalValue, selectLocalValueWithLinkConfig } from '@store/selectors/localization.selectors';
+import { selectLocalValue, selectLocalValueWithLink } from '@store/selectors/localization.selectors';
 import styles from './Footer.module.scss';
 
 export interface IFooterProps {
@@ -7,10 +7,10 @@ export interface IFooterProps {
 }
 
 export function Footer({ className }: IFooterProps) {
-    const { linkText: tosLinkText, linkUrl: tosLinkUrl } = useSelector(selectLocalValueWithLinkConfig('txt.footer.tos'));
-    const { linkText: privacyPolicyLinkText, linkUrl: privacyPolicyLinkUrl } = useSelector(selectLocalValueWithLinkConfig('txt.footer.privacyPolicy'));
-    const { linkText: ourGamesLinkText, linkUrl: ourGamesLinkUrl } = useSelector(selectLocalValueWithLinkConfig('txt.footer.ourGames'));
-    const { linkText: websiteLinkText, linkUrl: websiteLinkUrl } = useSelector(selectLocalValueWithLinkConfig('txt.footer.website'));
+    const { linkText: tosLinkText, linkUrl: tosLinkUrl } = useSelector(selectLocalValueWithLink('txt.footer.tos'));
+    const { linkText: privacyPolicyLinkText, linkUrl: privacyPolicyLinkUrl } = useSelector(selectLocalValueWithLink('txt.footer.privacyPolicy'));
+    const { linkText: ourGamesLinkText, linkUrl: ourGamesLinkUrl } = useSelector(selectLocalValueWithLink('txt.footer.ourGames'));
+    const { linkText: websiteLinkText, linkUrl: websiteLinkUrl } = useSelector(selectLocalValueWithLink('txt.footer.website'));
     
     const allRightReservedTxt = useSelector(selectLocalValue('txt.footer.allRightReserved'));
     return (

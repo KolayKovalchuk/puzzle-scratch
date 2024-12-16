@@ -63,8 +63,6 @@ export const selectLocalValueWithLink = (localizationKey: string) => createSelec
             followingText: localizationValue
         }
 
-        console.log('matchResult', matchResult);
-
         const [
             fullMatch,
             prevText,

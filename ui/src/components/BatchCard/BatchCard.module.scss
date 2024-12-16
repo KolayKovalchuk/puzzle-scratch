@@ -29,6 +29,8 @@ $shadow_size: 0.1px;
 
     cursor: pointer;
 
+    position: relative;
+
     &.blue {
         background: colors.$sky-blue;
 
@@ -76,6 +78,18 @@ $shadow_size: 0.1px;
             background: colors.$crimson-red;
         }
     }
+}
+
+$comingSoonIconLeft: 18%;
+
+.comingSoonIcon {
+    width: calc(100% + #{$comingSoonIconLeft} * 2);
+    left: calc(-1 * #{$comingSoonIconLeft});
+    position: absolute;
+    bottom: -10px;
+    z-index: 1000;
+
+    aspect-ratio: 460/140;
 }
 
 .content {

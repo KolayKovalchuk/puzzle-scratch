@@ -5,16 +5,19 @@ import { StyledHeaderType } from '../StyledHeader';
 import main_header_bg_blue from '@icons/styledHeader/main_header_bg_blue.svg';
 import main_header_bg_pink from '@icons/styledHeader/main_header_bg_pink.svg';
 import main_header_bg_red from '@icons/styledHeader/main_header_bg_red.svg';
+import main_header_bg_green from '@icons/styledHeader/main_header_bg_green.svg';
 import main_header_bg from '@icons/styledHeader/main_header_bg.svg';
 
 import left_dialog_wing_blue from '@icons/styledHeader/left_dialog_wing_blue.svg';
 import left_dialog_wing_pink from '@icons/styledHeader/left_dialog_wing_pink.svg';
 import left_dialog_wing_red from '@icons/styledHeader/left_dialog_wing_red.svg';
+import left_dialog_wing_green from '@icons/styledHeader/left_dialog_wing_green.svg';
 import left_dialog_wing from '@icons/styledHeader/left_dialog_wing.svg';
 
 import right_dialog_wing_blue from '@icons/styledHeader/right_dialog_wing_blue.svg';
 import right_dialog_wing_pink from '@icons/styledHeader/right_dialog_wing_pink.svg';
 import right_dialog_wing_red from '@icons/styledHeader/right_dialog_wing_red.svg';
+import right_dialog_wing_green from '@icons/styledHeader/right_dialog_wing_green.svg';
 import right_dialog_wing from '@icons/styledHeader/right_dialog_wing.svg';
 
 function getIconsConfig(type: StyledHeaderType) {
@@ -39,6 +42,12 @@ function getIconsConfig(type: StyledHeaderType) {
             mainHeaderBgIconName = main_header_bg_red;
             leftWingIconName = left_dialog_wing_red;
             rightWingIconName = right_dialog_wing_red;
+            break;
+
+        case StyledHeaderType.GREEN:
+            mainHeaderBgIconName = main_header_bg_green;
+            leftWingIconName = left_dialog_wing_green;
+            rightWingIconName = right_dialog_wing_green;
             break;
     
         default:

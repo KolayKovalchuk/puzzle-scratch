@@ -1,5 +1,3 @@
-import DOMPurify from 'dompurify';
-
 import { LocalizationModel } from '@models/LocalizationDataKey.model';
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '@store/store';
@@ -50,27 +48,34 @@ export const selectLocalValue = (localizationKey: string) => createSelector(
     }
 )
 
-const linkTagStr = '<link url="'
-const linkTagStrEnd = '">'
-const linkTagClose = '</link>'
-
-export const selectLocalValueWithLinkHTML = (localizationKey: string) => createSelector(
+export const selectLocalValueWithLink = (localizationKey: string) => createSelector(
     [selectLocalValue(localizationKey)],
     (localizationValue) => {
-        const str = localizationValue.replace(linkTagStr, '<a href="').replace(linkTagClose, '</a>')
-        return DOMPurify.sanitize(str)
-    }
-)
+        const matchResult = localizationValue.match(/(.*)<link url="(https:\/\/.*)">(.*)<\/link>(.*)/)
 
-export const selectLocalValueWithLinkConfig = (localizationKey: string) => createSelector(
-    [selectLocalValue(localizationKey)],
-    (localizationValue) => {
-        const linkUrlRegEx = `${linkTagStr}(.*)${linkTagStrEnd}`
-        const linkUrl = localizationValue.match(linkUrlRegEx)?.[1] || ''
+        if (!matchResult) return {
+            fullMatch: localizationValue,
+            prevText: localizationValue,
+            linkUrl: localizationValue,
+            linkText: localizationValue,
+            followingText: localizationValue
+        }
 
-        const linkTextRegex = `${linkTagStrEnd}(.*)${linkTagClose}`
-        const linkText = localizationValue.match(linkTextRegex)?.[1] || localizationKey
-        return { linkUrl, linkText }
+        const [
+            fullMatch,
+            prevText,
+            linkUrl,
+            linkText,
+            followingText
+        ] = matchResult;
+        
+        return {
+            fullMatch: fullMatch || '',
+            prevText: prevText || '',
+            linkUrl: linkUrl || '',
+            linkText: linkText || '',
+            followingText: followingText || ''
+        }
     }
 )
 

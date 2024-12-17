@@ -1,10 +1,11 @@
 import { INotification, NotificationType } from '@models/Notification.model';
-import { postCollectDailyGift, postCollectGiftBonus, postCollectRefferalGift } from '@services/api/bonus.service';
+import { postCollectDailyGift, postCollectEmojiBonus, postCollectGiftBonus, postCollectRefferalGift } from '@services/api/bonus.service';
 import { updateUserBalanceRbax } from '@store/actions/user.actions';
 import store from '@store/store';
 import { ReactNode } from 'react';
 import { DailyBonusNotificationBody } from './components/DailyBonusNotificationBody/DailyBonusNotificationBody';
 import { TooManyGifts } from './components/TooManyGiftsBody/TooManyGiftsBody';
+import { OnePerXGiftBody } from './components/OnePerXGiftBody/OnePerXGiftBody';
 
 
 export interface NotificationConfigItem {
@@ -57,6 +58,23 @@ export const NotificationConfig: NotificationConfig = {
             return response;
         },
     },
+    [NotificationType.EMOJI_BONUS]: {
+        title: 'text.gift.rbaxGift',
+        content: 'txt.emojiBonus.content',
+        agreeBtn: 'txt.btn.collect',
+        agreeCallback: async () => {
+            const response = await postCollectEmojiBonus();
+
+            if (response?.newBalance) {
+                console.log('Emoji bonus collected successfully:', response);
+                store.dispatch(updateUserBalanceRbax(response.newBalance));
+            } else {
+                // TODO: handle error
+            }
+
+            return response;
+        },
+    },
     [NotificationType.RBAX_GIFT_AVAILABLE]: {
         title: 'text.gift.rbaxGift',
         content: 'txt.btn.friendgift',
@@ -86,7 +104,7 @@ export const NotificationConfig: NotificationConfig = {
     },
     [NotificationType.RBAX_GIFT_1_PER_X]: {
         title: 'text.gift.rbaxgift',
-        content: 'txt.limit.collection',
+        children: <OnePerXGiftBody />,
         agreeBtn: 'txt.btn.ok',
     },
     [NotificationType.RBAX_GIFT_1_PER_FRIEND]: {

@@ -1,14 +1,15 @@
-import { Table } from '@components/shared/Table';
-import { useLeaderboardData } from './hooks/useLeaderboardData';
-
+import { useSelector } from 'react-redux';
 import { useState } from 'react';
+
 import styles from './LeaderBoard.module.scss';
 
-import { Icon } from '@components/shared/Icon';
-import leaderboardIcon from '@icons/leaderboard.svg';
-
+import { Table } from '@components/shared/Table';
+import { SecondaryStyledText } from '@components/shared/StyledText';
+import { selectLocalValue } from '@store/selectors/localization.selectors';
+import { useLeaderboardData } from './hooks/useLeaderboardData';
 import { HeaderRow, useHeaderCells } from './HeaderRow';
 import { LeaderboardCell } from './LeaderboardCell';
+import { ITextStyle } from 'pixi.js';
 
 interface ILeaderBoardProps {
 }
@@ -19,10 +20,16 @@ export enum LeaderboardTableMode {
     Daily = 'Daily',
 }
 
+const headerStyles: Partial<ITextStyle> = {
+    fontSize: 36,
+}
+
 export function LeaderBoard({ }: ILeaderBoardProps) {
     const [mode, setMode] = useState<LeaderboardTableMode>(LeaderboardTableMode.Monthly);
     const { tHeadData, onNextHeaderClick, onPrevHeaderClick } = useHeaderCells(mode, setMode);
     const [tBodyData, isLoading] = useLeaderboardData(mode);
+    
+    const headerText = useSelector(selectLocalValue('txt.title.leaderboard'));
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -31,9 +38,10 @@ export function LeaderBoard({ }: ILeaderBoardProps) {
     return (
         <div className={styles.container}>
             <div className={styles.header}>
-                <Icon
-                    name={leaderboardIcon}
-                    className={styles.leaderboardIcon}
+                <SecondaryStyledText
+                    text={headerText}
+                    className={styles.header}
+                    textStyles={headerStyles}
                 />
             </div>
             <Table

@@ -20,10 +20,24 @@ export const selectUserName = createSelector(
     }
 )
 
+export const selectUserAvatar = createSelector(
+    selectUser,
+    (queryState) => {
+        return queryState?.avatar
+    }
+)
+
 export const selectUserAcceptedTerms = createSelector(
     selectUser,
     (queryState) => {
         return queryState?.acceptedTerms
+    }
+)
+
+export const selectUserPreferredLocale = createSelector(
+    selectUser,
+    (queryState) => {
+        return queryState?.preferredLocale
     }
 )
 

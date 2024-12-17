@@ -7,7 +7,8 @@ import { ROUTES } from '@routers/routerConfig';
 import { aprooveUserTerms, selectUserLocale } from '@services/api/user.service';
 import { updateUserLocale } from '@store/actions/user.actions';
 import { selectLocalValue, selectSupportedLocales } from '@store/selectors/localization.selectors';
-import { selectPreferredLocale, selectUserAcceptedTerms } from '@store/selectors/user.selectors';
+import { selectPreferredLocale, selectUserAcceptedTerms, selectUserPreferredLocale } from '@store/selectors/user.selectors';
+import { Footer } from '@components/Footer/Footer';
 import store from '@store/store';
 import WebApp from '@twa-dev/sdk';
 import { useEffect, useMemo, useState } from 'react';
@@ -16,8 +17,6 @@ import { useNavigate } from 'react-router-dom';
 import styles from './LanguageSelect.module.scss';
 
 export interface ILanguageSelectProps {
-    onLangSelected?: (lang: string) => void | Promise<void>,
-    isPreferredLocaleSelected: boolean
 }
 
 function getSupportLocalesItems(supportLocales: string[]): IDropdownItem[] {
@@ -43,18 +42,16 @@ function getPreselectedLocale(
     return preselectedLocale || supportLocaleItems[0]
 }
 
-export function LanguageSelect({ onLangSelected, isPreferredLocaleSelected }: ILanguageSelectProps) {
+export function LanguageSelect({}: ILanguageSelectProps) {
     const navigate = useNavigate();
     const onLangSelect = async (lang: IDropdownItem) => {
         try {
             const result = await selectUserLocale(lang.data)
 
             if (!result) {
-                console.error('Failed to set isPreferredLocaleSelected to cloud');
+                console.error('Failed to set preferred locale');
                 return;
             }
-
-            if (onLangSelected) onLangSelected(lang.data)
 
             navigate(ROUTES.Home)
         } catch (error) {
@@ -64,6 +61,7 @@ export function LanguageSelect({ onLangSelected, isPreferredLocaleSelected }: IL
 
     const [isTosApprovePopupOpen, setIsTosApprovePopupOpen] = useState<boolean>(false);
     const isUserAcceptedTerms = useSelector(selectUserAcceptedTerms)
+    const isPreferredLocaleSelected = !!useSelector(selectUserPreferredLocale)
 
     useEffect(() => {
         const isTosApprovePopupOpen = isPreferredLocaleSelected && !isUserAcceptedTerms
@@ -147,6 +145,7 @@ export function LanguageSelect({ onLangSelected, isPreferredLocaleSelected }: IL
                 }
             }}></Button>
 
+            <Footer />
             <TosApprovePopup
                 isOpen={isTosApprovePopupOpen}
                 onConfirm={() => onTosApprove()}

@@ -1,11 +1,21 @@
+import { IGetReferralsResponse, IReferralData } from '@models/IGetReferralsResponse';
 import { useEffect, useState } from 'react';
 import { apiClient } from './api.service';
-import { IGetReferralsResponse, IReferralData } from '@models/IGetReferralsResponse';
 
 export interface IGetUserReferralsParams {
     page: number;
     size: number;
 }
+
+// const getMockReferralDataContent = async ({ page, size }: IGetUserReferralsParams): Promise<IGetReferralsResponse["content"]> => {
+//     console.log('getMockReferralDataContent', page, size);
+//     await new Promise((resolve) => setTimeout(resolve, 1000 + 10));
+//     const mockData: IReferralData[] = [];
+//     for (let i = page * size; i <= (page * size + size) - 1; i++) {
+//         mockData.push({ nickname: `user${i + 1}` });
+//     }
+//     return mockData;
+// };
 
 export async function getUserReferrals({ page, size }: IGetUserReferralsParams): Promise<IReferralData[] | null> {
     try {
@@ -18,6 +28,7 @@ export async function getUserReferrals({ page, size }: IGetUserReferralsParams):
         const referralData = response.data as IGetReferralsResponse;
 
         return referralData.content;
+        // return getMockReferralDataContent({ page, size });
     } catch (error) {
         console.error('Error creating share link code:', error);
         return null

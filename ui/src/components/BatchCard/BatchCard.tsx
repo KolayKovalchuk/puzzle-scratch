@@ -1,17 +1,17 @@
-import styles from './BatchCard.module.scss';
 import { useNavigate } from 'react-router-dom';
+import styles from './BatchCard.module.scss';
 
 
 import { Icon } from '@components/shared/Icon';
 import { StyledHeader } from '@components/shared/StyledHeader';
 import { StyledText } from '@components/shared/StyledText';
-
 import { BatchCard } from '@models/BatchCard.model';
+
 import { useBatchCardHandler, useGetBatchCardConfig } from './hooks/useGetBatchCardConfig';
 
-import robo_token_no_bg from '@icons/robo_token_no_bg.svg';
+import coming_soon from '@icons/coming_soon.svg';
 import hint from '@icons/hint.svg';
-
+import robo_token_no_bg from '@icons/robo_token_no_bg.svg';
 
 export interface IBatchCardProps {
     className?: string;
@@ -27,8 +27,10 @@ export function BatchCardComponent({ className, batchCard }: IBatchCardProps) {
     return (
         <div
             className={`${styles.container} ${batchCardClass} ${className || ''}`}
-            onClick={batchClickHandler}
+            // TODO: Uncomment this line to enable batch click
+            // onClick={batchClickHandler}
         >
+            <Icon name={coming_soon} className={styles.comingSoonIcon}></Icon>
             <StyledHeader
                 title={batchCard.batchName}
                 className={styles.styledHeader}

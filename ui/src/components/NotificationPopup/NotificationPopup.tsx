@@ -1,7 +1,7 @@
 
 import ModalDialog from '@components/shared/ModalDialog/ModalDialog';
 import { INotification } from '@models/Notification.model';
-import { selectLocalValue, selectLocalValueWithLinkConfig, selectLocalValueWithLinkHTML } from '@store/selectors/localization.selectors';
+import { selectLocalValue, selectLocalValueWithLink } from '@store/selectors/localization.selectors';
 import { useSelector } from 'react-redux';
 import { NotificationConfig } from './NotificationConfig.tsx';
 
@@ -15,10 +15,10 @@ export function NotificationPopup({ isOpen, notification, onConfirm }: INotifica
     const notificationConfig = NotificationConfig[notification.type];
 
     const titleText = useSelector(selectLocalValue(notificationConfig?.title))
-    const content = useSelector(selectLocalValueWithLinkHTML(notificationConfig?.content || ''))
+    const content = useSelector(selectLocalValue(notificationConfig?.content || ''))
     const agreeBtnText = useSelector(selectLocalValue(notificationConfig?.agreeBtn))
 
-    const declineBtnConfig = useSelector(selectLocalValueWithLinkConfig(notificationConfig?.declineBtn || ''))
+    const declineBtnConfig = useSelector(selectLocalValueWithLink(notificationConfig?.declineBtn || ''))
     
     if (!notificationConfig) {
         return null;
@@ -43,7 +43,7 @@ export function NotificationPopup({ isOpen, notification, onConfirm }: INotifica
             confirmText={agreeBtnText}
             cancelText={declineBtnConfig.linkText}
         >
-            {notificationConfig.content ? <div dangerouslySetInnerHTML={{ __html: content }} /> : notificationConfig.children}
+            {notificationConfig.content ? <div>{content}</div> : notificationConfig.children}
         </ModalDialog>
     );
 };

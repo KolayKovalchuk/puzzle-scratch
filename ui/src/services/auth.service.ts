@@ -137,5 +137,5 @@ export function useLoginUser() {
     ]);
 
     const isLoaded = isLoginApiLoaded && isApiLoaded && !!user;
-    return [user, isLoaded];
+    return {user, isLoaded};
 }

@@ -1,6 +1,6 @@
+import { useEffect, useState } from 'react';
 import { INotification, Notification } from '@models/Notification.model';
 import { apiClient } from './api.service';
-import { useEffect, useState } from 'react';
 
 export async function getNotifications(): Promise<Notification[] | null> {
     try {

@@ -28,10 +28,12 @@ export function LoadingScreen({ isLoaded }: ILoadingScreenProps) {
         percentage,
     } = useLoadingPercentHook(isLoaded);
 
-    const containerClassName = `${styles.contianer} ${isVisible ? styles.visible : ''}`;
+    // const containerClassName = `${styles.contianer} ${isVisible ? styles.visible : ''}`;
+
+    if (!isVisible) return null;
 
     return (
-        <div className={containerClassName}>
+        <div className={styles.contianer}>
             <LogoHeader className={styles.logoHeader} />
 
             <div className={styles.poweredByTextContainer}>

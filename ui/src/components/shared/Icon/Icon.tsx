@@ -1,13 +1,15 @@
-import { CSSProperties, forwardRef } from 'react';
+import { CSSProperties, forwardRef, ReactNode } from 'react';
 
 import styles from './Icon.module.scss';
 
 interface IconProps {
-    name: string;
+    name?: string;
     title?: string;
     className?: string;
     iconSize?: number | string;
     style?: CSSProperties;
+
+    children?: ReactNode;
 
     onClick?: () => void;
 }
@@ -19,6 +21,7 @@ export const Icon = forwardRef<HTMLDivElement, IconProps>(({
     title,
     className,
     onClick,
+    children
 }, ref) => {
     return (
         <div
@@ -28,14 +31,17 @@ export const Icon = forwardRef<HTMLDivElement, IconProps>(({
             onClick={onClick}
         >
             <div className={styles.iconContent}>
-                <svg
-                    width={iconSize}
-                    height={iconSize}
-                    aria-label={title ? title : name}
-                    role="img"
-                >
-                    <use xlinkHref={`#${name}`} />
-                </svg>
+                {children
+                    ? children
+                    : <svg
+                        width={iconSize}
+                        height={iconSize}
+                        aria-label={title ? title : name}
+                        role="img"
+                    >
+                        <use xlinkHref={`#${name}`} />
+                    </svg>
+                }
             </div>
         </div>
     );

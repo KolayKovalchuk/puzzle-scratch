@@ -1,6 +1,6 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-
+import { useNavigate } from 'react-router-dom';
 
 import { BatchCardContainer } from '@components/BatchCard';
 import { Footer } from '@components/Footer/Footer';
@@ -12,24 +12,32 @@ import { useShowLoginNotificationsPopups } from '@services/loginNotifications.se
 import { shareLinkToFriends } from '@services/telegramWebApp/telegramWebApp.service';
 
 import { selectLocalValueWithVars } from '@store/selectors/localization.selectors';
-import { selectUserName } from '@store/selectors/user.selectors';
+import { selectPreferredLocale, selectUserName } from '@store/selectors/user.selectors';
 
-import { InviteFriendList } from './components/InviteFriendList/InviteFriendList';
 
 import { LeaderBoard } from './components/LeaderBoard/LeaderBoard';
 import { LogoHeader } from './components/LogoHeader/LogoHeader';
 
+import { ROUTES } from '@routers/routerConfig';
 import styles from './MainView.module.scss';
+import { Stage, Text } from '@pixi/react';
+import { TextStyle } from 'pixi.js';
+import { StyledText } from '@components/shared/StyledText';
+
+const testTextStyle = new TextStyle({
+    fill: '#FFFFFF',
+    fontSize: 36,
+})
 
 export function MainView() {
     const userName = useSelector(selectUserName);
     const shareLinkText = useSelector(selectLocalValueWithVars('txt.gift.msg', userName || ''));
-    const [userLoginNotifications, removeLoginNotification] = useShowLoginNotificationsPopups();
+    // const [userLoginNotifications, removeLoginNotification] = useShowLoginNotificationsPopups();
 
-    const [isInviteFriendVisible, setIsInviteFriendVisible] = useState(false);
+    const navigate = useNavigate()
 
     const onInviteClicked = useCallback(() => {
-        setIsInviteFriendVisible(true);
+        navigate(ROUTES.InviteFriends);
     }, []);
 
     const onSendRbaxClicked = useCallback(async () => {
@@ -43,38 +51,56 @@ export function MainView() {
         shareLinkToFriends(shareLinkText, url);
     }, [shareLinkText]);
 
-    const onInviteFriendClose = useCallback(() => {
-        setIsInviteFriendVisible(false);
+    const containerClassName = `${styles.container}`;
+
+    // const { notifications, removeNotification } = useGetNotifications();
+
+    // const isUserLoginNotificationsEmpty = userLoginNotifications.length === 0;
+    // const isNotificationsEmpty = notifications.length === 0;
+    const preferredLocale = useSelector(selectPreferredLocale);
+    const inviteFriendImgName = `mainView/invite_friend_bunner_${preferredLocale?.toLocaleLowerCase()}.png`;
+    const sendRbaxImgName = `mainView/send_rbax_to_a_friend_${preferredLocale?.toLocaleLowerCase()}.png`;
+
+    const test = useMemo(() => {
+        return (<>
+            <Stage options={{ backgroundAlpha: 0 }} width={200} height={100}>
+                <Text text={'Main View'} style={testTextStyle}></Text>
+            </Stage>
+            <StyledText text={'Main View'} textStyles={{ fontSize: 30 }} />
+        </>)
     }, []);
-
-    const containerClassName = `${styles.container} ${isInviteFriendVisible ? styles.hidden : ''}`;
-
-    const { notifications, removeNotification } = useGetNotifications();
-
-    const isUserLoginNotificationsEmpty = userLoginNotifications.length === 0;
-    const isNotificationsEmpty = notifications.length === 0;
 
     return (<>
         <div className={styles.mainContainer}>
-            {isInviteFriendVisible && <InviteFriendList onCloseClick={onInviteFriendClose} />}
             <div className={containerClassName}>
                 <LogoHeader className={styles.logoHeader}></LogoHeader>
-                <BatchCardContainer></BatchCardContainer>
+                {/* <BatchCardContainer></BatchCardContainer> */}
+
 
                 <div className={styles.banner} onClick={() => onInviteClicked()}>
-                    <img src="/invite_frind_bunner.png" alt="Invite Friend" />
+                    <img src={inviteFriendImgName} alt="Invite Friend" />
                 </div>
                 <div className={styles.banner} onClick={() => onSendRbaxClicked()}>
-                    <img src="/send_rbax_to_a_friend.png" alt="Send Rbax to a Friend" />
+                    <img src={sendRbaxImgName} alt="Send Rbax to a Friend" />
                 </div>
 
                 <div className={styles.leaderboardContainer}>
                     <LeaderBoard />
                 </div>
             </div>
-            <Footer />
+            <Footer className={styles.footer} />
+
+            {/* <div>
+
+            {test}
+            </div>
+            <Stage options={{ backgroundAlpha: 0 }} width={200} height={100}>
+                <Text text={'Main View'} style={testTextStyle}></Text>
+            </Stage>
+            <StyledText text={'Main View'} textStyles={{ fontSize: 30 }} /> */}
         </div>
-        {!isUserLoginNotificationsEmpty && <NotificationPopup
+
+        {/* {!isUserLoginNotificationsEmpty && <NotificationPopup
             isOpen={userLoginNotifications.length > 0}
             notification={userLoginNotifications[0]}
             onConfirm={(notification) => {
@@ -87,6 +113,6 @@ export function MainView() {
             onConfirm={(notification) => {
                 removeNotification(notification);
             }}
-        />}
+        />} */}
     </>);
 };

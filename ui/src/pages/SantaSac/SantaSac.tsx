@@ -17,6 +17,7 @@ import { TopPrizeLabel } from '@components/TopPrizeLabel/TopPrizeLabel';
 import { ISantaSacBundle, SANTA_SAC_BUNDLE } from '@config/santaSacBundleConfig';
 import { useScratchGame } from '@hooks/useScratchGame';
 import { useSwipeAria } from '@hooks/useSwipeAria';
+import { Footer } from '@components/Footer/Footer';
 
 import { useSpriteCellData } from './hooks/useSpriteCellData';
 import { ISantaSacCardData } from './SantaSac.model';
@@ -140,6 +141,7 @@ export function SantaSac() {
                     />
                 </div>
                 <GameFooterBtn onPlay={onPlay}/>
+                <Footer />
             </div>
             {isBigWinVisible
                 && <BigWinScreen

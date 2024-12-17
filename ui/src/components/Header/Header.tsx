@@ -1,20 +1,21 @@
 import { Icon } from '@components/shared/Icon'
 import { useCallback, useMemo } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import AnimatedNumbers from "react-animated-numbers"
+
 import styles from './Header.module.scss'
 
-import avatar_placeholder from '@icons/avatar_placeholder.svg'
-import logo from '@icons/logo.svg'
-import robo_token from '@icons/robo_token.svg'
-import wallet from '@icons/wallet.svg'
-import { selectUserBalanceRbax } from '@store/selectors/user.selectors'
-import { useSelector } from 'react-redux'
+import { selectUserAvatar, selectUserBalanceRbax } from '@store/selectors/user.selectors'
 
 import { WinStyledText } from '@components/shared/StyledText'
 import { selectScratchCardTransitionTimeout } from '@store/selectors/config.selectors'
-import AnimatedNumbers from "react-animated-numbers"
 import { useBalanceChangeLabel } from './hooks/useBalanceChangeLabel'
-import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '@routers/routerConfig'
+
+import wallet from '@icons/wallet.svg'
+import logo from '@icons/logo.svg'
+import robo_token from '@icons/robo_token.svg'
 
 function renderAnimatedNumbers(amount: number) {
     return <AnimatedNumbers
@@ -39,8 +40,11 @@ export function Header() {
     const navigate = useNavigate();
 
     const openWallet = useCallback(() => {
-        navigate(ROUTES.Wallet);
+        // TODO: Uncomment this line to enable wallet click
+        // navigate(ROUTES.Wallet);
     }, [navigate]);
+
+    const userAvatar = useSelector(selectUserAvatar);
 
     return (
         <div className={styles.mainContainer}>
@@ -65,7 +69,9 @@ export function Header() {
             </div>
             <div className={styles.profileContainer}>
                 <Icon name={wallet} iconSize='58%' className={styles.icon} onClick={openWallet}></Icon>
-                <Icon name={avatar_placeholder} iconSize='85%' className={styles.icon}></Icon>
+                <Icon className={styles.icon}>
+                    <img src={userAvatar} width='85%' height='85%' />
+                </Icon>
             </div>
         </div>
     )

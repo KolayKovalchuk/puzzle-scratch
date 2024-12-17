@@ -20,6 +20,13 @@ import { LogoHeader } from './components/LogoHeader/LogoHeader';
 
 import { ROUTES } from '@routers/routerConfig';
 import styles from './MainView.module.scss';
+import { Stage, Text } from '@pixi/react';
+import { TextStyle } from 'pixi.js';
+
+const testTextStyle = new TextStyle({
+    fill: '#FFFFFF',
+    fontSize: 36,
+})
 
 export function MainView() {
     const userName = useSelector(selectUserName);
@@ -58,6 +65,11 @@ export function MainView() {
             <div className={containerClassName}>
                 <LogoHeader className={styles.logoHeader}></LogoHeader>
                 <BatchCardContainer></BatchCardContainer>
+
+                <Stage options={{ backgroundAlpha: 0 }} width={200} height={100}>
+
+                    <Text text={'Main View'} style={testTextStyle}></Text>
+                </Stage>
 
                 <div className={styles.banner} onClick={() => onInviteClicked()}>
                     <img src={inviteFriendImgName} alt="Invite Friend" />

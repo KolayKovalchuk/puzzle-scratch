@@ -94,6 +94,9 @@ export async function loginUser() {
         }
 
         const isLocalDevMode = import.meta.env.VITE_IS_LOCAL_DEV_MODE
+        console.log('isLocalDevMode', isLocalDevMode);
+        console.log('import.meta.env', import.meta.env);
+        
         if (isLocalDevMode) {
             body.initData = WebApp.initData || 'test-test';
             body.local = !!WebApp.initData

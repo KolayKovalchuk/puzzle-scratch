@@ -1,31 +1,34 @@
 import { useEffect, useRef, useState } from 'react';
 
 export function useContainerDimensions<T extends Element = HTMLDivElement>() {
-  const containerRef = useRef<T>(null);
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+    const containerRef = useRef<T>(null);
+    const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
-  useEffect(() => {
-    const observer = new ResizeObserver(entries => {
-      for (let entry of entries) {
-        if (entry.target === containerRef.current) {
-          setDimensions({
-            width: entry.contentRect.width,
-            height: entry.contentRect.height,
-          });
+    useEffect(() => {
+        const observer = new ResizeObserver(entries => {
+            for (let entry of entries) {
+                if (entry.target === containerRef.current) {
+
+                    console.log('entry.contentRect.width', entry.contentRect.width);
+                    
+                    setDimensions({
+                        width: entry.contentRect.width,
+                        height: entry.contentRect.height,
+                    });
+                }
+            }
+        });
+
+        if (containerRef.current) {
+            observer.observe(containerRef.current);
         }
-      }
-    });
 
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
+        return () => {
+            if (containerRef.current) {
+                observer.unobserve(containerRef.current);
+            }
+        };
+    }, [containerRef.current]);
 
-    return () => {
-      if (containerRef.current) {
-        observer.unobserve(containerRef.current);
-      }
-    };
-  }, [containerRef.current]);
-
-  return { containerRef, dimensions };
+    return { containerRef, dimensions };
 };

@@ -47,28 +47,27 @@ export function StyledTextPixiEl({
     }
 
     const textStyle = new TextStyle(textStyleConfig);
-    const memorizedComponent = useMemo(() => {
-        console.log('StyledTextPixiEl: ', text, dimensions.width, dimensions.height);
-        return (
-        <Container x={x} y={y}>
-            <Text
-                text={text}
-                style={textStyle}
-                anchor={anchor}
-                x={dimensions.width * xShift}
-                y={dimensions.height * yShift} />
-        </Container>
-        )
-    }, [
-        text,
-        dimensions.width,
-        dimensions.height,
-        // textStyle,
-        x,
-        y,
-        xShift,
-        yShift
-]);
+        const memorizedComponent = useMemo(() => {
+            return (
+            <Container x={x} y={y}>
+                <Text
+                    text={text}
+                    style={textStyle}
+                    anchor={anchor}
+                    x={dimensions.width * xShift}
+                    y={dimensions.height * yShift} />
+            </Container>
+            )
+        }, [
+            text,
+            dimensions.width,
+            dimensions.height,
+            // textStyle,
+            x,
+            y,
+            xShift,
+            yShift
+    ]);
 
     try{
         return memorizedComponent;

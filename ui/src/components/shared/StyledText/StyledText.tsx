@@ -12,8 +12,6 @@ export function StyledText({
     styles: styleArg,
     textStyles,
     textFitCoefficient = 1,
-    isUnderline = false,
-    underlineConfig,
     anchor = 0.5,
     shouldFitFontSize = true,
     xShift = 0.5,
@@ -25,13 +23,11 @@ export function StyledText({
         <div ref={containerRef} className={`${styles.container} ${className || ''}`} style={styleArg}>
             <Stage className={styles.stageClass} width={dimensions.width} height={dimensions.height} options={{ backgroundAlpha: 0 }}>
                 <StyledTextPixiEl
-                    isUnderline={isUnderline}
                     dimensions={dimensions}
                     text={text}
                     textStyles={textStyles}
                     textFitCoefficient={textFitCoefficient}
                     anchor={anchor}
-                    underlineConfig={underlineConfig}
                     shouldFitFontSize={shouldFitFontSize}
                     xShift={xShift}
                     yShift={yShift}

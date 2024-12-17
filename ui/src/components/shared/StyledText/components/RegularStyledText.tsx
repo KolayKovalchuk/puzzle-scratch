@@ -21,10 +21,5 @@ export function RegularStyledText(props: IStyledTextProps) {
     return (<StyledText
         {...props}
         textStyles={textStyle}
-        underlineConfig={{
-            textUnderlineColor: '#B6E2EC',
-            textUnderlineBorderColor: '#095A63',
-            textUnderlineShadowColor: '#0CA2B2',
-        }}
     ></StyledText>)
 }

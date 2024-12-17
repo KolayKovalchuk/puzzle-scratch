@@ -1,8 +1,7 @@
 import { useFitTextSize } from '@hooks/useFitTextSize';
-import { Container, Graphics, Text } from '@pixi/react';
+import { Container, Text } from '@pixi/react';
 import { ITextStyle, TextStyle } from 'pixi.js';
-import { useTextUnderline } from '../hooks/useTextUnderline';
-import { IUnderlineConfig } from '../StyledText.models';
+import { useMemo } from 'react';
 import { DefaultTextStyleConfig } from '../DefaultTextStyleConfig';
 
 
@@ -18,9 +17,6 @@ export interface IStyledTextPixiElProps {
     xShift?: number;
     yShift?: number;
 
-    isUnderline?: boolean;
-    underlineConfig?: IUnderlineConfig;
-
     shouldFitFontSize?: boolean;
 }
 
@@ -30,8 +26,6 @@ export function StyledTextPixiEl({
     text,
     textStyles,
     textFitCoefficient = 1,
-    isUnderline = false,
-    underlineConfig,
     anchor = 0.5,
     x = 0,
     y = 0,
@@ -53,35 +47,33 @@ export function StyledTextPixiEl({
     }
 
     const textStyle = new TextStyle(textStyleConfig);
-    const { textRef, underlineRef } = useTextUnderline(
+    const memorizedComponent = useMemo(() => {
+        console.log('StyledTextPixiEl: ', text, dimensions.width, dimensions.height);
+        return (
+        <Container x={x} y={y}>
+            <Text
+                text={text}
+                style={textStyle}
+                anchor={anchor}
+                x={dimensions.width * xShift}
+                y={dimensions.height * yShift} />
+        </Container>
+        )
+    }, [
+        text,
         dimensions.width,
-        underlineConfig?.textUnderlineColor || '#000000',
-        underlineConfig?.textUnderlineBorderColor || '#000000',
-        underlineConfig?.textUnderlineShadowColor || '#000000',
-        underlineConfig?.lineXShift,
-        underlineConfig?.lineYShift,
-        isUnderline,
-    );
-
-    // const spriteRef = useTextCurved();
+        dimensions.height,
+        // textStyle,
+        x,
+        y,
+        xShift,
+        yShift
+]);
 
     try{
-        return (
-            <Container x={x} y={y}>
-                {isUnderline && <Graphics ref={underlineRef} /> || null}
-                <Text
-                    ref={textRef}
-                    text={text}
-                    style={textStyle}
-                    anchor={anchor}
-                    x={dimensions.width * xShift}
-                    y={dimensions.height * yShift} />
-
-                {/* <Sprite ref={spriteRef} /> */}
-            </Container>
-        )
+        return memorizedComponent;
     }
     catch(e){
-        console.log(e)
+        console.log('StyledTextPixiEl error: ', e)
     }
 }

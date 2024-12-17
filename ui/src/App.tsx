@@ -40,7 +40,7 @@ function App() {
                 <Header />
                 <AppRouter />
             </> : null}
-            <LoadingScreen isLoaded={isLoaded} />
+            {/* <LoadingScreen isLoaded={isLoaded} /> */}
         </div>
     )
 };

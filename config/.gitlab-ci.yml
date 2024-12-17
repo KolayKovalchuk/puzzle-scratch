@@ -13,16 +13,17 @@ upload_config_and_localisation:
 
     # Conditional deployment based on branch
     - if [ "$CI_COMMIT_BRANCH" = "main" ]; then
-        gsutil -m rsync -r config gs://puzzle-config/config;
+        gsutil -m cp -r config/* gs://puzzle-config/config/;
       elif [ "$CI_COMMIT_BRANCH" = "dev" ]; then
         gsutil cp config/dev-config.json gs://puzzle-config/config/dev-config.json;
         gsutil cp config/qa-config.json gs://puzzle-config/config/qa-config.json;
       fi
 
-    # These directories are always synced
-    - gsutil -m rsync -d -r localisation gs://puzzle-config/localisation
-    - gsutil -m rsync -d -r avatars gs://puzzle-config/avatars
-    - gsutil -m rsync -d -r botLocalization gs://puzzle-config/botLocalization
+    # Copy directories
+    - gsutil -m cp -r localisation/* gs://puzzle-config/localisation/
+    - gsutil -m cp -r avatars/* gs://puzzle-config/avatars/
+    - gsutil -m cp -r botLocalization/* gs://puzzle-config/botLocalization/
+    - gsutil -m cp -r botMsgImg/* gs://puzzle-config/botMsgImg/
 
     # Set no-cache headers if main branch
     - gsutil -m setmeta -h "Cache-Control:no-cache, max-age=0" gs://puzzle-config/config/**

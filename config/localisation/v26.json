@@ -283,33 +283,33 @@
     "pt-BR": "Ao tocar em “Concordo”, você confirma que tem mais de 18 anos e concorda com os Termos de Serviço disponíveis <link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">aqui</link>.",
     "VI": "Bằng cách nhấn vào 'Đồng ý', bạn xác nhận rằng mình trên 18 tuổi và đồng ý với Điều khoản dịch vụ có sẵn <link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">tại đây</link>.",
     "ES": "Al tocar \"Aceptar\", confirma que es mayor de 18 años y acepta los Términos de servicio disponibles <link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">aquí</link>.",
-    "AR": "من خلال النقر على \"موافقة\"، فإنك تؤكد أن عمرك يزيد عن 18 عامًا وتوافق على شروط الخدمة المتاحة <link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">هنا</link>.",
+    "AR": "من خلال النقر على \"موافقة\"، فإنك تؤكد أن عمرك يزيد عن 18 عامًا وتوافق على شروط الخدمة المتوفرة <link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">هنا</link>.",
     "FIL": "Sa pamamagitan ng pag-tap sa ‘Sumasang-ayon,’ kinukumpirma mong lampas ka na sa 18 at sumasang-ayon sa Mga Tuntunin ng Serbisyo na available <link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">dito</link>.",
     "HI": "'सहमत' पर टैप करके आप पुष्टि करते हैं कि आपकी उम्र 18 वर्ष से अधिक है और आप <link url='https://www.cryptoscratch.gg/terms-and-conditions'>यहां</link> उपलब्ध सेवा की शर्तों से सहमत हैं।"
   },
   {
     "Key": "txt.tos.decline",
     "EN": "<link url=\"https://www.cryptoscratch.gg/about-us\">Decline</link>",
-    "UK": "<link url=\"https://www.cryptoscratch.gg/about-us/?=uk\">Decline</link>",
-    "RU": "<link url=\"https://www.cryptoscratch.gg/about-us\">Отклонить</link>",
+    "UK": "<link url=\"https://www.cryptoscratch.gg/about-us/?=uk\">Відхилити</link>",
+    "RU": "<link url=\"https://www.cryptoscratch.gg/about-us/?=uk\">Отклонить</link>",
     "pt-BR": "<link url=\"https://www.cryptoscratch.gg/about-us\">Recusar</link>",
     "VI": "<link url=\"https://www.cryptoscratch.gg/about-us\">Từ chối</link>",
     "ES": "<link url=\"https://www.cryptoscratch.gg/about-us\">Rechazar</link>",
     "AR": "<link url=\"https://www.cryptoscratch.gg/about-us\">رفض</link>",
     "FIL": "<link url=\"https://www.cryptoscratch.gg/about-us\">Tanggihan</link>",
-    "HI": "<लिंक url='https://www.cryptoscratch.gg/about-us'>अस्वीकृत</लिंक>"
+    "HI": "<link url=\"https://www.cryptoscratch.gg/about-us\">अस्वीकृत</link>"
   },
   {
     "Key": "txt.btn.agree",
     "EN": "Agree",
-    "UK": "Погоджуюсь",
-    "RU": "Согласен",
-    "pt-BR": "Concordar",
+    "UK": "Прийняти",
+    "RU": "Принять",
+    "pt-BR": "Concordo",
     "VI": "Đồng ý",
     "ES": "Aceptar",
     "AR": "موافق",
-    "FIL": "Sumang-ayon",
-    "HI": "सहमत"
+    "FIL": "Sumasang-ayon",
+    "HI": "सहमति"
   },
   {
     "Key": "txt.btn.decline",
@@ -326,7 +326,7 @@
   {
     "Key": "txt.tos.title",
     "EN": "Terms of Service",
-    "UK": "Умови надання послуг",
+    "UK": "Умови обслуговування",
     "RU": "Условия обслуживания",
     "pt-BR": "Termos de Serviço",
     "VI": "Điều khoản dịch vụ",
@@ -1033,27 +1033,27 @@
   },
   {
     "Key": "txt.invite.terms",
-    "EN": "You will receive the invite friend bonus of <$var1> with every <$var2> friend who accepted your invite and never played before.",
-    "UK": "Ви отримаєте бонус за запрошених друзів в розмірі <$var1> за кожного <$var2> друга, який прийняв ваше запрошення та ще не грав.",
-    "RU": "Вы получите бонус за приглашение друга в размере <$var1> за каждого <$var2> друга, который принял ваше приглашение и никогда не играл.",
-    "pt-BR": "Você receberá o bônus de amigo convidado de <$var1> a cada <$var2> amigos que aceitarem seu convite e nunca jogaram antes.",
-    "VI": "Bạn sẽ nhận được phần thưởng bạn bè mời là <$var1> cho mỗi <$var2> người bạn đã chấp nhận lời mời của bạn và chưa bao giờ chơi trước đó.",
-    "ES": "Recibirás el bono de amigo invitado de <$var1> por cada <$var2> amigos que acepten tu invitación y nunca hayan jugado antes.",
-    "AR": "ستحصل على مكافأة دعوة الأصدقاء بقيمة <$var1> عن كل <$var2> من الأصدقاء الذين قبلوا دعوتك ولم يلعبوا من قبل.",
-    "FIL": "Makakatanggap ka ng bonus sa paanyaya ng kaibigan na <$var1> sa bawat <$var2> kaibigan na tumanggap ng iyong imbitasyon at hindi pa naglalaro.",
-    "HI": "आपको प्रत्येक <$var2> दोस्तों के लिए <$var1> का आमंत्रण बोनस मिलेगा, जिन्होंने आपका निमंत्रण स्वीकार किया और पहले कभी नहीं खेला।"
+    "EN": "You will receive the invite friend bonus of <$var1> RBAX with every <$var2> friends who accepted your invite and never played before.",
+    "UK": "Ви отримаєте бонус за запрошених друзів в розмірі <$var1> RBAX за кожного <$var2> друга, який прийняв ваше запрошення та ще не грав.",
+    "RU": "Вы получите бонус за приглашение друга в размере <$var1> RBAX за каждого <$var2> друга, который принял ваше приглашение и никогда не играл.",
+    "pt-BR": "Você receberá o bônus de amigo convidado de <$var1> RBAX a cada <$var2> amigos que aceitarem seu convite e nunca jogaram antes.",
+    "VI": "Bạn sẽ nhận được phần thưởng bạn bè mời là <$var1> RBAX cho mỗi <$var2> người bạn đã chấp nhận lời mời của bạn và chưa bao giờ chơi trước đó.",
+    "ES": "Recibirás el bono de amigo invitado de <$var1>  RBAX por cada <$var2> amigos que acepten tu invitación y nunca hayan jugado antes.",
+    "AR": "ستحصل على مكافأة دعوة الأصدقاء بقيمة <$var1> RBAX عن كل <$var2> من الأصدقاء الذين قبلوا دعوتك ولم يلعبوا من قبل.",
+    "FIL": "Makakatanggap ka ng bonus sa paanyaya ng kaibigan na <$var1> RBAX sa bawat <$var2> kaibigan na tumanggap ng iyong imbitasyon at hindi pa naglalaro.",
+    "HI": "आपको प्रत्येक <$var2> दोस्तों के लिए <$var1> RBAX  का आमंत्रण बोनस मिलेगा, जिन्होंने आपका निमंत्रण स्वीकार किया और पहले कभी नहीं खेला।"
   },
   {
     "Key": "txt.gift.msg",
     "EN": "<$var1> sent you RBAX! Play in CryptoScratch with your gift and convert fun to cash!",
-    "UK": "<$var1> надіслав(ла) вам RBAX! Грайте у CryptoScratch із подарунком і перетворюйте веселощі на гроші!",
-    "RU": "<$var1> отправил(а) вам RBAX! Играйте в CryptoScratch с подарком и превращайте веселье в деньги!",
-    "pt-BR": "<$var1> enviou RBAX para você! Jogue no CryptoScratch com seu presente e transforme diversão em dinheiro!",
-    "VI": "<$var1> đã gửi cho bạn RBAX! Chơi CryptoScratch với quà tặng và biến niềm vui thành tiền mặt!",
-    "ES": "<$var1> te envió RBAX! Juega en CryptoScratch con tu regalo y convierte la diversión en dinero en efectivo!",
-    "AR": "<$var1> أرسل لك RBAX! العب في CryptoScratch بهديتك وحول المتعة إلى نقود!",
-    "FIL": "<$var1> nagpadala sa iyo ng RBAX! Maglaro sa CryptoScratch gamit ang iyong regalo at gawing pera ang kasiyahan!",
-    "HI": "<$var1> ने आपको RBAX भेजा है! अपने गिफ्ट के साथ CryptoScratch खेलें और मज़े को कैश में बदलें!"
+    "UK": "<$var1> sent you RBAX! Play in CryptoScratch with your gift and convert fun to cash!",
+    "RU": "<$var1> sent you RBAX! Play in CryptoScratch with your gift and convert fun to cash!",
+    "pt-BR": "<$var1> sent you RBAX! Play in CryptoScratch with your gift and convert fun to cash!",
+    "VI": "<$var1> sent you RBAX! Play in CryptoScratch with your gift and convert fun to cash!",
+    "ES": "<$var1> sent you RBAX! Play in CryptoScratch with your gift and convert fun to cash!",
+    "AR": "<$var1> sent you RBAX! Play in CryptoScratch with your gift and convert fun to cash!",
+    "FIL": "<$var1> sent you RBAX! Play in CryptoScratch with your gift and convert fun to cash!",
+    "HI": "<$var1> sent you RBAX! Play in CryptoScratch with your gift and convert fun to cash!"
   },
   {
     "Key": "txt.wallet.winnigns",
@@ -1071,7 +1071,7 @@
     "Key": "txt.transfer.title",
     "EN": "Wallet Transfer",
     "UK": "Переказ гаманцем",
-    "RU": "Перевод кошелька",
+    "RU": "Перевод на кошелек",
     "pt-BR": "Transferência de carteira",
     "VI": "Chuyển ví",
     "ES": "Transferencia de billetera",
@@ -1232,7 +1232,7 @@
     "VI": "Mô tả trò chơi hộp băng\nMô tả trò chơi hộp băng\nMô tả trò chơi hộp băng\nMô tả trò chơi hộp băng",
     "ES": "Descripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo",
     "AR": "وصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج",
-    "FIL": "Ang paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box",
+    "FIL": "Ang paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo",
     "HI": "आइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण"
   },
   {
@@ -1244,7 +1244,7 @@
     "VI": "Mô tả trò chơi hộp băng\nMô tả trò chơi hộp băng\nMô tả trò chơi hộp băng\nMô tả trò chơi hộp băng",
     "ES": "Descripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo",
     "AR": "وصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج",
-    "FIL": "Ang paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box",
+    "FIL": "Ang paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo",
     "HI": "आइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण"
   },
   {
@@ -1256,7 +1256,7 @@
     "VI": "Mô tả trò chơi hộp đá\nMô tả trò chơi hộp băng\nMô tả trò chơi hộp băng\nMô tả trò chơi hộp băng",
     "ES": "Descripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo\nDescripción del juego de la caja de hielo",
     "AR": "وصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج\nوصف لعبة صندوق الثلج ",
-    "FIL": "Ang paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box\nAng paglalarawan ng laro ng ice box\nAng paglalarawan ng larong kahon ng yelo",
+    "FIL": "Ang paglalarawan ng laro ng ice box\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo\nAng paglalarawan ng larong kahon ng yelo",
     "HI": "आइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण\nआइस बॉक्स गेम विवरण"
   },
   {
@@ -1269,7 +1269,7 @@
     "ES": "¡Los premios suman hasta 1.000.000 RBAX!",
     "AR": "مجموع الجوائز يصل إلى 1,000,000 RBAX!",
     "FIL": "Ang mga premyo ay sum hanggang 1,000,000 RBAX!",
-    "HI": "पुरस्कारों की राशि 1,000,000 आरबीएक्स तक है!"
+    "HI": "पुरस्कारों की राशि 1,000,000 RBAX तक है!"
   },
   {
     "Key": "puzzle.gallery.santasac",
@@ -1281,7 +1281,7 @@
     "ES": "¡Los premios suman hasta 1.000.000 RBAX!",
     "AR": "مجموع الجوائز يصل إلى 1,000,000 RBAX!",
     "FIL": "Ang mga premyo ay sum hanggang 1,000,000 RBAX!",
-    "HI": "पुरस्कारों की राशि 1,000,000 आरबीएक्स तक है!"
+    "HI": "पुरस्कारों की राशि 1,000,000 RBAX तक है!"
   },
   {
     "Key": "puzzle.gallery.candymaze",
@@ -1293,7 +1293,7 @@
     "ES": "¡Los premios suman hasta 1.000.000 RBAX!",
     "AR": "مجموع الجوائز يصل إلى 1,000,000 RBAX!",
     "FIL": "Ang mga premyo ay sum hanggang 1,000,000 RBAX!",
-    "HI": "पुरस्कारों की राशि 1,000,000 आरबीएक्स तक है!"
+    "HI": "पुरस्कारों की राशि 1,000,000 RBAX तक है!"
   },
   {
     "Key": "txt.invite.roles",
@@ -1306,5 +1306,29 @@
     "AR": "احصل على <$var1> RBAX لكل أصدقاء <$var2> يقبلون دعوتك! يتم احتسابها فقط إذا لم يلعب صديقك Crypto Scratch بعد.",
     "FIL": "Kumuha ng <$var1> RBAX para sa bawat <$var2> na kaibigan na tumatanggap ng iyong imbitasyon! Mabibilang lang kung hindi pa nakakalaro ng Crypto Scratch ang iyong kaibigan.",
     "HI": "आपका निमंत्रण स्वीकार करने वाले प्रत्येक <$var2> मित्र के लिए <$var1> RBAX प्राप्त करें! केवल तभी मायने रखता है जब आपके मित्र ने अभी तक क्रिप्टो स्क्रैच नहीं खेला है।"
+  },
+  {
+    "Key": "txt.emojiBonus.content",
+    "EN": "Nice! Collect the nickname emoji bonus.",
+    "UK": "Круто! Збирайте бонус за емодзі псевдоніму.",
+    "RU": "Здорово! Соберите бонус за эмодзи ника.",
+    "pt-BR": "Legal! Colete o bônus de emoji de apelido.",
+    "VI": "Tuyệt! Nhận ngay phần thưởng emoji biệt danh.",
+    "ES": "¡Genial! Recoge el bono de emoji del apodo.",
+    "AR": "رائع! اجمع مكافأة رمز تعبيري للقب.",
+    "FIL": "Ayos! Kolektahin ang emoji bonus ng palayaw.",
+    "HI": "बढ़िया! उपनाम इमोजी बोनस प्राप्त करें।"
+  },
+  {
+    "Key": "txt.title.leaderboard",
+    "EN": "Leaderboard",
+    "UK": "Турнірна таблиця",
+    "RU": "Таблица лидеров",
+    "pt-BR": "Classificação",
+    "VI": "Bảng Xếp Hạng",
+    "ES": "Tabla de Posiciones",
+    "AR": "لوحة الصدارة",
+    "FIL": "Talaan ng Nangunguna",
+    "HI": "लीडरबोर्ड"
   }
 ]

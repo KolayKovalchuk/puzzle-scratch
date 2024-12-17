@@ -52,13 +52,13 @@ export function StyledText({
         text,
         dimensions.width,
         dimensions.height,
-        // textStyles,
-        // textFitCoefficient,
-        // anchor,
-        // shouldFitFontSize,
-        // xShift,
-        // yShift,
-        // className,
-        // styleArg
+        textStyles,
+        textFitCoefficient,
+        anchor,
+        shouldFitFontSize,
+        xShift,
+        yShift,
+        className,
+        styleArg
     ]);
 }

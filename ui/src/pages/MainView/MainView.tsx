@@ -12,7 +12,7 @@ import { useShowLoginNotificationsPopups } from '@services/loginNotifications.se
 import { shareLinkToFriends } from '@services/telegramWebApp/telegramWebApp.service';
 
 import { selectLocalValueWithVars } from '@store/selectors/localization.selectors';
-import { selectUserName } from '@store/selectors/user.selectors';
+import { selectPreferredLocale, selectUserName } from '@store/selectors/user.selectors';
 
 
 import { LeaderBoard } from './components/LeaderBoard/LeaderBoard';
@@ -49,6 +49,9 @@ export function MainView() {
 
     const isUserLoginNotificationsEmpty = userLoginNotifications.length === 0;
     const isNotificationsEmpty = notifications.length === 0;
+    const preferredLocale = useSelector(selectPreferredLocale);
+    const inviteFriendImgName = `mainView/invite_friend_bunner_${preferredLocale?.toLocaleLowerCase()}.png`;
+    const sendRbaxImgName = `mainView/send_rbax_to_a_friend_${preferredLocale?.toLocaleLowerCase()}.png`;
 
     return (<>
         <div className={styles.mainContainer}>
@@ -57,10 +60,10 @@ export function MainView() {
                 <BatchCardContainer></BatchCardContainer>
 
                 <div className={styles.banner} onClick={() => onInviteClicked()}>
-                    <img src="/invite_frind_bunner.png" alt="Invite Friend" />
+                    <img src={inviteFriendImgName} alt="Invite Friend" />
                 </div>
                 <div className={styles.banner} onClick={() => onSendRbaxClicked()}>
-                    <img src="/send_rbax_to_a_friend.png" alt="Send Rbax to a Friend" />
+                    <img src={sendRbaxImgName} alt="Send Rbax to a Friend" />
                 </div>
 
                 <div className={styles.leaderboardContainer}>

@@ -1,5 +1,3 @@
-import DOMPurify from 'dompurify';
-
 import { LocalizationModel } from '@models/LocalizationDataKey.model';
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '@store/store';

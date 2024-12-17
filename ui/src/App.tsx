@@ -5,37 +5,21 @@ import { LoadingScreen } from '@components/LoadingScreen/LoadingScreen';
 import { useInitApp } from '@hooks/useInitApp';
 import { AppRouter } from '@routers/router';
 import { ROUTES } from '@routers/routerConfig';
-import { selectUserAcceptedTerms } from '@store/selectors/user.selectors';
+import { selectUserAcceptedTerms, selectUserPreferredLocale } from '@store/selectors/user.selectors';
 import store from '@store/store';
 import { useEffect } from 'react';
 import { Provider, useSelector } from 'react-redux';
 import { BrowserRouter, useNavigate } from 'react-router-dom';
 
-// TODO: remove test code when done
-// function TestBtn({ click }: { click: () => void }) {
-//     const preferredLocale = useSelector(selectPreferredLocale)
-
-//     return (
-//         <div style={{
-//             width: '100%',
-//             backgroundColor: 'lightgreen',
-//             display: 'flex',
-//             justifyContent: 'center',
-//             alignItems: 'center',
-//         }} onClick={() => click()}>Reset(only for test) Locale: {preferredLocale}</div>
-//     )
-// }
-
 function App() {
     const {
         isLoaded,
-        isPreferredLocaleSelected,
-        setIsPreferredLocaleSelected,
         isFontListLoaded,
     } = useInitApp();
 
     const navigate = useNavigate();
     const isUserAcceptedTerms = useSelector(selectUserAcceptedTerms)
+    const isPreferredLocaleSelected = !!useSelector(selectUserPreferredLocale)
     const shouldRedirectToLanguageSelect = !isPreferredLocaleSelected || !isUserAcceptedTerms;
 
     useEffect(() => {
@@ -46,37 +30,17 @@ function App() {
         }
     }, [isLoaded, shouldRedirectToLanguageSelect, navigate]);
 
-    // const location = useLocation();
-
     if (!isFontListLoaded) {
         return null;
     }
-
-    const onLangSelected = async () => {
-        setIsPreferredLocaleSelected(true)
-    }
-
-    const languageSelectProps = {
-        onLangSelected,
-        isPreferredLocaleSelected,
-    }
-    // TODO: remove test code when done
-    // const onTestBtnClick = async () => {
-    //     const result = await setIsPreferredLocaleSelectedToCloud(false)
-    //     setIsPreferredLocaleSelected(false)
-    //     console.log('testbtn setIsPreferredLocaleSelectedToCloud result:', result);
-    // }
 
     return (
         <div className={styles.mainContainer}>
             {isLoaded ? <>
                 <Header />
-                <AppRouter languageSelectProps={languageSelectProps} />
+                <AppRouter />
             </> : null}
             <LoadingScreen isLoaded={isLoaded} />
-
-            {/* // TODO: remove test code when done */}
-            {/* { location.pathname === ROUTES.Home && <TestBtn click={() => onTestBtnClick()}/>} */}
         </div>
     )
 };

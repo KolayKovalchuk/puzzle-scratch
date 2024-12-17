@@ -1,6 +1,5 @@
 import { IUserAcceptTermsResponse } from '@models/IUserAcceptTermsResponse';
 import { updateToken } from '@services/auth.service';
-import { setIsPreferredLocaleSelectedToCloud } from '@services/telegramCloud/preferredLocale.service';
 import { updateUserLocale, updateUserTos } from '@store/actions/user.actions';
 import store from '@store/store';
 import { apiClient } from './api.service';
@@ -37,13 +36,6 @@ export async function selectUserLocale(locale: string) {
     
     if (!patchLocaleResult) {
         console.error('Failed to update locale:', locale);
-        return false;
-    }
-
-    const setToCloudeLocaleResult = await setIsPreferredLocaleSelectedToCloud(true)
-
-    if (!setToCloudeLocaleResult) {
-        console.error('Failed to set isPreferredLocaleSelected to cloud');
         return false;
     }
 

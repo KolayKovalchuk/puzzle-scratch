@@ -32,7 +32,7 @@ const testTextStyle = new TextStyle({
 export function MainView() {
     const userName = useSelector(selectUserName);
     const shareLinkText = useSelector(selectLocalValueWithVars('txt.gift.msg', userName || ''));
-    // const [userLoginNotifications, removeLoginNotification] = useShowLoginNotificationsPopups();
+    const [userLoginNotifications, removeLoginNotification] = useShowLoginNotificationsPopups();
 
     const navigate = useNavigate()
 
@@ -53,28 +53,28 @@ export function MainView() {
 
     const containerClassName = `${styles.container}`;
 
-    // const { notifications, removeNotification } = useGetNotifications();
+    const { notifications, removeNotification } = useGetNotifications();
 
-    // const isUserLoginNotificationsEmpty = userLoginNotifications.length === 0;
-    // const isNotificationsEmpty = notifications.length === 0;
+    const isUserLoginNotificationsEmpty = userLoginNotifications.length === 0;
+    const isNotificationsEmpty = notifications.length === 0;
     const preferredLocale = useSelector(selectPreferredLocale);
     const inviteFriendImgName = `mainView/invite_friend_bunner_${preferredLocale?.toLocaleLowerCase()}.png`;
     const sendRbaxImgName = `mainView/send_rbax_to_a_friend_${preferredLocale?.toLocaleLowerCase()}.png`;
 
-    const test = useMemo(() => {
-        return (<>
-            <Stage options={{ backgroundAlpha: 0 }} width={200} height={100}>
-                <Text text={'Main View'} style={testTextStyle}></Text>
-            </Stage>
-            <StyledText text={'Main View'} textStyles={{ fontSize: 30 }} />
-        </>)
-    }, []);
+    // const test = useMemo(() => {
+    //     return (<>
+    //         <Stage options={{ backgroundAlpha: 0 }} width={200} height={100}>
+    //             <Text text={'Main View'} style={testTextStyle}></Text>
+    //         </Stage>
+    //         <StyledText text={'Main View'} textStyles={{ fontSize: 30 }} />
+    //     </>)
+    // }, []);
 
     return (<>
         <div className={styles.mainContainer}>
             <div className={containerClassName}>
                 <LogoHeader className={styles.logoHeader}></LogoHeader>
-                {/* <BatchCardContainer></BatchCardContainer> */}
+                <BatchCardContainer></BatchCardContainer>
 
 
                 <div className={styles.banner} onClick={() => onInviteClicked()}>
@@ -100,7 +100,7 @@ export function MainView() {
             <StyledText text={'Main View'} textStyles={{ fontSize: 30 }} /> */}
         </div>
 
-        {/* {!isUserLoginNotificationsEmpty && <NotificationPopup
+        {!isUserLoginNotificationsEmpty && <NotificationPopup
             isOpen={userLoginNotifications.length > 0}
             notification={userLoginNotifications[0]}
             onConfirm={(notification) => {
@@ -113,6 +113,6 @@ export function MainView() {
             onConfirm={(notification) => {
                 removeNotification(notification);
             }}
-        />} */}
+        />}
     </>);
 };

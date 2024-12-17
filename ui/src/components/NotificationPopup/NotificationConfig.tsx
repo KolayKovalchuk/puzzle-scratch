@@ -59,8 +59,8 @@ export const NotificationConfig: NotificationConfig = {
         },
     },
     [NotificationType.EMOJI_BONUS]: {
-        title: 'text.gift.rbax',
-        content: 'txt.enojiBonus.content',
+        title: 'text.gift.rbaxGift',
+        content: 'txt.emojiBonus.content',
         agreeBtn: 'txt.btn.collect',
         agreeCallback: async () => {
             const response = await postCollectEmojiBonus();

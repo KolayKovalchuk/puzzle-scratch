@@ -16,7 +16,7 @@ export const bot = new Telegraf(BOT_TOKEN || '');
 
 bot.start(onStartCommand);
 
-const webhookPath = '/telegramWebhook';
+const webhookPath = 'telegramWebhook';
 const webhookConfig: Telegraf.LaunchOptions['webhook'] = {
     domain: TELEGRAM_WEB_HOOK_URL,
     path: webhookPath,
@@ -41,7 +41,7 @@ export async function startBot() {
 }
 
 export function setWebhookUrl() {
-    bot.telegram.setWebhook(`${TELEGRAM_WEB_HOOK_URL}/${webhookPath}`);
+    return bot.telegram.setWebhook(`${TELEGRAM_WEB_HOOK_URL}/${webhookPath}`);
 }
 
 export async function handleWebhookUpdate(update: Update) {

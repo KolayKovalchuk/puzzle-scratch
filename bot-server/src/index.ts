@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import { HttpFunction } from '@google-cloud/functions-framework';
-import { bot, handleWebhookUpdate, setWebhookUrl, startBot } from './bot';
+import { bot, handleWebhookUpdate, setWebhookUrl } from './bot';
 
 
 export const handleWebhook: HttpFunction = async (request, response) => {

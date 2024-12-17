@@ -62,7 +62,7 @@ export function StyledTextPixiEl({
             text,
             dimensions.width,
             dimensions.height,
-            // textStyle,
+            textStyle,
             x,
             y,
             xShift,

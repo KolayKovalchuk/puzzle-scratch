@@ -29,3 +29,18 @@ steps:
     - --allow-unauthenticated
     # - --env-vars-file=.env.yaml
     # - --update-labels=dependencies=updated
+  - name: gcr.io/cloud-builders/gcloud
+    id: Build get telegram webhook url
+    entrypoint: gcloud
+    args: 
+    - functions
+    - deploy
+    - getWebhookDev
+    - --entry-point=getWebhook
+    - --source=dist
+    - --runtime=nodejs22
+    - --trigger-http
+    - --region=us-central1
+    - --allow-unauthenticated
+    # - --env-vars-file=.env.yaml
+    # - --update-labels=dependencies=updated

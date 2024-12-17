@@ -8,13 +8,19 @@ import { bot, handleWebhookUpdate, setWebhookUrl } from './bot';
 export const handleWebhook: HttpFunction = async (request, response) => {
     console.log('handleWebhook');
     await handleWebhookUpdate(request.body);
-    response.status(200).send('Success!');
+    response.status(200).send('ok');
 };
 
 export const setWebhook: HttpFunction = async (request, response) => {
     console.log('setWebhook');
     await setWebhookUrl();
-    response.status(200).send('Success!');
+    response.status(200).send('ok');
+}
+
+export const getWebhook: HttpFunction = async (request, response) => {
+    console.log('getWebhook');
+    const webhookInfo = await bot.telegram.getWebhookInfo();
+    response.status(200).send(webhookInfo);
 }
 
 if (process.env.IS_LOCAL_DEV) {

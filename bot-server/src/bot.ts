@@ -41,7 +41,7 @@ export async function startBot() {
 }
 
 export function setWebhookUrl() {
-    return bot.telegram.setWebhook(`${TELEGRAM_WEB_HOOK_URL}/${webhookPath}`);
+    return bot.telegram.setWebhook(`${TELEGRAM_WEB_HOOK_URL}`);
 }
 
 export async function handleWebhookUpdate(update: Update) {

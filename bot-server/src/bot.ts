@@ -15,6 +15,7 @@ if (!TELEGRAM_WEB_HOOK_URL) throw new Error('"TELEGRAM_WEB_HOOK_URL" env var is 
 export const bot = new Telegraf(BOT_TOKEN || '');
 
 bot.start(onStartCommand);
+bot.command('bonus', onStartCommand);
 
 const webhookPath = 'telegramWebhook';
 const webhookConfig: Telegraf.LaunchOptions['webhook'] = {

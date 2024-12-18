@@ -30,6 +30,7 @@ if (process.env.IS_LOCAL_DEV) {
     if (process.env.IS_LOCAL_DEV_WEBHOOK) {
         console.log('start local webhook');
         setWebhookUrl();
+        bot.telegram.getWebhookInfo().then(console.log);
     } else {
         console.log('launch');
         bot.launch();

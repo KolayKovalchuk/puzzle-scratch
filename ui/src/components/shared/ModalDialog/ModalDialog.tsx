@@ -1,4 +1,4 @@
-import { FC, MouseEvent, ReactNode, useCallback, useMemo } from 'react';
+import { FC, MouseEvent, ReactNode, useCallback, useEffect, useMemo } from 'react';
 
 import { StyledHeader } from '@components/shared/StyledHeader';
 import { Button, ButtonType } from '@components/shared/Button';
@@ -7,6 +7,8 @@ import { Icon } from '@components/shared/Icon';
 import close_cross_icon from '@icons/close_cross_icon.svg';
 
 import styles from './ModalDialog.module.scss';
+import store from '@store/store';
+import { setIsModalDialogOpen } from '@store/actions/appState.actions';
 
 interface ModalDialogProps {
     isOpen: boolean;
@@ -48,6 +50,14 @@ const ModalDialog: FC<ModalDialogProps> = ({
         onConfirm && onConfirm();
     }, [onConfirm]);
 
+    useEffect(() => {
+        store.dispatch(setIsModalDialogOpen(isOpen));
+
+        return () => {
+            store.dispatch(setIsModalDialogOpen(false));
+        }
+    }, [isOpen]);
+
     const modalDialogContent = useMemo(() => {
         return (
             <div className={`${styles.modalBody} modalBody`}>
@@ -57,13 +67,17 @@ const ModalDialog: FC<ModalDialogProps> = ({
                         className={styles.btn}
                         text={cancelText}
                         mode={ButtonType.Cancel}
-                        onClick={handleClose} />
+                        onClick={handleClose}
+                        isModalDialogPixiEl
+                        />
                     }
                     {confirmText && <Button
                         className={styles.btn}
                         text={confirmText}
                         mode={ButtonType.Confirm}
-                        onClick={handleConfirm} />
+                        onClick={handleConfirm}
+                        isModalDialogPixiEl
+                        />
                     }
                 </div>
             </div>
@@ -84,7 +98,7 @@ const ModalDialog: FC<ModalDialogProps> = ({
         <div className={`${styles.modalOverlay} ${className}`} onClick={onOverlayClick}>
             <div className={`${styles.modalContent} modalContent`} onClick={onModalContentClick}>
                 {typeof title === 'string'
-                    ? <StyledHeader title={title}>
+                    ? <StyledHeader title={title} isModalDialogPixiEl>
                         {modalDialogContent}
                     </StyledHeader>
                     : <>

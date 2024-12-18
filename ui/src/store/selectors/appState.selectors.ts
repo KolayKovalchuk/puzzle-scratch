@@ -19,3 +19,17 @@ export const selectPrizeLabelCounter = createSelector(
         return queryState?.prizeLabelCounter;
     }
 )
+
+export const selectIsMainLoaderOpen = createSelector(
+    selectGame,
+    (queryState) => {
+        return queryState?.isMainLoaderOpen;
+    }
+)
+
+export const selectIsModalDialogOpen = createSelector(
+    selectGame,
+    (queryState) => {
+        return queryState?.isModalDialogOpen;
+    }
+)

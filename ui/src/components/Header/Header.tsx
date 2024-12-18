@@ -16,18 +16,19 @@ import { ROUTES } from '@routers/routerConfig'
 import wallet from '@icons/wallet.svg'
 import logo from '@icons/logo.svg'
 import robo_token from '@icons/robo_token.svg'
+import { formatNumber } from '@utils/formatters/formatNumber'
 
-function renderAnimatedNumbers(amount: number) {
-    return <AnimatedNumbers
-        includeComma
-        className={styles.amount_value}
-        animateToNumber={amount}
-        fontStyle={{
-            fontSize: 18,
-            color: "#fff",
-        }}
-    />
-}
+// function renderAnimatedNumbers(amount: number) {
+//     return <AnimatedNumbers
+//         includeComma
+//         className={styles.amount_value}
+//         animateToNumber={amount}
+//         fontStyle={{
+//             fontSize: 18,
+//             color: "#fff",
+//         }}
+//     />
+// }
 
 export function Header() {
     const amount = useSelector(selectUserBalanceRbax) || 0;
@@ -35,7 +36,7 @@ export function Header() {
     const { lastWinLabel, labelRef } = useBalanceChangeLabel(styles.animate);
     const scratchCardTransitionTimeout = useSelector(selectScratchCardTransitionTimeout);
 
-    const animatedNumbers = useMemo(() => renderAnimatedNumbers(amount), [amount]);
+    // const animatedNumbers = useMemo(() => renderAnimatedNumbers(amount), [amount]);
 
     const navigate = useNavigate();
 
@@ -53,7 +54,9 @@ export function Header() {
             </div>
             <div className={styles.currency_info_container} onClick={openWallet}>
                 <Icon name={robo_token} className={styles.token_icon}></Icon>
-                {animatedNumbers}
+                <span className={styles.amount_value}>
+                    {formatNumber(amount)}
+                </span>
 
                 <div
                     ref={labelRef}

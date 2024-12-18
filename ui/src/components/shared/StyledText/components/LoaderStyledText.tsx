@@ -21,5 +21,6 @@ export function LoaderStyledStyledText(props: IStyledTextProps) {
     return (<StyledText
         {...props}
         textStyles={textStyle}
+        isLoaderPixiEl
     ></StyledText>)
 }

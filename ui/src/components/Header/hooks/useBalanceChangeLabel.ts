@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
-import { selectLastAmountIncrease, selectPrizeLabelCounter } from '@store/selectors/game.selectors';
+import { selectLastAmountIncrease, selectPrizeLabelCounter } from '@store/selectors/appState.selectors';
 
 export function useBalanceChangeLabel(className: string) {
     const lastAmountIncrease = useSelector(selectLastAmountIncrease);

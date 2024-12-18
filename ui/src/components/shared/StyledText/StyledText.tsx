@@ -7,7 +7,6 @@ import { DefaultTextStyleConfig } from './DefaultTextStyleConfig';
 import { useGetCanRender } from './hooks/useGetCanRender';
 import { IStyledTextProps } from './StyledText.models';
 import styles from './StyledText.module.scss';
-import { useMemo } from 'react';
 
 export function StyledText({
     text,

@@ -3,7 +3,7 @@ import { updateUserBalanceRbax } from '@store/actions/user.actions';
 import store from '@store/store';
 import { useCallback, useState } from 'react';
 import { apiClient } from './api.service';
-import { showAmountChangeLabel } from '@store/actions/game.actions';
+import { showAmountChangeLabel } from '@store/actions/appState.actions';
 
 export async function postBuyCard<CardData extends ICardData>(batchId: string) {
     try {

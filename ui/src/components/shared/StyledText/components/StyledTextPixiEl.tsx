@@ -47,8 +47,9 @@ export function StyledTextPixiEl({
     }
 
     const textStyle = new TextStyle(textStyleConfig);
-        const memorizedComponent = useMemo(() => {
-            return (
+
+    try{
+        return (
             <Container x={x} y={y}>
                 <Text
                     text={text}
@@ -57,20 +58,7 @@ export function StyledTextPixiEl({
                     x={dimensions.width * xShift}
                     y={dimensions.height * yShift} />
             </Container>
-            )
-        }, [
-            text,
-            dimensions.width,
-            dimensions.height,
-            textStyle,
-            x,
-            y,
-            xShift,
-            yShift
-    ]);
-
-    try{
-        return memorizedComponent;
+        );
     }
     catch(e){
         console.log('StyledTextPixiEl error: ', e)

@@ -27,6 +27,7 @@ export interface IButtonProps {
     textStyle?: Partial<ITextStyle>;
 
     is3d?: boolean;
+    isModalDialogPixiEl?: boolean;
 }
 
 export function ButtonComponent({
@@ -42,6 +43,7 @@ export function ButtonComponent({
     textStyle = {},
 
     is3d = false,
+    isModalDialogPixiEl = false,
 
 }: IButtonProps, ref: Ref<HTMLButtonElement>) {
     const { className: buttonTypeClassName, textStyles } = useButtonConfig(mode, styles);
@@ -66,6 +68,7 @@ export function ButtonComponent({
                     ...textStyle,
                 }}
                 shouldFitFontSize={shouldFitFontSize}
+                isModalDialogPixiEl={isModalDialogPixiEl}
             ></RegularStyledText>
         );
     }, [
@@ -74,7 +77,8 @@ export function ButtonComponent({
         text,
         textStyles,
         shouldFitFontSize,
-        textStyle
+        textStyle,
+        isModalDialogPixiEl,
     ]);
 
     const iconContainerClassName = iconName ? styles.iconContainer : '';

@@ -23,6 +23,8 @@ export interface StyledHeaderTextProps {
     fontSize?: number;
     height?: string;
     noWings?: boolean;
+
+    isModalDialogPixiEl?: boolean;
 }
 
 export function StyledHeader({
@@ -32,7 +34,8 @@ export function StyledHeader({
     type = StyledHeaderType.DEFAULT,
     fontSize = 30,
     height = '55px',
-    noWings = false
+    noWings = false,
+    isModalDialogPixiEl = false,
 }: StyledHeaderTextProps) {
     const {
         mainHeaderBgIconName,
@@ -63,7 +66,7 @@ export function StyledHeader({
                 style={{ width: height }}
             /> }
             <div className={styles.headerContainer} style={{ height: height }}>
-                <StyledText text={title} textStyles={{ fontSize }} textFitCoefficient={0.9} />
+                <StyledText text={title} textStyles={{ fontSize }} textFitCoefficient={0.9} isModalDialogPixiEl={isModalDialogPixiEl} />
             </div>
             <div className={`${styles.content}`} style={{ marginTop: contentMarginTop }}>
                 {children}

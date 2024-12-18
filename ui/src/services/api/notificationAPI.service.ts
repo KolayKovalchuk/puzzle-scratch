@@ -8,6 +8,7 @@ export async function getNotifications(): Promise<Notification[] | null> {
         const referralData = response.data.map((notification: any) => new Notification(notification));
 
         return referralData;
+        // return [];
     } catch (error) {
         console.error('Error creating share link code:', error);
         return null

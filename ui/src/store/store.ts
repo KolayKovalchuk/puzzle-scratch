@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { configApi } from '@services/api/apiLogin.service';
 import { userReducer } from './reducers/user.reducer';
 import { localizationReducer } from './reducers/localization.reducer';
-import { gameReducer } from './reducers/game.reducer';
+import { gameReducer } from './reducers/appState.reducer';
 
 const store = configureStore({
     reducer: {

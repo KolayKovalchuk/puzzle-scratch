@@ -1,5 +1,5 @@
 {
-  "API_URL": "https://puzzle-dev-api-ke8734.rebelbots.com/game",
+  "API_URL": "https://puzzle-dev-api-ke8734.rebelbots.com",
   "TELEGRAM_BOT_URL": "https://t.me/PuzzleScratchDEVbot/",
   "TELEGRAM_APP_URL": "https://t.me/PuzzleScratchDEVbot/PuzzleScratch_DEV",
   "TELEGRAM_APP_DOMAIN": "https://puzzle-ui-dev-291ijd.cryptoscratch.gg/",

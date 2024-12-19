@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 
 export function useCounterAnimation(amount: number) {
@@ -7,15 +6,20 @@ export function useCounterAnimation(amount: number) {
     useEffect(() => {
         let start = displayAmount;
         const end = amount;
-        const duration = 2000;
-        const stepTime = Math.abs(Math.floor(duration / (end - start)));
+        if (start === end) return;
 
-        console.log(start, end, stepTime);
+        const duration = 2000;
+        const totalSteps = 100;
+        const stepTime = duration / totalSteps;
+        const stepSize = Math.round(Math.abs(end - start) / totalSteps);
 
         const timer = setInterval(() => {
-            start += 1;
+            start += stepSize;
             setDisplayAmount(start);
-            if (start >= end) clearInterval(timer);
+            if (start >= end) {
+                setDisplayAmount(end);
+                clearInterval(timer);
+            }
         }, stepTime);
 
         return () => clearInterval(timer);

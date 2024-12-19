@@ -1,4 +1,4 @@
-import { FC, MouseEvent, ReactNode, useCallback, useMemo } from 'react';
+import { FC, MouseEvent, ReactNode, useCallback, useEffect, useMemo } from 'react';
 
 import { StyledHeader } from '@components/shared/StyledHeader';
 import { Button, ButtonType } from '@components/shared/Button';
@@ -7,6 +7,8 @@ import { Icon } from '@components/shared/Icon';
 import close_cross_icon from '@icons/close_cross_icon.svg';
 
 import styles from './ModalDialog.module.scss';
+import store from '@store/store';
+import { setIsModalDialogOpen } from '@store/actions/appState.actions';
 
 interface ModalDialogProps {
     isOpen: boolean;
@@ -22,6 +24,7 @@ interface ModalDialogProps {
     onConfirm?: () => void;
 
     callOnCloseOnOverlayClick?: boolean;
+    shouldDispatchIsModalDialogOpen?: boolean;
 
     className?: string;
 }
@@ -37,9 +40,8 @@ const ModalDialog: FC<ModalDialogProps> = ({
     children,
     className,
     callOnCloseOnOverlayClick = false,
+    shouldDispatchIsModalDialogOpen = true,
 }) => {
-    if (!isOpen) return null;
-
     const handleClose = useCallback(() => {
         onClose && onClose();
     }, [onClose]);
@@ -80,11 +82,25 @@ const ModalDialog: FC<ModalDialogProps> = ({
         e.stopPropagation();
     }, []);
 
+    useEffect(() => {
+        if (!shouldDispatchIsModalDialogOpen) return;
+
+        store.dispatch(setIsModalDialogOpen(isOpen));
+
+        return () => {
+            store.dispatch(setIsModalDialogOpen(false));
+        }
+    }, [isOpen, shouldDispatchIsModalDialogOpen]);
+
+    if (!isOpen) {
+        return null;
+    }
+
     return (
         <div className={`${styles.modalOverlay} ${className}`} onClick={onOverlayClick}>
             <div className={`${styles.modalContent} modalContent`} onClick={onModalContentClick}>
                 {typeof title === 'string'
-                    ? <StyledHeader title={title}>
+                    ? <StyledHeader title={title} isModalDialogPixiEl={shouldDispatchIsModalDialogOpen}>
                         {modalDialogContent}
                     </StyledHeader>
                     : <>

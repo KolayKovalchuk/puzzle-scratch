@@ -12,7 +12,11 @@ const PORT = Number(process.env.PORT) || 3000;
 if (!BOT_TOKEN) throw new Error('"BOT_TOKEN" env var is required!');
 if (!TELEGRAM_WEB_HOOK_URL) throw new Error('"TELEGRAM_WEB_HOOK_URL" env var is required!');
 
-export const bot = new Telegraf(BOT_TOKEN || '');
+export const bot = new Telegraf(BOT_TOKEN || '', {
+    telegram: {
+        webhookReply: true,
+    },
+});
 
 bot.start(onStartCommand);
 bot.command('bonus', onStartCommand);
@@ -27,19 +31,19 @@ if (PORT) {
     webhookConfig.port = PORT;
 }
 
-export async function startBot() {
-    console.log('Starting bot...');
-    if (!bot.botInfo) {
-        bot.botInfo = await bot.telegram.getMe();
-        console.log('Bot info:', bot.botInfo);
+// export async function startBot() {
+//     console.log('Starting bot...');
+//     if (!bot.botInfo) {
+//         bot.botInfo = await bot.telegram.getMe();
+//         console.log('Bot info:', bot.botInfo);
 
-        await bot.launch({ webhook: webhookConfig });
-        console.log("Bot started");
+//         await bot.launch({ webhook: webhookConfig });
+//         console.log("Bot started");
         
-        const webHookInfo = await bot.telegram.getWebhookInfo()
-        console.log('Webhook info:', webHookInfo);
-    }
-}
+//         const webHookInfo = await bot.telegram.getWebhookInfo()
+//         console.log('Webhook info:', webHookInfo);
+//     }
+// }
 
 export function setWebhookUrl() {
     return bot.telegram.setWebhook(`${TELEGRAM_WEB_HOOK_URL}`);

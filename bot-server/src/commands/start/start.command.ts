@@ -66,8 +66,6 @@ async function getMsgText(ctx: Context<Update.MessageUpdate<Message.TextMessage>
 }
 
 export async function onStartCommand(ctx: Context<Update.MessageUpdate<Message.TextMessage>>) {
-    console.log('onStartCommand');
-    
     const [, ...params] = ctx.message.text.split(' ');
 
     console.log('params: ', params);

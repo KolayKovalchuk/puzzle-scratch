@@ -56,12 +56,15 @@ const ModalDialog: FC<ModalDialogProps> = ({
                 {children ? children : <p>{content}</p>}
                 <div className={`${styles.modalActions} modalActions`}>
                     {cancelText && <Button
+                        isModalDialogPixiEl={shouldDispatchIsModalDialogOpen}
                         className={styles.btn}
                         text={cancelText}
                         mode={ButtonType.Cancel}
-                        onClick={handleClose} />
+                        onClick={handleClose}
+                        />
                     }
                     {confirmText && <Button
+                        isModalDialogPixiEl={shouldDispatchIsModalDialogOpen}
                         className={styles.btn}
                         text={confirmText}
                         mode={ButtonType.Confirm}

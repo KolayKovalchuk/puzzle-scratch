@@ -53,7 +53,7 @@ export function InviteFriendList({ className }: InviteFriendListProps) {
         shareLinkToFriends(shareLinkText, url);
     }
 
-    const [isSuccessCopiedOpen, setIsSuccessCopiedOpen] = useState(false);
+    const [isCopiedDialogOpen, setIsCopiedDialogOpen] = useState(false);
     const successCopiedTitleText = useSelector(selectLocalValue('txt.invite.copied'));
     const successCopiedBtnText = useSelector(selectLocalValue('txt.btn.ok'));
 
@@ -61,7 +61,8 @@ export function InviteFriendList({ className }: InviteFriendListProps) {
         const url = getReferralLink();
 
         await navigator.clipboard.writeText(url || '')
-        setIsSuccessCopiedOpen(true);
+        // setTimeout(() => setIsCopiedDialogOpen(true), 0);
+        setIsCopiedDialogOpen(true);
     }, []);
 
     const navigate = useNavigate();
@@ -124,11 +125,12 @@ export function InviteFriendList({ className }: InviteFriendListProps) {
         </div>
 
         <ModalDialog
-            isOpen={isSuccessCopiedOpen}
+            isOpen={isCopiedDialogOpen}
             title={successCopiedTitleText}
             content={''}
-            onConfirm={() => setIsSuccessCopiedOpen(false)}
+            onConfirm={() => setIsCopiedDialogOpen(false)}
             confirmText={successCopiedBtnText}
+            shouldDispatchIsModalDialogOpen={false}
         ></ModalDialog>
     </>);
 }

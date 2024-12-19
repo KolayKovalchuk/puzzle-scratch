@@ -70,6 +70,8 @@ export function ButtonComponent({
                 shouldFitFontSize={shouldFitFontSize}
                 isModalDialogPixiEl={isModalDialogPixiEl}
             ></RegularStyledText>
+            // <span className={styles.textLabel}>{text}</span>
+
         );
     }, [
         children,

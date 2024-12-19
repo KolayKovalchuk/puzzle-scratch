@@ -107,7 +107,7 @@ div.btn3dContainer {
     padding: 10px 20px;
     border: none;
     border-radius: $borderRadius;
-    color: white;
+    color: #c6e9f2;
     font-weight: bold;
     cursor: pointer;
     text-align: center;
@@ -115,8 +115,16 @@ div.btn3dContainer {
     box-shadow: 0px -1px 3px 1px #00000040 inset;
     z-index: 10000;
 
+    .textLabel {
+        font-family: 'Nunito';
+        font-size: 22px;
+        font-weight: 1000;
+        font-family: 'Nunito';
+    }
+
     &.confirm {
         background: colors.$modal_accept_btn_bg;
+        // -webkit-text-stroke: 1px #295808;
 
         &:hover {
             background: colors.$modal_accept_btn_bg_hover;
@@ -125,6 +133,7 @@ div.btn3dContainer {
 
     &.cancel {
         background: colors.$modal_cancel_btn_bg;
+        // -webkit-text-stroke: 1px #580808;
 
         &:hover {
             background: colors.$modal_cancel_btn_bg_hover;
@@ -134,6 +143,7 @@ div.btn3dContainer {
     &.default {
         // border: 1px solid #132F00;
         background: colors.$modal_default_btn_bg;
+        // -webkit-text-stroke: 1px #105CB4;
 
         box-shadow: 0px -2px 2px 0px #00000044 inset,
             0px 2px 2px 0px #ffffffdd inset;

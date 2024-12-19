@@ -22,6 +22,7 @@ export function BonusInfoDialogPopup({ isOpen, onClose }: IBonusInfoDialogPopupP
             content={content}
             onClose={onClose}
             callOnCloseOnOverlayClick={true}
+            shouldDispatchIsModalDialogOpen={false}
         >
         </ModalDialog>
     );

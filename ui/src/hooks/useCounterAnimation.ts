@@ -6,23 +6,30 @@ export function useCounterAnimation(amount: number) {
     useEffect(() => {
         let start = displayAmount;
         const end = amount;
+        const isIncreasing = start < end;
+
         if (start === end) return;
 
         const duration = 2000;
         const totalSteps = 100;
         const stepTime = duration / totalSteps;
-        const stepSize = Math.round(Math.abs(end - start) / totalSteps);
+        const stepSize = Math.round(Math.abs(end - start) / totalSteps) || 1;
 
         const timer = setInterval(() => {
             start += stepSize;
             setDisplayAmount(start);
-            if (start >= end) {
+            if (
+                isIncreasing && start >= end
+                || !isIncreasing && start <= end
+            ) {
                 setDisplayAmount(end);
                 clearInterval(timer);
             }
         }, stepTime);
 
-        return () => clearInterval(timer);
+        return () => {
+            clearInterval(timer)
+        };
     }, [amount]);
 
     return displayAmount;

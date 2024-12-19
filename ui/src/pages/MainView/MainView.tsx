@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -23,6 +23,9 @@ import styles from './MainView.module.scss';
 import { Stage, Text } from '@pixi/react';
 import { TextStyle } from 'pixi.js';
 import { StyledText } from '@components/shared/StyledText';
+import { Notification, NotificationType } from '@models/Notification.model';
+import store from '@store/store';
+import { updateUserBalanceRbax } from '@store/actions/user.actions';
 
 const testTextStyle = new TextStyle({
     fill: '#FFFFFF',
@@ -69,6 +72,20 @@ export function MainView() {
     //         <StyledText text={'Main View'} textStyles={{ fontSize: 30 }} />
     //     </>)
     // }, []);
+
+    // useEffect(() => {
+        
+    //     setTimeout(() => {
+            
+    //     //   store.dispatch(updateUserBalanceRbax(2000));
+    //     }, 1000);
+    // }, []);
+
+    // {
+    //     "success": true,
+    //     "amount": 13,
+    //     "newBalance": 1343
+    // }
 
     return (<>
         <div className={styles.mainContainer}>

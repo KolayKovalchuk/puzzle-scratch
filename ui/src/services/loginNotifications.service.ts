@@ -1,4 +1,4 @@
-import { INotification } from '@models/Notification.model';
+import { INotification, NotificationType } from '@models/Notification.model';
 import { updateUserNotifications } from '@store/actions/user.actions';
 import { selectUserNotifications } from '@store/selectors/user.selectors';
 import store from '@store/store';
@@ -17,5 +17,12 @@ export function useShowLoginNotificationsPopups(): [INotification[], (notificati
         }
     }
 
-    return [ notifications, removeNotification ];
+    return [ [
+        {
+            "type": NotificationType.RBAX_GIFT_AVAILABLE,
+            "message": '',
+            "createdAt": 1734606600692,
+            "linkCode": "lQgrATTzDwUskXH",
+        }
+    ], removeNotification ];
 }

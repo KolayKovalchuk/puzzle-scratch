@@ -10,8 +10,9 @@ import { selectUserAvatar, selectUserBalanceRbax } from '@store/selectors/user.s
 import { WinStyledText } from '@components/shared/StyledText'
 import { selectScratchCardTransitionTimeout } from '@store/selectors/config.selectors'
 import { useBalanceChangeLabel } from './hooks/useBalanceChangeLabel'
-
+import { ROUTES } from '@routers/routerConfig'
 import { formatNumber } from '@utils/formatters/formatNumber'
+
 import { useCounterAnimation } from '@hooks/useCounterAnimation'
 import logo from '@icons/logo.svg'
 import robo_token from '@icons/robo_token.svg'
@@ -27,8 +28,11 @@ export function Header() {
     const navigate = useNavigate();
 
     const openWallet = useCallback(() => {
-        // TODO: Uncomment this line to enable wallet click
-        // navigate(ROUTES.Wallet);
+        // TODO: Remove this line to enable wallet click on prod
+        console.log('import.meta.env.MODE', import.meta.env.MODE);
+        
+        if (import.meta.env.MODE !== 'development') return;
+        navigate(ROUTES.Wallet);
     }, [navigate]);
 
     const userAvatar = useSelector(selectUserAvatar);

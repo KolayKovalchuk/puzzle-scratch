@@ -13,7 +13,4 @@ export interface IStyledTextProps {
     shouldFitFontSize?: boolean;
     xShift?: number
     yShift?: number
-
-    isLoaderPixiEl?: boolean;
-    isModalDialogPixiEl?: boolean;
 }

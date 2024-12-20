@@ -49,10 +49,10 @@ export function WalletHistoryTable() {
                 <span>{formatNumber(data.data as number)}</span>
             </div>)
 
-            return <TableCell data={cellContent} width={cellWidth} />
+            return <TableCell key={index} data={cellContent} width={cellWidth} />
         }
 
-        return <TableCell data={data.data} width={cellWidth} />
+        return <TableCell key={index} data={data.data} width={cellWidth} />
     }, [tHeadData])
 
 

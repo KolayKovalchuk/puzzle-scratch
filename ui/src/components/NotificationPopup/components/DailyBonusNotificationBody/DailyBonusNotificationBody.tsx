@@ -90,7 +90,6 @@ export function DailyBonusNotificationBody() {
                             text={item.headerText}
                             textStyles={headerTextStyles}
                             textFitCoefficient={textFitCoefficient}
-                            isModalDialogPixiEl
                         />
                         <Icon name={item.coinIconName} className={styles.coinIcon} />
                         <div className={styles.dayContainerBonus}>
@@ -100,7 +99,6 @@ export function DailyBonusNotificationBody() {
                                 text={item.bonus + ''}
                                 shouldFitFontSize={false}
                                 textStyles={{ fontSize: footerFontSize, dropShadow: false, strokeThickness: 1 }}
-                                isModalDialogPixiEl
                             ></StyledText>
                         </div>
                     </div>)

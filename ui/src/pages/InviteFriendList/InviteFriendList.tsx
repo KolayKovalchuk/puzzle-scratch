@@ -1,21 +1,21 @@
 
+import { ITextStyle } from 'pixi.js';
 import { useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { ITextStyle } from 'pixi.js';
 import { useNavigate } from 'react-router-dom';
 
 import styles from './InviteFriendList.module.scss';
 
-import { Icon } from '@components/shared/Icon';
-import ModalDialog from '@components/shared/ModalDialog/ModalDialog';
-import { getReferralLink } from '@services/api/links.service';
-import { shareLinkToFriends } from '@services/telegramWebApp/telegramWebApp.service';
-import { selectLocalValue } from '@store/selectors/localization.selectors';
 import { Footer } from '@components/Footer/Footer';
 import { Button, ButtonType } from '@components/shared/Button/Button';
 import { useButtonConfig } from '@components/shared/Button/hooks/useButtonConfig';
+import { Icon } from '@components/shared/Icon';
+import ModalDialog from '@components/shared/ModalDialog/ModalDialog';
 import { RegularStyledText, SecondaryStyledText } from '@components/shared/StyledText';
 import { useScrollTo } from '@hooks/useScrollTo';
+import { getReferralLink } from '@services/api/links.service';
+import { shareLinkToFriends } from '@services/telegramWebApp/telegramWebApp.service';
+import { selectLocalValue } from '@store/selectors/localization.selectors';
 import { InvitedFriendsTable } from './components/InvitedFriendsTable/InvitedFriendsTable';
 
 import back_arrow from '@icons/back_arrow.svg';
@@ -36,7 +36,6 @@ const headerLabelStyles: Partial<ITextStyle> = {
 export function InviteFriendList({ className }: InviteFriendListProps) {
     const shareLinkText = useSelector(selectLocalValue('txt.invite.msg'))
     const inviteFriendBtnText = useSelector(selectLocalValue('txt.btn.inviteFriends'))
-    const btnCloseTxt = useSelector(selectLocalValue('txt.btn.close'));
 
     const { textStyles } = useButtonConfig(ButtonType.Confirm, styles);
     textStyles.fill = 'white';
@@ -130,7 +129,6 @@ export function InviteFriendList({ className }: InviteFriendListProps) {
             content={''}
             onConfirm={() => setIsCopiedDialogOpen(false)}
             confirmText={successCopiedBtnText}
-            shouldDispatchIsModalDialogOpen={false}
         ></ModalDialog>
     </>);
 }

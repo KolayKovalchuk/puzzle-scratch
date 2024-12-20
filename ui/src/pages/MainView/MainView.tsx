@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,18 +19,8 @@ import { LeaderBoard } from './components/LeaderBoard/LeaderBoard';
 import { LogoHeader } from './components/LogoHeader/LogoHeader';
 
 import { ROUTES } from '@routers/routerConfig';
-import styles from './MainView.module.scss';
-import { Stage, Text } from '@pixi/react';
-import { TextStyle } from 'pixi.js';
-import { StyledText } from '@components/shared/StyledText';
-import { Notification, NotificationType } from '@models/Notification.model';
-import store from '@store/store';
-import { updateUserBalanceRbax } from '@store/actions/user.actions';
 
-const testTextStyle = new TextStyle({
-    fill: '#FFFFFF',
-    fontSize: 36,
-})
+import styles from './MainView.module.scss';
 
 export function MainView() {
     const userName = useSelector(selectUserName);
@@ -64,29 +54,6 @@ export function MainView() {
     const inviteFriendImgName = `mainView/invite_friend_bunner_${preferredLocale?.toLocaleLowerCase()}.png`;
     const sendRbaxImgName = `mainView/send_rbax_to_a_friend_${preferredLocale?.toLocaleLowerCase()}.png`;
 
-    // const test = useMemo(() => {
-    //     return (<>
-    //         <Stage options={{ backgroundAlpha: 0 }} width={200} height={100}>
-    //             <Text text={'Main View'} style={testTextStyle}></Text>
-    //         </Stage>
-    //         <StyledText text={'Main View'} textStyles={{ fontSize: 30 }} />
-    //     </>)
-    // }, []);
-
-    // useEffect(() => {
-        
-    //     setTimeout(() => {
-            
-    //     //   store.dispatch(updateUserBalanceRbax(2000));
-    //     }, 1000);
-    // }, []);
-
-    // {
-    //     "success": true,
-    //     "amount": 13,
-    //     "newBalance": 1343
-    // }
-
     return (<>
         <div className={styles.mainContainer}>
             <div className={containerClassName}>
@@ -106,15 +73,6 @@ export function MainView() {
                 </div>
             </div>
             <Footer className={styles.footer} />
-
-            {/* <div>
-
-            {test}
-            </div>
-            <Stage options={{ backgroundAlpha: 0 }} width={200} height={100}>
-                <Text text={'Main View'} style={testTextStyle}></Text>
-            </Stage>
-            <StyledText text={'Main View'} textStyles={{ fontSize: 30 }} /> */}
         </div>
 
         {!isUserLoginNotificationsEmpty && <NotificationPopup

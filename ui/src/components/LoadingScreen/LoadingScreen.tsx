@@ -9,9 +9,6 @@ import { useLoadingPercentHook } from './hooks/useLoadingPercentHook';
 import styles from './LoadingScreen.module.scss';
 
 import robo_token_double_border from '@icons/robo_token_double_border.svg';
-import { setIsMainLoaderOpen } from '@store/actions/appState.actions';
-import { useEffect } from 'react';
-import store from '@store/store';
 
 const poweredByTextStyles: Partial<ITextStyle> = {
     fontSize: 20,
@@ -30,12 +27,6 @@ export function LoadingScreen({ isLoaded }: ILoadingScreenProps) {
         isVisible,
         percentage,
     } = useLoadingPercentHook(isLoaded);
-
-    // const containerClassName = `${styles.contianer} ${isVisible ? styles.visible : ''}`;
-
-    useEffect(() => {
-        store.dispatch(setIsMainLoaderOpen(isVisible));
-    }, [isVisible]);
 
     if (!isVisible) return null;
 

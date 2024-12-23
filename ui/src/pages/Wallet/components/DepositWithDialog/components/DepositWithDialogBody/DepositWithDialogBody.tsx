@@ -37,27 +37,29 @@ export function DepositWithDialogBody({ onSelectStars, onSelectTransfer }: IDepo
 
     return (<div className={styles.container} ref={containerRef}>
         <span className={styles.contentText}>{contentText}</span>
-        <Button
-            className={`${widestChildTargetClassName} ${styles.btn}`}
-            text={selectStarsLabel}
-            mode={ButtonType.Confirm}
-            onClick={onSelectStarsCb}
-            style={{ width: btnWidth || 'auto' }}
-        >
-        </Button>
-        <Button
-            className={`${widestChildTargetClassName} ${styles.btn} ${styles.iconContainerBtn}`}
-            mode={ButtonType.Confirm}
-            onClick={onSelectTransferCb}
-            style={{ width: btnWidth || 'auto' }}
-        >
-            <div className={styles.iconContainerBtnContent}>
-                <Icon name={robo_token_gold_no_shining} className={`${styles.icon} ${styles.roboTokenGoldIcon}`} />
-                <RegularStyledText
-                    text={transferBtnText}
-                    className={styles.iconContainerBtnText}
-                    textStyles={textStyles} />
-            </div>
-        </Button>
+        <div className={`${styles.btnContainer} ${!btnWidth ? styles.hidden : ''}`}>
+            <Button
+                className={`${widestChildTargetClassName} ${styles.btn}`}
+                text={selectStarsLabel}
+                mode={ButtonType.Confirm}
+                onClick={onSelectStarsCb}
+                style={{ width: btnWidth || 'auto' }}
+            >
+            </Button>
+            <Button
+                className={`${widestChildTargetClassName} ${styles.btn} ${styles.iconContainerBtn}`}
+                mode={ButtonType.Confirm}
+                onClick={onSelectTransferCb}
+                style={{ width: btnWidth || 'auto' }}
+            >
+                <div className={styles.iconContainerBtnContent}>
+                    <Icon name={robo_token_gold_no_shining} className={`${styles.icon} ${styles.roboTokenGoldIcon}`} />
+                    <RegularStyledText
+                        text={transferBtnText}
+                        className={styles.iconContainerBtnText}
+                        textStyles={textStyles} />
+                </div>
+            </Button>
+        </div>
     </div>);
 }

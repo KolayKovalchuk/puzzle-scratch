@@ -924,6 +924,18 @@
     "HI": "जमा करें"
   },
   {
+    "Key": "deposit.select.starsTitle",
+    "EN": "Stars Conversion",
+    "UK": "Stars Conversion",
+    "RU": "Stars Conversion",
+    "pt-BR": "Stars Conversion",
+    "VI": "Stars Conversion",
+    "ES": "Stars Conversion",
+    "AR": "Stars Conversion",
+    "FIL": "Stars Conversion",
+    "HI": "Stars Conversion"
+  },
+  {
     "Key": "deposit.select.stars",
     "EN": "Telegram Stars",
     "UK": "Зірки Telegram",
@@ -1045,15 +1057,15 @@
   },
   {
     "Key": "txt.gift.msg",
-    "EN": "<$var1> sent you RBAX! Play in CryptoScratch with your gift and convert fun to cash!",
-    "UK": "<$var1> sent you RBAX! Play in CryptoScratch with your gift and convert fun to cash!",
-    "RU": "<$var1> sent you RBAX! Play in CryptoScratch with your gift and convert fun to cash!",
-    "pt-BR": "<$var1> sent you RBAX! Play in CryptoScratch with your gift and convert fun to cash!",
-    "VI": "<$var1> sent you RBAX! Play in CryptoScratch with your gift and convert fun to cash!",
-    "ES": "<$var1> sent you RBAX! Play in CryptoScratch with your gift and convert fun to cash!",
-    "AR": "<$var1> sent you RBAX! Play in CryptoScratch with your gift and convert fun to cash!",
-    "FIL": "<$var1> sent you RBAX! Play in CryptoScratch with your gift and convert fun to cash!",
-    "HI": "<$var1> sent you RBAX! Play in CryptoScratch with your gift and convert fun to cash!"
+    "EN": "<$var1> sent you RBAX! Collect it and get rady for the game launch! Invite or send and recieve RBAX from frineds. Convert fun to cash!",
+    "UK": "<$var1> sent you RBAX! Collect it and get rady for the game launch! Invite or send and recieve RBAX from frineds. Convert fun to cash!",
+    "RU": "<$var1> sent you RBAX! Collect it and get rady for the game launch! Invite or send and recieve RBAX from frineds. Convert fun to cash!",
+    "pt-BR": "<$var1> sent you RBAX! Collect it and get rady for the game launch! Invite or send and recieve RBAX from frineds. Convert fun to cash!",
+    "VI": "<$var1> sent you RBAX! Collect it and get rady for the game launch! Invite or send and recieve RBAX from frineds. Convert fun to cash!",
+    "ES": "<$var1> sent you RBAX! Collect it and get rady for the game launch! Invite or send and recieve RBAX from frineds. Convert fun to cash!",
+    "AR": "<$var1> sent you RBAX! Collect it and get rady for the game launch! Invite or send and recieve RBAX from frineds. Convert fun to cash!",
+    "FIL": "<$var1> sent you RBAX! Collect it and get rady for the game launch! Invite or send and recieve RBAX from frineds. Convert fun to cash!",
+    "HI": "<$var1> sent you RBAX! Collect it and get rady for the game launch! Invite or send and recieve RBAX from frineds. Convert fun to cash!"
   },
   {
     "Key": "txt.wallet.winnigns",
@@ -1105,15 +1117,15 @@
   },
   {
     "Key": "txt.transfer.terms",
-    "EN": "•$1 = (RBAX) <$var1>\n•RBAX, USDT/C, TON on TON network Only\n•Minimum redraw amount is <$var2>.\n•Send funds to the following wallet. Make sure you specify the tag.\n•Conversion is estimated and final conversion will be decided on the moment of processing.",
-    "UK": "•$1 = (RBAX) <$var1> \n•RBAX, USDT/C, TON на мережі TON тільки \n•Мінімальна сума для виведення <$var2>. \n•Надішліть кошти на наступний гаманець. Переконайтесь, що ви вказали тег. \n•Конверсія приблизна, остаточна конверсія буде визначена в момент обробки.",
-    "RU": "•$1 = (RBAX) <$var1> \n•RBAX, USDT/C, TON только в сети TON \n•Минимальная сумма для вывода <$var2>. \n•Отправьте средства на следующий кошелек. Убедитесь, что вы указали тег.\n•Конвертация оценивается, окончательная конвертация будет определена на момент обработки.",
-    "pt-BR": "•$1 = (RBAX) <$var1> \n•RBAX, USDT/C, TON apenas na rede TON \n•O valor mínimo para retirada é <$var2>. \n•Envie fundos para a seguinte carteira. Certifique-se de especificar a tag. \n•A conversão é estimada, e a conversão final será decidida no momento do processamento.",
-    "VI": "•$1 = (RBAX) <$var1> \n•RBAX, USDT/C, TON chỉ trên mạng TON \n•Số tiền rút tối thiểu là <$var2>. \n•Chuyển tiền vào ví dưới đây. Đảm bảo bạn đã chỉ định thẻ. \n•Việc chuyển đổi là ước tính và việc chuyển đổi cuối cùng sẽ được quyết định tại thời điểm xử lý.",
-    "ES": "•$1 = (RBAX) <$var1> \n•RBAX, USDT/C, TON solo en la red TON \n•La cantidad mínima para retirar es <$var2>. \n•Envía fondos a la siguiente billetera. Asegúrate de especificar la etiqueta. \n•La conversión es estimada y la conversión final se decidirá en el momento del procesamiento.",
-    "AR": "•$1 = (RBAX) <$var1> \n•RBAX, USDT/C, TON فقط على شبكة TON \n•الحد الأدنى للسحب هو <$var2>. \n•أرسل الأموال إلى المحفظة التالية. تأكد من تحديد الوسم. \n•التحويل مقدر، وسيتم تحديد التحويل النهائي في لحظة المعالجة.",
-    "FIL": "•$1 = (RBAX) <$var1> \n•RBAX, USDT/C, TON sa TON network lamang \n•Ang pinakamababang halagang maibabalik ay <$var2>. \n•Magpadala ng pondo sa sumusunod na wallet. Tiyaking tukuyin ang tag. \n•Ang conversion ay tinatayang halaga at ang pangwakas na conversion ay magaganap sa sandaling iproseso.",
-    "HI": "•$1 = (RBAX) <$var1> \n•RBAX, USDT/C, TON केवल TON नेटवर्क पर \n•न्यूनतम निकासी राशि <$var2> है। \n•निम्नलिखित वॉलेट में फंड भेजें। सुनिश्चित करें कि आपने टैग निर्दिष्ट किया है। \n•रूपांतरण का अनुमान है, और अंतिम रूपांतरण प्रसंस्करण के समय पर तय किया जाएगा।"
+    "EN": "•$1 = (<$icon1>) <$var1>\n•RBAX, USDT/C, TON on TON network Only\n•Minimum redraw amount is <$var2>.\n•Send funds to the following wallet. Make sure you specify the tag.\n•Conversion is estimated and final conversion will be decided on the moment of processing.",
+    "UK": "•$1 = (<$icon1>) <$var1> \n•RBAX, USDT/C, TON на мережі TON тільки \n•Мінімальна сума для виведення <$var2>. \n•Надішліть кошти на наступний гаманець. Переконайтесь, що ви вказали тег. \n•Конверсія приблизна, остаточна конверсія буде визначена в момент обробки.",
+    "RU": "•$1 = (<$icon1>) <$var1> \n•RBAX, USDT/C, TON только в сети TON \n•Минимальная сумма для вывода <$var2>. \n•Отправьте средства на следующий кошелек. Убедитесь, что вы указали тег.\n•Конвертация оценивается, окончательная конвертация будет определена на момент обработки.",
+    "pt-BR": "•$1 = (<$icon1>) <$var1> \n•RBAX, USDT/C, TON apenas na rede TON \n•O valor mínimo para retirada é <$var2>. \n•Envie fundos para a seguinte carteira. Certifique-se de especificar a tag. \n•A conversão é estimada, e a conversão final será decidida no momento do processamento.",
+    "VI": "•$1 = (<$icon1>) <$var1> \n•RBAX, USDT/C, TON chỉ trên mạng TON \n•Số tiền rút tối thiểu là <$var2>. \n•Chuyển tiền vào ví dưới đây. Đảm bảo bạn đã chỉ định thẻ. \n•Việc chuyển đổi là ước tính và việc chuyển đổi cuối cùng sẽ được quyết định tại thời điểm xử lý.",
+    "ES": "•$1 = (<$icon1>) <$var1> \n•RBAX, USDT/C, TON solo en la red TON \n•La cantidad mínima para retirar es <$var2>. \n•Envía fondos a la siguiente billetera. Asegúrate de especificar la etiqueta. \n•La conversión es estimada y la conversión final se decidirá en el momento del procesamiento.",
+    "AR": "•$1 = (<$icon1>) <$var1> \n•RBAX, USDT/C, TON فقط على شبكة TON \n•الحد الأدنى للسحب هو <$var2>. \n•أرسل الأموال إلى المحفظة التالية. تأكد من تحديد الوسم. \n•التحويل مقدر، وسيتم تحديد التحويل النهائي في لحظة المعالجة.",
+    "FIL": "•$1 = (<$icon1>) <$var1> \n•RBAX, USDT/C, TON sa TON network lamang \n•Ang pinakamababang halagang maibabalik ay <$var2>. \n•Magpadala ng pondo sa sumusunod na wallet. Tiyaking tukuyin ang tag. \n•Ang conversion ay tinatayang halaga at ang pangwakas na conversion ay magaganap sa sandaling iproseso.",
+    "HI": "•$1 = (<$icon1>) <$var1> \n•RBAX, USDT/C, TON केवल TON नेटवर्क पर \n•न्यूनतम निकासी राशि <$var2> है। \n•निम्नलिखित वॉलेट में फंड भेजें। सुनिश्चित करें कि आपने टैग निर्दिष्ट किया है। \n•रूपांतरण का अनुमान है, और अंतिम रूपांतरण प्रसंस्करण के समय पर तय किया जाएगा।"
   },
   {
     "Key": "txt.withdrawal.title",
@@ -1153,15 +1165,15 @@
   },
   {
     "Key": "txt.withdrawal.terms",
-    "EN": "•Minimum withdrawal (rbax) <$var1>.\n•Make sure you the address is correct.\n•0 Withdrawal fee\n•Withdrawal can take a 2 minutes",
-    "UK": "•Мінімальне зняття (rbax) <$var1>.\n• Переконайтеся, що адреса правильна.\n•0 Комісія за зняття\n• Виведення може зайняти 2 хвилини",
-    "RU": "•Минимальная сумма вывода (rbax) <$var1>.\n• Убедитесь, что адрес указан правильно.\n• 0 комиссия за снятие средств\n• Вывод средств может занять 2 минуты.",
-    "pt-BR": "•Saque mínimo (rbax) <$var1>.\n•Certifique-se de que o endereço esteja correto.\n•0 Taxa de retirada\n•A retirada pode levar 2 minutos",
-    "VI": "•Số tiền rút tối thiểu (rbax) <$var1>.\n• Hãy chắc chắn rằng địa chỉ của bạn là chính xác.\n•0 Phí rút tiền\n•Việc rút tiền có thể mất 2 phút",
-    "ES": "•Retiro mínimo (rbax) <$var1>.\n•Asegúrese de que la dirección sea correcta.\n•0 tarifa de retiro\n•La retirada puede tardar 2 minutos.",
-    "AR": "•الحد الأدنى للسحب (rbax) <$var1>.\n•تأكد من صحة العنوان.\n•0 رسوم السحب\n• يمكن أن يستغرق السحب دقيقتين",
-    "FIL": "•Minimum na withdrawal (rbax) <$var1>.\n•Tiyaking tama ang address.\n•0 Bayad sa pag-withdraw\n• Maaaring tumagal ng 2 minuto ang pag-withdraw",
-    "HI": "•न्यूनतम निकासी (rbax) <$var1>.\n•सुनिश्चित करें कि आपका पता सही है।\n•0 निकासी शुल्क\n•निकासी में 2 मिनट का समय लग सकता है"
+    "EN": "•Minimum withdrawal (<$icon1>) <$var1>.\n•Make sure you the address is correct.\n•0 Withdrawal fee\n•Withdrawal can take a 2 minutes",
+    "UK": "•Мінімальне виведення (<$icon1>) <$var1>.\n• Переконайтеся, що адреса правильна.\n•0 Комісія за зняття\n• Виведення може зайняти 2 хвилини",
+    "RU": "•Минимальная сумма вывода (<$icon1>) <$var1>.\n• Убедитесь, что адрес указан правильно.\n• 0 комиссия за снятие средств\n• Вывод средств может занять 2 минуты.",
+    "pt-BR": "•Retirada mínima (<$icon1>) <$var1>.\n•Certifique-se de que o endereço esteja correto.\n•0 Taxa de retirada\n•A retirada pode levar 2 minutos",
+    "VI": "•Số tiền rút tối thiểu (<$icon1>) <$var1>.\n• Hãy chắc chắn rằng địa chỉ của bạn là chính xác.\n•0 Phí rút tiền\n•Việc rút tiền có thể mất 2 phút",
+    "ES": "•Retiro mínimo (<$icon1>) <$var1>.\n•Asegúrese de que la dirección sea correcta.\n•0 tarifa de retiro\n•La retirada puede tardar 2 minutos.",
+    "AR": "•الحد الأدنى للسحب (<$icon1>) <$var1>.\n•تأكد من صحة العنوان.\n•0 رسوم السحب\n• يمكن أن يستغرق السحب دقيقتين",
+    "FIL": "•Minimum na withdrawal (<$icon1>) <$var1>.\n•Tiyaking tama ang address.\n•0 Bayad sa pag-withdraw\n• Maaaring tumagal ng 2 minuto ang pag-withdraw",
+    "HI": "•न्यूनतम निकासी (<$icon1>) <$var1>.\n•सुनिश्चित करें कि आपका पता सही है।\n•0 निकासी शुल्क\n•निकासी में 2 मिनट का समय लग सकता है"
   },
   {
     "Key": "pop.withdrawal.errortitle",

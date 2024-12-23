@@ -14,9 +14,11 @@
     z-index: 10000;
 }
 
+$top: max(-20%, variables.$sx_header_height);
+
 .modalContent {
     position: absolute;
-    top: max(-20%, variables.$sx_header_height);
+    top: $top;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     width: 400px;

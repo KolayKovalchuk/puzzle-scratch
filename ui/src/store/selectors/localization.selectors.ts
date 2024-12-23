@@ -92,3 +92,5 @@ export const selectLocalValueWithVars = (localizationKey: string, ...vars: (stri
         return valueStr;
     }
 )
+
+export const iconSign = '<$icon1>'

@@ -14,7 +14,6 @@
     "serve:qa": "vite --mode qa"
   },
   "dependencies": {
-    "@pixi/canvas-display": "^7.4.2",
     "@pixi/react": "^7.1.2",
     "@reduxjs/toolkit": "^2.3.0",
     "@twa-dev/sdk": "^7.10.1",

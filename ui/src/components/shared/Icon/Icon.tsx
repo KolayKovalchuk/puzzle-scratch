@@ -2,7 +2,7 @@ import { CSSProperties, forwardRef, ReactNode } from 'react';
 
 import styles from './Icon.module.scss';
 
-interface IconProps {
+export interface IconProps {
     name?: string;
     title?: string;
     className?: string;

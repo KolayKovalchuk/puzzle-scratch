@@ -1,45 +1,25 @@
+import { Footer } from '@components/Footer/Footer'
 import { Button, ButtonType } from '@components/shared/Button/Button'
 import { Icon } from '@components/shared/Icon'
 import { SecondaryStyledText } from '@components/shared/StyledText'
-import { selectLocalValue } from '@store/selectors/localization.selectors'
-import { useSelector } from 'react-redux'
-import styles from './Wallet.module.scss'
-
 import back_arrow from '@icons/back_arrow.svg'
 import robo_token_gold_no_shining from '@icons/robo_token_gold_no_shining.svg'
 
+import { selectLocalValue } from '@store/selectors/localization.selectors'
 import { selectUserBalanceTotal } from '@store/selectors/user.selectors'
 import { formatNumber } from '@utils/formatters/formatNumber'
 import { ITextStyle } from 'pixi.js'
-import { useCallback, useState } from 'react'
+import { useCallback } from 'react'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-
-import { Footer } from '@components/Footer/Footer'
 import { DepositWithDialog } from './components/DepositWithDialog/DepositWithDialog'
 import { WalletHistoryTable } from './components/WalletHistoryTable/WalletHistoryTable'
+import { useDepositWithDialog } from './hooks/useDepositWithDialog'
+import styles from './Wallet.module.scss'
 
 const headerStyles: Partial<ITextStyle> = {
     fontSize: 40,
     fontWeight: 'bold',
-}
-
-export function useDopositWithDialog() {
-    const [isDepositDialogOpen, setIsDepositDialogOpen] = useState(false);
-
-    const onDepositBtnClick = useCallback(() => {
-        console.log('Deposit button clicked');
-        setIsDepositDialogOpen(true);
-    }, [])
-
-    const onCancel = useCallback(() => {
-        setIsDepositDialogOpen(false);
-    }, [])
-
-    return {
-        isDepositDialogOpen,
-        onDepositBtnClick,
-        onCancel,
-    }
 }
 
 export function Wallet() {
@@ -57,7 +37,7 @@ export function Wallet() {
         navigate(-1)
     }, [navigate])
 
-    const { onDepositBtnClick, onCancel, isDepositDialogOpen } = useDopositWithDialog();
+    const { onDepositBtnClick, onCancel, isDepositDialogOpen } = useDepositWithDialog();
 
     const onWithdrawBtnClick = useCallback(() => {
         console.log('Withdraw button clicked');

@@ -26,8 +26,8 @@ export function DepositWithStarsBody({ }: IDepositWithStarsBodyProps) {
                 isLoading ? <SpinnerIcon name={robo_token_gold_no_shining} className={styles.spinnerIcon} />
                     : <div className={`${styles.btnContainer} ${!btnWidth ? styles.hidden : ''}`}>{
                         starsConvertOptions.map((option, index) => {
-                            const rbaxValue = Math.round(option.rbax);
-                            const starsValue = Math.round(option.stars);
+                            const rbaxValue = Math.ceil(option.rbax);
+                            const starsValue = Math.ceil(option.stars);
 
                             const isLastBtn = index === starsConvertOptions.length - 1;
 

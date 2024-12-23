@@ -1,6 +1,6 @@
 
 import { ITextStyle } from 'pixi.js';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,16 +10,15 @@ import { Footer } from '@components/Footer/Footer';
 import { Button, ButtonType } from '@components/shared/Button/Button';
 import { useButtonConfig } from '@components/shared/Button/hooks/useButtonConfig';
 import { Icon } from '@components/shared/Icon';
-import ModalDialog from '@components/shared/ModalDialog/ModalDialog';
 import { RegularStyledText, SecondaryStyledText } from '@components/shared/StyledText';
 import { useScrollTo } from '@hooks/useScrollTo';
 import { getReferralLink } from '@services/api/links.service';
 import { shareLinkToFriends } from '@services/telegramWebApp/telegramWebApp.service';
 import { selectLocalValue } from '@store/selectors/localization.selectors';
 import { InvitedFriendsTable } from './components/InvitedFriendsTable/InvitedFriendsTable';
+import { CopyButton } from '@components/shared/Button/CopyButton';
 
 import back_arrow from '@icons/back_arrow.svg';
-import copy_icon from '@icons/copy_icon.svg';
 import invite_friend_icon from '@icons/invite_friend_icon.svg';
 import invite_friends_coins_header from '@icons/invite_friends_coins_header.svg';
 
@@ -51,18 +50,6 @@ export function InviteFriendList({ className }: InviteFriendListProps) {
 
         shareLinkToFriends(shareLinkText, url);
     }
-
-    const [isCopiedDialogOpen, setIsCopiedDialogOpen] = useState(false);
-    const successCopiedTitleText = useSelector(selectLocalValue('txt.invite.copied'));
-    const successCopiedBtnText = useSelector(selectLocalValue('txt.btn.ok'));
-
-    const onCopyClicked = useCallback(async () => {
-        const url = getReferralLink();
-
-        await navigator.clipboard.writeText(url || '')
-        // setTimeout(() => setIsCopiedDialogOpen(true), 0);
-        setIsCopiedDialogOpen(true);
-    }, []);
 
     const navigate = useNavigate();
     const onBackBtnClick = useCallback(() => {
@@ -107,14 +94,7 @@ export function InviteFriendList({ className }: InviteFriendListProps) {
                             <Icon name={invite_friend_icon} className={styles.inviteFriendIcon} />
                         </div>
                     </Button>
-                    <Button
-                        className={styles.btn}
-                        iconName={copy_icon}
-                        mode={ButtonType.Confirm}
-                        onClick={() => onCopyClicked()}
-                        is3d={true}
-                    >
-                    </Button>
+                    <CopyButton className={styles.btn} getCopyValue={getReferralLink} is3d/>
                 </div>
                 <div className={styles.tableContainer}>
                     <InvitedFriendsTable className={styles.table}/>
@@ -122,13 +102,5 @@ export function InviteFriendList({ className }: InviteFriendListProps) {
                 <Footer />
             </div>
         </div>
-
-        <ModalDialog
-            isOpen={isCopiedDialogOpen}
-            title={successCopiedTitleText}
-            content={''}
-            onConfirm={() => setIsCopiedDialogOpen(false)}
-            confirmText={successCopiedBtnText}
-        ></ModalDialog>
     </>);
 }

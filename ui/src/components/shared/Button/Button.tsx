@@ -15,7 +15,7 @@ export enum ButtonType {
 }
 
 export interface IButtonProps {
-    onClick: () => void;
+    onClick?: () => void;
     className?: string;
     mode?: ButtonType;
     children?: ReactNode;

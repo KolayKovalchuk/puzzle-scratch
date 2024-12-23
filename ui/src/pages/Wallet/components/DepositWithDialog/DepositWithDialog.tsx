@@ -5,9 +5,10 @@ import { selectLocalValue } from '@store/selectors/localization.selectors';
 import { useSelector } from 'react-redux';
 // import { NotificationConfig } from './NotificationConfig.tsx';
 
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { DepositWithDialogBody } from './components/DepositWithDialogBody/DepositWithDialogBody';
 import { DepositWithStarsBody } from './components/DepositWithStarsBody/DepositWithStarsBody';
+import { DepositWithTransferBody } from './components/DepositWithTransferBody/DepositWithTransferBody';
 
 enum DepositWithDialogMode {
     Select = 'select',
@@ -20,18 +21,43 @@ export interface IDepositWithDialogProps {
     onCancel: () => void;
 }
 
-export function DepositWithDialog({ isOpen, onCancel }: IDepositWithDialogProps) {
-    const titleText = useSelector(selectLocalValue('deposit.select.title'))
-    const cancelBtnText = useSelector(selectLocalValue('txt.btn.cancel'))
+export function useDialogTitle(mode: DepositWithDialogMode) {
+    const depositSelectTitleText = useSelector(selectLocalValue('deposit.select.title'))
+    const starsTitleText = useSelector(selectLocalValue('deposit.select.starsTitle'))
+    const walletTitleText = useSelector(selectLocalValue('txt.transfer.title'))
 
+    const [title, setTitle] = useState('');
+
+    useEffect(() => {
+        switch (mode) {
+            case DepositWithDialogMode.Select:
+                setTitle(depositSelectTitleText);
+                break;
+            case DepositWithDialogMode.Starts:
+                setTitle(starsTitleText);
+                break;
+            case DepositWithDialogMode.Transfer:
+                setTitle(walletTitleText);
+                break;
+            default:
+                setTitle(depositSelectTitleText);
+        }
+    }, [mode, depositSelectTitleText, starsTitleText, walletTitleText]);
+
+    return title;
+}
+
+export function DepositWithDialog({ isOpen, onCancel }: IDepositWithDialogProps) {
     const [mode, setMode] = useState(DepositWithDialogMode.Select);
+    const titleText = useDialogTitle(mode);
+    const cancelBtnText = useSelector(selectLocalValue('txt.btn.cancel'))
 
     const onStarsSelect = useCallback(() => {
         setMode(DepositWithDialogMode.Starts);
     }, []);
 
     const onTransferSelect = useCallback(() => {
-        // setMode(DepositWithDialogMode.Transfer);
+        setMode(DepositWithDialogMode.Transfer);
     }, []);
 
     const onCancelCb = useCallback(() => {
@@ -52,7 +78,9 @@ export function DepositWithDialog({ isOpen, onCancel }: IDepositWithDialogProps)
                     <DepositWithStarsBody />
                 );
             case DepositWithDialogMode.Transfer:
-                return null;
+                return (
+                    <DepositWithTransferBody />
+                );
             default:
                 return null;
         }

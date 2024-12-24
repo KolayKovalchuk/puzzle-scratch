@@ -1,72 +1,54 @@
 import { useGetStarsConvertOptions } from '@services/api/purchase.service';
 
-import { Button, ButtonType } from '@components/shared/Button/Button';
-import { Icon } from '@components/shared/Icon';
-import { RegularStyledText } from '@components/shared/StyledText';
-
 import styles from './DepositWithStarsBody.module.scss';
 
-import { useButtonConfig } from '@components/shared/Button/hooks/useButtonConfig';
-import { useGetWidestChild, widestChildTargetClassName } from '@hooks/useGetWidestChild';
-import robo_token_gold_no_shining from '@icons/robo_token_gold_no_shining.svg';
-import telegram_star from '@icons/telegram_star.svg';
 import { SpinnerIcon } from '@components/shared/Icon/SpinnerIcon';
+import { useGetWidestChild } from '@hooks/useGetWidestChild';
+import robo_token_gold_no_shining from '@icons/robo_token_gold_no_shining.svg';
+import { useConvertStarsFromRbax } from '@services/telegramInvoice.service';
+import { InvoiceStatuses } from '@twa-dev/types';
+import { useEffect } from 'react';
+import { DepositWithStarsButtons } from './DepositWithStarsButtons/DepositWithStarsButtons';
+import { useSelector } from 'react-redux';
+import { selectLocalValue, selectLocalValueWithVars } from '@store/selectors/localization.selectors';
 
 export interface IDepositWithStarsBodyProps {
+    onIvoiceStatusChange: (status: InvoiceStatuses) => void;
 }
 
-export function DepositWithStarsBody({ }: IDepositWithStarsBodyProps) {
+export function DepositWithStarsBody({ onIvoiceStatusChange }: IDepositWithStarsBodyProps) {
     const { isLoading, starsConvertOptions } = useGetStarsConvertOptions();
-    const { textStyles } = useButtonConfig(ButtonType.Confirm, styles);
     const { containerRef, width: btnWidth } = useGetWidestChild(isLoading);
+    const { invoiceStatus } = useConvertStarsFromRbax();
+    const isInvoicePending = invoiceStatus === 'pending';
+
+    const invoiceSuccessText = useSelector(selectLocalValueWithVars('shop.stars.popup.success', '1000000'))
+    const invoiceFailText = useSelector(selectLocalValue('shop.stars.popup.fail'))
+
+    useEffect(() => {
+        if (invoiceStatus) {
+            onIvoiceStatusChange(invoiceStatus);
+        }
+    }, [invoiceStatus]);
+
+    const renderBody = () => {
+        switch (invoiceStatus) {
+            case 'paid':
+                return <div>{invoiceSuccessText}</div>;
+            case 'failed':
+                return <div>{invoiceFailText}</div>;
+            default:
+                return (
+                    <DepositWithStarsButtons starsConvertOptions={starsConvertOptions} btnWidth={btnWidth} />
+                );
+        }
+    }
 
     return (
         <div className={styles.container} ref={containerRef}>
             {
-                isLoading ? <SpinnerIcon name={robo_token_gold_no_shining} className={styles.spinnerIcon} />
-                    : <div className={`${styles.btnContainer} ${!btnWidth ? styles.hidden : ''}`}>{
-                        starsConvertOptions.map((option, index) => {
-                            const rbaxValue = Math.ceil(option.rbax);
-                            const starsValue = Math.ceil(option.stars);
-
-                            const isLastBtn = index === starsConvertOptions.length - 1;
-
-                            return (
-                                <Button
-                                    key={index}
-                                    mode={ButtonType.Confirm}
-                                    onClick={() => { }}
-                                    className={`${widestChildTargetClassName} ${styles.btn} ${styles.iconContainerBtn}`}
-                                    style={isLastBtn ? {} : { width: btnWidth }}
-                                >
-                                    <div className={styles.iconContainerBtnContent}>
-                                        <div className={styles.iconContainerBtnLabel}>
-                                            <Icon name={telegram_star} className={`${styles.icon} ${styles.starIcon}`} />
-                                            <RegularStyledText
-                                                className={styles.iconContainerBtnText}
-                                                textStyles={textStyles}
-                                                text={rbaxValue.toString()}
-                                            />
-                                        </div>
-
-                                        <RegularStyledText
-                                            text=" > "
-                                            className={`${styles.iconContainerBtnText} ${styles.arrowText}`}
-                                            textStyles={textStyles}
-                                        />
-                                        <div className={styles.iconContainerBtnLabel}>
-                                            <Icon name={robo_token_gold_no_shining} className={`${styles.icon} ${styles.roboTokenGoldIcon}`} />
-                                            <RegularStyledText
-                                                className={styles.iconContainerBtnText}
-                                                textStyles={textStyles}
-                                                text={starsValue.toString()}
-                                            />
-                                        </div>
-                                    </div>
-                                </Button>
-                            );
-                        })
-                    }</div>
+                isLoading || isInvoicePending ? <SpinnerIcon name={robo_token_gold_no_shining} className={styles.spinnerIcon} />
+                    : renderBody()
             }
         </div>
     );

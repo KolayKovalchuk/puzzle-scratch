@@ -32,13 +32,15 @@ export async function getDepositAdress(coin: SupportedDepositWallets): Promise<I
     try {
         const response = await apiClient.get(`/dw/deposit-address/${coin}`);
 
-        console.log('Batches fetched successfully:', response.data);
+        console.log('Deposit adress fetched successfully:', response.data);
 
         const depositData = new DepositAdress(response.data);
-        depositData.coin = coin;
+        if (!depositData.coin) {
+            depositData.coin = coin;
+        }
         return depositData;
     } catch (error) {
-        console.error('Error fetching batches:', error);
+        console.error('Error fetching deposit adress:', error);
         return null;
     }
 }

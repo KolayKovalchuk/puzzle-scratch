@@ -1,0 +1,67 @@
+import { Button, ButtonType } from '@components/shared/Button';
+import { useButtonConfig } from '@components/shared/Button/hooks/useButtonConfig';
+import { RegularStyledText } from '@components/shared/StyledText';
+import { widestChildTargetClassName } from '@hooks/useGetWidestChild';
+import { IStarsConvertOption } from '@services/api/purchase.service';
+
+import { Icon } from '@components/shared/Icon';
+import styles from '../DepositWithStarsBody.module.scss';
+
+import robo_token_gold_no_shining from '@icons/robo_token_gold_no_shining.svg';
+import telegram_star from '@icons/telegram_star.svg';
+
+
+export interface IDepositWithStarsButtonsProps {
+    starsConvertOptions: IStarsConvertOption[];
+    btnWidth: number | 'auto';
+}
+
+export function DepositWithStarsButtons({ starsConvertOptions, btnWidth }: IDepositWithStarsButtonsProps) {
+    const { textStyles } = useButtonConfig(ButtonType.Confirm, styles);
+
+    return (
+        <div className={`${styles.btnContainer} ${!btnWidth ? styles.hidden : ''}`}>{
+            starsConvertOptions.map((option, index) => {
+                const rbaxValue = Math.ceil(option.rbax);
+                const starsValue = Math.ceil(option.stars);
+
+                const isLastBtn = index === starsConvertOptions.length - 1;
+
+                return (
+                    <Button
+                        key={index}
+                        mode={ButtonType.Confirm}
+                        onClick={() => { }}
+                        className={`${widestChildTargetClassName} ${styles.btn} ${styles.iconContainerBtn}`}
+                        style={isLastBtn ? {} : { width: btnWidth }}
+                    >
+                        <div className={styles.iconContainerBtnContent}>
+                            <div className={styles.iconContainerBtnLabel}>
+                                <Icon name={telegram_star} className={`${styles.icon} ${styles.starIcon}`} />
+                                <RegularStyledText
+                                    className={styles.iconContainerBtnText}
+                                    textStyles={textStyles}
+                                    text={starsValue.toString()}
+                                />
+                            </div>
+
+                            <RegularStyledText
+                                text=" > "
+                                className={`${styles.iconContainerBtnText} ${styles.arrowText}`}
+                                textStyles={textStyles}
+                            />
+                            <div className={styles.iconContainerBtnLabel}>
+                                <Icon name={robo_token_gold_no_shining} className={`${styles.icon} ${styles.roboTokenGoldIcon}`} />
+                                <RegularStyledText
+                                    className={styles.iconContainerBtnText}
+                                    textStyles={textStyles}
+                                    text={rbaxValue.toString()}
+                                />
+                            </div>
+                        </div>
+                    </Button>
+                );
+            })
+        }</div>
+    )
+}

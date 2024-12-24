@@ -14,9 +14,10 @@ import telegram_star from '@icons/telegram_star.svg';
 export interface IDepositWithStarsButtonsProps {
     starsConvertOptions: IStarsConvertOption[];
     btnWidth: number | 'auto';
+    onOptionSelected: (option: IStarsConvertOption) => void;
 }
 
-export function DepositWithStarsButtons({ starsConvertOptions, btnWidth }: IDepositWithStarsButtonsProps) {
+export function DepositWithStarsButtons({ starsConvertOptions, btnWidth, onOptionSelected }: IDepositWithStarsButtonsProps) {
     const { textStyles } = useButtonConfig(ButtonType.Confirm, styles);
 
     return (
@@ -31,7 +32,7 @@ export function DepositWithStarsButtons({ starsConvertOptions, btnWidth }: IDepo
                     <Button
                         key={index}
                         mode={ButtonType.Confirm}
-                        onClick={() => { }}
+                        onClick={() => onOptionSelected(option)}
                         className={`${widestChildTargetClassName} ${styles.btn} ${styles.iconContainerBtn}`}
                         style={isLastBtn ? {} : { width: btnWidth }}
                     >

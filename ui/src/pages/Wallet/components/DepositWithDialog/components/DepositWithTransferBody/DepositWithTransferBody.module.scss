@@ -29,6 +29,16 @@
         flex-direction: column;
         align-items: flex-start;
 
+        &:not(:last-child) {
+            margin-right: 10px;
+        }
+
+        .label,
+        .value {
+            word-break: break-all;
+            text-align: left;
+        }
+
         .label {
             color: colors.$light-yellow;
             font-weight: bold;
@@ -39,6 +49,16 @@
             color: white;
             font-size: 16px;
         }
+
+        .adrresValue {
+            font-size: 14px;
+        }
+    }
+
+    .btn {
+        width: 45px;
+        min-width: 45px;
+        margin-top: auto;
     }
 }
 

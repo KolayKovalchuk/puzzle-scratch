@@ -23,8 +23,8 @@ export function DepositWithStarsButtons({ starsConvertOptions, btnWidth, onOptio
     return (
         <div className={`${styles.btnContainer} ${!btnWidth ? styles.hidden : ''}`}>{
             starsConvertOptions.map((option, index) => {
-                const rbaxValue = Math.ceil(option.rbax);
-                const starsValue = Math.ceil(option.stars);
+                const rbaxValue = Math.floor(option.rbax);
+                const starsValue = Math.floor(option.stars);
 
                 const isLastBtn = index === starsConvertOptions.length - 1;
 

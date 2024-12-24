@@ -14,7 +14,11 @@ export async function convertStarsFromRbax(option: IStarsConvertOption, invoiceS
         return hadnleUnsuccessPurchase(purchaseResponse);
     }
 
-    WebApp.openInvoice(purchaseResponse.invoiceData.invoiceUrl, invoiceStatusHanlder);
+    const invoiceUrl = purchaseResponse.invoiceData.invoiceUrl
+    console.log('Purchase response:', purchaseResponse);
+    console.log('invoiceUrl', invoiceUrl);
+    
+    WebApp.openInvoice(invoiceUrl, invoiceStatusHanlder);
 }
 
 export function useConvertStarsFromRbax() {
@@ -22,6 +26,7 @@ export function useConvertStarsFromRbax() {
 
     const convertStarsFromRbaxCb = useCallback((option: IStarsConvertOption) => {
         convertStarsFromRbax(option, (status) => {
+            console.log('Invoice status:', status);
             setInvoiceStatus(status);
         });
     }, []);

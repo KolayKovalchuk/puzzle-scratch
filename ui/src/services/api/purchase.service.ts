@@ -6,10 +6,15 @@ export interface IStarsConvertOption {
     stars: number;
 }
 
+export interface IInvoiceData {
+    invoiceUrl: string;
+    invoiceId: string;
+}
+
 export interface IPostConvertStarsResponse {
     success: boolean;
     updatedPackages: IStarsConvertOption[];
-    invoiceData: string;
+    invoiceData: IInvoiceData;
 }
 
 export async function getStarsConvertOptions(): Promise<IStarsConvertOption[]> {

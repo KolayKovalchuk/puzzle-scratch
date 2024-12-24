@@ -19,5 +19,6 @@
 }
 
 .spinnerIcon {
+    width: 50px;
     @include animation_mixins.spinner;
 }

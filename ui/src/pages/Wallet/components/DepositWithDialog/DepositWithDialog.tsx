@@ -2,49 +2,28 @@
 
 import ModalDialog from '@components/shared/ModalDialog/ModalDialog';
 import { selectLocalValue } from '@store/selectors/localization.selectors';
+import { InvoiceStatuses } from '@twa-dev/types';
 import { useSelector } from 'react-redux';
 // import { NotificationConfig } from './NotificationConfig.tsx';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { DepositWithDialogBody } from './components/DepositWithDialogBody/DepositWithDialogBody';
 import { DepositWithStarsBody } from './components/DepositWithStarsBody/DepositWithStarsBody';
 import { DepositWithTransferBody } from './components/DepositWithTransferBody/DepositWithTransferBody';
+import { useDialogTitle } from './hooks/useDialogTitle';
 
-enum DepositWithDialogMode {
+export enum DepositWithDialogMode {
     Select = 'select',
     Starts = 'stars',
     Transfer = 'transfer',
+
+    InvoiceSuccess = 'invoiceSuccess',
+    InvoiceFailed = 'invoiceFailed',
 }
 
 export interface IDepositWithDialogProps {
     isOpen: boolean;
     onCancel: () => void;
-}
-
-export function useDialogTitle(mode: DepositWithDialogMode) {
-    const depositSelectTitleText = useSelector(selectLocalValue('deposit.select.title'))
-    const starsTitleText = useSelector(selectLocalValue('deposit.select.starsTitle'))
-    const walletTitleText = useSelector(selectLocalValue('txt.transfer.title'))
-
-    const [title, setTitle] = useState('');
-
-    useEffect(() => {
-        switch (mode) {
-            case DepositWithDialogMode.Select:
-                setTitle(depositSelectTitleText);
-                break;
-            case DepositWithDialogMode.Starts:
-                setTitle(starsTitleText);
-                break;
-            case DepositWithDialogMode.Transfer:
-                setTitle(walletTitleText);
-                break;
-            default:
-                setTitle(depositSelectTitleText);
-        }
-    }, [mode, depositSelectTitleText, starsTitleText, walletTitleText]);
-
-    return title;
 }
 
 export function DepositWithDialog({ isOpen, onCancel }: IDepositWithDialogProps) {
@@ -65,6 +44,19 @@ export function DepositWithDialog({ isOpen, onCancel }: IDepositWithDialogProps)
         onCancel();
     }, [onCancel]);
 
+    const onInvoiceStatusChange = useCallback((status: InvoiceStatuses) => {
+        switch (status) {
+            case 'paid':
+                setMode(DepositWithDialogMode.InvoiceSuccess);
+                break;
+            case 'failed':
+                setMode(DepositWithDialogMode.InvoiceFailed);
+                break;
+            default:
+                break;
+        }
+    }, []);
+
     const renderBody = useCallback(() => {
         switch (mode) {
             case DepositWithDialogMode.Select:
@@ -75,7 +67,7 @@ export function DepositWithDialog({ isOpen, onCancel }: IDepositWithDialogProps)
                     />);
             case DepositWithDialogMode.Starts:
                 return (
-                    <DepositWithStarsBody />
+                    <DepositWithStarsBody onIvoiceStatusChange={onInvoiceStatusChange}/>
                 );
             case DepositWithDialogMode.Transfer:
                 return (

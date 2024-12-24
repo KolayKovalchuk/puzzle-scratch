@@ -14,7 +14,7 @@ export async function convertStarsFromRbax(option: IStarsConvertOption, invoiceS
         return hadnleUnsuccessPurchase(purchaseResponse);
     }
 
-    WebApp.openInvoice(purchaseResponse.invoiceData, invoiceStatusHanlder);
+    WebApp.openInvoice(purchaseResponse.invoiceData.invoiceUrl, invoiceStatusHanlder);
 }
 
 export function useConvertStarsFromRbax() {

@@ -11,6 +11,7 @@ import { formatNumber } from '@utils/formatters/formatNumber'
 import robo_token_gold_no_shining from '@icons/robo_token_gold_no_shining.svg'
 
 import styles from './WalletHistoryTable.module.scss'
+import { useDWHistory } from '@services/api/depositWithdrawal.service'
 
 const historyLabelStyles: Partial<ITextStyle> = {
     fontSize: 30,
@@ -22,6 +23,7 @@ export function WalletHistoryTable() {
     const dateLabel = useSelector(selectLocalValue('txt.wallet.history.date'))
     const actionLabel = useSelector(selectLocalValue('txt.wallet.history.action'))
     const amountLabel = useSelector(selectLocalValue('txt.wallet.history.amount'))
+    const noTransactionsLabel = useSelector(selectLocalValue('txt.wallet.history.noTransactions'))
 
     const tHeadData: ITableCellData[] = useMemo(() => [
         { key: 'date', data: dateLabel },
@@ -29,18 +31,24 @@ export function WalletHistoryTable() {
         { key: 'amount', data: amountLabel },
     ], [dateLabel, actionLabel, amountLabel]);
 
-    const tBodyData: ITRowData[] = useMemo(() => Array.from({ length: 20 }, (_, index) => ({
-        key: `row-${index}`,
-        cellData: [
-            {
-                key: `cell-${index}-1`, data: `${index + 1}. ${new Date().toLocaleDateString('en-US', {
-                    dateStyle: 'short',
-                })}`
-            },
-            { key: `cell-${index}-2`, data: index % 2 ? 'Deposit' : 'Withdraw' },
-            { key: `cell-${index}-3`, data: 1000 },
-        ],
-    })), []);
+    const { historyData, loading } = useDWHistory();
+
+    const tBodyData: ITRowData[] = useMemo(() => {
+        if (!historyData) return [];
+
+        return historyData.map((data, index) => ({
+            key: `row-${index}`,
+            cellData: [
+                {
+                    key: `cell-${index}-1`, data: new Date(data.date).toLocaleDateString('en-US', {
+                        dateStyle: 'short',
+                    })
+                },
+                { key: `cell-${index}-2`, data: data.type ? 'Deposit' : 'Withdraw' },
+                { key: `cell-${index}-3`, data: data.amount },
+            ],
+        }));
+    }, [historyData]);
 
     const renderCell = useCallback((data: ITableCellData, index: number, cellWidth: string): ReactNode => {
         if (tHeadData.length - 1 === index) {
@@ -70,6 +78,7 @@ export function WalletHistoryTable() {
                 tBodyData={tBodyData}
                 renderCell={renderCell}
                 noRowBg={true}
+                emptyText={noTransactionsLabel}
             />
         </div>
     )

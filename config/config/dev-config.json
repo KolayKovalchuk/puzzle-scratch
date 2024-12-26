@@ -11,7 +11,8 @@
   "AFFILIATE_BONUS": 1,
   "SYSTEM_MSG": null,
   "SYSTEM_MSG_ONE_TIME": true,
-  "EMOJI_BONUS": 10,
+  "EMOJI_BONUS": 1,
+  "MIN_RBAX_WITHDRAW": 10,
   "DAILY_BONUS": [
     10,
     20,

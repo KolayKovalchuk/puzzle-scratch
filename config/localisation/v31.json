@@ -283,8 +283,8 @@
     "pt-BR": "Ao tocar em “Concordo”, você confirma que tem mais de 18 anos e concorda com os Termos de Serviço disponíveis <link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">aqui</link>.",
     "VI": "Bằng cách nhấn vào 'Đồng ý', bạn xác nhận rằng mình trên 18 tuổi và đồng ý với Điều khoản dịch vụ có sẵn <link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">tại đây</link>.",
     "ES": "Al tocar \"Aceptar\", confirma que es mayor de 18 años y acepta los Términos de servicio disponibles <link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">aquí</link>.",
-    "AR": "من خلال النقر على \"موافقة\"، فإنك تؤكد أن عمرك يزيد عن 18 عامًا وتوافق على شروط الخدمة المتوفرة <link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">هنا</link>.",
-    "FIL": "Sa pamamagitan ng pag-tap sa ‘Sang-ayon’, kinukumpirma mong ikaw ay lampas 18 at sumasang-ayon sa Mga Tuntunin ng Serbisyo na available <link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">dito</link>.",
+    "AR": "من خلال النقر على \"موافقة\"، فإنك تؤكد أن عمرك يزيد عن 18 عامًا وتوافق على شروط الخدمة المتاحة <link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">هنا</link>.",
+    "FIL": "Sa pamamagitan ng pag-tap sa ‘Sumasang-ayon,’ kinukumpirma mong lampas ka na sa 18 at sumasang-ayon sa Mga Tuntunin ng Serbisyo na available <link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">dito</link>.",
     "HI": "सहमत' पर टैप करके आप पुष्टि करते हैं कि आपकी उम्र 18 वर्ष से अधिक है और आप <link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">यहां</link> उपलब्ध सेवा की शर्तों से सहमत हैं।"
   },
   {
@@ -326,7 +326,7 @@
   {
     "Key": "txt.tos.title",
     "EN": "Terms of Service",
-    "UK": "Умови обслуговування",
+    "UK": "Умови надання послуг",
     "RU": "Условия обслуживания",
     "pt-BR": "Termos de Serviço",
     "VI": "Điều khoản dịch vụ",
@@ -912,6 +912,18 @@
     "HI": "मात्रा"
   },
   {
+    "Key": "txt.wallet.history.noTransactions",
+    "EN": "No transactions yet",
+    "UK": "No transactions yet",
+    "RU": "No transactions yet",
+    "pt-BR": "No transactions yet",
+    "VI": "No transactions yet",
+    "ES": "No transactions yet",
+    "AR": "No transactions yet",
+    "FIL": "No transactions yet",
+    "HI": "No transactions yet"
+  },
+  {
     "Key": "deposit.select.title",
     "EN": "Deposit With",
     "UK": "Депозит за",
@@ -1281,7 +1293,7 @@
     "ES": "¡Los premios suman hasta 1.000.000 RBAX!",
     "AR": "مجموع الجوائز يصل إلى 1,000,000 RBAX!",
     "FIL": "Ang mga premyo ay sum hanggang 1,000,000 RBAX!",
-    "HI": "पुरस्कारों की राशि 1,000,000 आरबीएक्स तक है!"
+    "HI": "पुरस्कारों की राशि 1,000,000 RBAX तक है!"
   },
   {
     "Key": "puzzle.gallery.santasac",
@@ -1293,7 +1305,7 @@
     "ES": "¡Los premios suman hasta 1.000.000 RBAX!",
     "AR": "مجموع الجوائز يصل إلى 1,000,000 RBAX!",
     "FIL": "Ang mga premyo ay sum hanggang 1,000,000 RBAX!",
-    "HI": "पुरस्कारों की राशि 1,000,000 आरबीएक्स तक है!"
+    "HI": "पुरस्कारों की राशि 1,000,000 RBAX तक है!"
   },
   {
     "Key": "puzzle.gallery.candymaze",
@@ -1305,7 +1317,7 @@
     "ES": "¡Los premios suman hasta 1.000.000 RBAX!",
     "AR": "مجموع الجوائز يصل إلى 1,000,000 RBAX!",
     "FIL": "Ang mga premyo ay sum hanggang 1,000,000 RBAX!",
-    "HI": "पुरस्कारों की राशि 1,000,000 आरबीएक्स तक है!"
+    "HI": "पुरस्कारों की राशि 1,000,000 RBAX तक है!"
   },
   {
     "Key": "txt.invite.roles",

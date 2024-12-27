@@ -780,6 +780,18 @@
     "HI": "बटुआ"
   },
   {
+    "Key": "txt.wallet.currency",
+    "EN": "Currency",
+    "UK": "Currency",
+    "RU": "Currency",
+    "pt-BR": "Currency",
+    "VI": "Currency",
+    "ES": "Currency",
+    "AR": "Currency",
+    "FIL": "Currency",
+    "HI": "Currency"
+  },
+  {
     "Key": "txt.wallet.balance",
     "EN": "Balance",
     "UK": "Баланс",

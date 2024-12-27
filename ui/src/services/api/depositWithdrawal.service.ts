@@ -12,6 +12,7 @@ export interface IDepositAdress {
     address: string
     memo: number
     minDeposit: number
+    rate: number
 }
 
 class DepositAdress implements IDepositAdress {
@@ -19,12 +20,14 @@ class DepositAdress implements IDepositAdress {
     address: string
     memo: number
     minDeposit: number
+    rate: number
 
     constructor(data: IDepositAdress) {
         this.coin = data.coin;
         this.address = data.address;
         this.memo = data.memo;
         this.minDeposit = data.minDeposit;
+        this.rate = data.rate;
     }
 }
 

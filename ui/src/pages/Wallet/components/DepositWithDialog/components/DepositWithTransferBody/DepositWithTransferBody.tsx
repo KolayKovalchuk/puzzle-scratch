@@ -30,7 +30,11 @@ export function DepositWithTransferBody({ }: IDepositWithTransferBodyProps) {
 
     const [selectedWallet, setSelectedWallet] = useState<IDropdownItem>(supportedDepositWallets[0]);
     const { depositAddress, loading } = useDepositAddress(selectedWallet.data);
-    const transferTermsLabel = useSelector(selectLocalValueWithVars('txt.transfer.terms', 'MOCKED RATE', depositAddress?.minDeposit || ''));
+    const transferTermsLabel = useSelector(selectLocalValueWithVars(
+        'txt.transfer.terms',
+        depositAddress?.rate || '',
+        depositAddress?.minDeposit || ''
+    ));
 
     const transferTermsMarkedList = useMemo(() => {
         const partials = transferTermsLabel.split('•').filter(Boolean);

@@ -54,7 +54,7 @@ $border-radius: 10px;
     list-style: none;
 
     border-radius: $border-radius;
-    z-index: 1000;
+    z-index: 100000;
     overflow: hidden;
 
     .dropdownListItem {
@@ -85,4 +85,14 @@ $border-radius: 10px;
 .icon {
     width: 25%;
     margin-right: 5px;
+}
+
+.arrowIcon {
+    width: 14px;
+    position: absolute;
+    right: 10px;
+
+    &.open {
+        transform: rotate(-90deg);
+    }
 }

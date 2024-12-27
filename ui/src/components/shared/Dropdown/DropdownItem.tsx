@@ -1,8 +1,11 @@
 import { Icon } from '@components/shared/Icon'
 import { selectLocalValue } from '@store/selectors/localization.selectors'
 import { useSelector } from 'react-redux'
-import { IDropdownItemProps } from './Dropdown.models'
+import { IDropdownItemProps, ISelectedDropdownItemProps } from './Dropdown.models'
 import styles from './Dropdown.module.scss'
+
+import arrowIcon from '@icons/arrow.svg';
+
 
 export function DropdownItem({ item, selected, onClick = () => {} }: IDropdownItemProps) {
     let className = styles.dropdownListItem
@@ -16,6 +19,17 @@ export function DropdownItem({ item, selected, onClick = () => {} }: IDropdownIt
         <div className={className} onClick={() => onClick(item)}>
             { item.icon ? <Icon name={item.icon} className={styles.icon} /> : null }
             <span>{label}</span>
+        </div>
+    )
+}
+
+export function SelectedDropdownItem({ item, isOpen }: ISelectedDropdownItemProps) {
+    const label = useSelector(selectLocalValue(item.text))
+
+    return (
+        <div className={styles.dropdownListItem}>
+            <span>{label}</span>
+            <Icon name={arrowIcon} className={`${styles.arrowIcon} ${isOpen ? styles.open : ''}`} />
         </div>
     )
 }

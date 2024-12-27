@@ -47,10 +47,11 @@ export async function getDepositAdress(coin: SupportedDepositWallets): Promise<I
 
 export function useDepositAddress(coin: SupportedDepositWallets): { depositAddress: IDepositAdress | null, loading: boolean } {
     const [depositAddress, setDepositAddress] = useState<IDepositAdress | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
+    const [loading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
         const fetch = async () => {
+            setLoading(true);
             const address = await getDepositAdress(coin);
             setDepositAddress(address);
             setLoading(false);

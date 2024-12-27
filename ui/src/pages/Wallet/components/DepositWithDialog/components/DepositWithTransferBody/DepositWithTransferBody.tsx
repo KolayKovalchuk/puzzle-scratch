@@ -1,22 +1,35 @@
 
-import { useCallback, useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { Icon } from '@components/shared/Icon';
 import { CopyButton } from '@components/shared/Button/CopyButton';
-import { iconSign, selectLocalValue, selectLocalValueWithVars } from '@store/selectors/localization.selectors';
-import styles from './DepositWithTransferBody.module.scss';
-import { SupportedDepositWallets, useDepositAddress } from '@services/api/depositWithdrawal.service';
+import { Icon } from '@components/shared/Icon';
 import { SpinnerIcon } from '@components/shared/Icon/SpinnerIcon';
+import { SupportedDepositWallets, useDepositAddress } from '@services/api/depositWithdrawal.service';
+import { iconSign, selectLocalValue, selectLocalValueWithVars } from '@store/selectors/localization.selectors';
+import { useCallback, useMemo, useState } from 'react';
+import { useSelector } from 'react-redux';
+import styles from './DepositWithTransferBody.module.scss';
 
+import { Dropdown, IDropdownItem } from '@components/shared/Dropdown';
 import robo_token_gold_no_shining from '@icons/robo_token_gold_no_shining.svg';
+
+const supportedDepositWallets: IDropdownItem[] = Object.values(SupportedDepositWallets)
+    .map<IDropdownItem>((wallet) => {
+        return {
+            text: wallet,
+            icon: null,
+            data: wallet
+        }
+    });
 
 export interface IDepositWithTransferBodyProps {
 }
 
 export function DepositWithTransferBody({ }: IDepositWithTransferBodyProps) {
     const walletLabel = useSelector(selectLocalValue('txt.transfer.wallet'))
+    const currencyLabel = useSelector(selectLocalValue('txt.wallet.currency'))
     const tagLabel = useSelector(selectLocalValue('txt.transfer.tag'))
-    const { depositAddress, loading } = useDepositAddress(SupportedDepositWallets.RBAX);
+
+    const [selectedWallet, setSelectedWallet] = useState<IDropdownItem>(supportedDepositWallets[0]);
+    const { depositAddress, loading } = useDepositAddress(selectedWallet.data);
     const transferTermsLabel = useSelector(selectLocalValueWithVars('txt.transfer.terms', 'MOCKED RATE', depositAddress?.minDeposit || ''));
 
     const transferTermsMarkedList = useMemo(() => {
@@ -57,10 +70,31 @@ export function DepositWithTransferBody({ }: IDepositWithTransferBodyProps) {
         return depositAddress?.memo.toString() || '';
     }, [depositAddress?.memo]);
 
+    const preselectedWallet = useMemo(() => {
+        return supportedDepositWallets.find((wallet) => wallet.data === depositAddress?.coin);
+    }, [depositAddress?.coin]);
+
+    const onWalletSelect = useCallback((wallet: IDropdownItem) => {
+        console.log('Selected wallet:', wallet);
+        setSelectedWallet(wallet);
+    }, []);
+
     return (
-        <div className={styles.container}>{
-            loading ? <SpinnerIcon name={robo_token_gold_no_shining} className={styles.spinnerIcon} />
-                : <>
+        <div className={styles.container}>
+            <div className={styles.row}>
+                <div className={styles.column}>
+                    <span className={styles.label}>{currencyLabel}</span>
+                </div>
+                <Dropdown
+                    className={styles.dropdown}
+                    items={supportedDepositWallets}
+                    selectedItem={preselectedWallet}
+                    onSelect={onWalletSelect}
+                />
+            </div>
+            {loading
+            ? <SpinnerIcon name={robo_token_gold_no_shining} className={styles.spinnerIcon} />
+            : <>
                 <div className={styles.copyHeaderContaienr}>
                     <div className={styles.row}>
                         <div className={styles.column}>
@@ -79,7 +113,7 @@ export function DepositWithTransferBody({ }: IDepositWithTransferBodyProps) {
                     </div>
                 </div>
                 {transferTermsMarkedList}
-                </>
+            </>
         }
         </div>
     );

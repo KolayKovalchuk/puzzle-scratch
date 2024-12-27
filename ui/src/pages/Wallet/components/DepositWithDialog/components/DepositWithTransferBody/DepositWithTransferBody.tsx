@@ -32,15 +32,21 @@ export function DepositWithTransferBody({ }: IDepositWithTransferBodyProps) {
     const { depositAddress, loading } = useDepositAddress(selectedWallet.data);
     const transferTermsLabel = useSelector(selectLocalValueWithVars(
         'txt.transfer.terms',
-        depositAddress?.rate || '',
         depositAddress?.minDeposit || ''
+    ));
+    const transferTermsFirstItemLabel = useSelector(selectLocalValueWithVars(
+        'txt.transfer.terms.firstItem',
+        selectedWallet.data || '',
+        depositAddress?.rate || '',
     ));
 
     const transferTermsMarkedList = useMemo(() => {
         const partials = transferTermsLabel.split('•').filter(Boolean);
+        const isRbaxWallet = selectedWallet.data === SupportedDepositWallets.RBAX;
 
         return (
             <ul className={styles.list}>
+                {!isRbaxWallet && <li className={styles.listItem}>{transferTermsFirstItemLabel}</li>}
                 {partials.map((partial, index) => {
                     if (partial.includes(iconSign)) {
                         const iconPartials = partial.split(iconSign);
@@ -63,7 +69,7 @@ export function DepositWithTransferBody({ }: IDepositWithTransferBodyProps) {
             </ul>
         )
 
-    }, [transferTermsLabel]);
+    }, [transferTermsLabel, transferTermsFirstItemLabel]);
 
 
     const getWalletAddress = useCallback(() => {

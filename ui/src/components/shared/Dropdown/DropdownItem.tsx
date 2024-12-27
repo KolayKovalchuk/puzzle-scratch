@@ -27,7 +27,7 @@ export function SelectedDropdownItem({ item, isOpen }: ISelectedDropdownItemProp
     const label = useSelector(selectLocalValue(item.text))
 
     return (
-        <div className={styles.dropdownListItem}>
+        <div className={`${styles.dropdownListItem} ${isOpen ? styles.open : ''}`}>
             <span>{label}</span>
             <Icon name={arrowIcon} className={`${styles.arrowIcon} ${isOpen ? styles.open : ''}`} />
         </div>

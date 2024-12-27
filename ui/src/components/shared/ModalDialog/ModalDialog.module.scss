@@ -40,6 +40,8 @@ $top: max(-20%, variables.$sx_header_height);
     height: 100%;
     background: colors.$modal_dialog_bg;
     border-radius: 16px;
+    overflow-y: auto;
+    max-height: calc(100vh - variables.$sx_header_height - variables.$styledHeaderHeight);
 }
 
 .modalActions {

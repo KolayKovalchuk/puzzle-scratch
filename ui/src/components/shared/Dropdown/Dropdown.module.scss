@@ -36,10 +36,6 @@ $border-radius: 10px;
     .dropdownListItem {
         border-radius: $border-radius;
     }
-
-    &:hover {
-        background-color: colors.$light-violet;
-    }
 }
 
 .dropdownList {
@@ -75,6 +71,10 @@ $border-radius: 10px;
 
     color: #fff;
     white-space: nowrap;
+
+    &.open {
+        background-color: colors.$light-violet;
+    }
 }
 
 .dropdownListItem.selected,

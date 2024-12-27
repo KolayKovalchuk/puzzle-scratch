@@ -1153,15 +1153,15 @@
   },
   {
     "Key": "txt.transfer.terms.firstItem",
-    "EN": "•<$var1>1 = (<$icon1>) <$var2>",
-    "UK": "•<$var1>1 = (<$icon1>) <$var2>",
-    "RU": "•<$var1>1 = (<$icon1>) <$var2>",
-    "pt-BR": "•<$var1>1 = (<$icon1>) <$var2>",
-    "VI": "•<$var1>1 = (<$icon1>) <$var2>",
-    "ES": "•<$var1>1 = (<$icon1>) <$var2>",
-    "AR": "•<$var1>1 = (<$icon1>) <$var2>",
-    "FIL": "•<$var1>1 = (<$icon1>) <$var2>",
-    "HI": "•<$var1>1 = (<$icon1>) <$var2>"
+    "EN": "<$var1>1 = (<$icon1>) <$var2>",
+    "UK": "<$var1>1 = (<$icon1>) <$var2>",
+    "RU": "<$var1>1 = (<$icon1>) <$var2>",
+    "pt-BR": "<$var1>1 = (<$icon1>) <$var2>",
+    "VI": "<$var1>1 = (<$icon1>) <$var2>",
+    "ES": "<$var1>1 = (<$icon1>) <$var2>",
+    "AR": "<$var1>1 = (<$icon1>) <$var2>",
+    "FIL": "<$var1>1 = (<$icon1>) <$var2>",
+    "HI": "<$var1>1 = (<$icon1>) <$var2>"
   },
   {
     "Key": "txt.transfer.terms",

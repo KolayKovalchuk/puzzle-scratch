@@ -5,6 +5,11 @@ export interface IDropdownItem {
     data?: any
 }
 
+export interface ISelectedDropdownItemProps {
+    item: IDropdownItem,
+    isOpen: boolean,
+}
+
 export interface IDropdownItemProps {
     item: IDropdownItem,
     selected?: boolean,

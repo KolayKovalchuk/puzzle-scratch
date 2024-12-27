@@ -43,25 +43,18 @@ export function DepositWithTransferBody({ }: IDepositWithTransferBodyProps) {
     const transferTermsMarkedList = useMemo(() => {
         const partials = transferTermsLabel.split('•').filter(Boolean);
         const isRbaxWallet = selectedWallet.data === SupportedDepositWallets.RBAX;
+        const iconPartials = transferTermsFirstItemLabel.split(iconSign);
 
         return (
             <ul className={styles.list}>
-                {!isRbaxWallet && <li className={styles.listItem}>{transferTermsFirstItemLabel}</li>}
+                {!isRbaxWallet && <li className={styles.listItem}>
+                    <div className={styles.roboTokenIconListItemContainer}>
+                        <span>{iconPartials[0]}</span>
+                        <Icon className={styles.roboTokenIcon} name={robo_token_gold_no_shining} />
+                        <span>{iconPartials[1]}</span>
+                    </div>
+                </li>}
                 {partials.map((partial, index) => {
-                    if (partial.includes(iconSign)) {
-                        const iconPartials = partial.split(iconSign);
-
-                        return (
-                            <li key={index} className={styles.listItem}>
-                                <div className={styles.roboTokenIconListItemContainer}>
-                                    <span>{iconPartials[0]}</span>
-                                    <Icon className={styles.roboTokenIcon} name={robo_token_gold_no_shining} />
-                                    <span>{iconPartials[1]}</span>
-                                </div>
-                            </li>
-                        )
-                    }
-
                     return (
                         <li key={index} className={styles.listItem}>{partial}</li>
                     );
@@ -103,28 +96,28 @@ export function DepositWithTransferBody({ }: IDepositWithTransferBodyProps) {
                 />
             </div>
             {loading
-            ? <SpinnerIcon name={robo_token_gold_no_shining} className={styles.spinnerIcon} />
-            : <>
-                <div className={styles.copyHeaderContaienr}>
-                    <div className={styles.row}>
-                        <div className={styles.column}>
-                            <span className={styles.label}>{walletLabel}</span>
-                            <span className={`${styles.value} ${styles.adrresValue}`}>{getWalletAddress()}</span>
-                        </div>
-                        <CopyButton className={styles.btn} getCopyValue={getWalletAddress} showDialog={false} />
+                ? <SpinnerIcon name={robo_token_gold_no_shining} className={styles.spinnerIcon} />
+                : <>
+                    <div className={styles.copyHeaderContaienr}>
+                        <div className={styles.row}>
+                            <div className={styles.column}>
+                                <span className={styles.label}>{walletLabel}</span>
+                                <span className={`${styles.value} ${styles.adrresValue}`}>{getWalletAddress()}</span>
+                            </div>
+                            <CopyButton className={styles.btn} getCopyValue={getWalletAddress} showDialog={false} />
 
-                    </div>
-                    <div className={styles.row}>
-                        <div className={styles.column}>
-                            <span className={styles.label}>{tagLabel}</span>
-                            <span className={styles.value}>{getTagAddress()}</span>
                         </div>
-                        <CopyButton className={styles.btn} getCopyValue={getTagAddress} showDialog={false} />
+                        <div className={styles.row}>
+                            <div className={styles.column}>
+                                <span className={styles.label}>{tagLabel}</span>
+                                <span className={styles.value}>{getTagAddress()}</span>
+                            </div>
+                            <CopyButton className={styles.btn} getCopyValue={getTagAddress} showDialog={false} />
+                        </div>
                     </div>
-                </div>
-                {transferTermsMarkedList}
-            </>
-        }
+                    {transferTermsMarkedList}
+                </>
+            }
         </div>
     );
 }

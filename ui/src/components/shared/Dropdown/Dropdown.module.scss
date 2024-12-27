@@ -86,3 +86,13 @@ $border-radius: 10px;
     width: 25%;
     margin-right: 5px;
 }
+
+.arrowIcon {
+    width: 14px;
+    position: absolute;
+    right: 10px;
+
+    &.open {
+        transform: rotate(-90deg);
+    }
+}

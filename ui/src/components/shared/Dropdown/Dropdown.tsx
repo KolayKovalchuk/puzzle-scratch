@@ -2,7 +2,7 @@ import { useHandleClickOutside } from '@hooks/useHandleClickOutside'
 import { useEffect, useRef, useState } from 'react'
 import { IDropdownItem, IDropdownProps } from './Dropdown.models'
 import styles from './Dropdown.module.scss'
-import { DropdownItem } from './DropdownItem'
+import { SelectedDropdownItem } from './DropdownItem'
 import { DropdownList } from './DropdownList'
 
 export function Dropdown({
@@ -43,7 +43,7 @@ export function Dropdown({
         >
             <div className={styles.dropdownSelected}>
                 {selectedItem ? (
-                    <DropdownItem item={selectedItem} />
+                    <SelectedDropdownItem isOpen={isOpen} item={selectedItem} />
                 ) : (
                     <span>{placeholder}</span>
                 )}

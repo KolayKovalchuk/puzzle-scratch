@@ -80,12 +80,11 @@
     flex-wrap: nowrap;
 
     span {
+        width: fit-content;
         white-space: nowrap;
     }
 
     .roboTokenIcon {
         width: 30px;
-        display: inline;
-        transform: translateX(-10%);
     }
 }

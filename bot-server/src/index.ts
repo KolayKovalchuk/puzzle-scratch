@@ -28,20 +28,20 @@ export const getWebhook: HttpFunction = async (request, response) => {
     response.status(200).send(webhookInfo);
 }
 
-// if (process.env.IS_LOCAL_DEV) {
-//     console.log('start local bot');
+if (process.env.IS_LOCAL_DEV) {
+    console.log('start local bot');
 
 
-//     if (process.env.IS_LOCAL_DEV_WEBHOOK) {
-//         console.log('start local webhook');
-//         setWebhookUrl();
-//         bot.telegram.getWebhookInfo().then(console.log);
-//     } else {
-//         console.log('launch');
-//         bot.launch();
-//     }
+    if (process.env.IS_LOCAL_DEV_WEBHOOK) {
+        console.log('start local webhook');
+        setWebhookUrl();
+        bot.telegram.getWebhookInfo().then(console.log);
+    } else {
+        console.log('launch');
+        bot.launch();
+    }
 
-//     process.once("SIGINT", () => bot.stop("SIGINT"));
-//     process.once("SIGTERM", () => bot.stop("SIGTERM"));
-// }
+    process.once("SIGINT", () => bot.stop("SIGINT"));
+    process.once("SIGTERM", () => bot.stop("SIGTERM"));
+}
 

@@ -1,7 +1,11 @@
-import { Telegraf } from 'telegraf';
+import { Telegraf, Context } from 'telegraf';
 import dotenv from 'dotenv';
 import { onStartCommand } from './commands/start/start.command';
-import { Update } from 'telegraf/types';
+import { Message, Update } from 'telegraf/types';
+import { apiClient } from './services/api/api.service';
+import { validatePurchase, notifySuccessPurchase } from './services/api/purchase.service';
+import { onPreCheckoutQuery } from './commands/purchaseHandlers/preCheckoutQuery';
+import { onSuccessfulPayment } from './commands/purchaseHandlers/successfulPayment';
 
 dotenv.config();
 
@@ -20,6 +24,18 @@ export const bot = new Telegraf(BOT_TOKEN || '', {
 
 bot.start(onStartCommand);
 bot.command('bonus', onStartCommand);
+bot.on('pre_checkout_query', onPreCheckoutQuery);
+bot.on('message', (ctx) => {
+    const message = ctx.update.message;
+    if ('successful_payment' in message) {
+        const successfulPayment = message.successful_payment;
+    
+        console.log('Received successful_payment:', successfulPayment);
+        onSuccessfulPayment(ctx as Context<Update.MessageUpdate<Message.SuccessfulPaymentMessage>>);
+    } else {
+        // Handle other message types, subtypes
+    }
+})
 
 const webhookPath = 'telegramWebhook';
 const webhookConfig: Telegraf.LaunchOptions['webhook'] = {

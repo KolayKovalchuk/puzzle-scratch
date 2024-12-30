@@ -1,7 +1,7 @@
 import { Context, Markup } from 'telegraf';
 import { Message, Update } from 'telegraf/types';
 
-import { linkCodeParam, refCodeParam } from '../../models/AppConfig.model';
+import { linkCodeParam } from '../../models/AppConfig.model';
 import { fetchConfigData } from '../../services/api/config.service';
 import { getLocalizationData, getUserLocale } from '../../services/api/localization.service';
 import { selectLocalValue } from '../../utils/selectLocalValue';
@@ -52,12 +52,9 @@ async function getMsgKey(ctx: Context<Update.MessageUpdate<Message.TextMessage>>
 
 async function getMsgText(ctx: Context<Update.MessageUpdate<Message.TextMessage>>) {
     const localizationData = await getLocalizationData();
-    const config = await fetchConfigData();
 
-    if (!config) return { msg: '', photoUrl: '' };
+    const userLocale = await getUserLocale(ctx.from?.id || null);
 
-
-    const userLocale = await getUserLocale(ctx.from?.id || null, config.API_URL);
     const { msg: msgKey, photoUrl } = await getMsgKey(ctx);
 
     const msg = selectLocalValue(localizationData, msgKey, userLocale);

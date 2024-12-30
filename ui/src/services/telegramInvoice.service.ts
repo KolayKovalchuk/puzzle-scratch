@@ -23,16 +23,20 @@ export async function convertStarsFromRbax(option: IStarsConvertOption, invoiceS
 
 export function useConvertStarsFromRbax() {
     const [invoiceStatus, setInvoiceStatus] = useState<InvoiceStatuses | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
 
-    const convertStarsFromRbaxCb = useCallback((option: IStarsConvertOption) => {
-        convertStarsFromRbax(option, (status) => {
+    const convertStarsFromRbaxCb = useCallback(async (option: IStarsConvertOption) => {
+        setIsLoading(true);
+        await convertStarsFromRbax(option, (status) => {
             console.log('Invoice status:', status);
             setInvoiceStatus(status);
+            setIsLoading(false);
         });
     }, []);
 
     return {
         convertStarsFromRbax: convertStarsFromRbaxCb,
         invoiceStatus,
+        isLoading
     }
 }

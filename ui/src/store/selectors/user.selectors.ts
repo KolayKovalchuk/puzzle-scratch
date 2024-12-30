@@ -55,17 +55,17 @@ export const selectUserRefCode = createSelector(
     }
 )
 
-export const selectUserBalanceTon = createSelector(
+export const selectUserBalanceTotal = createSelector(
     selectUser,
     (queryState) => {
-        return queryState?.balance?.ton
+        return queryState?.balance?.total
     }
 )
 
-export const selectUserBalanceRbax = createSelector(
+export const selectUserBalanceWithdrawable = createSelector(
     selectUser,
     (queryState) => {
-        return queryState?.balance?.rbax
+        return queryState?.balance?.withdrawable
     }
 )
 

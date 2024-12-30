@@ -1,11 +1,13 @@
 import { Footer } from '@components/Footer/Footer'
 import { Button, ButtonType } from '@components/shared/Button/Button'
 import { Icon } from '@components/shared/Icon'
+import { SpinnerIcon } from '@components/shared/Icon/SpinnerIcon'
 import { SecondaryStyledText } from '@components/shared/StyledText'
 import back_arrow from '@icons/back_arrow.svg'
 import robo_token_gold_no_shining from '@icons/robo_token_gold_no_shining.svg'
+import { useGetUserBalance } from '@services/api/balance.service'
 import { selectLocalValue } from '@store/selectors/localization.selectors'
-import { selectUserBalanceRbax } from '@store/selectors/user.selectors'
+import { selectUserBalanceTotal, selectUserBalanceWithdrawable } from '@store/selectors/user.selectors'
 import { formatNumber } from '@utils/formatters/formatNumber'
 import { ITextStyle } from 'pixi.js'
 import { useCallback } from 'react'
@@ -28,7 +30,10 @@ export function Wallet() {
     const withdrawableLabel = useSelector(selectLocalValue('txt.wallet.withdrawable'))
     const withdrawLabel = useSelector(selectLocalValue('txt.button.withdraw'))
 
-    const amount = useSelector(selectUserBalanceRbax) || 0;
+    const totalAmount = useSelector(selectUserBalanceTotal) || 0;
+    const withdrawableAmount = useSelector(selectUserBalanceWithdrawable) || 0;
+
+    const { isLoading } = useGetUserBalance();
 
     const navigate = useNavigate();
 
@@ -44,56 +49,60 @@ export function Wallet() {
 
     return (
         <div className={styles.container}>
-            <div className={styles.headerContianer}>
-                <Button
-                    className={styles.backBtn || ''}
-                    mode={ButtonType.Default}
-                    onClick={onBackBtnClick}
-                    iconName={back_arrow}
-                >
-                </Button>
+            {isLoading ? <SpinnerIcon name={robo_token_gold_no_shining} className={styles.spinnerIcon} />
+                : <>
+                    <div className={styles.headerContianer}>
+                        <Button
+                            className={styles.backBtn || ''}
+                            mode={ButtonType.Default}
+                            onClick={onBackBtnClick}
+                            iconName={back_arrow}
+                        >
+                        </Button>
 
-                <SecondaryStyledText
-                    text={headerText}
-                    className={styles.headerText}
-                    textStyles={headerStyles}
-                ></SecondaryStyledText>
-            </div>
+                        <SecondaryStyledText
+                            text={headerText}
+                            className={styles.headerText}
+                            textStyles={headerStyles}
+                        ></SecondaryStyledText>
+                    </div>
 
-            <div className={styles.walletInfoContainer}>
-                <div className={styles.balanceInfoRow}>
-                    <div className={styles.column}>
-                        <div className={styles.balanceNameLabel}>{balanceLabel}</div>
-                        <div className={styles.balanceAmountContainer}>
-                            <Icon name={robo_token_gold_no_shining} className={styles.roboTokenGoldIcon} />
-                            <span className={styles.balanceAmount}>{formatNumber(amount)}</span>
+                    <div className={styles.walletInfoContainer}>
+                        <div className={styles.balanceInfoRow}>
+                            <div className={styles.column}>
+                                <div className={styles.balanceNameLabel}>{balanceLabel}</div>
+                                <div className={styles.balanceAmountContainer}>
+                                    <Icon name={robo_token_gold_no_shining} className={styles.roboTokenGoldIcon} />
+                                    <span className={styles.balanceAmount}>{formatNumber(totalAmount)}</span>
+                                </div>
+                            </div>
+                            <Button
+                                mode={ButtonType.Confirm}
+                                onClick={onDepositBtnClick}
+                                text={depositLabel}
+                            ></Button>
+                        </div>
+                        <div className={styles.balanceInfoRow}>
+                            <div className={styles.column}>
+                                <div className={styles.balanceNameLabel}>{withdrawableLabel}</div>
+                                <div className={styles.balanceAmountContainer}>
+                                    <Icon name={robo_token_gold_no_shining} className={styles.roboTokenGoldIcon} />
+                                    <span className={styles.balanceAmount}>{formatNumber(withdrawableAmount)}</span>
+                                </div>
+                            </div>
+                            <Button
+                                mode={ButtonType.Confirm}
+                                onClick={onWithdrawBtnClick}
+                                text={withdrawLabel}
+                            ></Button>
                         </div>
                     </div>
-                    <Button
-                        mode={ButtonType.Confirm}
-                        onClick={onDepositBtnClick}
-                        text={depositLabel}
-                    ></Button>
-                </div>
-                <div className={styles.balanceInfoRow}>
-                    <div className={styles.column}>
-                        <div className={styles.balanceNameLabel}>{withdrawableLabel}</div>
-                        <div className={styles.balanceAmountContainer}>
-                            <Icon name={robo_token_gold_no_shining} className={styles.roboTokenGoldIcon} />
-                            <span className={styles.balanceAmount}>1000</span>
-                        </div>
-                    </div>
-                    <Button
-                        mode={ButtonType.Confirm}
-                        onClick={onWithdrawBtnClick}
-                        text={withdrawLabel}
-                    ></Button>
-                </div>
-            </div>
 
-            <WalletHistoryTable />
-            <DepositWithDialog isOpen={isDepositDialogOpen} onCancel={onCancel} />
-            <Footer />
+                    <WalletHistoryTable />
+                    <DepositWithDialog isOpen={isDepositDialogOpen} onCancel={onCancel} />
+                    <Footer />
+                </>
+            }
 
         </div>
     )

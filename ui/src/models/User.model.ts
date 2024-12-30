@@ -1,8 +1,8 @@
 import { INotification, Notification } from './Notification.model';
 
 export interface IUserBalance {
-    rbax: number;
-    ton: number;
+    total: number;
+    withdrawable: number;
 }
 
 export interface IUser {

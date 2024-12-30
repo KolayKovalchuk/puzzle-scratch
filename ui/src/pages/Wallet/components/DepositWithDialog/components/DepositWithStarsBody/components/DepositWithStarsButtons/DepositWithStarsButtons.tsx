@@ -5,7 +5,7 @@ import { widestChildTargetClassName } from '@hooks/useGetWidestChild';
 import { IStarsConvertOption } from '@services/api/purchase.service';
 
 import { Icon } from '@components/shared/Icon';
-import styles from '../DepositWithStarsBody.module.scss';
+import styles from '../../DepositWithStarsBody.module.scss';
 
 import robo_token_gold_no_shining from '@icons/robo_token_gold_no_shining.svg';
 import telegram_star from '@icons/telegram_star.svg';

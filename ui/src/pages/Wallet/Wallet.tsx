@@ -10,13 +10,14 @@ import { selectLocalValue } from '@store/selectors/localization.selectors'
 import { selectUserBalanceTotal, selectUserBalanceWithdrawable } from '@store/selectors/user.selectors'
 import { formatNumber } from '@utils/formatters/formatNumber'
 import { ITextStyle } from 'pixi.js'
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { DepositWithDialog } from './components/DepositWithDialog/DepositWithDialog'
 import { WalletHistoryTable } from './components/WalletHistoryTable/WalletHistoryTable'
 import { useDepositWithDialog } from './hooks/useDepositWithDialog'
 import styles from './Wallet.module.scss'
+import { DepositWithDialogMode } from './Wallet.models'
 
 const headerStyles: Partial<ITextStyle> = {
     fontSize: 40,
@@ -33,6 +34,8 @@ export function Wallet() {
     const totalAmount = useSelector(selectUserBalanceTotal) || 0;
     const withdrawableAmount = useSelector(selectUserBalanceWithdrawable) || 0;
 
+    const [mode, setMode] = useState(DepositWithDialogMode.Select);
+
     const { isLoading } = useGetUserBalance();
 
     const navigate = useNavigate();
@@ -41,7 +44,11 @@ export function Wallet() {
         navigate(-1)
     }, [navigate])
 
-    const { onDepositBtnClick, onCancel, isDepositDialogOpen } = useDepositWithDialog();
+    const { onDepositBtnClick, closeDialog, isDepositDialogOpen } = useDepositWithDialog();
+
+    const onModeChanged = useCallback((mode: DepositWithDialogMode) => {
+        setMode(mode);
+    }, [closeDialog]);
 
     const onWithdrawBtnClick = useCallback(() => {
         console.log('Withdraw button clicked');
@@ -98,8 +105,13 @@ export function Wallet() {
                         </div>
                     </div>
 
-                    <WalletHistoryTable />
-                    <DepositWithDialog isOpen={isDepositDialogOpen} onCancel={onCancel} />
+                    <WalletHistoryTable mode={mode}/>
+                    <DepositWithDialog
+                        onModeChanged={onModeChanged}
+                        isOpen={isDepositDialogOpen}
+                        onCancel={closeDialog}
+                        onConfirm={closeDialog}
+                    />
                     <Footer />
                 </>
             }

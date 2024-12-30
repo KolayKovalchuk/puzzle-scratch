@@ -1,7 +1,7 @@
+import { DepositWithDialogMode } from '@pages/Wallet/Wallet.models'
 import { selectLocalValue } from '@store/selectors/localization.selectors'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { DepositWithDialogMode } from '../DepositWithDialog'
 
 export function useDialogTitle(mode: DepositWithDialogMode) {
     const depositSelectTitleText = useSelector(selectLocalValue('deposit.select.title'))

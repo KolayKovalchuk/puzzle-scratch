@@ -1,14 +1,20 @@
-import axios from 'axios';
+import { apiClient } from './api.service';
 import { LocalizationModel } from '../../models/LocalizationDataKey.model';
 import { fetchConfigData } from './config.service';
 
 let _localization_url = '';
 let localizationData: LocalizationModel[] = [];
 
-export async function getUserLocale(telegramId: number | null, baseUrl: string): Promise<string> {
+export async function getUserLocale(telegramId: number | null): Promise<string> {
     try {
-        const url = baseUrl + '/public/locale?userId=' + telegramId;
-        const response = await axios.get(url);
+        const config = await fetchConfigData();
+
+        if (!config) {
+            throw new Error('Config data is not available');
+        }
+
+        const url = config?.API_URL + '/public/locale?userId=' + telegramId;
+        const response = await apiClient.get(url);
 
         const userLocale = response.data;
 
@@ -33,7 +39,7 @@ export async function fetchLocalizationFile(localization_url: string): Promise<L
         }
 
         _localization_url = localization_url;
-        const response = await axios.get(_localization_url);
+        const response = await apiClient.get(_localization_url);
 
         if (!response.data) {
             console.error('Localization file is empty');

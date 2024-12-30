@@ -1,24 +1,29 @@
-import { useSelector } from 'react-redux'
 import { ITextStyle } from 'pixi.js'
 import { ReactNode, useCallback, useMemo } from 'react'
+import { useSelector } from 'react-redux'
 
 import { Icon } from '@components/shared/Icon'
 import { SecondaryStyledText } from '@components/shared/StyledText'
-import { Table, TableCell, ITableCellData, ITRowData } from '@components/shared/Table'
+import { ITableCellData, ITRowData, Table, TableCell } from '@components/shared/Table'
 import { selectLocalValue } from '@store/selectors/localization.selectors'
 import { formatNumber } from '@utils/formatters/formatNumber'
+import { DepositWithDialogMode } from '@pages/Wallet/Wallet.models'
+import { useDWHistory } from '@services/api/depositWithdrawal.service'
 
 import robo_token_gold_no_shining from '@icons/robo_token_gold_no_shining.svg'
 
 import styles from './WalletHistoryTable.module.scss'
-import { useDWHistory } from '@services/api/depositWithdrawal.service'
 
 const historyLabelStyles: Partial<ITextStyle> = {
     fontSize: 30,
     fontWeight: 'bold',
 }
 
-export function WalletHistoryTable() {
+export interface IWalletHistoryTableProps {
+    mode: DepositWithDialogMode;
+}
+
+export function WalletHistoryTable({ mode }: IWalletHistoryTableProps) {
     const historyLabel = useSelector(selectLocalValue('txt.wallet.history'))
     const dateLabel = useSelector(selectLocalValue('txt.wallet.history.date'))
     const actionLabel = useSelector(selectLocalValue('txt.wallet.history.action'))
@@ -30,8 +35,9 @@ export function WalletHistoryTable() {
         { key: 'action', data: actionLabel },
         { key: 'amount', data: amountLabel },
     ], [dateLabel, actionLabel, amountLabel]);
-
-    const { historyData, loading } = useDWHistory();
+    
+    const shouldReload = DepositWithDialogMode.Select === mode;
+    const { historyData } = useDWHistory(shouldReload);
 
     const tBodyData: ITRowData[] = useMemo(() => {
         if (!historyData) return [];

@@ -8,13 +8,13 @@ export function useDepositWithDialog() {
         setIsDepositDialogOpen(true);
     }, [])
 
-    const onCancel = useCallback(() => {
+    const closeDialog = useCallback(() => {
         setIsDepositDialogOpen(false);
     }, [])
 
     return {
         isDepositDialogOpen,
         onDepositBtnClick,
-        onCancel,
+        closeDialog,
     }
 }

@@ -6,23 +6,23 @@ import { SpinnerIcon } from '@components/shared/Icon/SpinnerIcon';
 import { useGetWidestChild } from '@hooks/useGetWidestChild';
 import robo_token_gold_no_shining from '@icons/robo_token_gold_no_shining.svg';
 import { useConvertStarsFromRbax } from '@services/telegramInvoice.service';
+import { selectLocalValue } from '@store/selectors/localization.selectors';
 import { InvoiceStatuses } from '@twa-dev/types';
 import { useEffect } from 'react';
-import { DepositWithStarsButtons } from './DepositWithStarsButtons/DepositWithStarsButtons';
 import { useSelector } from 'react-redux';
-import { selectLocalValue, selectLocalValueWithVars } from '@store/selectors/localization.selectors';
+import { DepositWithStarsButtons } from './components/DepositWithStarsButtons/DepositWithStarsButtons';
+import { DepositWithStarsSuccess } from './components/DepositWithStarsSuccess/DepositWithStarsSuccess';
 
 export interface IDepositWithStarsBodyProps {
     onIvoiceStatusChange: (status: InvoiceStatuses) => void;
 }
 
 export function DepositWithStarsBody({ onIvoiceStatusChange }: IDepositWithStarsBodyProps) {
-    const { isLoading, starsConvertOptions } = useGetStarsConvertOptions();
-    const { containerRef, width: btnWidth } = useGetWidestChild(isLoading);
-    const { invoiceStatus, convertStarsFromRbax } = useConvertStarsFromRbax();
-    const isInvoicePending = invoiceStatus === 'pending';
+    const { isLoading: isGetStarsOptionLoading, starsConvertOptions } = useGetStarsConvertOptions();
+    const { containerRef, width: btnWidth } = useGetWidestChild(isGetStarsOptionLoading);
+    const { isLoading: isStarsConvertionLoading, invoiceStatus, convertStarsFromRbax } = useConvertStarsFromRbax();
+    const isLoading = isGetStarsOptionLoading || isStarsConvertionLoading;
 
-    const invoiceSuccessText = useSelector(selectLocalValueWithVars('shop.stars.popup.success', '1000000'))
     const invoiceFailText = useSelector(selectLocalValue('shop.stars.popup.fail'))
 
     useEffect(() => {
@@ -32,9 +32,11 @@ export function DepositWithStarsBody({ onIvoiceStatusChange }: IDepositWithStars
     }, [invoiceStatus]);
 
     const renderBody = () => {
+        console.log('rednerBody invoiceStatus:', invoiceStatus);
+        
         switch (invoiceStatus) {
             case 'paid':
-                return <div>{invoiceSuccessText}</div>;
+                return <DepositWithStarsSuccess />;
             case 'failed':
                 return <div>{invoiceFailText}</div>;
             default:
@@ -51,7 +53,7 @@ export function DepositWithStarsBody({ onIvoiceStatusChange }: IDepositWithStars
     return (
         <div className={styles.container} ref={containerRef}>
             {
-                isLoading || isInvoicePending ? <SpinnerIcon name={robo_token_gold_no_shining} className={styles.spinnerIcon} />
+                isLoading ? <SpinnerIcon name={robo_token_gold_no_shining} className={styles.spinnerIcon} />
                     : renderBody()
             }
         </div>

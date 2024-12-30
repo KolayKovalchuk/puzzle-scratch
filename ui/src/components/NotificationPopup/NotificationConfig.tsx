@@ -1,11 +1,11 @@
 import { INotification, NotificationType } from '@models/Notification.model';
 import { postCollectDailyGift, postCollectEmojiBonus, postCollectGiftBonus, postCollectRefferalGift } from '@services/api/bonus.service';
+import { updateUserBalance } from '@store/actions/user.actions';
 import store from '@store/store';
 import { ReactNode } from 'react';
 import { DailyBonusNotificationBody } from './components/DailyBonusNotificationBody/DailyBonusNotificationBody';
-import { TooManyGifts } from './components/TooManyGiftsBody/TooManyGiftsBody';
 import { OnePerXGiftBody } from './components/OnePerXGiftBody/OnePerXGiftBody';
-import { updateUserBalance } from '@store/actions/user.actions';
+import { TooManyGifts } from './components/TooManyGiftsBody/TooManyGiftsBody';
 
 
 export interface NotificationConfigItem {

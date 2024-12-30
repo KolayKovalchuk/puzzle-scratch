@@ -45,6 +45,8 @@ export function DepositWithDialog({ isOpen, onCancel }: IDepositWithDialogProps)
     }, [onCancel]);
 
     const onInvoiceStatusChange = useCallback((status: InvoiceStatuses, isPaid: boolean) => {
+        console.log('onInvoiceStatusChange status:', status, isPaid);
+        
         switch (status) {
             case 'paid':
                 if (isPaid) {
@@ -62,6 +64,8 @@ export function DepositWithDialog({ isOpen, onCancel }: IDepositWithDialogProps)
     }, []);
 
     const renderBody = useCallback(() => {
+        console.log('DepositWithDialog renderBody mode:', mode);
+        
         switch (mode) {
             case DepositWithDialogMode.Select:
                 return (

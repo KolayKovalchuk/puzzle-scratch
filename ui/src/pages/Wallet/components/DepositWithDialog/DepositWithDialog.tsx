@@ -44,10 +44,14 @@ export function DepositWithDialog({ isOpen, onCancel }: IDepositWithDialogProps)
         onCancel();
     }, [onCancel]);
 
-    const onInvoiceStatusChange = useCallback((status: InvoiceStatuses) => {
+    const onInvoiceStatusChange = useCallback((status: InvoiceStatuses, isPaid: boolean) => {
         switch (status) {
             case 'paid':
-                setMode(DepositWithDialogMode.InvoiceSuccess);
+                if (isPaid) {
+                    setMode(DepositWithDialogMode.InvoiceSuccess);
+                } else {
+                    setMode(DepositWithDialogMode.InvoiceFailed);
+                }
                 break;
             case 'failed':
                 setMode(DepositWithDialogMode.InvoiceFailed);
@@ -65,7 +69,7 @@ export function DepositWithDialog({ isOpen, onCancel }: IDepositWithDialogProps)
                         onSelectStars={onStarsSelect}
                         onSelectTransfer={onTransferSelect}
                     />);
-            case DepositWithDialogMode.Starts:
+            case (DepositWithDialogMode.Starts || DepositWithDialogMode.InvoiceSuccess || DepositWithDialogMode.InvoiceFailed):
                 return (
                     <DepositWithStarsBody onIvoiceStatusChange={onInvoiceStatusChange}/>
                 );

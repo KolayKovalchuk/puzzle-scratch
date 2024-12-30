@@ -32,8 +32,10 @@ export async function getStarsConvertOptions(): Promise<IStarsConvertOption[]> {
 
 export interface IPostConvertStarsResponse {
     paid: boolean,
-    rbaxBalance: number,
-    rbaxDelta: number,
+    balanceUpdate: {
+        rbaxBalance: number,
+        rbaxDelta: number,
+    }
 }
 export async function getStarsConvertResult(invoiceId: string): Promise<IPostConvertStarsResponse | null> {
     try {

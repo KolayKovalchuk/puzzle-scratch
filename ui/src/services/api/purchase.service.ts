@@ -30,6 +30,25 @@ export async function getStarsConvertOptions(): Promise<IStarsConvertOption[]> {
     }
 }
 
+export interface IPostConvertStarsResponse {
+    paid: boolean,
+    rbaxBalance: number,
+    rbaxDelta: number,
+}
+export async function getStarsConvertResult(invoiceId: string): Promise<IPostConvertStarsResponse | null> {
+    try {
+        const url = `/purchase/stars/${invoiceId}`;
+        const response = await apiClient.get(url);
+
+        console.log('Stars convert options:', response.data);
+
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching stars convert options:', error);
+        return null;
+    }
+}
+
 export async function postConvertStars(option: IStarsConvertOption): Promise<IPostConvertStarsResponse> {
     try {
         const response = await apiClient.post('/purchase/stars', option);

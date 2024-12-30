@@ -20,7 +20,12 @@ export interface IDepositWithStarsBodyProps {
 export function DepositWithStarsBody({ onIvoiceStatusChange }: IDepositWithStarsBodyProps) {
     const { isLoading: isGetStarsOptionLoading, starsConvertOptions } = useGetStarsConvertOptions();
     const { containerRef, width: btnWidth } = useGetWidestChild(isGetStarsOptionLoading);
-    const { isLoading: isStarsConvertionLoading, invoiceStatus, convertStarsFromRbax } = useConvertStarsFromRbax();
+    const {
+        isLoading: isStarsConvertionLoading,
+        invoiceStatus,
+        balanceChange,
+        convertStarsFromRbaxCb,
+    } = useConvertStarsFromRbax();
     const isLoading = isGetStarsOptionLoading || isStarsConvertionLoading;
 
     const invoiceFailText = useSelector(selectLocalValue('shop.stars.popup.fail'))
@@ -36,14 +41,14 @@ export function DepositWithStarsBody({ onIvoiceStatusChange }: IDepositWithStars
         
         switch (invoiceStatus) {
             case 'paid':
-                return <DepositWithStarsSuccess />;
+                return <DepositWithStarsSuccess balanceChange={balanceChange || 0} />;
             case 'failed':
                 return <div>{invoiceFailText}</div>;
             default:
                 return (
                     <DepositWithStarsButtons
                         starsConvertOptions={starsConvertOptions}
-                        onOptionSelected={convertStarsFromRbax}
+                        onOptionSelected={convertStarsFromRbaxCb}
                         btnWidth={btnWidth}
                         />
                 );

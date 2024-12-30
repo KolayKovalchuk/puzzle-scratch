@@ -1,13 +1,15 @@
 import WebApp from '@twa-dev/sdk';
 import { InvoiceStatuses } from '@twa-dev/types';
 import { useCallback, useState } from 'react';
-import { IPostConvertStarsResponse, IStarsConvertOption, postConvertStars } from './api/purchase.service';
+import { getStarsConvertResult, IPostConvertStarsResponse, IStarsConvertOption, postConvertStars } from './api/purchase.service';
+import store from '@store/store';
+import { updateUserBalance } from '@store/actions/user.actions';
 
 function hadnleUnsuccessPurchase(purchaseResponse: IPostConvertStarsResponse) {
     // Handle the unsuccess purchase here
 }
 
-export async function convertStarsFromRbax(option: IStarsConvertOption, invoiceStatusHanlder: (status: InvoiceStatuses) => void) {
+export async function convertStarsFromRbax(option: IStarsConvertOption, invoiceStatusHanlder: (status: InvoiceStatuses, invoiceId: string) => void) {
     const purchaseResponse = await postConvertStars(option);
 
     if (!purchaseResponse.success) {
@@ -18,25 +20,39 @@ export async function convertStarsFromRbax(option: IStarsConvertOption, invoiceS
     console.log('Purchase response:', purchaseResponse);
     console.log('invoiceUrl', invoiceUrl);
     
-    WebApp.openInvoice(invoiceUrl, invoiceStatusHanlder);
+    WebApp.openInvoice(invoiceUrl, (status) => {
+        invoiceStatusHanlder(status, purchaseResponse.invoiceData.invoiceId);
+    });
 }
 
 export function useConvertStarsFromRbax() {
     const [invoiceStatus, setInvoiceStatus] = useState<InvoiceStatuses | null>(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [balanceChange, setBalanceChange] = useState<number | null>(null);
 
     const convertStarsFromRbaxCb = useCallback(async (option: IStarsConvertOption) => {
         setIsLoading(true);
-        await convertStarsFromRbax(option, (status) => {
-            console.log('Invoice status:', status);
+        await convertStarsFromRbax(option, async (status, invoiceId: string) => {
+            if (status === 'paid') {
+                const reposponse = await getStarsConvertResult(invoiceId);
+
+                if (reposponse?.paid) {
+                    store.dispatch(updateUserBalance({
+                        total: reposponse?.rbaxBalance || 0,
+                    }));
+                    setBalanceChange(reposponse?.rbaxDelta);
+                }
+            }
+
             setInvoiceStatus(status);
             setIsLoading(false);
         });
     }, []);
 
     return {
-        convertStarsFromRbax: convertStarsFromRbaxCb,
+        convertStarsFromRbaxCb,
         invoiceStatus,
+        balanceChange,
         isLoading
     }
 }

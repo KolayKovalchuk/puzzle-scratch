@@ -30,6 +30,7 @@ export function DepositWithDialog({ isOpen, onCancel }: IDepositWithDialogProps)
     const [mode, setMode] = useState(DepositWithDialogMode.Select);
     const titleText = useDialogTitle(mode);
     const cancelBtnText = useSelector(selectLocalValue('txt.btn.cancel'))
+    const okBtnText = useSelector(selectLocalValue('txt.btn.ok'))
 
     const onStarsSelect = useCallback(() => {
         setMode(DepositWithDialogMode.Starts);
@@ -73,7 +74,9 @@ export function DepositWithDialog({ isOpen, onCancel }: IDepositWithDialogProps)
                         onSelectStars={onStarsSelect}
                         onSelectTransfer={onTransferSelect}
                     />);
-            case (DepositWithDialogMode.Starts || DepositWithDialogMode.InvoiceSuccess || DepositWithDialogMode.InvoiceFailed):
+            case DepositWithDialogMode.Starts:
+            case DepositWithDialogMode.InvoiceSuccess:
+            case DepositWithDialogMode.InvoiceFailed:
                 return (
                     <DepositWithStarsBody onIvoiceStatusChange={onInvoiceStatusChange}/>
                 );
@@ -84,14 +87,20 @@ export function DepositWithDialog({ isOpen, onCancel }: IDepositWithDialogProps)
             default:
                 return null;
         }
-    }, [mode, onStarsSelect, onTransferSelect]);
+    }, [mode, onStarsSelect, onTransferSelect, onInvoiceStatusChange]);
+
+    const isStarsConversationDone = mode === DepositWithDialogMode.InvoiceSuccess || mode === DepositWithDialogMode.InvoiceFailed;
+    const cancelText = isStarsConversationDone ? '' : cancelBtnText;
+    const confirmText = isStarsConversationDone ? okBtnText : '';
 
     return (
         <ModalDialog
             isOpen={isOpen}
             title={titleText}
-            cancelText={cancelBtnText}
+            cancelText={cancelText}
+            confirmText={confirmText}
             onClose={onCancelCb}
+            onConfirm={onCancelCb}
         >
             {renderBody()}
         </ModalDialog>

@@ -38,8 +38,6 @@ export function DepositWithStarsBody({ onIvoiceStatusChange }: IDepositWithStars
     }, [invoiceStatus, isPaid]);
 
     const renderBody = () => {
-        console.log('DepositWithStarsBody rednerBody invoiceStatus:', invoiceStatus);
-        
         switch (invoiceStatus) {
             case 'paid':
                 return isPaid

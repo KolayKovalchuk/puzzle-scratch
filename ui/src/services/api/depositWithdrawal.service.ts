@@ -87,19 +87,23 @@ export async function getDWHistory(): Promise<IDWHistory[] | null> {
     }
 }
 
-export function useDWHistory(): { historyData: IDWHistory[] | null, loading: boolean } {
+export function useDWHistory(shouldReload = true): { historyData: IDWHistory[] | null, loading: boolean } {
     const [historyData, setHistory] = useState<IDWHistory[] | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
+    const fetch = async () => {
+        const data = await getDWHistory();
+        setHistory(data);
+        setLoading(false);
+    };
+
     useEffect(() => {
-        const fetch = async () => {
-            const data = await getDWHistory();
-            setHistory(data);
-            setLoading(false);
-        };
+        if (!shouldReload) {
+            return;
+        }
 
         fetch();
-    }, []);
+    }, [shouldReload]);
 
     return { historyData, loading };
 }

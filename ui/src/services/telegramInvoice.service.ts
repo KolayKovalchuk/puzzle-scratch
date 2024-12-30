@@ -29,6 +29,7 @@ export function useConvertStarsFromRbax() {
     const [invoiceStatus, setInvoiceStatus] = useState<InvoiceStatuses | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [balanceChange, setBalanceChange] = useState<number | null>(null);
+    const [isPaid, setIsPaid] = useState<boolean>(false);
 
     const convertStarsFromRbaxCb = useCallback(async (option: IStarsConvertOption) => {
         setIsLoading(true);
@@ -36,11 +37,13 @@ export function useConvertStarsFromRbax() {
             if (status === 'paid') {
                 const reposponse = await getStarsConvertResult(invoiceId);
 
+                setIsPaid(!!reposponse?.paid);
+
                 if (reposponse?.paid) {
                     store.dispatch(updateUserBalance({
-                        total: reposponse?.rbaxBalance || 0,
+                        total: reposponse?.balanceUpdate.rbaxBalance || 0,
                     }));
-                    setBalanceChange(reposponse?.rbaxDelta);
+                    setBalanceChange(reposponse?.balanceUpdate.rbaxDelta);
                 }
             }
 
@@ -52,6 +55,7 @@ export function useConvertStarsFromRbax() {
     return {
         convertStarsFromRbaxCb,
         invoiceStatus,
+        isPaid,
         balanceChange,
         isLoading
     }

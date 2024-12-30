@@ -14,7 +14,7 @@ import { DepositWithStarsButtons } from './components/DepositWithStarsButtons/De
 import { DepositWithStarsSuccess } from './components/DepositWithStarsSuccess/DepositWithStarsSuccess';
 
 export interface IDepositWithStarsBodyProps {
-    onIvoiceStatusChange: (status: InvoiceStatuses) => void;
+    onIvoiceStatusChange: (status: InvoiceStatuses, isPaid: boolean) => void;
 }
 
 export function DepositWithStarsBody({ onIvoiceStatusChange }: IDepositWithStarsBodyProps) {
@@ -23,6 +23,7 @@ export function DepositWithStarsBody({ onIvoiceStatusChange }: IDepositWithStars
     const {
         isLoading: isStarsConvertionLoading,
         invoiceStatus,
+        isPaid,
         balanceChange,
         convertStarsFromRbaxCb,
     } = useConvertStarsFromRbax();
@@ -32,16 +33,18 @@ export function DepositWithStarsBody({ onIvoiceStatusChange }: IDepositWithStars
 
     useEffect(() => {
         if (invoiceStatus) {
-            onIvoiceStatusChange(invoiceStatus);
+            onIvoiceStatusChange(invoiceStatus, isPaid);
         }
-    }, [invoiceStatus]);
+    }, [invoiceStatus, isPaid]);
 
     const renderBody = () => {
         console.log('rednerBody invoiceStatus:', invoiceStatus);
         
         switch (invoiceStatus) {
             case 'paid':
-                return <DepositWithStarsSuccess balanceChange={balanceChange || 0} />;
+                return isPaid
+                    ? <DepositWithStarsSuccess balanceChange={balanceChange || 0} />
+                    : <div>{invoiceFailText}</div>;
             case 'failed':
                 return <div>{invoiceFailText}</div>;
             default:

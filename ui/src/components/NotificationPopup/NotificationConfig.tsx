@@ -11,7 +11,7 @@ import { OnePerXGiftBody } from './components/OnePerXGiftBody/OnePerXGiftBody';
 export interface NotificationConfigItem {
     title: string;
     content?: string;
-    children?: ReactNode;
+    renderChildren?: (props?: any) => ReactNode;
     agreeBtn: string;
     agreeCallback?: (notification: INotification) => void | Promise<any>;
     declineBtn?: string;
@@ -25,7 +25,7 @@ export interface NotificationConfig {
 export const NotificationConfig: NotificationConfig = {
     [NotificationType.DAILY_BONUS]: {
         title: 'txt.dailybonus.title',
-        children: <DailyBonusNotificationBody />,
+        renderChildren: (data) => <DailyBonusNotificationBody data={data} />,
         agreeBtn: 'txt.btn.collect',
         agreeCallback: async () => {
             const response = await postCollectDailyGift();
@@ -99,12 +99,12 @@ export const NotificationConfig: NotificationConfig = {
     },
     [NotificationType.RBAX_GIFT_TO_MANY]: {
         title: 'text.gift.rbaxgift',
-        children: <TooManyGifts />,
+        renderChildren: () => <TooManyGifts />,
         agreeBtn: 'txt.btn.ok',
     },
     [NotificationType.RBAX_GIFT_1_PER_X]: {
         title: 'text.gift.rbaxgift',
-        children: <OnePerXGiftBody />,
+        renderChildren: () => <OnePerXGiftBody />,
         agreeBtn: 'txt.btn.ok',
     },
     [NotificationType.RBAX_GIFT_1_PER_FRIEND]: {

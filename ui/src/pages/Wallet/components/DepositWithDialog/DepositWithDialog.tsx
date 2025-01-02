@@ -4,7 +4,6 @@ import ModalDialog from '@components/shared/ModalDialog/ModalDialog';
 import { selectLocalValue } from '@store/selectors/localization.selectors';
 import { InvoiceStatuses } from '@twa-dev/types';
 import { useSelector } from 'react-redux';
-// import { NotificationConfig } from './NotificationConfig.tsx';
 
 import { DepositWithDialogMode } from '@pages/Wallet/Wallet.models';
 import { useCallback, useEffect, useState } from 'react';

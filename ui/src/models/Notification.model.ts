@@ -11,24 +11,31 @@ export enum NotificationType {
     RBAX_GIFT_EXPIRED = 'RBAX_GIFT_EXPIRED', // link expired
 }
 
-export interface INotification {
-    type: NotificationType;
-    message: string;
-    createdAt: number;
-    linkCode: string;
+export interface IDaylyBonusData {
+    day: number;
 }
 
-export class Notification implements INotification {
+export interface INotification<Data = any> {
     type: NotificationType;
     message: string;
     createdAt: number;
     linkCode: string;
+    data: Data
+}
 
-    constructor(data: INotification) {
+export class Notification<Data = any> implements INotification<Data> {
+    type: NotificationType;
+    message: string;
+    createdAt: number;
+    linkCode: string;
+    data: Data
+
+    constructor(data: INotification<Data>) {
         this.type = NotificationType[data.type as unknown as keyof typeof NotificationType];
         this.message = data.message;
         this.createdAt = data.createdAt;
         this.linkCode = data.linkCode;
+        this.data = data.data;
     }
 
     toJSON() {
@@ -36,7 +43,8 @@ export class Notification implements INotification {
             type: this.type,
             message: this.message,
             createdAt: this.createdAt,
-            linkCode: this.linkCode
+            linkCode: this.linkCode,
+            data: this.data
         };
     }
 }

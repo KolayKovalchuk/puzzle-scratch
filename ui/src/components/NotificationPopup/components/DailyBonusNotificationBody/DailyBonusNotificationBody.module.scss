@@ -4,10 +4,19 @@
 .container {
     display: flex;
     flex-direction: column;
+    max-width: 100%;
+    overflow: hidden;
+
+    min-width: 108%;
+    max-width: 108%;
+    position: relative;
+    right: 4.4%;
 }
 
 $roboIconSize: 18px;
 $paddingBottom: 10px;
+$dayCellMargin: 6px;
+$todayDayCellMargin: calc($dayCellMargin * -1.5);
 
 .mainContentText {
     margin-top: 20px;
@@ -21,9 +30,7 @@ $paddingBottom: 10px;
 
     padding: $paddingBottom 0px;
 
-    width: 108%;
     position: relative;
-    right: 4.4%;
 }
 
 .dayContainer {
@@ -42,12 +49,10 @@ $paddingBottom: 10px;
 
     white-space: nowrap;
 
-    // aspect-ratio: 258/200;
-
     padding: $paddingBottom 10px;
 
-    &:not(:first-child) {
-        left: -5%;
+    &:not(:last-child) {
+        margin-right: -$dayCellMargin;
     }
 
     &.leftArrowBlock {
@@ -55,8 +60,7 @@ $paddingBottom: 10px;
 
         .headerText,
         .dayContainerBonus {
-            position: relative;
-            left: -10%;
+            right: 10%;
         }
     }
 
@@ -77,21 +81,52 @@ $paddingBottom: 10px;
 
         .dayContainerBonus,
         .headerText {
-            position: relative;
             right: 10%;
         }
     }
 
     &.todayArrowBlock {
-        background-image: url('/arrowBlocks/todayArrowBlock.png');
+        align-self: stretch;
+
+        &.leftArrowBlock {
+            background-image: url('/arrowBlocks/todayArrowBlockLeft.png');
+            margin-right: $todayDayCellMargin;
+        }
+
+        &.rightArrowBlock {
+            background-image: url('/arrowBlocks/todayArrowBlockRight.png');
+            padding-right: 20px;
+
+            .dayContainerBonus,
+            .headerText {
+                left: 10%;
+            }
+        }
+
+        &.centerArrowBlock {
+            background-image: url('/arrowBlocks/todayArrowBlockCenter.png');
+        }
+
+        &:not(.leftArrowBlock) {
+            margin-left: $todayDayCellMargin;
+        }
+
+        &:not(.rightArrowBlock) {
+            margin-right: $todayDayCellMargin;
+
+            .dayContainerBonus,
+            .headerText {
+                right: -5%;
+            }
+        }
+
         padding-bottom: $paddingBottom * 2;
 
-        height: 100%;
-        padding-right: 8%;
+        padding-right: 30px;
 
         .dayContainerBonus {
             border-radius: 50px;
-            width: 60%;
+            max-width: 90%;
         }
 
         .coinIcon {
@@ -108,11 +143,14 @@ $paddingBottom: 10px;
 
 .headerText,
 .dayContainerBonus {
+    position: relative;
     width: 100%;
 }
 
 .headerText {
     max-height: 34px;
+    min-height: 34px;
+    width: 100%;
 }
 
 .coinIcon {

@@ -4,6 +4,7 @@ import { INotification } from '@models/Notification.model';
 import { selectLocalValue, selectLocalValueWithLink } from '@store/selectors/localization.selectors';
 import { useSelector } from 'react-redux';
 import { NotificationConfig } from './NotificationConfig.tsx';
+import { useCallback } from 'react';
 
 export interface INotificationPopupProps {
     onConfirm?: (notification: INotification) => void;
@@ -33,6 +34,18 @@ export function NotificationPopup({ isOpen, notification, onConfirm }: INotifica
         notificationConfig.agreeCallback && await notificationConfig.agreeCallback(notification);
     }
 
+    const renderBody = useCallback(() => {
+        if (notificationConfig.content){
+            return <div>{content}</div>;
+        }
+
+        if (notificationConfig.renderChildren) {
+            return notificationConfig.renderChildren(notification.data);
+        }
+
+        return 
+    }, [notificationConfig, content, notification.data])
+
     return (
         <ModalDialog
             isOpen={isOpen}
@@ -43,7 +56,7 @@ export function NotificationPopup({ isOpen, notification, onConfirm }: INotifica
             confirmText={agreeBtnText}
             cancelText={declineBtnConfig.linkText}
         >
-            {notificationConfig.content ? <div>{content}</div> : notificationConfig.children}
+            {renderBody()}
         </ModalDialog>
     );
 };

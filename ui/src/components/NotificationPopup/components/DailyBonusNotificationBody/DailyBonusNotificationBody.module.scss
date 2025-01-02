@@ -50,10 +50,15 @@ $todayDayCellMargin: calc($dayCellMargin * -1.5);
     white-space: nowrap;
 
     padding: $paddingBottom 10px;
-    aspect-ratio: 70/100;
 
     &:not(:last-child) {
         margin-right: -$dayCellMargin;
+    }
+
+    &:not(.todayArrowBlock) {
+        $margin: 7%;
+        margin-top: $margin;
+        margin-bottom: $margin;
     }
 
     &.leftArrowBlock {

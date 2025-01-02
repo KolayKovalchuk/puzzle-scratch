@@ -31,6 +31,8 @@ $todayDayCellMargin: calc($dayCellMargin * -1.5);
     padding: $paddingBottom 0px;
 
     position: relative;
+
+    max-height: 200px;
 }
 
 .dayContainer {

@@ -111,6 +111,10 @@ $todayDayCellMargin: calc($dayCellMargin * -1.5);
 
         &.centerArrowBlock {
             background-image: url('/arrowBlocks/todayArrowBlockCenter.png');
+
+            .coinIcon {
+                left: 20%;
+            }
         }
 
         &:not(.leftArrowBlock) {

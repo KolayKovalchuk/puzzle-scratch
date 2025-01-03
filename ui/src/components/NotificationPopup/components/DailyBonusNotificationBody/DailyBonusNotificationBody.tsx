@@ -35,7 +35,15 @@ const headerTextStyles: Partial<ITextStyle> = {
     ...DefaultTextStyleConfig,
     ...GameCellTextStyle,
     dropShadow: false,
-    lineHeight: 1
+    lineHeight: 1,
+    strokeThickness: 1,
+}
+
+const bonusAmountTextStyles: Partial<ITextStyle> = {
+    ...DefaultTextStyleConfig,
+    dropShadow: false,
+    lineHeight: 1,
+    strokeThickness: 1,
 }
 
 export interface IDailyBonusContainerConfig {
@@ -96,14 +104,16 @@ export function DailyBonusNotificationBody({ data }: IDailyBonusNotificationBody
                             textStyles={headerTextStyles}
                             textFitCoefficient={textFitCoefficient}
                         />
-                        <Icon name={item.coinIconName} className={styles.coinIcon} />
+                        <div className={styles.coinIcon}>
+                            <Icon name={item.coinIconName} />
+                        </div>
                         <div className={styles.dayContainerBonus}>
                             <Icon name={robo_token_no_bg} className={styles.roboTokenIcon} />
                             <StyledText
                                 className={styles.bonusAmount}
                                 text={item.bonus + ''}
                                 shouldFitFontSize={false}
-                                textStyles={{ fontSize: footerFontSize, dropShadow: false, strokeThickness: 1 }}
+                                textStyles={{ ...bonusAmountTextStyles, fontSize: footerFontSize }}
                             ></StyledText>
                         </div>
                     </div>)

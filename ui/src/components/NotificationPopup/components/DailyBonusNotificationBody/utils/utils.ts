@@ -24,11 +24,11 @@ export function getDailyContainerStyles(index: number, length: number, mainDay: 
 
     if (index === mainDayIndex) {
         return {
-            minWidth: mainDayWidth + '%',
+            width: mainDayWidth + '%',
         }
     }
 
     return {
-        minWidth: dayWidth + '%'
+        width: dayWidth + '%'
     }
 }

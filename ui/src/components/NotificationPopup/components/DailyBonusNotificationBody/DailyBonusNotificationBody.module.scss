@@ -94,8 +94,6 @@ $todayDayCellMargin: calc($dayCellMargin * -1.5);
     }
 
     &.todayArrowBlock {
-        align-self: stretch;
-
         &.leftArrowBlock {
             background-image: url('/arrowBlocks/todayArrowBlockLeft.png');
             margin-right: $todayDayCellMargin;
@@ -124,7 +122,7 @@ $todayDayCellMargin: calc($dayCellMargin * -1.5);
 
             .dayContainerBonus,
             .headerText {
-                right: -5%;
+                right: -6%;
             }
         }
 
@@ -134,7 +132,6 @@ $todayDayCellMargin: calc($dayCellMargin * -1.5);
 
         .dayContainerBonus {
             border-radius: 50px;
-            max-width: 90%;
         }
 
         .coinIcon {
@@ -149,10 +146,14 @@ $todayDayCellMargin: calc($dayCellMargin * -1.5);
     }
 }
 
-.headerText,
-.dayContainerBonus {
+.headerText {
     position: relative;
     width: 100%;
+}
+
+.dayContainerBonus {
+    position: relative;
+    max-width: 100%;
 }
 
 .headerText {
@@ -175,7 +176,7 @@ $todayDayCellMargin: calc($dayCellMargin * -1.5);
     background-color: colors.$soft-blue;
     border-radius: 8px;
 
-    max-height: 20px;
+    height: 20px;
 
     .roboTokenIcon {
         min-width: $roboIconSize;
@@ -188,5 +189,5 @@ $todayDayCellMargin: calc($dayCellMargin * -1.5);
     height: initial;
 
     position: relative;
-    top: 1px;
+    top: 2px;
 }

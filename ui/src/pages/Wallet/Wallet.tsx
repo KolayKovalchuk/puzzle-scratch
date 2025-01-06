@@ -8,7 +8,7 @@ import styles from './Wallet.module.scss'
 import back_arrow from '@icons/back_arrow.svg'
 import robo_token_gold_no_shining from '@icons/robo_token_gold_no_shining.svg'
 
-import { selectUserBalanceRbax } from '@store/selectors/user.selectors'
+import { selectUserBalanceTotal } from '@store/selectors/user.selectors'
 import { formatNumber } from '@utils/formatters/formatNumber'
 import { ITextStyle } from 'pixi.js'
 import { useCallback, useState } from 'react'
@@ -49,7 +49,7 @@ export function Wallet() {
     const withdrawableLabel = useSelector(selectLocalValue('txt.wallet.withdrawable'))
     const withdrawLabel = useSelector(selectLocalValue('txt.button.withdraw'))
 
-    const amount = useSelector(selectUserBalanceRbax) || 0;
+    const amount = useSelector(selectUserBalanceTotal) || 0;
 
     const navigate = useNavigate();
 

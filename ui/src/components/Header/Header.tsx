@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 import styles from './Header.module.scss'
 
-import { selectUserAvatar, selectUserBalanceRbax } from '@store/selectors/user.selectors'
+import { selectUserAvatar, selectUserBalanceTotal } from '@store/selectors/user.selectors'
 
 import { WinStyledText } from '@components/shared/StyledText'
 import { selectScratchCardTransitionTimeout } from '@store/selectors/config.selectors'
@@ -19,7 +19,7 @@ import robo_token from '@icons/robo_token.svg'
 import wallet from '@icons/wallet.svg'
 
 export function Header() {
-    const amount = useSelector(selectUserBalanceRbax) || 0;
+    const amount = useSelector(selectUserBalanceTotal) || 0;
     const animatedAmount = useCounterAnimation(amount);
 
     const { lastWinLabel, labelRef } = useBalanceChangeLabel(styles.animate);

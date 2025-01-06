@@ -1,5 +1,5 @@
 import { IUser, IUserBalance } from '@models/User.model';
-import { FETCH_USER, FETCH_USER_ERROR, FETCH_USER_SUCCESS, UPDATE_USER_BALANCE_RBAX, UPDATE_USER_BALANCE_TON, UPDATE_USER_LOCALE, UPDATE_USER_NOTIFICATIONS, UPDATE_USER_TOKEN, UPDATE_USER_ToS } from '../actions/user.actions';
+import { FETCH_USER, FETCH_USER_ERROR, FETCH_USER_SUCCESS, UPDATE_USER_BALANCE, UPDATE_USER_LOCALE, UPDATE_USER_NOTIFICATIONS, UPDATE_USER_TOKEN, UPDATE_USER_ToS } from '../actions/user.actions';
 
 // Initial State
 export interface UserState {
@@ -45,26 +45,14 @@ export const userReducer = (state = initialState, action: any): UserState => {
                 },
             }
 
-        case UPDATE_USER_BALANCE_TON:
+        case UPDATE_USER_BALANCE:
             return {
                 ...state,
                 user: {
                     ...state.user as IUser,
                     balance: {
                         ...state.user?.balance as IUserBalance,
-                        ton: action.payload,
-                    }
-                },
-            }
-
-        case UPDATE_USER_BALANCE_RBAX:
-            return {
-                ...state,
-                user: {
-                    ...state.user as IUser,
-                    balance: {
-                        ...state.user?.balance as IUserBalance,
-                        rbax: action.payload,
+                        ...action.payload,
                     }
                 },
             }

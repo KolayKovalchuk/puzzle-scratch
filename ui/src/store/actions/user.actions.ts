@@ -1,6 +1,6 @@
 import { IUserAcceptTermsResponse } from '@models/IUserAcceptTermsResponse';
 import { INotification } from '@models/Notification.model';
-import { IUser } from '@models/User.model';
+import { IUser, IUserBalance } from '@models/User.model';
 
 // Action Types
 export const FETCH_USER = 'FETCH_USER';
@@ -29,17 +29,10 @@ export const updateUserLocale = (locale: string) => ({
     payload: locale,
 });
 
-export const UPDATE_USER_BALANCE_TON = 'UPDATE_USER_BALANCE_TON';
+export const UPDATE_USER_BALANCE = 'UPDATE_USER_BALANCE';
 
-export const updateUserBalanceTon = (payload: number) => ({
-    type: UPDATE_USER_BALANCE_TON,
-    payload,
-});
-
-export const UPDATE_USER_BALANCE_RBAX = 'UPDATE_USER_BALANCE_RBAX';
-
-export const updateUserBalanceRbax = (payload: number) => ({
-    type: UPDATE_USER_BALANCE_RBAX,
+export const updateUserBalance = (payload: Partial<IUserBalance>) => ({
+    type: UPDATE_USER_BALANCE,
     payload,
 });
 

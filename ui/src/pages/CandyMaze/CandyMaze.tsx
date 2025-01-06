@@ -61,9 +61,10 @@ export function CandyMaze() {
     const {
         isBigWinVisible,
         onBigWinClicked,
-        // onCardScratched,
         onPlay,
         onSwipe,
+        onScratchAnimationCompleted,
+        // onCardScratched,
         // onScratchStarted,
     } = useScratchGame(
         batchId,
@@ -114,20 +115,21 @@ export function CandyMaze() {
                 <div className={styles.radialShining}></div>
                 <TopPrizeLabel topPrize={batch?.totalPotentialPrizes || 0} />
 
-                <div className={styles.scratchAreaContainer}>
-                    <div
-                        className={styles.animationContainer}
-                        onTouchStart={onTouchStart}
-                        onTouchEnd={onTouchEnd}
-                        onTouchMove={onTouchMove}
-                        onMouseDown={onMouseDown}
-                        onMouseUp={onMouseUp}
-                        onMouseMove={onMouseMove}
-                    >
+                <div className={styles.scratchAreaContainer}
+                    onTouchStart={onTouchStart}
+                    onTouchEnd={onTouchEnd}
+                    onTouchMove={onTouchMove}
+                    onMouseDown={onMouseDown}
+                    onMouseUp={onMouseUp}
+                    onMouseMove={onMouseMove}
+                >
+                    <div className={styles.animationContainer}>
                         <ScratchAnimation
                             ref={scratchAnimationRef}
                             animationName={ScratchAnimationName.candy_action}
-                            />
+                            onComplete={onScratchAnimationCompleted}
+                            onCompleteParams={[card]}
+                        />
                     </div>
                     <div className={styles.potentialPrizeContainer}>
                         <ScratchCard

@@ -26,11 +26,19 @@
 
 .multiplierContainer {
     width: 100%;
-    margin-bottom: -26px;
+    // margin-bottom: -26px;
+    height: 90px;
+    min-height: 90px;
+}
+
+.scratchAreaContainer {
+    justify-content: center;
 }
 
 .roundScratchCard {
-    width: 24%;
+    height: 100%;
+    aspect-ratio: 1/1;
+    width: auto;
 }
 
 .toyChainContainer {
@@ -39,7 +47,7 @@
     align-items: flex-end;
 
     position: absolute;
-    top: 5px;
+    top: 2px;
     left: 50%;
     height: 25%;
 

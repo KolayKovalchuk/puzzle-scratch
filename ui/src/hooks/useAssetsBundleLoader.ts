@@ -60,7 +60,7 @@ export function useAddBundle<BundleConfig extends AssetsBundle["assets"]>({ bund
 };
 
 export interface IBundle {
-    [key: string]: Texture;
+    [key: string]: Texture | any;
 }
 
 export function useLoadBundle<Bundle extends IBundle>(bundleName: string): { bundle: Bundle | null, error: Error | null, loading: boolean } {

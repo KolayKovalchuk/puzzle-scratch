@@ -62,14 +62,18 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
 
         _applyForEachScratchCardRef(scratchCardsRefConfig, (card) => {
             card.reset();
-            scratchAnimationRef.current?.play();
         });
 
         const card = await buyCard(batchId)
 
+        if (!card) return;
+
         _applyForEachScratchCardRef(scratchCardsRefConfig, (card) => {
             card.reveal();
         });
+
+        scratchAnimationRef.current?.play();
+
         setIsCardsScratched(_getScratchedStateConfig(scratchCardsRefConfig, true))
 
         setLastAction('playBtnClick');

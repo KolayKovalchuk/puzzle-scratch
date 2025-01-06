@@ -11,6 +11,10 @@ export enum ScratchAnimationName {
     candy_action = 'candy_action',
     candy_idle_start = 'candy_idle_start',
     candy_idle_end = 'candy_idle_end',
+    
+    santa_action = 'santa_action',
+    santa_idle_start = 'santa_idle_start',
+    santa_idle_end = 'santa_idle_end',
 }
 
 export interface IScratchAnimationHandle {

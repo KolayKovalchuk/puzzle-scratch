@@ -3,11 +3,23 @@ import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
 import { useApp } from '@pixi/react';
 import { Spine } from 'pixi-spine';
 import { useCallback, useEffect, useState } from 'react';
+import { ScratchAnimationName } from '../ScratchAnimation';
+
+function getScratchJson(bundle: IScratchAnimationBundle | null, animationName: ScratchAnimationName) {
+    switch (animationName) {
+        case ScratchAnimationName.candy_action:
+            return bundle?.scratchCandyBox;
+        case ScratchAnimationName.santa_action:
+            return bundle?.scratchSantaSac
+        default:
+            return null;
+    }
+}
 
 export function useScratchAnimation(
     width: number,
     height: number,
-    animationName: string,
+    animationName: ScratchAnimationName,
     onComplete?: (...args: any) => void,
 ) {
     const app = useApp();
@@ -15,7 +27,7 @@ export function useScratchAnimation(
 
     const bundleName = SCRATCH_ANIMATION_BUNDLE.name
     const { bundle } = useLoadBundle<IScratchAnimationBundle>(bundleName)
-    const scratchJson = bundle?.scratchCandyBox;
+    const scratchJson = getScratchJson(bundle, animationName);
 
     useEffect(() => {
         console.log('ScratchAnimationSprite create animation');

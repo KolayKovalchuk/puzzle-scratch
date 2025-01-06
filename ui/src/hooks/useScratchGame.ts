@@ -8,7 +8,6 @@ import store from '@store/store';
 import { RefObject, useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-let timeout: NodeJS.Timeout | null = null;
 
 function _applyForEachScratchCardRef<T extends IScratchCardHandle = IScratchCardHandle>(
     scratchCardsRefConfig: { [key: string]: RefObject<T> },
@@ -31,6 +30,7 @@ function _getScratchedStateConfig(config: { [key: string]: RefObject<IScratchCar
     }, {})
 }
 
+let timeout: NodeJS.Timeout | null = null;
 let swipeTimeout: NodeJS.Timeout | null = null;
 
 export function useScratchGame<CardData extends ICardData = ICardData>(
@@ -64,6 +64,7 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
 
         _applyForEachScratchCardRef(scratchCardsRefConfig, (card) => {
             card.reset();
+            scratchAnimationRef.current?.reset();
         });
 
         const card = await buyCard(batchId)
@@ -101,11 +102,6 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
 
         if (cardData?.winning) {
 
-            if (timeout) {
-                clearTimeout(timeout);
-                timeout = null;
-            }
-
             console.log('You win ' + cardData.winning + ' RBAX. Your new balance is ' + cardData.rbaxBalance + ' RBAX')
         } else if (cardData) {
             console.log('You lose. Your balance is ' + cardData?.rbaxBalance + ' RBAX')
@@ -129,9 +125,15 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
         if (cardData?.winning) {
             setIsBigWinVisible(true);
 
+            if (timeout) {
+                clearTimeout(timeout);
+                timeout = null;
+            }
+
             timeout = setTimeout(() => {
                 setIsBigWinVisible(false);
             }, scratchCardTransitionTimeout);
+
         }
 
         store.dispatch(updateUserBalance({ total: cardData.rbaxBalance }));

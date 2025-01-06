@@ -41,12 +41,17 @@
     }
 }
 
+$roundScratchCardWidth: 88px;
+
 .roundScratchCard {
     position: relative;
 
+    // top: 4px;
+
     top: 4.5%;
-    width: 26%;
-    min-width: 82px;
+    // width: 26%;
+    // min-width: 82px;
+    width: 88px;
 
     $sidePosition: 32%;
     left: $sidePosition;
@@ -74,7 +79,6 @@
 
     transform: translateX(-50%);
 }
-
 
 .diamondsRowContainer {
     display: flex;
@@ -120,6 +124,19 @@
     align-items: center;
 
     width: 100%;
+}
+
+.topPrizeLabel {
+    margin-bottom: 40px;
+}
+
+.scratchAreaContainer {
+    justify-content: end;
+}
+
+.animationContainer {
+    height: calc(100% + ($roundScratchCardWidth / 4));
+    width: 96%;
 }
 
 .multiplierScratchCard {

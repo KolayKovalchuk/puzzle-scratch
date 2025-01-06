@@ -11,6 +11,8 @@ function getScratchJson(bundle: IScratchAnimationBundle | null, animationName: S
             return bundle?.scratchCandyBox;
         case ScratchAnimationName.santa_action:
             return bundle?.scratchSantaSac
+        case ScratchAnimationName.ice_action:
+            return bundle?.scratchIceBox
         default:
             return null;
     }

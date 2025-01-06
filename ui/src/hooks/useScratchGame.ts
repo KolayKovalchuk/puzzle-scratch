@@ -14,7 +14,7 @@ function _applyForEachScratchCardRef<T extends IScratchCardHandle = IScratchCard
     scratchCardsRefConfig: { [key: string]: RefObject<T> },
     callback: (ref: T, index: number) => void
 ) {
-    // if (!scratchCardsRefConfig) return {};
+    if (!scratchCardsRefConfig) return {};
 
     const scratchCardsRefList = Object.values(scratchCardsRefConfig);
 
@@ -27,7 +27,7 @@ function _applyForEachScratchCardRef<T extends IScratchCardHandle = IScratchCard
 }
 
 function _getScratchedStateConfig(config: { [key: string]: RefObject<IScratchCardHandle> }, value: boolean) {
-    // if (!config) return {};
+    if (!config) return {};
     return Object.keys(config).reduce((acc: { [key: string]: boolean }, key) => {
         acc[key] = value;
         return acc;

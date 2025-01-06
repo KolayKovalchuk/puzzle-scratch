@@ -1,7 +1,10 @@
 import { IScratchCardHandle } from '@components/ScratchCard';
 import { IScratchAnimationHandle } from '@components/shared/ScratchAnimation/ScratchAnimation';
 import { IBuyBatchCardData, ICardData } from '@models/IBuyBatchCardData';
+import { showAmountChangeLabel } from '@store/actions/appState.actions';
+import { updateUserBalance } from '@store/actions/user.actions';
 import { selectScratchCardTransitionTimeout } from '@store/selectors/config.selectors';
+import store from '@store/store';
 import { RefObject, useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -36,7 +39,6 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
     buyCard: (batchId: string) => Promise<IBuyBatchCardData<CardData> | null>,
     scratchCardsRefConfig: { [key: string]: RefObject<IScratchCardHandle> },
     scratchAnimationRef: RefObject<IScratchAnimationHandle>,
-    isScratchMode = false,
 ) {
     const [lastAction, setLastAction] = useState<'playBtnClick' | 'swipe' | 'scratch' | null>(null);
     const [isBigWinVisible, setIsBigWinVisible] = useState(false);
@@ -104,12 +106,6 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
                 timeout = null;
             }
 
-            setIsBigWinVisible(true);
-
-            timeout = setTimeout(() => {
-                setIsBigWinVisible(false);
-            }, scratchCardTransitionTimeout);
-
             console.log('You win ' + cardData.winning + ' RBAX. Your new balance is ' + cardData.rbaxBalance + ' RBAX')
         } else if (cardData) {
             console.log('You lose. Your balance is ' + cardData?.rbaxBalance + ' RBAX')
@@ -125,6 +121,21 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
 
     const onBigWinClicked = useCallback(() => {
         setIsBigWinVisible(false);
+    }, []);
+
+    const onScratchAnimationCompleted = useCallback((cardData: IBuyBatchCardData) => {
+        if (!cardData) return;
+
+        if (cardData?.winning) {
+            setIsBigWinVisible(true);
+
+            timeout = setTimeout(() => {
+                setIsBigWinVisible(false);
+            }, scratchCardTransitionTimeout);
+        }
+
+        store.dispatch(updateUserBalance({ total: cardData.rbaxBalance }));
+        store.dispatch(showAmountChangeLabel(cardData.cardData.winAmount));
     }, []);
 
     useEffect(() => {
@@ -145,9 +156,10 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
     return {
         isBigWinVisible,
         onBigWinClicked,
-        onCardScratched,
         onPlay,
         onSwipe: onPlay,
+        onScratchAnimationCompleted,
+        onCardScratched,
         onScratchStarted,
     }
 }

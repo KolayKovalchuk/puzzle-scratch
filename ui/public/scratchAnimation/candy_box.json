@@ -1,6 +1,6 @@
 {
 "skeleton": {
-	"hash": "9Sua+y2ZFRc",
+	"hash": "tb4Vtwjxnbw",
 	"spine": "4.1.24",
 	"x": -471,
 	"y": -686,
@@ -15,7 +15,7 @@
 ],
 "slots": [
 	{ "name": "s_", "bone": "root", "attachment": "s_" },
-	{ "name": "sss_02", "bone": "sss_1", "attachment": "sss_05" },
+	{ "name": "sss_02", "bone": "sss_1", "attachment": "sss_04" },
 	{ "name": "sss_05", "bone": "sss_1" }
 ],
 "skins": [
@@ -46,7 +46,6 @@
 					{ "time": 0.9333, "color": "ffffff00" }
 				],
 				"attachment": [
-					{ "name": "sss_04" },
 					{ "time": 0.0333, "name": "sss_05" }
 				]
 			},

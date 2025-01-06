@@ -9,7 +9,6 @@ export function useScratchAnimation(
     height: number,
     animationName: string,
     onComplete?: (...args: any) => void,
-    onCompleteParams: any[] = []
 ) {
     const app = useApp();
     const [animation, setAnimation] = useState<Spine | null>(null);
@@ -43,7 +42,7 @@ export function useScratchAnimation(
         }
         const onCompleteListener = () => {
             console.log('Animation rendering finished: ', animationName);
-            if(onComplete) onComplete(...onCompleteParams);
+            if(onComplete) onComplete();
         }
 
         animation.state.addListener({
@@ -55,7 +54,7 @@ export function useScratchAnimation(
                 complete: onCompleteListener
             });
         }
-    }, [animation, animationName, onComplete, onCompleteParams]);
+    }, [animation, animationName, onComplete]);
 
     const play = useCallback(() => {
         if (!animation) {

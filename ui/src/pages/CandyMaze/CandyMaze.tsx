@@ -41,12 +41,10 @@ export function CandyMaze() {
     const { batchId } = useParams();
 
     const { batch, loading: isBatchLoading } = useGetBatchById(batchId || null);
-    const { buyCard, card, loading: isCardBuying } = useBuyCard<ICandyMazeCardData>();
+    // const { buyCard, card, loading: isCardBuying } = useBuyCard<ICandyMazeCardData>();
 
     const bundleName = CANDY_MAZE_BUNDLE.name
     const { bundle, loading: isBundleLoading } = useLoadBundle<ICandyMazeBundle>(bundleName)
-
-    const { data } = useSpriteCellData(card, bundleName)
 
     const topScratchCardRef = useRef<IScratchCardHandle>(null);
     const mainScratchCardRef = useRef<IScratchCardHandle>(null);
@@ -64,12 +62,13 @@ export function CandyMaze() {
         onPlay,
         onSwipe,
         onScratchAnimationCompleted,
+        card,
         // onCardScratched,
         // onScratchStarted,
     } = useScratchGame(
         batchId,
-        card,
-        buyCard,
+        // card,
+        // buyCard,
         scratchCardsRefConfig,
         scratchAnimationRef
     );
@@ -100,6 +99,8 @@ export function CandyMaze() {
         setTopScratchCardData([[{ textureName: card.cardData.potentialWin + '' || '0', bundleName }]])
     }, [card]);
 
+    const { data } = useSpriteCellData(card, bundleName)
+
     const isLoading = isBatchLoading || isBundleLoading;
     const hiddenClass = isLoading || !bundle ? 'hidden' : '';
 
@@ -128,7 +129,6 @@ export function CandyMaze() {
                             ref={scratchAnimationRef}
                             animationName={ScratchAnimationName.candy_action}
                             onComplete={onScratchAnimationCompleted}
-                            onCompleteParams={[card]}
                         />
                     </div>
                     <div className={styles.potentialPrizeContainer}>

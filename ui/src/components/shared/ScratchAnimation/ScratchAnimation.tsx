@@ -24,16 +24,15 @@ export interface IScratchAnimationSpriteProps {
     height: number;
     animationName: ScratchAnimationName;
     onComplete?: (...args: any) => void,
-    onCompleteParams: any[]
 }
 
 const ScratchAnimationSprite = forwardRef<IScratchAnimationHandle, IScratchAnimationSpriteProps>(
     (
-        { width, height, animationName, onComplete, onCompleteParams }: IScratchAnimationSpriteProps,
+        { width, height, animationName, onComplete }: IScratchAnimationSpriteProps,
         ref: Ref<IScratchAnimationHandle>
     ) => {
     
-    const { play, stop, reset } = useScratchAnimation(width, height, animationName, onComplete, onCompleteParams);
+    const { play, stop, reset } = useScratchAnimation(width, height, animationName, onComplete);
 
     useImperativeHandle(ref, () => {
         return {

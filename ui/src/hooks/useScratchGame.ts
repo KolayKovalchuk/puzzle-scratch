@@ -1,6 +1,7 @@
 import { IScratchCardHandle } from '@components/ScratchCard';
 import { IScratchAnimationHandle } from '@components/shared/ScratchAnimation/ScratchAnimation';
 import { IBuyBatchCardData, ICardData } from '@models/IBuyBatchCardData';
+import { useBuyCard } from '@services/api/cards.service';
 import { showAmountChangeLabel } from '@store/actions/appState.actions';
 import { updateUserBalance } from '@store/actions/user.actions';
 import { selectScratchCardTransitionTimeout } from '@store/selectors/config.selectors';
@@ -35,13 +36,16 @@ let swipeTimeout: NodeJS.Timeout | null = null;
 
 export function useScratchGame<CardData extends ICardData = ICardData>(
     batchId: string | undefined,
-    card: IBuyBatchCardData<CardData> | null,
-    buyCard: (batchId: string) => Promise<IBuyBatchCardData<CardData> | null>,
+    // card: IBuyBatchCardData<CardData> | null,
+    // buyCard: (batchId: string) => Promise<IBuyBatchCardData<CardData> | null>,
     scratchCardsRefConfig: { [key: string]: RefObject<IScratchCardHandle> },
     scratchAnimationRef: RefObject<IScratchAnimationHandle>,
 ) {
+    const { buyCard, card, loading: isCardBuying } = useBuyCard<CardData>();
+
     const [lastAction, setLastAction] = useState<'playBtnClick' | 'swipe' | 'scratch' | null>(null);
     const [isBigWinVisible, setIsBigWinVisible] = useState(false);
+    const [isScratchAnimationPlaying, setIsScratchAnimationPlaying] = useState(false);
 
     const defultScratchConfig = useMemo(() => _getScratchedStateConfig(scratchCardsRefConfig, false), [scratchCardsRefConfig]);
 
@@ -49,6 +53,16 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
     const isAllCardsScratched = Object.values(isCardsScratched).every((v) => v);
 
     const scratchCardTransitionTimeout = useSelector(selectScratchCardTransitionTimeout);
+
+    const resetAnimation = useCallback(() => {
+        scratchAnimationRef.current?.reset();
+        setIsScratchAnimationPlaying(false);
+    }, []);
+
+    const playAnimation = useCallback(() => {
+        scratchAnimationRef.current?.play();
+        setIsScratchAnimationPlaying(true);
+    }, []);
 
     const onCardScratched = useCallback((name: string) => {
         setIsCardsScratched((prevStat) => {
@@ -60,11 +74,11 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
     }, [isCardsScratched]);
 
     const onPlay = useCallback(async () => {
-        if (!batchId || isBigWinVisible) return
+        if (!batchId || isBigWinVisible || isScratchAnimationPlaying || isCardBuying) return
 
         _applyForEachScratchCardRef(scratchCardsRefConfig, (card) => {
             card.reset();
-            scratchAnimationRef.current?.reset();
+            resetAnimation();
         });
 
         const card = await buyCard(batchId)
@@ -75,14 +89,14 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
             card.reveal();
         });
 
-        scratchAnimationRef.current?.play();
+        playAnimation();
 
         setIsCardsScratched(_getScratchedStateConfig(scratchCardsRefConfig, true))
 
         setLastAction('playBtnClick');
 
         onScratchedEnought(card);
-    }, [batchId, buyCard, scratchCardsRefConfig, isBigWinVisible]);
+    }, [batchId, buyCard, scratchCardsRefConfig, isBigWinVisible, isScratchAnimationPlaying, isCardBuying]);
 
     const resetScratchState = useCallback(async () => {
         console.log('resetScratchState');
@@ -91,7 +105,7 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
 
         _applyForEachScratchCardRef(scratchCardsRefConfig, (card) => {
             card.reset()
-            scratchAnimationRef.current?.reset();
+            resetAnimation();
         });
         setLastAction('swipe');
         setIsCardsScratched(_getScratchedStateConfig(scratchCardsRefConfig, false));
@@ -119,10 +133,11 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
         setIsBigWinVisible(false);
     }, []);
 
-    const onScratchAnimationCompleted = useCallback((cardData: IBuyBatchCardData) => {
-        if (!cardData) return;
+    const onScratchAnimationCompleted = useCallback(() => {
+        setIsScratchAnimationPlaying(false);
+        if (!card) return;
 
-        if (cardData?.winning) {
+        if (card?.winning) {
             setIsBigWinVisible(true);
 
             if (timeout) {
@@ -136,9 +151,9 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
 
         }
 
-        store.dispatch(updateUserBalance({ total: cardData.rbaxBalance }));
-        store.dispatch(showAmountChangeLabel(cardData.cardData.winAmount));
-    }, []);
+        store.dispatch(updateUserBalance({ total: card.rbaxBalance }));
+        store.dispatch(showAmountChangeLabel(card.cardData.winAmount));
+    }, [card, card?.winning, scratchCardTransitionTimeout]);
 
     useEffect(() => {
         if (isAllCardsScratched) {
@@ -163,5 +178,6 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
         onScratchAnimationCompleted,
         onCardScratched,
         onScratchStarted,
+        card,
     }
 }

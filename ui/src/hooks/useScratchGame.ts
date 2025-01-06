@@ -1,4 +1,5 @@
 import { IScratchCardHandle } from '@components/ScratchCard';
+import { IScratchAnimationHandle } from '@components/shared/ScratchAnimation/ScratchAnimation';
 import { IBuyBatchCardData, ICardData } from '@models/IBuyBatchCardData';
 import { selectScratchCardTransitionTimeout } from '@store/selectors/config.selectors';
 import { RefObject, useCallback, useEffect, useMemo, useState } from 'react';
@@ -34,6 +35,8 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
     card: IBuyBatchCardData<CardData> | null,
     buyCard: (batchId: string) => Promise<IBuyBatchCardData<CardData> | null>,
     scratchCardsRefConfig: { [key: string]: RefObject<IScratchCardHandle> },
+    scratchAnimationRef: RefObject<IScratchAnimationHandle>,
+    isScratchMode = false,
 ) {
     const [lastAction, setLastAction] = useState<'playBtnClick' | 'swipe' | 'scratch' | null>(null);
     const [isBigWinVisible, setIsBigWinVisible] = useState(false);
@@ -57,13 +60,20 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
     const onPlay = useCallback(async () => {
         if (!batchId || isBigWinVisible) return
 
-        _applyForEachScratchCardRef(scratchCardsRefConfig, (card) => card.reset());
+        _applyForEachScratchCardRef(scratchCardsRefConfig, (card) => {
+            card.reset();
+        });
 
         const card = await buyCard(batchId)
+
+        if (!card) return;
 
         _applyForEachScratchCardRef(scratchCardsRefConfig, (card) => {
             card.reveal();
         });
+
+        scratchAnimationRef.current?.play();
+
         setIsCardsScratched(_getScratchedStateConfig(scratchCardsRefConfig, true))
 
         setLastAction('playBtnClick');
@@ -71,10 +81,15 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
         onScratchedEnought(card);
     }, [batchId, buyCard, scratchCardsRefConfig, isBigWinVisible]);
 
-    const onSwipe = useCallback(async () => {
+    const resetScratchState = useCallback(async () => {
+        console.log('resetScratchState');
+        
         if (!batchId || !isAllCardsScratched) return
 
-        _applyForEachScratchCardRef(scratchCardsRefConfig, (card) => card.reset());
+        _applyForEachScratchCardRef(scratchCardsRefConfig, (card) => {
+            card.reset()
+            scratchAnimationRef.current?.reset();
+        });
         setLastAction('swipe');
         setIsCardsScratched(_getScratchedStateConfig(scratchCardsRefConfig, false));
     }, [batchId, isAllCardsScratched, scratchCardsRefConfig]);
@@ -122,7 +137,7 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
             }
 
             swipeTimeout = setTimeout(() => {
-                onSwipe();
+                resetScratchState();
             }, scratchCardTransitionTimeout);
         }
     }, [isAllCardsScratched]);
@@ -132,7 +147,7 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
         onBigWinClicked,
         onCardScratched,
         onPlay,
-        onSwipe,
+        onSwipe: onPlay,
         onScratchStarted,
     }
 }

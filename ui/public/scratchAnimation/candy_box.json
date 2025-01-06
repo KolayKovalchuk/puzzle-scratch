@@ -1,0 +1,108 @@
+{
+"skeleton": {
+	"hash": "9Sua+y2ZFRc",
+	"spine": "4.1.24",
+	"x": -471,
+	"y": -686,
+	"width": 942,
+	"height": 1122.18,
+	"images": "./images/",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root", "y": -10 },
+	{ "name": "sss_1", "parent": "root", "x": -395.72, "y": 376.46 }
+],
+"slots": [
+	{ "name": "s_", "bone": "root", "attachment": "s_" },
+	{ "name": "sss_02", "bone": "sss_1", "attachment": "sss_05" },
+	{ "name": "sss_05", "bone": "sss_1" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"sss_02": {
+				"sss_04": { "x": 405.99, "y": 4.24, "width": 546, "height": 129 },
+				"sss_05": { "x": 405.37, "y": 4.72, "width": 546, "height": 130 }
+			},
+			"s_": {
+				"s_": {
+					"y": -214,
+					"width": 942,
+					"height": 924,
+					"sequence": { "count": 22, "start": 0, "digits": 2 }
+				}
+			}
+		}
+	}
+],
+"animations": {
+	"candy_action": {
+		"slots": {
+			"sss_02": {
+				"rgba": [
+					{ "time": 0.8, "color": "ffffffff" },
+					{ "time": 0.9333, "color": "ffffff00" }
+				],
+				"attachment": [
+					{ "name": "sss_04" },
+					{ "time": 0.0333, "name": "sss_05" }
+				]
+			},
+			"s_": {
+				"rgba": [
+					{ "time": 0.8, "color": "ffffffff" },
+					{ "time": 0.9333, "color": "ffffff00" }
+				]
+			}
+		},
+		"attachments": {
+			"default": {
+				"s_": {
+					"s_": {
+						"sequence": [
+							{ "time": 0.0667, "mode": "once", "delay": 0.0333 },
+							{ "time": 0.9333, "mode": "once", "index": 42 }
+						]
+					}
+				}
+			}
+		}
+	},
+	"candy_idle_end": {
+		"slots": {
+			"sss_02": {
+				"rgba": [
+					{ "color": "ffffff00" }
+				]
+			},
+			"s_": {
+				"rgba": [
+					{ "color": "ffffff00" }
+				]
+			}
+		},
+		"attachments": {
+			"default": {
+				"s_": {
+					"s_": {
+						"sequence": [
+							{ "mode": "once", "index": 42, "delay": 0.0333 }
+						]
+					}
+				}
+			}
+		}
+	},
+	"candy_idle_start": {
+		"slots": {
+			"sss_02": {
+				"attachment": [
+					{ "name": "sss_04" }
+				]
+			}
+		}
+	}
+}
+}

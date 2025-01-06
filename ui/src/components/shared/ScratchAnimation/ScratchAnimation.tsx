@@ -15,6 +15,10 @@ export enum ScratchAnimationName {
     santa_action = 'santa_action',
     santa_idle_start = 'santa_idle_start',
     santa_idle_end = 'santa_idle_end',
+
+    ice_action = 'ise_action',
+    ice_idle_start = 'ise_idle_start',
+    ice_idle_end = 'ise_idle_end',
 }
 
 export interface IScratchAnimationHandle {
@@ -62,6 +66,9 @@ function ScratchAnimationComponent(
     const { containerRef, dimensions } = useContainerDimensions();
     const width = props.width || dimensions.width;
     const height = props.height || dimensions.height;
+
+    console.log('ScratchAnimationComponent', width, height);
+    
 
     return ( <div className={styles.container} ref={containerRef}>
         <Stage

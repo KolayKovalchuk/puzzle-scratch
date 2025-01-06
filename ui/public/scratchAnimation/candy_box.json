@@ -1,17 +1,17 @@
 {
 "skeleton": {
-	"hash": "tb4Vtwjxnbw",
+	"hash": "Qv6aD/6RzPQ",
 	"spine": "4.1.24",
 	"x": -471,
 	"y": -686,
 	"width": 942,
-	"height": 1122.18,
+	"height": 1121.2,
 	"images": "./images/",
 	"audio": ""
 },
 "bones": [
 	{ "name": "root", "y": -10 },
-	{ "name": "sss_1", "parent": "root", "x": -395.72, "y": 376.46 }
+	{ "name": "sss_1", "parent": "root", "x": -405.09, "y": 376.46 }
 ],
 "slots": [
 	{ "name": "s_", "bone": "root", "attachment": "s_" },

@@ -16,7 +16,12 @@ export function useCounterAnimation(amount: number) {
         const stepSize = Math.round(Math.abs(end - start) / totalSteps) || 1;
 
         const timer = setInterval(() => {
-            start += stepSize;
+            if (isIncreasing) {
+                start += stepSize
+            } else {
+                start -= stepSize
+            }
+
             setDisplayAmount(start);
             if (
                 isIncreasing && start >= end

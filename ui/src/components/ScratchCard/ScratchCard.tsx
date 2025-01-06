@@ -7,9 +7,7 @@ import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
 import { useContainerDimensions } from '@hooks/useContainerDimensions';
 
 import { Application, ICanvas, Graphics as OriginGraphics, RenderTexture, Resource, Texture } from 'pixi.js';
-import { forwardRef, ReactElement, Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef } from 'react';
-import { CoverSpriteCell } from './CoverCell';
-import { useCoverData } from './hooks/useCoverData';
+import { forwardRef, ReactElement, Ref, useEffect, useImperativeHandle, useMemo, useRef } from 'react';
 import { GradientConfig } from './hooks/useGradientTexture';
 import { useIsPercentAreaScratched } from './hooks/useIsAreaScratched';
 import { useRenderBgGraphics } from './hooks/useRenderBgGraphics';
@@ -118,8 +116,8 @@ function ScratchCardElComponent({
     }, [isScratchedEnought]);
 
     const { bundle } = useLoadBundle<IScrathCardBundle>(bundleName)
-    const coverData = useCoverData(bundleName, coverTextureName, sizeX, sizeY);
-    const defaultRenderCoverCell = useCallback((props: IMatrixCellProps) => (<CoverSpriteCell {...props} />), []);
+    // const coverData = useCoverData(bundleName, coverTextureName, sizeX, sizeY);
+    // const defaultRenderCoverCell = useCallback((props: IMatrixCellProps) => (<CoverSpriteCell {...props} />), []);
 
     useImperativeHandle(ref, () => {
         return {
@@ -160,12 +158,13 @@ function ScratchCardElComponent({
         return (<Graphics draw={renderBgGraphics} />)
     }, [renderBgGraphics, width, height, bundle, bgTextureConfigArg]);
 
-    if (!bundle || !coverData.length) return null
+    // if (!bundle || !coverData.length) return null
+    if (!bundle) return null
 
     return (
         <Container width={width} height={height}>
             {renderCardBg}
-            <IconMatrix data={coverData} renderCell={renderCoverCell || defaultRenderCoverCell} config={coverMatrixConfig || matrixConfig} />
+            {/* <IconMatrix data={coverData} renderCell={renderCoverCell || defaultRenderCoverCell} config={coverMatrixConfig || matrixConfig} /> */}
             <Container
                 mask={renderTextureSprite}
                 pointermove={pointerMove}

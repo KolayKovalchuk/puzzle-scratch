@@ -158,6 +158,7 @@ export function IceBox() {
                     onMouseDown={onMouseDown}
                     onMouseUp={onMouseUp}
                     onMouseMove={onMouseMove}
+                    onClick={onPlay}
                 >
                     <div className={styles.animationContainer}>
                         <ScratchAnimation

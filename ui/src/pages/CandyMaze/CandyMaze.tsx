@@ -123,6 +123,7 @@ export function CandyMaze() {
                     onMouseDown={onMouseDown}
                     onMouseUp={onMouseUp}
                     onMouseMove={onMouseMove}
+                    onClick={onPlay}
                 >
                     <div className={styles.animationContainer}>
                         <ScratchAnimation

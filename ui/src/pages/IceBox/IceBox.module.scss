@@ -1,8 +1,8 @@
 @use '@styles/colors';
 @use '@styles/variables';
-@use '@styles/mixins';
+@use '@styles/game_mixins';
 
-@include mixins.gameMixin;
+@include game_mixins.gameMixin;
 
 .mainContainer {
     background: url('/iceBox/ice_box_bg.png') no-repeat;

@@ -40,6 +40,10 @@ const roundScratchCardMatrixConfig: IGameMatrixConfig = {
     cellPadding: 2
 }
 
+const mainScratchCardMatrixConfig: IGameMatrixConfig = {
+    cellPadding: 19
+}
+
 export function SantaSac() {
     const { batchId } = useParams();
 
@@ -156,6 +160,7 @@ export function SantaSac() {
 
                             sizeX={batch?.sizeX}
                             sizeY={batch?.sizeY}
+                            matrixConfig={mainScratchCardMatrixConfig}
 
                         // onScratchedEnought={onMainCardScratched}
                         // onScratchStarted={onScratchStarted}

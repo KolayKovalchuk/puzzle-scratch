@@ -9,5 +9,9 @@ export enum SantaSacScratchItemsEnum {
     'sportsCar' = 'sportsCar',
     'watch' = 'watch',
     'womanBag' = 'womanBag',
+    'christmassWreath' = 'christmassWreath',
+    'greenStar' = 'greenStar',
+    'santaChariot' = 'santaChariot',
+    'snowMan' = 'snowMan',
     'cover' = 'cover',
 }

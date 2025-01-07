@@ -122,7 +122,7 @@ export function useAssetsBundleLoader() {
             setLoading(true);
             await Assets.init({ manifest: ASSETS_MANIFEST, basePath: '/public' });
 
-            await Assets.backgroundLoadBundle(bundleNameList);
+            Assets.backgroundLoadBundle(bundleNameList);
             setLoading(false);
         };
 

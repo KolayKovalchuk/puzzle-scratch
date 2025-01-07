@@ -25,7 +25,7 @@ import { DiamondSpriteCell, IDiamondSpriteCellData, IDiamondSpriteCellProps } fr
 import { IceBoxSpriteCell, IIceBoxSpriteCellProps } from './components/IceBoxSpriteCell/IceBoxSpriteCell';
 import { useSpriteCellData } from './hooks/useSpriteCellData';
 
-import { redCardBgGradient } from '@components/ScratchCard/ScratchCardBgGradient';
+import { emptyGradientData } from '@components/ScratchCard/ScratchCardBgGradient';
 import { IScratchAnimationHandle, ScratchAnimation, ScratchAnimationName } from '@components/shared/ScratchAnimation/ScratchAnimation';
 import twoX_multiplaier from '@icons/iceBox/2x_multiplaier.svg';
 import fiveX_multiplaier from '@icons/iceBox/5x_multiplaier.svg';
@@ -49,6 +49,10 @@ const roundMatrixConfig: IGameMatrixConfig = {
 const daimondMatrixConfig: IGameMatrixConfig = {
     containerPadding: 0,
     cellPadding: -6,
+}
+
+const mainMatrixConfig: IGameMatrixConfig = {
+    cellPadding: 12
 }
 
 const diamondCardCoverTextureName: string[][] = [
@@ -125,9 +129,9 @@ export function IceBox() {
     const isLoading = isBatchLoading || isBundleLoading;
     const hiddenClass = isLoading || !bundle ? 'hidden' : '';
 
-    const x2Multiplier = card?.cardData.multi[0];
+    const x2Multiplier = card?.cardData.x2;
     const x2MultiplierText = typeof x2Multiplier === 'number' ? 'x' + x2Multiplier : '';
-    const x5Multiplier = card?.cardData.multi[1];
+    const x5Multiplier = card?.cardData.x5;
     const x5MultiplierText = typeof x5Multiplier === 'number' ? 'x' + x5Multiplier : '';
 
     const diamondScratchCardData: IDiamondSpriteCellData[][] = useMemo(() => {
@@ -149,8 +153,8 @@ export function IceBox() {
                 <Icon name={ice_box_logo} className={styles.iceBoxHeaderIcon} />
                 <Icon name={ice_box_header_diamonds_stars} className={styles.iceBoxHeaderIconDiamonds} />
             </div>
+            <TopPrizeLabel topPrize={batch?.totalPotentialPrizes || 0} className={styles.topPrizeLabel} />
             <div className={styles.content}>
-                <TopPrizeLabel topPrize={batch?.totalPotentialPrizes || 0} className={styles.topPrizeLabel} />
                 <div className={styles.scratchAreaContainer}
                     onTouchStart={onTouchStart}
                     onTouchEnd={onTouchEnd}
@@ -204,7 +208,7 @@ export function IceBox() {
 
                                 // coverTextureName={diamondCardCoverTextureName}
                                 matrixConfig={daimondMatrixConfig}
-                                gradientData={redCardBgGradient}
+                                gradientData={emptyGradientData}
 
                                 sizeX={diamondCardSizeX}
                                 sizeY={diamondCardSizeY}
@@ -225,6 +229,8 @@ export function IceBox() {
                                 className={styles.scratchCard}
                                 bundleName={bundleName}
                                 renderCell={renderCell}
+                                matrixConfig={mainMatrixConfig}
+
 
                                 sizeX={batch?.sizeX}
                                 sizeY={batch?.sizeY}
@@ -238,8 +244,8 @@ export function IceBox() {
                 <GameFooterBtn onPlay={onPlay}>
                     <Icon name={footer_stars} className={styles.footerStars} />
                 </GameFooterBtn>
-                <Footer />
             </div>
+            <Footer />
             {isBigWinVisible
                 && <BigWinScreen
                     winAmount={card?.winning || 0}

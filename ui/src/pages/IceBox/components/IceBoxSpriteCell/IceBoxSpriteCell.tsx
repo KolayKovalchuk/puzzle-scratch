@@ -58,8 +58,8 @@ export function IceBoxSpriteCell({ x, y, width, height, data }: IIceBoxSpriteCel
                     texture={goldenDiamond}
                     x={0}
                     y={0}
-                    width={width}
-                    height={height}
+                    width={width - 5}
+                    height={height - 5}
                 ></Sprite>
             </Container>
         )

@@ -23,9 +23,9 @@ export function useFitTextSize(text: string, targetWidth: number, textStyle: Par
             metrics = measureTextSize(currentFontSize);
         }
 
-        if (currentFontSize === 0) {
-            console.warn(`Text '${text}' is too long to fit the target width:${targetWidth}`);
-        }
+        // if (currentFontSize === 0) {
+        //     console.warn(`Text '${text}' is too long to fit the target width:${targetWidth}`);
+        // }
 
         setFontSize(currentFontSize);
     }, [text, targetWidth, initialFontSize]);

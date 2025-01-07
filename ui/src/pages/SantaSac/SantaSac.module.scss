@@ -26,9 +26,6 @@
 
 .multiplierContainer {
     width: 100%;
-    // margin-bottom: -26px;
-    height: 90px;
-    min-height: 90px;
 }
 
 .scratchAreaContainer {
@@ -38,13 +35,13 @@
 .animationContainer {
     height: calc(100% - 10px);
     aspect-ratio: 942/1168.9;
-    margin-top: 1px;
+    margin-top: 2px;
 }
 
 .roundScratchCard {
-    height: 100%;
     aspect-ratio: 1/1;
-    width: auto;
+    width: 30.2222%;
+
 }
 
 .toyChainContainer {
@@ -68,7 +65,7 @@
 
 .roundMulriplierIcon {
     position: absolute;
-    top: 14%;
+    top: 13%;
     left: 49.4%;
     transform: translate(-50%, -50%);
     z-index: 1;

@@ -17,11 +17,12 @@ export function DiamondSpriteCell({ x, y, width, height, data }: IDiamondSpriteC
 
     return (
         <StyledTextPixiEl
-            dimensions={{ width, height }}
+            dimensions={{ width: width - 2, height }}
             text={data.textureName.toString()}
             textStyles={textStyles}
             x={x}
             y={y}
             yShift={0.5}
+            valueForMeasure={'1000'}
         />)
 };

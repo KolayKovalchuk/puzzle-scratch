@@ -1,13 +1,13 @@
 import { useFitTextSize } from '@hooks/useFitTextSize';
 import { Container, Text } from '@pixi/react';
 import { ITextStyle, TextStyle } from 'pixi.js';
-import { useMemo } from 'react';
 import { DefaultTextStyleConfig } from '../DefaultTextStyleConfig';
 
 
 export interface IStyledTextPixiElProps {
     dimensions: { width: number, height: number };
     text: string;
+    valueForMeasure?: string;
     textStyles?: Partial<ITextStyle>;
     textFitCoefficient?: number;
 
@@ -33,6 +33,7 @@ export function StyledTextPixiEl({
     yShift = 0.35,
 
     shouldFitFontSize = true,
+    valueForMeasure = text,
 }: IStyledTextPixiElProps) {
 
     const textStyleConfig: Partial<ITextStyle> = {
@@ -40,7 +41,7 @@ export function StyledTextPixiEl({
         ...textStyles,
     };
 
-    const fittedFontSize = useFitTextSize(text, dimensions.width * textFitCoefficient, textStyleConfig);
+    const fittedFontSize = useFitTextSize(valueForMeasure, dimensions.width * textFitCoefficient, textStyleConfig);
 
     if (shouldFitFontSize) {
         textStyleConfig.fontSize = fittedFontSize || textStyleConfig.fontSize;

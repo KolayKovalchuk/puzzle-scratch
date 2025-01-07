@@ -10,7 +10,7 @@
 	"audio": ""
 },
 "bones": [
-	{ "name": "root" },
+	{ "name": "root", "y": -44 },
 	{ "name": "ss_0", "parent": "root", "x": -395.72, "y": 376.46 },
 	{ "name": "ss_1", "parent": "root", "x": 398.76, "y": 373.41 },
 	{ "name": "sss_1", "parent": "root", "x": -395.72, "y": 376.46 }

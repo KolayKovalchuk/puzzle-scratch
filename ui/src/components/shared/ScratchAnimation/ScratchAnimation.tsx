@@ -67,9 +67,6 @@ function ScratchAnimationComponent(
     const width = props.width || dimensions.width;
     const height = props.height || dimensions.height;
 
-    console.log('ScratchAnimationComponent', width, height);
-    
-
     return ( <div className={styles.container} ref={containerRef}>
         <Stage
             width={width}

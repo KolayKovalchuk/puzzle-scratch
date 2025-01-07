@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import createSvgSpritePlugin from "vite-plugin-svg-sprite";
+import restart from 'vite-plugin-restart';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -17,6 +18,12 @@ export default defineConfig({
         createSvgSpritePlugin({
             include: '**/src/assets/icons/**/*.svg',
         }),
+        restart({
+            restart: [
+                './public/**/*', // Path to your JSON file
+                // Add more paths if needed
+            ]
+        })
     ],
     base: process.env.VITE_BASE_URL || '/',
     resolve: {

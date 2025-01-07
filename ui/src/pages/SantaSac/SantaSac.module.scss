@@ -1,8 +1,8 @@
 @use '@styles/colors';
 @use '@styles/variables';
-@use '@styles/mixins';
+@use '@styles/game_mixins';
 
-@include mixins.gameMixin;
+@include game_mixins.gameMixin;
 
 .mainContainer {
     background: url('/santa_sac_bg.png') no-repeat center;
@@ -32,7 +32,13 @@
 }
 
 .scratchAreaContainer {
-    justify-content: center;
+    justify-content: flex-start;
+}
+
+.animationContainer {
+    height: calc(100% - 10px);
+    aspect-ratio: 942/1168.9;
+    margin-top: 1px;
 }
 
 .roundScratchCard {

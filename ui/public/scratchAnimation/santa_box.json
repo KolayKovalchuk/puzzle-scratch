@@ -10,7 +10,7 @@
 	"audio": ""
 },
 "bones": [
-	{ "name": "root", "y": -10 }
+	{ "name": "root", "y": -44 }
 ],
 "slots": [
 	{ "name": "s_", "bone": "root", "attachment": "s_" },
@@ -21,8 +21,8 @@
 		"name": "default",
 		"attachments": {
 			"ss_4": {
-				"ss_4": { "x": 16.36, "y": 374.9, "width": 232, "height": 236 },
-				"ss_5": { "x": 23.91, "y": 374.9, "width": 190, "height": 235 }
+				"ss_4": { "x": 0, "y": 374.9, "width": 232, "height": 236 },
+				"ss_5": { "x": 0, "y": 374.9, "width": 190, "height": 235 }
 			},
 			"s_": {
 				"s_": {

@@ -36,14 +36,14 @@ const headerTextStyles: Partial<ITextStyle> = {
     ...GameCellTextStyle,
     dropShadow: false,
     lineHeight: 1,
-    strokeThickness: 1,
+    strokeThickness: 2,
 }
 
 const bonusAmountTextStyles: Partial<ITextStyle> = {
     ...DefaultTextStyleConfig,
     dropShadow: false,
     lineHeight: 1,
-    strokeThickness: 1,
+    strokeThickness: 2,
 }
 
 export interface IDailyBonusContainerConfig {
@@ -67,14 +67,15 @@ export function DailyBonusNotificationBody({ data }: IDailyBonusNotificationBody
         if (!dayliBonusConfig) return
 
         const config = dayliBonusConfig.map<IDailyBonusContainerConfig>((bonus, index) => {
-            const headerText: string = isDayToday(index, data.day)
+            const isToday = isDayToday(index, data.day);
+            const headerText: string = isToday
                 ? selectLocalValue('txt.dailybonus.today')(store.getState())
                 : selectLocalValueWithVars('txt.dailybonus.day', index + 1)(store.getState());
 
             return {
                 bonus: bonus,
                 bgClass: getDayContainerBgIconClass(index, dayliBonusConfig.length, data.day),
-                coinIconName: getCoinIcon(index),
+                coinIconName: getCoinIcon(index, isToday),
                 headerText,
             }
         });

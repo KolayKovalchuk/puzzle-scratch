@@ -117,7 +117,7 @@ export function CandyMaze() {
                 <Icon name={candy_stars_bg} className={styles.candyStarsBg} />
                 <Icon name={shining} className={styles.candyMazeShining} />
                 <div className={styles.radialShining}></div>
-                <TopPrizeLabel topPrize={batch?.totalPotentialPrizes || 0} />
+                <TopPrizeLabel topPrize={batch?.maxPrize || 0} />
 
                 <div className={styles.scratchAreaContainer}
                     onTouchStart={onTouchStart}
@@ -175,7 +175,7 @@ export function CandyMaze() {
             {isBigWinVisible
                 && <BigWinScreen
                     winAmount={card?.winning || 0}
-                    topPrize={batch?.totalPotentialPrizes || 0}
+                    winType={card?.winType}
                     onClick={onBigWinClicked}
                 />}
         </div>

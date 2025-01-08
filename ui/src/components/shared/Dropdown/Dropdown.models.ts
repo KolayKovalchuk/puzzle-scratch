@@ -8,18 +8,21 @@ export interface IDropdownItem {
 export interface ISelectedDropdownItemProps {
     item: IDropdownItem,
     isOpen: boolean,
+    locale?: string
 }
 
 export interface IDropdownItemProps {
     item: IDropdownItem,
     selected?: boolean,
     onClick?: (item: IDropdownItem) => void
+    locale?: string
 }
 
 export interface IDropdownListProps {
     items: IDropdownItem[],
     selectedItem?: IDropdownItem | null
     handleSelect: (item: IDropdownItem) => void
+    locale?: string
 }
 
 export interface IDropdownProps {
@@ -29,4 +32,5 @@ export interface IDropdownProps {
     items: IDropdownItem[]
     onSelect: (item: IDropdownItem) => void
     onOpenClose?: (isOpen: boolean) => void
+    locale?: string
 }

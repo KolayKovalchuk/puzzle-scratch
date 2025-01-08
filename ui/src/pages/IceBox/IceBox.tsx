@@ -129,10 +129,8 @@ export function IceBox() {
     const isLoading = isBatchLoading || isBundleLoading;
     const hiddenClass = isLoading || !bundle ? 'hidden' : '';
 
-    const x2Multiplier = card?.cardData.x2;
-    const x2MultiplierText = typeof x2Multiplier === 'number' ? 'x' + x2Multiplier : '';
-    const x5Multiplier = card?.cardData.x5;
-    const x5MultiplierText = typeof x5Multiplier === 'number' ? 'x' + x5Multiplier : '';
+    const x2Multiplier = card?.cardData.x2.toString() || '';
+    const x5Multiplier = card?.cardData.x5.toString() || '';
 
     const diamondScratchCardData: IDiamondSpriteCellData[][] = useMemo(() => {
         if (!card) return [[]];
@@ -153,7 +151,7 @@ export function IceBox() {
                 <Icon name={ice_box_logo} className={styles.iceBoxHeaderIcon} />
                 <Icon name={ice_box_header_diamonds_stars} className={styles.iceBoxHeaderIconDiamonds} />
             </div>
-            <TopPrizeLabel topPrize={batch?.totalPotentialPrizes || 0} className={styles.topPrizeLabel} />
+            <TopPrizeLabel topPrize={batch?.maxPrize || 0} className={styles.topPrizeLabel} />
             <div className={styles.content}>
                 <div className={styles.scratchAreaContainer}
                     onTouchStart={onTouchStart}
@@ -176,7 +174,7 @@ export function IceBox() {
                         <RoundScratchCard
                             ref={x2MultyplierScratchCardRef}
                             className={styles.multiplierScratchCard}
-                            cellData={x2MultiplierText}
+                            cellData={x2Multiplier}
                             bundleName={ICE_BOX_BUNDLE.name}
                             bgTextureConfig={bgTextureConfig}
                             matrixConfig={roundMatrixConfig}
@@ -189,7 +187,7 @@ export function IceBox() {
                         <RoundScratchCard
                             ref={x5MultyplierScratchCardRef}
                             className={styles.multiplierScratchCard}
-                            cellData={x5MultiplierText}
+                            cellData={x5Multiplier}
                             bundleName={ICE_BOX_BUNDLE.name}
                             bgTextureConfig={bgTextureConfig}
                             matrixConfig={roundMatrixConfig}
@@ -249,7 +247,7 @@ export function IceBox() {
             {isBigWinVisible
                 && <BigWinScreen
                     winAmount={card?.winning || 0}
-                    topPrize={batch?.totalPotentialPrizes || 0}
+                    winType={card?.winType}
                     onClick={onBigWinClicked}
                 />}
         </div>

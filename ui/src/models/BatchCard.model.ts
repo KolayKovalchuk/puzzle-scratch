@@ -19,6 +19,7 @@ export class BatchCard {
     pricePerCard: number;
     sizeX: number;
     sizeY: number;
+    maxPrize: number;
 
     constructor(data: BatchCard) {
         this.batchId = data.batchId;
@@ -34,5 +35,6 @@ export class BatchCard {
         this.pricePerCard = data.pricePerCard;
         this.sizeX = data.sizeX;
         this.sizeY = data.sizeY;
+        this.maxPrize = data.maxPrize;
     }
 }

@@ -153,7 +153,7 @@ export function IceBox() {
                 <Icon name={ice_box_logo} className={styles.iceBoxHeaderIcon} />
                 <Icon name={ice_box_header_diamonds_stars} className={styles.iceBoxHeaderIconDiamonds} />
             </div>
-            <TopPrizeLabel topPrize={batch?.totalPotentialPrizes || 0} className={styles.topPrizeLabel} />
+            <TopPrizeLabel topPrize={batch?.maxPrize || 0} className={styles.topPrizeLabel} />
             <div className={styles.content}>
                 <div className={styles.scratchAreaContainer}
                     onTouchStart={onTouchStart}

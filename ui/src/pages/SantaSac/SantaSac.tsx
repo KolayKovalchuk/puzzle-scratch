@@ -111,7 +111,7 @@ export function SantaSac() {
                 <Icon name={santa_sac} className={styles.headerIcon} />
             </div>
             <div className={styles.content}>
-                <TopPrizeLabel className={styles.topPrizeLabel} topPrize={batch?.totalPotentialPrizes || 0} />
+                <TopPrizeLabel className={styles.topPrizeLabel} topPrize={batch?.maxPrize || 0} />
 
                 <div className={styles.scratchAreaContainer}
                     onTouchStart={onTouchStart}

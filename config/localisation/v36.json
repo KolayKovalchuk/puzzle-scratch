@@ -283,7 +283,7 @@
     "pt-BR": "Ao tocar em “Concordo”, você confirma que tem mais de 18 anos e concorda com os Termos de Serviço disponíveis <link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">aqui</link>.",
     "VI": "Bằng cách nhấn vào 'Đồng ý', bạn xác nhận rằng mình trên 18 tuổi và đồng ý với Điều khoản dịch vụ có sẵn <link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">tại đây</link>.",
     "ES": "Al tocar \"Aceptar\", confirma que es mayor de 18 años y acepta los Términos de servicio disponibles <link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">aquí</link>.",
-    "AR": "من خلال النقر على \"موافقة\"، فإنك تؤكد أن عمرك يزيد عن 18 عامًا وتوافق على شروط الخدمة المتاحة <link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">هنا</link>.",
+    "AR": "من خلال النقر على \"موافقة\"، فإنك تؤكد أن عمرك يزيد عن 18 عامًا وتوافق على شروط الخدمة المتوفرة <link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">هنا</link>.",
     "FIL": "Sa pamamagitan ng pag-tap sa ‘Sumasang-ayon,’ kinukumpirma mong lampas ka na sa 18 at sumasang-ayon sa Mga Tuntunin ng Serbisyo na available <link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">dito</link>.",
     "HI": "सहमत' पर टैप करके आप पुष्टि करते हैं कि आपकी उम्र 18 वर्ष से अधिक है और आप <link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">यहां</link> उपलब्ध सेवा की शर्तों से सहमत हैं।"
   },
@@ -326,7 +326,7 @@
   {
     "Key": "txt.tos.title",
     "EN": "Terms of Service",
-    "UK": "Умови надання послуг",
+    "UK": "Умови обслуговування",
     "RU": "Условия обслуживания",
     "pt-BR": "Termos de Serviço",
     "VI": "Điều khoản dịch vụ",
@@ -470,14 +470,14 @@
   {
     "Key": "txt.dailybonus.today",
     "EN": "Today",
-    "UK": "Today",
-    "RU": "Today",
-    "pt-BR": "Today",
-    "VI": "Today",
-    "ES": "Today",
-    "AR": "Today",
-    "FIL": "Today",
-    "HI": "Today"
+    "UK": "Сьогодні",
+    "RU": "Сегодня",
+    "pt-BR": "Hoje",
+    "VI": "Hôm nay",
+    "ES": "Hoy",
+    "AR": "اليوم",
+    "FIL": "Ngayong araw",
+    "HI": "आज"
   },
   {
     "Key": "txt.affiliate.fail",
@@ -793,15 +793,15 @@
   },
   {
     "Key": "txt.wallet.balance",
-    "EN": "Balance",
-    "UK": "Баланс",
-    "RU": "Баланс",
-    "pt-BR": "Equilíbrio",
-    "VI": "Sự cân bằng",
-    "ES": "Balance",
-    "AR": "توازن",
-    "FIL": "Balanse",
-    "HI": "संतुलन"
+    "EN": "Balance:",
+    "UK": "Баланс:",
+    "RU": "Баланс:",
+    "pt-BR": "Equilíbrio:",
+    "VI": "Sự cân bằng:",
+    "ES": "Balance:",
+    "AR": "توازن:",
+    "FIL": "Balanse:",
+    "HI": "संतुलन:"
   },
   {
     "Key": "txt.button.deposit",
@@ -817,15 +817,15 @@
   },
   {
     "Key": "txt.wallet.withdrawable",
-    "EN": "Withdrawable",
-    "UK": "Можна вивести",
-    "RU": "Можно вывести",
-    "pt-BR": "Retirável",
-    "VI": "Có thể rút",
-    "ES": "Retirable",
-    "AR": "قابل للسحب",
-    "FIL": "Maaaring i-withdraw",
-    "HI": "निकासी योग्य"
+    "EN": "Withdrawable:",
+    "UK": "Withdrawable:",
+    "RU": "Можно вывести:",
+    "pt-BR": "Retirável:",
+    "VI": "Có thể rút:",
+    "ES": "Retirable:",
+    "AR": "قابل للسحب:",
+    "FIL": "Maaaring i-withdraw:",
+    "HI": "निकासी योग्य:"
   },
   {
     "Key": "txt.button.withdraw",
@@ -1022,7 +1022,7 @@
   {
     "Key": "shop.stars.popup.success.title",
     "EN": "Deposit Successful",
-    "UK": "Депозит виконано",
+    "UK": "Депозит успішно",
     "RU": "Депозит успешен",
     "pt-BR": "Depósito bem-sucedido",
     "VI": "Gửi tiền thành công",
@@ -1129,7 +1129,7 @@
   },
   {
     "Key": "txt.transfer.wallet",
-    "EN": "Address::",
+    "EN": "Address:",
     "UK": "Адреса:",
     "RU": "Адрес:",
     "pt-BR": "Endereço:",
@@ -1153,39 +1153,51 @@
   },
   {
     "Key": "txt.transfer.terms.firstItem",
-    "EN": "<$var1>1 = (<$icon1>) <$var2>",
-    "UK": "<$var1>1 = (<$icon1>) <$var2>",
-    "RU": "<$var1>1 = (<$icon1>) <$var2>",
-    "pt-BR": "<$var1>1 = (<$icon1>) <$var2>",
-    "VI": "<$var1>1 = (<$icon1>) <$var2>",
-    "ES": "<$var1>1 = (<$icon1>) <$var2>",
-    "AR": "<$var1>1 = (<$icon1>) <$var2>",
-    "FIL": "<$var1>1 = (<$icon1>) <$var2>",
-    "HI": "<$var1>1 = (<$icon1>) <$var2>"
+    "EN": "<$var1> 1 = <$icon1> <$var2>",
+    "UK": "<$var1> 1 = <$icon1> <$var2>",
+    "RU": "<$var1> 1 = <$icon1> <$var2>",
+    "pt-BR": "<$var1> 1 = <$icon1> <$var2>",
+    "VI": "<$var1> 1 = <$icon1> <$var2>",
+    "ES": "<$var1> 1 = (<$icon1>) <$var2>",
+    "AR": "<$var1>1 = <$icon1> <$var2>",
+    "FIL": "<$var1> 1 = <$icon1> <$var2>",
+    "HI": "<$var1> 1 = <$icon1> <$var2>"
   },
   {
     "Key": "txt.transfer.terms",
-    "EN": "•Send tokens on TON network Only\n•Minimum deposit amount is <$var1>.\n•Send funds to the following wallet. Make sure you specify the tag.\n•Conversion is estimated and final conversion will be decided on the moment of processing.",
-    "UK": "•Надсилайте токени тільки в мережі TON        \n•Мінімальна сума депозиту — <$var1>.        \n•Надішліть кошти на наступний гаманець. Обов’язково вкажіть тег.        \n•Конверсія є приблизною, остаточна буде визначена в момент обробки.",
-    "RU": "•Отправляйте токены только в сети TON        \n•Минимальная сумма депозита — <$var1>.        \n•Отправьте средства на следующий кошелек. Убедитесь, что указали тег.        \n•Конвертация предварительная, окончательная будет определена в момент обработки.",
-    "pt-BR": "•Envie tokens apenas na rede TON        \n•O valor mínimo de depósito é <$var1>.        \n•Envie os fundos para a carteira a seguir. Certifique-se de especificar a tag.        \n•A conversão é estimada e será definida no momento do processamento.",
-    "VI": "•Chỉ gửi token trên mạng TON        \n•Số tiền gửi tối thiểu là <$var1>.        \n•Gửi tiền vào ví sau đây. Hãy chắc chắn bạn đã nhập thẻ.        \n•Tỷ lệ chuyển đổi là ước tính và sẽ được xác định tại thời điểm xử lý.",
-    "ES": "•Envía tokens solo en la red TON        \n•La cantidad mínima de depósito es <$var1>.        \n•Envía los fondos a la siguiente cartera. Asegúrate de especificar la etiqueta.        \n•La conversión es estimada y se definirá en el momento del procesamiento.",
-    "AR": "•أرسل الرموز المميزة على شبكة TON فقط        \n•الحد الأدنى لمبلغ الإيداع هو <$var1>.        \n•أرسل الأموال إلى المحفظة التالية. تأكد من تحديد العلامة.        \n•التحويل تقديري، وسيتم تحديده نهائيًا وقت المعالجة.",
-    "FIL": "•Magpadala ng mga token sa TON network lamang        \n•Ang pinakamababang halaga ng deposito ay <$var1>.        \n•Ipadala ang mga pondo sa sumusunod na wallet. Siguraduhing tukuyin ang tag.        \n•Ang conversion ay tinatayang at tatapusin sa oras ng pagproseso.",
-    "HI": "•टोकन केवल TON नेटवर्क पर भेजें        \n•न्यूनतम जमा राशि <$var1> है।        \n•निम्नलिखित वॉलेट में फंड भेजें। सुनिश्चित करें कि आपने टैग निर्दिष्ट किया है।        \n•रूपांतरण अनुमानित है और इसे संसाधन के समय अंतिम रूप दिया जाएगा।"
+    "EN": "•Send tokens on TON network Only.\n•Minimum deposit amount is <$var1> <$var2>.\n•Send funds to the following wallet. Make sure you specify the tag.\n•Conversion is estimated and final conversion will be decided on the moment of processing.",
+    "UK": "•Надсилайте токени тільки в мережі TON.       \n•Мінімальна сума депозиту — <$var1> <$var2>.        \n•Надішліть кошти на наступний гаманець. Обов’язково вкажіть тег.        \n•Конверсія є приблизною, остаточна буде визначена в момент обробки.",
+    "RU": "•Отправляйте токены только в сети TON.        \n•Минимальная сумма депозита — <$var1> <$var2>.        \n•Отправьте средства на следующий кошелек. Убедитесь, что указали тег.        \n•Конвертация предварительная, окончательная будет определена в момент обработки.",
+    "pt-BR": "•Envie tokens apenas na rede TON.        \n•O valor mínimo de depósito é <$var1> <$var2>.        \n•Envie os fundos para a carteira a seguir. Certifique-se de especificar a tag.        \n•A conversão é estimada e será definida no momento do processamento.",
+    "VI": "•Chỉ gửi token trên mạng TON.        \n•Số tiền gửi tối thiểu là <$var1> <$var2>.        \n•Gửi tiền vào ví sau đây. Hãy chắc chắn bạn đã nhập thẻ.        \n•Tỷ lệ chuyển đổi là ước tính và sẽ được xác định tại thời điểm xử lý.",
+    "ES": "•Envía tokens solo en la red TON.        \n•La cantidad mínima de depósito es <$var1> <$var2>.        \n•Envía los fondos a la siguiente cartera. Asegúrate de especificar la etiqueta.        \n•La conversión es estimada y se definirá en el momento del procesamiento.",
+    "AR": "•أرسل الرموز المميزة على شبكة TON فقط .       \n•الحد الأدنى لمبلغ الإيداع هو <$var1> <$var2>.        \n•أرسل الأموال إلى المحفظة التالية. تأكد من تحديد العلامة.        \n•التحويل تقديري، وسيتم تحديده نهائيًا وقت المعالجة.",
+    "FIL": "•Magpadala ng mga token sa TON network lamang.        \n•Ang pinakamababang halaga ng deposito ay <$var1> <$var2>.        \n•Ipadala ang mga pondo sa sumusunod na wallet. Siguraduhing tukuyin ang tag.        \n•Ang conversion ay tinatayang at tatapusin sa oras ng pagproseso.",
+    "HI": "•टोकन केवल TON नेटवर्क पर भेजें।        \n•न्यूनतम जमा राशि <$var1>  <$var2> है।        \n•निम्नलिखित वॉलेट में फंड भेजें। सुनिश्चित करें कि आपने टैग निर्दिष्ट किया है।        \n•रूपांतरण अनुमानित है और इसे संसाधन के समय अंतिम रूप दिया जाएगा।"
   },
   {
-    "Key": "txt.withdrawal.title",
-    "EN": "RBAX Withdrawal",
-    "UK": "Виведення RBAX",
-    "RU": "Вывод RBAX",
-    "pt-BR": "Retirada de RBAX",
-    "VI": "Rút RBAX",
-    "ES": "Retiro de RBAX",
-    "AR": "سحب RBAX",
-    "FIL": "Pag-withdraw ng RBAX",
-    "HI": "RBAX निकासी"
+    "Key": "txt.transfer.popup.success.title",
+    "EN": "Deposit Successful",
+    "UK": "Депозит успішно",
+    "RU": "Депозит успешен",
+    "pt-BR": "Depósito bem-sucedido",
+    "VI": "Gửi tiền thành công",
+    "ES": "Depósito exitoso",
+    "AR": "تم الإيداع بنجاح",
+    "FIL": "Matagumpay ang Deposit",
+    "HI": "जमा सफल"
+  },
+  {
+    "Key": "txt.transfer.popup.success",
+    "EN": "The amount of <$var1> RBAX was deposited to your balance.",
+    "UK": "Сума <$var1> RBAX була зарахована на ваш баланс",
+    "RU": "Сумма <$var1> RBAX была зачислена на ваш баланс",
+    "pt-BR": "A quantia de <$var1> RBAX foi depositada no seu saldo",
+    "VI": "Số tiền <$var1> RBAX đã được nạp vào số dư của bạn",
+    "ES": "La cantidad de <$var1> RBAX se depositó en tu saldo",
+    "AR": "تم إيداع مبلغ  <$var1> RBAX في رصيدك",
+    "FIL": "Ang halaga ng <$var1> RBAX ay naidagdag sa iyong balanse",
+    "HI": "<$var1> RBAX की राशि आपके बैलेंस में जमा की गई थी"
   },
   {
     "Key": "txt.withdrawal.addInst",
@@ -1329,7 +1341,7 @@
     "ES": "¡Los premios suman hasta 1.000.000 RBAX!",
     "AR": "مجموع الجوائز يصل إلى 1,000,000 RBAX!",
     "FIL": "Ang mga premyo ay sum hanggang 1,000,000 RBAX!",
-    "HI": "पुरस्कारों की राशि 1,000,000 RBAX तक है!"
+    "HI": "पुरस्कारों की राशि 1,000,000 आरबीएक्स तक है!"
   },
   {
     "Key": "puzzle.gallery.santasac",
@@ -1341,7 +1353,7 @@
     "ES": "¡Los premios suman hasta 1.000.000 RBAX!",
     "AR": "مجموع الجوائز يصل إلى 1,000,000 RBAX!",
     "FIL": "Ang mga premyo ay sum hanggang 1,000,000 RBAX!",
-    "HI": "पुरस्कारों की राशि 1,000,000 RBAX तक है!"
+    "HI": "पुरस्कारों की राशि 1,000,000 आरबीएक्स तक है!"
   },
   {
     "Key": "puzzle.gallery.candymaze",
@@ -1353,7 +1365,7 @@
     "ES": "¡Los premios suman hasta 1.000.000 RBAX!",
     "AR": "مجموع الجوائز يصل إلى 1,000,000 RBAX!",
     "FIL": "Ang mga premyo ay sum hanggang 1,000,000 RBAX!",
-    "HI": "पुरस्कारों की राशि 1,000,000 RBAX तक है!"
+    "HI": "पुरस्कारों की राशि 1,000,000 आरबीएक्स तक है!"
   },
   {
     "Key": "txt.invite.roles",

@@ -4,7 +4,7 @@ import { IDropdownListProps } from './Dropdown.models'
 import { DropdownItem } from './DropdownItem'
 
 
-export function DropdownList({ items, handleSelect, selectedItem }: IDropdownListProps) {
+export function DropdownList({ items, locale, handleSelect, selectedItem }: IDropdownListProps) {
     return (
         <ul className={styles.dropdownList}>
             {items.map((item, index) => (
@@ -13,6 +13,7 @@ export function DropdownList({ items, handleSelect, selectedItem }: IDropdownLis
                     key={index}
                     item={item}
                     onClick={(item) => handleSelect(item)}
+                    locale={locale}
                 />
             ))}
         </ul>

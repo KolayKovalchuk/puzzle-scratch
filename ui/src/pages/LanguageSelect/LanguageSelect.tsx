@@ -96,15 +96,14 @@ export function LanguageSelect({}: ILanguageSelectProps) {
 
     useEffect(() => {
         if (preselectedLocale) {
-            store.dispatch(updateUserLocale(preselectedLocale.data));
             setSelectedLocale(preselectedLocale)
         }
     }, [preselectedLocale]);
 
-    const headerText = useSelector(selectLocalValue('txt.lang.title'))
-    const secondHeaderText = useSelector(selectLocalValue('txt.languageSelect.selectYourLanguage'))
-    const dropdownLabel = useSelector(selectLocalValue('txt.lang.language'))
-    const buttonText = useSelector(selectLocalValue('txt.btn.select'))
+    const headerText = useSelector(selectLocalValue('txt.lang.title', selectedLocale?.data))
+    const secondHeaderText = useSelector(selectLocalValue('txt.languageSelect.selectYourLanguage', selectedLocale?.data))
+    const dropdownLabel = useSelector(selectLocalValue('txt.lang.language', selectedLocale?.data))
+    const buttonText = useSelector(selectLocalValue('txt.btn.select', selectedLocale?.data))
 
 
     const { containerRef, dimensions } = useContainerDimensions();
@@ -127,9 +126,9 @@ export function LanguageSelect({}: ILanguageSelectProps) {
                     <Dropdown
                         items={supportLocaleItems}
                         selectedItem={preselectedLocale}
+                        locale={selectedLocale?.data}
                         onSelect={(data) => {
                             setSelectedLocale(data)
-                            store.dispatch(updateUserLocale(data.data));
                         }}
                     />
                 </div>

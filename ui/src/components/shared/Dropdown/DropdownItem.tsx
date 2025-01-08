@@ -7,13 +7,13 @@ import styles from './Dropdown.module.scss'
 import arrowIcon from '@icons/arrow.svg';
 
 
-export function DropdownItem({ item, selected, onClick = () => {} }: IDropdownItemProps) {
+export function DropdownItem({ item, selected, locale, onClick = () => {} }: IDropdownItemProps) {
     let className = styles.dropdownListItem
     if (selected) {
         className += ` ${styles.selected}`
     }
 
-    const label = useSelector(selectLocalValue(item.text))
+    const label = useSelector(selectLocalValue(item.text, locale))
 
     return (
         <div className={className} onClick={() => onClick(item)}>
@@ -23,8 +23,8 @@ export function DropdownItem({ item, selected, onClick = () => {} }: IDropdownIt
     )
 }
 
-export function SelectedDropdownItem({ item, isOpen }: ISelectedDropdownItemProps) {
-    const label = useSelector(selectLocalValue(item.text))
+export function SelectedDropdownItem({ item, isOpen, locale }: ISelectedDropdownItemProps) {
+    const label = useSelector(selectLocalValue(item.text, locale))
 
     return (
         <div className={`${styles.dropdownListItem} ${isOpen ? styles.open : ''}`}>

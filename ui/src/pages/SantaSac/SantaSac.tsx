@@ -173,7 +173,7 @@ export function SantaSac() {
             {isBigWinVisible
                 && <BigWinScreen
                     winAmount={card?.winning || 0}
-                    topPrize={batch?.totalPotentialPrizes || 0}
+                    winType={card?.winType}
                     onClick={onBigWinClicked}
                 />}
         </div>

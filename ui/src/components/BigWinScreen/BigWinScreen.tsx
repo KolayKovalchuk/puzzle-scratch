@@ -6,6 +6,7 @@ import { Icon } from '@components/shared/Icon';
 import { selectScratchCardTransitionTimeout } from '@store/selectors/config.selectors';
 import { useSelector } from 'react-redux';
 
+import { WinType } from '@models/IBuyBatchCardData';
 import { WinStyledText } from '@components/shared/StyledText';
 import { formatNumber } from '@utils/formatters/formatNumber';
 import { getCoinAnimationName } from '@utils/getCoinAnimationName';
@@ -16,17 +17,17 @@ import robo_token_gold from '@icons/robo_token_gold.svg';
 
 export interface IBigWinScreenProps {
     winAmount: number;
-    topPrize: number;
+    winType?: WinType;
     className?: string;
     onClick?: () => void;
 }
 
-export function BigWinScreen({ winAmount, topPrize, className, onClick }: IBigWinScreenProps) {
+export function BigWinScreen({ winAmount, winType = WinType.M, className, onClick }: IBigWinScreenProps) {
     const scratchCardTransitionTimeout = useSelector(selectScratchCardTransitionTimeout);
 
     if (!winAmount) return null
 
-    const coinAnimationName = getCoinAnimationName(winAmount, topPrize)
+    const coinAnimationName = getCoinAnimationName(winType)
     const isBigWinIconVisible = coinAnimationName === CoinAnimationName.coint_l
 
     return <div

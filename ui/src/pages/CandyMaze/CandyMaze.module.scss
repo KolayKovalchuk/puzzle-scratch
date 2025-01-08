@@ -61,6 +61,7 @@
 
 .animationContainer {
     height: 96%;
+    margin-top: 0.5%;
 }
 
 .potentialPrizeContainer {
@@ -69,7 +70,7 @@
     align-items: center;
 
     width: 56%;
-    height: 80px;
+    min-height: 18.5%;
 
     position: relative;
     top: 20px;

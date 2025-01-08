@@ -15,9 +15,9 @@ interface ILeaderBoardProps {
 }
 
 export enum LeaderboardTableMode {
-    Monthly = 'Monthly',
-    Weekly = 'Weekly',
     Daily = 'Daily',
+    Weekly = 'Weekly',
+    Monthly = 'Monthly',
 }
 
 const headerStyles: Partial<ITextStyle> = {

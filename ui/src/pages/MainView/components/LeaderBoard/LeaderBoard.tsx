@@ -25,7 +25,7 @@ const headerStyles: Partial<ITextStyle> = {
 }
 
 export function LeaderBoard({ }: ILeaderBoardProps) {
-    const [mode, setMode] = useState<LeaderboardTableMode>(LeaderboardTableMode.Monthly);
+    const [mode, setMode] = useState<LeaderboardTableMode>(LeaderboardTableMode.Daily);
     const { tHeadData, onNextHeaderClick, onPrevHeaderClick } = useHeaderCells(mode, setMode);
     const [tBodyData, isLoading] = useLeaderboardData(mode);
     

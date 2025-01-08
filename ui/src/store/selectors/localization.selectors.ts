@@ -27,7 +27,7 @@ export const selectLocalizationDataItem = (localizationKey: string) => createSel
     })
 )
 
-export const selectLocalValue = (localizationKey: string) => createSelector(
+export const selectLocalValue = (localizationKey: string, locale?: string) => createSelector(
     [selectLocalizationDataItem(localizationKey), selectPreferredLocale],
     (localizationDataItem, preferredLocale) => {
 
@@ -35,12 +35,13 @@ export const selectLocalValue = (localizationKey: string) => createSelector(
 
         const localizationKeyList = Object.keys(localizationDataItem)
 
-        if (!preferredLocale) return localizationKey
+        const targetLocale = locale || preferredLocale
 
+        if (!targetLocale) return localizationKey
 
         const localeKey = localizationKeyList
             .find((key) =>
-                key.toLowerCase() === preferredLocale?.toLowerCase()
+                key.toLowerCase() === targetLocale?.toLowerCase()
             )
             || 'EN'
 

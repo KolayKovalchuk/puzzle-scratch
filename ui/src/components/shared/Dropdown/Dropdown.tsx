@@ -9,6 +9,7 @@ export function Dropdown({
     className,
     items,
     placeholder = 'Select: ',
+    locale,
     selectedItem: selectedItemProp,
     onSelect,
     onOpenClose,
@@ -43,7 +44,11 @@ export function Dropdown({
         >
             <div className={styles.dropdownSelected}>
                 {selectedItem ? (
-                    <SelectedDropdownItem isOpen={isOpen} item={selectedItem} />
+                    <SelectedDropdownItem
+                        isOpen={isOpen}
+                        item={selectedItem}
+                        locale={locale}
+                    />
                 ) : (
                     <span>{placeholder}</span>
                 )}
@@ -52,7 +57,9 @@ export function Dropdown({
                 (<DropdownList
                     items={items}
                     selectedItem={selectedItem}
-                    handleSelect={handleSelect} />)
+                    handleSelect={handleSelect}
+                    locale={locale}
+                />)
             }
         </div>
     )

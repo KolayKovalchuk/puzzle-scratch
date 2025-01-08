@@ -11,7 +11,7 @@
 },
 "bones": [
 	{ "name": "root", "y": -10 },
-	{ "name": "sss_1", "parent": "root", "x": -405.09, "y": 376.46 }
+	{ "name": "sss_1", "parent": "root", "x": -405.09, "y": 336.46 }
 ],
 "slots": [
 	{ "name": "s_", "bone": "root", "attachment": "s_" },

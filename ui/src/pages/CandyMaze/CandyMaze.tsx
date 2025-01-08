@@ -37,6 +37,10 @@ const topScratchCardMatrixConfig: IGameMatrixConfig = {
     paddintBottom: 5,
 }
 
+const mainMatrixConfig: IGameMatrixConfig = {
+    cellPadding: 32
+}
+
 export function CandyMaze() {
     const { batchId } = useParams();
 
@@ -156,6 +160,7 @@ export function CandyMaze() {
                             className={styles.scratchCard}
                             bundleName={bundleName}
                             renderCell={renderCandyMazeSpriteCell}
+                            matrixConfig={mainMatrixConfig}
 
                             sizeX={batch?.sizeX}
                             sizeY={batch?.sizeY}

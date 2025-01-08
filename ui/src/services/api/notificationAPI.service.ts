@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+
 import { INotification, Notification } from '@models/Notification.model';
 import { apiClient } from './api.service';
 
@@ -15,8 +16,13 @@ export async function getNotifications(): Promise<Notification[] | null> {
     }
 }
 
+export interface IGetNotificationResponse {
+    isLoading: boolean;
+    notifications: Notification[];
+    removeNotification: (notification: INotification) => void
+}
 
-export function useGetNotifications() {
+export function useGetNotifications(): IGetNotificationResponse  {
     const [isLoading, setIsLoading] = useState(false);
     const [notifications, setNotifications] = useState<Notification[]>([]);
 
@@ -36,7 +42,7 @@ export function useGetNotifications() {
     }, []);
 
     const removeNotification = (notification: INotification) => {
-        setNotifications(notifications.filter(n => n.createdAt !== notification.createdAt));
+        setNotifications(notifications.filter(n => n !== notification));
     }
 
     return {

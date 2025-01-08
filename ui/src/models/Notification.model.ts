@@ -9,21 +9,29 @@ export enum NotificationType {
     RBAX_GIFT_1_PER_FRIEND = 'RBAX_GIFT_1_PER_FRIEND', // 4. This message is shown when the friend tries to collect more RBAX from the same friend on same day from different link
     RBAX_GIFT_1_PER_X = 'RBAX_GIFT_1_PER_X', // 3. This message is shown when the user is collecting more than Y gifts a day.
     RBAX_GIFT_EXPIRED = 'RBAX_GIFT_EXPIRED', // link expired
+
+    DEPOSIT = 'DEPOSIT',
 }
+
+export type NotificationData = IDaylyBonusData | IDepositSuccessData;
 
 export interface IDaylyBonusData {
     day: number;
 }
 
-export interface INotification<Data = any> {
+export interface IDepositSuccessData {
+    rbaxDepositAmount: number;
+}
+
+export interface INotification<Data = NotificationData> {
     type: NotificationType;
     message: string;
     createdAt: number;
     linkCode: string;
-    data: Data
+    data: Data;
 }
 
-export class Notification<Data = any> implements INotification<Data> {
+export class Notification<Data = NotificationData> implements INotification<Data> {
     type: NotificationType;
     message: string;
     createdAt: number;

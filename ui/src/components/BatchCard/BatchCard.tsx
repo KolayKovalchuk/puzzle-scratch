@@ -12,6 +12,7 @@ import { useBatchCardHandler, useGetBatchCardConfig } from './hooks/useGetBatchC
 import coming_soon from '@icons/coming_soon.svg';
 import hint from '@icons/hint.svg';
 import robo_token_no_bg from '@icons/robo_token_no_bg.svg';
+import { formatNumber } from '@utils/formatters/formatNumber';
 
 export interface IBatchCardProps {
     className?: string;
@@ -24,12 +25,14 @@ export function BatchCardComponent({ className, batchCard }: IBatchCardProps) {
     const navigate = useNavigate();
     const batchClickHandler = useBatchCardHandler(batchCard, navigate)
     const fontSize = 21;
+
+    const appMode = import.meta.env.MODE
     return (
         <div
             className={`${styles.container} ${batchCardClass} ${className || ''}`}
             onClick={batchClickHandler}
         >
-            <Icon name={coming_soon} className={styles.comingSoonIcon}></Icon>
+            { appMode !== 'development' && <Icon name={coming_soon} className={styles.comingSoonIcon}></Icon> }
             <StyledHeader
                 title={batchCard.batchName}
                 className={styles.styledHeader}
@@ -42,7 +45,7 @@ export function BatchCardComponent({ className, batchCard }: IBatchCardProps) {
                         <img src={batchImageUrl} alt="cover" />
                     </div>
                     <div className={styles.prizePool}>
-                        <span>Prize pool</span>
+                        <span className={styles.prizePoolLabel}>{formatNumber(batchCard.maxPrize)}</span>
                     </div>
                     <div className={styles.footer}>
                         <div className={styles.priceLabel}>

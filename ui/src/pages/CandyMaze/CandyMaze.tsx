@@ -10,7 +10,6 @@ import { TopPrizeLabel } from '@components/TopPrizeLabel/TopPrizeLabel';
 import { CANDY_MAZE_BUNDLE, ICandyMazeBundle } from '@config/candyMazeBundleConfig';
 import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
 import { useGetBatchById } from '@services/api/batch.service';
-import { useBuyCard } from '@services/api/cards.service';
 import { CandyMazeSpriteCell, ICandyMazeSpriteCellData, ICandyMazeSpriteCellProps } from './components/CandyMazeSpriteCell/CandyMazeSpriteCell';
 import { useSpriteCellData } from './hooks/useSpriteCellData';
 import { ICandyMazeCardData } from './ICandyMaze.model';
@@ -69,7 +68,7 @@ export function CandyMaze() {
         card,
         // onCardScratched,
         // onScratchStarted,
-    } = useScratchGame(
+    } = useScratchGame<ICandyMazeCardData>(
         batchId,
         // card,
         // buyCard,

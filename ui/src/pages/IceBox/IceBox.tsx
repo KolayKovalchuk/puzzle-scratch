@@ -129,10 +129,8 @@ export function IceBox() {
     const isLoading = isBatchLoading || isBundleLoading;
     const hiddenClass = isLoading || !bundle ? 'hidden' : '';
 
-    const x2Multiplier = card?.cardData.x2;
-    const x2MultiplierText = typeof x2Multiplier === 'number' ? 'x' + x2Multiplier : '';
-    const x5Multiplier = card?.cardData.x5;
-    const x5MultiplierText = typeof x5Multiplier === 'number' ? 'x' + x5Multiplier : '';
+    const x2Multiplier = card?.cardData.x2.toString() || '';
+    const x5Multiplier = card?.cardData.x5.toString() || '';
 
     const diamondScratchCardData: IDiamondSpriteCellData[][] = useMemo(() => {
         if (!card) return [[]];
@@ -176,7 +174,7 @@ export function IceBox() {
                         <RoundScratchCard
                             ref={x2MultyplierScratchCardRef}
                             className={styles.multiplierScratchCard}
-                            cellData={x2MultiplierText}
+                            cellData={x2Multiplier}
                             bundleName={ICE_BOX_BUNDLE.name}
                             bgTextureConfig={bgTextureConfig}
                             matrixConfig={roundMatrixConfig}
@@ -189,7 +187,7 @@ export function IceBox() {
                         <RoundScratchCard
                             ref={x5MultyplierScratchCardRef}
                             className={styles.multiplierScratchCard}
-                            cellData={x5MultiplierText}
+                            cellData={x5Multiplier}
                             bundleName={ICE_BOX_BUNDLE.name}
                             bgTextureConfig={bgTextureConfig}
                             matrixConfig={roundMatrixConfig}

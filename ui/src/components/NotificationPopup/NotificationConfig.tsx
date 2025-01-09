@@ -1,6 +1,6 @@
 import { IDaylyBonusData, IDepositSuccessData, INotification, NotificationData, NotificationType } from '@models/Notification.model';
 import { postCollectDailyGift, postCollectEmojiBonus, postCollectGiftBonus, postCollectRefferalGift } from '@services/api/bonus.service';
-import { updateUserBalance } from '@store/actions/user.actions';
+import { updateUserBalanceWithChangeAnimation } from '@store/actions/user.actions';
 import store from '@store/store';
 import { ReactNode } from 'react';
 import { DailyBonusNotificationBody } from './components/DailyBonusNotificationBody/DailyBonusNotificationBody';
@@ -33,7 +33,7 @@ export const NotificationConfig: NotificationConfig = {
 
             if (response?.newBalance) {
                 console.log('Dayily bonus gift collected successfully:', response);
-                store.dispatch(updateUserBalance({ total: response.newBalance }));
+                store.dispatch(updateUserBalanceWithChangeAnimation({ total: response.newBalance }, response.amount));
             } else {
                 // TODO: handle error
             }
@@ -51,7 +51,7 @@ export const NotificationConfig: NotificationConfig = {
 
             if (response?.newBalance) {
                 console.log('Referral gift collected successfully:', response);
-                store.dispatch(updateUserBalance({ total: response.newBalance }));
+                store.dispatch(updateUserBalanceWithChangeAnimation({ total: response.newBalance }, response.amount));
             } else {
                 // TODO: handle error
             }
@@ -68,7 +68,7 @@ export const NotificationConfig: NotificationConfig = {
 
             if (response?.newBalance) {
                 console.log('Emoji bonus collected successfully:', response);
-                store.dispatch(updateUserBalance({ total: response.newBalance }));
+                store.dispatch(updateUserBalanceWithChangeAnimation({ total: response.newBalance }, response.amount));
             } else {
                 // TODO: handle error
             }
@@ -85,7 +85,7 @@ export const NotificationConfig: NotificationConfig = {
 
             if (response?.success) {
                 console.log('Gift collected successfully:', response);
-                store.dispatch(updateUserBalance({ total: response.newBalance }));
+                store.dispatch(updateUserBalanceWithChangeAnimation({ total: response.newBalance }, response.amount));
             } else {
                 // TODO: handle error
             }

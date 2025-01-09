@@ -29,6 +29,8 @@ export function WalletHistoryTable({ mode }: IWalletHistoryTableProps) {
     const actionLabel = useSelector(selectLocalValue('txt.wallet.history.action'))
     const amountLabel = useSelector(selectLocalValue('txt.wallet.history.amount'))
     const noTransactionsLabel = useSelector(selectLocalValue('txt.wallet.history.noTransactions'))
+    const depositLabel = useSelector(selectLocalValue('txt.button.deposit'))
+    const withdrawLabel = useSelector(selectLocalValue('txt.button.withdraw'))
 
     const tHeadData: ITableCellData[] = useMemo(() => [
         { key: 'date', data: dateLabel },
@@ -50,7 +52,7 @@ export function WalletHistoryTable({ mode }: IWalletHistoryTableProps) {
                         dateStyle: 'short',
                     })
                 },
-                { key: `cell-${index}-2`, data: data.type ? 'Deposit' : 'Withdraw' },
+                { key: `cell-${index}-2`, data: data.type ? withdrawLabel : depositLabel },
                 { key: `cell-${index}-3`, data: data.amount },
             ],
         }));

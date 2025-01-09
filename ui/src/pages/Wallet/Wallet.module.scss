@@ -71,13 +71,13 @@
     .balanceNameLabel {
         color: colors.$light-yellow;
         font-weight: bold;
-        font-size: 22px;
+        font-size: 20px;
     }
     
     .balanceAmountContainer {
         display: flex;
         align-items: center;
-        font-size: 20px;
+        font-size: 18px;
         color: #fff;
         font-weight: bold;
     }
@@ -85,6 +85,10 @@
     .roboTokenGoldIcon {
         width: 14%;
     }
+}
+
+.infoLabel {
+    justify-content: flex-end;
 }
 
 .spinnerIcon {

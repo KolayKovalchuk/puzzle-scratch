@@ -5,13 +5,13 @@ import { useNavigate } from 'react-router-dom'
 
 import styles from './Header.module.scss'
 
-import { selectUserAvatar, selectUserBalanceTotal } from '@store/selectors/user.selectors'
+import { selectIsQaUser, selectUserAvatar, selectUserBalanceTotal } from '@store/selectors/user.selectors'
 
 import { WinStyledText } from '@components/shared/StyledText'
-import { selectScratchCardTransitionTimeout } from '@store/selectors/config.selectors'
-import { useBalanceChangeLabel } from './hooks/useBalanceChangeLabel'
 import { ROUTES } from '@routers/routerConfig'
+import { selectScratchCardTransitionTimeout } from '@store/selectors/config.selectors'
 import { formatNumber } from '@utils/formatters/formatNumber'
+import { useBalanceChangeLabel } from './hooks/useBalanceChangeLabel'
 
 import { useCounterAnimation } from '@hooks/useCounterAnimation'
 import logo from '@icons/logo.svg'
@@ -26,12 +26,15 @@ export function Header() {
     const scratchCardTransitionTimeout = useSelector(selectScratchCardTransitionTimeout);
 
     const navigate = useNavigate();
+    const isQaUser = useSelector(selectIsQaUser);
 
     const openWallet = useCallback(() => {
         // TODO: Remove this line to enable wallet click on prod
-        if (import.meta.env.MODE !== 'development') return;
+        const appMode = import.meta.env.MODE
+        const isAllowed = isQaUser || appMode === 'development';
+        if (!isAllowed) return;
         navigate(ROUTES.Wallet);
-    }, [navigate]);
+    }, [navigate, isQaUser]);
 
     const userAvatar = useSelector(selectUserAvatar);
 

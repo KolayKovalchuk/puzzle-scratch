@@ -1,9 +1,9 @@
+import { updateUserBalanceWithChangeAnimation } from '@store/actions/user.actions';
+import store from '@store/store';
 import WebApp from '@twa-dev/sdk';
 import { InvoiceStatuses } from '@twa-dev/types';
 import { useCallback, useState } from 'react';
 import { getStarsConvertResult, IPostConvertStarsResponse, IStarsConvertOption, postConvertStars } from './api/purchase.service';
-import store from '@store/store';
-import { updateUserBalance } from '@store/actions/user.actions';
 
 function hadnleUnsuccessPurchase(purchaseResponse: IPostConvertStarsResponse) {
     // Handle the unsuccess purchase here
@@ -40,9 +40,11 @@ export function useConvertStarsFromRbax() {
                 setIsPaid(!!reposponse?.paid);
 
                 if (reposponse?.paid) {
-                    store.dispatch(updateUserBalance({
-                        total: reposponse?.balanceUpdate.rbaxBalance || 0,
-                    }));
+                    store.dispatch(updateUserBalanceWithChangeAnimation(
+                        { total: reposponse?.balanceUpdate.rbaxBalance || 0 },
+                        reposponse?.balanceUpdate.rbaxDelta || 0,
+                    ));
+                    
                     setBalanceChange(reposponse?.balanceUpdate.rbaxDelta);
                 }
             }

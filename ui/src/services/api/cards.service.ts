@@ -1,6 +1,5 @@
 import { IBuyBatchCardData, ICardData } from '@models/IBuyBatchCardData';
-import { showAmountChangeLabel } from '@store/actions/appState.actions';
-import { updateUserBalance } from '@store/actions/user.actions';
+import { updateUserBalanceWithChangeAnimation } from '@store/actions/user.actions';
 import store from '@store/store';
 import { useCallback, useState } from 'react';
 import { apiClient } from './api.service';
@@ -41,15 +40,14 @@ export function useBuyCard<CardData extends ICardData>(updateUserBalanceOnSucces
             setLoading(false);
 
             if (updateUserBalanceOnSuccess) {
-                store.dispatch(updateUserBalance({ total: cardData.rbaxBalance }));
-                store.dispatch(showAmountChangeLabel(cardData.cardData.winAmount));
+                store.dispatch(updateUserBalanceWithChangeAnimation({ total: cardData.rbaxBalance }, cardData.cardData.winAmount));
             }
 
             return cardData;
         } catch (error) {
             return null;
         }
-    }, [updateUserBalance]);
+    }, []);
 
     return { card, loading, buyCard };
 }

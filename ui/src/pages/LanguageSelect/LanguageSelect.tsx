@@ -1,3 +1,4 @@
+import { Footer } from '@components/Footer/Footer';
 import { Button, ButtonType } from '@components/shared/Button/Button';
 import { Dropdown, IDropdownItem } from '@components/shared/Dropdown';
 import { SecondaryStyledText } from '@components/shared/StyledText';
@@ -5,11 +6,8 @@ import { TosApprovePopup } from '@components/TosApprovePopup/TosApprovePopup';
 import { useContainerDimensions } from '@hooks/useContainerDimensions';
 import { ROUTES } from '@routers/routerConfig';
 import { aprooveUserTerms, selectUserLocale } from '@services/api/user.service';
-import { updateUserLocale } from '@store/actions/user.actions';
 import { selectLocalValue, selectSupportedLocales } from '@store/selectors/localization.selectors';
 import { selectPreferredLocale, selectUserAcceptedTerms, selectUserPreferredLocale } from '@store/selectors/user.selectors';
-import { Footer } from '@components/Footer/Footer';
-import store from '@store/store';
 import WebApp from '@twa-dev/sdk';
 import { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';

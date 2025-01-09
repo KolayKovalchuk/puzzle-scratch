@@ -168,8 +168,8 @@ export function SantaSac() {
                     </div>
                 </div>
                 <GameFooterBtn onPlay={onPlay} />
-                <Footer />
             </div>
+            <Footer />
             {isBigWinVisible
                 && <BigWinScreen
                     winAmount={card?.winning || 0}

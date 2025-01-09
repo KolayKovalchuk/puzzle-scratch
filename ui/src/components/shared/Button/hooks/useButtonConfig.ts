@@ -21,6 +21,7 @@ export function getModeCondg(mode: ButtonType, styles: CSSModuleClasses): IButto
                 textStyles: {
                     ...defaultTextStyles,
                     stroke: '#295808',
+                    fill: ['#FFFFFF'],
                 }
             }
         case ButtonType.Cancel:
@@ -29,6 +30,7 @@ export function getModeCondg(mode: ButtonType, styles: CSSModuleClasses): IButto
                 textStyles: {
                     ...defaultTextStyles,
                     stroke: '#580808',
+                    fill: ['#FFFFFF'],
                 }
             }
 

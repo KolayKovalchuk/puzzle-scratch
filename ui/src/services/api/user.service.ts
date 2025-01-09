@@ -3,6 +3,8 @@ import { updateToken } from '@services/auth.service';
 import { updateUserLocale, updateUserTos } from '@store/actions/user.actions';
 import store from '@store/store';
 import { apiClient } from './api.service';
+import { UserStats } from '@models/UserStats.model';
+import { useState, useEffect } from 'react';
 
 export async function patchUserLocale(locale: string): Promise<boolean> {
     try {
@@ -58,4 +60,32 @@ export async function aprooveUserTerms() {
     store.dispatch(updateUserTos(true));
     await updateToken(patchUserAcceptTermsResult);
     return true
+}
+
+export async function getUserStats(): Promise<UserStats | null> {
+    try {
+        const response = await apiClient.get('/user/stats');
+        return response.data;
+    } catch (error) {
+        console.error('Error getting user stats:', error);
+        return null;
+    }
+}
+
+export function useGetUserStats() {
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [userStats, setUserStats] = useState<UserStats | null>(null);
+
+    useEffect(() => {
+        async function fetchUserStats() {
+            setIsLoading(true);
+            const stats = await getUserStats();
+            setUserStats(stats);
+            setIsLoading(false);
+        }
+
+        fetchUserStats();
+    }, []);
+
+    return { userStats, isLoading };
 }

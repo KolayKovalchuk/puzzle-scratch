@@ -6,6 +6,7 @@ import { SecondaryStyledText } from '@components/shared/StyledText'
 import back_arrow from '@icons/back_arrow.svg'
 import robo_token_gold_no_shining from '@icons/robo_token_gold_no_shining.svg'
 import { useGetUserBalance } from '@services/api/balance.service'
+import { useGetUserStats } from '@services/api/user.service'
 import { selectLocalValue } from '@store/selectors/localization.selectors'
 import { selectUserBalanceTotal, selectUserBalanceWithdrawable } from '@store/selectors/user.selectors'
 import { formatNumber } from '@utils/formatters/formatNumber'
@@ -16,8 +17,8 @@ import { useNavigate } from 'react-router-dom'
 import { DepositWithDialog } from './components/DepositWithDialog/DepositWithDialog'
 import { WalletHistoryTable } from './components/WalletHistoryTable/WalletHistoryTable'
 import { useDepositWithDialog } from './hooks/useDepositWithDialog'
-import styles from './Wallet.module.scss'
 import { DepositWithDialogMode } from './Wallet.models'
+import styles from './Wallet.module.scss'
 
 const headerStyles: Partial<ITextStyle> = {
     fontSize: 40,
@@ -30,6 +31,7 @@ export function Wallet() {
     const depositLabel = useSelector(selectLocalValue('txt.button.deposit'))
     const withdrawableLabel = useSelector(selectLocalValue('txt.wallet.withdrawable'))
     const withdrawLabel = useSelector(selectLocalValue('txt.button.withdraw'))
+    const winnignsLabel = useSelector(selectLocalValue('txt.wallet.winnigns'))
 
     const totalAmount = useSelector(selectUserBalanceTotal) || 0;
     const withdrawableAmount = useSelector(selectUserBalanceWithdrawable) || 0;
@@ -53,6 +55,8 @@ export function Wallet() {
     const onWithdrawBtnClick = useCallback(() => {
         console.log('Withdraw button clicked');
     }, [])
+
+    const { userStats } = useGetUserStats();
 
     return (
         <div className={styles.container}>
@@ -102,6 +106,15 @@ export function Wallet() {
                                 onClick={onWithdrawBtnClick}
                                 text={withdrawLabel}
                             ></Button>
+                        </div>
+                        <div className={styles.balanceInfoRow}>
+                            <div className={styles.column}>
+                                <div className={styles.balanceNameLabel}>{winnignsLabel}</div>
+                            </div>
+                            <div className={`${styles.balanceAmountContainer} ${styles.infoLabel}`}>
+                                <Icon name={robo_token_gold_no_shining} className={styles.roboTokenGoldIcon} />
+                                <span className={styles.balanceAmount}>{formatNumber(userStats?.totalRbaxWon || 0)}</span>
+                            </div>
                         </div>
                     </div>
 

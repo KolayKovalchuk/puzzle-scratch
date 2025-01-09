@@ -4,6 +4,7 @@ import { IDropdownItem, IDropdownProps } from './Dropdown.models'
 import styles from './Dropdown.module.scss'
 import { SelectedDropdownItem } from './DropdownItem'
 import { DropdownList } from './DropdownList'
+import { useContainerDimensions } from '@hooks/useContainerDimensions'
 
 export function Dropdown({
     className,
@@ -36,6 +37,9 @@ export function Dropdown({
 
     useHandleClickOutside(dropdownRef, () => setIsOpen(false))
 
+    const { dimensions } = useContainerDimensions(dropdownRef)
+    const maxDropdownListHeight = dimensions.height * 4.6
+
     return (
         <div
             ref={dropdownRef}
@@ -59,6 +63,7 @@ export function Dropdown({
                     selectedItem={selectedItem}
                     handleSelect={handleSelect}
                     locale={locale}
+                    maxHeight={maxDropdownListHeight}
                 />)
             }
         </div>

@@ -6,7 +6,7 @@ $border-radius: 10px;
 .dropdown {
     @include mixins.icon-shadown;
 
-    height: 40px;
+    height: 42px;
     min-width: 150px;
 
     position: relative;
@@ -52,6 +52,7 @@ $border-radius: 10px;
     border-radius: $border-radius;
     z-index: 100000;
     overflow: hidden;
+    overflow-y: auto;
 
     .dropdownListItem {
         background-color: colors.$dark-violet;
@@ -63,7 +64,7 @@ $border-radius: 10px;
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 100%;
+    // height: 100%;
 
     padding: 12px 8px;
 

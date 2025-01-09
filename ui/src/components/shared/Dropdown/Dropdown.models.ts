@@ -23,6 +23,7 @@ export interface IDropdownListProps {
     selectedItem?: IDropdownItem | null
     handleSelect: (item: IDropdownItem) => void
     locale?: string
+    maxHeight?: number
 }
 
 export interface IDropdownProps {

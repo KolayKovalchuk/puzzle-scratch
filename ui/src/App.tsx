@@ -9,7 +9,7 @@ import { selectUserAcceptedTerms, selectUserPreferredLocale } from '@store/selec
 import store from '@store/store';
 import { useEffect } from 'react';
 import { Provider, useSelector } from 'react-redux';
-import { BrowserRouter, useNavigate } from 'react-router-dom';
+import { BrowserRouter, useLocation, useNavigate } from 'react-router-dom';
 
 function App() {
     const {
@@ -18,6 +18,9 @@ function App() {
     } = useInitApp();
 
     const navigate = useNavigate();
+    const location = useLocation();
+    const isLanguageSelectPage = location.pathname === ROUTES.LanguageSelect;
+
     const isUserAcceptedTerms = useSelector(selectUserAcceptedTerms)
     const isPreferredLocaleSelected = !!useSelector(selectUserPreferredLocale)
     const shouldRedirectToLanguageSelect = !isPreferredLocaleSelected || !isUserAcceptedTerms;
@@ -37,7 +40,7 @@ function App() {
     return (
         <div className={styles.mainContainer}>
             {isLoaded ? <>
-                <Header />
+                { !isLanguageSelectPage ? <Header /> : null }
                 <AppRouter />
             </> : null}
             <LoadingScreen isLoaded={isLoaded} />

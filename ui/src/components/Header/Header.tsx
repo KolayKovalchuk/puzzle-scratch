@@ -29,8 +29,6 @@ export function Header() {
 
     const openWallet = useCallback(() => {
         // TODO: Remove this line to enable wallet click on prod
-        console.log('import.meta.env.MODE', import.meta.env.MODE);
-        
         if (import.meta.env.MODE !== 'development') return;
         navigate(ROUTES.Wallet);
     }, [navigate]);

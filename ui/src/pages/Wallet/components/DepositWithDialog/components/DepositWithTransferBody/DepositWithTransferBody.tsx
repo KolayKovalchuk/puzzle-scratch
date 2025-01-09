@@ -32,7 +32,8 @@ export function DepositWithTransferBody({ }: IDepositWithTransferBodyProps) {
     const { depositAddress, loading } = useDepositAddress(selectedWallet.data);
     const transferTermsLabel = useSelector(selectLocalValueWithVars(
         'txt.transfer.terms',
-        depositAddress?.minDeposit || ''
+        depositAddress?.minDeposit || '',
+        selectedWallet.text,
     ));
     const transferTermsFirstItemLabel = useSelector(selectLocalValueWithVars(
         'txt.transfer.terms.firstItem',

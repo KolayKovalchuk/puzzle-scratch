@@ -30,10 +30,7 @@ import candy_stars_bg from '@icons/candy_stars_bg.svg';
 import shining from '@icons/shining.svg';
 
 const topScratchCardMatrixConfig: IGameMatrixConfig = {
-    cellHeight: 50,
-    cellPadding: 0,
-    containerPadding: 4,
-    paddintBottom: 5,
+    paddintBottom: 2,
 }
 
 const mainMatrixConfig: IGameMatrixConfig = {

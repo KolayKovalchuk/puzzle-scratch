@@ -2,8 +2,7 @@ import { IScratchCardHandle } from '@components/ScratchCard';
 import { IScratchAnimationHandle } from '@components/shared/ScratchAnimation/ScratchAnimation';
 import { IBuyBatchCardData, ICardData } from '@models/IBuyBatchCardData';
 import { useBuyCard } from '@services/api/cards.service';
-import { showAmountChangeLabel } from '@store/actions/appState.actions';
-import { updateUserBalance } from '@store/actions/user.actions';
+import { updateUserBalanceWithChangeAnimation } from '@store/actions/user.actions';
 import { selectScratchCardTransitionTimeout } from '@store/selectors/config.selectors';
 import store from '@store/store';
 import { RefObject, useCallback, useEffect, useMemo, useState } from 'react';
@@ -154,8 +153,8 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
 
         }
 
-        store.dispatch(updateUserBalance({ total: card.rbaxBalance }));
-        store.dispatch(showAmountChangeLabel(card.cardData.winAmount));
+        store.dispatch(updateUserBalanceWithChangeAnimation({ total: card.rbaxBalance }, card.cardData.winAmount));
+
     }, [card, card?.winning, scratchCardTransitionTimeout]);
 
     useEffect(() => {

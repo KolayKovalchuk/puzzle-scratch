@@ -1,6 +1,8 @@
 import { IUserAcceptTermsResponse } from '@models/IUserAcceptTermsResponse';
 import { INotification } from '@models/Notification.model';
 import { IUser, IUserBalance } from '@models/User.model';
+import { Dispatch } from '@reduxjs/toolkit';
+import { showAmountChangeLabel } from './appState.actions';
 
 // Action Types
 export const FETCH_USER = 'FETCH_USER';
@@ -35,6 +37,13 @@ export const updateUserBalance = (payload: Partial<IUserBalance>) => ({
     type: UPDATE_USER_BALANCE,
     payload,
 });
+
+export const updateUserBalanceWithChangeAnimation = (balance: Partial<IUserBalance>, changeAmount: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(updateUserBalance(balance));
+        dispatch(showAmountChangeLabel(changeAmount));
+    };
+};
 
 
 export const UPDATE_USER_ToS = 'UPDATE_USER_ToS';

@@ -5,7 +5,7 @@ import { ITextStyle } from 'pixi.js';
 const topScratchCardTextStyles: Partial<ITextStyle> = {
     ...DefaultTextStyleConfig,
     ...WinStyledTextConfig,
-    fontSize: 40,
+    fontSize: 34,
 }
 
 export interface ITopScratchSpriteCellProps extends IMatrixCellProps {
@@ -21,8 +21,8 @@ export function TopScratchSpriteCell({ x, y, width, height, data }: ITopScratchS
             dimensions={{ width, height }}
             text={value}
             textStyles={topScratchCardTextStyles}
-            textFitCoefficient={2}
-            x={x} y={y}
+            x={x}
+            y={y}
         />
     )
 };

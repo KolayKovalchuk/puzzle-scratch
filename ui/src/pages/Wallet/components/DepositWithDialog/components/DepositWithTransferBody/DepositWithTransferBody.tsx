@@ -1,14 +1,15 @@
 
 import { CopyButton } from '@components/shared/Button/CopyButton';
+import { Dropdown, IDropdownItem } from '@components/shared/Dropdown';
 import { Icon } from '@components/shared/Icon';
 import { SpinnerIcon } from '@components/shared/Icon/SpinnerIcon';
 import { SupportedDepositWallets, useDepositAddress } from '@services/api/depositWithdrawal.service';
 import { iconSign, selectLocalValue, selectLocalValueWithVars } from '@store/selectors/localization.selectors';
+import { formatNumber } from '@utils/formatters/formatNumber';
 import { useCallback, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styles from './DepositWithTransferBody.module.scss';
 
-import { Dropdown, IDropdownItem } from '@components/shared/Dropdown';
 import robo_token_gold_no_shining from '@icons/robo_token_gold_no_shining.svg';
 
 const supportedDepositWallets: IDropdownItem[] = Object.values(SupportedDepositWallets)
@@ -35,10 +36,12 @@ export function DepositWithTransferBody({ }: IDepositWithTransferBodyProps) {
         depositAddress?.minDeposit || '',
         selectedWallet.text,
     ));
+
+    const formattedDepositRate = formatNumber(depositAddress?.rate || 0);
     const transferTermsFirstItemLabel = useSelector(selectLocalValueWithVars(
         'txt.transfer.terms.firstItem',
         selectedWallet.data || '',
-        depositAddress?.rate || '',
+        formattedDepositRate,
     ));
 
     const transferTermsMarkedList = useMemo(() => {

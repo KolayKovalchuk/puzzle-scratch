@@ -166,7 +166,7 @@ export function CandyMaze() {
                         />
                     </div>
                 </div>
-                <GameFooterBtn onPlay={onPlay} />
+                <GameFooterBtn batchCardType={batch?.cardType || null} onPlay={onPlay} />
                 <Footer />
             </div>
             {isBigWinVisible

@@ -239,7 +239,7 @@ export function IceBox() {
                         </div>
                     </div>
                 </div>
-                <GameFooterBtn onPlay={onPlay}>
+                <GameFooterBtn batchCardType={batch?.cardType || null} onPlay={onPlay}>
                     <Icon name={footer_stars} className={styles.footerStars} />
                 </GameFooterBtn>
             </div>

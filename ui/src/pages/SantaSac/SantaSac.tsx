@@ -167,7 +167,7 @@ export function SantaSac() {
                         />
                     </div>
                 </div>
-                <GameFooterBtn onPlay={onPlay} />
+                <GameFooterBtn batchCardType={batch?.cardType || null} onPlay={onPlay} />
             </div>
             <Footer />
             {isBigWinVisible

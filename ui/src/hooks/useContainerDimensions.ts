@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { RefObject, useEffect, useRef, useState } from 'react';
 
-export function useContainerDimensions<T extends Element = HTMLDivElement>() {
-    const containerRef = useRef<T>(null);
+export function useContainerDimensions<T extends Element = HTMLDivElement>(containerRef: RefObject<T> = useRef<T>(null)) {
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
     useEffect(() => {

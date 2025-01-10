@@ -2,7 +2,7 @@ import { useContainerDimensions } from '@hooks/useContainerDimensions';
 import { Stage } from '@pixi/react';
 import 'pixi.js-legacy';
 
-import { useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { StyledTextPixiEl } from './components/StyledTextPixiEl';
 import { DefaultTextStyleConfig } from './DefaultTextStyleConfig';
 import { IStyledTextProps } from './StyledText.models';
@@ -22,6 +22,16 @@ export function StyledText({
 }: IStyledTextProps) {
     const { containerRef, dimensions } = useContainerDimensions();
 
+    const [fontSize, setFontSize] = useState<number | string | undefined>(textStyles?.fontSize || DefaultTextStyleConfig.fontSize);
+
+    const getTextSizeCb = useCallback((textSize: string | number) => {
+        setFontSize(textSize);
+
+        if (getTextSize) {
+            getTextSize(textSize);
+        }
+    }, [getTextSize]);
+
     return useMemo(() => {
         return (
             <div ref={containerRef} className={`${styles.container} ${className || ''}`} style={styleArg}>
@@ -35,13 +45,13 @@ export function StyledText({
                             shouldFitFontSize={shouldFitFontSize}
                             xShift={xShift}
                             yShift={yShift}
-                            getTextSize={getTextSize}
+                            getTextSize={getTextSizeCb}
                         />
                     </Stage>
                 <div
                     className={styles.textMock}
                     style={{
-                        fontSize: textStyles?.fontSize || DefaultTextStyleConfig.fontSize,
+                        fontSize: fontSize || textStyles?.fontSize || DefaultTextStyleConfig.fontSize,
                         letterSpacing: '2px'
                     }}
                 >{text}</div>
@@ -52,6 +62,7 @@ export function StyledText({
         dimensions.width,
         dimensions.height,
         // textStyles,
+        textStyles?.fontSize,
         textFitCoefficient,
         anchor,
         shouldFitFontSize,

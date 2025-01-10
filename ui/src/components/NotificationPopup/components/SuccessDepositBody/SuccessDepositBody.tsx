@@ -7,6 +7,6 @@ export interface ISuccessDepositBodyProps {
 }
 
 export function SuccessDepositBody({ notificationData }: ISuccessDepositBodyProps) {
-    const contentText = useSelector(selectLocalValueWithVars('txt.transfer.popup.success', notificationData.rbaxDepositAmount));
+    const contentText = useSelector(selectLocalValueWithVars({ localizationKey: 'txt.transfer.popup.success' }, notificationData.rbaxDepositAmount));
     return contentText
 }

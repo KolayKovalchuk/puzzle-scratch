@@ -1,6 +1,6 @@
 import { useFitTextSize } from '@hooks/useFitTextSize';
 import { Container, Text } from '@pixi/react';
-import { ITextStyle, TextStyle } from 'pixi.js';
+import { ITextStyle, TextStyle } from 'pixi.js-legacy';
 import { DefaultTextStyleConfig } from '../DefaultTextStyleConfig';
 import { useEffect } from 'react';
 

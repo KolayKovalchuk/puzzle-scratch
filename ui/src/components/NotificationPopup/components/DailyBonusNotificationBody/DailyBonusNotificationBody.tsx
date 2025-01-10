@@ -11,7 +11,7 @@ import { GameCellStyledText, GameCellTextStyle } from '@components/shared/Styled
 import { DefaultTextStyleConfig, StyledText } from '@components/shared/StyledText';
 import robo_token_no_bg from '@icons/robo_token_no_bg.svg';
 import store from '@store/store';
-import { ITextStyle } from 'pixi.js';
+import { ITextStyle } from 'pixi.js-legacy';
 import { getCoinIcon, getDailyContainerStyles, isDayToday } from './utils/utils';
 import { IDaylyBonusData } from '@models/Notification.model';
 
@@ -70,7 +70,7 @@ export function DailyBonusNotificationBody({ data }: IDailyBonusNotificationBody
             const isToday = isDayToday(index, data.day);
             const headerText: string = isToday
                 ? selectLocalValue('txt.dailybonus.today')(store.getState())
-                : selectLocalValueWithVars('txt.dailybonus.day', index + 1)(store.getState());
+                : selectLocalValueWithVars({ localizationKey: 'txt.dailybonus.day' }, index + 1)(store.getState());
 
             return {
                 bonus: bonus,

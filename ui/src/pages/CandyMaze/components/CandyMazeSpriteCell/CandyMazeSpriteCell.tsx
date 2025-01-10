@@ -2,7 +2,7 @@ import { IMatrixCellProps, ISpriteCellData } from '@components/shared/IconMatrix
 import { DefaultTextStyleConfig, RedStyledTextStyle } from '@components/shared/StyledText';
 import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
 import { Container, Sprite, Text } from '@pixi/react';
-import { TextStyle } from 'pixi.js';
+import { TextStyle } from 'pixi.js-legacy';
 import { CandyMazeScratchItemsEnum, CandyMazeScratchTextItems } from '../../scratchItemsEnum';
 
 export interface ICandyMazeSpriteCellData extends ISpriteCellData {

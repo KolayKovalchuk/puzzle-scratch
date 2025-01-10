@@ -2,12 +2,12 @@ import { SHOW_AMOUNT_CHANGE_LABEL } from '@store/actions/appState.actions';
 
 // Initial State
 export interface IPuzzleGameState {
-    lastAmountIncrease: number;
+    lastAmountChange: number;
     prizeLabelCounter: number;
 }
 
 const initialState: IPuzzleGameState = {
-    lastAmountIncrease: 0,
+    lastAmountChange: 0,
     prizeLabelCounter: 0,
 };
 
@@ -17,7 +17,7 @@ export const gameReducer = (state = initialState, action: any): IPuzzleGameState
         case SHOW_AMOUNT_CHANGE_LABEL:
             return {
                 ...state,
-                lastAmountIncrease: action.payload,
+                lastAmountChange: action.payload,
                 prizeLabelCounter: state.prizeLabelCounter + 1,
             };
         default:

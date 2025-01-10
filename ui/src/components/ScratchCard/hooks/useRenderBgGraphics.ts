@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { GradientConfig, useGradientTexture } from './useGradientTexture';
-import { Graphics, Texture } from 'pixi.js';
+import { Graphics, Texture } from 'pixi.js-legacy';
 
 type RenderBgCb = (g: Graphics, gradientTexture: Texture, width: number, height: number) => void;
 

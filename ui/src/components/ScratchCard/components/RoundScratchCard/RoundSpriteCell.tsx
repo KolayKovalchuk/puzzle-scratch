@@ -1,7 +1,7 @@
 import { IMatrixCellProps, ISpriteCellData } from '@components/shared/IconMatrix/IconMatrix.models';
 import { StyledTextPixiEl, WinStyledTextConfig } from '@components/shared/StyledText';
 import { useFitTextSize } from '@hooks/useFitTextSize';
-import { ITextStyle, TextStyle } from 'pixi.js';
+import { ITextStyle, TextStyle } from 'pixi.js-legacy';
 
 export interface IRoundSpriteCellData extends ISpriteCellData {
     textureName: string;

@@ -1,4 +1,4 @@
-import { ITextStyle } from 'pixi.js';
+import { ITextStyle } from 'pixi.js-legacy';
 
 import { Icon } from '@components/shared/Icon';
 import { ProgressBar } from '@components/shared/ProgressBar/ProgressBar';

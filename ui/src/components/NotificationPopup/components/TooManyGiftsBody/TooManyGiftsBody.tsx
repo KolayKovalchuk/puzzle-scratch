@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 export function TooManyGifts() {
     const sendRBaxMaxPerUserDaily = useSelector(selectSendRBaxMaxUses) || 0;
-    const contentText = useSelector(selectLocalValueWithVars('txt.limit.reached', sendRBaxMaxPerUserDaily));
+    const contentText = useSelector(selectLocalValueWithVars({ localizationKey: 'txt.limit.reached' }, sendRBaxMaxPerUserDaily));
     return (<>
         {contentText}
     </>);

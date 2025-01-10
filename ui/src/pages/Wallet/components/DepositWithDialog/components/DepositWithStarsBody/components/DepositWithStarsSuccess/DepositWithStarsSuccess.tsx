@@ -6,7 +6,7 @@ export  interface IDepositWithStarsSuccessProps {
 }
 
 export function DepositWithStarsSuccess({ balanceChange }: IDepositWithStarsSuccessProps) {
-    const invoiceSuccessText = useSelector(selectLocalValueWithVars('shop.stars.popup.success', balanceChange))
+    const invoiceSuccessText = useSelector(selectLocalValueWithVars({ localizationKey: 'shop.stars.popup.success' }, balanceChange))
     console.log('invoiceSuccessText', invoiceSuccessText);
 
     return <div>{invoiceSuccessText}</div>

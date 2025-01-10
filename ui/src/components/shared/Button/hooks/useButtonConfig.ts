@@ -1,4 +1,4 @@
-import { TextStyle } from 'pixi.js';
+import { TextStyle } from 'pixi.js-legacy';
 import { useMemo } from 'react';
 import { ButtonType } from '../Button';
 

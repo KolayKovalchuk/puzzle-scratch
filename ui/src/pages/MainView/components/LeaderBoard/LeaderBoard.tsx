@@ -9,7 +9,7 @@ import { selectLocalValue } from '@store/selectors/localization.selectors';
 import { useLeaderboardData } from './hooks/useLeaderboardData';
 import { HeaderRow, useHeaderCells } from './HeaderRow';
 import { LeaderboardCell } from './LeaderboardCell';
-import { ITextStyle } from 'pixi.js';
+import { ITextStyle } from 'pixi.js-legacy';
 
 interface ILeaderBoardProps {
 }

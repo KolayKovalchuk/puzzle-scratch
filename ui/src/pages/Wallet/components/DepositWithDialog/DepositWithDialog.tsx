@@ -23,6 +23,7 @@ export function DepositWithDialog({ isOpen, onCancel, onConfirm, onModeChanged }
     const [mode, setMode] = useState(DepositWithDialogMode.Select);
     const titleText = useDialogTitle(mode);
     const cancelBtnText = useSelector(selectLocalValue('txt.btn.cancel'))
+    const closeBtnText = useSelector(selectLocalValue('txt.btn.close'))
     const okBtnText = useSelector(selectLocalValue('txt.btn.ok'))
 
     const onStarsSelect = useCallback(() => {
@@ -90,7 +91,8 @@ export function DepositWithDialog({ isOpen, onCancel, onConfirm, onModeChanged }
     }, [mode, onStarsSelect, onTransferSelect, onInvoiceStatusChange]);
 
     const isStarsConversationDone = mode === DepositWithDialogMode.InvoiceSuccess || mode === DepositWithDialogMode.InvoiceFailed;
-    const cancelText = isStarsConversationDone ? '' : cancelBtnText;
+    const cancelBtnModeText = [DepositWithDialogMode.Transfer, DepositWithDialogMode.InvoiceSuccess].includes(mode) ? closeBtnText : cancelBtnText;
+    const cancelText = isStarsConversationDone ? '' : cancelBtnModeText;
     const confirmText = isStarsConversationDone ? okBtnText : '';
 
     return (

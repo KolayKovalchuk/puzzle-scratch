@@ -1,4 +1,4 @@
-import { ITextStyle } from 'pixi.js';
+import { ITextStyle } from 'pixi.js-legacy';
 import { StyledText } from '../StyledText';
 import { IStyledTextProps } from '../StyledText.models';
 

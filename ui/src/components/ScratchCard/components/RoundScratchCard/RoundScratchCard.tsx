@@ -1,6 +1,6 @@
 import { IScratchCardHandle, IScratchCardProps, ScratchCard } from '../../ScratchCard';
 
-import { Graphics, Resource, Texture } from 'pixi.js';
+import { Graphics, Resource, Texture } from 'pixi.js-legacy';
 import { forwardRef, Ref, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import styles from './RoundScratchCard.module.scss';
 import { IRoundSpriteCellProps, RoundSpriteCell } from './RoundSpriteCell';

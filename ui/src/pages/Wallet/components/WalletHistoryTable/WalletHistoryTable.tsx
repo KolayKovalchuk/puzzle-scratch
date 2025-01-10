@@ -1,4 +1,4 @@
-import { ITextStyle } from 'pixi.js'
+import { ITextStyle } from 'pixi.js-legacy'
 import { ReactNode, useCallback, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 

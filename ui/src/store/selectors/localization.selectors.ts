@@ -49,8 +49,8 @@ export const selectLocalValue = (localizationKey: string, locale?: string) => cr
     }
 )
 
-export const selectLocalValueWithLink = (localizationKey: string) => createSelector(
-    [selectLocalValue(localizationKey)],
+export const selectLocalValueWithLink = (localizationKey: string, locale?: string) => createSelector(
+    [selectLocalValue(localizationKey, locale)],
     (localizationValue) => {
         const matchResult = localizationValue.match(/(.*)<link url="(https:\/\/.*)">(.*)<\/link>(.*)/)
 
@@ -80,8 +80,8 @@ export const selectLocalValueWithLink = (localizationKey: string) => createSelec
     }
 )
 
-export const selectLocalValueWithVars = (localizationKey: string, ...vars: (string | number)[]) => createSelector(
-    [selectLocalValue(localizationKey)],
+export const selectLocalValueWithVars = (config: {localizationKey: string, locale?: string}, ...vars: (string | number)[]) => createSelector(
+    [selectLocalValue(config.localizationKey, config.locale)],
     (localizationValue) => {
         const valueStr = vars.reduce<string>((acc, varName, index) => {
             const varNameStr = varName.toString();

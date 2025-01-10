@@ -18,6 +18,7 @@ export function StyledText({
     shouldFitFontSize = true,
     xShift = 0.5,
     yShift = 0.35,
+    getTextSize,
 }: IStyledTextProps) {
     const { containerRef, dimensions } = useContainerDimensions();
 
@@ -34,6 +35,7 @@ export function StyledText({
                             shouldFitFontSize={shouldFitFontSize}
                             xShift={xShift}
                             yShift={yShift}
+                            getTextSize={getTextSize}
                         />
                     </Stage>
                 <div
@@ -56,6 +58,7 @@ export function StyledText({
         xShift,
         yShift,
         className,
-        styleArg
+        styleArg,
+        getTextSize,
     ]);
 }

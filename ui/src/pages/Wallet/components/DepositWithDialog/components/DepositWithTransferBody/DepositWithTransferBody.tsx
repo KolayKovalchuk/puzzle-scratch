@@ -32,14 +32,14 @@ export function DepositWithTransferBody({ }: IDepositWithTransferBodyProps) {
     const [selectedWallet, setSelectedWallet] = useState<IDropdownItem>(supportedDepositWallets[0]);
     const { depositAddress, loading } = useDepositAddress(selectedWallet.data);
     const transferTermsLabel = useSelector(selectLocalValueWithVars(
-        'txt.transfer.terms',
+        { localizationKey: 'txt.transfer.terms' },
         depositAddress?.minDeposit || '',
         selectedWallet.text,
     ));
 
     const formattedDepositRate = formatNumber(depositAddress?.rate || 0);
     const transferTermsFirstItemLabel = useSelector(selectLocalValueWithVars(
-        'txt.transfer.terms.firstItem',
+        { localizationKey: 'txt.transfer.terms.firstItem' },
         selectedWallet.data || '',
         formattedDepositRate,
     ));

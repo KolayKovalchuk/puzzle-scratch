@@ -2,6 +2,7 @@ import { useFitTextSize } from '@hooks/useFitTextSize';
 import { Container, Text } from '@pixi/react';
 import { ITextStyle, TextStyle } from 'pixi.js';
 import { DefaultTextStyleConfig } from '../DefaultTextStyleConfig';
+import { useEffect } from 'react';
 
 
 export interface IStyledTextPixiElProps {
@@ -18,6 +19,7 @@ export interface IStyledTextPixiElProps {
     yShift?: number;
 
     shouldFitFontSize?: boolean;
+    getTextSize?: (textSize: string | number) => void;
 }
 
 
@@ -34,6 +36,8 @@ export function StyledTextPixiEl({
 
     shouldFitFontSize = true,
     valueForMeasure = text,
+
+    getTextSize,
 }: IStyledTextPixiElProps) {
 
     const textStyleConfig: Partial<ITextStyle> = {
@@ -48,6 +52,10 @@ export function StyledTextPixiEl({
     }
 
     const textStyle = new TextStyle(textStyleConfig);
+
+    useEffect(() => {
+        getTextSize && getTextSize(textStyle.fontSize);
+    }, [textStyle.fontSize, getTextSize]);
 
     try{
         return (

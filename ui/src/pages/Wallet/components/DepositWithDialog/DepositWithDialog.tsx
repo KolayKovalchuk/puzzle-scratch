@@ -67,8 +67,6 @@ export function DepositWithDialog({ isOpen, onCancel, onConfirm, onModeChanged }
     }, []);
 
     const renderBody = useCallback(() => {
-        console.log('DepositWithDialog renderBody mode:', mode);
-        
         switch (mode) {
             case DepositWithDialogMode.Select:
                 return (

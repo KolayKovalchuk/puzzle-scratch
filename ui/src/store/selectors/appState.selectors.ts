@@ -6,10 +6,10 @@ export const selectGame = (state: RootState) => {
     return state.game;
 }
 
-export const selectLastAmountIncrease = createSelector(
+export const selectLastAmountChange = createSelector(
     selectGame,
     (queryState) => {
-        return queryState?.lastAmountIncrease;
+        return queryState?.lastAmountChange;
     }
 )
 

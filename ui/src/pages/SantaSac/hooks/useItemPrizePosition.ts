@@ -1,4 +1,4 @@
-import { TextMetrics } from 'pixi.js';
+import { TextMetrics } from 'pixi.js-legacy';
 import { useEffect, useState } from 'react';
 import { ItemPrizeTextStyles } from '../SantaSacSpriteCell';
 

@@ -1,5 +1,5 @@
 import { useApp, useTick } from '@pixi/react';
-import { RenderTexture } from 'pixi.js';
+import { RenderTexture } from 'pixi.js-legacy';
 import { useState } from 'react';
 
 export function useScratchedPercent(renderTexture: RenderTexture, dragging: boolean) {

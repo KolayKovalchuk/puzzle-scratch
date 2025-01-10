@@ -1,4 +1,4 @@
-import { AssetsBundle, Texture } from 'pixi.js';
+import { AssetsBundle, Texture } from 'pixi.js-legacy';
 import { IScrathCardBundle } from './assetsManifest';
 
 const SANTA_SAC_BUNDLE_BASE_PATH = '/santaSac';

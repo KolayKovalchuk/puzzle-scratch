@@ -1,4 +1,4 @@
-import { ITextStyle } from 'pixi.js';
+import { ITextStyle } from 'pixi.js-legacy';
 
 export const DefaultTextStyleConfig: Partial<ITextStyle> = {
     align: 'center',

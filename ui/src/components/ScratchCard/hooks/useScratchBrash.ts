@@ -1,5 +1,5 @@
 import { useApp } from '@pixi/react';
-import { FederatedPointerEvent, Graphics, RenderTexture, Sprite } from 'pixi.js';
+import { FederatedPointerEvent, Graphics, RenderTexture, Sprite } from 'pixi.js-legacy';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 export function useScratchBrash(

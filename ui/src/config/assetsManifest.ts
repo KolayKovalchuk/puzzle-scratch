@@ -1,4 +1,4 @@
-import { AssetsManifest, Texture } from 'pixi.js';
+import { AssetsManifest, Texture } from 'pixi.js-legacy';
 import { IBundle } from '@hooks/useAssetsBundleLoader';
 import { CANDY_MAZE_BUNDLE } from './candyMazeBundleConfig';
 import { SANTA_SAC_BUNDLE } from './santaSacBundleConfig';

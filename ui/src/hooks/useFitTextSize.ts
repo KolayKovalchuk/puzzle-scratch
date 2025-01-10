@@ -1,4 +1,4 @@
-import { ITextStyle, TextMetrics, TextStyle } from 'pixi.js';
+import { ITextStyle, TextMetrics, TextStyle } from 'pixi.js-legacy';
 import { useEffect, useState } from 'react';
 
 export function useFitTextSize(text: string, targetWidth: number, textStyle: Partial<ITextStyle>) {

@@ -1,4 +1,4 @@
-import { AssetsBundle } from 'pixi.js';
+import { AssetsBundle } from 'pixi.js-legacy';
 
 const COIN_ANIMATION_BUNDLE_BASE_PATH = '/coinsAnimation';
 

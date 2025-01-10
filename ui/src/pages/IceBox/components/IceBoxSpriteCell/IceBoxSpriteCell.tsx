@@ -4,7 +4,7 @@ import { GameCellTextStyle } from '@components/shared/StyledText/components/Game
 import { IIceBoxBundle } from '@config/iceBoxBundleConfig';
 import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
 import { Container, Graphics, Sprite } from '@pixi/react';
-import { ITextStyle, TextStyle } from 'pixi.js';
+import { ITextStyle, TextStyle } from 'pixi.js-legacy';
 import { useCellLabelsPosition } from './hooks/useCellLabelsPosition';
 
 export interface IIceBoxSpriteCellData {

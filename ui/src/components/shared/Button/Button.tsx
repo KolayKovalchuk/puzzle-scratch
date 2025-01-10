@@ -1,4 +1,4 @@
-import { ITextStyle } from 'pixi.js';
+import { ITextStyle } from 'pixi.js-legacy';
 import { CSSProperties, forwardRef, ReactNode, Ref, useCallback } from 'react';
 import { Icon } from '../Icon';
 import { RegularStyledText } from '../StyledText';

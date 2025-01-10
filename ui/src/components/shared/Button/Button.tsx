@@ -27,6 +27,8 @@ export interface IButtonProps {
     textStyle?: Partial<ITextStyle>;
 
     is3d?: boolean;
+
+    getTextSize?: (textSize: string | number) => void;
 }
 
 export function ButtonComponent({
@@ -43,6 +45,7 @@ export function ButtonComponent({
 
     is3d = false,
 
+    getTextSize,
 }: IButtonProps, ref: Ref<HTMLButtonElement>) {
     const { className: buttonTypeClassName, textStyles } = useButtonConfig(mode, styles);
 
@@ -66,9 +69,8 @@ export function ButtonComponent({
                     ...textStyle,
                 }}
                 shouldFitFontSize={shouldFitFontSize}
+                getTextSize={getTextSize}
             ></RegularStyledText>
-            // <span className={styles.textLabel}>{text}</span>
-
         );
     }, [
         children,

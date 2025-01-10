@@ -13,4 +13,6 @@ export interface IStyledTextProps {
     shouldFitFontSize?: boolean;
     xShift?: number
     yShift?: number
+
+    getTextSize?: (textSize: string | number) => void;
 }

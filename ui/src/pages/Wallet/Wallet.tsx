@@ -3,6 +3,7 @@ import { Button, ButtonType } from '@components/shared/Button/Button'
 import { Icon } from '@components/shared/Icon'
 import { SpinnerIcon } from '@components/shared/Icon/SpinnerIcon'
 import { SecondaryStyledText } from '@components/shared/StyledText'
+import { useGetSmallestFontSize } from '@hooks/useGetSmallestFontSize'
 import back_arrow from '@icons/back_arrow.svg'
 import robo_token_gold_no_shining from '@icons/robo_token_gold_no_shining.svg'
 import { useGetUserBalance } from '@services/api/balance.service'
@@ -58,6 +59,12 @@ export function Wallet() {
 
     const { userStats } = useGetUserStats();
 
+    const {
+        textStylesWithFontSize,
+        setDepositBtnFontSize,
+        setWithdrawBtnFontSize,
+    } = useGetSmallestFontSize();
+
     return (
         <div className={styles.container}>
             {isLoading ? <SpinnerIcon name={robo_token_gold_no_shining} className={styles.spinnerIcon} />
@@ -88,9 +95,12 @@ export function Wallet() {
                                 </div>
                             </div>
                             <Button
+                                className={`${styles.walletBtn}`}
                                 mode={ButtonType.Confirm}
                                 onClick={onDepositBtnClick}
                                 text={depositLabel}
+                                getTextSize={(size) => setDepositBtnFontSize(size)}
+                                textStyle={textStylesWithFontSize}
                             ></Button>
                         </div>
                         <div className={styles.balanceInfoRow}>
@@ -102,9 +112,12 @@ export function Wallet() {
                                 </div>
                             </div>
                             <Button
+                                className={`${styles.walletBtn}`}
                                 mode={ButtonType.Confirm}
                                 onClick={onWithdrawBtnClick}
                                 text={withdrawLabel}
+                                getTextSize={(size) => setWithdrawBtnFontSize(size)}
+                                textStyle={textStylesWithFontSize}
                             ></Button>
                         </div>
                         <div className={styles.balanceInfoRow}>

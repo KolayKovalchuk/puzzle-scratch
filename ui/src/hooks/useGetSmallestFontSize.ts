@@ -16,7 +16,7 @@ export function useGetSmallestFontSize() {
 
     }, [depositBtnFontSize, withdrawBtnFontSize]);
 
-    const [textStylesWithFontSize, setTextStylesWithFontSize] = useState<Partial<ITextStyle>>({});
+    const [textStylesWithFontSize, setTextStylesWithFontSize] = useState<Partial<ITextStyle>>({ fontSize: 40 });
 
     useEffect(() => {
         if (biggestBtnFontSize) {

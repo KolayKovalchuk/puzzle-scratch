@@ -48,10 +48,13 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
 
         if (!card) return;
 
+        const balanceCange = card.rbaxBalance - card.rbaxBalanceBefore - card.cardData.winAmount;
+        const total = card.rbaxBalanceBefore + balanceCange;
+
         store.dispatch(
             updateUserBalanceWithChangeAnimation(
-                { total: card.rbaxBalance },
-                card.rbaxBalance - card.rbaxBalanceBefore - card.cardData.winAmount
+                { total: total },
+                balanceCange
             )
         );
 

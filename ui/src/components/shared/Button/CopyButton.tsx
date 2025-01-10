@@ -14,6 +14,37 @@ export interface ICopyButtonProps extends IButtonProps {
     showDialog?: boolean;
 }
 
+// Implemented for Telegram Web App
+function legacyCopy(value: string) {
+    try {
+        const ta = document.createElement('textarea')
+        ta.value = value ?? ''
+        ta.style.position = 'absolute'
+        ta.style.opacity = '0'
+        document.body.appendChild(ta)
+        ta.select()
+        document.execCommand('copy')
+        ta.remove()
+        console.warn('Legacy copied to clipboard: ', value);
+    } catch (error) {
+        console.error('Error legacy copying to clipboard:', error);
+    }
+}
+
+async function copyToClipboard(value: string) {
+    try {
+        await navigator.clipboard.writeText(value || '');
+        console.log('Copied to clipboard:', value);
+    } catch (error) {
+        if (error instanceof Error && error.name === 'NotAllowedError') {
+            legacyCopy(value);
+        } else {
+            console.error('Error copying to clipboard:', error);
+        }
+    }
+}
+
+
 export function CopyButton(props: ICopyButtonProps) {
     const [isCopiedDialogOpen, setIsCopiedDialogOpen] = useState(false);
     const successCopiedTitleText = useSelector(selectLocalValue('txt.invite.copied'));
@@ -22,15 +53,18 @@ export function CopyButton(props: ICopyButtonProps) {
     const showDialog = props.showDialog === undefined ? true : props.showDialog;
 
     const onCopyClicked = useCallback(async () => {
-        const url = props.getCopyValue();
+        try {
+            const url = props.getCopyValue();
+            await copyToClipboard(url || '');
+            setIsCopiedDialogOpen(true);
 
-        await navigator.clipboard.writeText(url || '')
-        setIsCopiedDialogOpen(true);
-
-        if (props.onClick) {
-            props.onClick();
+            if (props.onClick) {
+                props.onClick();
+            }
+        } catch (error) {
+            console.error('Error copying to clipboard:', error);
         }
-    }, []);
+    }, [props.getCopyValue, props.onClick]);
 
     const onConfirmClick = useCallback(() => {
         setIsCopiedDialogOpen(false);

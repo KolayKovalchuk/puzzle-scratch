@@ -13,7 +13,7 @@ export function BonusInfoDialogPopup({ isOpen, onClose }: IBonusInfoDialogPopupP
     const friendToInvite = useSelector(selectFriendToInvite) || 0;
     const friendRBax = useSelector(selectFriendRBax) || 0;
 
-    const content = useSelector(selectLocalValueWithVars('txt.invite.terms', friendRBax, friendToInvite));
+    const content = useSelector(selectLocalValueWithVars({ localizationKey: 'txt.invite.terms' }, friendRBax, friendToInvite));
 
 
     return (

@@ -142,7 +142,7 @@ export function LanguageSelect({}: ILanguageSelectProps) {
                 }
             }}></Button>
 
-            <Footer />
+            <Footer locale={selectedLocale?.data} />
             <TosApprovePopup
                 isOpen={isTosApprovePopupOpen}
                 onConfirm={() => onTosApprove()}

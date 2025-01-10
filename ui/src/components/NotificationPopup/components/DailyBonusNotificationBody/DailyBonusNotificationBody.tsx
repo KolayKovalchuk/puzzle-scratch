@@ -70,7 +70,7 @@ export function DailyBonusNotificationBody({ data }: IDailyBonusNotificationBody
             const isToday = isDayToday(index, data.day);
             const headerText: string = isToday
                 ? selectLocalValue('txt.dailybonus.today')(store.getState())
-                : selectLocalValueWithVars('txt.dailybonus.day', index + 1)(store.getState());
+                : selectLocalValueWithVars({ localizationKey: 'txt.dailybonus.day' }, index + 1)(store.getState());
 
             return {
                 bonus: bonus,

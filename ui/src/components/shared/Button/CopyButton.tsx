@@ -47,7 +47,8 @@ async function copyToClipboard(value: string) {
 
 export function CopyButton(props: ICopyButtonProps) {
     const [isCopiedDialogOpen, setIsCopiedDialogOpen] = useState(false);
-    const successCopiedTitleText = useSelector(selectLocalValue('txt.invite.copied'));
+    const successCopiedTitleText = useSelector(selectLocalValue('txt.invite.copied.title'));
+    const successCopiedContentText = useSelector(selectLocalValue('txt.invite.copied'));
     const successCopiedBtnText = useSelector(selectLocalValue('txt.btn.ok'));
 
     const showDialog = props.showDialog === undefined ? true : props.showDialog;
@@ -86,7 +87,7 @@ export function CopyButton(props: ICopyButtonProps) {
                     className={styles.copyModalDialog}
                     isOpen={isCopiedDialogOpen}
                     title={successCopiedTitleText}
-                    content={''}
+                    content={successCopiedContentText}
                     onConfirm={onConfirmClick}
                     confirmText={successCopiedBtnText}
                 ></ModalDialog>

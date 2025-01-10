@@ -82,9 +82,11 @@ const ModalDialog: FC<ModalDialogProps> = ({
         return null;
     }
 
+    const noTitleCenteredClass = !title ? styles.noTitleCentered : '';
+
     return (
         <div className={`${styles.modalOverlay} ${className}`} onClick={onOverlayClick}>
-            <div className={`${styles.modalContent} modalContent`} onClick={onModalContentClick}>
+            <div className={`${styles.modalContent} ${noTitleCenteredClass} modalContent`} onClick={onModalContentClick}>
                 {typeof title === 'string'
                     ? <StyledHeader title={title}>
                         {modalDialogContent}

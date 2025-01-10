@@ -1,8 +1,10 @@
 import { IUserBalance } from '@models/User.model';
-import { apiClient } from './api.service';
-import { useEffect, useState } from 'react';
+import { updateUserBalanceWithChangeAnimation } from '@store/actions/user.actions';
+import { selectUserBalanceTotal } from '@store/selectors/user.selectors';
 import store from '@store/store';
-import { updateUserBalance } from '@store/actions/user.actions';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { apiClient } from './api.service';
 
 export interface IUserBalanceResponse {
     totalBalance: number;
@@ -24,6 +26,8 @@ export function useGetUserBalance(): { balance: IUserBalance | null, isLoading: 
     const [balance, setBalance] = useState<IUserBalance | null>(null);
     const [isLoading, setLoading] = useState<boolean>(false);
 
+    const prevBalance = useSelector(selectUserBalanceTotal);
+
     useEffect(() => {
         const fetch = async () => {
             setLoading(true);
@@ -34,12 +38,13 @@ export function useGetUserBalance(): { balance: IUserBalance | null, isLoading: 
                 total: userBalanceResponse?.totalBalance || 0,
                 withdrawable: userBalanceResponse?.withdrawableBalance || 0,
             }
+            const balanceDiff = userBalance.total - (prevBalance || 0);
             setBalance(userBalance);
-            store.dispatch(updateUserBalance(userBalance));
+            store.dispatch(updateUserBalanceWithChangeAnimation(userBalance, balanceDiff));
         };
 
         fetch();
-    }, []);
+    }, [prevBalance]);
 
     return { balance, isLoading };
 }

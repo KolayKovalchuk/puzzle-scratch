@@ -1,17 +1,20 @@
 import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
-import { selectLastAmountIncrease, selectPrizeLabelCounter } from '@store/selectors/appState.selectors';
+import { selectLastAmountChange, selectPrizeLabelCounter } from '@store/selectors/appState.selectors';
 
 export function useBalanceChangeLabel(className: string) {
-    const lastAmountIncrease = useSelector(selectLastAmountIncrease);
+    const lastAmountChange = useSelector(selectLastAmountChange);
     const prizeLabelCounter = useSelector(selectPrizeLabelCounter);
 
     const labelRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (!labelRef.current) return;
-        if (!lastAmountIncrease) return;
+        if (!lastAmountChange) {
+            labelRef.current.classList.remove(className);
+            return;
+        }
 
         labelRef.current.classList.remove(className);
         setTimeout(() => {
@@ -21,8 +24,10 @@ export function useBalanceChangeLabel(className: string) {
 
     }, [prizeLabelCounter]);
 
+    const lastWinLabel = lastAmountChange > 0 ? '+' + lastAmountChange : lastAmountChange.toString();
+
     return {
-        lastWinLabel: '+' + lastAmountIncrease,
+        lastWinLabel: lastWinLabel,
         labelRef,
     }
 }

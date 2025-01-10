@@ -38,12 +38,25 @@ let swipeTimeout: NodeJS.Timeout | null = null;
 
 export function useScratchGame<CardData extends ICardData = ICardData>(
     batchId: string | undefined,
-    // card: IBuyBatchCardData<CardData> | null,
-    // buyCard: (batchId: string) => Promise<IBuyBatchCardData<CardData> | null>,
     scratchCardsRefConfig: { [key: string]: RefObject<IScratchCardHandle> },
     scratchAnimationRef: RefObject<IScratchAnimationHandle>,
 ) {
     const { buyCard, card, loading: isCardBuying } = useBuyCard<CardData>();
+
+    const buyCardWithBalanceChange = useCallback(async (batchId: string) => {
+        const card = await buyCard(batchId);
+
+        if (!card) return;
+
+        store.dispatch(
+            updateUserBalanceWithChangeAnimation(
+                { total: card.rbaxBalance },
+                card.rbaxBalance - card.rbaxBalanceBefore - card.cardData.winAmount
+            )
+        );
+
+        return card;
+    }, [buyCard]);
 
     const [lastAction, setLastAction] = useState<'playBtnClick' | 'swipe' | 'scratch' | null>(null);
     const [isBigWinVisible, setIsBigWinVisible] = useState(false);
@@ -83,7 +96,7 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
             resetAnimation();
         });
 
-        const card = await buyCard(batchId)
+        const card = await buyCardWithBalanceChange(batchId)
 
         if (!card) return;
 
@@ -98,7 +111,7 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
         setLastAction('playBtnClick');
 
         onScratchedEnought(card);
-    }, [batchId, buyCard, scratchCardsRefConfig, isBigWinVisible, isScratchAnimationPlaying, isCardBuying]);
+    }, [batchId, buyCardWithBalanceChange, scratchCardsRefConfig, isBigWinVisible, isScratchAnimationPlaying, isCardBuying]);
 
     const resetScratchState = useCallback(async () => {
         console.log('resetScratchState');
@@ -126,10 +139,10 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
 
     const onScratchStarted = useCallback(() => {
         if (batchId && (!lastAction || lastAction == 'swipe')) {
-            buyCard(batchId)
+            buyCardWithBalanceChange(batchId)
             setLastAction('scratch');
         }
-    }, [batchId, buyCard, lastAction]);
+    }, [batchId, buyCardWithBalanceChange, lastAction]);
 
     const onBigWinClicked = useCallback(() => {
         setIsBigWinVisible(false);

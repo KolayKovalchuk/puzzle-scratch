@@ -1,5 +1,5 @@
 import { useApp } from '@pixi/react';
-import { BaseTexture, Container, Matrix, Point, RenderTexture, SimpleRope, Sprite, Text, Texture } from 'pixi.js';
+import { BaseTexture, Container, Matrix, Point, RenderTexture, SimpleRope, Sprite, Text, Texture } from 'pixi.js-legacy';
 import { useEffect, useRef } from 'react';
 
 export function useTextCurved() {

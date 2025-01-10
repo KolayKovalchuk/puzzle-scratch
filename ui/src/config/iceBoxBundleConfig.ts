@@ -1,4 +1,4 @@
-import { AssetsBundle, Texture } from 'pixi.js';
+import { AssetsBundle, Texture } from 'pixi.js-legacy';
 import { IScrathCardBundle } from './assetsManifest';
 
 const ICE_BOX_BUNDLE_BASE_PATH = '/iceBox';

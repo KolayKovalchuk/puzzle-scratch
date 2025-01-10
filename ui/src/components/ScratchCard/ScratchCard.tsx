@@ -6,7 +6,7 @@ import { IconMatrix, IGameMatrixConfig, IGameMatrixProps, IMatrixCellProps } fro
 import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
 import { useContainerDimensions } from '@hooks/useContainerDimensions';
 
-import { Application, ICanvas, Graphics as OriginGraphics, RenderTexture, Resource, Texture } from 'pixi.js';
+import { Application, ICanvas, Graphics as OriginGraphics, RenderTexture, Resource, Texture } from 'pixi.js-legacy';
 import { forwardRef, ReactElement, Ref, useEffect, useImperativeHandle, useMemo, useRef } from 'react';
 import { GradientConfig } from './hooks/useGradientTexture';
 import { useIsPercentAreaScratched } from './hooks/useIsAreaScratched';

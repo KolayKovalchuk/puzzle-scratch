@@ -1,4 +1,4 @@
-import { Texture } from 'pixi.js';
+import { Texture } from 'pixi.js-legacy';
 import { useMemo } from 'react';
 
 export type GradientConfig = [number, string][]

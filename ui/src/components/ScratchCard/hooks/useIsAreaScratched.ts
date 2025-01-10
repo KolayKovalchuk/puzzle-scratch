@@ -1,5 +1,5 @@
 import { useApp, useTick } from '@pixi/react';
-import { Application, ICanvas, RenderTexture } from 'pixi.js';
+import { Application, ICanvas, RenderTexture } from 'pixi.js-legacy';
 import { useCallback, useMemo, useState } from 'react';
 
 export function getIsAreaScratched(

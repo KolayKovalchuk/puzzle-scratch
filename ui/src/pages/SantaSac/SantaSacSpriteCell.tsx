@@ -1,7 +1,7 @@
 import { IMatrixCellProps, ISpriteCellData } from '@components/shared/IconMatrix/IconMatrix.models';
 import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
 import { Container, Sprite, Text } from '@pixi/react';
-import { TextStyle } from 'pixi.js';
+import { TextStyle } from 'pixi.js-legacy';
 import { useItemPrizePosition } from './hooks/useItemPrizePosition';
 import { SantaSacScratchItemsEnum } from './scratchItemsEnum';
 import { GameCellTextStyle } from '@components/shared/StyledText/components/GameCellStyledText';

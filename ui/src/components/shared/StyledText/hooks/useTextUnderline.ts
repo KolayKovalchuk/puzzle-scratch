@@ -1,4 +1,4 @@
-import { LINE_CAP, LINE_JOIN, Graphics, Text } from 'pixi.js';
+import { LINE_CAP, LINE_JOIN, Graphics, Text } from 'pixi.js-legacy';
 import { useEffect, useRef } from 'react';
 
 export function useTextUnderline(

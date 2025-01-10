@@ -1,6 +1,6 @@
 import { IMatrixCellProps, ISpriteCellData } from '@components/shared/IconMatrix/IconMatrix.models';
 import { StyledTextPixiEl, WinStyledTextConfig } from '@components/shared/StyledText';
-import { ITextStyle } from 'pixi.js';
+import { ITextStyle } from 'pixi.js-legacy';
 
 export interface IDiamondSpriteCellData extends ISpriteCellData {
 }

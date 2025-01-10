@@ -1,4 +1,4 @@
-import { AssetsBundle, Texture } from 'pixi.js';
+import { AssetsBundle, Texture } from 'pixi.js-legacy';
 import { IScrathCardBundle } from './assetsManifest';
 
 const CANDY_MAZE_BUNDLE_BASE_PATH = '/candyMaze';

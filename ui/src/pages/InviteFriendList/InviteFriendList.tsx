@@ -1,4 +1,4 @@
-import { ITextStyle } from 'pixi.js';
+import { ITextStyle } from 'pixi.js-legacy';
 import { useSelector } from 'react-redux';
 
 import styles from './InviteFriendList.module.scss';

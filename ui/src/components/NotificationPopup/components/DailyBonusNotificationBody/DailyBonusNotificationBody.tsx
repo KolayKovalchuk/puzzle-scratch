@@ -11,7 +11,7 @@ import { GameCellStyledText, GameCellTextStyle } from '@components/shared/Styled
 import { DefaultTextStyleConfig, StyledText } from '@components/shared/StyledText';
 import robo_token_no_bg from '@icons/robo_token_no_bg.svg';
 import store from '@store/store';
-import { ITextStyle } from 'pixi.js';
+import { ITextStyle } from 'pixi.js-legacy';
 import { getCoinIcon, getDailyContainerStyles, isDayToday } from './utils/utils';
 import { IDaylyBonusData } from '@models/Notification.model';
 

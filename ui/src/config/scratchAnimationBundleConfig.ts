@@ -1,4 +1,4 @@
-import { AssetsBundle } from 'pixi.js';
+import { AssetsBundle } from 'pixi.js-legacy';
 
 const SCRATCH_ANIMATION_BUNDLE_BASE_PATH = '/scratchAnimation';
 

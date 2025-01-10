@@ -1,5 +1,5 @@
 import { ASSETS_MANIFEST, bundleNameList } from '@config/assetsManifest';
-import { Assets, AssetsBundle, Texture } from 'pixi.js'; // Import Assets from pixi.js
+import { Assets, AssetsBundle, Texture } from 'pixi.js-legacy'; // Import Assets from pixi.js
 import { useEffect, useState } from 'react';
 
 export interface IAddBundleData<BundleConfig extends AssetsBundle["assets"]> {

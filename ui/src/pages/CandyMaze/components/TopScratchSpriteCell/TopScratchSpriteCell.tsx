@@ -1,6 +1,6 @@
 import { IMatrixCellProps } from '@components/shared/IconMatrix';
 import { DefaultTextStyleConfig, StyledTextPixiEl, WinStyledTextConfig } from '@components/shared/StyledText';
-import { ITextStyle } from 'pixi.js';
+import { ITextStyle } from 'pixi.js-legacy';
 
 const topScratchCardTextStyles: Partial<ITextStyle> = {
     ...DefaultTextStyleConfig,

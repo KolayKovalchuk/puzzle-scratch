@@ -1,22 +1,20 @@
-
 import { ITextStyle } from 'pixi.js';
-import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
 import styles from './InviteFriendList.module.scss';
 
 import { Footer } from '@components/Footer/Footer';
 import { Button, ButtonType } from '@components/shared/Button/Button';
+import { CopyButton } from '@components/shared/Button/CopyButton';
 import { useButtonConfig } from '@components/shared/Button/hooks/useButtonConfig';
 import { Icon } from '@components/shared/Icon';
 import { RegularStyledText, SecondaryStyledText } from '@components/shared/StyledText';
+import { useFixNavigateForTelegramWebApp } from '@hooks/useFixNavigateForTelegramWebApp';
 import { useScrollTo } from '@hooks/useScrollTo';
 import { getReferralLink } from '@services/api/links.service';
 import { shareLinkToFriends } from '@services/telegramWebApp/telegramWebApp.service';
 import { selectLocalValue } from '@store/selectors/localization.selectors';
 import { InvitedFriendsTable } from './components/InvitedFriendsTable/InvitedFriendsTable';
-import { CopyButton } from '@components/shared/Button/CopyButton';
 
 import back_arrow from '@icons/back_arrow.svg';
 import invite_friend_icon from '@icons/invite_friend_icon.svg';
@@ -51,10 +49,7 @@ export function InviteFriendList({ className }: InviteFriendListProps) {
         shareLinkToFriends(shareLinkText, url);
     }
 
-    const navigate = useNavigate();
-    const onBackBtnClick = useCallback(() => {
-        navigate(-1);
-    }, [navigate]);
+    const onBackBtnClick = useFixNavigateForTelegramWebApp();
 
     return (<>
         <div className={`${styles.container} ${className}`} ref={targetRef}>

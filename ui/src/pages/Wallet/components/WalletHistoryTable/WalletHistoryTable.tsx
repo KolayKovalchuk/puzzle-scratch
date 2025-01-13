@@ -49,7 +49,9 @@ export function WalletHistoryTable({ mode }: IWalletHistoryTableProps) {
             cellData: [
                 {
                     key: `cell-${index}-1`, data: new Date(data.date).toLocaleDateString('en-US', {
-                        dateStyle: 'short',
+                        month: '2-digit',
+                        day: '2-digit',
+                        year: '2-digit',
                     })
                 },
                 { key: `cell-${index}-2`, data: data.type ? withdrawLabel : depositLabel },

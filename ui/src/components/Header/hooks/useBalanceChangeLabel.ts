@@ -12,7 +12,6 @@ export function useBalanceChangeLabel(className: string) {
     useEffect(() => {
         if (!labelRef.current) return;
         if (!lastAmountChange) {
-            labelRef.current.classList.remove(className);
             return;
         }
 
@@ -24,7 +23,8 @@ export function useBalanceChangeLabel(className: string) {
 
     }, [prizeLabelCounter]);
 
-    const lastWinLabel = lastAmountChange > 0 ? '+' + lastAmountChange : lastAmountChange.toString();
+    const roundedAmountChange = Number.isInteger(lastAmountChange) ? lastAmountChange : lastAmountChange.toFixed(2);
+    const lastWinLabel = lastAmountChange > 0 ? '+' + roundedAmountChange : roundedAmountChange.toString();
 
     return {
         lastWinLabel: lastWinLabel,

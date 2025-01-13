@@ -38,6 +38,10 @@ export function DepositWithStarsBody({ onIvoiceStatusChange }: IDepositWithStars
     }, [invoiceStatus, isPaid]);
 
     const renderBody = () => {
+        if (isLoading) {
+            return <SpinnerIcon name={robo_token_gold_no_shining} className={styles.spinnerIcon} />
+        }
+        
         switch (invoiceStatus) {
             case 'paid':
                 return isPaid
@@ -54,13 +58,12 @@ export function DepositWithStarsBody({ onIvoiceStatusChange }: IDepositWithStars
                         />
                 );
         }
-    }
+    };
 
     return (
         <div className={styles.container} ref={containerRef}>
             {
-                isLoading ? <SpinnerIcon name={robo_token_gold_no_shining} className={styles.spinnerIcon} />
-                    : renderBody()
+                renderBody()
             }
         </div>
     );

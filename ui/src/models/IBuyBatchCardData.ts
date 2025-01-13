@@ -1,5 +1,5 @@
 export interface ICardData {
-    matrix: (number | string)[][];
+    matrix: (number | string)[][][];
     winAmount: number;
 }
 

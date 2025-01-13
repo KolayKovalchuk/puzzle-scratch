@@ -65,83 +65,80 @@ export function Wallet() {
         setWithdrawBtnFontSize,
     } = useGetSmallestFontSize();
 
-    return (
-        <div className={styles.container}>
-            {isLoading ? <SpinnerIcon name={robo_token_gold_no_shining} className={styles.spinnerIcon} />
-                : <>
-                    <div className={styles.headerContianer}>
-                        <Button
-                            className={styles.backBtn || ''}
-                            mode={ButtonType.Default}
-                            onClick={onBackBtnClick}
-                            iconName={back_arrow}
-                        >
-                        </Button>
+    const containerClass = `${styles.container} ${isLoading ? styles.hidden : ''}`;
 
-                        <SecondaryStyledText
-                            text={headerText}
-                            className={styles.headerText}
-                            textStyles={headerStyles}
-                        ></SecondaryStyledText>
-                    </div>
+    return (<>
+        {isLoading && <div className={styles.spinnerContainer}><SpinnerIcon name={robo_token_gold_no_shining} className={styles.spinnerIcon} /></div>}
+        <div className={containerClass}>
+            <div className={styles.headerContianer}>
+                <Button
+                    className={styles.backBtn || ''}
+                    mode={ButtonType.Default}
+                    onClick={onBackBtnClick}
+                    iconName={back_arrow}
+                >
+                </Button>
 
-                    <div className={styles.walletInfoContainer}>
-                        <div className={styles.balanceInfoRow}>
-                            <div className={styles.column}>
-                                <div className={styles.balanceNameLabel}>{balanceLabel}</div>
-                                <div className={styles.balanceAmountContainer}>
-                                    <Icon name={robo_token_gold_no_shining} className={styles.roboTokenGoldIcon} />
-                                    <span className={styles.balanceAmount}>{formatNumber(totalAmount)}</span>
-                                </div>
-                            </div>
-                            <Button
-                                className={`${styles.walletBtn}`}
-                                mode={ButtonType.Confirm}
-                                onClick={onDepositBtnClick}
-                                text={depositLabel}
-                                getTextSize={(size) => setDepositBtnFontSize(size)}
-                                textStyle={textStylesWithFontSize}
-                            ></Button>
-                        </div>
-                        <div className={styles.balanceInfoRow}>
-                            <div className={styles.column}>
-                                <div className={styles.balanceNameLabel}>{withdrawableLabel}</div>
-                                <div className={styles.balanceAmountContainer}>
-                                    <Icon name={robo_token_gold_no_shining} className={styles.roboTokenGoldIcon} />
-                                    <span className={styles.balanceAmount}>{formatNumber(withdrawableAmount)}</span>
-                                </div>
-                            </div>
-                            <Button
-                                className={`${styles.walletBtn}`}
-                                mode={ButtonType.Confirm}
-                                onClick={onWithdrawBtnClick}
-                                text={withdrawLabel}
-                                getTextSize={(size) => setWithdrawBtnFontSize(size)}
-                                textStyle={textStylesWithFontSize}
-                            ></Button>
-                        </div>
-                        <div className={styles.balanceInfoRow}>
-                            <div className={styles.column}>
-                                <div className={styles.balanceNameLabel}>{winnignsLabel}</div>
-                            </div>
-                            <div className={`${styles.balanceAmountContainer} ${styles.infoLabel}`}>
-                                <Icon name={robo_token_gold_no_shining} className={styles.roboTokenGoldIcon} />
-                                <span className={styles.balanceAmount}>{formatNumber(userStats?.totalRbaxWon || 0)}</span>
-                            </div>
+                <SecondaryStyledText
+                    text={headerText}
+                    className={styles.headerText}
+                    textStyles={headerStyles}
+                ></SecondaryStyledText>
+            </div>
+
+            <div className={styles.walletInfoContainer}>
+                <div className={styles.balanceInfoRow}>
+                    <div className={styles.column}>
+                        <div className={styles.balanceNameLabel}>{balanceLabel}</div>
+                        <div className={styles.balanceAmountContainer}>
+                            <Icon name={robo_token_gold_no_shining} className={styles.roboTokenGoldIcon} />
+                            <span className={styles.balanceAmount}>{formatNumber(totalAmount)}</span>
                         </div>
                     </div>
-
-                    <WalletHistoryTable mode={mode}/>
-                    <DepositWithDialog
-                        onModeChanged={onModeChanged}
-                        isOpen={isDepositDialogOpen}
-                        onCancel={closeDialog}
-                        onConfirm={closeDialog}
-                    />
-                    <Footer />
-                </>
-            }
-
-        </div>
-    )
+                    <Button
+                        className={`${styles.walletBtn}`}
+                        mode={ButtonType.Confirm}
+                        onClick={onDepositBtnClick}
+                        text={depositLabel}
+                        getTextSize={(size) => setDepositBtnFontSize(size)}
+                        textStyle={textStylesWithFontSize}
+                    ></Button>
+                </div>
+                <div className={styles.balanceInfoRow}>
+                    <div className={styles.column}>
+                        <div className={styles.balanceNameLabel}>{withdrawableLabel}</div>
+                        <div className={styles.balanceAmountContainer}>
+                            <Icon name={robo_token_gold_no_shining} className={styles.roboTokenGoldIcon} />
+                            <span className={styles.balanceAmount}>{formatNumber(withdrawableAmount)}</span>
+                        </div>
+                    </div>
+                    <Button
+                        className={`${styles.walletBtn}`}
+                        mode={ButtonType.Confirm}
+                        onClick={onWithdrawBtnClick}
+                        text={withdrawLabel}
+                        getTextSize={(size) => setWithdrawBtnFontSize(size)}
+                        textStyle={textStylesWithFontSize}
+                    ></Button>
+                </div>
+                <div className={styles.balanceInfoRow}>
+                    <div className={styles.column}>
+                        <div className={styles.balanceNameLabel}>{winnignsLabel}</div>
+                    </div>
+                    <div className={`${styles.balanceAmountContainer} ${styles.infoLabel}`}>
+                        <Icon name={robo_token_gold_no_shining} className={styles.roboTokenGoldIcon} />
+                        <span className={styles.balanceAmount}>{formatNumber(userStats?.totalRbaxWon || 0)}</span>
+                    </div>
+                </div>
+            </div>
+            <WalletHistoryTable mode={mode} />
+            <DepositWithDialog
+                onModeChanged={onModeChanged}
+                isOpen={isDepositDialogOpen}
+                onCancel={closeDialog}
+                onConfirm={closeDialog}
+            />
+            <Footer />
+        </div >
+    </>)
 }

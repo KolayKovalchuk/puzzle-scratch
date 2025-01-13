@@ -6,7 +6,7 @@ import { Icon } from '@components/shared/Icon'
 import { SecondaryStyledText } from '@components/shared/StyledText'
 import { ITableCellData, ITRowData, Table, TableCell } from '@components/shared/Table'
 import { selectLocalValue } from '@store/selectors/localization.selectors'
-import { formatNumber } from '@utils/formatters/formatNumber'
+import { formatLargeNumber, formatNumber } from '@utils/formatters/formatNumber'
 import { DepositWithDialogMode } from '@pages/Wallet/Wallet.models'
 import { useDWHistory } from '@services/api/depositWithdrawal.service'
 
@@ -49,11 +49,13 @@ export function WalletHistoryTable({ mode }: IWalletHistoryTableProps) {
             cellData: [
                 {
                     key: `cell-${index}-1`, data: new Date(data.date).toLocaleDateString('en-US', {
-                        dateStyle: 'short',
+                        month: '2-digit',
+                        day: '2-digit',
+                        year: '2-digit',
                     })
                 },
                 { key: `cell-${index}-2`, data: data.type ? withdrawLabel : depositLabel },
-                { key: `cell-${index}-3`, data: data.amount },
+                { key: `cell-${index}-3`, data: formatLargeNumber(data.amount) },
             ],
         }));
     }, [historyData]);

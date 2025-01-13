@@ -38,25 +38,33 @@ export function useScratchAnimation(
             return;
         }
 
+        animation?.destroy();
         app.stage.removeChildren();
         const newAnimation = new Spine(scratchJson.spineData);
-        newAnimation.x = width / 2;
-        newAnimation.y = height * 0.38;
-        newAnimation.width = width;
-        newAnimation.height = height;
 
         app.stage.addChild(newAnimation);
         setAnimation(newAnimation);
-    }, [app, scratchJson, width, height]);
-
+    }, [app, scratchJson]);
 
     useEffect(() => {
         if (!animation) {
             return;
         }
-        const onCompleteListener = () => {
-            console.log('Animation rendering finished: ', animationName);
-            if(onComplete) onComplete();
+
+        animation.x = width / 2;
+        animation.y = height * 0.38;
+        animation.width = width;
+        animation.height = height;
+    }, [width, height, animation]);
+
+    const onCompleteListener = useCallback(() => {
+        console.log('Animation rendering finished: ', animationName);
+        onComplete && onComplete();
+    }, [onComplete, animationName]);
+
+    useEffect(() => {
+        if (!animation) {
+            return;
         }
 
         animation.state.addListener({
@@ -64,11 +72,9 @@ export function useScratchAnimation(
         });
 
         return () => {
-            animation.state.removeListener({
-                complete: onCompleteListener
-            });
+            animation.state.clearListeners();
         }
-    }, [animation, animationName, onComplete]);
+    }, [animation, onCompleteListener]);
 
     const play = useCallback(() => {
         if (!animation) {

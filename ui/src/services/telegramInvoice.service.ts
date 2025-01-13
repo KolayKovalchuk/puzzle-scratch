@@ -40,12 +40,14 @@ export function useConvertStarsFromRbax() {
                 setIsPaid(!!reposponse?.paid);
 
                 if (reposponse?.paid) {
-                    store.dispatch(updateUserBalanceWithChangeAnimation(
-                        { total: reposponse?.balanceUpdate.rbaxBalance || 0 },
-                        reposponse?.balanceUpdate.rbaxDelta || 0,
-                    ));
-                    
                     setBalanceChange(reposponse?.balanceUpdate.rbaxDelta);
+                }
+
+                if (reposponse?.balanceUpdate.rbaxDelta) {
+                    store.dispatch(updateUserBalanceWithChangeAnimation(
+                        { total: reposponse?.balanceUpdate.rbaxBalance },
+                        reposponse?.balanceUpdate.rbaxDelta,
+                    ));
                 }
             }
 

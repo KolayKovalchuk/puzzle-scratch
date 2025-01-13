@@ -171,7 +171,13 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
 
         store.dispatch(updateUserBalanceWithChangeAnimation({ total: card.rbaxBalance }, card.cardData.winAmount));
 
-    }, [card, card?.winning, scratchCardTransitionTimeout]);
+    }, [
+        card,
+        card?.rbaxBalance,
+        card?.winning,
+        card?.cardData.winAmount,
+        scratchCardTransitionTimeout
+    ]);
 
     useEffect(() => {
         if (isAllCardsScratched) {

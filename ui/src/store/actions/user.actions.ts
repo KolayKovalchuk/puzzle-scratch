@@ -41,7 +41,9 @@ export const updateUserBalance = (payload: Partial<IUserBalance>) => ({
 export const updateUserBalanceWithChangeAnimation = (balance: Partial<IUserBalance>, changeAmount: number) => {
     return (dispatch: Dispatch) => {
         dispatch(updateUserBalance(balance));
-        dispatch(showAmountChangeLabel(changeAmount));
+        if (changeAmount) {
+            dispatch(showAmountChangeLabel(changeAmount));
+        }
     };
 };
 

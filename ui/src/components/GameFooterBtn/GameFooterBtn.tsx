@@ -2,14 +2,13 @@ import { Button, ButtonGoldBorder, ButtonType } from '@components/shared/Button/
 import { selectLocalValue } from '@store/selectors/localization.selectors';
 import { ReactNode, useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
 import styles from './GameFooterBtn.module.scss';
 
-import { useScrollTo } from '@hooks/useScrollTo';
-import back_arrow from '@icons/back_arrow.svg';
-import hint from '@icons/hint.svg';
+import { BackButton } from '@components/shared/Button/BackButton';
 import { GameDescriptionPopup } from '@components/shared/GameDescriptionPopup/GameDescriptionPopup';
+import { useScrollTo } from '@hooks/useScrollTo';
+import hint from '@icons/hint.svg';
 import { BatchCardType } from '@models/BatchCard.model';
 
 
@@ -23,10 +22,9 @@ export interface IGameFooterBtnProps {
 export function GameFooterBtn({ onPlay, onCancel, children, batchCardType }: IGameFooterBtnProps) {
     const playButtonText = useSelector(selectLocalValue('txt.btn.play'));
 
-    const navigate = useNavigate();
     const onCancelCb = useCallback(() => {
-        navigate(-1)
-    }, [navigate])
+        if (onCancel) onCancel();
+    }, [onCancel])
 
     const { targetRef } = useScrollTo();
 
@@ -38,13 +36,10 @@ export function GameFooterBtn({ onPlay, onCancel, children, batchCardType }: IGa
 
     return (<>
         <div ref={targetRef} className={styles.footer} id='#gameFooter'>
-            <Button
-                className={`${styles.btn} ${styles.backBtn}`}
-                mode={ButtonType.Default}
-                onClick={() => onCancel ? onCancel() : onCancelCb()}
-                iconName={back_arrow}
-            >
-            </Button>
+            <BackButton
+                className={`${styles.btn}`}
+                onClick={onCancelCb}
+            />
             <ButtonGoldBorder
                 className={`${styles.btn} ${styles.playButton}`}
                 mode={ButtonType.Default}
@@ -52,7 +47,7 @@ export function GameFooterBtn({ onPlay, onCancel, children, batchCardType }: IGa
                 onClick={() => onPlay()}
             />
             <Button
-                className={`${styles.btn} ${styles.backBtn}`}
+                className={`${styles.btn} ${styles.iconBtn}`}
                 mode={ButtonType.Default}
                 onClick={() => {setIsGameDescriptionPopupOpen(true)}}
                 iconName={hint}

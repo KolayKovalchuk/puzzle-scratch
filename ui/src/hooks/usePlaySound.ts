@@ -1,19 +1,16 @@
-import { useCallback, useEffect } from 'react';
-import { useHowlerSound } from './useHowlerSound';
-import { useSelector } from 'react-redux';
-import { selectSoundPlayerCounter, selectSoundToPlay } from '@store/selectors/appState.selectors';
-import store from '@store/store';
-import { playSound } from '@store/actions/appState.actions';
 import { AppSounds } from '@config/sounds';
+import { selectSoundPlayerCounter, selectSoundToPlay } from '@store/selectors/appState.selectors';
+import { useCallback, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useHowlerSound } from './useHowlerSound';
 
 export const NO_TAP_SOUND_CLASS = 'noTapSound';
 
 export function usePlaySound() {
-    const soundeName = useSelector(selectSoundToPlay);
     const soundPlayCounter = useSelector(selectSoundPlayerCounter);
-    const sound = useHowlerSound(soundeName || '');
+    const tapSound = useHowlerSound(AppSounds.Tap);
 
-    const handleClick = useCallback((e: MouseEvent) => {
+    const playTapSound = useCallback((e: MouseEvent) => {
         let targetElement: HTMLElement | null = e.target as HTMLElement;
         while (targetElement) {
             if (targetElement.classList.contains(NO_TAP_SOUND_CLASS)) {
@@ -22,17 +19,20 @@ export function usePlaySound() {
             targetElement = targetElement.parentElement;
         }
 
-        store.dispatch(playSound(AppSounds.Tap));
-    }, [sound]);
+        tapSound?.play();
+    }, [tapSound]);
+
+    const soundeName = useSelector(selectSoundToPlay);
+    const sound = useHowlerSound(soundeName || '');
 
     useEffect(() => {
-        document.addEventListener('click', handleClick, true); // Use capture phase
+        document.addEventListener('click', playTapSound, true); // Use capture phase
 
         return () => {
-            document.removeEventListener('click', handleClick, true);
             sound?.stop();
+            document.removeEventListener('click', playTapSound, true);
         };
-    }, [handleClick]);
+    }, [playTapSound, sound]);
 
     useEffect(() => {
         if (!sound) return;

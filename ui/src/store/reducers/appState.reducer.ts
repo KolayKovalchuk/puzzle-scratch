@@ -5,15 +5,19 @@ import { PLAY_SOUND, SHOW_AMOUNT_CHANGE_LABEL } from '@store/actions/appState.ac
 export interface IAppState {
     lastAmountChange: number;
     prizeLabelCounter: number;
+
     soundToPlay: AppSounds | null;
     shouldStopAllSounds: boolean;
     soundPlayerCounter: number;
+    duration?: number | null;
 }
 
 const initialState: IAppState = {
     lastAmountChange: 0,
     prizeLabelCounter: 0,
+
     soundToPlay: null,
+    duration: null,
     shouldStopAllSounds: true,
     soundPlayerCounter: 0,
 };
@@ -33,6 +37,7 @@ export const gameReducer = (state = initialState, action: any): IAppState => {
                 soundToPlay: action.payload.soundName,
                 shouldStopAllSounds: action.payload.shouldStopAllSounds,
                 soundPlayerCounter: state.soundPlayerCounter + 1,
+                duration: action.payload.duration,
             };
         default:
             return state;

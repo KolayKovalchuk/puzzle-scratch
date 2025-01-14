@@ -1,4 +1,4 @@
-import { FC, MouseEvent, ReactNode, useCallback, useMemo } from 'react';
+import { FC, MouseEvent, ReactNode, useCallback, useEffect, useMemo } from 'react';
 
 import { Button, ButtonType } from '@components/shared/Button';
 import { Icon } from '@components/shared/Icon';
@@ -7,6 +7,9 @@ import { StyledHeader } from '@components/shared/StyledHeader';
 import close_cross_icon from '@icons/close_cross_icon.svg';
 
 import styles from './ModalDialog.module.scss';
+import store from '@store/store';
+import { playSound } from '@store/actions/appState.actions';
+import { AppSounds } from '@config/sounds';
 
 interface ModalDialogProps {
     isOpen: boolean;
@@ -78,6 +81,12 @@ const ModalDialog: FC<ModalDialogProps> = ({
     const onModalContentClick = useCallback((e: MouseEvent<HTMLDivElement>) => {
         e.stopPropagation();
     }, []);
+
+    useEffect(() => {
+        if (isOpen) {
+            store.dispatch(playSound(AppSounds.OpenDialog));
+        }
+    }, [isOpen]);
 
     if (!isOpen) {
         return null;

@@ -6,6 +6,7 @@ export interface IAppState {
     lastAmountChange: number;
     prizeLabelCounter: number;
     soundToPlay: AppSounds | null;
+    shouldStopAllSounds: boolean;
     soundPlayerCounter: number;
 }
 
@@ -13,6 +14,7 @@ const initialState: IAppState = {
     lastAmountChange: 0,
     prizeLabelCounter: 0,
     soundToPlay: null,
+    shouldStopAllSounds: true,
     soundPlayerCounter: 0,
 };
 
@@ -28,7 +30,8 @@ export const gameReducer = (state = initialState, action: any): IAppState => {
         case PLAY_SOUND:
             return {
                 ...state,
-                soundToPlay: action.payload,
+                soundToPlay: action.payload.soundName,
+                shouldStopAllSounds: action.payload.shouldStopAllSounds,
                 soundPlayerCounter: state.soundPlayerCounter + 1,
             };
         default:

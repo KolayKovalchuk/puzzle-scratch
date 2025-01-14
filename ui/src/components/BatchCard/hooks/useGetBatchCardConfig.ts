@@ -56,11 +56,9 @@ function getBatchImageUrl(cardType: BatchCardType) {
 
 export function useBatchCardHandler(batchCard: BatchCard, navigate: NavigateFunction) {
     // TODO: Remove this line to enable batch click on prod
-    const appMode = import.meta.env.MODE
     const isQaUser = useSelector(selectIsQaUser);
-    const isAllowed = isQaUser || appMode === 'development';
 
-    if (!isAllowed) return () => {};
+    if (!isQaUser) return () => {};
 
     switch (batchCard.cardType) {
         case BatchCardType.ICE_BOX:

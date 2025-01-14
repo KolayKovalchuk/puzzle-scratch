@@ -68,7 +68,8 @@ const ModalDialog: FC<ModalDialogProps> = ({
         );
     }, [children, content, confirmText, cancelText, handleClose, handleConfirm]);
 
-    const onOverlayClick = useCallback(() => {
+    const onOverlayClick = useCallback((e: MouseEvent) => {
+        e.stopPropagation();
         if (callOnCloseOnOverlayClick) {
             onClose && onClose();
         }

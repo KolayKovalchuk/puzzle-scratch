@@ -13,8 +13,8 @@ import coming_soon from '@icons/coming_soon.svg';
 import hint from '@icons/hint.svg';
 import robo_token_no_bg from '@icons/robo_token_no_bg.svg';
 import { formatNumber } from '@utils/formatters/formatNumber';
-import { MouseEvent, useCallback, useState } from 'react';
 import { GameInfoPopup } from './GameInfoPopup/GameInfoPopup';
+import { MouseEvent, useCallback, useState } from 'react';
 
 export interface IBatchCardProps {
     className?: string;
@@ -40,12 +40,13 @@ export function BatchCardComponent({ className, batchCard }: IBatchCardProps) {
     const batchClickHandler = useBatchCardHandler(batchCard, navigate)
     const fontSize = 21;
 
+    const appMode = import.meta.env.MODE
     return (
         <div
             className={`${styles.container} ${batchCardClass} ${className || ''}`}
             onClick={batchClickHandler}
         >
-            <Icon name={coming_soon} className={styles.comingSoonIcon}></Icon>
+            {appMode !== 'development' && <Icon name={coming_soon} className={styles.comingSoonIcon}></Icon>}
             <StyledHeader
                 title={batchCard.batchName}
                 className={styles.styledHeader}

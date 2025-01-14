@@ -180,3 +180,10 @@ div.btn3dContainer {
         height: 100%;
     }
 }
+
+$iconSize: 45px;
+.backBtn {
+    max-width: $iconSize;
+    min-width: $iconSize;
+    height: $iconSize;
+}

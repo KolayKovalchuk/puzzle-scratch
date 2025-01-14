@@ -1,10 +1,10 @@
 import { Footer } from '@components/Footer/Footer'
+import { BackButton } from '@components/shared/Button/BackButton'
 import { Button, ButtonType } from '@components/shared/Button/Button'
 import { Icon } from '@components/shared/Icon'
 import { SpinnerIcon } from '@components/shared/Icon/SpinnerIcon'
 import { SecondaryStyledText } from '@components/shared/StyledText'
 import { useGetSmallestFontSize } from '@hooks/useGetSmallestFontSize'
-import back_arrow from '@icons/back_arrow.svg'
 import robo_token_gold_no_shining from '@icons/robo_token_gold_no_shining.svg'
 import { useGetUserBalance } from '@services/api/balance.service'
 import { useGetUserStats } from '@services/api/user.service'
@@ -14,7 +14,6 @@ import { formatNumber } from '@utils/formatters/formatNumber'
 import { ITextStyle } from 'pixi.js-legacy'
 import { useCallback, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 import { DepositWithDialog } from './components/DepositWithDialog/DepositWithDialog'
 import { WalletHistoryTable } from './components/WalletHistoryTable/WalletHistoryTable'
 import { useDepositWithDialog } from './hooks/useDepositWithDialog'
@@ -41,12 +40,6 @@ export function Wallet() {
 
     const { isLoading } = useGetUserBalance();
 
-    const navigate = useNavigate();
-
-    const onBackBtnClick = useCallback(() => {
-        navigate(-1)
-    }, [navigate])
-
     const { onDepositBtnClick, closeDialog, isDepositDialogOpen } = useDepositWithDialog();
 
     const onModeChanged = useCallback((mode: DepositWithDialogMode) => {
@@ -71,13 +64,7 @@ export function Wallet() {
         {isLoading && <div className={styles.spinnerContainer}><SpinnerIcon name={robo_token_gold_no_shining} className={styles.spinnerIcon} /></div>}
         <div className={containerClass}>
             <div className={styles.headerContianer}>
-                <Button
-                    className={styles.backBtn || ''}
-                    mode={ButtonType.Default}
-                    onClick={onBackBtnClick}
-                    iconName={back_arrow}
-                >
-                </Button>
+                <BackButton />
 
                 <SecondaryStyledText
                     text={headerText}

@@ -68,8 +68,7 @@ export function BigWinScreen({ winAmount, winType = WinType.M, className, onClic
     const coinAnimationName = getCoinAnimationName(winType)
     const isBigWinIconVisible = coinAnimationName === CoinAnimationName.coint_l
 
-    const { stopWinSound } = usePlayWinSound(coinAnimationName);
-    const onAnimationEnd = useCallback(() => stopWinSound(), [stopWinSound]);
+    const {} = usePlayWinSound(coinAnimationName);
 
     if (!winAmount) return null
 
@@ -90,6 +89,6 @@ export function BigWinScreen({ winAmount, winType = WinType.M, className, onClic
                 />
             </div>
         </div>
-        <CoinAnimation animationName={coinAnimationName} onAnimationEnd={onAnimationEnd}/>
+        <CoinAnimation animationName={coinAnimationName}/>
     </div>
 }

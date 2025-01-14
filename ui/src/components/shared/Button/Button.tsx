@@ -1,3 +1,8 @@
+import { AppSounds } from '@config/sounds';
+import { NO_TAP_SOUND_CLASS } from '@hooks/usePlaySound';
+import btn_3d_elipse from '@icons/btn_3d_elipse.svg';
+import { playSound } from '@store/actions/appState.actions';
+import store from '@store/store';
 import { ITextStyle } from 'pixi.js-legacy';
 import { CSSProperties, forwardRef, ReactNode, Ref, useCallback } from 'react';
 import { Icon } from '../Icon';
@@ -6,7 +11,6 @@ import { useButtonConfig } from './hooks/useButtonConfig';
 
 import styles from './Button.module.scss';
 
-import btn_3d_elipse from '@icons/btn_3d_elipse.svg';
 
 export enum ButtonType {
     Confirm = 'confirm',
@@ -82,8 +86,18 @@ export function ButtonComponent({
     ]);
 
     const iconContainerClassName = iconName ? styles.iconContainer : '';
-    let btnClassName = `${styles.container} ${buttonTypeClassName}`
-    const containerClassName = `${iconContainerClassName} ${className || ''}`;
+    const btnClassName = `${styles.container} ${buttonTypeClassName}`
+    const noTapSoundClassName = mode === ButtonType.Cancel ? NO_TAP_SOUND_CLASS : '';
+    const containerClassName = `${iconContainerClassName} ${noTapSoundClassName} ${className || ''}`;
+
+    const onClickWithSound = useCallback(() => {
+        onClick && onClick();
+
+        if (mode === ButtonType.Cancel) {
+            store.dispatch(playSound(AppSounds.Cancel));
+        }
+    }, [mode, onClick]);
+
     if (is3d) {
         return (
             <div className={`${containerClassName} ${styles.btn3dContainer} `}>
@@ -93,7 +107,7 @@ export function ButtonComponent({
                     <Icon name={btn_3d_elipse} className={`${styles.btnElips}`} />
                     <Icon name={btn_3d_elipse} className={`${styles.btnElips} ${styles.smallElipse}`} />
                 </div>
-                <button ref={ref} className={`${btnClassName}`} onClick={onClick} style={style}>
+                <button ref={ref} className={`${btnClassName}`} onClick={onClickWithSound} style={style}>
                     {renderContent()}
                 </button>
             </div>
@@ -101,7 +115,7 @@ export function ButtonComponent({
     }
 
     return (
-        <button ref={ref} className={`${btnClassName} ${containerClassName}`} onClick={onClick} style={style}>
+        <button ref={ref} className={`${btnClassName} ${containerClassName}`} onClick={onClickWithSound} style={style}>
             {renderContent()}
         </button>
     )

@@ -19,3 +19,17 @@ export const selectPrizeLabelCounter = createSelector(
         return queryState?.prizeLabelCounter;
     }
 )
+
+export const selectSoundToPlay = createSelector(
+    selectGame,
+    (queryState) => {
+        return queryState?.soundToPlay;
+    }
+)
+
+export const selectSoundPlayerCounter = createSelector(
+    selectGame,
+    (queryState) => {
+        return queryState?.soundPlayerCounter;
+    }
+)

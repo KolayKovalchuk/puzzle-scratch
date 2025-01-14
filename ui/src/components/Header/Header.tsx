@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 import styles from './Header.module.scss'
 
-import { selectUserAvatar, selectUserBalanceTotal } from '@store/selectors/user.selectors'
+import { selectIsQaUser, selectUserAvatar, selectUserBalanceTotal } from '@store/selectors/user.selectors'
 
 import { WinStyledText } from '@components/shared/StyledText'
 import { ROUTES } from '@routers/routerConfig'
@@ -26,10 +26,13 @@ export function Header() {
     const scratchCardTransitionTimeout = useSelector(selectScratchCardTransitionTimeout);
 
     const navigate = useNavigate();
+    const isQaUser = useSelector(selectIsQaUser);
 
     const openWallet = useCallback(() => {
+        // TODO: Remove this line to enable wallet click on prod
+        if (!isQaUser) return;
         navigate(ROUTES.Wallet);
-    }, [navigate]);
+    }, [navigate, isQaUser]);
 
     const userAvatar = useSelector(selectUserAvatar);
 

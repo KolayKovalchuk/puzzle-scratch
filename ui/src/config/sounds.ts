@@ -5,4 +5,7 @@ export enum AppSounds {
     CoinsCount = '/sounds/coinsCount.mp3',
     OpenDialog = '/sounds/openDialog.mp3',
     Scratch = '/sounds/scratch.mp3',
+    BigWin = '/sounds/bigWin.mp3',
+    MedWin = '/sounds/medWin.mp3',
+    SmallWin = '/sounds/smallWin.mp3',
 }

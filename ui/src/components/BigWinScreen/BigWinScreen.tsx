@@ -14,6 +14,10 @@ import { CoinAnimation, CoinAnimationName } from './components/CoinAnimation';
 
 import big_win from '@icons/big_win.svg';
 import robo_token_gold from '@icons/robo_token_gold.svg';
+import { useEffect } from 'react';
+import store from '@store/store';
+import { playSound } from '@store/actions/appState.actions';
+import { AppSounds } from '@config/sounds';
 
 export interface IBigWinScreenProps {
     winAmount: number;
@@ -22,13 +26,32 @@ export interface IBigWinScreenProps {
     onClick?: () => void;
 }
 
+function usePlayWinSound(animationName: CoinAnimationName) {
+    useEffect(() => {
+        switch (animationName) {
+            case CoinAnimationName.coint_l:
+                store.dispatch(playSound(AppSounds.BigWin));
+                break;
+            case CoinAnimationName.coint_m:
+                store.dispatch(playSound(AppSounds.MedWin));
+                break;
+            case CoinAnimationName.coint_s:
+                store.dispatch(playSound(AppSounds.SmallWin));
+                break;
+        }
+    }, [animationName]);
+}
+
+
 export function BigWinScreen({ winAmount, winType = WinType.M, className, onClick }: IBigWinScreenProps) {
     const scratchCardTransitionTimeout = useSelector(selectScratchCardTransitionTimeout);
 
-    if (!winAmount) return null
-
     const coinAnimationName = getCoinAnimationName(winType)
     const isBigWinIconVisible = coinAnimationName === CoinAnimationName.coint_l
+
+    usePlayWinSound(coinAnimationName);
+
+    if (!winAmount) return null
 
     return <div
         className={`${styles.container} ${className || ''}`}

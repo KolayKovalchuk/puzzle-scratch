@@ -80,16 +80,35 @@ $shadow_size: 0.1px;
     }
 }
 
-$comingSoonIconLeft: 18%;
+$ribbonIconLeft: 18%;
 
-.comingSoonIcon {
-    width: calc(100% + #{$comingSoonIconLeft} * 2);
-    left: calc(-1 * #{$comingSoonIconLeft});
+.ribbonContainer {
+    width: calc(100% + #{$ribbonIconLeft} * 2);
+    left: calc(-1 * #{$ribbonIconLeft});
     position: absolute;
     bottom: -10px;
     z-index: 1000;
 
     aspect-ratio: 460/140;
+}
+
+.ribbonIcon {
+    width: 100%;
+    height: 100%;
+}
+
+.ribbonText {
+    text-transform: capitalize;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 34%;
+    z-index: 1000000;
+    white-space: nowrap;
+    color: #ffffff;
+    font-family: "Nunito";
+    font-weight: 900;
+    font-size: 20px;
 }
 
 .content {

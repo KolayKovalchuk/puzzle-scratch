@@ -17,6 +17,7 @@ export interface IUser {
     refCode: string;
     notifications: INotification[];
     avatar: string;
+    qa: boolean | null;
 }
 
 export class User implements IUser {
@@ -31,6 +32,7 @@ export class User implements IUser {
     refCode: string;
     notifications: Notification[];
     avatar: string;
+    qa: boolean | null;
 
     constructor(data: IUser) {
         this.id = data.id;
@@ -44,6 +46,7 @@ export class User implements IUser {
         this.refCode = data.refCode;
         this.notifications = data.notifications.map(notification => new Notification(notification));
         this.avatar = data.avatar;
+        this.qa = data.qa;
     }
 
     toJSON() {
@@ -59,6 +62,7 @@ export class User implements IUser {
             refCode: this.refCode,
             notifications: this.notifications.map(notification => notification.toJSON()),
             avatar: this.avatar,
+            qa: this.qa
         };
     }
 }

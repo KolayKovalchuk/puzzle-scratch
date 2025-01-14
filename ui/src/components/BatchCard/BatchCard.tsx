@@ -13,10 +13,8 @@ import coming_soon from '@icons/coming_soon.svg';
 import hint from '@icons/hint.svg';
 import robo_token_no_bg from '@icons/robo_token_no_bg.svg';
 import { formatNumber } from '@utils/formatters/formatNumber';
-import { GameInfoPopup } from './GameInfoPopup/GameInfoPopup';
 import { MouseEvent, useCallback, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { selectIsQaUser } from '@store/selectors/user.selectors';
+import { GameInfoPopup } from './GameInfoPopup/GameInfoPopup';
 
 export interface IBatchCardProps {
     className?: string;
@@ -42,13 +40,12 @@ export function BatchCardComponent({ className, batchCard }: IBatchCardProps) {
     const batchClickHandler = useBatchCardHandler(batchCard, navigate)
     const fontSize = 21;
 
-    const isQaUser = useSelector(selectIsQaUser);
     return (
         <div
             className={`${styles.container} ${batchCardClass} ${className || ''}`}
             onClick={batchClickHandler}
         >
-            {!isQaUser && <Icon name={coming_soon} className={styles.comingSoonIcon}></Icon>}
+            <Icon name={coming_soon} className={styles.comingSoonIcon}></Icon>
             <StyledHeader
                 title={batchCard.batchName}
                 className={styles.styledHeader}

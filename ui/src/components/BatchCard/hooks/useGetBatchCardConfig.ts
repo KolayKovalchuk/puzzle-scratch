@@ -1,9 +1,7 @@
 import { StyledHeaderType } from '@components/shared/StyledHeader';
 import { BatchCard, BatchCardType } from '@models/BatchCard.model';
 import { ROUTES } from '@routers/routerConfig';
-import { selectIsQaUser } from '@store/selectors/user.selectors';
 import { useCallback, useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { NavigateFunction } from 'react-router-dom';
 
 function getStyledHeaderType(cardType: BatchCardType) {
@@ -55,10 +53,6 @@ function getBatchImageUrl(cardType: BatchCardType) {
 }
 
 export function useBatchCardHandler(batchCard: BatchCard, navigate: NavigateFunction) {
-    // TODO: Remove this line to enable batch click on prod
-    const isQaUser = useSelector(selectIsQaUser);
-
-    if (!isQaUser) return () => {};
 
     switch (batchCard.cardType) {
         case BatchCardType.ICE_BOX:

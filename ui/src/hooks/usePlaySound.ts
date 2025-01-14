@@ -37,6 +37,7 @@ export function usePlaySound() {
     useEffect(() => {
         if (!sound) return;
 
+        sound.stop(); // Stop the previous sound
         sound.play();
     
     }, [sound, soundPlayCounter]);

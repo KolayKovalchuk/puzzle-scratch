@@ -2,6 +2,9 @@ import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
 import { selectLastAmountChange, selectPrizeLabelCounter } from '@store/selectors/appState.selectors';
+import store from '@store/store';
+import { playSound } from '@store/actions/appState.actions';
+import { AppSounds } from '@config/sounds';
 
 export function useBalanceChangeLabel(className: string) {
     const lastAmountChange = useSelector(selectLastAmountChange);
@@ -19,6 +22,7 @@ export function useBalanceChangeLabel(className: string) {
         setTimeout(() => {
             if (!labelRef.current) return;
             labelRef.current.classList.add(className);
+            store.dispatch(playSound(AppSounds.CoinsCount));
         }, 0);
 
     }, [prizeLabelCounter]);

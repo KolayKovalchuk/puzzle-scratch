@@ -1,7 +1,9 @@
 import { IScratchCardHandle } from '@components/ScratchCard';
 import { IScratchAnimationHandle } from '@components/shared/ScratchAnimation/ScratchAnimation';
+import { AppSounds } from '@config/sounds';
 import { IBuyBatchCardData, ICardData } from '@models/IBuyBatchCardData';
 import { useBuyCard } from '@services/api/cards.service';
+import { playSound } from '@store/actions/appState.actions';
 import { updateUserBalanceWithChangeAnimation } from '@store/actions/user.actions';
 import { selectScratchCardTransitionTimeout } from '@store/selectors/config.selectors';
 import store from '@store/store';
@@ -80,6 +82,7 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
     const playAnimation = useCallback(() => {
         scratchAnimationRef.current?.play();
         setIsScratchAnimationPlaying(true);
+        setTimeout(() => store.dispatch(playSound(AppSounds.Scratch)), 0);
     }, []);
 
     const onCardScratched = useCallback((name: string) => {

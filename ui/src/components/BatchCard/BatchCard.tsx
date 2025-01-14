@@ -5,11 +5,11 @@ import styles from './BatchCard.module.scss';
 import { Icon } from '@components/shared/Icon';
 import { StyledHeader } from '@components/shared/StyledHeader';
 import { StyledText } from '@components/shared/StyledText';
-import { BatchCard } from '@models/BatchCard.model';
+import { BatchCard, BatchStatus } from '@models/BatchCard.model';
 
 import { useBatchCardHandler, useGetBatchCardConfig } from './hooks/useGetBatchCardConfig';
 
-import coming_soon from '@icons/coming_soon.svg';
+import batch_ribbon from '@icons/batch_ribbon.svg';
 import hint from '@icons/hint.svg';
 import robo_token_no_bg from '@icons/robo_token_no_bg.svg';
 import { formatNumber } from '@utils/formatters/formatNumber';
@@ -19,6 +19,19 @@ import { MouseEvent, useCallback, useState } from 'react';
 export interface IBatchCardProps {
     className?: string;
     batchCard: BatchCard;
+}
+
+function getRibbonLabel(status: BatchStatus) {
+    switch (status) {
+        case BatchStatus.SCHEDULED:
+            return 'COMING SOON!';
+        case BatchStatus.EXPIRED:
+        case BatchStatus.DEPLETED:
+        case BatchStatus.STOPPED:
+            return 'SOLD OUT';
+        default:
+            return '';
+    }
 }
 
 export function BatchCardComponent({ className, batchCard }: IBatchCardProps) {
@@ -40,13 +53,21 @@ export function BatchCardComponent({ className, batchCard }: IBatchCardProps) {
     const batchClickHandler = useBatchCardHandler(batchCard, navigate)
     const fontSize = 21;
 
-    const appMode = import.meta.env.MODE
+    const isRibbonVisible = batchCard.status !== BatchStatus.AVAILABLE;
+    const ribbonLabel = getRibbonLabel(batchCard.status);
     return (
         <div
             className={`${styles.container} ${batchCardClass} ${className || ''}`}
             onClick={batchClickHandler}
         >
-            {appMode !== 'development' && <Icon name={coming_soon} className={styles.comingSoonIcon}></Icon>}
+            {isRibbonVisible &&
+                <div className={styles.ribbonContainer}>
+                    <Icon name={batch_ribbon} className={styles.ribbonIcon}></Icon>
+                    <span
+                        className={styles.ribbonText}
+                    >{ribbonLabel}</span>
+                </div>
+            }
             <StyledHeader
                 title={batchCard.batchName}
                 className={styles.styledHeader}

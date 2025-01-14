@@ -4,6 +4,14 @@ export enum BatchCardType {
     SANTA_SAC = 'SANTA_SAC'
 }
 
+export enum BatchStatus {
+    AVAILABLE = 'AVAILABLE',
+    SCHEDULED = 'SCHEDULED',
+    EXPIRED = 'EXPIRED',
+    DEPLETED = 'DEPLETED',
+    STOPPED = 'STOPPED'
+}
+
 
 export class BatchCard {
     batchId: string;
@@ -20,6 +28,7 @@ export class BatchCard {
     sizeX: number;
     sizeY: number;
     maxPrize: number;
+    status: BatchStatus;
 
     constructor(data: BatchCard) {
         this.batchId = data.batchId;
@@ -36,5 +45,6 @@ export class BatchCard {
         this.sizeX = data.sizeX;
         this.sizeY = data.sizeY;
         this.maxPrize = data.maxPrize;
+        this.status = data.status;
     }
 }

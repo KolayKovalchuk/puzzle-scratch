@@ -9,10 +9,11 @@ export const showAmountChangeLabel = (lastAmountChange: number) => ({
 
 export const PLAY_SOUND = 'PLAY_SOUND';
 
-export const playSound = (soundName: AppSounds, shouldStopAllSounds = true) => ({
+export const playSound = (soundName: AppSounds, shouldStopAllSounds = true, duration: number | null = null) => ({
     type: PLAY_SOUND,
     payload: {
         soundName,
         shouldStopAllSounds,
+        duration,
     },
 })

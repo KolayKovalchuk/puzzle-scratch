@@ -76,3 +76,10 @@ export const selectUserNotifications = createSelector(
         return notifications;
     }
 )
+
+export const selectIsQaUser = createSelector(
+    selectUser,
+    (queryState) => {
+        return queryState?.qa
+    }
+)

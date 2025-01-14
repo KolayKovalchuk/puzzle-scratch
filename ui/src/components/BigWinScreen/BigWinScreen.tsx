@@ -14,10 +14,11 @@ import { CoinAnimation, CoinAnimationName } from './components/CoinAnimation';
 
 import big_win from '@icons/big_win.svg';
 import robo_token_gold from '@icons/robo_token_gold.svg';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import store from '@store/store';
 import { playSound } from '@store/actions/appState.actions';
 import { AppSounds } from '@config/sounds';
+import { useGetSounds } from '@hooks/usePlaySound';
 
 export interface IBigWinScreenProps {
     winAmount: number;
@@ -40,6 +41,24 @@ function usePlayWinSound(animationName: CoinAnimationName) {
                 break;
         }
     }, [animationName]);
+
+    const { stopSound } = useGetSounds();
+
+    const stopWinSound = useCallback(() => {
+        switch (animationName) {
+            case CoinAnimationName.coint_l:
+                stopSound(AppSounds.BigWin);
+                break;
+            case CoinAnimationName.coint_m:
+                stopSound(AppSounds.MedWin);
+                break;
+            case CoinAnimationName.coint_s:
+                stopSound(AppSounds.SmallWin);
+                break;
+        }
+    }, [animationName]);
+
+    return { stopWinSound };
 }
 
 
@@ -49,7 +68,8 @@ export function BigWinScreen({ winAmount, winType = WinType.M, className, onClic
     const coinAnimationName = getCoinAnimationName(winType)
     const isBigWinIconVisible = coinAnimationName === CoinAnimationName.coint_l
 
-    usePlayWinSound(coinAnimationName);
+    const { stopWinSound } = usePlayWinSound(coinAnimationName);
+    const onAnimationEnd = useCallback(() => stopWinSound(), [stopWinSound]);
 
     if (!winAmount) return null
 
@@ -70,6 +90,6 @@ export function BigWinScreen({ winAmount, winType = WinType.M, className, onClic
                 />
             </div>
         </div>
-        <CoinAnimation animationName={coinAnimationName} />
+        <CoinAnimation animationName={coinAnimationName} onAnimationEnd={onAnimationEnd}/>
     </div>
 }

@@ -40,3 +40,10 @@ export const selectShouldStopAllSounds = createSelector(
         return queryState?.shouldStopAllSounds;
     }
 )
+
+export const selectSoundDuration = createSelector(
+    selectGame,
+    (queryState) => {
+        return queryState?.duration;
+    }
+)

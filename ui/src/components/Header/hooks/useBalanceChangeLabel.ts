@@ -22,7 +22,7 @@ export function useBalanceChangeLabel(className: string) {
         setTimeout(() => {
             if (!labelRef.current) return;
             labelRef.current.classList.add(className);
-            store.dispatch(playSound(AppSounds.CoinsCount));
+            store.dispatch(playSound(AppSounds.CoinsCount, false));
         }, 0);
 
     }, [prizeLabelCounter]);

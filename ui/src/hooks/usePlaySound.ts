@@ -1,5 +1,5 @@
 import { AppSounds } from '@config/sounds';
-import { selectSoundPlayerCounter, selectSoundToPlay } from '@store/selectors/appState.selectors';
+import { selectShouldStopAllSounds, selectSoundPlayerCounter, selectSoundToPlay } from '@store/selectors/appState.selectors';
 import { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useHowlerSound } from './useHowlerSound';
@@ -9,6 +9,7 @@ export const NO_TAP_SOUND_CLASS = 'noTapSound';
 export function usePlaySound() {
     const soundPlayCounter = useSelector(selectSoundPlayerCounter);
     const tapSound = useHowlerSound(AppSounds.Tap);
+    const shouldStopAllSounds = useSelector(selectShouldStopAllSounds);
 
     const playTapSound = useCallback((e: MouseEvent) => {
         let targetElement: HTMLElement | null = e.target as HTMLElement;
@@ -29,16 +30,21 @@ export function usePlaySound() {
         document.addEventListener('click', playTapSound, true); // Use capture phase
 
         return () => {
-            sound?.stop();
+            if (shouldStopAllSounds) {
+                sound?.stop();
+            }
             document.removeEventListener('click', playTapSound, true);
         };
-    }, [playTapSound, sound]);
+    }, [playTapSound, sound, shouldStopAllSounds]);
 
     useEffect(() => {
         if (!sound) return;
 
-        sound.stop(); // Stop the previous sound
+        if (shouldStopAllSounds) {
+            sound.stop(); // Stop the previous sound
+        }
+
         sound.play();
     
-    }, [sound, soundPlayCounter]);
+    }, [sound, soundPlayCounter, shouldStopAllSounds]);
 }

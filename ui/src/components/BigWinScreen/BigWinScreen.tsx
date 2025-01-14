@@ -30,13 +30,13 @@ function usePlayWinSound(animationName: CoinAnimationName) {
     useEffect(() => {
         switch (animationName) {
             case CoinAnimationName.coint_l:
-                store.dispatch(playSound(AppSounds.BigWin));
+                store.dispatch(playSound(AppSounds.BigWin, false));
                 break;
             case CoinAnimationName.coint_m:
-                store.dispatch(playSound(AppSounds.MedWin));
+                store.dispatch(playSound(AppSounds.MedWin, false));
                 break;
             case CoinAnimationName.coint_s:
-                store.dispatch(playSound(AppSounds.SmallWin));
+                store.dispatch(playSound(AppSounds.SmallWin, false));
                 break;
         }
     }, [animationName]);

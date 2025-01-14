@@ -82,7 +82,8 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
     const playAnimation = useCallback(() => {
         scratchAnimationRef.current?.play();
         setIsScratchAnimationPlaying(true);
-        setTimeout(() => store.dispatch(playSound(AppSounds.Scratch)), 0);
+        // setTimeout(() => store.dispatch(playSound(AppSounds.Scratch)), 0);
+        store.dispatch(playSound(AppSounds.Scratch, false));
     }, []);
 
     const onCardScratched = useCallback((name: string) => {

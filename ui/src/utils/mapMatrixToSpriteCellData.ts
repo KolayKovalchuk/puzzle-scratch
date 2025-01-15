@@ -1,7 +1,7 @@
 import { ISpriteCellData } from '@components/shared/IconMatrix';
 
 export function mapMatrixToSpriteCellData<CellData extends ISpriteCellData = ISpriteCellData>(
-    matrix: (string | number)[][],
+    matrix: (string | number | [])[][],
     textureNameList: string[],
     itemMapper: (textureName: string) => CellData,
 ) {

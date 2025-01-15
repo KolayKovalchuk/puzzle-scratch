@@ -43,10 +43,7 @@ export function SantaSacSpriteCell({ x, y, width, height, data }: ISantaSacSprit
                 height={height}
                 texture={texture}
             />
-            {!!data.itemPrize
-                ? <Text text={itemPrize} x={itemPrizeTextX} y={itemPrizeTextY} style={ItemPrizeTextStyles} />
-                : null
-            }
+                <Text text={itemPrize} x={itemPrizeTextX} y={itemPrizeTextY} style={ItemPrizeTextStyles} />
         </Container>
     );
 };

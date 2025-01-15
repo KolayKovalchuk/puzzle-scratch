@@ -102,7 +102,7 @@ export function SantaSac() {
     const isLoading = isBatchLoading || isBundleLoading;
     const hiddenClass = isLoading || !bundle ? 'hidden' : '';
 
-    const multiplier = card?.cardData.multiplier;
+    const multiplier = card?.cardData.multi;
     const multiplierText = typeof multiplier === 'number' ? 'x' + multiplier : '';
 
     return (

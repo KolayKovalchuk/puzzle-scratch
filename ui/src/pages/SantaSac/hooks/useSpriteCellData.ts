@@ -10,16 +10,16 @@ const SantaSacScratchItemsEnumValues = Object.values(SantaSacScratchItemsEnum)
 export function useSpriteCellData(card: IBuyBatchCardData<ISantaSacCardData> | null, bundleName: string) {
     const [data, setData] = useState<(ISantaSacSpriteCellData | null)[][]>([])
 
-    const itemMapper = useCallback((textureName: string) => {
-        const textureIndex = SantaSacScratchItemsEnumValues.findIndex(item => item === textureName)
-        const itemPrize = card?.cardData.itemPrizes[textureIndex + 1] || 0
-        
+    const itemMapper = useCallback((cellData: string) => {
+        const [ textureNumber, itemPrize ] = cellData.split(',');
+        const textureName = SantaSacScratchItemsEnumValues[parseInt(textureNumber) - 1]
+
         return {
             textureName: textureName as SantaSacScratchItemsEnum,
             bundleName,
-            itemPrize,
+            itemPrize: Number(itemPrize),
         }
-    }, [bundleName, card?.cardData.itemPrizes])
+    }, [bundleName, card])
 
     const newData = useMemo(() => mapMatrixToSpriteCellData<ISantaSacSpriteCellData>(
         card?.cardData.matrix || [],

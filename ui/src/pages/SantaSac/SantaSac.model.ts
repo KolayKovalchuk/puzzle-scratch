@@ -5,7 +5,5 @@ export interface IItemPrizes {
 }
 
 export interface ISantaSacCardData extends ICardData {
-    itemPrizes: IItemPrizes;
-    multiplier: number;
-    winningItemId: number;
+    multi: number;
 }

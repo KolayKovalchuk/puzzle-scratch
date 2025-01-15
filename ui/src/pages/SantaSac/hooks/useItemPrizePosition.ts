@@ -5,7 +5,7 @@ import { ItemPrizeTextStyles } from '../SantaSacSpriteCell';
 export function useItemPrizePosition(itemPrize: number, width: number, height: number) {
     const [position, setPosition] = useState({ x: 0, y: 0 });
     useEffect(() => {
-        if (!itemPrize) return;
+        if (typeof itemPrize !== 'number') return;
 
         const metrics = TextMetrics.measureText(itemPrize.toString(), ItemPrizeTextStyles);
 

@@ -10,6 +10,7 @@ import { GameDescriptionPopup } from '@components/shared/GameDescriptionPopup/Ga
 import { useScrollTo } from '@hooks/useScrollTo';
 import hint from '@icons/hint.svg';
 import { BatchCardType } from '@models/BatchCard.model';
+import { NO_TAP_SOUND_CLASS } from '@hooks/usePlaySound';
 
 
 export interface IGameFooterBtnProps {
@@ -42,7 +43,7 @@ export function GameFooterBtn({ onPlay, onCancel, children, batchCardType, isPla
                 onClick={onCancelCb}
             />
             <ButtonGoldBorder
-                className={`${styles.btn} ${styles.playButton}`}
+                className={`${styles.btn} ${styles.playButton} ${NO_TAP_SOUND_CLASS}`}
                 mode={ButtonType.Default}
                 text={playButtonText}
                 onClick={() => onPlay()}

@@ -36,6 +36,7 @@ import ice_box_shining from '@icons/iceBox/ice_box_shining.svg';
 import { IIceBoxCardData } from './IceBox.model';
 import { CardsBonusTypesDict, useIsBonusShining } from '@hooks/useWinningBgConfig';
 import { isCellWinnings } from '@utils/isCellWinnings';
+import { NO_TAP_SOUND_CLASS } from '@hooks/usePlaySound';
 
 
 const bgTextureConfig: IBgTextureConfig = {
@@ -166,7 +167,7 @@ export function IceBox() {
             </div>
             <TopPrizeLabel topPrize={batch?.maxPrize || 0} className={styles.topPrizeLabel} />
             <div className={styles.content}>
-                <div className={styles.scratchAreaContainer}
+                <div className={`${styles.scratchAreaContainer} ${NO_TAP_SOUND_CLASS}`}
                     // onTouchStart={onTouchStart}
                     // onTouchEnd={onTouchEnd}
                     // onTouchMove={onTouchMove}

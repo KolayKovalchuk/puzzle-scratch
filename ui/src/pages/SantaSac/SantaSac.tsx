@@ -27,6 +27,7 @@ import round_multiplier from '@icons/round_multiplier.svg';
 import santa_sac from '@icons/santa_sac.svg';
 import shining from '@icons/shining.svg';
 import { CardsBonusTypesDict, useIsBonusShining } from '@hooks/useWinningBgConfig';
+import { NO_TAP_SOUND_CLASS } from '@hooks/usePlaySound';
 
 const bgTextureConfig: IBgTextureConfig = {
     textureName: 'redBallShining',
@@ -116,7 +117,7 @@ export function SantaSac() {
             <div className={styles.content}>
                 <TopPrizeLabel className={styles.topPrizeLabel} topPrize={batch?.maxPrize || 0} />
 
-                <div className={styles.scratchAreaContainer}
+                <div className={`${styles.scratchAreaContainer} ${NO_TAP_SOUND_CLASS}`}
                     // onTouchStart={onTouchStart}
                     // onTouchEnd={onTouchEnd}
                     // onTouchMove={onTouchMove}

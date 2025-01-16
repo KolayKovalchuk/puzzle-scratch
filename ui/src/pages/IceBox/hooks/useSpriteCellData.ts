@@ -26,7 +26,7 @@ export function useSpriteCellData(card: IBuyBatchCardData | null, bundleName: st
     newData.forEach((row) => {
         row.forEach((cell) => {
             if (!cell.isWinning) {
-                cell.isWinning = cell.textureName.startsWith('d')
+                cell.isWinning = cell.textureName.toLowerCase().startsWith('d')
             }
         })
     });

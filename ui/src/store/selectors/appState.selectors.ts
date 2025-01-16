@@ -47,3 +47,10 @@ export const selectSoundDuration = createSelector(
         return queryState?.duration;
     }
 )
+
+export const selectMatrixBlinkCounter = createSelector(
+    selectGame,
+    (queryState) => {
+        return queryState?.matrixBlinkCounter;
+    }
+)

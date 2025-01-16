@@ -62,5 +62,9 @@ export const ICE_BOX_BUNDLE: AssetsBundle = {
             alias: 'roboTokenBlueBorder',
             src: `/robo_token_blue_border.png`,
         },
+        {
+            alias: 'winningMatrixCellBg',
+            src: `/winningMatrixCellBg.png`,
+        },
     ],
 };

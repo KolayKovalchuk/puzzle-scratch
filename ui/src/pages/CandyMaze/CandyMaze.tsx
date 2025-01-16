@@ -16,8 +16,7 @@ import { ICandyMazeCardData } from './ICandyMaze.model';
 
 import { BigWinScreen } from '@components/BigWinScreen/BigWinScreen';
 import { Footer } from '@components/Footer/Footer';
-import { useScratchGame } from '@hooks/useScratchGame';
-import { useSwipeAria } from '@hooks/useSwipeAria';
+import { useScratchGame } from '@hooks/useScratchGame/useScratchGame';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ITopScratchSpriteCellProps, TopScratchSpriteCell } from './components/TopScratchSpriteCell/TopScratchSpriteCell';
 
@@ -60,9 +59,10 @@ export function CandyMaze() {
         isBigWinVisible,
         onBigWinClicked,
         onPlay,
-        onSwipe,
+        // onSwipe,
         onScratchAnimationCompleted,
         card,
+        isPlayBtnDisabled,
         // onCardScratched,
         // onScratchStarted,
     } = useScratchGame<ICandyMazeCardData>(
@@ -79,17 +79,17 @@ export function CandyMaze() {
     const renderCandyMazeSpriteCell = useCallback((data: ICandyMazeSpriteCellProps) => (<CandyMazeSpriteCell {...data} />), []);
     const renderTopScratchSpriteCell = useCallback((data: ITopScratchSpriteCellProps) => (<TopScratchSpriteCell {...data} />), []);
 
-    const {
-        onTouchEnd,
-        onTouchMove,
-        onTouchStart,
-        onMouseDown,
-        onMouseMove,
-        onMouseUp,
-    } = useSwipeAria({
-        onSwipedLeft: onSwipe,
-        onSwipedRight: onSwipe
-    });
+    // const {
+    //     onTouchEnd,
+    //     onTouchMove,
+    //     onTouchStart,
+    //     onMouseDown,
+    //     onMouseMove,
+    //     onMouseUp,
+    // } = useSwipeAria({
+    //     onSwipedLeft: onSwipe,
+    //     onSwipedRight: onSwipe
+    // });
 
     const [topScratchCardData, setTopScratchCardData] = useState<ICandyMazeSpriteCellData[][]>([]);
 
@@ -117,12 +117,12 @@ export function CandyMaze() {
                 <TopPrizeLabel topPrize={batch?.maxPrize || 0} />
 
                 <div className={styles.scratchAreaContainer}
-                    onTouchStart={onTouchStart}
-                    onTouchEnd={onTouchEnd}
-                    onTouchMove={onTouchMove}
-                    onMouseDown={onMouseDown}
-                    onMouseUp={onMouseUp}
-                    onMouseMove={onMouseMove}
+                    // onTouchStart={onTouchStart}
+                    // onTouchEnd={onTouchEnd}
+                    // onTouchMove={onTouchMove}
+                    // onMouseDown={onMouseDown}
+                    // onMouseUp={onMouseUp}
+                    // onMouseMove={onMouseMove}
                     onClick={onPlay}
                 >
                     <div className={styles.animationContainer}>
@@ -166,7 +166,7 @@ export function CandyMaze() {
                         />
                     </div>
                 </div>
-                <GameFooterBtn batchCardType={batch?.cardType || null} onPlay={onPlay} />
+                <GameFooterBtn batchCardType={batch?.cardType || null} onPlay={onPlay} isPlayBtnDisabled={isPlayBtnDisabled} />
                 <Footer />
             </div>
             {isBigWinVisible

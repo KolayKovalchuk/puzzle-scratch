@@ -8,7 +8,7 @@ import { IIceBoxSpriteCellData } from '../components/IceBoxSpriteCell/IceBoxSpri
 export function useSpriteCellData(card: IBuyBatchCardData | null, bundleName: string) {
     const [data, setData] = useState<(IIceBoxSpriteCellData)[][]>([])
 
-    const itemMapper = useCallback((textureName: string) => {
+    const itemMapper = useCallback((textureName: string): IIceBoxSpriteCellData => {
         return {
             textureName: textureName,
             bundleName
@@ -16,10 +16,10 @@ export function useSpriteCellData(card: IBuyBatchCardData | null, bundleName: st
     }, [bundleName])
 
     const newData = useMemo(() => mapMatrixToSpriteCellData<IIceBoxSpriteCellData>(
-        card?.cardData.matrix || [],
+        card?.cardData || null,
         [],
         itemMapper,
-    ), [card?.cardData.matrix, itemMapper])
+    ), [card?.cardData, itemMapper])
 
     useEffect(() => {
         if (!card) return

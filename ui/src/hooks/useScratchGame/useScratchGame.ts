@@ -1,39 +1,16 @@
 import { IScratchCardHandle } from '@components/ScratchCard';
 import { IScratchAnimationHandle } from '@components/shared/ScratchAnimation/ScratchAnimation';
 import { AppSounds } from '@config/sounds';
-import { IBuyBatchCardData, ICardData } from '@models/IBuyBatchCardData';
-import { useBuyCard } from '@services/api/cards.service';
-import { playSound } from '@store/actions/appState.actions';
+import { IBuyBatchCardData, ICardData, WinType } from '@models/IBuyBatchCardData';
+import { blinkMatrixCels, playSound, resetMatrixBlinkCounter } from '@store/actions/appState.actions';
 import { updateUserBalanceWithChangeAnimation } from '@store/actions/user.actions';
 import { selectScratchCardTransitionTimeout } from '@store/selectors/config.selectors';
 import store from '@store/store';
 import { RefObject, useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
-
-
-function _applyForEachScratchCardRef<T extends IScratchCardHandle = IScratchCardHandle>(
-    scratchCardsRefConfig: { [key: string]: RefObject<T> },
-    callback: (ref: T, index: number) => void
-) {
-    if (!scratchCardsRefConfig) return {};
-
-    const scratchCardsRefList = Object.values(scratchCardsRefConfig);
-
-    for (let index = 0; index < scratchCardsRefList.length; index++) {
-        const scratchCardRef = scratchCardsRefList[index];
-        if (scratchCardRef.current) {
-            callback(scratchCardRef.current, index);
-        }
-    }
-}
-
-function _getScratchedStateConfig(config: { [key: string]: RefObject<IScratchCardHandle> }, value: boolean) {
-    if (!config) return {};
-    return Object.keys(config).reduce((acc: { [key: string]: boolean }, key) => {
-        acc[key] = value;
-        return acc;
-    }, {})
-}
+import { _applyForEachScratchCardRef, _getScratchedStateConfig } from './utils';
+import { useBuyCardWithBalanceChange, useStopWinSound } from './hooks';
+import { useGetSounds } from '@hooks/usePlaySound';
 
 let timeout: NodeJS.Timeout | null = null;
 let swipeTimeout: NodeJS.Timeout | null = null;
@@ -43,25 +20,7 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
     scratchCardsRefConfig: { [key: string]: RefObject<IScratchCardHandle> },
     scratchAnimationRef: RefObject<IScratchAnimationHandle>,
 ) {
-    const { buyCard, card, loading: isCardBuying } = useBuyCard<CardData>();
-
-    const buyCardWithBalanceChange = useCallback(async (batchId: string) => {
-        const card = await buyCard(batchId);
-
-        if (!card) return;
-
-        const balanceCange = card.rbaxBalance - card.rbaxBalanceBefore - card.cardData.winAmount;
-        const total = card.rbaxBalanceBefore + balanceCange;
-
-        store.dispatch(
-            updateUserBalanceWithChangeAnimation(
-                { total: total },
-                balanceCange
-            )
-        );
-
-        return card;
-    }, [buyCard]);
+    const { buyCardWithBalanceChange, isCardBuying, card } = useBuyCardWithBalanceChange<CardData>();
 
     const [lastAction, setLastAction] = useState<'playBtnClick' | 'swipe' | 'scratch' | null>(null);
     const [isBigWinVisible, setIsBigWinVisible] = useState(false);
@@ -74,6 +33,16 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
 
     const scratchCardTransitionTimeout = useSelector(selectScratchCardTransitionTimeout);
 
+    const [isPlayBtnDisabled, setIsPlayBtnDisabled] = useState(false);
+
+    const { stopSound } = useGetSounds();
+    const { stopWinSound } = useStopWinSound();
+
+    useEffect(() => {
+        const isPlayBtnDisabled = !batchId || isScratchAnimationPlaying || isCardBuying;
+        setIsPlayBtnDisabled(isPlayBtnDisabled);
+    }, [batchId, isScratchAnimationPlaying, isCardBuying]);
+
     const resetAnimation = useCallback(() => {
         scratchAnimationRef.current?.reset();
         setIsScratchAnimationPlaying(false);
@@ -83,8 +52,10 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
         scratchAnimationRef.current?.play();
         setIsScratchAnimationPlaying(true);
         // setTimeout(() => store.dispatch(playSound(AppSounds.Scratch)), 0);
+        stopSound(AppSounds.Scratch);
+        stopWinSound(card);
         store.dispatch(playSound(AppSounds.Scratch, false));
-    }, []);
+    }, [stopSound]);
 
     const onCardScratched = useCallback((name: string) => {
         setIsCardsScratched((prevStat) => {
@@ -96,14 +67,16 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
     }, [isCardsScratched]);
 
     const onPlay = useCallback(async () => {
-        if (!batchId || isBigWinVisible || isScratchAnimationPlaying || isCardBuying) return
+        if (isPlayBtnDisabled) return
+
+        store.dispatch(resetMatrixBlinkCounter());
 
         _applyForEachScratchCardRef(scratchCardsRefConfig, (card) => {
             card.reset();
             resetAnimation();
         });
 
-        const card = await buyCardWithBalanceChange(batchId)
+        const card = await buyCardWithBalanceChange(batchId || '');
 
         if (!card) return;
 
@@ -112,13 +85,17 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
         });
 
         playAnimation();
-
         setIsCardsScratched(_getScratchedStateConfig(scratchCardsRefConfig, true))
-
         setLastAction('playBtnClick');
-
         onScratchedEnought(card);
-    }, [batchId, buyCardWithBalanceChange, scratchCardsRefConfig, isBigWinVisible, isScratchAnimationPlaying, isCardBuying]);
+    }, [
+        batchId,
+        buyCardWithBalanceChange,
+        scratchCardsRefConfig,
+        isPlayBtnDisabled,
+        playAnimation,
+        resetAnimation,
+]);
 
     const resetScratchState = useCallback(async () => {
         console.log('resetScratchState');
@@ -142,7 +119,7 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
         } else if (cardData) {
             console.log('You lose. Your balance is ' + cardData?.rbaxBalance + ' RBAX')
         };
-    }, [card, scratchCardTransitionTimeout]);
+    }, [card]);
 
     const onScratchStarted = useCallback(() => {
         if (batchId && (!lastAction || lastAction == 'swipe')) {
@@ -153,11 +130,17 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
 
     const onBigWinClicked = useCallback(() => {
         setIsBigWinVisible(false);
+        onPlay();
     }, []);
 
     const onScratchAnimationCompleted = useCallback(() => {
         setIsScratchAnimationPlaying(false);
+
+        stopSound(AppSounds.Scratch);
+
         if (!card) return;
+
+        store.dispatch(blinkMatrixCels());
 
         if (card?.winning) {
             setIsBigWinVisible(true);
@@ -180,21 +163,25 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
         card?.rbaxBalance,
         card?.winning,
         card?.cardData.winAmount,
-        scratchCardTransitionTimeout
+        scratchCardTransitionTimeout,
+        stopSound,
     ]);
+
+    const resetOnTimeOut = useCallback(() => {
+        if (swipeTimeout) {
+            clearTimeout(swipeTimeout);
+            swipeTimeout = null;
+        }
+
+        swipeTimeout = setTimeout(() => {
+            resetScratchState();
+        }, scratchCardTransitionTimeout);
+    }, [scratchCardTransitionTimeout]);
 
     useEffect(() => {
         if (isAllCardsScratched) {
             onScratchedEnought();
-
-            if (swipeTimeout) {
-                clearTimeout(swipeTimeout);
-                swipeTimeout = null;
-            }
-
-            swipeTimeout = setTimeout(() => {
-                resetScratchState();
-            }, scratchCardTransitionTimeout);
+            //resetOnTimeOut();
         }
     }, [isAllCardsScratched]);
 
@@ -202,10 +189,12 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
         isBigWinVisible,
         onBigWinClicked,
         onPlay,
-        onSwipe: onPlay,
+        // onSwipe: onPlay,
         onScratchAnimationCompleted,
+        card,
+        isPlayBtnDisabled,
+
         onCardScratched,
         onScratchStarted,
-        card,
     }
 }

@@ -24,6 +24,8 @@ $light-pink: #FF81F2;
 $light-yellow: #FFDD56;
 $deep-purple: #480978;
 $crimson-red: #dc2436;
+$light-gray: #DEDEDE;
+$medium-gray: #A1A3A1;
 
 
 $main_bg: linear-gradient(180deg, #380850 0%, #180132 100%);
@@ -67,6 +69,13 @@ $modal_default_btn_bg: linear-gradient(180deg,
 $modal_default_btn_bg_hover: linear-gradient(180deg,
         color.adjust($light-sky-blue, $lightness: -5%) 0%,
         color.adjust($bright-blue, $lightness: -5%) 100%);
+
+$modal_disabled_btn_bg: linear-gradient(180deg,
+        $light-gray 0%,
+        $medium-gray 100%);
+$modal_disabled_btn_bg_hover: linear-gradient(180deg,
+        color.adjust($light-gray, $lightness: -5%) 0%,
+        color.adjust($medium-gray, $lightness: -5%) 100%);
 
 $btn3dBg: linear-gradient(to bottom,
         $lime-green 0%,

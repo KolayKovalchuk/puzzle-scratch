@@ -1,24 +1,20 @@
 
 
-import styles from './BigWinScreen.module.scss';
-
 import { Icon } from '@components/shared/Icon';
-import { selectScratchCardTransitionTimeout } from '@store/selectors/config.selectors';
-import { useSelector } from 'react-redux';
-
-import { WinType } from '@models/IBuyBatchCardData';
 import { WinStyledText } from '@components/shared/StyledText';
-import { formatNumber } from '@utils/formatters/formatNumber';
-import { getCoinAnimationName } from '@utils/getCoinAnimationName';
-import { CoinAnimation, CoinAnimationName } from './components/CoinAnimation';
-
+import { AppSounds } from '@config/sounds';
 import big_win from '@icons/big_win.svg';
 import robo_token_gold from '@icons/robo_token_gold.svg';
-import { useCallback, useEffect } from 'react';
-import store from '@store/store';
+import { WinType } from '@models/IBuyBatchCardData';
 import { playSound } from '@store/actions/appState.actions';
-import { AppSounds } from '@config/sounds';
-import { useGetSounds } from '@hooks/usePlaySound';
+import { selectScratchCardTransitionTimeout } from '@store/selectors/config.selectors';
+import store from '@store/store';
+import { formatNumber } from '@utils/formatters/formatNumber';
+import { getCoinAnimationName } from '@utils/getCoinAnimationName';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import styles from './BigWinScreen.module.scss';
+import { CoinAnimation, CoinAnimationName } from './components/CoinAnimation';
 
 export interface IBigWinScreenProps {
     winAmount: number;
@@ -41,24 +37,6 @@ function usePlayWinSound(animationName: CoinAnimationName) {
                 break;
         }
     }, [animationName]);
-
-    const { stopSound } = useGetSounds();
-
-    const stopWinSound = useCallback(() => {
-        switch (animationName) {
-            case CoinAnimationName.coint_l:
-                stopSound(AppSounds.BigWin);
-                break;
-            case CoinAnimationName.coint_m:
-                stopSound(AppSounds.MedWin);
-                break;
-            case CoinAnimationName.coint_s:
-                stopSound(AppSounds.SmallWin);
-                break;
-        }
-    }, [animationName]);
-
-    return { stopWinSound };
 }
 
 
@@ -68,7 +46,7 @@ export function BigWinScreen({ winAmount, winType = WinType.M, className, onClic
     const coinAnimationName = getCoinAnimationName(winType)
     const isBigWinIconVisible = coinAnimationName === CoinAnimationName.coint_l
 
-    const {} = usePlayWinSound(coinAnimationName);
+    usePlayWinSound(coinAnimationName);
 
     if (!winAmount) return null
 

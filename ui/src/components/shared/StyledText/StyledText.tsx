@@ -63,6 +63,7 @@ export function StyledText({
         dimensions.height,
         // textStyles,
         textStyles?.fontSize,
+        textStyles?.stroke,
         textFitCoefficient,
         anchor,
         shouldFitFontSize,

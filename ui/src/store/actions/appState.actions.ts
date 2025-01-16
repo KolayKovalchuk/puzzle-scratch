@@ -17,3 +17,15 @@ export const playSound = (soundName: AppSounds, shouldStopAllSounds = true, dura
         duration,
     },
 })
+
+export const BLINK_MATRIX_CELS = 'BLINK_MATRIX_CELS';
+
+export const blinkMatrixCels = () => ({
+    type: BLINK_MATRIX_CELS,
+})
+
+export const RESET_MATRIX_BLINK_COUNTER = 'RESET_MATRIX_BLINK_COUNTER';
+
+export const resetMatrixBlinkCounter = () => ({
+    type: RESET_MATRIX_BLINK_COUNTER,
+})

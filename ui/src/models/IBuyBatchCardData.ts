@@ -1,6 +1,7 @@
 export interface ICardData {
     matrix: (number | string | [])[][];
     winAmount: number;
+    winningCells?: [number, number][];
 }
 
 export enum WinType {

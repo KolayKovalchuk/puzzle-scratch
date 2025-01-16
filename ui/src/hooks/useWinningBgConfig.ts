@@ -11,6 +11,7 @@ export interface ICardBonusTypesDict {
 
 export const CardsBonusTypesDict: ICardBonusTypesDict = {
     SantaSacBonus: [5,5],
+    IceBoxDiamondBonus: [6, Infinity],
     IceBoxX2Bonus: [7,1],
     IceBoxX5Bonus: [8,1],
 }

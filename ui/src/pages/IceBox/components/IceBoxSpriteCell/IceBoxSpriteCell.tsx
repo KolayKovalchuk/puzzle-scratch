@@ -1,4 +1,4 @@
-import { IMatrixCellProps } from '@components/shared/IconMatrix/IconMatrix.models';
+import { IMatrixCellProps, ISpriteCellData } from '@components/shared/IconMatrix/IconMatrix.models';
 import { DefaultTextStyleConfig, StyledTextPixiEl } from '@components/shared/StyledText';
 import { GameCellTextStyle } from '@components/shared/StyledText/components/GameCellStyledText';
 import { IIceBoxBundle } from '@config/iceBoxBundleConfig';
@@ -7,7 +7,7 @@ import { Container, Graphics, Sprite } from '@pixi/react';
 import { ITextStyle, TextStyle } from 'pixi.js-legacy';
 import { useCellLabelsPosition } from './hooks/useCellLabelsPosition';
 
-export interface IIceBoxSpriteCellData {
+export interface IIceBoxSpriteCellData extends ISpriteCellData {
     textureName: string;
     bundleName: string;
 }

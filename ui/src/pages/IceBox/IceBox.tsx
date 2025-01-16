@@ -35,6 +35,8 @@ import ice_box_logo_shining from '@icons/iceBox/ice_box_logo_shining.svg';
 import ice_box_shining from '@icons/iceBox/ice_box_shining.svg';
 import { IIceBoxCardData } from './IceBox.model';
 import { CardsBonusTypesDict, useIsBonusShining } from '@hooks/useWinningBgConfig';
+import { isCellWinnings } from '@utils/isCellWinnings';
+import { NO_TAP_SOUND_CLASS } from '@hooks/usePlaySound';
 
 
 const bgTextureConfig: IBgTextureConfig = {
@@ -137,8 +139,15 @@ export function IceBox() {
     const diamondScratchCardData: IDiamondSpriteCellData[][] = useMemo(() => {
         if (!card) return [[]];
 
-        return [card?.cardData.bonus.map((textureName) => ({ textureName: textureName.toString(), bundleName }))];
-    }, [card?.cardData.bonus]);
+        return [card?.cardData.bonus.map((textureName, index) => {
+            const isWinning = isCellWinnings(card.cardData.winningCells || [], CardsBonusTypesDict.IceBoxDiamondBonus[0], index);
+            return {
+                textureName: textureName.toString(),
+                bundleName,
+                isWinning,
+            }
+        })];
+    }, [card?.cardData.bonus, card?.cardData.winningCells, bundleName]);
 
     const { data } = useSpriteCellData(card, bundleName)
 
@@ -158,7 +167,7 @@ export function IceBox() {
             </div>
             <TopPrizeLabel topPrize={batch?.maxPrize || 0} className={styles.topPrizeLabel} />
             <div className={styles.content}>
-                <div className={styles.scratchAreaContainer}
+                <div className={`${styles.scratchAreaContainer} ${NO_TAP_SOUND_CLASS}`}
                     // onTouchStart={onTouchStart}
                     // onTouchEnd={onTouchEnd}
                     // onTouchMove={onTouchMove}

@@ -27,6 +27,7 @@ import candy_clouds from '@icons/candy_clouds.svg';
 import candy_maze from '@icons/candy_maze.svg';
 import candy_stars_bg from '@icons/candy_stars_bg.svg';
 import shining from '@icons/shining.svg';
+import { NO_TAP_SOUND_CLASS } from '@hooks/usePlaySound';
 
 const topScratchCardMatrixConfig: IGameMatrixConfig = {
     paddintBottom: 2,
@@ -116,7 +117,7 @@ export function CandyMaze() {
                 <div className={styles.radialShining}></div>
                 <TopPrizeLabel topPrize={batch?.maxPrize || 0} />
 
-                <div className={styles.scratchAreaContainer}
+                <div className={`${styles.scratchAreaContainer} ${NO_TAP_SOUND_CLASS}`}
                     // onTouchStart={onTouchStart}
                     // onTouchEnd={onTouchEnd}
                     // onTouchMove={onTouchMove}

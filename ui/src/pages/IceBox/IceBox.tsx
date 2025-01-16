@@ -35,6 +35,7 @@ import ice_box_logo_shining from '@icons/iceBox/ice_box_logo_shining.svg';
 import ice_box_shining from '@icons/iceBox/ice_box_shining.svg';
 import { IIceBoxCardData } from './IceBox.model';
 import { CardsBonusTypesDict, useIsBonusShining } from '@hooks/useWinningBgConfig';
+import { isCellWinnings } from '@utils/isCellWinnings';
 
 
 const bgTextureConfig: IBgTextureConfig = {
@@ -137,8 +138,15 @@ export function IceBox() {
     const diamondScratchCardData: IDiamondSpriteCellData[][] = useMemo(() => {
         if (!card) return [[]];
 
-        return [card?.cardData.bonus.map((textureName) => ({ textureName: textureName.toString(), bundleName }))];
-    }, [card?.cardData.bonus]);
+        return [card?.cardData.bonus.map((textureName, index) => {
+            const isWinning = isCellWinnings(card.cardData.winningCells || [], CardsBonusTypesDict.IceBoxDiamondBonus[0], index);
+            return {
+                textureName: textureName.toString(),
+                bundleName,
+                isWinning,
+            }
+        })];
+    }, [card?.cardData.bonus, card?.cardData.winningCells, bundleName]);
 
     const { data } = useSpriteCellData(card, bundleName)
 

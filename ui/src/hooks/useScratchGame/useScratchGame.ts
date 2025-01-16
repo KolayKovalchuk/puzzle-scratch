@@ -55,7 +55,7 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
         stopSound(AppSounds.Scratch);
         stopWinSound(card);
         store.dispatch(playSound(AppSounds.Scratch, false));
-    }, [stopSound]);
+    }, [stopSound, stopWinSound, card]);
 
     const onCardScratched = useCallback((name: string) => {
         setIsCardsScratched((prevStat) => {
@@ -129,9 +129,10 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
     }, [batchId, buyCardWithBalanceChange, lastAction]);
 
     const onBigWinClicked = useCallback(() => {
+        stopWinSound(card);
         setIsBigWinVisible(false);
         onPlay();
-    }, []);
+    }, [card, onPlay, stopWinSound]);
 
     const onScratchAnimationCompleted = useCallback(() => {
         setIsScratchAnimationPlaying(false);

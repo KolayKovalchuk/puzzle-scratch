@@ -1,7 +1,7 @@
 import { IScratchCardHandle } from '@components/ScratchCard';
 import { IScratchAnimationHandle } from '@components/shared/ScratchAnimation/ScratchAnimation';
 import { AppSounds } from '@config/sounds';
-import { IBuyBatchCardData, ICardData } from '@models/IBuyBatchCardData';
+import { IBuyBatchCardData, ICardData, WinType } from '@models/IBuyBatchCardData';
 import { blinkMatrixCels, playSound, resetMatrixBlinkCounter } from '@store/actions/appState.actions';
 import { updateUserBalanceWithChangeAnimation } from '@store/actions/user.actions';
 import { selectScratchCardTransitionTimeout } from '@store/selectors/config.selectors';
@@ -9,7 +9,8 @@ import store from '@store/store';
 import { RefObject, useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { _applyForEachScratchCardRef, _getScratchedStateConfig } from './utils';
-import { useBuyCardWithBalanceChange } from './hooks';
+import { useBuyCardWithBalanceChange, useStopWinSound } from './hooks';
+import { useGetSounds } from '@hooks/usePlaySound';
 
 let timeout: NodeJS.Timeout | null = null;
 let swipeTimeout: NodeJS.Timeout | null = null;
@@ -34,6 +35,9 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
 
     const [isPlayBtnDisabled, setIsPlayBtnDisabled] = useState(false);
 
+    const { stopSound } = useGetSounds();
+    const { stopWinSound } = useStopWinSound();
+
     useEffect(() => {
         const isPlayBtnDisabled = !batchId || isScratchAnimationPlaying || isCardBuying;
         setIsPlayBtnDisabled(isPlayBtnDisabled);
@@ -48,8 +52,10 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
         scratchAnimationRef.current?.play();
         setIsScratchAnimationPlaying(true);
         // setTimeout(() => store.dispatch(playSound(AppSounds.Scratch)), 0);
+        stopSound(AppSounds.Scratch);
+        stopWinSound(card);
         store.dispatch(playSound(AppSounds.Scratch, false));
-    }, []);
+    }, [stopSound]);
 
     const onCardScratched = useCallback((name: string) => {
         setIsCardsScratched((prevStat) => {
@@ -129,6 +135,9 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
 
     const onScratchAnimationCompleted = useCallback(() => {
         setIsScratchAnimationPlaying(false);
+
+        stopSound(AppSounds.Scratch);
+
         if (!card) return;
 
         store.dispatch(blinkMatrixCels());
@@ -154,7 +163,8 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
         card?.rbaxBalance,
         card?.winning,
         card?.cardData.winAmount,
-        scratchCardTransitionTimeout
+        scratchCardTransitionTimeout,
+        stopSound,
     ]);
 
     const resetOnTimeOut = useCallback(() => {

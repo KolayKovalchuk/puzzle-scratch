@@ -1,4 +1,6 @@
-import { ICardData } from '@models/IBuyBatchCardData';
+import { AppSounds } from '@config/sounds';
+import { useGetSounds } from '@hooks/usePlaySound';
+import { IBuyBatchCardData, ICardData, WinType } from '@models/IBuyBatchCardData';
 import { useBuyCard } from '@services/api/cards.service';
 import { updateUserBalanceWithChangeAnimation } from '@store/actions/user.actions';
 import store from '@store/store';
@@ -32,4 +34,26 @@ export function useBuyCardWithBalanceChange<CardData extends ICardData = ICardDa
         isCardBuying,
         card,
     }
+}
+
+export function useStopWinSound() {
+    const { stopSound } = useGetSounds();
+
+    const stopWinSound = useCallback((card: IBuyBatchCardData | null) => {
+        if (!card) return;
+
+        switch (card.winType) {
+            case WinType.B:
+                stopSound(AppSounds.BigWin);
+                break;
+            case WinType.M:
+                stopSound(AppSounds.MedWin);
+                break;
+            case WinType.S:
+                stopSound(AppSounds.SmallWin);
+                break;
+        }
+    }, [stopSound]);
+
+    return {stopWinSound}
 }

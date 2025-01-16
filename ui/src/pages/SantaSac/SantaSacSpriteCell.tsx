@@ -1,10 +1,11 @@
 import { IMatrixCellProps, ISpriteCellData } from '@components/shared/IconMatrix/IconMatrix.models';
+import { GameCellTextStyle } from '@components/shared/StyledText/components/GameCellStyledText';
+import { ISantaSacBundle } from '@config/santaSacBundleConfig';
 import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
 import { Container, Sprite, Text } from '@pixi/react';
 import { TextStyle } from 'pixi.js-legacy';
 import { useItemPrizePosition } from './hooks/useItemPrizePosition';
 import { SantaSacScratchItemsEnum } from './scratchItemsEnum';
-import { GameCellTextStyle } from '@components/shared/StyledText/components/GameCellStyledText';
 
 export interface ISantaSacSpriteCellData extends ISpriteCellData {
     textureName: SantaSacScratchItemsEnum;
@@ -21,7 +22,7 @@ export const ItemPrizeTextStyles = new TextStyle({
 });
 
 export function SantaSacSpriteCell({ x, y, width, height, data }: ISantaSacSpriteCellProps) {
-    const { bundle, loading: isBundleLoading } = useLoadBundle(data.bundleName);
+    const { bundle, loading: isBundleLoading } = useLoadBundle<ISantaSacBundle>(data.bundleName);
 
     const itemPrize = data.itemPrize?.toString() || '0';
     const { x: itemPrizeTextX, y: itemPrizeTextY } = useItemPrizePosition(data.itemPrize, width, height);
@@ -43,7 +44,7 @@ export function SantaSacSpriteCell({ x, y, width, height, data }: ISantaSacSprit
                 height={height}
                 texture={texture}
             />
-                <Text text={itemPrize} x={itemPrizeTextX} y={itemPrizeTextY} style={ItemPrizeTextStyles} />
+            <Text text={itemPrize} x={itemPrizeTextX} y={itemPrizeTextY} style={ItemPrizeTextStyles} />
         </Container>
     );
 };

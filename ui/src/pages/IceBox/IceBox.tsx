@@ -12,8 +12,7 @@ import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
 import { useGetBatchById } from '@services/api/batch.service';
 
 import { BigWinScreen } from '@components/BigWinScreen/BigWinScreen';
-import { useScratchGame } from '@hooks/useScratchGame';
-import { useSwipeAria } from '@hooks/useSwipeAria';
+import { useScratchGame } from '@hooks/useScratchGame/useScratchGame';
 import { useCallback, useMemo, useRef } from 'react';
 
 import { Footer } from '@components/Footer/Footer';
@@ -35,6 +34,7 @@ import ice_box_logo from '@icons/iceBox/ice_box_logo.svg';
 import ice_box_logo_shining from '@icons/iceBox/ice_box_logo_shining.svg';
 import ice_box_shining from '@icons/iceBox/ice_box_shining.svg';
 import { IIceBoxCardData } from './IceBox.model';
+import { CardsBonusTypesDict, useIsBonusShining } from '@hooks/useWinningBgConfig';
 
 
 const bgTextureConfig: IBgTextureConfig = {
@@ -52,7 +52,8 @@ const daimondMatrixConfig: IGameMatrixConfig = {
 }
 
 const mainMatrixConfig: IGameMatrixConfig = {
-    cellPadding: 12
+    cellPadding: 12,
+    winningBgTextureYShiftCoef: 1.2,
 }
 
 const diamondCardCoverTextureName: string[][] = [
@@ -93,9 +94,10 @@ export function IceBox() {
         isBigWinVisible,
         onBigWinClicked,
         onPlay,
-        onSwipe,
+        // onSwipe,
         onScratchAnimationCompleted,
         card,
+        isPlayBtnDisabled,
         // onCardScratched,
         // onScratchStarted,
     } = useScratchGame<IIceBoxCardData>(
@@ -114,17 +116,17 @@ export function IceBox() {
     const renderCell = useCallback((data: IIceBoxSpriteCellProps) => (<IceBoxSpriteCell {...data} />), []);
     const renderDaimondCell = useCallback((data: IDiamondSpriteCellProps) => (<DiamondSpriteCell {...data} />), []);
 
-    const {
-        onTouchEnd,
-        onTouchMove,
-        onTouchStart,
-        onMouseDown,
-        onMouseMove,
-        onMouseUp,
-    } = useSwipeAria({
-        onSwipedLeft: onSwipe,
-        onSwipedRight: onSwipe
-    });
+    // const {
+    //     onTouchEnd,
+    //     onTouchMove,
+    //     onTouchStart,
+    //     onMouseDown,
+    //     onMouseMove,
+    //     onMouseUp,
+    // } = useSwipeAria({
+    //     onSwipedLeft: onSwipe,
+    //     onSwipedRight: onSwipe
+    // });
 
     const isLoading = isBatchLoading || isBundleLoading;
     const hiddenClass = isLoading || !bundle ? 'hidden' : '';
@@ -144,6 +146,9 @@ export function IceBox() {
     daimondMatrixConfig.cellWidth = (dimensions.width / diamondCardSizeX) * 1.1;
     daimondMatrixConfig.cellHeight = daimondMatrixConfig.cellWidth;
 
+    const isX2BonusShining = useIsBonusShining(CardsBonusTypesDict.IceBoxX2Bonus, card?.cardData.winningCells || null);
+    const isX5BonusShining = useIsBonusShining(CardsBonusTypesDict.IceBoxX5Bonus, card?.cardData.winningCells || null);
+
     return (
         <div className={`${styles.mainContainer} ${hiddenClass}`}>
             <div className={styles.headerLogoContainer}>
@@ -154,12 +159,12 @@ export function IceBox() {
             <TopPrizeLabel topPrize={batch?.maxPrize || 0} className={styles.topPrizeLabel} />
             <div className={styles.content}>
                 <div className={styles.scratchAreaContainer}
-                    onTouchStart={onTouchStart}
-                    onTouchEnd={onTouchEnd}
-                    onTouchMove={onTouchMove}
-                    onMouseDown={onMouseDown}
-                    onMouseUp={onMouseUp}
-                    onMouseMove={onMouseMove}
+                    // onTouchStart={onTouchStart}
+                    // onTouchEnd={onTouchEnd}
+                    // onTouchMove={onTouchMove}
+                    // onMouseDown={onMouseDown}
+                    // onMouseUp={onMouseUp}
+                    // onMouseMove={onMouseMove}
                     onClick={onPlay}
                 >
                     <div className={styles.animationContainer}>
@@ -178,6 +183,7 @@ export function IceBox() {
                             bundleName={ICE_BOX_BUNDLE.name}
                             bgTextureConfig={bgTextureConfig}
                             matrixConfig={roundMatrixConfig}
+                            isWinning={isX2BonusShining}
                         // onScratchedEnought={onX2CardScratched}
                         // onScratchStarted={onScratchStarted}
                         />
@@ -191,6 +197,7 @@ export function IceBox() {
                             bundleName={ICE_BOX_BUNDLE.name}
                             bgTextureConfig={bgTextureConfig}
                             matrixConfig={roundMatrixConfig}
+                            isWinning={isX5BonusShining}
                         // onScratchedEnought={onX5CardScratched}
                         // onScratchStarted={onScratchStarted}
                         />
@@ -239,7 +246,7 @@ export function IceBox() {
                         </div>
                     </div>
                 </div>
-                <GameFooterBtn batchCardType={batch?.cardType || null} onPlay={onPlay}>
+                <GameFooterBtn batchCardType={batch?.cardType || null} onPlay={onPlay} isPlayBtnDisabled={isPlayBtnDisabled}>
                     <Icon name={footer_stars} className={styles.footerStars} />
                 </GameFooterBtn>
             </div>

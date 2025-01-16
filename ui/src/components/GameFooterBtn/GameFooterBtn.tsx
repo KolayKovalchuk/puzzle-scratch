@@ -17,9 +17,10 @@ export interface IGameFooterBtnProps {
     onCancel?: () => void
     children?: ReactNode
     batchCardType: BatchCardType | null
+    isPlayBtnDisabled?: boolean
 }
 
-export function GameFooterBtn({ onPlay, onCancel, children, batchCardType }: IGameFooterBtnProps) {
+export function GameFooterBtn({ onPlay, onCancel, children, batchCardType, isPlayBtnDisabled }: IGameFooterBtnProps) {
     const playButtonText = useSelector(selectLocalValue('txt.btn.play'));
 
     const onCancelCb = useCallback(() => {
@@ -45,6 +46,7 @@ export function GameFooterBtn({ onPlay, onCancel, children, batchCardType }: IGa
                 mode={ButtonType.Default}
                 text={playButtonText}
                 onClick={() => onPlay()}
+                isDisabled={isPlayBtnDisabled}
             />
             <Button
                 className={`${styles.btn} ${styles.iconBtn}`}

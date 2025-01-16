@@ -18,10 +18,10 @@ export interface ISantaSacBundle extends IScrathCardBundle {
     greenStar: Texture;
     santaChariot: Texture;
     snowMan: Texture;
-
-    roundCover: Texture;
     cristmasToy: Texture;
     redBallShining: Texture;
+
+    roundCover: Texture;
 }
 
 export const SANTA_SAC_BUNDLE: AssetsBundle = {
@@ -93,14 +93,14 @@ export const SANTA_SAC_BUNDLE: AssetsBundle = {
             alias: 'roundCover',
             src: `/roundCover.png`,
         },
+        {
+            alias: 'winningMatrixCellBg',
+            src: `/winningMatrixCellBg.png`,
+        },
 
         {
             alias: 'redBallShining',
             src: `${SANTA_SAC_BUNDLE_BASE_PATH}/redBallShining.png`,
         },
-        // {
-        //     alias: 'redBall',
-        //     src: `/red_ball.png`,
-        // },
     ],
 };

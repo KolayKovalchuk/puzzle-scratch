@@ -15,8 +15,7 @@ import { IBgTextureConfig, IScratchCardHandle, ScratchCard } from '@components/S
 import { IRoundScratchCardHandle, RoundScratchCard } from '@components/ScratchCard/components/RoundScratchCard/RoundScratchCard';
 import { TopPrizeLabel } from '@components/TopPrizeLabel/TopPrizeLabel';
 import { ISantaSacBundle, SANTA_SAC_BUNDLE } from '@config/santaSacBundleConfig';
-import { useScratchGame } from '@hooks/useScratchGame';
-import { useSwipeAria } from '@hooks/useSwipeAria';
+import { useScratchGame } from '@hooks/useScratchGame/useScratchGame';
 
 import { useSpriteCellData } from './hooks/useSpriteCellData';
 import { ISantaSacCardData } from './SantaSac.model';
@@ -27,6 +26,7 @@ import { IScratchAnimationHandle, ScratchAnimation, ScratchAnimationName } from 
 import round_multiplier from '@icons/round_multiplier.svg';
 import santa_sac from '@icons/santa_sac.svg';
 import shining from '@icons/shining.svg';
+import { CardsBonusTypesDict, useIsBonusShining } from '@hooks/useWinningBgConfig';
 
 const bgTextureConfig: IBgTextureConfig = {
     textureName: 'redBallShining',
@@ -67,9 +67,10 @@ export function SantaSac() {
         isBigWinVisible,
         onBigWinClicked,
         onPlay,
-        onSwipe,
+        // onSwipe,
         onScratchAnimationCompleted,
         card,
+        isPlayBtnDisabled,
         // onCardScratched,
         // onScratchStarted,
     } = useScratchGame<ISantaSacCardData>(
@@ -85,17 +86,17 @@ export function SantaSac() {
 
     const renderSantaSacSpriteCell = useCallback((data: ISantaSacSpriteCellProps) => (<SantaSacSpriteCell {...data} />), []);
 
-    const {
-        onTouchEnd,
-        onTouchMove,
-        onTouchStart,
-        onMouseDown,
-        onMouseMove,
-        onMouseUp,
-    } = useSwipeAria({
-        onSwipedLeft: onSwipe,
-        onSwipedRight: onSwipe
-    });
+    // const {
+    //     onTouchEnd,
+    //     onTouchMove,
+    //     onTouchStart,
+    //     onMouseDown,
+    //     onMouseMove,
+    //     onMouseUp,
+    // } = useSwipeAria({
+    //     onSwipedLeft: onSwipe,
+    //     onSwipedRight: onSwipe
+    // });
 
     const { data } = useSpriteCellData(card, bundleName)
 
@@ -104,6 +105,8 @@ export function SantaSac() {
 
     const multiplier = card?.cardData.multi;
     const multiplierText = typeof multiplier === 'number' ? 'x' + multiplier : '';
+
+    const isBonusShining = useIsBonusShining(CardsBonusTypesDict.SantaSacBonus, card?.cardData.winningCells || null);
 
     return (
         <div className={`${styles.mainContainer} ${hiddenClass}`}>
@@ -114,12 +117,12 @@ export function SantaSac() {
                 <TopPrizeLabel className={styles.topPrizeLabel} topPrize={batch?.maxPrize || 0} />
 
                 <div className={styles.scratchAreaContainer}
-                    onTouchStart={onTouchStart}
-                    onTouchEnd={onTouchEnd}
-                    onTouchMove={onTouchMove}
-                    onMouseDown={onMouseDown}
-                    onMouseUp={onMouseUp}
-                    onMouseMove={onMouseMove}
+                    // onTouchStart={onTouchStart}
+                    // onTouchEnd={onTouchEnd}
+                    // onTouchMove={onTouchMove}
+                    // onMouseDown={onMouseDown}
+                    // onMouseUp={onMouseUp}
+                    // onMouseMove={onMouseMove}
                     onClick={onPlay}
                 >
                     <div className={styles.animationContainer}>
@@ -145,6 +148,7 @@ export function SantaSac() {
                             // onScratchStarted={onScratchStarted}
                             xShift={0.52}
                             yShift={0.45}
+                            isWinning={isBonusShining}
                         />
                     </div>
                     <div
@@ -167,7 +171,7 @@ export function SantaSac() {
                         />
                     </div>
                 </div>
-                <GameFooterBtn batchCardType={batch?.cardType || null} onPlay={onPlay} />
+                <GameFooterBtn batchCardType={batch?.cardType || null} onPlay={onPlay} isPlayBtnDisabled={isPlayBtnDisabled} />
             </div>
             <Footer />
             {isBigWinVisible

@@ -16,6 +16,7 @@ export enum ButtonType {
     Confirm = 'confirm',
     Cancel = 'cancel',
     Default = 'default',
+    Disabled = 'disabled',
 }
 
 export interface IButtonProps {
@@ -31,6 +32,8 @@ export interface IButtonProps {
     textStyle?: Partial<ITextStyle>;
 
     is3d?: boolean;
+
+    isDisabled?: boolean;
 
     getTextSize?: (textSize: string | number) => void;
 }
@@ -48,10 +51,11 @@ export function ButtonComponent({
     textStyle = {},
 
     is3d = false,
+    isDisabled = false,
 
     getTextSize,
 }: IButtonProps, ref: Ref<HTMLButtonElement>) {
-    const { className: buttonTypeClassName, textStyles } = useButtonConfig(mode, styles);
+    const { className: buttonTypeClassName, textStyles } = useButtonConfig(mode, styles, isDisabled);
 
     const renderContent = useCallback(() => {
         if (!!children) {
@@ -86,17 +90,20 @@ export function ButtonComponent({
     ]);
 
     const iconContainerClassName = iconName ? styles.iconContainer : '';
-    const btnClassName = `${styles.container} ${buttonTypeClassName}`
+    const isDisabledClass = isDisabled ? styles.disabled : '';
+    const btnClassName = `${styles.container} ${buttonTypeClassName} ${isDisabledClass}`;
     const noTapSoundClassName = mode === ButtonType.Cancel ? NO_TAP_SOUND_CLASS : '';
     const containerClassName = `${iconContainerClassName} ${noTapSoundClassName} ${className || ''}`;
 
     const onClickWithSound = useCallback(() => {
-        onClick && onClick();
+        if (!isDisabled && onClick) {
+            onClick();
+        }
 
         if (mode === ButtonType.Cancel) {
             store.dispatch(playSound(AppSounds.Cancel));
         }
-    }, [mode, onClick]);
+    }, [mode, onClick, isDisabled]);
 
     if (is3d) {
         return (

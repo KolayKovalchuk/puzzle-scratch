@@ -2,13 +2,17 @@ import { useApp } from '@pixi/react';
 import { useEffect, useState } from 'react';
 import { IGameMatrixConfig } from '../IconMatrix.models';
 
-interface IGameMatrixDefaultConfig extends IGameMatrixConfig {
+export interface IGameMatrixDefaultConfig extends IGameMatrixConfig {
     cellWidth: number | null;
     cellHeight: number | null;
     cellPadding: number;
     containerPadding: number;
     paddintBottom: number;
     paddintLeft: number;
+
+    winningBgTextureWidthCoef: number;
+    winningBgTexturePositionShiftCoef: number;
+    winningBgTextureYShiftCoef: number;
 }
 
 export const defaultConfig: IGameMatrixDefaultConfig = {
@@ -18,6 +22,10 @@ export const defaultConfig: IGameMatrixDefaultConfig = {
     containerPadding: 8,
     paddintBottom: 0,
     paddintLeft: 0,
+
+    winningBgTextureWidthCoef: 1,
+    winningBgTexturePositionShiftCoef: 1,
+    winningBgTextureYShiftCoef: 1,
 }
 
 export function useCellSize(configArg: IGameMatrixConfig, rowDataLength: number, columnDataLength: number) {

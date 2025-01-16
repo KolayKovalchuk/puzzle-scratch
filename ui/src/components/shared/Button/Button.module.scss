@@ -153,6 +153,15 @@ div.btn3dContainer {
         }
     }
 
+    &.disabled {
+        background: colors.$modal_disabled_btn_bg;
+        cursor: not-allowed;
+
+        &:hover {
+            background: colors.$modal_disabled_btn_bg_hover;
+        }
+    }
+
     .label {
         position: relative;
         top: 1px;

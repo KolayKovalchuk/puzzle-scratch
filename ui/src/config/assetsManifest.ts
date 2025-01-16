@@ -8,6 +8,7 @@ import { SCRATCH_ANIMATION_BUNDLE } from './scratchAnimationBundleConfig';
 
 export interface IScrathCardBundle extends IBundle {
     cover: Texture;
+    winningMatrixCellBg: Texture;
 }
 
 export const ASSETS_MANIFEST: AssetsManifest = {

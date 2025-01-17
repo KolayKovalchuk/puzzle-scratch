@@ -102,9 +102,10 @@ div.btn3dContainer {
 
 .container {
     min-width: $minWidth;
+    height: $maxHeight;
     max-height: $maxHeight;
 
-    padding: 10px 20px;
+    padding: 0px 20px;
     border: none;
     border-radius: $borderRadius;
     color: #c6e9f2;
@@ -164,7 +165,7 @@ div.btn3dContainer {
 
     .label {
         position: relative;
-        top: 1px;
+        // top: 1px;
     }
 }
 
@@ -177,8 +178,9 @@ div.btn3dContainer {
 .goldBorder {
     display: flex;
 
-    min-width: $minWidth;
-    max-height: $maxHeight;
+    min-width: calc($minWidth + 4px);
+    height: calc($maxHeight + 4px);
+    max-height: calc($maxHeight + 4px);
 
     padding: 4px;
     background: colors.$btnGoldBorder;

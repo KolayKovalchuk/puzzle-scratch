@@ -15,7 +15,6 @@ import { BrowserRouter, useLocation, useNavigate } from 'react-router-dom';
 function App() {
     const {
         isLoaded,
-        isFontListLoaded,
     } = useInitApp();
 
     const navigate = useNavigate();
@@ -36,9 +35,9 @@ function App() {
 
     usePlaySound();
 
-    if (!isFontListLoaded) {
-        return null;
-    }
+    // if (!isFontListLoaded) {
+    //     return null;
+    // }
 
     return (
         <div className={styles.mainContainer}>

@@ -1,5 +1,5 @@
 import { StyledHeaderType } from '@components/shared/StyledHeader';
-import { BatchCard, BatchCardType } from '@models/BatchCard.model';
+import { BatchCard, BatchCardType, BatchStatus } from '@models/BatchCard.model';
 import { ROUTES } from '@routers/routerConfig';
 import { selectIsQaUser } from '@store/selectors/user.selectors';
 import { useCallback, useMemo } from 'react';
@@ -59,8 +59,8 @@ export function useBatchCardHandler(batchCard: BatchCard, navigate: NavigateFunc
     const appMode = import.meta.env.MODE
     const isQaUser = useSelector(selectIsQaUser);
     const isAllowed = isQaUser || appMode === 'development';
-
-    if (!isAllowed) return () => {};
+    const isCardAvailable = batchCard.status === BatchStatus.AVAILABLE;
+    if (!isCardAvailable && !isAllowed) return () => {};
 
     switch (batchCard.cardType) {
         case BatchCardType.ICE_BOX:

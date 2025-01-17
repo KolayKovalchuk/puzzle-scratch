@@ -78,6 +78,7 @@ export function ButtonComponent({
                 }}
                 shouldFitFontSize={shouldFitFontSize}
                 getTextSize={getTextSize}
+                yShift={0.5}
             ></RegularStyledText>
         );
     }, [

@@ -1,24 +1,31 @@
-import { useEffect, useRef, useState } from 'react';
+import { RefObject, useEffect, useRef, useState } from 'react';
 
-export function useContainerDimensions(...args: any) {
-    const containerRef = useRef<HTMLDivElement>(null);
+export function useContainerDimensions<T extends Element = HTMLDivElement>(containerRef: RefObject<T> = useRef<T>(null)) {
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
     useEffect(() => {
-        const updateDimensions = () => {
-            if (containerRef.current) {
-                const { clientWidth, clientHeight } = containerRef.current;
-                setDimensions({ width: clientWidth, height: clientHeight });
-            }
-        };
+        const observer = new ResizeObserver(entries => {
+            for (let entry of entries) {
+                if (entry.target === containerRef.current) {
 
-        updateDimensions(); // Initial dimensions
-        window.addEventListener('resize', updateDimensions); // Update on resize
+                    setDimensions({
+                        width: entry.contentRect.width,
+                        height: entry.contentRect.height,
+                    });
+                }
+            }
+        });
+
+        if (containerRef.current) {
+            observer.observe(containerRef.current);
+        }
 
         return () => {
-            window.removeEventListener('resize', updateDimensions);
+            if (containerRef.current) {
+                observer.unobserve(containerRef.current);
+            }
         };
-    }, [...args]);
+    }, [containerRef.current]);
 
     return { containerRef, dimensions };
 };

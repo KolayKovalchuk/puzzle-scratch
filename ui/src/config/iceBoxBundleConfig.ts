@@ -1,4 +1,4 @@
-import { AssetsBundle, Texture } from 'pixi.js';
+import { AssetsBundle, Texture } from 'pixi.js-legacy';
 import { IScrathCardBundle } from './assetsManifest';
 
 const ICE_BOX_BUNDLE_BASE_PATH = '/iceBox';
@@ -62,10 +62,9 @@ export const ICE_BOX_BUNDLE: AssetsBundle = {
             alias: 'roboTokenBlueBorder',
             src: `/robo_token_blue_border.png`,
         },
-
         {
-            alias: 'coinSpine',
-            src: `/coinsAnimation/coin.json`,
+            alias: 'winningMatrixCellBg',
+            src: `/winningMatrixCellBg.png`,
         },
     ],
 };

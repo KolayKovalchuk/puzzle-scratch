@@ -1,0 +1,90 @@
+@use '@styles/colors';
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.copyHeaderContaienr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    &:not(:last-child) {
+        margin-bottom: 10px;
+    }
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    &:not(:last-child) {
+        margin-right: 10px;
+    }
+
+    .label,
+    .value {
+        word-break: break-all;
+        text-align: left;
+    }
+
+    .label {
+        color: colors.$light-yellow;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .value {
+        color: white;
+        font-size: 16px;
+    }
+
+    .adrresValue {
+        font-size: 14px;
+    }
+}
+
+.btn {
+    width: 45px;
+    min-width: 45px;
+    margin-top: auto;
+}
+
+.list {
+    text-align: left;
+    width: 100%;
+    padding: 0 20px;
+
+    .listItem {
+        &:not(:last-child) {
+            margin-bottom: 10px;
+        }
+    }
+}
+
+.roboTokenIconListItemContainer {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+
+    span {
+        width: fit-content;
+        white-space: nowrap;
+    }
+
+    .roboTokenIcon {
+        width: 30px;
+    }
+}

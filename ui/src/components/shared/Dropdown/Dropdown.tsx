@@ -1,17 +1,31 @@
 import { useHandleClickOutside } from '@hooks/useHandleClickOutside'
 import { useEffect, useRef, useState } from 'react'
-import { IDropdownItem, IDropdownProps } from './Dropdown.models'
+import { IDropdownItem, IDropdownProps, TextAlign } from './Dropdown.models'
 import styles from './Dropdown.module.scss'
-import { DropdownItem } from './DropdownItem'
+import { SelectedDropdownItem } from './DropdownItem'
 import { DropdownList } from './DropdownList'
+import { useContainerDimensions } from '@hooks/useContainerDimensions'
+
+function getTextAlignCssClass(textAlign: TextAlign) {
+    switch (textAlign) {
+        case 'left':
+            return styles.left
+        case 'right':
+            return styles.right
+        default:
+            return styles.center
+    }
+}
 
 export function Dropdown({
     className,
     items,
     placeholder = 'Select: ',
+    locale,
     selectedItem: selectedItemProp,
     onSelect,
     onOpenClose,
+    textAlign = 'left',
 }: IDropdownProps) {
     const [selectedItem, setSelectedItem] = useState<IDropdownItem | null>(null)
     const [isOpen, setIsOpen] = useState(false)
@@ -35,15 +49,24 @@ export function Dropdown({
 
     useHandleClickOutside(dropdownRef, () => setIsOpen(false))
 
+    const { dimensions } = useContainerDimensions(dropdownRef)
+    const maxDropdownListHeight = dimensions.height * 4.6
+
+    const textAlignClassname = getTextAlignCssClass(textAlign)
+
     return (
         <div
             ref={dropdownRef}
-            className={`${styles.dropdown} ${className}`}
+            className={`${styles.dropdown} ${textAlignClassname} ${className}`}
             onClick={() => setIsOpen(!isOpen)}
         >
             <div className={styles.dropdownSelected}>
                 {selectedItem ? (
-                    <DropdownItem item={selectedItem} />
+                    <SelectedDropdownItem
+                        isOpen={isOpen}
+                        item={selectedItem}
+                        locale={locale}
+                    />
                 ) : (
                     <span>{placeholder}</span>
                 )}
@@ -52,7 +75,10 @@ export function Dropdown({
                 (<DropdownList
                     items={items}
                     selectedItem={selectedItem}
-                    handleSelect={handleSelect} />)
+                    handleSelect={handleSelect}
+                    locale={locale}
+                    maxHeight={maxDropdownListHeight}
+                />)
             }
         </div>
     )

@@ -1,13 +1,13 @@
 import { ASSETS_MANIFEST, bundleNameList } from '@config/assetsManifest';
-import { Assets, AssetsBundle, Texture } from 'pixi.js'; // Import Assets from pixi.js
-import { useEffect, useState } from 'react';
+import { Assets, AssetsBundle, Texture } from 'pixi.js-legacy'; // Import Assets from pixi.js
+import { useCallback, useEffect, useState } from 'react';
 
 export interface IAddBundleData<BundleConfig extends AssetsBundle["assets"]> {
     bundleName: string,
     bundle: BundleConfig
 }
 
-export function useTexture (svgName: string) {
+export function useTexture(svgName: string) {
     const [texture, setTexture] = useState<Texture | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<Error | null>(null);
@@ -19,7 +19,7 @@ export function useTexture (svgName: string) {
                 const url = `/scratchCard/${svgName}.svg`;
                 // const url = './assets/icons/candy_maze.png';
                 console.log('url', url);
-                
+
                 const loadedTexture = await Texture.fromURL(url)
                     .then((texture) => {
                         console.log('texture', texture);
@@ -47,7 +47,7 @@ export function useAddBundle<BundleConfig extends AssetsBundle["assets"]>({ bund
                 // Use Assets to load resources
                 Assets.addBundle(bundleName, bundle);
                 console.log('Assets added:', bundle);
-                
+
                 // setIsLoaded(true);
             } catch (error) {
                 console.error('Error adding assets:', error);
@@ -60,36 +60,36 @@ export function useAddBundle<BundleConfig extends AssetsBundle["assets"]>({ bund
 };
 
 export interface IBundle {
-    [key: string]: Texture;
+    [key: string]: Texture | any;
 }
 
-export function useLoadBundle<Bundle extends IBundle>(bundleName: string): { bundle: Bundle | null, error: Error | null, loading: boolean } {
+export function useLoadBundle<Bundle extends IBundle>(bundleName?: string): { bundle: Bundle | null, error: Error | null, loading: boolean, loadBundle: (bundleName: string) => void } {
     const [bundle, setBundle] = useState<Bundle | null>(null);
     const [error, setError] = useState<Error | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
+    const loadBundle = useCallback(async (bundleName: string) => {
+        setLoading(true);
+        setError(null);
+        try {
+            const bundleAssets = await Assets.loadBundle(bundleName);
+            setBundle(bundleAssets);
+        } catch (err) {
+
+            console.log(`Error loading bundle ${bundleName}:`, err);
+            setError(err instanceof Error ? err : new Error(String(err)));
+        } finally {
+            setLoading(false);
+        }
+    }, []);
+
     useEffect(() => {
-        const loadBundle = async () => {
-            setLoading(true);
-            setError(null);
-            try {
-                const bundleAssets = await Assets.loadBundle(bundleName);
-                setBundle(bundleAssets);
-            } catch (err) {
-
-                console.log(`Error loading bundle ${bundleName}:`, err);
-                setError(err instanceof Error ? err : new Error(String(err)));
-            } finally {
-                setLoading(false);
-            }
-        };
-
         if (bundleName) {
-            loadBundle();
+            loadBundle(bundleName);
         }
     }, [bundleName]);
 
-    return { bundle, error, loading };
+    return { bundle, error, loading, loadBundle };
 };
 
 
@@ -122,7 +122,7 @@ export function useAssetsBundleLoader() {
             setLoading(true);
             await Assets.init({ manifest: ASSETS_MANIFEST, basePath: '/public' });
 
-            await Assets.backgroundLoadBundle(bundleNameList);
+            Assets.backgroundLoadBundle(bundleNameList);
             setLoading(false);
         };
 

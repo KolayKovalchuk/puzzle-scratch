@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
+import { useGetSounds } from './usePlaySound';
+import { AppSounds } from '@config/sounds';
 
 export function useCounterAnimation(amount: number) {
     const [displayAmount, setDisplayAmount] = useState(amount);
+    const { stopSound } = useGetSounds();
 
     useEffect(() => {
         let start = displayAmount;
@@ -16,7 +19,12 @@ export function useCounterAnimation(amount: number) {
         const stepSize = Math.round(Math.abs(end - start) / totalSteps) || 1;
 
         const timer = setInterval(() => {
-            start += stepSize;
+            if (isIncreasing) {
+                start += stepSize
+            } else {
+                start -= stepSize
+            }
+
             setDisplayAmount(start);
             if (
                 isIncreasing && start >= end
@@ -31,6 +39,14 @@ export function useCounterAnimation(amount: number) {
             clearInterval(timer)
         };
     }, [amount]);
+
+    useEffect(() => {
+        if (amount === displayAmount) {
+            console.log('stop sound');
+            
+            stopSound(AppSounds.CoinsCount);
+        };
+    }, [amount, displayAmount, stopSound]);
 
     return displayAmount;
 }

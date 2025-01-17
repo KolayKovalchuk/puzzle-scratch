@@ -1,6 +1,6 @@
 import { IMatrixCellProps, ISpriteCellData } from '@components/shared/IconMatrix/IconMatrix.models';
 import { StyledTextPixiEl, WinStyledTextConfig } from '@components/shared/StyledText';
-import { ITextStyle } from 'pixi.js';
+import { ITextStyle } from 'pixi.js-legacy';
 
 export interface IDiamondSpriteCellData extends ISpriteCellData {
 }
@@ -17,11 +17,12 @@ export function DiamondSpriteCell({ x, y, width, height, data }: IDiamondSpriteC
 
     return (
         <StyledTextPixiEl
-            dimensions={{ width, height }}
+            dimensions={{ width: width - 2, height }}
             text={data.textureName.toString()}
             textStyles={textStyles}
             x={x}
             y={y}
             yShift={0.5}
+            valueForMeasure={'1000'}
         />)
 };

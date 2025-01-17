@@ -1,17 +1,18 @@
-import { INotification, NotificationType } from '@models/Notification.model';
+import { IDaylyBonusData, IDepositSuccessData, INotification, NotificationData, NotificationType } from '@models/Notification.model';
 import { postCollectDailyGift, postCollectEmojiBonus, postCollectGiftBonus, postCollectRefferalGift } from '@services/api/bonus.service';
+import { updateUserBalanceWithChangeAnimation } from '@store/actions/user.actions';
 import store from '@store/store';
 import { ReactNode } from 'react';
 import { DailyBonusNotificationBody } from './components/DailyBonusNotificationBody/DailyBonusNotificationBody';
-import { TooManyGifts } from './components/TooManyGiftsBody/TooManyGiftsBody';
 import { OnePerXGiftBody } from './components/OnePerXGiftBody/OnePerXGiftBody';
-import { updateUserBalance } from '@store/actions/user.actions';
+import { SuccessDepositBody } from './components/SuccessDepositBody/SuccessDepositBody';
+import { TooManyGifts } from './components/TooManyGiftsBody/TooManyGiftsBody';
 
 
 export interface NotificationConfigItem {
     title: string;
     content?: string;
-    children?: ReactNode;
+    renderChildren?: (notificationData: NotificationData) => ReactNode;
     agreeBtn: string;
     agreeCallback?: (notification: INotification) => void | Promise<any>;
     declineBtn?: string;
@@ -25,14 +26,14 @@ export interface NotificationConfig {
 export const NotificationConfig: NotificationConfig = {
     [NotificationType.DAILY_BONUS]: {
         title: 'txt.dailybonus.title',
-        children: <DailyBonusNotificationBody />,
+        renderChildren: (data) => <DailyBonusNotificationBody data={data as IDaylyBonusData} />,
         agreeBtn: 'txt.btn.collect',
         agreeCallback: async () => {
             const response = await postCollectDailyGift();
 
             if (response?.newBalance) {
                 console.log('Dayily bonus gift collected successfully:', response);
-                store.dispatch(updateUserBalance({ total: response.newBalance }));
+                store.dispatch(updateUserBalanceWithChangeAnimation({ total: response.newBalance }, response.amount));
             } else {
                 // TODO: handle error
             }
@@ -50,7 +51,7 @@ export const NotificationConfig: NotificationConfig = {
 
             if (response?.newBalance) {
                 console.log('Referral gift collected successfully:', response);
-                store.dispatch(updateUserBalance({ total: response.newBalance }));
+                store.dispatch(updateUserBalanceWithChangeAnimation({ total: response.newBalance }, response.amount));
             } else {
                 // TODO: handle error
             }
@@ -67,7 +68,7 @@ export const NotificationConfig: NotificationConfig = {
 
             if (response?.newBalance) {
                 console.log('Emoji bonus collected successfully:', response);
-                store.dispatch(updateUserBalance({ total: response.newBalance }));
+                store.dispatch(updateUserBalanceWithChangeAnimation({ total: response.newBalance }, response.amount));
             } else {
                 // TODO: handle error
             }
@@ -84,7 +85,7 @@ export const NotificationConfig: NotificationConfig = {
 
             if (response?.success) {
                 console.log('Gift collected successfully:', response);
-                store.dispatch(updateUserBalance({ total: response.newBalance }));
+                store.dispatch(updateUserBalanceWithChangeAnimation({ total: response.newBalance }, response.amount));
             } else {
                 // TODO: handle error
             }
@@ -99,12 +100,12 @@ export const NotificationConfig: NotificationConfig = {
     },
     [NotificationType.RBAX_GIFT_TO_MANY]: {
         title: 'text.gift.rbaxgift',
-        children: <TooManyGifts />,
+        renderChildren: () => <TooManyGifts />,
         agreeBtn: 'txt.btn.ok',
     },
     [NotificationType.RBAX_GIFT_1_PER_X]: {
         title: 'text.gift.rbaxgift',
-        children: <OnePerXGiftBody />,
+        renderChildren: () => <OnePerXGiftBody />,
         agreeBtn: 'txt.btn.ok',
     },
     [NotificationType.RBAX_GIFT_1_PER_FRIEND]: {
@@ -115,6 +116,13 @@ export const NotificationConfig: NotificationConfig = {
     [NotificationType.RBAX_GIFT_EXPIRED]: {
         title: 'text.gift.rbaxgift',
         content: 'txt.limit.expired',
+        agreeBtn: 'txt.btn.ok',
+    },
+
+
+    [NotificationType.DEPOSIT]: {
+        title: 'txt.transfer.popup.success.title',
+        renderChildren: (data) => <SuccessDepositBody notificationData={data as IDepositSuccessData} />,
         agreeBtn: 'txt.btn.ok',
     },
 };

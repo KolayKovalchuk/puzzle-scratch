@@ -4,10 +4,19 @@
 .container {
     display: flex;
     flex-direction: column;
+    max-width: 100%;
+    overflow: hidden;
+
+    min-width: 108%;
+    max-width: 108%;
+    position: relative;
+    right: 4.4%;
 }
 
 $roboIconSize: 18px;
 $paddingBottom: 10px;
+$dayCellMargin: 6px;
+$todayDayCellMargin: calc($dayCellMargin * -1.5);
 
 .mainContentText {
     margin-top: 20px;
@@ -21,9 +30,9 @@ $paddingBottom: 10px;
 
     padding: $paddingBottom 0px;
 
-    width: 108%;
     position: relative;
-    right: 4.4%;
+
+    max-height: 200px;
 }
 
 .dayContainer {
@@ -42,12 +51,16 @@ $paddingBottom: 10px;
 
     white-space: nowrap;
 
-    // aspect-ratio: 258/200;
-
     padding: $paddingBottom 10px;
 
-    &:not(:first-child) {
-        left: -5%;
+    &:not(:last-child) {
+        margin-right: -$dayCellMargin;
+    }
+
+    &:not(.todayArrowBlock) {
+        $margin: 7%;
+        margin-top: $margin;
+        margin-bottom: $margin;
     }
 
     &.leftArrowBlock {
@@ -55,8 +68,7 @@ $paddingBottom: 10px;
 
         .headerText,
         .dayContainerBonus {
-            position: relative;
-            left: -10%;
+            right: 10%;
         }
     }
 
@@ -77,21 +89,53 @@ $paddingBottom: 10px;
 
         .dayContainerBonus,
         .headerText {
-            position: relative;
             right: 10%;
         }
     }
 
     &.todayArrowBlock {
-        background-image: url('/arrowBlocks/todayArrowBlock.png');
+        &.leftArrowBlock {
+            background-image: url('/arrowBlocks/todayArrowBlockLeft.png');
+            margin-right: $todayDayCellMargin;
+        }
+
+        &.rightArrowBlock {
+            background-image: url('/arrowBlocks/todayArrowBlockRight.png');
+            padding-right: 20px;
+
+            .dayContainerBonus,
+            .headerText {
+                left: 10%;
+            }
+        }
+
+        &.centerArrowBlock {
+            background-image: url('/arrowBlocks/todayArrowBlockCenter.png');
+
+            .coinIcon {
+                left: 20%;
+            }
+        }
+
+        &:not(.leftArrowBlock) {
+            margin-left: $todayDayCellMargin;
+        }
+
+        &:not(.rightArrowBlock) {
+            margin-right: $todayDayCellMargin;
+
+            .dayContainerBonus,
+            .headerText {
+                right: -6%;
+            }
+        }
+
         padding-bottom: $paddingBottom * 2;
 
-        height: 100%;
-        padding-right: 8%;
+        padding-right: 30px;
 
         .dayContainerBonus {
             border-radius: 50px;
-            width: 60%;
         }
 
         .coinIcon {
@@ -106,13 +150,20 @@ $paddingBottom: 10px;
     }
 }
 
-.headerText,
-.dayContainerBonus {
+.headerText {
+    position: relative;
     width: 100%;
+}
+
+.dayContainerBonus {
+    position: relative;
+    max-width: 100%;
 }
 
 .headerText {
     max-height: 34px;
+    min-height: 34px;
+    width: 100%;
 }
 
 .coinIcon {
@@ -129,7 +180,7 @@ $paddingBottom: 10px;
     background-color: colors.$soft-blue;
     border-radius: 8px;
 
-    max-height: 20px;
+    height: 20px;
 
     .roboTokenIcon {
         min-width: $roboIconSize;
@@ -142,5 +193,5 @@ $paddingBottom: 10px;
     height: initial;
 
     position: relative;
-    top: 1px;
+    top: 2px;
 }

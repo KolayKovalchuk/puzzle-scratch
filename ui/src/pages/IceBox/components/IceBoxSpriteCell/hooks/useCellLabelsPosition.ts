@@ -1,4 +1,4 @@
-import { TextMetrics, TextStyle } from 'pixi.js';
+import { TextMetrics, TextStyle } from 'pixi.js-legacy';
 import { useEffect, useState } from 'react';
 
 export function useCellLabelsPosition(

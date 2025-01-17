@@ -3,13 +3,14 @@ import styles from './App.module.scss';
 
 import { LoadingScreen } from '@components/LoadingScreen/LoadingScreen';
 import { useInitApp } from '@hooks/useInitApp';
+import { usePlaySound } from '@hooks/usePlaySound';
 import { AppRouter } from '@routers/router';
 import { ROUTES } from '@routers/routerConfig';
 import { selectUserAcceptedTerms, selectUserPreferredLocale } from '@store/selectors/user.selectors';
 import store from '@store/store';
 import { useEffect } from 'react';
 import { Provider, useSelector } from 'react-redux';
-import { BrowserRouter, useNavigate } from 'react-router-dom';
+import { BrowserRouter, useLocation, useNavigate } from 'react-router-dom';
 
 function App() {
     const {
@@ -18,6 +19,9 @@ function App() {
     } = useInitApp();
 
     const navigate = useNavigate();
+    const location = useLocation();
+    const isLanguageSelectPage = location.pathname === ROUTES.LanguageSelect;
+
     const isUserAcceptedTerms = useSelector(selectUserAcceptedTerms)
     const isPreferredLocaleSelected = !!useSelector(selectUserPreferredLocale)
     const shouldRedirectToLanguageSelect = !isPreferredLocaleSelected || !isUserAcceptedTerms;
@@ -30,6 +34,8 @@ function App() {
         }
     }, [isLoaded, shouldRedirectToLanguageSelect, navigate]);
 
+    usePlaySound();
+
     if (!isFontListLoaded) {
         return null;
     }
@@ -37,7 +43,7 @@ function App() {
     return (
         <div className={styles.mainContainer}>
             {isLoaded ? <>
-                <Header />
+                { !isLanguageSelectPage ? <Header /> : null }
                 <AppRouter />
             </> : null}
             <LoadingScreen isLoaded={isLoaded} />

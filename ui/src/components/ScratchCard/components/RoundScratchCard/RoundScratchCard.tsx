@@ -1,26 +1,33 @@
 import { IScratchCardHandle, IScratchCardProps, ScratchCard } from '../../ScratchCard';
 
-import { Graphics, Resource, Texture } from 'pixi.js';
+import { Graphics, Resource, Texture } from 'pixi.js-legacy';
 import { forwardRef, Ref, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import styles from './RoundScratchCard.module.scss';
 import { IRoundSpriteCellProps, RoundSpriteCell } from './RoundSpriteCell';
+import { IGameMatrixConfig, ISpriteCellData } from '@components/shared/IconMatrix';
 
 export interface IRoundScratchCardProps extends Omit<IScratchCardProps, 'data' | 'renderCell'> {
     cellData: string;
     renderCell?: IScratchCardProps['renderCell'];
     xShift?: number;
     yShift?: number;
+    isWinning?: boolean;
 }
 
 export interface IRoundScratchCardHandle extends IScratchCardHandle {
 }
 
+const matrixConfig: IGameMatrixConfig = {
+    winningBgTextureWidthCoef: 0.75,
+    winningBgTexturePositionShiftCoef: 0.75,
+}
+
 function RoundScratchCardComponent(props: IRoundScratchCardProps, ref: Ref<IRoundScratchCardHandle>) {
-    const [data, setData] = useState<{ textureName: string }[][]>([[{ textureName: props.cellData }]])
+    const [data, setData] = useState<Omit<ISpriteCellData, 'bundleName'>[][]>([[{ textureName: props.cellData, isWinning: props.isWinning }]])
 
     useEffect(() => {
-        setData([[{ textureName: props.cellData }]])
-    }, [props.cellData])
+        setData([[{ textureName: props.cellData, isWinning: props.isWinning }]])
+    }, [props.cellData, props.isWinning])
 
     const renderCell = useCallback((data: IRoundSpriteCellProps) => (
         <RoundSpriteCell {...data} xShift={props.xShift} yShift={props.yShift}/>
@@ -59,6 +66,10 @@ function RoundScratchCardComponent(props: IRoundScratchCardProps, ref: Ref<IRoun
             activateTotalPercent={0.5}
             brushSizeCoef={0.3}
             {...props}
+            matrixConfig={{
+                ...matrixConfig,
+                ...props.matrixConfig,
+            }}
         />);
 }
 

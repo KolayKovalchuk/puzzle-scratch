@@ -1,45 +1,28 @@
+import { Footer } from '@components/Footer/Footer'
+import { BackButton } from '@components/shared/Button/BackButton'
 import { Button, ButtonType } from '@components/shared/Button/Button'
 import { Icon } from '@components/shared/Icon'
+import { SpinnerIcon } from '@components/shared/Icon/SpinnerIcon'
 import { SecondaryStyledText } from '@components/shared/StyledText'
-import { selectLocalValue } from '@store/selectors/localization.selectors'
-import { useSelector } from 'react-redux'
-import styles from './Wallet.module.scss'
-
-import back_arrow from '@icons/back_arrow.svg'
+import { useGetSmallestFontSize } from '@hooks/useGetSmallestFontSize'
 import robo_token_gold_no_shining from '@icons/robo_token_gold_no_shining.svg'
-
-import { selectUserBalanceTotal } from '@store/selectors/user.selectors'
+import { useGetUserBalance } from '@services/api/balance.service'
+import { useGetUserStats } from '@services/api/user.service'
+import { selectLocalValue } from '@store/selectors/localization.selectors'
+import { selectUserBalanceTotal, selectUserBalanceWithdrawable } from '@store/selectors/user.selectors'
 import { formatNumber } from '@utils/formatters/formatNumber'
-import { ITextStyle } from 'pixi.js'
+import { ITextStyle } from 'pixi.js-legacy'
 import { useCallback, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-
-import { Footer } from '@components/Footer/Footer'
+import { useSelector } from 'react-redux'
 import { DepositWithDialog } from './components/DepositWithDialog/DepositWithDialog'
 import { WalletHistoryTable } from './components/WalletHistoryTable/WalletHistoryTable'
+import { useDepositWithDialog } from './hooks/useDepositWithDialog'
+import { DepositWithDialogMode } from './Wallet.models'
+import styles from './Wallet.module.scss'
 
 const headerStyles: Partial<ITextStyle> = {
     fontSize: 40,
     fontWeight: 'bold',
-}
-
-export function useDopositWithDialog() {
-    const [isDepositDialogOpen, setIsDepositDialogOpen] = useState(false);
-
-    const onDepositBtnClick = useCallback(() => {
-        console.log('Deposit button clicked');
-        setIsDepositDialogOpen(true);
-    }, [])
-
-    const onCancel = useCallback(() => {
-        setIsDepositDialogOpen(false);
-    }, [])
-
-    return {
-        isDepositDialogOpen,
-        onDepositBtnClick,
-        onCancel,
-    }
 }
 
 export function Wallet() {
@@ -48,31 +31,40 @@ export function Wallet() {
     const depositLabel = useSelector(selectLocalValue('txt.button.deposit'))
     const withdrawableLabel = useSelector(selectLocalValue('txt.wallet.withdrawable'))
     const withdrawLabel = useSelector(selectLocalValue('txt.button.withdraw'))
+    const winnignsLabel = useSelector(selectLocalValue('txt.wallet.winnigns'))
 
-    const amount = useSelector(selectUserBalanceTotal) || 0;
+    const totalAmount = useSelector(selectUserBalanceTotal) || 0;
+    const withdrawableAmount = useSelector(selectUserBalanceWithdrawable) || 0;
 
-    const navigate = useNavigate();
+    const [mode, setMode] = useState(DepositWithDialogMode.Select);
 
-    const onBackBtnClick = useCallback(() => {
-        navigate(-1)
-    }, [navigate])
+    const { isLoading } = useGetUserBalance();
 
-    const { onDepositBtnClick, onCancel, isDepositDialogOpen } = useDopositWithDialog();
+    const { onDepositBtnClick, closeDialog, isDepositDialogOpen } = useDepositWithDialog();
+
+    const onModeChanged = useCallback((mode: DepositWithDialogMode) => {
+        setMode(mode);
+    }, [closeDialog]);
 
     const onWithdrawBtnClick = useCallback(() => {
         console.log('Withdraw button clicked');
     }, [])
 
-    return (
-        <div className={styles.container}>
+    const { userStats } = useGetUserStats();
+
+    const {
+        textStylesWithFontSize,
+        setDepositBtnFontSize,
+        setWithdrawBtnFontSize,
+    } = useGetSmallestFontSize();
+
+    const containerClass = `${styles.container} ${isLoading ? styles.hidden : ''}`;
+
+    return (<>
+        {isLoading && <div className={styles.spinnerContainer}><SpinnerIcon name={robo_token_gold_no_shining} className={styles.spinnerIcon} /></div>}
+        <div className={containerClass}>
             <div className={styles.headerContianer}>
-                <Button
-                    className={styles.backBtn || ''}
-                    mode={ButtonType.Default}
-                    onClick={onBackBtnClick}
-                    iconName={back_arrow}
-                >
-                </Button>
+                <BackButton />
 
                 <SecondaryStyledText
                     text={headerText}
@@ -87,13 +79,16 @@ export function Wallet() {
                         <div className={styles.balanceNameLabel}>{balanceLabel}</div>
                         <div className={styles.balanceAmountContainer}>
                             <Icon name={robo_token_gold_no_shining} className={styles.roboTokenGoldIcon} />
-                            <span className={styles.balanceAmount}>{formatNumber(amount)}</span>
+                            <span className={styles.balanceAmount}>{formatNumber(totalAmount)}</span>
                         </div>
                     </div>
                     <Button
+                        className={`${styles.walletBtn}`}
                         mode={ButtonType.Confirm}
                         onClick={onDepositBtnClick}
                         text={depositLabel}
+                        getTextSize={(size) => setDepositBtnFontSize(size)}
+                        textStyle={textStylesWithFontSize}
                     ></Button>
                 </div>
                 <div className={styles.balanceInfoRow}>
@@ -101,21 +96,36 @@ export function Wallet() {
                         <div className={styles.balanceNameLabel}>{withdrawableLabel}</div>
                         <div className={styles.balanceAmountContainer}>
                             <Icon name={robo_token_gold_no_shining} className={styles.roboTokenGoldIcon} />
-                            <span className={styles.balanceAmount}>1000</span>
+                            <span className={styles.balanceAmount}>{formatNumber(withdrawableAmount)}</span>
                         </div>
                     </div>
                     <Button
+                        className={`${styles.walletBtn}`}
                         mode={ButtonType.Confirm}
                         onClick={onWithdrawBtnClick}
                         text={withdrawLabel}
+                        getTextSize={(size) => setWithdrawBtnFontSize(size)}
+                        textStyle={textStylesWithFontSize}
                     ></Button>
                 </div>
+                <div className={styles.balanceInfoRow}>
+                    <div className={styles.column}>
+                        <div className={styles.balanceNameLabel}>{winnignsLabel}</div>
+                    </div>
+                    <div className={`${styles.balanceAmountContainer} ${styles.infoLabel}`}>
+                        <Icon name={robo_token_gold_no_shining} className={styles.roboTokenGoldIcon} />
+                        <span className={styles.balanceAmount}>{formatNumber(userStats?.totalRbaxWon || 0)}</span>
+                    </div>
+                </div>
             </div>
-
-            <WalletHistoryTable />
-            <DepositWithDialog isOpen={isDepositDialogOpen} onCancel={onCancel} />
+            <WalletHistoryTable mode={mode} />
+            <DepositWithDialog
+                onModeChanged={onModeChanged}
+                isOpen={isDepositDialogOpen}
+                onCancel={closeDialog}
+                onConfirm={closeDialog}
+            />
             <Footer />
-
-        </div>
-    )
+        </div >
+    </>)
 }

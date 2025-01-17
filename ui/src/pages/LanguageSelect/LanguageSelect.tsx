@@ -1,3 +1,4 @@
+import { Footer } from '@components/Footer/Footer';
 import { Button, ButtonType } from '@components/shared/Button/Button';
 import { Dropdown, IDropdownItem } from '@components/shared/Dropdown';
 import { SecondaryStyledText } from '@components/shared/StyledText';
@@ -5,11 +6,8 @@ import { TosApprovePopup } from '@components/TosApprovePopup/TosApprovePopup';
 import { useContainerDimensions } from '@hooks/useContainerDimensions';
 import { ROUTES } from '@routers/routerConfig';
 import { aprooveUserTerms, selectUserLocale } from '@services/api/user.service';
-import { updateUserLocale } from '@store/actions/user.actions';
 import { selectLocalValue, selectSupportedLocales } from '@store/selectors/localization.selectors';
 import { selectPreferredLocale, selectUserAcceptedTerms, selectUserPreferredLocale } from '@store/selectors/user.selectors';
-import { Footer } from '@components/Footer/Footer';
-import store from '@store/store';
 import WebApp from '@twa-dev/sdk';
 import { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -96,15 +94,14 @@ export function LanguageSelect({}: ILanguageSelectProps) {
 
     useEffect(() => {
         if (preselectedLocale) {
-            store.dispatch(updateUserLocale(preselectedLocale.data));
             setSelectedLocale(preselectedLocale)
         }
     }, [preselectedLocale]);
 
-    const headerText = useSelector(selectLocalValue('txt.lang.title'))
-    const secondHeaderText = useSelector(selectLocalValue('txt.languageSelect.selectYourLanguage'))
-    const dropdownLabel = useSelector(selectLocalValue('txt.lang.language'))
-    const buttonText = useSelector(selectLocalValue('txt.btn.select'))
+    const headerText = useSelector(selectLocalValue('txt.lang.title', selectedLocale?.data))
+    const secondHeaderText = useSelector(selectLocalValue('txt.languageSelect.selectYourLanguage', selectedLocale?.data))
+    const dropdownLabel = useSelector(selectLocalValue('txt.lang.language', selectedLocale?.data))
+    const buttonText = useSelector(selectLocalValue('txt.btn.select', selectedLocale?.data))
 
 
     const { containerRef, dimensions } = useContainerDimensions();
@@ -127,9 +124,9 @@ export function LanguageSelect({}: ILanguageSelectProps) {
                     <Dropdown
                         items={supportLocaleItems}
                         selectedItem={preselectedLocale}
+                        locale={selectedLocale?.data}
                         onSelect={(data) => {
                             setSelectedLocale(data)
-                            store.dispatch(updateUserLocale(data.data));
                         }}
                     />
                 </div>
@@ -145,7 +142,7 @@ export function LanguageSelect({}: ILanguageSelectProps) {
                 }
             }}></Button>
 
-            <Footer />
+            <Footer locale={selectedLocale?.data} />
             <TosApprovePopup
                 isOpen={isTosApprovePopupOpen}
                 onConfirm={() => onTosApprove()}

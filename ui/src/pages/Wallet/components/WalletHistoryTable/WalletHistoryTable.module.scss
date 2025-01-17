@@ -18,8 +18,15 @@
     align-items: center;
 
     .roboTokenGoldIcon {
-        width: 20%;
+        min-width: 30px;
+        width: 30px;
         margin-right: 2px;
+    }
+
+    span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
 

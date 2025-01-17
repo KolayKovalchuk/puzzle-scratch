@@ -6,10 +6,10 @@ export const selectGame = (state: RootState) => {
     return state.game;
 }
 
-export const selectLastAmountIncrease = createSelector(
+export const selectLastAmountChange = createSelector(
     selectGame,
     (queryState) => {
-        return queryState?.lastAmountIncrease;
+        return queryState?.lastAmountChange;
     }
 )
 
@@ -17,5 +17,40 @@ export const selectPrizeLabelCounter = createSelector(
     selectGame,
     (queryState) => {
         return queryState?.prizeLabelCounter;
+    }
+)
+
+export const selectSoundToPlay = createSelector(
+    selectGame,
+    (queryState) => {
+        return queryState?.soundToPlay;
+    }
+)
+
+export const selectSoundPlayerCounter = createSelector(
+    selectGame,
+    (queryState) => {
+        return queryState?.soundPlayerCounter;
+    }
+)
+
+export const selectShouldStopAllSounds = createSelector(
+    selectGame,
+    (queryState) => {
+        return queryState?.shouldStopAllSounds;
+    }
+)
+
+export const selectSoundDuration = createSelector(
+    selectGame,
+    (queryState) => {
+        return queryState?.duration;
+    }
+)
+
+export const selectMatrixBlinkCounter = createSelector(
+    selectGame,
+    (queryState) => {
+        return queryState?.matrixBlinkCounter;
     }
 )

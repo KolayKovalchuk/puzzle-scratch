@@ -1,0 +1,101 @@
+{
+"skeleton": {
+	"hash": "RoeqegInS2s",
+	"spine": "4.1.24",
+	"x": -471,
+	"y": -686,
+	"width": 942,
+	"height": 1168.9,
+	"images": "./images/",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root", "y": -44 }
+],
+"slots": [
+	{ "name": "s_", "bone": "root", "attachment": "s_" },
+	{ "name": "ss_4", "bone": "root", "attachment": "ss_4" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"ss_4": {
+				"ss_4": { "x": 0, "y": 374.9, "width": 232, "height": 236 },
+				"ss_5": { "x": 0, "y": 374.9, "width": 190, "height": 235 }
+			},
+			"s_": {
+				"s_": {
+					"y": -214,
+					"width": 942,
+					"height": 924,
+					"sequence": { "count": 22, "start": 0, "digits": 2 }
+				}
+			}
+		}
+	}
+],
+"animations": {
+	"santa_action": {
+		"slots": {
+			"ss_4": {
+				"attachment": [
+					{ "time": 0.0333, "name": "ss_5" }
+				]
+			},
+			"s_": {
+				"rgba": [
+					{ "time": 0.8, "color": "ffffffff" },
+					{ "time": 0.9333, "color": "ffffff00" }
+				]
+			}
+		},
+		"attachments": {
+			"default": {
+				"s_": {
+					"s_": {
+						"sequence": [
+							{ "time": 0.0667, "mode": "once", "delay": 0.0333 },
+							{ "time": 0.9333, "mode": "once", "index": 42 }
+						]
+					}
+				}
+			}
+		}
+	},
+	"santa_idle_end": {
+		"slots": {
+			"ss_4": {
+				"attachment": [
+					{}
+				]
+			},
+			"s_": {
+				"rgba": [
+					{ "color": "ffffff00" }
+				]
+			}
+		},
+		"attachments": {
+			"default": {
+				"s_": {
+					"s_": {
+						"sequence": [
+							{ "mode": "once", "index": 42, "delay": 0.0333 }
+						]
+					}
+				}
+			}
+		}
+	},
+	"santa_idle_start": {
+		"slots": {
+			"ss_4": {
+				"attachment": [
+					{ "name": "ss_4" }
+				]
+			}
+		}
+	}
+}
+}

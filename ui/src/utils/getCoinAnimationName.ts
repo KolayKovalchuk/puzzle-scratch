@@ -1,11 +1,13 @@
 import { CoinAnimationName } from '@components/BigWinScreen/components/CoinAnimation';
+import { WinType } from '@models/IBuyBatchCardData';
 
-export function getCoinAnimationName(winAmount: number, topPrize: number): CoinAnimationName {
-    if (winAmount <= 0.3 * topPrize) {
-        return CoinAnimationName.coint_s;
-    } else if (winAmount > 0.3 * topPrize && winAmount <= 0.8 * topPrize) {
-        return CoinAnimationName.coint_m;
-    } else {
-        return CoinAnimationName.coint_l;
+export function getCoinAnimationName(winType: WinType): CoinAnimationName {
+    switch (winType) {
+        case WinType.S:
+            return CoinAnimationName.coint_s;
+        case WinType.M:
+            return CoinAnimationName.coint_m;
+        case WinType.B:
+            return CoinAnimationName.coint_l;
     }
 }

@@ -5,17 +5,28 @@ export interface IDropdownItem {
     data?: any
 }
 
+export interface ISelectedDropdownItemProps {
+    item: IDropdownItem,
+    isOpen: boolean,
+    locale?: string
+}
+
 export interface IDropdownItemProps {
     item: IDropdownItem,
     selected?: boolean,
     onClick?: (item: IDropdownItem) => void
+    locale?: string
 }
 
 export interface IDropdownListProps {
     items: IDropdownItem[],
     selectedItem?: IDropdownItem | null
     handleSelect: (item: IDropdownItem) => void
+    locale?: string
+    maxHeight?: number
 }
+
+export type TextAlign = 'left' | 'center' | 'right'
 
 export interface IDropdownProps {
     className?: string
@@ -24,4 +35,6 @@ export interface IDropdownProps {
     items: IDropdownItem[]
     onSelect: (item: IDropdownItem) => void
     onOpenClose?: (isOpen: boolean) => void
+    locale?: string
+    textAlign?: TextAlign
 }

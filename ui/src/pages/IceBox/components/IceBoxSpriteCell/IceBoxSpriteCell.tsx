@@ -1,13 +1,13 @@
-import { IMatrixCellProps } from '@components/shared/IconMatrix/IconMatrix.models';
+import { IMatrixCellProps, ISpriteCellData } from '@components/shared/IconMatrix/IconMatrix.models';
 import { DefaultTextStyleConfig, StyledTextPixiEl } from '@components/shared/StyledText';
 import { GameCellTextStyle } from '@components/shared/StyledText/components/GameCellStyledText';
 import { IIceBoxBundle } from '@config/iceBoxBundleConfig';
 import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
-import { Container, Sprite, Text } from '@pixi/react';
-import { ITextStyle, TextStyle } from 'pixi.js';
+import { Container, Graphics, Sprite } from '@pixi/react';
+import { ITextStyle, TextStyle } from 'pixi.js-legacy';
 import { useCellLabelsPosition } from './hooks/useCellLabelsPosition';
 
-export interface IIceBoxSpriteCellData {
+export interface IIceBoxSpriteCellData extends ISpriteCellData {
     textureName: string;
     bundleName: string;
 }
@@ -19,7 +19,7 @@ const winNumberTextStyle: Partial<ITextStyle> = {
     ...DefaultTextStyleConfig,
     ...GameCellTextStyle,
     dropShadow: false,
-    fontSize: 24,
+    fontSize: 20,
 }
 
 const winNumberTextStyleClass = new TextStyle(winNumberTextStyle);
@@ -28,7 +28,7 @@ const priceNumberTextStyle: Partial<ITextStyle> = {
     ...DefaultTextStyleConfig,
     ...GameCellTextStyle,
     dropShadow: false,
-    fontSize: 18,
+    fontSize: 14,
 }
 
 const priceNumberTextStyleClass = new TextStyle(priceNumberTextStyle);
@@ -41,7 +41,8 @@ export function IceBoxSpriteCell({ x, y, width, height, data }: IIceBoxSpriteCel
     const roboTokenBlueBorder = bundle?.roboTokenBlueBorder;
     const goldenDiamond = bundle?.goldenDiamond;
 
-    const { priceContainerWidth, priceNumberPosition, roboIconSize } = useCellLabelsPosition(winNumber,
+    const { priceContainerWidth, priceNumberPosition, roboIconSize } = useCellLabelsPosition(
+        winNumber,
         priceNumber,
         width,
         winNumberTextStyleClass,
@@ -57,8 +58,8 @@ export function IceBoxSpriteCell({ x, y, width, height, data }: IIceBoxSpriteCel
                     texture={goldenDiamond}
                     x={0}
                     y={0}
-                    width={width}
-                    height={height}
+                    width={width - 5}
+                    height={height - 5}
                 ></Sprite>
             </Container>
         )
@@ -66,7 +67,13 @@ export function IceBoxSpriteCell({ x, y, width, height, data }: IIceBoxSpriteCel
 
 
     return (
-        <Container x={x} y={y} width={width} height={height}>
+        <Container x={x} y={y - 8} width={width} height={height}>
+            <Graphics draw={(g) => {
+                g.clear();
+                g.beginFill(0x000000, 0.000000000001);
+                g.drawRect(0, 0, width, height);
+                g.endFill();
+            }} />
             <StyledTextPixiEl
                 dimensions={{ width, height }}
                 text={winNumber}
@@ -75,6 +82,7 @@ export function IceBoxSpriteCell({ x, y, width, height, data }: IIceBoxSpriteCel
                 x={0}
                 y={0}
                 xShift={0.55}
+                valueForMeasure={'1000'}
             />
             <Container
                 width={priceContainerWidth}
@@ -89,11 +97,17 @@ export function IceBoxSpriteCell({ x, y, width, height, data }: IIceBoxSpriteCel
                     width={roboIconSize}
                     height={roboIconSize}
                 ></Sprite>
-                <Text
+
+                <StyledTextPixiEl
+                    dimensions={{ width: priceContainerWidth - roboIconSize, height: height - priceNumberPosition.y }}
                     text={priceNumber}
-                    style={priceNumberTextStyleClass}
+                    textStyles={priceNumberTextStyleClass}
+                    textFitCoefficient={1}
                     x={roboIconSize}
-                    y={-4}
+                    y={0}
+                    // xShift={0.55}
+                    // valueForMeasure={'100'}
+                    // shouldFitFontSize={false}
                 />
             </Container>
         </Container >

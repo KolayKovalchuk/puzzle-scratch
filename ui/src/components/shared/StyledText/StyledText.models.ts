@@ -1,4 +1,4 @@
-import { ITextStyle } from 'pixi.js';
+import { ITextStyle } from 'pixi.js-legacy';
 import { CSSProperties } from 'react';
 
 export interface IStyledTextProps {
@@ -13,4 +13,6 @@ export interface IStyledTextProps {
     shouldFitFontSize?: boolean;
     xShift?: number
     yShift?: number
+
+    getTextSize?: (textSize: string | number) => void;
 }

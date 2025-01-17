@@ -1,60 +1,43 @@
 import { CSSProperties } from 'react';
 
+import coinXL from "@icons/coins/coin_xl.svg";
 import coinLG from "@icons/coins/coin_lg.svg";
 import coinMD from "@icons/coins/coin_md.svg";
 import coinSM from "@icons/coins/coin_sm.svg";
-import coinXL from "@icons/coins/coin_xl.svg";
 import coinXS from "@icons/coins/coin_xs.svg";
 
+import coinXLBordered from "@icons/coins/coin_xl_bordered.svg";
+import coinLGBordered from "@icons/coins/coin_lg_bordered.svg";
+import coinMDBordered from "@icons/coins/coin_md_bordered.svg";
+import coinSMBordered from "@icons/coins/coin_sm_bordered.svg";
+import coinXSBordered from "@icons/coins/coin_xs_bordered.svg";
+
 const icons = [coinXS, coinSM, coinMD, coinLG, coinXL];
+const borderedIcons = [coinXSBordered, coinSMBordered, coinMDBordered, coinLGBordered, coinXLBordered];
 
-export function getCoinIcon(index: number) {
-    return icons[index] || coinMD;
+export function getCoinIcon(index: number, isToday: boolean) {
+    const iconName = isToday ? borderedIcons[index] : icons[index];
+
+    return iconName || coinMD;
 }
 
-export function getMainDayIndex(length: number) {
-    return Math.floor(length / 2)
+export function isDayToday(index: number, dayNumber: number) {
+    return index + 1 === dayNumber;
 }
 
-export function isMiddleDay(index: number, length: number) {
-    return getMainDayIndex(length) === index;
-}
-
-export function getDailyContainerStyles(index: number, length: number): CSSProperties {
-    const shiftPercent = 2;
-    const todayContainerShiftPercent = 2.8;
-    const todayContainerDiff = 14;
-    const dayContainerWidth = 100 / length + shiftPercent - todayContainerDiff / length;
-
-    const mainDayIndex = getMainDayIndex(length);
-
-    if (index < mainDayIndex) {
-        const left = shiftPercent * index * -1 + '%';
-
-        return {
-            minWidth: dayContainerWidth + '%',
-            left,
-        }
-    }
+export function getDailyContainerStyles(index: number, length: number, mainDay: number): CSSProperties {
+    const mainDayIndex = mainDay - 1;
+    const baseWidth = Math.floor(100 / length);
+    const mainDayWidth = baseWidth + 12;
+    const dayWidth = Math.floor((100 - mainDayWidth) / (length - 1));
 
     if (index === mainDayIndex) {
-        const left = todayContainerShiftPercent * index * -1 - ((todayContainerDiff - 4) / length) + '%';
-
         return {
-            minWidth: 100 / length + shiftPercent + todayContainerDiff + '%',
-            left: left,
+            width: mainDayWidth + '%',
         }
     }
 
-    if (index > mainDayIndex) {
-        const todayContainerAdjust = todayContainerShiftPercent * 0.5;
-        const left = shiftPercent * index * -1 - todayContainerAdjust - (todayContainerDiff / length) + '%';
-
-        return {
-            minWidth: dayContainerWidth + '%',
-            left,
-        }
+    return {
+        width: dayWidth + '%'
     }
-
-    return {}
 }

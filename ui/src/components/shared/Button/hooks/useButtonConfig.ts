@@ -1,4 +1,4 @@
-import { TextStyle } from 'pixi.js';
+import { TextStyle } from 'pixi.js-legacy';
 import { useMemo } from 'react';
 import { ButtonType } from '../Button';
 
@@ -7,11 +7,22 @@ export interface IButtonConfig {
     textStyles: Partial<TextStyle>;
 }
 
-export function getModeCondg(mode: ButtonType, styles: CSSModuleClasses): IButtonConfig {
+export function getModeCondg(mode: ButtonType, styles: CSSModuleClasses, isDisabled: boolean): IButtonConfig {
     const defaultTextStyles: Partial<TextStyle> = {
         fontSize: 20,
         dropShadow: false,
         stroke: '#000000',
+        fill: ['#FFFFFF'],
+    }
+
+    if (isDisabled) {
+        return {
+            className: styles.disabled,
+            textStyles: {
+                ...defaultTextStyles,
+                stroke: '#5E5F5E',
+            }
+        }
     }
 
     switch (mode) {
@@ -38,7 +49,6 @@ export function getModeCondg(mode: ButtonType, styles: CSSModuleClasses): IButto
                 textStyles: {
                     ...defaultTextStyles,
                     stroke: '#105CB4',
-                    fill: ['#FFFFFF'],
                     fillGradientStops: [0]
                 }
             }
@@ -53,6 +63,6 @@ export function getModeCondg(mode: ButtonType, styles: CSSModuleClasses): IButto
     }
 }
 
-export function useButtonConfig(mode: ButtonType, styles: CSSModuleClasses): IButtonConfig {
-    return useMemo(() => getModeCondg(mode, styles), [mode, styles]);
+export function useButtonConfig(mode: ButtonType, styles: CSSModuleClasses, isDisabled: boolean): IButtonConfig {
+    return useMemo(() => getModeCondg(mode, styles, isDisabled), [mode, styles, isDisabled]);
 }

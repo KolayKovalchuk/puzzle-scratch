@@ -1,8 +1,8 @@
-import { CSSProperties, forwardRef, ReactNode } from 'react';
+import { CSSProperties, forwardRef, MouseEventHandler, ReactNode } from 'react';
 
 import styles from './Icon.module.scss';
 
-interface IconProps {
+export interface IconProps {
     name?: string;
     title?: string;
     className?: string;
@@ -11,7 +11,7 @@ interface IconProps {
 
     children?: ReactNode;
 
-    onClick?: () => void;
+    onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
 export const Icon = forwardRef<HTMLDivElement, IconProps>(({

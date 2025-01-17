@@ -7,26 +7,27 @@ import styles from './SantaSac.module.scss';
 
 import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
 import { useGetBatchById } from '@services/api/batch.service';
-import { useBuyCard } from '@services/api/cards.service';
 
 import { BigWinScreen } from '@components/BigWinScreen/BigWinScreen';
+import { Footer } from '@components/Footer/Footer';
 import { GameFooterBtn } from '@components/GameFooterBtn/GameFooterBtn';
 import { IBgTextureConfig, IScratchCardHandle, ScratchCard } from '@components/ScratchCard';
 import { IRoundScratchCardHandle, RoundScratchCard } from '@components/ScratchCard/components/RoundScratchCard/RoundScratchCard';
 import { TopPrizeLabel } from '@components/TopPrizeLabel/TopPrizeLabel';
 import { ISantaSacBundle, SANTA_SAC_BUNDLE } from '@config/santaSacBundleConfig';
-import { useScratchGame } from '@hooks/useScratchGame';
-import { useSwipeAria } from '@hooks/useSwipeAria';
-import { Footer } from '@components/Footer/Footer';
+import { useScratchGame } from '@hooks/useScratchGame/useScratchGame';
 
 import { useSpriteCellData } from './hooks/useSpriteCellData';
 import { ISantaSacCardData } from './SantaSac.model';
 import { ISantaSacSpriteCellProps, SantaSacSpriteCell } from './SantaSacSpriteCell';
 
 import { IGameMatrixConfig } from '@components/shared/IconMatrix';
+import { IScratchAnimationHandle, ScratchAnimation, ScratchAnimationName } from '@components/shared/ScratchAnimation/ScratchAnimation';
 import round_multiplier from '@icons/round_multiplier.svg';
 import santa_sac from '@icons/santa_sac.svg';
 import shining from '@icons/shining.svg';
+import { CardsBonusTypesDict, useIsBonusShining } from '@hooks/useWinningBgConfig';
+import { NO_TAP_SOUND_CLASS } from '@hooks/usePlaySound';
 
 const bgTextureConfig: IBgTextureConfig = {
     textureName: 'redBallShining',
@@ -40,16 +41,18 @@ const roundScratchCardMatrixConfig: IGameMatrixConfig = {
     cellPadding: 2
 }
 
+const mainScratchCardMatrixConfig: IGameMatrixConfig = {
+    cellPadding: 19
+}
+
 export function SantaSac() {
     const { batchId } = useParams();
 
     const { batch, loading: isBatchLoading } = useGetBatchById(batchId || null);
-    const { buyCard, card } = useBuyCard<ISantaSacCardData>();
+    // const { buyCard, card } = useBuyCard<ISantaSacCardData>();
 
     const bundleName = SANTA_SAC_BUNDLE.name
     const { bundle, loading: isBundleLoading } = useLoadBundle<ISantaSacBundle>(bundleName)
-
-    const { data } = useSpriteCellData(card, bundleName)
 
     const roundScratchCardRef = useRef<IRoundScratchCardHandle>(null);
     const mainScratchCardRef = useRef<IScratchCardHandle>(null);
@@ -59,37 +62,52 @@ export function SantaSac() {
         'mainScratchCard': mainScratchCardRef,
     }), [roundScratchCardRef, mainScratchCardRef]);
 
+    const scratchAnimationRef = useRef<IScratchAnimationHandle>(null);
+
     const {
         isBigWinVisible,
         onBigWinClicked,
-        onCardScratched,
         onPlay,
-        onSwipe,
-        onScratchStarted,
-    } = useScratchGame(batchId, card, buyCard, scratchCardsRefConfig);
+        // onSwipe,
+        onScratchAnimationCompleted,
+        card,
+        isPlayBtnDisabled,
+        // onCardScratched,
+        // onScratchStarted,
+    } = useScratchGame<ISantaSacCardData>(
+        batchId,
+        // card,
+        // buyCard,
+        scratchCardsRefConfig,
+        scratchAnimationRef
+    );
 
-    const onMainCardScratched = useCallback(() => { onCardScratched('mainScratchCard') }, [])
-    const onRoundCardScratched = useCallback(() => { onCardScratched('roundScratchCard') }, [])
+    // const onMainCardScratched = useCallback(() => { onCardScratched('mainScratchCard') }, [])
+    // const onRoundCardScratched = useCallback(() => { onCardScratched('roundScratchCard') }, [])
 
     const renderSantaSacSpriteCell = useCallback((data: ISantaSacSpriteCellProps) => (<SantaSacSpriteCell {...data} />), []);
 
-     const {
-        onTouchEnd,
-        onTouchMove,
-        onTouchStart,
-        onMouseDown,
-        onMouseMove,
-        onMouseUp,
-     } = useSwipeAria({
-        onSwipedLeft: onSwipe,
-        onSwipedRight: onSwipe
-     });
+    // const {
+    //     onTouchEnd,
+    //     onTouchMove,
+    //     onTouchStart,
+    //     onMouseDown,
+    //     onMouseMove,
+    //     onMouseUp,
+    // } = useSwipeAria({
+    //     onSwipedLeft: onSwipe,
+    //     onSwipedRight: onSwipe
+    // });
+
+    const { data } = useSpriteCellData(card, bundleName)
 
     const isLoading = isBatchLoading || isBundleLoading;
     const hiddenClass = isLoading || !bundle ? 'hidden' : '';
 
-    const multiplier = card?.cardData.multiplier;
+    const multiplier = card?.cardData.multi;
     const multiplierText = typeof multiplier === 'number' ? 'x' + multiplier : '';
+
+    const isBonusShining = useIsBonusShining(CardsBonusTypesDict.SantaSacBonus, card?.cardData.winningCells || null);
 
     return (
         <div className={`${styles.mainContainer} ${hiddenClass}`}>
@@ -97,56 +115,70 @@ export function SantaSac() {
                 <Icon name={santa_sac} className={styles.headerIcon} />
             </div>
             <div className={styles.content}>
-                <TopPrizeLabel className={styles.topPrizeLabel} topPrize={batch?.totalPotentialPrizes || 0} />
-                <div className={styles.multiplierContainer}>
-                    <div className={styles.toyChainContainer}>
-                        <img className={styles.toyChainImg} src="/santaSac/christmassToyChain.png" />
-                    </div>
-                    <Icon name={round_multiplier} className={styles.roundMulriplierIcon} />
-                    <RoundScratchCard
-                        ref={roundScratchCardRef}
-                        cellData={multiplierText}
-                        className={styles.roundScratchCard}
-                        bundleName={SANTA_SAC_BUNDLE.name}
-                        bgTextureConfig={bgTextureConfig}
-                        matrixConfig={roundScratchCardMatrixConfig}
-                        onScratchedEnought={onRoundCardScratched}
-                        onScratchStarted={onScratchStarted}
-                        xShift={0.52}
-                        yShift={0.45}
-                    />
-                </div>
-                <div
-                    className={styles.scratchCardContainer}
-                    onTouchStart={onTouchStart}
-                    onTouchEnd={onTouchEnd}
-                    onTouchMove={onTouchMove}
-                    onMouseDown={onMouseDown}
-                    onMouseUp={onMouseUp}
-                    onMouseMove={onMouseMove}
+                <TopPrizeLabel className={styles.topPrizeLabel} topPrize={batch?.maxPrize || 0} />
+
+                <div className={`${styles.scratchAreaContainer} ${NO_TAP_SOUND_CLASS}`}
+                    // onTouchStart={onTouchStart}
+                    // onTouchEnd={onTouchEnd}
+                    // onTouchMove={onTouchMove}
+                    // onMouseDown={onMouseDown}
+                    // onMouseUp={onMouseUp}
+                    // onMouseMove={onMouseMove}
+                    onClick={onPlay}
                 >
-                    <Icon name={shining} className={styles.shiningIcon} />
-                    <ScratchCard
-                        ref={mainScratchCardRef}
-                        data={data}
-                        className={styles.scratchCard}
-                        bundleName={bundleName}
-                        renderCell={renderSantaSacSpriteCell}
+                    <div className={styles.animationContainer}>
+                        <ScratchAnimation
+                            ref={scratchAnimationRef}
+                            animationName={ScratchAnimationName.santa_action}
+                            onComplete={onScratchAnimationCompleted}
+                        />
+                    </div>
+                    <div className={styles.multiplierContainer}>
+                        <div className={styles.toyChainContainer}>
+                            <img className={styles.toyChainImg} src="/santaSac/christmassToyChain.png" />
+                        </div>
+                        <Icon name={round_multiplier} className={styles.roundMulriplierIcon} />
+                        <RoundScratchCard
+                            ref={roundScratchCardRef}
+                            cellData={multiplierText}
+                            className={styles.roundScratchCard}
+                            bundleName={SANTA_SAC_BUNDLE.name}
+                            bgTextureConfig={bgTextureConfig}
+                            matrixConfig={roundScratchCardMatrixConfig}
+                            // onScratchedEnought={onRoundCardScratched}
+                            // onScratchStarted={onScratchStarted}
+                            xShift={0.52}
+                            yShift={0.45}
+                            isWinning={isBonusShining}
+                        />
+                    </div>
+                    <div
+                        className={styles.scratchCardContainer}
+                    >
+                        <Icon name={shining} className={styles.shiningIcon} />
+                        <ScratchCard
+                            ref={mainScratchCardRef}
+                            data={data}
+                            className={styles.scratchCard}
+                            bundleName={bundleName}
+                            renderCell={renderSantaSacSpriteCell}
 
-                        sizeX={batch?.sizeX}
-                        sizeY={batch?.sizeY}
+                            sizeX={batch?.sizeX}
+                            sizeY={batch?.sizeY}
+                            matrixConfig={mainScratchCardMatrixConfig}
 
-                        onScratchedEnought={onMainCardScratched}
-                        onScratchStarted={onScratchStarted}
-                    />
+                        // onScratchedEnought={onMainCardScratched}
+                        // onScratchStarted={onScratchStarted}
+                        />
+                    </div>
                 </div>
-                <GameFooterBtn onPlay={onPlay}/>
-                <Footer />
+                <GameFooterBtn batchCardType={batch?.cardType || null} onPlay={onPlay} isPlayBtnDisabled={isPlayBtnDisabled} />
             </div>
+            <Footer />
             {isBigWinVisible
                 && <BigWinScreen
                     winAmount={card?.winning || 0}
-                    topPrize={batch?.totalPotentialPrizes || 0}
+                    winType={card?.winType}
                     onClick={onBigWinClicked}
                 />}
         </div>

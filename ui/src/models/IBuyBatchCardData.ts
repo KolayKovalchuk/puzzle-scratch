@@ -1,6 +1,13 @@
 export interface ICardData {
-    matrix: (number | string)[][];
+    matrix: (number | string | [])[][];
     winAmount: number;
+    winningCells?: [number, number][];
+}
+
+export enum WinType {
+    S = 'S',
+    M = 'M',
+    B = 'B',
 }
 
 export interface IBuyBatchCardData<CardData extends ICardData = ICardData> {
@@ -9,5 +16,5 @@ export interface IBuyBatchCardData<CardData extends ICardData = ICardData> {
     batchId: string;
     rbaxBalance: number;
     rbaxBalanceBefore: number;
-    winType: string;
+    winType: WinType;
 }

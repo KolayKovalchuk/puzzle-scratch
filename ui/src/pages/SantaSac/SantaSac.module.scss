@@ -1,8 +1,8 @@
 @use '@styles/colors';
 @use '@styles/variables';
-@use '@styles/mixins';
+@use '@styles/game_mixins';
 
-@include mixins.gameMixin;
+@include game_mixins.gameMixin;
 
 .mainContainer {
     background: url('/santa_sac_bg.png') no-repeat center;
@@ -26,11 +26,24 @@
 
 .multiplierContainer {
     width: 100%;
-    margin-bottom: -26px;
+    margin-top: -1.8%;
+    margin-bottom: -8%;
+}
+
+.scratchAreaContainer {
+    justify-content: flex-start;
+}
+
+.animationContainer {
+    height: 94.5%;
+    width: 91.6%;
+    margin-top: 2.2%;
 }
 
 .roundScratchCard {
-    width: 24%;
+    aspect-ratio: 1/1;
+    width: 30.2222%;
+
 }
 
 .toyChainContainer {
@@ -39,7 +52,7 @@
     align-items: flex-end;
 
     position: absolute;
-    top: 5px;
+    top: 2px;
     left: 50%;
     height: 25%;
 
@@ -54,7 +67,7 @@
 
 .roundMulriplierIcon {
     position: absolute;
-    top: 14%;
+    top: 13%;
     left: 49.4%;
     transform: translate(-50%, -50%);
     z-index: 1;

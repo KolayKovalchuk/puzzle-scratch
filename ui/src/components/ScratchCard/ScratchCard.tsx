@@ -1,15 +1,14 @@
 import { IScrathCardBundle } from '@config/assetsManifest';
 import "@pixi/events";
-import { Container, Graphics, Sprite, Stage, useApp } from '@pixi/react';
+import { Container, Graphics, Sprite, Stage as PixiStage, useApp } from '@pixi/react';
+import { ReactReduxContext } from 'react-redux';
 
 import { IconMatrix, IGameMatrixConfig, IGameMatrixProps, IMatrixCellProps } from '@components/shared/IconMatrix';
 import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
 import { useContainerDimensions } from '@hooks/useContainerDimensions';
 
-import { Application, ICanvas, Graphics as OriginGraphics, RenderTexture, Resource, Texture } from 'pixi.js';
-import { forwardRef, ReactElement, Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef } from 'react';
-import { CoverSpriteCell } from './CoverCell';
-import { useCoverData } from './hooks/useCoverData';
+import { Application, ICanvas, Graphics as OriginGraphics, RenderTexture, Resource, Texture } from 'pixi.js-legacy';
+import { FC, forwardRef, ReactElement, ReactNode, Ref, useEffect, useImperativeHandle, useMemo, useRef } from 'react';
 import { GradientConfig } from './hooks/useGradientTexture';
 import { useIsPercentAreaScratched } from './hooks/useIsAreaScratched';
 import { useRenderBgGraphics } from './hooks/useRenderBgGraphics';
@@ -70,6 +69,32 @@ export interface IScratchCardProps<CellProps extends IMatrixCellProps = IMatrixC
     coverMatrixConfig?: IGameMatrixConfig
 }
 
+const ContextBridge = ({ children, Context, render }: { children: ReactNode, Context: any, render: (children: ReactNode) => ReactNode }) => {
+    return (
+        <Context.Consumer>
+            {(value: any) =>
+                render(<Context.Provider value={value}>{children}</Context.Provider>)
+            }
+        </Context.Consumer>
+    );
+};
+
+interface StageProps {
+    children: ReactNode;
+    [key: string]: any;
+}
+
+export const Stage: FC<StageProps> = ({ children, ...props }) => {
+    return (
+        <ContextBridge
+            Context={ReactReduxContext}
+            render={(children: ReactNode) => <PixiStage {...props}>{children}</PixiStage>}
+        >
+            {children}
+        </ContextBridge>
+    );
+};
+
 function ScratchCardElComponent({
     bundleName,
     activateAreaPercent = 0.75,
@@ -118,8 +143,8 @@ function ScratchCardElComponent({
     }, [isScratchedEnought]);
 
     const { bundle } = useLoadBundle<IScrathCardBundle>(bundleName)
-    const coverData = useCoverData(bundleName, coverTextureName, sizeX, sizeY);
-    const defaultRenderCoverCell = useCallback((props: IMatrixCellProps) => (<CoverSpriteCell {...props} />), []);
+    // const coverData = useCoverData(bundleName, coverTextureName, sizeX, sizeY);
+    // const defaultRenderCoverCell = useCallback((props: IMatrixCellProps) => (<CoverSpriteCell {...props} />), []);
 
     useImperativeHandle(ref, () => {
         return {
@@ -160,12 +185,13 @@ function ScratchCardElComponent({
         return (<Graphics draw={renderBgGraphics} />)
     }, [renderBgGraphics, width, height, bundle, bgTextureConfigArg]);
 
-    if (!bundle || !coverData.length) return null
+    // if (!bundle || !coverData.length) return null
+    if (!bundle) return null
 
     return (
         <Container width={width} height={height}>
             {renderCardBg}
-            <IconMatrix data={coverData} renderCell={renderCoverCell || defaultRenderCoverCell} config={coverMatrixConfig || matrixConfig} />
+            {/* <IconMatrix data={coverData} renderCell={renderCoverCell || defaultRenderCoverCell} config={coverMatrixConfig || matrixConfig} /> */}
             <Container
                 mask={renderTextureSprite}
                 pointermove={pointerMove}
@@ -175,7 +201,12 @@ function ScratchCardElComponent({
                 eventMode='static'
             >
                 {renderCardBg}
-                <IconMatrix data={data} config={{ cellPadding: 8, ...matrixConfig }} renderCell={renderCell} />
+                <IconMatrix
+                    data={data}
+                    config={{ cellPadding: 8, ...matrixConfig }}
+                    renderCell={renderCell}
+                    winningBgTexture={bundle.winningMatrixCellBg}
+                />
             </Container>
         </Container>
     );
@@ -204,7 +235,7 @@ function ScratchCardComponent(props: IScratchCardProps, ref: Ref<IScratchCardHan
         return (
             <div className={`${styles.container} ${props.className || ''}`} ref={containerRef}>
                 {!!width && <Stage width={width} height={height} options={{ backgroundAlpha: 0 }}>
-                    <ScratchCardEl {...props} ref={scratchCardElRef}/>
+                    <ScratchCardEl {...props} ref={scratchCardElRef} />
                 </Stage>}
             </div>
         );

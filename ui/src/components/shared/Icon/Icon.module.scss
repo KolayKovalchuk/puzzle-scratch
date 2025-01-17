@@ -1,3 +1,5 @@
+@use '@styles/animation_mixins';
+
 .iconContainer {
     width: 100%;
     aspect-ratio: 1 / 1; /* Maintain a square aspect ratio */
@@ -14,4 +16,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.spinnerIcon {
+    width: 50px;
+    @include animation_mixins.spinner;
 }

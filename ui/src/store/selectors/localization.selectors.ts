@@ -27,7 +27,7 @@ export const selectLocalizationDataItem = (localizationKey: string) => createSel
     })
 )
 
-export const selectLocalValue = (localizationKey: string) => createSelector(
+export const selectLocalValue = (localizationKey: string, locale?: string) => createSelector(
     [selectLocalizationDataItem(localizationKey), selectPreferredLocale],
     (localizationDataItem, preferredLocale) => {
 
@@ -35,12 +35,13 @@ export const selectLocalValue = (localizationKey: string) => createSelector(
 
         const localizationKeyList = Object.keys(localizationDataItem)
 
-        if (!preferredLocale) return localizationKey
+        const targetLocale = locale || preferredLocale
 
+        if (!targetLocale) return localizationKey
 
         const localeKey = localizationKeyList
             .find((key) =>
-                key.toLowerCase() === preferredLocale?.toLowerCase()
+                key.toLowerCase() === targetLocale?.toLowerCase()
             )
             || 'EN'
 
@@ -48,8 +49,8 @@ export const selectLocalValue = (localizationKey: string) => createSelector(
     }
 )
 
-export const selectLocalValueWithLink = (localizationKey: string) => createSelector(
-    [selectLocalValue(localizationKey)],
+export const selectLocalValueWithLink = (localizationKey: string, locale?: string) => createSelector(
+    [selectLocalValue(localizationKey, locale)],
     (localizationValue) => {
         const matchResult = localizationValue.match(/(.*)<link url="(https:\/\/.*)">(.*)<\/link>(.*)/)
 
@@ -79,8 +80,8 @@ export const selectLocalValueWithLink = (localizationKey: string) => createSelec
     }
 )
 
-export const selectLocalValueWithVars = (localizationKey: string, ...vars: (string | number)[]) => createSelector(
-    [selectLocalValue(localizationKey)],
+export const selectLocalValueWithVars = (config: {localizationKey: string, locale?: string}, ...vars: (string | number)[]) => createSelector(
+    [selectLocalValue(config.localizationKey, config.locale)],
     (localizationValue) => {
         const valueStr = vars.reduce<string>((acc, varName, index) => {
             const varNameStr = varName.toString();
@@ -92,3 +93,5 @@ export const selectLocalValueWithVars = (localizationKey: string, ...vars: (stri
         return valueStr;
     }
 )
+
+export const iconSign = '<$icon1>'

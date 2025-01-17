@@ -1,4 +1,4 @@
-import { AssetsBundle, Texture } from 'pixi.js';
+import { AssetsBundle, Texture } from 'pixi.js-legacy';
 import { IScrathCardBundle } from './assetsManifest';
 
 const SANTA_SAC_BUNDLE_BASE_PATH = '/santaSac';
@@ -14,9 +14,14 @@ export interface ISantaSacBundle extends IScrathCardBundle {
     sportsCar: Texture;
     watch: Texture;
     womanBag: Texture;
+    christmassWreath: Texture;
+    greenStar: Texture;
+    santaChariot: Texture;
+    snowMan: Texture;
+    cristmasToy: Texture;
+    redBallShining: Texture;
 
     roundCover: Texture;
-    cristmasToy: Texture;
 }
 
 export const SANTA_SAC_BUNDLE: AssetsBundle = {
@@ -66,20 +71,36 @@ export const SANTA_SAC_BUNDLE: AssetsBundle = {
             alias: 'womanBag',
             src: `${SANTA_SAC_BUNDLE_BASE_PATH}/womanBag.png`,
         },
+        {
+            alias: 'christmassWreath',
+            src: `${SANTA_SAC_BUNDLE_BASE_PATH}/christmassWreath.png`,
+        },
+        {
+            alias: 'greenStar',
+            src: `${SANTA_SAC_BUNDLE_BASE_PATH}/greenStar.png`,
+        },
+        {
+            alias: 'santaChariot',
+            src: `${SANTA_SAC_BUNDLE_BASE_PATH}/santaChariot.png`,
+        },
+        {
+            alias: 'snowMan',
+            src: `${SANTA_SAC_BUNDLE_BASE_PATH}/snowMan.png`,
+        },
 
 
         {
             alias: 'roundCover',
             src: `/roundCover.png`,
         },
+        {
+            alias: 'winningMatrixCellBg',
+            src: `/winningMatrixCellBg.png`,
+        },
 
         {
             alias: 'redBallShining',
             src: `${SANTA_SAC_BUNDLE_BASE_PATH}/redBallShining.png`,
         },
-        // {
-        //     alias: 'redBall',
-        //     src: `/red_ball.png`,
-        // },
     ],
 };

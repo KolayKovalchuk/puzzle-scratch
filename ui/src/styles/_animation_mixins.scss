@@ -66,3 +66,16 @@
     opacity: 1;
     animation: loadingBlink 1s ease-in-out infinite;
 }
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@mixin spinner {
+    animation: spin 0.7s linear infinite;
+}

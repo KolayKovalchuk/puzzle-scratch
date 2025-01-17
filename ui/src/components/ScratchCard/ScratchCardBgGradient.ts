@@ -50,3 +50,5 @@ export const redCardBgGradient: GradientConfig = [
     [0.874172180891037, '#440E0E'],
     [1, '#3D0C0C'],
 ];
+
+export const emptyGradientData: GradientConfig = []

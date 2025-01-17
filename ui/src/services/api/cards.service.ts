@@ -1,9 +1,8 @@
 import { IBuyBatchCardData, ICardData } from '@models/IBuyBatchCardData';
+import { updateUserBalanceWithChangeAnimation } from '@store/actions/user.actions';
 import store from '@store/store';
 import { useCallback, useState } from 'react';
 import { apiClient } from './api.service';
-import { showAmountChangeLabel } from '@store/actions/appState.actions';
-import { updateUserBalance } from '@store/actions/user.actions';
 
 export async function postBuyCard<CardData extends ICardData>(batchId: string) {
     try {
@@ -25,7 +24,7 @@ export interface IUseBuyCardReturn<CardData extends ICardData> {
     buyCard: (batchId: string) => Promise<IBuyBatchCardData<CardData> | null>;
 }
 
-export function useBuyCard<CardData extends ICardData>(): IUseBuyCardReturn<CardData> {
+export function useBuyCard<CardData extends ICardData>(updateUserBalanceOnSuccess = false): IUseBuyCardReturn<CardData> {
     const [card, setCard] = useState<IBuyBatchCardData<CardData> | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -40,8 +39,9 @@ export function useBuyCard<CardData extends ICardData>(): IUseBuyCardReturn<Card
             setCard(cardData);
             setLoading(false);
 
-            store.dispatch(updateUserBalance({ total: cardData.rbaxBalance }));
-            store.dispatch(showAmountChangeLabel(cardData.cardData.winAmount));
+            if (updateUserBalanceOnSuccess) {
+                store.dispatch(updateUserBalanceWithChangeAnimation({ total: cardData.rbaxBalance }, cardData.cardData.winAmount));
+            }
 
             return cardData;
         } catch (error) {

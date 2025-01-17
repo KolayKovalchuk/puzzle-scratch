@@ -2,7 +2,7 @@ import { IMatrixCellProps, ISpriteCellData } from '@components/shared/IconMatrix
 import { DefaultTextStyleConfig, RedStyledTextStyle } from '@components/shared/StyledText';
 import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
 import { Container, Sprite, Text } from '@pixi/react';
-import { TextStyle } from 'pixi.js';
+import { TextStyle } from 'pixi.js-legacy';
 import { CandyMazeScratchItemsEnum, CandyMazeScratchTextItems } from '../../scratchItemsEnum';
 
 export interface ICandyMazeSpriteCellData extends ISpriteCellData {
@@ -25,10 +25,15 @@ export function CandyMazeSpriteCell({ x, y, width, height, data }: ICandyMazeSpr
     if (CandyMazeScratchTextItems.includes(data.textureName as CandyMazeScratchItemsEnum)) {
         const text = data.textureName.replace('w', 'x');
 
-        const xShift = width / 6;
-        const yShift = height / 15;
+        const xShift = width * 0.25 * -1;
+        const yShift = height * 0.33 * -1;
 
-        return (<Text text={text} x={x + xShift} y={y + yShift} style={textStyleConfig} />)
+        const textX = x + xShift;
+        const textY = y + yShift;
+
+        return (<Container>
+                <Text text={text} x={textX} y={textY} style={textStyleConfig} />
+            </Container>)
     }
 
     if (!bundle) return null

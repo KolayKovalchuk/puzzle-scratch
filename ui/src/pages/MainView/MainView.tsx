@@ -24,7 +24,7 @@ import styles from './MainView.module.scss';
 
 export function MainView() {
     const userName = useSelector(selectUserName);
-    const shareLinkText = useSelector(selectLocalValueWithVars('txt.gift.msg', userName || ''));
+    const shareLinkText = useSelector(selectLocalValueWithVars({ localizationKey: 'txt.gift.msg' }, userName || ''));
     const [userLoginNotifications, removeLoginNotification] = useShowLoginNotificationsPopups();
 
     const navigate = useNavigate()

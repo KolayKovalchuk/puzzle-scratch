@@ -10,8 +10,12 @@ export function useFixNavigateForTelegramWebApp() {
         navigate(-1);
 
         const timeout = setTimeout(() => {
-            console.log('timeout!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-            navigate(ROUTES.Home);
+            const ancestorOrigins = window.location.ancestorOrigins;
+            console.log('useFixNavigateForTelegramWebApp', ancestorOrigins.length);
+            if (ancestorOrigins.length) {
+                console.log('redirect to home');
+                navigate(ROUTES.Home);
+            }
         }, 0);
 
         setNavigateTimeout(timeout);

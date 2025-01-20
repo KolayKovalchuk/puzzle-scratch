@@ -68,7 +68,17 @@ export function useAlphaBlinkingAnimation() {
 
         timeout = setTimeout(() => {
             clearAnimationFrame();
-            setAlpha(1); // Ensure it ends in a non-transparent state
+            const smoothToFullAlpha = () => {
+                setAlpha(prevAlpha => {
+                    if (prevAlpha < 1) {
+                        const newAlpha = Math.min(prevAlpha + alphaStep, 1);
+                        requestAnimationFrame(smoothToFullAlpha);
+                        return newAlpha;
+                    }
+                    return 1;
+                });
+            };
+            smoothToFullAlpha();
         }, blinkingDuration);
 
         return () => {

@@ -17,7 +17,26 @@ export async function getUserBalance(): Promise<IUserBalanceResponse | null> {
 
         return response.data;
     } catch (error) {
-        console.error('Error creating share link code:', error);
+        console.error('Error getting user balance:', error);
+        return null
+    }
+}
+
+export async function updateUserBalance() {
+    try {
+        const prevBalance = store.getState().user.user?.balance?.total;
+        const userBalanceResponse = await getUserBalance();
+        const userBalance: IUserBalance = {
+            total: userBalanceResponse?.totalBalance || 0,
+            withdrawable: userBalanceResponse?.withdrawableBalance || 0,
+        }
+        const balanceDiff = userBalance.total - (prevBalance || 0);
+        store.dispatch(updateUserBalanceWithChangeAnimation(userBalance, balanceDiff));
+
+        return userBalance;
+
+    } catch (error) {
+        console.error('Error updating user balance:', error);
         return null
     }
 }
@@ -26,25 +45,16 @@ export function useGetUserBalance(): { balance: IUserBalance | null, isLoading: 
     const [balance, setBalance] = useState<IUserBalance | null>(null);
     const [isLoading, setLoading] = useState<boolean>(false);
 
-    const prevBalance = useSelector(selectUserBalanceTotal);
-
     useEffect(() => {
         const fetch = async () => {
             setLoading(true);
-            const userBalanceResponse = await getUserBalance();
+            const balance = await updateUserBalance();
+            setBalance(balance);
             setLoading(false);
-
-            const userBalance: IUserBalance = {
-                total: userBalanceResponse?.totalBalance || 0,
-                withdrawable: userBalanceResponse?.withdrawableBalance || 0,
-            }
-            const balanceDiff = userBalance.total - (prevBalance || 0);
-            setBalance(userBalance);
-            store.dispatch(updateUserBalanceWithChangeAnimation(userBalance, balanceDiff));
         };
 
         fetch();
-    }, [prevBalance]);
+    }, []);
 
     return { balance, isLoading };
 }

@@ -51,6 +51,8 @@ export function DepositWithStarsButtons({ starsConvertOptions, btnWidth, onOptio
                                 className={`${styles.iconContainerBtnText} ${styles.arrowText}`}
                                 textStyles={textStyles}
                             />
+                            <span style={{ fontSize: textStyles.fontSize }}
+                                className={styles.arrowTextPlaceholder}>{' > '}</span>
                             <div className={styles.iconContainerBtnLabel}>
                                 <Icon name={robo_token_gold_no_shining} className={`${styles.icon} ${styles.roboTokenGoldIcon}`} />
                                 <RegularStyledText

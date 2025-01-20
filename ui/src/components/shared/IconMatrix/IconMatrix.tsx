@@ -1,10 +1,8 @@
-import { useWinningBgConfig } from '@hooks/useWinningBgConfig';
-import { Container, Sprite, useApp } from '@pixi/react';
-import { useCallback } from 'react';
+import { Container, useApp } from '@pixi/react';
 import { useCellOffset } from './hooks/useCellOffset';
 import { defaultConfig, useCellSize } from './hooks/useCellSize';
 import { IGameMatrixProps } from './IconMatrix.models';
-import { useAlphaBlinkingAnimation } from '@hooks/useAlphaBlinkingAnimation';
+import { WinningBg } from './WinningBg';
 
 export function IconMatrix({ data = [], renderCell, config: configArg = defaultConfig, winningBgTexture }: IGameMatrixProps) {
     const config = { ...defaultConfig, ...configArg };
@@ -16,36 +14,6 @@ export function IconMatrix({ data = [], renderCell, config: configArg = defaultC
 
     const {  width: cellWidth, height: cellHeight } = useCellSize(config, fistRowLength, data.length);
     const { offsetX, offsetY } = useCellOffset(cellWidth, cellHeight, config.cellPadding, fistRowLength, data.length);
-
-    const {
-        winningBgTextureWidth,
-        winningBgTextureHeight,
-        winningBgTextureX,
-        winningBgTextureY,
-    } = useWinningBgConfig(cellWidth, config);
-    const { alpha } = useAlphaBlinkingAnimation();
-
-    const winningBg = useCallback((x: number, y: number, isWinning: boolean) => {
-        if (!winningBgTexture || !isWinning) return null;
-
-        return (
-            <Sprite
-                texture={winningBgTexture}
-                width={winningBgTextureWidth}
-                height={winningBgTextureHeight}
-                x={x + winningBgTextureX}
-                y={y + winningBgTextureY}
-                alpha={alpha}
-            />
-        );
-    }, [
-        winningBgTexture,
-        winningBgTextureWidth,
-        winningBgTextureHeight,
-        winningBgTextureX,
-        winningBgTextureY,
-        alpha
-    ]);
 
     if (!cellWidth || !cellHeight) {
         return null;
@@ -65,7 +33,14 @@ export function IconMatrix({ data = [], renderCell, config: configArg = defaultC
 
                     return (
                         <Container key={key}>
-                            {winningBg(x, y, cellData.isWinning)}
+                            <WinningBg
+                                x={x}
+                                y={y}
+                                cellWidth={cellWidth}
+                                config={config}
+                                winningBgTexture={winningBgTexture}
+                                isWinning={cellData.isWinning}
+                            />
                             {renderCell({ data: cellData, x, y, width: cellWidth, height: cellHeight })}
                         </Container>
                     )

@@ -12,7 +12,7 @@
   "SYSTEM_MSG": null,
   "SYSTEM_MSG_ONE_TIME": true,
   "EMOJI_BONUS": 30,
-  "MIN_RBAX_WITHDRAW": 10,
+  "MIN_RBAX_WITHDRAW": 1000,
   "DAILY_BONUS": [
     30,
     40,

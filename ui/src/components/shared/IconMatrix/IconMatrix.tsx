@@ -4,6 +4,7 @@ import { useCallback } from 'react';
 import { useCellOffset } from './hooks/useCellOffset';
 import { defaultConfig, useCellSize } from './hooks/useCellSize';
 import { IGameMatrixProps } from './IconMatrix.models';
+import { useAlphaBlinkingAnimation } from '@hooks/useAlphaBlinkingAnimation';
 
 export function IconMatrix({ data = [], renderCell, config: configArg = defaultConfig, winningBgTexture }: IGameMatrixProps) {
     const config = { ...defaultConfig, ...configArg };
@@ -21,8 +22,8 @@ export function IconMatrix({ data = [], renderCell, config: configArg = defaultC
         winningBgTextureHeight,
         winningBgTextureX,
         winningBgTextureY,
-        winningBgTextureAlpha
     } = useWinningBgConfig(cellWidth, config);
+    const { alpha } = useAlphaBlinkingAnimation();
 
     const winningBg = useCallback((x: number, y: number, isWinning: boolean) => {
         if (!winningBgTexture || !isWinning) return null;
@@ -34,7 +35,7 @@ export function IconMatrix({ data = [], renderCell, config: configArg = defaultC
                 height={winningBgTextureHeight}
                 x={x + winningBgTextureX}
                 y={y + winningBgTextureY}
-                alpha={winningBgTextureAlpha}
+                alpha={alpha}
             />
         );
     }, [
@@ -43,7 +44,7 @@ export function IconMatrix({ data = [], renderCell, config: configArg = defaultC
         winningBgTextureHeight,
         winningBgTextureX,
         winningBgTextureY,
-        winningBgTextureAlpha
+        alpha
     ]);
 
     if (!cellWidth || !cellHeight) {

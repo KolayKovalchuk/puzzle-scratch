@@ -1,4 +1,5 @@
 import { AppSounds } from '@config/sounds';
+import { AppErrors } from '@store/reducers/appState.reducer';
 
 export const SHOW_AMOUNT_CHANGE_LABEL = 'SHOW_AMOUNT_CHANGE_LABEL';
 
@@ -28,4 +29,11 @@ export const RESET_MATRIX_BLINK_COUNTER = 'RESET_MATRIX_BLINK_COUNTER';
 
 export const resetMatrixBlinkCounter = () => ({
     type: RESET_MATRIX_BLINK_COUNTER,
+})
+
+export const SET_APP_ERROR = 'SET_APP_ERROR';
+
+export const setAppError = (error: AppErrors) => ({
+    type: SET_APP_ERROR,
+    payload: error,
 })

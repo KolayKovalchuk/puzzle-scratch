@@ -4,7 +4,7 @@ import { Howl } from 'howler';
 import { useCallback, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-export const NO_TAP_SOUND_CLASS = 'noTapSound';
+export const NO_TAP_SOUND_CLASS = 'no-tap-sound';
 
 
 const tapSound = new Howl({ src: AppSounds.Tap })
@@ -68,10 +68,18 @@ export function useGetSounds(soundName: AppSounds | null = null) {
     };
 }
 
+Howler.ctx.onstatechange = function() {
+    console.log('Howler.ctx.state:', Howler.ctx.state);
+
+    if (Howler.ctx.state === 'suspended') {
+        Howler.ctx.resume();
+    }
+};
+
+
 export function usePlaySound() {
     const soundPlayCounter = useSelector(selectSoundPlayerCounter);
     const shouldStopAllSounds = useSelector(selectShouldStopAllSounds);
-
     const soundDuration = useSelector(selectSoundDuration);
 
     const playTapSound = useCallback((e: MouseEvent) => {
@@ -86,16 +94,13 @@ export function usePlaySound() {
         tapSound?.play();
     }, [tapSound]);
 
-    const soundeName = useSelector(selectSoundToPlay);
-    const { sound, stopAllSounds } = useGetSounds(soundeName);
+    const soundName = useSelector(selectSoundToPlay);
+    const { sound, stopAllSounds } = useGetSounds(soundName);
 
     useEffect(() => {
         document.addEventListener('click', playTapSound, true); // Use capture phase
 
         return () => {
-            if (shouldStopAllSounds) {
-                stopAllSounds();
-            }
             document.removeEventListener('click', playTapSound, true);
         };
     }, [playTapSound, sound, shouldStopAllSounds]);

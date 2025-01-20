@@ -1,16 +1,21 @@
-import { Button, ButtonGoldBorder, ButtonType } from '@components/shared/Button/Button';
-import { selectLocalValue } from '@store/selectors/localization.selectors';
-import { ReactNode, useCallback, useState } from 'react';
-import { useSelector } from 'react-redux';
-
-import styles from './GameFooterBtn.module.scss';
-
+import { DepositWithDialog } from '@components/DepositWithDialog/DepositWithDialog';
+import { useDepositWithDialog } from '@components/DepositWithDialog/hooks/useDepositWithDialog';
 import { BackButton } from '@components/shared/Button/BackButton';
+import { Button, ButtonGoldBorder, ButtonType } from '@components/shared/Button/Button';
 import { GameDescriptionPopup } from '@components/shared/GameDescriptionPopup/GameDescriptionPopup';
+import { NO_TAP_SOUND_CLASS } from '@hooks/usePlaySound';
 import { useScrollTo } from '@hooks/useScrollTo';
 import hint from '@icons/hint.svg';
 import { BatchCardType } from '@models/BatchCard.model';
-import { NO_TAP_SOUND_CLASS } from '@hooks/usePlaySound';
+import { setAppError } from '@store/actions/appState.actions';
+import { AppErrors } from '@store/reducers/appState.reducer';
+import { selectAppError } from '@store/selectors/appState.selectors';
+import { selectLocalValue } from '@store/selectors/localization.selectors';
+import store from '@store/store';
+import { ReactNode, useCallback, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+
+import styles from './GameFooterBtn.module.scss';
 
 
 export interface IGameFooterBtnProps {
@@ -35,6 +40,16 @@ export function GameFooterBtn({ onPlay, onCancel, children, batchCardType, isPla
     const onCloseGameDescriptionPopup = useCallback(() => {
         setIsGameDescriptionPopupOpen(false);
     }, []);
+
+    const { onDepositBtnClick, closeDialog, isDepositDialogOpen } = useDepositWithDialog();
+    const appError = useSelector(selectAppError);
+
+    useEffect(() => {
+        if (appError === AppErrors.InsufficientBalance) {
+            onDepositBtnClick();
+            store.dispatch(setAppError(AppErrors.NoError));
+        }
+    }, [appError]);
 
     return (<>
         <div ref={targetRef} className={styles.footer} id='#gameFooter'>
@@ -65,5 +80,10 @@ export function GameFooterBtn({ onPlay, onCancel, children, batchCardType, isPla
                 batchCardType={batchCardType}
             />
         }
+         <DepositWithDialog
+            isOpen={isDepositDialogOpen}
+            onCancel={closeDialog}
+            onConfirm={closeDialog}
+        />
     </>);
 }

@@ -1,5 +1,10 @@
 import { AppSounds } from '@config/sounds';
-import { BLINK_MATRIX_CELS, PLAY_SOUND, RESET_MATRIX_BLINK_COUNTER, SHOW_AMOUNT_CHANGE_LABEL } from '@store/actions/appState.actions';
+import { BLINK_MATRIX_CELS, PLAY_SOUND, RESET_MATRIX_BLINK_COUNTER, SET_APP_ERROR, SHOW_AMOUNT_CHANGE_LABEL } from '@store/actions/appState.actions';
+
+export enum AppErrors {
+    NoError = 'noError',
+    InsufficientBalance = 'InsufficientBalance',
+}
 
 // Initial State
 export interface IAppState {
@@ -12,6 +17,8 @@ export interface IAppState {
     duration?: number | null;
 
     matrixBlinkCounter: number;
+
+    error: AppErrors;
 }
 
 const initialState: IAppState = {
@@ -24,6 +31,8 @@ const initialState: IAppState = {
     soundPlayerCounter: 0,
 
     matrixBlinkCounter: 0,
+
+    error: AppErrors.NoError,
 };
 
 // Reducer
@@ -54,6 +63,12 @@ export const gameReducer = (state = initialState, action: any): IAppState => {
             return {
                 ...state,
                 matrixBlinkCounter: 0,
+            };
+
+        case SET_APP_ERROR:
+            return {
+                ...state,
+                error: action.payload,
             };
         default:
             return state;

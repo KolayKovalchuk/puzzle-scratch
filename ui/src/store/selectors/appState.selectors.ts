@@ -54,3 +54,10 @@ export const selectMatrixBlinkCounter = createSelector(
         return queryState?.matrixBlinkCounter;
     }
 )
+
+export const selectAppError = createSelector(
+    selectGame,
+    (queryState) => {
+        return queryState?.error;
+    }
+)

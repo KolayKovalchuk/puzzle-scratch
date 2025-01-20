@@ -51,6 +51,7 @@ $roundScratchCardWidth: 88px;
     width: 23.5%;
 
     &.right {
+        top: -18.4%;
         left: auto;
         right: -0.9%;
     }
@@ -75,8 +76,7 @@ $roundScratchCardWidth: 88px;
     left: 1%;
     width: 74%;
 
-    $minHeight: 15.5%;
-    min-height: $minHeight;
+    min-height: 17.8%;
 
     background: colors.$grayGradient;
     z-index: 3;

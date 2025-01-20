@@ -1,6 +1,8 @@
+import { DepositWithDialog } from '@components/DepositWithDialog/DepositWithDialog'
+import { useDepositWithDialog } from '@components/DepositWithDialog/hooks/useDepositWithDialog'
 import { Footer } from '@components/Footer/Footer'
+import { Button, ButtonType, ButtonWithRibbon } from '@components/shared/Button'
 import { BackButton } from '@components/shared/Button/BackButton'
-import { Button, ButtonType } from '@components/shared/Button/Button'
 import { Icon } from '@components/shared/Icon'
 import { SpinnerIcon } from '@components/shared/Icon/SpinnerIcon'
 import { SecondaryStyledText } from '@components/shared/StyledText'
@@ -14,9 +16,7 @@ import { formatNumber } from '@utils/formatters/formatNumber'
 import { ITextStyle } from 'pixi.js-legacy'
 import { useCallback, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { DepositWithDialog } from '@components/DepositWithDialog/DepositWithDialog'
 import { WalletHistoryTable } from './components/WalletHistoryTable/WalletHistoryTable'
-import { useDepositWithDialog } from '@components/DepositWithDialog/hooks/useDepositWithDialog'
 import { DepositWithDialogMode } from './Wallet.models'
 import styles from './Wallet.module.scss'
 
@@ -99,14 +99,16 @@ export function Wallet() {
                             <span className={styles.balanceAmount}>{formatNumber(withdrawableAmount)}</span>
                         </div>
                     </div>
-                    <Button
+                    <ButtonWithRibbon
                         className={`${styles.walletBtn}`}
                         mode={ButtonType.Confirm}
                         onClick={onWithdrawBtnClick}
                         text={withdrawLabel}
                         getTextSize={(size) => setWithdrawBtnFontSize(size)}
                         textStyle={textStylesWithFontSize}
-                    ></Button>
+                        isDisabled={true}
+                        ribbonLabel='COMING SOON!'
+                    ></ButtonWithRibbon>
                 </div>
                 <div className={styles.balanceInfoRow}>
                     <div className={styles.column}>

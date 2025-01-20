@@ -7,6 +7,7 @@ import { DailyBonusNotificationBody } from './components/DailyBonusNotificationB
 import { OnePerXGiftBody } from './components/OnePerXGiftBody/OnePerXGiftBody';
 import { SuccessDepositBody } from './components/SuccessDepositBody/SuccessDepositBody';
 import { TooManyGifts } from './components/TooManyGiftsBody/TooManyGiftsBody';
+import { updateUserBalance } from '@services/api/balance.service';
 
 
 export interface NotificationConfigItem {
@@ -124,5 +125,8 @@ export const NotificationConfig: NotificationConfig = {
         title: 'txt.transfer.popup.success.title',
         renderChildren: (data) => <SuccessDepositBody notificationData={data as IDepositSuccessData} />,
         agreeBtn: 'txt.btn.ok',
+        agreeCallback: async () => {
+            updateUserBalance();
+        },
     },
 };

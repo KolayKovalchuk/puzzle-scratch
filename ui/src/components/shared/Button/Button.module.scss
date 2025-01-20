@@ -198,3 +198,40 @@ $iconSize: 45px;
     min-width: $iconSize;
     height: $iconSize;
 }
+
+.ribbonBtnContainer {
+    position: relative;
+    .container {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.ribbonContainer {
+    position: absolute;
+    top: 0;
+    right: -8%;
+    z-index: 1000;
+
+    width: 38%;
+}
+
+.ribbonText {
+    text-align: center;
+    text-transform: capitalize;
+    position: absolute;
+    transform: translate(-50%, -50%) rotate(12.88deg);
+    left: 50%;
+    top: 50%;
+    z-index: 1000000;
+    white-space: wrap;
+    color: #ffffff;
+    font-family: "Nunito";
+    font-weight: 1000;
+    font-size: 8px;
+
+    @media screen and (max-width: 375px) {
+        font-size: 7px;
+
+    }
+}

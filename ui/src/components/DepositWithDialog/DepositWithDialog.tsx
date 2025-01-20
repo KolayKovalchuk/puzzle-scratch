@@ -16,7 +16,7 @@ export interface IDepositWithDialogProps {
     isOpen: boolean;
     onCancel: () => void;
     onConfirm: () => void;
-    onModeChanged: (mode: DepositWithDialogMode) => void;
+    onModeChanged?: (mode: DepositWithDialogMode) => void;
 }
 
 export function DepositWithDialog({ isOpen, onCancel, onConfirm, onModeChanged }: IDepositWithDialogProps) {
@@ -45,7 +45,7 @@ export function DepositWithDialog({ isOpen, onCancel, onConfirm, onModeChanged }
     }, [onConfirm]);
 
     useEffect(() => {
-        onModeChanged(mode);
+        onModeChanged && onModeChanged(mode);
     }, [mode, onModeChanged]);
 
     const onInvoiceStatusChange = useCallback((status: InvoiceStatuses, isPaid: boolean) => {

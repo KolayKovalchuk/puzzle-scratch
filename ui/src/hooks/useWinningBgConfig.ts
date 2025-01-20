@@ -35,8 +35,6 @@ export function useWinningBgConfig(width: number | null, config: IGameMatrixDefa
     const [textureHeight, setTextureHeight] = useState<number>(0);
     const [textureX, setTextureX] = useState<number>(0);
     const [textureY, setTextureY] = useState<number>(0);
-    const [textureAlpha, setTextureAlpha] = useState<number>(0);
-    const matrixBlinkCounter = useSelector(selectMatrixBlinkCounter);
 
     useEffect(() => {
         if (!width) return;
@@ -54,51 +52,12 @@ export function useWinningBgConfig(width: number | null, config: IGameMatrixDefa
         setTextureHeight(textureHeight);
         setTextureX(textureX);
         setTextureY(textureY);
-
-        const blinkingTimeout = 1000 * 10;
-
-        let alpha = 0;
-        let isIncreasing = true;
-        const alphaStep = 0.01;
-        const interval = setInterval(() => {
-            
-            if (alpha >= 1) {
-                alpha -= alphaStep
-                isIncreasing = false;
-            }
-            else if (alpha <= 0.5) {
-                alpha += alphaStep
-                isIncreasing = true;
-            }
-            else {
-                alpha += isIncreasing ? alphaStep : -alphaStep;
-            }
-
-            setTextureAlpha(alpha);
-        }, 10);
-
-        const timeout = setTimeout(() => {
-            clearInterval(interval);
-            setTextureAlpha(1); // Ensure it ends in a non-transparent state
-        }, blinkingTimeout);
-
-        if (matrixBlinkCounter === 0) {
-            clearInterval(interval);
-            clearTimeout(timeout);
-            setTextureAlpha(0);
-        }
-
-        return () => {
-            clearInterval(interval);
-            clearTimeout(timeout);
-        };
-    }, [matrixBlinkCounter]);
+    }, [width, config]);
 
     return {
         winningBgTextureWidth: textureWidth,
         winningBgTextureHeight: textureHeight,
         winningBgTextureX: textureX,
         winningBgTextureY: textureY,
-        winningBgTextureAlpha: textureAlpha,
     }
 }

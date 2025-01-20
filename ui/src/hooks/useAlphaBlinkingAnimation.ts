@@ -2,16 +2,17 @@ import { selectMatrixBlinkCounter } from '@store/selectors/appState.selectors';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-let timeout: NodeJS.Timeout | undefined = undefined;
-let animationFrameId: number | undefined = undefined;
 
 export function useAlphaBlinkingAnimation() {
+    let timeout: NodeJS.Timeout | undefined = undefined;
+    let animationFrameId: number | undefined = undefined;
     const [alpha, setAlpha] = useState(0);
 
     const matrixBlinkCounter = useSelector(selectMatrixBlinkCounter);
     useEffect(() => {
         const blinkingDuration = 1000 * 10;
-        const alphaStep = 0.01;
+        const alphaStep = 0.02;
+        // const alphaStep =  1 / (1000 / 60); // 60 FPS;
         let lastTimestamp: number | null = null;
 
         const clearAnimationFrame = () => {

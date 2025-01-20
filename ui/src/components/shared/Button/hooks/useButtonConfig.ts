@@ -63,6 +63,6 @@ export function getModeCondg(mode: ButtonType, styles: CSSModuleClasses, isDisab
     }
 }
 
-export function useButtonConfig(mode: ButtonType, styles: CSSModuleClasses, isDisabled: boolean): IButtonConfig {
+export function useButtonConfig(mode: ButtonType, styles: CSSModuleClasses, isDisabled: boolean = false): IButtonConfig {
     return useMemo(() => getModeCondg(mode, styles, isDisabled), [mode, styles, isDisabled]);
 }

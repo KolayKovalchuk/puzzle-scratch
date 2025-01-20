@@ -64,18 +64,38 @@ export async function postConvertStars(option: IStarsConvertOption): Promise<IPo
     }
 }
 
+let intervalId: NodeJS.Timeout | null = null;
+
+function clearIntervalCb() {
+    if (intervalId) {
+        clearInterval(intervalId);
+        intervalId = null;
+    }
+}
+
 export function useGetStarsConvertOptions() {
     const [starsConvertOptions, setStarsConvertOptions] = useState<IStarsConvertOption[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        setIsLoading(true);
-        getStarsConvertOptions().then((options) => {
-            setStarsConvertOptions(options);
-            setIsLoading(false);
-        }).catch(() => {
-            setIsLoading(false);
-        });
+        const fetchOptions = () => {
+            setIsLoading(true);
+            getStarsConvertOptions().then((options) => {
+                setStarsConvertOptions(options);
+                setIsLoading(false);
+            }).catch(() => {
+                setIsLoading(false);
+            });
+        };
+
+        fetchOptions();
+
+        clearIntervalCb();
+        intervalId = setInterval(fetchOptions, 1000 * 30); // Reload every 30 seconds
+
+        return () => {
+            clearIntervalCb();
+        }; // Cleanup interval on unmount
     }, []);
 
     return { starsConvertOptions, isLoading };

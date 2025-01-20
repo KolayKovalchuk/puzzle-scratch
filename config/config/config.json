@@ -11,13 +11,13 @@
   "AFFILIATE_BONUS": 1,
   "SYSTEM_MSG": null,
   "SYSTEM_MSG_ONE_TIME": true,
-  "EMOJI_BONUS": 1,
+  "EMOJI_BONUS": 30,
   "MIN_RBAX_WITHDRAW": 10,
   "DAILY_BONUS": [
-    10,
-    20,
     30,
+    40,
     50,
+    60,
     100
   ],
   "FRIENDS_BONUS": {
@@ -28,6 +28,6 @@
     "RBAX": 30,
     "MAX_RBAX_PER_USER_DAILY": 200,
     "EXPIRATION_MS": 1800000,
-    "MAX_USES": 3
+    "MAX_USES": 2
   }
 }

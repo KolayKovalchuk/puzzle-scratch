@@ -25,8 +25,8 @@ export function CandyMazeSpriteCell({ x, y, width, height, data }: ICandyMazeSpr
     if (CandyMazeScratchTextItems.includes(data.textureName as CandyMazeScratchItemsEnum)) {
         const text = data.textureName.replace('w', 'x');
 
-        const xShift = width * 0.25 * -1;
-        const yShift = height * 0.33 * -1;
+        const xShift = 0;
+        const yShift = height * 0.1 * -1;
 
         const textX = x + xShift;
         const textY = y + yShift;

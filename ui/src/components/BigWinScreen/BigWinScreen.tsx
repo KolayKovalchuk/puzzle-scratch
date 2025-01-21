@@ -54,7 +54,6 @@ export function BigWinScreen({ winAmount, winType = WinType.M, className, onClic
         className={`${styles.container} ${className || ''}`}
         style={{ animationDuration: `${scratchCardTransitionTimeout}ms` }}
         onClick={onClick}
-        onMouseMove={onClick}
     >
         <div className={styles.animatedContainer} style={{ animationDuration: `${scratchCardTransitionTimeout}ms` }}>
             {isBigWinIconVisible && <Icon name={big_win} className={styles.bigWinIcon} />}

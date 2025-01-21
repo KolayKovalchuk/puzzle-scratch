@@ -23,6 +23,15 @@ export interface ICoinAnimationSpriteProps {
     onAnimationEnd?: () => void;
 }
 
+function getCoinAnimationSize(width: number, animationName: CoinAnimationName) {
+    switch (animationName) {
+        case CoinAnimationName.coint_m:
+            return width / 6;
+        default:
+            return width / 5;
+    }
+}
+
 export function CoinAnimationSprite({ width, height, animationName, onAnimationEnd }: ICoinAnimationSpriteProps) {
     const app = useApp();
 
@@ -52,14 +61,17 @@ export function CoinAnimationSprite({ width, height, animationName, onAnimationE
             return;
         }
 
-        const animationSize = width / 5;
+        const animationSize = getCoinAnimationSize(width, animationName);
         animation.x = width / 2;
         animation.y = width / 1.5;
         animation.width = animationSize;
         animation.height = animationSize;
 
-        
-    }, [width, height, animation]);
+        if (animationName === CoinAnimationName.coint_m) {
+            animation.height = animation.height * 1.5;
+        }
+
+    }, [width, height, animation, animationName]);
 
     const [trackEntry, setTrackEntry] = useState<ITrackEntry | null>(null);
 
@@ -70,7 +82,7 @@ export function CoinAnimationSprite({ width, height, animationName, onAnimationE
 
         const trackEntry = animation.state.setAnimation(0, animationName, false);
         setTrackEntry(trackEntry);
-    }, [animation, animationName, onAnimationEnd]);
+    }, [animation, animationName]);
 
     useEffect(() => {
         if (!trackEntry) {

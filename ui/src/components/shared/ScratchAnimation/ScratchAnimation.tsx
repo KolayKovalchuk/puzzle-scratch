@@ -71,7 +71,7 @@ function ScratchAnimationComponent(
         <Stage
             width={width}
             height={height}
-            options={{ backgroundAlpha: 0 }}
+            options={{ backgroundAlpha: 0, forceCanvas: true }}
         >
             <ScratchAnimationSprite
                 {...props}

@@ -234,7 +234,7 @@ function ScratchCardComponent(props: IScratchCardProps, ref: Ref<IScratchCardHan
     const card = useMemo(() => {
         return (
             <div className={`${styles.container} ${props.className || ''}`} ref={containerRef}>
-                {!!width && <Stage width={width} height={height} options={{ backgroundAlpha: 0 }}>
+                {!!width && <Stage width={width} height={height} options={{ backgroundAlpha: 0, forceCanvas: true }}>
                     <ScratchCardEl {...props} ref={scratchCardElRef} />
                 </Stage>}
             </div>

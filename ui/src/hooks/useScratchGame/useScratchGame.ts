@@ -9,7 +9,7 @@ import store from '@store/store';
 import { RefObject, useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { _applyForEachScratchCardRef, _getScratchedStateConfig } from './utils';
-import { useBuyCardWithBalanceChange, useStopWinSound } from './hooks';
+import { useBuyCardWithBalanceChange, useRedirectOnBatchFinished, useStopWinSound } from './hooks';
 import { useGetSounds } from '@hooks/usePlaySound';
 
 let timeout: NodeJS.Timeout | null = null;
@@ -37,6 +37,8 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
 
     const { stopSound } = useGetSounds();
     const { stopWinSound } = useStopWinSound();
+
+    useRedirectOnBatchFinished();
 
     useEffect(() => {
         const isPlayBtnDisabled = !batchId || isScratchAnimationPlaying || isCardBuying;

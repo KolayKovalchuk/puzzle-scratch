@@ -4,6 +4,7 @@ import { BLINK_MATRIX_CELS, PLAY_SOUND, RESET_MATRIX_BLINK_COUNTER, SET_APP_ERRO
 export enum AppErrors {
     NoError = 'noError',
     InsufficientBalance = 'InsufficientBalance',
+    NoAvailableCards = 'NoAvailableCards',
 }
 
 // Initial State

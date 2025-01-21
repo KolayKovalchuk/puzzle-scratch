@@ -11,7 +11,7 @@ import { selectScratchCardTransitionTimeout } from '@store/selectors/config.sele
 import store from '@store/store';
 import { formatNumber } from '@utils/formatters/formatNumber';
 import { getCoinAnimationName } from '@utils/getCoinAnimationName';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import styles from './BigWinScreen.module.scss';
 import { CoinAnimation, CoinAnimationName } from './components/CoinAnimation';
@@ -47,13 +47,17 @@ export function BigWinScreen({ winAmount, winType = WinType.M, className, onClic
     const isBigWinIconVisible = coinAnimationName === CoinAnimationName.coint_l
 
     usePlayWinSound(coinAnimationName);
+    
+    const onClickCb = useCallback(() => {
+        if (onClick) onClick();
+    }, [onClick]);
 
     if (!winAmount) return null
 
     return <div
         className={`${styles.container} ${className || ''}`}
         style={{ animationDuration: `${scratchCardTransitionTimeout}ms` }}
-        onClick={onClick}
+        onClick={onClickCb}
     >
         <div className={styles.animatedContainer} style={{ animationDuration: `${scratchCardTransitionTimeout}ms` }}>
             {isBigWinIconVisible && <Icon name={big_win} className={styles.bigWinIcon} />}

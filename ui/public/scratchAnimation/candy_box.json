@@ -44,9 +44,6 @@
 				"rgba": [
 					{ "time": 0.8, "color": "ffffffff" },
 					{ "time": 0.9333, "color": "ffffff00" }
-				],
-				"attachment": [
-					{ "time": 0.0333, "name": "sss_05" }
 				]
 			},
 			"s_": {

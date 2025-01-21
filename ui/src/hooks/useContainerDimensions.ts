@@ -8,6 +8,9 @@ export function useContainerDimensions<T extends Element = HTMLDivElement>(conta
             for (let entry of entries) {
                 if (entry.target === containerRef.current) {
 
+                    console.log('entry.contentRect.width', entry.contentRect.width);
+                    console.log('entry.contentRect.height', entry.contentRect.height);
+
                     setDimensions({
                         width: entry.contentRect.width,
                         height: entry.contentRect.height,

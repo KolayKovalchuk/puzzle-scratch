@@ -53,8 +53,8 @@
 		"slots": {
 			"sss_02": {
 				"rgba": [
-					{ "time": 0.8667, "color": "ffffffff" },
-					{ "time": 1, "color": "ffffff00" }
+					{ "time": 0.0, "color": "ffffffff" },
+					{ "time": 0.1, "color": "ffffff00" }
 				]
 			},
 			"ss_0": {

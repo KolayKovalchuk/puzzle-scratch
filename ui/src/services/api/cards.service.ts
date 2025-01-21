@@ -56,11 +56,13 @@ export function useBuyCard<CardData extends ICardData>(): IUseBuyCardReturn<Card
 function _handleError(error: Error) {
     
     if (error instanceof AxiosError && error.response?.status === 400) {
-        const isInnsufficientBalanceError = error.response.data?.error === AppErrors.InsufficientBalance;
-        if (isInnsufficientBalanceError) {
-            console.log('!!!!', error);
-            // insufficientBalanceErrorHandle();
-            store.dispatch(setAppError(AppErrors.InsufficientBalance));
+        switch (error.response.data?.error) {
+            case AppErrors.InsufficientBalance:
+                store.dispatch(setAppError(AppErrors.InsufficientBalance));
+                break;
+            case AppErrors.NoAvailableCards:
+                store.dispatch(setAppError(AppErrors.NoAvailableCards));
+                break;
         }
     } else {
         console.error('Error buying batch card: ', error);

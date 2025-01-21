@@ -1,10 +1,16 @@
 import { AppSounds } from '@config/sounds';
 import { useGetSounds } from '@hooks/usePlaySound';
 import { IBuyBatchCardData, ICardData, WinType } from '@models/IBuyBatchCardData';
+import { ROUTES } from '@routers/routerConfig';
 import { useBuyCard } from '@services/api/cards.service';
+import { setAppError } from '@store/actions/appState.actions';
 import { updateUserBalanceWithChangeAnimation } from '@store/actions/user.actions';
+import { AppErrors } from '@store/reducers/appState.reducer';
+import { selectAppError } from '@store/selectors/appState.selectors';
 import store from '@store/store';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Route, useNavigate } from 'react-router-dom';
 
 export function useBuyCardWithBalanceChange<CardData extends ICardData = ICardData>() {
     const { buyCard, card, loading: isCardBuying } = useBuyCard<CardData>();
@@ -56,4 +62,16 @@ export function useStopWinSound() {
     }, [stopSound]);
 
     return {stopWinSound}
+}
+
+export function useRedirectOnBatchFinished() {
+    const appError = useSelector(selectAppError);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (appError === AppErrors.NoAvailableCards) {
+            store.dispatch(setAppError(AppErrors.NoError));
+            navigate(ROUTES.Home);
+        }
+    }, [appError]);
 }

@@ -24,9 +24,10 @@ export interface IGameFooterBtnProps {
     children?: ReactNode
     batchCardType: BatchCardType | null
     isPlayBtnDisabled?: boolean
+    className?: string
 }
 
-export function GameFooterBtn({ onPlay, onCancel, children, batchCardType, isPlayBtnDisabled }: IGameFooterBtnProps) {
+export function GameFooterBtn({ onPlay, onCancel, children, batchCardType, isPlayBtnDisabled, className }: IGameFooterBtnProps) {
     const playButtonText = useSelector(selectLocalValue('txt.btn.play'));
 
     const onCancelCb = useCallback(() => {
@@ -52,7 +53,7 @@ export function GameFooterBtn({ onPlay, onCancel, children, batchCardType, isPla
     }, [appError]);
 
     return (<>
-        <div ref={targetRef} className={styles.footer} id='#gameFooter'>
+        <div ref={targetRef} className={`${styles.footer} ${className || ''}`} id='#gameFooter'>
             <BackButton
                 className={`${styles.btn}`}
                 onClick={onCancelCb}

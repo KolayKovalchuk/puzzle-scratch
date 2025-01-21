@@ -40,6 +40,18 @@
 
     position: relative;
     top: -20%;
+
+    @media screen and (min-height: 650px) {
+        top: -25%;
+    }
+
+    @media screen and (min-height: 750px) {
+        top: -30%;
+    }
+
+    @media screen and (min-height: 850px) {
+        top: -35%;
+    }
 }
 
 .bigWinIcon {

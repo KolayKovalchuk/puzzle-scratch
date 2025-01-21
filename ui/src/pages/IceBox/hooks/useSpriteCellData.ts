@@ -9,8 +9,6 @@ export function useSpriteCellData(card: IBuyBatchCardData | null, bundleName: st
     const [data, setData] = useState<(IIceBoxSpriteCellData)[][]>([])
 
     const itemMapper = useCallback((textureName: string): IIceBoxSpriteCellData => {
-        console.log('textureName', textureName);
-        
         return {
             textureName: textureName,
             bundleName

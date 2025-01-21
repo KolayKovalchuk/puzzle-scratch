@@ -33,7 +33,7 @@ export function CoinAnimationSprite({ width, height, animationName, onAnimationE
     const [animation, setAnimation] = useState<Spine | null>(null);
     
     useEffect(() => {
-        console.log('ScratchAnimationSprite create animation');
+        console.log('CoinAnimationSprite create animation');
         
         if (!coinJson) {
             return;
@@ -103,7 +103,7 @@ export function CoinAnimation({ animationName, width: widthArg, height: heigthAr
         <Stage
             width={width}
             height={height}
-            options={{ backgroundAlpha: 0 }}
+            options={{ backgroundAlpha: 0, forceCanvas: true }}
         >
             <CoinAnimationSprite
                 width={width}

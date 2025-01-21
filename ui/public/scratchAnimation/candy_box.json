@@ -11,7 +11,7 @@
 },
 "bones": [
 	{ "name": "root", "y": -10 },
-	{ "name": "sss_1", "parent": "root", "x": -405.09, "y": 336.46 }
+	{ "name": "sss_1", "parent": "root", "x": -405.09, "y": 376.46 }
 ],
 "slots": [
 	{ "name": "s_", "bone": "root", "attachment": "s_" },
@@ -23,14 +23,14 @@
 		"name": "default",
 		"attachments": {
 			"sss_02": {
-				"sss_04": { "x": 405.99, "y": 54.24, "width": 546, "height": 129 },
-				"sss_05": { "x": 405.37, "y": 54.72, "width": 546, "height": 130 }
+				"sss_04": { "x": 405.99, "y": 4.24, "width": 546, "height": 129 },
+				"sss_05": { "x": 405.37, "y": 4.72, "width": 546, "height": 130 }
 			},
 			"s_": {
 				"s_": {
 					"y": -214,
 					"width": 942,
-					"height": 974,
+					"height": 924,
 					"sequence": { "count": 22, "start": 0, "digits": 2 }
 				}
 			}

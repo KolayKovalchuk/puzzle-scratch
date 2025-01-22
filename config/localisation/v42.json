@@ -1333,15 +1333,15 @@
   },
   {
     "Key": "puzzle.gallery.icebox",
-    "EN": "HIGH ROLLER GAME!\nThis deck holds prizes in the amount of 120,000 RBAX!\nHi chances to win! 10,000 card in batch.",
-    "UK": "HIGH ROLLER ГРА!\nЦя колода містить призи в розмірі 120 000 RBAX!\nПривіт шанси на перемогу! 10 000 карток у партії.",
-    "RU": "ВЫСОКАЯ ИГРА!\nЭта колода содержит призы в размере 120 000 RBAX!\nПривет, шансы на победу! 10 000 карт в партии.",
-    "pt-BR": "JOGO DE ALTO ROLLER!\nEste deck contém prêmios no valor de 120.000 RBAX!\nOlá, chances de ganhar! 10.000 cartões em lote.",
-    "VI": "TRÒ CHƠI LĂN CAO!\nBộ bài này có giải thưởng lên tới 120.000 RBAX!\nXin chào cơ hội chiến thắng! 10.000 thẻ trong đợt.",
-    "ES": "¡JUEGO DE ALTO ROLLER!\n¡Esta baraja tiene premios por valor de 120.000 RBAX!\nHola posibilidades de ganar! 10.000 tarjetas en lote.",
-    "AR": "لعبة عالية الأسطوانة!\nتحتوي هذه المجموعة على جوائز بقيمة 120.000 RBAX!\nمرحبا فرص الفوز! 10.000 بطاقة دفعة واحدة.",
-    "FIL": "HIGH ROLLER LARO!\nAng deck na ito ay mayroong mga premyo sa halagang 120,000 RBAX!\nHi mga pagkakataong manalo! 10,000 card sa batch.",
-    "HI": "हाई रोलर गेम!\nइस डेक में 120,000 आरबीएक्स की राशि के पुरस्कार हैं!\nजीतने की संभावना हाय! बैच में 10,000 कार्ड."
+    "EN": "HIGH ROLLER GAME!\nThis deck holds prizes in the amount of 120,000 RBAX!\nHi chances to win! 50,000 cards in batch.",
+    "UK": "HIGH ROLLER ГРА!\nЦя колода містить призи в розмірі 120 000 RBAX!\nПривіт шанси на перемогу! 50 000 карток у партії.",
+    "RU": "ВЫСОКАЯ ИГРА!\nЭта колода содержит призы в размере 120 000 RBAX!\nПривет, шансы на победу! В партии 50 000 карт.",
+    "pt-BR": "JOGO DE ALTO ROLLER!\nEste deck contém prêmios no valor de 120.000 RBAX!\nOlá, chances de ganhar! 50.000 cartões em lote.",
+    "VI": "TRÒ CHƠI LĂN CAO!\nBộ bài này có giải thưởng lên tới 120.000 RBAX!\nXin chào cơ hội chiến thắng! 50.000 thẻ theo đợt.",
+    "ES": "¡JUEGO DE ALTO ROLLER!\n¡Esta baraja tiene premios por valor de 120.000 RBAX!\nHola posibilidades de ganar! 50.000 tarjetas en lote.",
+    "AR": "لعبة عالية الأسطوانة!\nتحتوي هذه المجموعة على جوائز بقيمة 120.000 RBAX!\nمرحبا فرص الفوز! 50.000 بطاقة دفعة واحدة.",
+    "FIL": "HIGH ROLLER LARO!\nAng deck na ito ay mayroong mga premyo sa halagang 120,000 RBAX!\nHi mga pagkakataong manalo! 50,000 card sa batch.",
+    "HI": "हाई रोलर गेम!\nइस डेक में 120,000 आरबीएक्स की राशि के पुरस्कार हैं!\nजीतने की संभावना हाय! बैच में 50,000 कार्ड।"
   },
   {
     "Key": "puzzle.gallery.santasac",
@@ -1474,5 +1474,29 @@
     "AR": "<link url=\"https://www.cryptoscratch.gg/about-us\">OK</link>",
     "FIL": "<link url=\"https://www.cryptoscratch.gg/about-us\">OK</link>",
     "HI": "<link url=\"https://www.cryptoscratch.gg/about-us\">OK</link>"
+  },
+  {
+    "Key": "txt.system.title",
+    "EN": "System under maintanance",
+    "UK": "System under maintanance",
+    "RU": "System under maintanance",
+    "pt-BR": "System under maintanance",
+    "VI": "System under maintanance",
+    "ES": "System under maintanance",
+    "AR": "System under maintanance",
+    "FIL": "System under maintanance",
+    "HI": "System under maintanance"
+  },
+  {
+    "Key": "txt.system.msg",
+    "EN": "System under maintanance",
+    "UK": "System under maintanance",
+    "RU": "System under maintanance",
+    "pt-BR": "System under maintanance",
+    "VI": "System under maintanance",
+    "ES": "System under maintanance",
+    "AR": "System under maintanance",
+    "FIL": "System under maintanance",
+    "HI": "System under maintanance"
   }
 ]

@@ -9,3 +9,5 @@ export enum AppSounds {
     MedWin = '/sounds/medWin.mp3',
     SmallWin = '/sounds/smallWin.mp3',
 }
+
+export const WIN_SOUND_LIST = [ AppSounds.BigWin, AppSounds.MedWin, AppSounds.SmallWin ];

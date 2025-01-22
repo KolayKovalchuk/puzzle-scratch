@@ -1,5 +1,8 @@
-import { AppSounds } from '@config/sounds';
+import { CoinAnimationName } from '@components/BigWinScreen/components/CoinAnimation';
+import { AppSounds, WIN_SOUND_LIST } from '@config/sounds';
+import { playSound } from '@store/actions/appState.actions';
 import { selectShouldStopAllSounds, selectSoundDuration, selectSoundPlayerCounter, selectSoundToPlay } from '@store/selectors/appState.selectors';
+import store from '@store/store';
 import { Howl } from 'howler';
 import { useCallback, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
@@ -120,4 +123,39 @@ export function usePlaySound() {
             }, soundDuration);
         }
     }, [soundPlayCounter]);
+}
+
+export function usePlayWinSound(animationName: CoinAnimationName) {
+    const { stopWinSound } = useStopWinSound();
+    useEffect(() => {
+        stopWinSound();
+        switch (animationName) {
+            case CoinAnimationName.coint_l:
+                store.dispatch(playSound(AppSounds.BigWin, false));
+                break;
+            case CoinAnimationName.coint_m:
+                store.dispatch(playSound(AppSounds.MedWin, false));
+                break;
+            case CoinAnimationName.coint_s:
+                store.dispatch(playSound(AppSounds.SmallWin, false));
+                break;
+        }
+    }, [animationName]);
+}
+
+export function useStopWinSound() {
+    const { stopSound } = useGetSounds();
+    const playingSound = useSelector(selectSoundToPlay);
+
+    const stopWinSound = useCallback(() => {
+        if (!playingSound) return;
+
+
+        if (WIN_SOUND_LIST.includes(playingSound)) {
+            stopSound(playingSound);
+        }
+
+    }, [stopSound, playingSound]);
+
+    return { stopWinSound };
 }

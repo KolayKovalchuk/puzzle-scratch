@@ -29,7 +29,6 @@ export function useScratchAnimation(
 
     const bundleName = SCRATCH_ANIMATION_BUNDLE.name
     const { bundle } = useLoadBundle<IScratchAnimationBundle>(bundleName)
-    console.log('useScratchAnimation bundle', bundle);
     
     const scratchJson = getScratchJson(bundle, animationName);
 

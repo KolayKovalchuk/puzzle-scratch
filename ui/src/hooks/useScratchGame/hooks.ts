@@ -1,6 +1,4 @@
-import { AppSounds } from '@config/sounds';
-import { useGetSounds } from '@hooks/usePlaySound';
-import { IBuyBatchCardData, ICardData, WinType } from '@models/IBuyBatchCardData';
+import { ICardData } from '@models/IBuyBatchCardData';
 import { ROUTES } from '@routers/routerConfig';
 import { useBuyCard } from '@services/api/cards.service';
 import { setAppError } from '@store/actions/appState.actions';
@@ -10,7 +8,7 @@ import { selectAppError } from '@store/selectors/appState.selectors';
 import store from '@store/store';
 import { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Route, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export function useBuyCardWithBalanceChange<CardData extends ICardData = ICardData>() {
     const { buyCard, card, loading: isCardBuying } = useBuyCard<CardData>();
@@ -40,28 +38,6 @@ export function useBuyCardWithBalanceChange<CardData extends ICardData = ICardDa
         isCardBuying,
         card,
     }
-}
-
-export function useStopWinSound() {
-    const { stopSound } = useGetSounds();
-
-    const stopWinSound = useCallback((card: IBuyBatchCardData | null) => {
-        if (!card) return;
-
-        switch (card.winType) {
-            case WinType.B:
-                stopSound(AppSounds.BigWin);
-                break;
-            case WinType.M:
-                stopSound(AppSounds.MedWin);
-                break;
-            case WinType.S:
-                stopSound(AppSounds.SmallWin);
-                break;
-        }
-    }, [stopSound]);
-
-    return {stopWinSound}
 }
 
 export function useRedirectOnBatchFinished() {

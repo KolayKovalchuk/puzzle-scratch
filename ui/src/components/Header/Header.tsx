@@ -29,10 +29,6 @@ export function Header() {
     const isQaUser = useSelector(selectIsQaUser);
 
     const openWallet = useCallback(() => {
-        // TODO: Remove this line to enable wallet click on prod
-        const appMode = import.meta.env.MODE
-        const isAllowed = isQaUser || appMode === 'development';
-        if (!isAllowed) return;
         navigate(ROUTES.Wallet);
     }, [navigate, isQaUser]);
 

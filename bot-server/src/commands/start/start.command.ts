@@ -28,7 +28,7 @@ async function getMsgKey(ctx: Context<Update.MessageUpdate<Message.TextMessage>>
     const config = await fetchConfigData();
 
     if (isIncludeLinkCode) {
-        const photoUrl = (config?.BOT_MSG_IMG_BASE_URL || '' )+ 'msg1_1.png';
+        const photoUrl = (config?.BOT_MSG_IMG_BASE_URL || '' )+ 'msg1_1.jpg';
         return {
             msg: 'bot.start.msg1.1',
             photoUrl: photoUrl,
@@ -37,16 +37,14 @@ async function getMsgKey(ctx: Context<Update.MessageUpdate<Message.TextMessage>>
 
     const isFirstMsg = getIsFirstMsg(ctx);
 
-    const photoUrl = (config?.BOT_MSG_IMG_BASE_URL || '' )+ 'msg1_2.png';
-
     return isFirstMsg
         ? {
             msg: 'bot.start.msg1.2',
-            photoUrl: photoUrl
+            photoUrl: (config?.BOT_MSG_IMG_BASE_URL || '' )+ 'msg1_2.jpg'
          }
         : {
             msg: 'bot.start.msg1.3',
-            photoUrl: photoUrl
+            photoUrl: (config?.BOT_MSG_IMG_BASE_URL || '' )+ 'msg1_3.jpg'
         };
 }
 

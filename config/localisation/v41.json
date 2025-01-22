@@ -264,18 +264,6 @@
     "HI": "Play"
   },
   {
-    "Key": "txt.geo.restricted",
-    "EN": "Sorry, your location is not supported for playing our game",
-    "UK": "На жаль, ваша локація не підтримується для гри в нашу гру.",
-    "RU": "К сожалению, ваша локация не поддерживается для игры в нашу игру.",
-    "pt-BR": "Desculpe, sua localização não é suportada para jogar nosso jogo",
-    "VI": "Rất tiếc, vị trí của bạn không được hỗ trợ để chơi trò chơi của chúng tôi",
-    "ES": "Lo sentimos, tu ubicación no es compatible para jugar nuestro juego",
-    "AR": "عذرًا، موقعك غير مدعوم للعب لعبتنا",
-    "FIL": "Pasensya, hindi suportado ang iyong lokasyon para maglaro ng aming laro",
-    "HI": "क्षमा करें, आपका स्थान हमारे खेल को खेलने के लिए समर्थित नहीं है।"
-  },
-  {
     "Key": "txt.tos.approve",
     "EN": "By tapping ‘Agree’ you confirm you are over 18 and agree to the Terms of Service available <link url=\"https://www.cryptoscratch.gg/terms-and-conditions\">here</link>.",
     "UK": "Торкнувшись «Прийняти», ви підтверджуєте, що вам виповнилося 18 років, і погоджуєтеся з Умовами використання, доступними <link url=\"https://www.cryptoscratch.gg/terms-and-conditions/?=uk\">тут</link>.",
@@ -1345,39 +1333,39 @@
   },
   {
     "Key": "puzzle.gallery.icebox",
-    "EN": "HIGH ROLLER GAME!\nThis deck holds prizes in the amount of 200,000 RBAX!\nMore then 50% to draw a winning card.",
-    "UK": "HIGH ROLLER ГРА!\nЦя колода містить призи в розмірі 200,000 RBAX!\nБільше 50%, щоб отримати виграшну картку.",
-    "RU": "HIGH ROLLER ИГРА!\nЭта колода содержит призы в размере 200,000 RBAX!\nБолее 50% для вытягивания выигрышной карты.",
-    "pt-BR": "JOGO DE ALTO ROLLER!\nEste deck contém prêmios no valor de 200,000 RBAX!\nMais de 50% para tirar uma carta vencedora.",
-    "VI": "TRÒ CHƠI LĂN CAO!\nBộ bài này có giải thưởng lên tới 200,000 RBAX!\nHơn 50% để rút thẻ chiến thắng.",
-    "ES": "¡JUEGO DE ALTO ROLLER!\n¡Esta baraja tiene premios por valor de 200,000 RBAX!\nMás del 50% para sacar una carta ganadora.",
-    "AR": "لعبة عالية الأسطوانة!\nتحتوي هذه المجموعة على جوائز بقيمة 200,000 RBAX!\nأكثر من 50% لسحب البطاقة الرابحة.",
-    "FIL": "HIGH ROLLER LARO!\nAng deck na ito ay mayroong mga premyo sa halagang 200,000 RBAX!\nHigit sa 50% para gumuhit ng panalong card.",
-    "HI": "हाई रोलर गेम!\nइस डेक में 200,000 RBAX की राशि के पुरस्कार हैं!\nएक विजेता कार्ड निकालने के लिए 50% से अधिक।"
+    "EN": "HIGH ROLLER GAME!\nThis deck holds prizes in the amount of 120,000 RBAX!\nHi chances to win! 10,000 card in batch.",
+    "UK": "HIGH ROLLER ГРА!\nЦя колода містить призи в розмірі 120 000 RBAX!\nПривіт шанси на перемогу! 10 000 карток у партії.",
+    "RU": "ВЫСОКАЯ ИГРА!\nЭта колода содержит призы в размере 120 000 RBAX!\nПривет, шансы на победу! 10 000 карт в партии.",
+    "pt-BR": "JOGO DE ALTO ROLLER!\nEste deck contém prêmios no valor de 120.000 RBAX!\nOlá, chances de ganhar! 10.000 cartões em lote.",
+    "VI": "TRÒ CHƠI LĂN CAO!\nBộ bài này có giải thưởng lên tới 120.000 RBAX!\nXin chào cơ hội chiến thắng! 10.000 thẻ trong đợt.",
+    "ES": "¡JUEGO DE ALTO ROLLER!\n¡Esta baraja tiene premios por valor de 120.000 RBAX!\nHola posibilidades de ganar! 10.000 tarjetas en lote.",
+    "AR": "لعبة عالية الأسطوانة!\nتحتوي هذه المجموعة على جوائز بقيمة 120.000 RBAX!\nمرحبا فرص الفوز! 10.000 بطاقة دفعة واحدة.",
+    "FIL": "HIGH ROLLER LARO!\nAng deck na ito ay mayroong mga premyo sa halagang 120,000 RBAX!\nHi mga pagkakataong manalo! 10,000 card sa batch.",
+    "HI": "हाई रोलर गेम!\nइस डेक में 120,000 आरबीएक्स की राशि के पुरस्कार हैं!\nजीतने की संभावना हाय! बैच में 10,000 कार्ड."
   },
   {
     "Key": "puzzle.gallery.santasac",
-    "EN": "This deck holds prizes in the amount of 40,000 RBAX!\nMore then 60% to draw a winning card. 10,000 cards in batch.",
-    "UK": "Ця колода містить призи в розмірі 40,000 RBAX!\nБільше 60%, щоб отримати виграшну карту. 10,000 карток у партії.",
-    "RU": "Эта колода содержит призы в размере 40,000 RBAX!\nБолее 60% на вытягивание выигрышной карты. В партии 10,000 карт.",
-    "pt-BR": "Este deck contém prêmios no valor de 40,000 RBAX!\nMais de 60% para tirar uma carta vencedora. 10,000 cartões em lote.",
-    "VI": "Bộ bài này có giải thưởng lên tới 40,000 RBAX!\nHơn 60% để rút thẻ chiến thắng. 10,000 thẻ theo lô.",
-    "ES": "¡Esta baraja tiene premios por valor de 40,000 RBAX!\nMás del 60% para sacar una carta ganadora. 10,000 tarjetas en lote.",
-    "AR": "تحتوي هذه المجموعة على جوائز بقيمة 40,000 RBAX!\nأكثر من 60% لسحب البطاقة الرابحة. 10,000 بطاقة دفعة واحدة.",
-    "FIL": "Ang deck na ito ay mayroong mga premyo sa halagang 40,000 RBAX!\nHigit sa 60% upang gumuhit ng isang panalong card. 10,000 card sa batch.",
-    "HI": "इस डेक में 40,000 RBAX की राशि के पुरस्कार हैं!\nएक विजेता कार्ड निकालने के लिए 60% से अधिक। बैच में 10,000 कार्ड।"
+    "EN": "Holiday themed game. This deck holds prizes in the amount of 30,000 RBAX!\n10,000 cards in batch.",
+    "UK": "Гра на святкову тему. Ця колода містить призи в розмірі 30 000 RBAX!\n10 000 карток у партії.",
+    "RU": "Игра на праздничную тематику. Эта колода содержит призы в размере 30 000 RBAX!\nВ партии 10 000 карт.",
+    "pt-BR": "Jogo temático de férias. Este deck contém prêmios no valor de 30.000 RBAX!\n10.000 cartões em lote.",
+    "VI": "Trò chơi theo chủ đề ngày lễ. Bộ bài này có giải thưởng lên tới 30.000 RBAX!\n10.000 thẻ theo lô.",
+    "ES": "Juego con temática navideña. ¡Esta baraja tiene premios por valor de 30.000 RBAX!\n10.000 tarjetas en lote.",
+    "AR": "لعبة تحت عنوان عطلة. تحتوي هذه المجموعة على جوائز بقيمة 30.000 RBAX!\n10.000 بطاقة دفعة واحدة.",
+    "FIL": "Larong may temang holiday. Ang deck na ito ay mayroong mga premyo sa halagang 30,000 RBAX!\n10,000 card sa batch.",
+    "HI": "अवकाश थीम पर आधारित खेल. इस डेक में 30,000 आरबीएक्स की राशि के पुरस्कार हैं!\nबैच में 10,000 कार्ड।"
   },
   {
     "Key": "puzzle.gallery.candymaze",
-    "EN": "This deck holds prizes in the amount of 40,000 RBAX!\nMore then 60% to draw a winning card. 10,000 cards in batch.",
-    "UK": "Ця колода містить призи в розмірі 40,000 RBAX!\nБільше 60%, щоб отримати виграшну карту. 10,000 карток у партії.",
-    "RU": "Эта колода содержит призы в размере 40,000 RBAX!\nБолее 60% на вытягивание выигрышной карты. В партии 10,000 карт.",
-    "pt-BR": "Este deck contém prêmios no valor de 40,000 RBAX!\nMais de 60% para tirar uma carta vencedora. 10,000 cartões em lote.",
-    "VI": "Bộ bài này có giải thưởng lên tới 40,000 RBAX!\nHơn 60% để rút thẻ chiến thắng. 10,000 thẻ theo lô.",
-    "ES": "¡Esta baraja tiene premios por valor de 40,000 RBAX!\nMás del 60% para sacar una carta ganadora. 10,000 tarjetas en lote.",
-    "AR": "تحتوي هذه المجموعة على جوائز بقيمة 40,000 RBAX!\nأكثر من 60% لسحب البطاقة الرابحة. 10,000 بطاقة دفعة واحدة.",
-    "FIL": "Ang deck na ito ay mayroong mga premyo sa halagang 40,000 RBAX!\nHigit sa 60% upang gumuhit ng isang panalong card. 10,000 card sa batch.",
-    "HI": "इस डेक में 40,000 RBAX की राशि के पुरस्कार हैं!\nएक विजेता कार्ड निकालने के लिए 60% से अधिक। बैच में 10,000 कार्ड।"
+    "EN": "This deck holds prizes in the amount of 33,000 RBAX!\nFun an addictive candy style game. 10,000 cards in batch.",
+    "UK": "Ця колода містить призи в розмірі 33 000 RBAX!\nВесела захоплююча гра в стилі цукерок. 10 000 карток у партії.",
+    "RU": "Эта колода содержит призы в размере 33 000 RBAX!\nВеселая захватывающая игра в стиле конфет. В партии 10 000 карт.",
+    "pt-BR": "Este deck contém prêmios no valor de 33.000 RBAX!\nDivertido, um jogo viciante de estilo doce. 10.000 cartões em lote.",
+    "VI": "Bộ bài này có giải thưởng lên tới 33.000 RBAX!\nTrò chơi theo phong cách kẹo gây nghiện thú vị. 10.000 thẻ theo lô.",
+    "ES": "¡Esta baraja tiene premios por valor de 33.000 RBAX!\nDivertido y adictivo juego estilo caramelo. 10.000 tarjetas en lote.",
+    "AR": "تحتوي هذه المجموعة على جوائز بقيمة 33000 RBAX!\nمتعة لعبة على غرار الحلوى الادمان. 10.000 بطاقة دفعة واحدة.",
+    "FIL": "Ang deck na ito ay mayroong mga premyo sa halagang 33,000 RBAX!\nMasaya ang isang nakakahumaling na laro ng estilo ng kendi. 10,000 card sa batch.",
+    "HI": "इस डेक में 33,000 आरबीएक्स की राशि के पुरस्कार हैं!\nएक नशे की लत कैंडी शैली के खेल का आनंद लें। बैच में 10,000 कार्ड।"
   },
   {
     "Key": "txt.invite.roles",
@@ -1450,5 +1438,41 @@
     "AR": "إيداع",
     "FIL": "Deposito",
     "HI": "जमा"
+  },
+  {
+    "Key": "txt.restricted",
+    "EN": "Sorry, the game is not available to the location you are at.",
+    "UK": "На жаль, гра недоступна в тому місці, де ви перебуваєте.",
+    "RU": "К сожалению, игра недоступна в том месте, где вы находитесь.",
+    "pt-BR": "Desculpe, o jogo não está disponível no local em que você está.",
+    "VI": "Rất tiếc, trò chơi không có sẵn ở địa điểm bạn đang ở.",
+    "ES": "Lo sentimos, el juego no está disponible en la ubicación en la que te encuentras.",
+    "AR": "عذرًا، اللعبة غير متاحة للموقع الذي تتواجد فيه.",
+    "FIL": "Paumanhin, hindi available ang laro sa lokasyong kinaroroonan mo.",
+    "HI": "क्षमा करें, आप जिस स्थान पर हैं वहां गेम उपलब्ध नहीं है।"
+  },
+  {
+    "Key": "txt.restricted.title",
+    "EN": "Restricted location",
+    "UK": "Обмежене розташування",
+    "RU": "Ограниченное местоположение",
+    "pt-BR": "Localização restrita",
+    "VI": "Vị trí bị hạn chế",
+    "ES": "Ubicación restringida",
+    "AR": "موقع مقيد",
+    "FIL": "Pinaghihigpitang lokasyon",
+    "HI": "प्रतिबंधित स्थान"
+  },
+  {
+    "Key": "txt.restricted.ok",
+    "EN": "<link url=\"https://www.cryptoscratch.gg/about-us\">OK</link>",
+    "UK": "<link url=\"https://www.cryptoscratch.gg/about-us\">OK</link>",
+    "RU": "<link url=\"https://www.cryptoscratch.gg/about-us\">OK</link>",
+    "pt-BR": "<link url=\"https://www.cryptoscratch.gg/about-us\">OK</link>",
+    "VI": "<link url=\"https://www.cryptoscratch.gg/about-us\">OK</link>",
+    "ES": "<link url=\"https://www.cryptoscratch.gg/about-us\">OK</link>",
+    "AR": "<link url=\"https://www.cryptoscratch.gg/about-us\">OK</link>",
+    "FIL": "<link url=\"https://www.cryptoscratch.gg/about-us\">OK</link>",
+    "HI": "<link url=\"https://www.cryptoscratch.gg/about-us\">OK</link>"
   }
 ]

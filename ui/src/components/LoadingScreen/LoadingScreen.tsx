@@ -9,6 +9,10 @@ import { useLoadingPercentHook } from './hooks/useLoadingPercentHook';
 import styles from './LoadingScreen.module.scss';
 
 import robo_token_double_border from '@icons/robo_token_double_border.svg';
+import { AppErrors } from '@store/reducers/appState.reducer';
+import { selectAppError } from '@store/selectors/appState.selectors';
+import { useSelector } from 'react-redux';
+import { GeoRestrictionPopup } from './GeoRestrictionPopup';
 
 const poweredByTextStyles: Partial<ITextStyle> = {
     fontSize: 20,
@@ -28,9 +32,12 @@ export function LoadingScreen({ isLoaded }: ILoadingScreenProps) {
         percentage,
     } = useLoadingPercentHook(isLoaded);
 
+    const appError = useSelector(selectAppError);
+    const isGeoRestrictionVisible = appError === AppErrors.GeoRestriction;
+
     if (!isVisible) return null;
 
-    return (
+    return (<>
         <div className={styles.contianer}>
             <LogoHeader className={styles.logoHeader} />
 
@@ -52,5 +59,6 @@ export function LoadingScreen({ isLoaded }: ILoadingScreenProps) {
                     textStyles={loadingTextStyles} />
             </div>
         </div>
-    );
+        <GeoRestrictionPopup isOpen={isGeoRestrictionVisible} className={styles.modalDialog}/>
+    </>);
 }

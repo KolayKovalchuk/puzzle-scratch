@@ -35,7 +35,7 @@ export const selectLocalValue = (localizationKey: string, locale?: string) => cr
 
         const localizationKeyList = Object.keys(localizationDataItem)
 
-        const targetLocale = locale || preferredLocale
+        const targetLocale = locale || preferredLocale || 'EN'
 
         if (!targetLocale) return localizationKey
 

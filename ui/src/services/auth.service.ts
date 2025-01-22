@@ -1,6 +1,8 @@
 import { IUserAcceptTermsResponse } from '@models/IUserAcceptTermsResponse';
 import { User } from '@models/User.model';
+import { setAppError } from '@store/actions/appState.actions';
 import { fetchUser, fetchUserError, fetchUserSuccess, updateUserToken } from '@store/actions/user.actions';
+import { AppErrors } from '@store/reducers/appState.reducer';
 import { selectUser } from '@store/selectors/user.selectors';
 import store from '@store/store';
 import WebApp from '@twa-dev/sdk';
@@ -70,6 +72,12 @@ function extractStartparams(start_param: string, paramName: string): string {
     return '';
 }
 
+function handleLogin403Error(data: any) {
+    if (data && data.ipForbidden) {
+        store.dispatch(setAppError(AppErrors.GeoRestriction));
+    }
+}
+
 export async function loginUser() {
     try {
         store.dispatch(fetchUser());
@@ -102,6 +110,11 @@ export async function loginUser() {
         const data = await apiLoginClient.post('/login', body);
 
         if (data?.status !== 200) {
+
+            if (data?.status === 403) {
+                handleLogin403Error(data?.data);
+            }
+
             throw new Error('Failed to login. User data is empty');
         }
 

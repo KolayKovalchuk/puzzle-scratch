@@ -3,7 +3,7 @@ import { RootState } from '../store';
 
 // Selector
 export const selectGame = (state: RootState) => {
-    return state.game;
+    return state.appState;
 }
 
 export const selectLastAmountChange = createSelector(

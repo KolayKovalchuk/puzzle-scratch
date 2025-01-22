@@ -1,9 +1,14 @@
 import { AppConfig } from '@models/AppConfig.model';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { setAppError } from '@store/actions/appState.actions';
+import { AppErrors } from '@store/reducers/appState.reducer';
 import axios, { AxiosError, AxiosInstance } from 'axios';
 import axiosRetry from 'axios-retry';
 
 const VITE_CONFIG_URL = import.meta.env.VITE_CONFIG_URL;
+
+const maxRetries = 4;
+let retries = maxRetries;
 
 export const configApi = createApi({
     reducerPath: 'configApi',
@@ -11,6 +16,33 @@ export const configApi = createApi({
     endpoints: (builder) => ({
         getAppConfig: builder.query<AppConfig, void>({
             query: () => '',
+            async onQueryStarted(arg, { queryFulfilled, dispatch, getState }) {
+
+                while (retries > 0) {
+                    try {
+                        await queryFulfilled;
+                        retries = maxRetries;
+                        dispatch(setAppError(AppErrors.NoError));
+
+                        break;
+                    } catch (error) {
+                        retries--;
+                        
+                        if (retries === 3) {
+                            dispatch(setAppError(AppErrors.SystemError));
+                        }
+                        
+                        await new Promise((resolve) => setTimeout(resolve, 1000 * 30));
+                        
+                        const appError = (getState() as any)?.appState.error;
+                        if (appError !== AppErrors.SystemError) {
+                            return;
+                        }
+
+                        await dispatch(configApi.endpoints.getAppConfig.initiate(arg));
+                    }
+                }
+            },
         }),
     }),
 })

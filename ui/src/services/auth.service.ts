@@ -79,6 +79,10 @@ function handleLogin403Error(data: any) {
     }
 }
 
+function handleLogin500Error() {
+    store.dispatch(setAppError(AppErrors.SystemError));
+}
+
 export async function loginUser() {
     try {
         store.dispatch(fetchUser());
@@ -118,6 +122,10 @@ export async function loginUser() {
 
             if (data?.status === 403) {
                 handleLogin403Error(data?.data);
+            }
+
+            if (data?.status === 500) {
+                handleLogin500Error();
             }
 
             throw new Error('Failed to login. User data is empty');

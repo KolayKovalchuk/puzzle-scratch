@@ -22,11 +22,11 @@
   ],
   "FRIENDS_BONUS": {
     "FRIENDS_TO_INVITE": 3,
-    "RBAX": 100
+    "RBAX": 60
   },
   "SEND_RBAX": {
     "RBAX": 30,
-    "MAX_RBAX_PER_USER_DAILY": 200,
+    "MAX_RBAX_PER_USER_DAILY": 100,
     "EXPIRATION_MS": 1800000,
     "MAX_USES": 2
   }

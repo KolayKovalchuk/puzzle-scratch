@@ -8,10 +8,9 @@ import { DefaultTextStyleConfig } from './DefaultTextStyleConfig';
 import { IStyledTextProps } from './StyledText.models';
 import styles from './StyledText.module.scss';
 
-function getTextPlaceholderFontSize(fontSize: number | string | undefined) {
+function getTextPlaceholderFontSize(fontSize: number | string | undefined, fontSizeShift = 6) {
     if (fontSize === undefined) return DefaultTextStyleConfig.fontSize;
 
-    const fontSizeShift = 6;
     if (typeof fontSize === 'number') {
         return fontSize + fontSizeShift;
     }

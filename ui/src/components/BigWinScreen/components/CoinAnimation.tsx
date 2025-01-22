@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 
 import { COIN_ANIMATION_BUNDLE } from '@config/coinAnimationBundleConfig';
 import styles from './CoinAnimation.module.scss';
+import { usePlayWinSound } from '@hooks/usePlaySound';
 
 export enum CoinAnimationName {
     coint_l = 'coint_l',
@@ -110,6 +111,8 @@ export function CoinAnimation({ animationName, width: widthArg, height: heigthAr
     const { containerRef, dimensions } = useContainerDimensions();
     const width = widthArg || dimensions.width;
     const height = heigthArg || dimensions.height;
+
+    usePlayWinSound(animationName);
 
     return (<div className={styles.container} ref={containerRef}>
         <Stage

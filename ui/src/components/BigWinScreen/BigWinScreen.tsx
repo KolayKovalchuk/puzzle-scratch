@@ -2,16 +2,13 @@
 
 import { Icon } from '@components/shared/Icon';
 import { WinStyledText } from '@components/shared/StyledText';
-import { AppSounds } from '@config/sounds';
 import big_win from '@icons/big_win.svg';
 import robo_token_gold from '@icons/robo_token_gold.svg';
 import { WinType } from '@models/IBuyBatchCardData';
-import { playSound } from '@store/actions/appState.actions';
 import { selectScratchCardTransitionTimeout } from '@store/selectors/config.selectors';
-import store from '@store/store';
 import { formatNumber } from '@utils/formatters/formatNumber';
 import { getCoinAnimationName } from '@utils/getCoinAnimationName';
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import styles from './BigWinScreen.module.scss';
 import { CoinAnimation, CoinAnimationName } from './components/CoinAnimation';
@@ -23,30 +20,12 @@ export interface IBigWinScreenProps {
     onClick?: () => void;
 }
 
-function usePlayWinSound(animationName: CoinAnimationName) {
-    useEffect(() => {
-        switch (animationName) {
-            case CoinAnimationName.coint_l:
-                store.dispatch(playSound(AppSounds.BigWin, false));
-                break;
-            case CoinAnimationName.coint_m:
-                store.dispatch(playSound(AppSounds.MedWin, false));
-                break;
-            case CoinAnimationName.coint_s:
-                store.dispatch(playSound(AppSounds.SmallWin, false));
-                break;
-        }
-    }, [animationName]);
-}
-
 
 export function BigWinScreen({ winAmount, winType = WinType.M, className, onClick }: IBigWinScreenProps) {
     const scratchCardTransitionTimeout = useSelector(selectScratchCardTransitionTimeout);
 
     const coinAnimationName = getCoinAnimationName(winType)
     const isBigWinIconVisible = coinAnimationName === CoinAnimationName.coint_l
-
-    usePlayWinSound(coinAnimationName);
     
     const onClickCb = useCallback(() => {
         if (onClick) onClick();

@@ -11,13 +11,12 @@ export async function onPreCheckoutQuery(ctx: Context<Update.PreCheckoutQueryUpd
     try {
         console.log('Sending validation request to Puzzle Game Service with payload:', payload);
         const isValidPurchase = await validatePurchase(payload);
-        console.log('Validation response from Puzzle Game Service:', isValidPurchase);
 
         if (isValidPurchase) {
-            console.log('Purchase is valid. Responding to Telegram.');
+            console.log('Purchase is valid. Responding to Telegram.', isValidPurchase);
             await ctx.answerPreCheckoutQuery(true);
         } else {
-            console.log('Purchase is invalid. Responding to Telegram with error.');
+            console.log('Purchase is invalid. Responding to Telegram with error.', isValidPurchase);
             await ctx.answerPreCheckoutQuery(false, 'Invalid purchase.');
         }
     } catch (error) {

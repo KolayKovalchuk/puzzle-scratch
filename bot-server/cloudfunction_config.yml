@@ -12,35 +12,36 @@ steps:
     - --trigger-http
     - --region=us-central1
     - --allow-unauthenticated
+    - --set-secrets=TELEGRAM_INTERNAL_COMM_AUTH_TOKEN=TELEGRAM_INTERNAL_COMM_AUTH_TOKEN:latest
     # - --env-vars-file=.env.yaml
     # - --update-labels=dependencies=updated
-  - name: gcr.io/cloud-builders/gcloud
-    id: Build set telegram webhook url
-    entrypoint: gcloud
-    args: 
-    - functions
-    - deploy
-    - setWebhook
-    - --entry-point=setWebhook
-    - --source=dist
-    - --runtime=nodejs22
-    - --trigger-http
-    - --region=us-central1
-    - --allow-unauthenticated
-    # - --env-vars-file=.env.yaml
-    # - --update-labels=dependencies=updated
-  - name: gcr.io/cloud-builders/gcloud
-    id: Build get telegram webhook url
-    entrypoint: gcloud
-    args: 
-    - functions
-    - deploy
-    - getWebhook
-    - --entry-point=getWebhook
-    - --source=dist
-    - --runtime=nodejs22
-    - --trigger-http
-    - --region=us-central1
-    - --allow-unauthenticated
-    # - --env-vars-file=.env.yaml
-    # - --update-labels=dependencies=updated
+  # - name: gcr.io/cloud-builders/gcloud
+  #   id: Build set telegram webhook url
+  #   entrypoint: gcloud
+  #   args: 
+  #   - functions
+  #   - deploy
+  #   - setWebhook
+  #   - --entry-point=setWebhook
+  #   - --source=dist
+  #   - --runtime=nodejs22
+  #   - --trigger-http
+  #   - --region=us-central1
+  #   - --allow-unauthenticated
+  #   # - --env-vars-file=.env.yaml
+  #   # - --update-labels=dependencies=updated
+  # - name: gcr.io/cloud-builders/gcloud
+  #   id: Build get telegram webhook url
+  #   entrypoint: gcloud
+  #   args: 
+  #   - functions
+  #   - deploy
+  #   - getWebhook
+  #   - --entry-point=getWebhook
+  #   - --source=dist
+  #   - --runtime=nodejs22
+  #   - --trigger-http
+  #   - --region=us-central1
+  #   - --allow-unauthenticated
+  #   # - --env-vars-file=.env.yaml
+  #   # - --update-labels=dependencies=updated

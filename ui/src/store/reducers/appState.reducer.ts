@@ -5,6 +5,8 @@ export enum AppErrors {
     NoError = 'noError',
     InsufficientBalance = 'InsufficientBalance',
     NoAvailableCards = 'NoAvailableCards',
+    GeoRestriction = 'GeoRestriction',
+    SystemError = 'SystemError',
 }
 
 // Initial State

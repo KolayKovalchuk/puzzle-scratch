@@ -27,6 +27,7 @@ export interface IButtonProps {
     iconName?: string;
 
     text?: string;
+    yShift?: number;
     style?: CSSProperties;
     shouldFitFontSize?: boolean;
     textStyle?: Partial<ITextStyle>;
@@ -45,6 +46,7 @@ export function ButtonComponent({
     iconName,
 
     text,
+    yShift = 0.5,
     children,
     style,
     shouldFitFontSize = true,
@@ -78,7 +80,7 @@ export function ButtonComponent({
                 }}
                 shouldFitFontSize={shouldFitFontSize}
                 getTextSize={getTextSize}
-                yShift={0.5}
+                yShift={yShift}
             ></RegularStyledText>
         );
     }, [

@@ -8,6 +8,17 @@ import { DefaultTextStyleConfig } from './DefaultTextStyleConfig';
 import { IStyledTextProps } from './StyledText.models';
 import styles from './StyledText.module.scss';
 
+function getTextPlaceholderFontSize(fontSize: number | string | undefined, fontSizeShift = 6) {
+    if (fontSize === undefined) return DefaultTextStyleConfig.fontSize;
+
+    if (typeof fontSize === 'number') {
+        return fontSize + fontSizeShift;
+    }
+
+    const fontSizeNumber = fontSize.replace('px', '');
+    return fontSizeNumber + fontSizeShift + 'px';
+}
+
 export function StyledText({
     text,
     className,
@@ -17,7 +28,7 @@ export function StyledText({
     anchor = 0.5,
     shouldFitFontSize = true,
     xShift = 0.5,
-    yShift = 0.35,
+    yShift = 0.5,
     getTextSize,
 }: IStyledTextProps) {
     const { containerRef, dimensions } = useContainerDimensions();
@@ -33,6 +44,8 @@ export function StyledText({
     }, [getTextSize]);
 
     return useMemo(() => {
+        const placeHolderFontSize = fontSize || textStyles?.fontSize || DefaultTextStyleConfig.fontSize;
+
         return (
             <div ref={containerRef} className={`${styles.container} ${className || ''}`} style={styleArg}>
                     <Stage className={styles.stageClass} width={dimensions.width} height={dimensions.height} options={{ backgroundAlpha: 0, forceCanvas: true }}>
@@ -51,8 +64,7 @@ export function StyledText({
                 <div
                     className={styles.textMock}
                     style={{
-                        fontSize: fontSize || textStyles?.fontSize || DefaultTextStyleConfig.fontSize,
-                        letterSpacing: '2px'
+                        fontSize: getTextPlaceholderFontSize(placeHolderFontSize),
                     }}
                 >{text}</div>
             </div>

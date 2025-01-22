@@ -9,21 +9,45 @@ import { SecondaryStyledText } from '@components/shared/StyledText'
 import { useGetSmallestFontSize } from '@hooks/useGetSmallestFontSize'
 import robo_token_gold_no_shining from '@icons/robo_token_gold_no_shining.svg'
 import { useGetUserBalance } from '@services/api/balance.service'
-import { useGetUserStats } from '@services/api/user.service'
 import { selectLocalValue } from '@store/selectors/localization.selectors'
-import { selectUserBalanceTotal, selectUserBalanceWithdrawable } from '@store/selectors/user.selectors'
+import { selectUserBalanceTotal, selectUserBalanceWithdrawable, selectUserPreferredLocale } from '@store/selectors/user.selectors'
 import { formatNumber } from '@utils/formatters/formatNumber'
 import { ITextStyle } from 'pixi.js-legacy'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { WalletHistoryTable } from './components/WalletHistoryTable/WalletHistoryTable'
 import { DepositWithDialogMode } from './Wallet.models'
 import styles from './Wallet.module.scss'
+import { useGetUserStats } from '@services/api/user.service'
 
 const headerStyles: Partial<ITextStyle> = {
     fontSize: 40,
     fontWeight: 'bold',
 }
+
+function useFixForArabicLocale(textStylesWithFontSize: Partial<ITextStyle>) {
+    const userLocale = useSelector(selectUserPreferredLocale);
+    const [btnYShift, setBtnYShift] = useState(0.5);
+    useEffect(() => {
+        if (userLocale?.toLowerCase() === 'ar') {
+            setBtnYShift(0.3);
+
+            if (!textStylesWithFontSize.fontSize) return;
+
+            const fontSizeShoft = 6;
+            if (typeof textStylesWithFontSize.fontSize === 'number') {
+                textStylesWithFontSize.fontSize = textStylesWithFontSize.fontSize - fontSizeShoft;
+            } else {
+
+                textStylesWithFontSize.fontSize = parseInt(textStylesWithFontSize.fontSize.replace('px', '')) - fontSizeShoft + 'px';
+            }
+        }
+
+    }, [userLocale, textStylesWithFontSize.fontSize]);
+
+    return { btnYShift };
+}
+
 
 export function Wallet() {
     const headerText = useSelector(selectLocalValue('txt.wallet.wallet'))
@@ -60,6 +84,8 @@ export function Wallet() {
 
     const containerClass = `${styles.container} ${isLoading ? styles.hidden : ''}`;
 
+    const { btnYShift } = useFixForArabicLocale(textStylesWithFontSize);
+
     return (<>
         {isLoading && <div className={styles.spinnerContainer}><SpinnerIcon name={robo_token_gold_no_shining} className={styles.spinnerIcon} /></div>}
         <div className={containerClass}>
@@ -89,6 +115,7 @@ export function Wallet() {
                         text={depositLabel}
                         getTextSize={(size) => setDepositBtnFontSize(size)}
                         textStyle={textStylesWithFontSize}
+                        yShift={btnYShift}
                     ></Button>
                 </div>
                 <div className={styles.balanceInfoRow}>
@@ -106,6 +133,7 @@ export function Wallet() {
                         text={withdrawLabel}
                         getTextSize={(size) => setWithdrawBtnFontSize(size)}
                         textStyle={textStylesWithFontSize}
+                        yShift={btnYShift}
                         isDisabled={true}
                         ribbonLabel='COMING SOON!'
                     ></ButtonWithRibbon>

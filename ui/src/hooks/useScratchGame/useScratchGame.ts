@@ -9,8 +9,8 @@ import store from '@store/store';
 import { RefObject, useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { _applyForEachScratchCardRef, _getScratchedStateConfig } from './utils';
-import { useBuyCardWithBalanceChange, useRedirectOnBatchFinished, useStopWinSound } from './hooks';
-import { useGetSounds } from '@hooks/usePlaySound';
+import { useBuyCardWithBalanceChange, useRedirectOnBatchFinished } from './hooks';
+import { useGetSounds, useStopWinSound } from '@hooks/usePlaySound';
 
 let timeout: NodeJS.Timeout | null = null;
 let swipeTimeout: NodeJS.Timeout | null = null;
@@ -53,9 +53,8 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
     const playAnimation = useCallback(() => {
         scratchAnimationRef.current?.play();
         setIsScratchAnimationPlaying(true);
-        // setTimeout(() => store.dispatch(playSound(AppSounds.Scratch)), 0);
         stopSound(AppSounds.Scratch);
-        stopWinSound(card);
+        stopWinSound();
         store.dispatch(playSound(AppSounds.Scratch, false));
     }, [stopSound, stopWinSound, card]);
 
@@ -70,6 +69,8 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
 
     const onPlay = useCallback(async () => {
         if (isPlayBtnDisabled) return
+        
+        setIsBigWinVisible(false);
 
         store.dispatch(resetMatrixBlinkCounter());
 
@@ -131,10 +132,10 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
     }, [batchId, buyCardWithBalanceChange, lastAction]);
 
     const onBigWinClicked = useCallback(() => {
-        stopWinSound(card);
-        setIsBigWinVisible(false);
-        onPlay();
-    }, [card, onPlay, stopWinSound]);
+        // stopWinSound(card);
+        // setIsBigWinVisible(false);
+        // onPlay();
+    }, []);
 
     const onScratchAnimationCompleted = useCallback(() => {
         setIsScratchAnimationPlaying(false);

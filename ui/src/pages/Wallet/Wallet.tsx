@@ -33,14 +33,14 @@ function useFixForArabicLocale() {
 
     useEffect(() => {
         if (isArabicLocale) {
-            setBtnYShift(0.3);
+            setBtnYShift(0.4);
         }
 
     }, [isArabicLocale]);
 
     return {
         btnYShift,
-        fontSizeShift: isArabicLocale ? 0.7 : 0,
+        fontSizeShift: isArabicLocale ? 0.7 : 1,
     };
 }
 

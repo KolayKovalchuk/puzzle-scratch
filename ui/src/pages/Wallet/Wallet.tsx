@@ -9,6 +9,7 @@ import { SecondaryStyledText } from '@components/shared/StyledText'
 import { useGetSmallestFontSize } from '@hooks/useGetSmallestFontSize'
 import robo_token_gold_no_shining from '@icons/robo_token_gold_no_shining.svg'
 import { useGetUserBalance } from '@services/api/balance.service'
+import { useGetUserStats } from '@services/api/user.service'
 import { selectLocalValue } from '@store/selectors/localization.selectors'
 import { selectUserBalanceTotal, selectUserBalanceWithdrawable, selectUserPreferredLocale } from '@store/selectors/user.selectors'
 import { formatNumber } from '@utils/formatters/formatNumber'
@@ -18,34 +19,29 @@ import { useSelector } from 'react-redux'
 import { WalletHistoryTable } from './components/WalletHistoryTable/WalletHistoryTable'
 import { DepositWithDialogMode } from './Wallet.models'
 import styles from './Wallet.module.scss'
-import { useGetUserStats } from '@services/api/user.service'
 
 const headerStyles: Partial<ITextStyle> = {
     fontSize: 40,
     fontWeight: 'bold',
 }
 
-function useFixForArabicLocale(textStylesWithFontSize: Partial<ITextStyle>) {
+function useFixForArabicLocale() {
     const userLocale = useSelector(selectUserPreferredLocale);
     const [btnYShift, setBtnYShift] = useState(0.5);
+
+    const isArabicLocale = userLocale?.toLowerCase() === 'ar';
+
     useEffect(() => {
-        if (userLocale?.toLowerCase() === 'ar') {
+        if (isArabicLocale) {
             setBtnYShift(0.3);
-
-            if (!textStylesWithFontSize.fontSize) return;
-
-            const fontSizeShoft = 6;
-            if (typeof textStylesWithFontSize.fontSize === 'number') {
-                textStylesWithFontSize.fontSize = textStylesWithFontSize.fontSize - fontSizeShoft;
-            } else {
-
-                textStylesWithFontSize.fontSize = parseInt(textStylesWithFontSize.fontSize.replace('px', '')) - fontSizeShoft + 'px';
-            }
         }
 
-    }, [userLocale, textStylesWithFontSize.fontSize]);
+    }, [isArabicLocale]);
 
-    return { btnYShift };
+    return {
+        btnYShift,
+        fontSizeShift: isArabicLocale ? 0.7 : 0,
+    };
 }
 
 
@@ -76,15 +72,14 @@ export function Wallet() {
 
     const { userStats } = useGetUserStats();
 
+    const { btnYShift, fontSizeShift } = useFixForArabicLocale();
     const {
         textStylesWithFontSize,
         setDepositBtnFontSize,
         setWithdrawBtnFontSize,
-    } = useGetSmallestFontSize();
+    } = useGetSmallestFontSize(fontSizeShift);
 
     const containerClass = `${styles.container} ${isLoading ? styles.hidden : ''}`;
-
-    const { btnYShift } = useFixForArabicLocale(textStylesWithFontSize);
 
     return (<>
         {isLoading && <div className={styles.spinnerContainer}><SpinnerIcon name={robo_token_gold_no_shining} className={styles.spinnerIcon} /></div>}
@@ -113,7 +108,7 @@ export function Wallet() {
                         mode={ButtonType.Confirm}
                         onClick={onDepositBtnClick}
                         text={depositLabel}
-                        getTextSize={(size) => setDepositBtnFontSize(size)}
+                        getTextSize={setDepositBtnFontSize}
                         textStyle={textStylesWithFontSize}
                         yShift={btnYShift}
                     ></Button>
@@ -131,7 +126,7 @@ export function Wallet() {
                         mode={ButtonType.Confirm}
                         onClick={onWithdrawBtnClick}
                         text={withdrawLabel}
-                        getTextSize={(size) => setWithdrawBtnFontSize(size)}
+                        getTextSize={setWithdrawBtnFontSize}
                         textStyle={textStylesWithFontSize}
                         yShift={btnYShift}
                         isDisabled={true}

@@ -6,7 +6,7 @@ import { AppErrors } from '@store/reducers/appState.reducer';
 import { selectUser } from '@store/selectors/user.selectors';
 import store from '@store/store';
 import WebApp from '@twa-dev/sdk';
-import { AxiosInstance } from 'axios';
+import { AxiosError, AxiosInstance } from 'axios';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { apiClient, useApiClient } from './api/api.service';
@@ -113,19 +113,6 @@ export async function loginUser() {
 
         const data = await apiLoginClient.post('/login', body);
 
-        if (data?.status !== 200) {
-
-            if (data?.status === 403) {
-                handleLogin403Error(data?.data);
-            }
-
-            if (data?.status === 500) {
-                handleLogin500Error();
-            }
-
-            throw new Error('Failed to login. User data is empty');
-        }
-
         const user = new User(data.data);
 
         store.dispatch(fetchUserSuccess(user.toJSON()));
@@ -134,10 +121,17 @@ export async function loginUser() {
             addAuthInterceptor(apiClient, user.authToken);
         }
     } catch (error) {
-        if (error instanceof Error) {
-            store.dispatch(fetchUserError(error.message));
-        } else {
-            store.dispatch(fetchUserError('loginUser: An unknown error occurred'));
+        const errorMessage = error instanceof Error ? error.message : 'loginUser: An unknown error occurred';
+        store.dispatch(fetchUserError(errorMessage));
+
+        if (error instanceof AxiosError) {
+            if (error.status === 403) {
+                handleLogin403Error(error.response?.data);
+            }
+
+            if (error.status === 500) {
+                handleLogin500Error();
+            }
         }
     }
 }

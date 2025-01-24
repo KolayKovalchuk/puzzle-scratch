@@ -1,0 +1,37 @@
+@use '@styles/colors';
+@use '@styles/mixins';
+
+.input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+
+    background-color: colors.$light-violet;
+    box-shadow: 0px -2px 2px 0px #00000040 inset,
+        0px 2px 2px 0px #00000040 inset;
+
+    border: none;
+    outline: none;
+
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+
+
+    & {
+        -moz-appearance: textfield;
+    }
+    
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    
+    &.error {
+        border-color: red;
+    }
+}

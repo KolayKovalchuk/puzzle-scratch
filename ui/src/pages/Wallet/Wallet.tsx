@@ -19,6 +19,8 @@ import { useSelector } from 'react-redux'
 import { WalletHistoryTable } from './components/WalletHistoryTable/WalletHistoryTable'
 import { DepositWithDialogMode } from './Wallet.models'
 import styles from './Wallet.module.scss'
+import { useWithdrawDialog } from './hooks/useWithdrawDialog'
+import { WithdrawDialog } from './components/WithdrawDialog/WithdrawDialog'
 
 const headerStyles: Partial<ITextStyle> = {
     fontSize: 40,
@@ -61,14 +63,11 @@ export function Wallet() {
     const { isLoading } = useGetUserBalance();
 
     const { onDepositBtnClick, closeDialog, isDepositDialogOpen } = useDepositWithDialog();
+    const { onWithdrawBtnClick, closeDialog: closeWithdrawDialog, isWithdrawDialogOpen } = useWithdrawDialog();
 
     const onModeChanged = useCallback((mode: DepositWithDialogMode) => {
         setMode(mode);
     }, [closeDialog]);
-
-    const onWithdrawBtnClick = useCallback(() => {
-        console.log('Withdraw button clicked');
-    }, [])
 
     const { userStats } = useGetUserStats();
 
@@ -121,7 +120,7 @@ export function Wallet() {
                             <span className={styles.balanceAmount}>{formatNumber(withdrawableAmount)}</span>
                         </div>
                     </div>
-                    <ButtonWithRibbon
+                    <Button
                         className={`${styles.walletBtn}`}
                         mode={ButtonType.Confirm}
                         onClick={onWithdrawBtnClick}
@@ -129,9 +128,7 @@ export function Wallet() {
                         getTextSize={setWithdrawBtnFontSize}
                         textStyle={textStylesWithFontSize}
                         yShift={btnYShift}
-                        isDisabled={true}
-                        ribbonLabel='COMING SOON!'
-                    ></ButtonWithRibbon>
+                    ></Button>
                 </div>
                 <div className={styles.balanceInfoRow}>
                     <div className={styles.column}>
@@ -144,11 +141,17 @@ export function Wallet() {
                 </div>
             </div>
             <WalletHistoryTable mode={mode} />
+            <Footer />
             <DepositWithDialog
                 onModeChanged={onModeChanged}
                 isOpen={isDepositDialogOpen}
                 onCancel={closeDialog}
                 onConfirm={closeDialog}
+            />
+            <WithdrawDialog
+                isOpen={isWithdrawDialogOpen}
+                onCancel={closeWithdrawDialog}
+                onConfirm={() => { }}
             />
             <Footer />
         </div >

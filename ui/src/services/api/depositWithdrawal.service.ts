@@ -1,5 +1,5 @@
 import { apiClient } from './api.service';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 export enum SupportedDepositWallets {
     RBAX = 'RBAX',
@@ -106,4 +106,33 @@ export function useDWHistory(shouldReload = true): { historyData: IDWHistory[] |
     }, [shouldReload]);
 
     return { historyData, loading };
+}
+
+export async function sendWithdrawalRequest(
+    address: string,
+    amount: string,
+    memo: string
+): Promise<void | null> {
+    try {
+        return await apiClient.post('/dw/withdraw', { address, amount, memo });
+    } catch (error) {
+        console.error('Error sending withdrawal request:', error);
+        return null;
+    }
+}
+
+export function useSendWithdrawalRequest(
+    address: string,
+    amount: string,
+    memo: string,
+) {
+    const [loading, setLoading] = useState(false);
+
+    const sendRequest = useCallback(async () => {
+        setLoading(true);
+        await sendWithdrawalRequest(address, amount, memo);
+        setLoading(false);
+    }, [address, amount, memo]);
+
+    return { sendRequest, loading };
 }

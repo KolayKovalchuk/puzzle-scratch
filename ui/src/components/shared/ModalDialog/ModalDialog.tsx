@@ -3,13 +3,13 @@ import { FC, MouseEvent, ReactNode, useCallback, useEffect, useMemo } from 'reac
 import { Button, ButtonType } from '@components/shared/Button';
 import { Icon } from '@components/shared/Icon';
 import { StyledHeader } from '@components/shared/StyledHeader';
+import { playSound } from '@store/actions/appState.actions';
+import store from '@store/store';
+import { AppSounds } from '@config/sounds';
 
 import close_cross_icon from '@icons/close_cross_icon.svg';
-
 import styles from './ModalDialog.module.scss';
-import store from '@store/store';
-import { playSound } from '@store/actions/appState.actions';
-import { AppSounds } from '@config/sounds';
+
 
 interface ModalDialogProps {
     isOpen: boolean;
@@ -26,6 +26,8 @@ interface ModalDialogProps {
 
     callOnCloseOnOverlayClick?: boolean;
     className?: string;
+
+    fotterBtnDirection?: 'row' | 'column';
 }
 
 const ModalDialog: FC<ModalDialogProps> = ({
@@ -39,6 +41,7 @@ const ModalDialog: FC<ModalDialogProps> = ({
     children,
     className,
     callOnCloseOnOverlayClick = false,
+    fotterBtnDirection = 'row',
 }) => {
     const handleClose = useCallback(() => {
         onClose && onClose();
@@ -49,10 +52,12 @@ const ModalDialog: FC<ModalDialogProps> = ({
     }, [onConfirm]);
 
     const modalDialogContent = useMemo(() => {
+        const directionClass = fotterBtnDirection === 'row' ? styles.row : styles.column;
+
         return (
             <div className={`${styles.modalBody} modalBody`}>
                 {children ? children : <p>{content}</p>}
-                <div className={`${styles.modalActions} modalActions`}>
+                <div className={`${styles.modalActions} ${directionClass} modalActions`}>
                     {cancelText && <Button
                         className={styles.btn}
                         text={cancelText}
@@ -64,12 +69,21 @@ const ModalDialog: FC<ModalDialogProps> = ({
                         className={styles.btn}
                         text={confirmText}
                         mode={ButtonType.Confirm}
-                        onClick={handleConfirm} />
+                        onClick={handleConfirm}
+                    />
                     }
                 </div>
             </div>
         );
-    }, [children, content, confirmText, cancelText, handleClose, handleConfirm]);
+    }, [
+        children,
+        content,
+        confirmText,
+        cancelText,
+        fotterBtnDirection,
+        handleClose,
+        handleConfirm,
+    ]);
 
     const onOverlayClick = useCallback((e: MouseEvent) => {
         e.stopPropagation();
@@ -102,7 +116,7 @@ const ModalDialog: FC<ModalDialogProps> = ({
                         {modalDialogContent}
                     </StyledHeader>
                     : <>
-                        <Icon name={close_cross_icon} className={styles.closeCrossIcon} onClick={handleClose}/>
+                        <Icon name={close_cross_icon} className={styles.closeCrossIcon} onClick={handleClose} />
                         {modalDialogContent}
                     </>
                 }

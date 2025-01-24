@@ -2,6 +2,7 @@ import { LocalizationModel } from '@models/LocalizationDataKey.model';
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '@store/store';
 import { selectPreferredLocale } from './user.selectors';
+import WebApp from '@twa-dev/sdk';
 
 // Base selector to access the query state
 const selectLocalizationState = (state: RootState) => state.localization;
@@ -35,9 +36,7 @@ export const selectLocalValue = (localizationKey: string, locale?: string) => cr
 
         const localizationKeyList = Object.keys(localizationDataItem)
 
-        const targetLocale = locale || preferredLocale || 'EN'
-
-        if (!targetLocale) return localizationKey
+        const targetLocale = locale || preferredLocale || WebApp?.initDataUnsafe.user?.language_code || 'EN'
 
         const localeKey = localizationKeyList
             .find((key) =>

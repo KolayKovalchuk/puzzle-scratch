@@ -16,7 +16,7 @@ export function GeoRestrictionPopup({ isOpen, className }: IGeoRestrictionPopupP
 
     const onConfirm = useCallback(() => {
         window.open(okBtnConfig.linkUrl, '_blank');
-    }, []);
+    }, [okBtnConfig.linkUrl]);
 
     return (
         <ModalDialog

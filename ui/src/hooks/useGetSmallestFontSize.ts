@@ -10,14 +10,14 @@ export function useGetSmallestFontSize(fontSizeShift = 1) {
         if (typeof depositBtnFontSize === 'string' || typeof withdrawBtnFontSize === 'string') return;
         if (depositBtnFontSize === undefined || withdrawBtnFontSize === undefined) return;
 
-        const smallesttBtnFontSize = Math.min(depositBtnFontSize, withdrawBtnFontSize);
+        const newSmallesttBtnFontSize = Math.min(depositBtnFontSize, withdrawBtnFontSize);
 
         setSmallesttBtnFontSize((prevFontSize => {
-            if (smallesttBtnFontSize === prevFontSize) {
+            if (newSmallesttBtnFontSize === prevFontSize) {
                 return prevFontSize;
             }
 
-            const shiftedFontSize = Math.round(smallesttBtnFontSize * fontSizeShift);
+            const shiftedFontSize = Math.round(newSmallesttBtnFontSize * fontSizeShift);
             return shiftedFontSize;
         }));
 

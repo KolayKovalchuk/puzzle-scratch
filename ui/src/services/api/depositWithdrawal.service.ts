@@ -112,27 +112,32 @@ export async function sendWithdrawalRequest(
     address: string,
     amount: string,
     memo: string
-): Promise<void | null> {
+): Promise<any> {
     try {
         return await apiClient.post('/dw/withdraw', { address, amount, memo });
     } catch (error) {
         console.error('Error sending withdrawal request:', error);
-        return null;
+        throw error;
     }
 }
 
-export function useSendWithdrawalRequest(
-    address: string,
-    amount: string,
-    memo: string,
-) {
+export function useSendWithdrawalRequest() {
     const [loading, setLoading] = useState(false);
 
-    const sendRequest = useCallback(async () => {
-        setLoading(true);
-        await sendWithdrawalRequest(address, amount, memo);
-        setLoading(false);
-    }, [address, amount, memo]);
+    const sendRequest = useCallback(async (
+        address: string,
+        amount: string,
+        memo: string,
+    ) => {
+        try {
+            setLoading(true);
+            await sendWithdrawalRequest(address, amount, memo);
+            setLoading(false);
+        } catch (error) {
+            setLoading(false);
+            throw error;
+        }
+    }, []);
 
     return { sendRequest, loading };
 }

@@ -141,7 +141,6 @@ export function Wallet() {
                 </div>
             </div>
             <WalletHistoryTable mode={mode} />
-            <Footer />
             <DepositWithDialog
                 onModeChanged={onModeChanged}
                 isOpen={isDepositDialogOpen}
@@ -151,7 +150,7 @@ export function Wallet() {
             <WithdrawDialog
                 isOpen={isWithdrawDialogOpen}
                 onCancel={closeWithdrawDialog}
-                onConfirm={() => { }}
+                onConfirm={closeWithdrawDialog}
             />
             <Footer />
         </div >

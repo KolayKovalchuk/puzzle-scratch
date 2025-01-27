@@ -5,13 +5,14 @@ import { updateUserBalance } from '@services/api/balance.service';
 import { useSendWithdrawalRequest } from '@services/api/depositWithdrawal.service';
 import { selectLocalValue } from '@store/selectors/localization.selectors';
 import { AxiosError } from 'axios';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styles from './WithdrawDialog.module.scss';
 import { IWithdrawalFormState, WithdrawBody } from './components/WithdrawBody/WithdrawBody';
 import { WithdrawResponse } from './components/WithdrawResponse/WithdrawResponse';
 import { useConfirmBtnText } from './hooks/useConfirmBtnText';
 import { useDilogTitleText } from './hooks/useDilogTitleText';
+import { useIsConfirmBtnDisabled } from './hooks/hooks';
 
 export interface IWithdrawDialogProps {
     className?: string;
@@ -45,11 +46,15 @@ export function WithdrawDialog({ className, isOpen, onCancel, onConfirm }: IWith
         setWithdrawalForm(state);
     }, []);
 
-    const { sendRequest, loading } = useSendWithdrawalRequest();
+    const { sendRequest, loading: isWithdrawRequestLoading } = useSendWithdrawalRequest();
+    const [ isBalanceLoading, setIsBalanceLoading ] = useState(false);
+
     const onConfirmCb = useCallback(async () => {
         try {
             if (withdrawalStatus === WithdrawalRequestStatus.Success) {
+                setIsBalanceLoading(true);
                 await updateUserBalance();
+                setIsBalanceLoading(false);
                 setWithdrawalStatus(WithdrawalRequestStatus.NotSent);
                 onConfirm();
                 return;
@@ -88,12 +93,22 @@ export function WithdrawDialog({ className, isOpen, onCancel, onConfirm }: IWith
 
     const onCancelCb = useCallback(() => {
         setWithdrawalStatus(WithdrawalRequestStatus.NotSent);
+        setWithdrawalForm({
+            walletAddress: '',
+            amount: '',
+            tag: '',
+        });
         onCancel();
     }, [onCancel]);
 
-    const withdrawBodyCalss = loading ? styles.hidden : '';
+    const { isConfirmDisabled } = useIsConfirmBtnDisabled(withdrawalStatus, withdrawalForm);
+
+    const isLoading = isWithdrawRequestLoading || isBalanceLoading;
+    const spinnerContainerClass = withdrawalStatus === WithdrawalRequestStatus.NotSent ? styles.absoluteSpinnerIconContainer : styles.relativeSpinnerIconContainer;
+    const withdrawBodyCalss = isLoading ? styles.hidden : '';
     const cancelBtnText = withdrawalStatus !== WithdrawalRequestStatus.Success ? closeBtnText : '';
     const isStatusNotSent = withdrawalStatus === WithdrawalRequestStatus.NotSent;
+
 
     return (
         <ModalDialog
@@ -104,14 +119,15 @@ export function WithdrawDialog({ className, isOpen, onCancel, onConfirm }: IWith
             onClose={onCancelCb}
             onConfirm={onConfirmCb}
             className={styles.modalDialog}
+            isConfirmDisabled={isConfirmDisabled}
         >
-            { loading && <div className={styles.spinnerIconContainer}>
+            { isLoading && <div className={spinnerContainerClass}>
                     <SpinnerIcon name={robo_token_gold_no_shining} className={styles.spinnerIcon}/>
                 </div>
             }
             { isStatusNotSent
                 ? <WithdrawBody onFormChange={onFormChange} className={`${withdrawBodyCalss} ${className || ''}`}/>
-                : <WithdrawResponse withdrawalStatus={withdrawalStatus}/>
+                : !isLoading ? <WithdrawResponse withdrawalStatus={withdrawalStatus}/> : null
             }
         </ModalDialog>
     );

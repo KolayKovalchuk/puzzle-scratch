@@ -24,6 +24,8 @@ interface ModalDialogProps {
     onClose?: () => void;
     onConfirm?: () => void;
 
+    isConfirmDisabled?: boolean;
+
     callOnCloseOnOverlayClick?: boolean;
     className?: string;
 
@@ -40,6 +42,7 @@ const ModalDialog: FC<ModalDialogProps> = ({
     cancelText,
     children,
     className,
+    isConfirmDisabled = false,
     callOnCloseOnOverlayClick = false,
     fotterBtnDirection = 'row',
 }) => {
@@ -70,6 +73,7 @@ const ModalDialog: FC<ModalDialogProps> = ({
                         text={confirmText}
                         mode={ButtonType.Confirm}
                         onClick={handleConfirm}
+                        isDisabled={isConfirmDisabled}
                     />
                     }
                 </div>

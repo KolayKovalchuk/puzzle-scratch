@@ -4,6 +4,7 @@ import path from 'path';
 import createSvgSpritePlugin from "vite-plugin-svg-sprite";
 import restart from 'vite-plugin-restart';
 import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
+import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -55,7 +56,8 @@ export default defineConfig({
             plugins: [
                 NodeGlobalsPolyfillPlugin({
                     buffer: true
-                })
+                }),
+                NodeModulesPolyfillPlugin()
             ]
         }
     }

@@ -3,10 +3,7 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import createSvgSpritePlugin from "vite-plugin-svg-sprite";
 import restart from 'vite-plugin-restart';
-import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
-import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
-import inject from '@rollup/plugin-inject';
-import { Buffer } from 'buffer';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -27,6 +24,11 @@ export default defineConfig({
                 './public/**/*', // Path to your JSON file
                 // Add more paths if needed
             ]
+        }),
+        nodePolyfills({
+            globals: {
+                Buffer: true
+            }
         })
     ],
     base: process.env.VITE_BASE_URL || '/',
@@ -47,34 +49,6 @@ export default defineConfig({
             //SCSS styles
             '@styles': path.resolve(__dirname, 'src/styles'),
             buffer: 'buffer'
-        }
-    },
-    optimizeDeps: {
-        esbuildOptions: {
-            // Node.js global to browser globalThis
-            define: {
-                global: 'globalThis'
-            },
-            // Enable esbuild polyfill plugins
-            plugins: [
-                NodeGlobalsPolyfillPlugin({
-                    buffer: true
-                }),
-                NodeModulesPolyfillPlugin()
-            ]
-        }
-    },
-    build: {
-        rollupOptions: {
-            plugins: [
-                inject({
-                    Buffer: ['buffer', 'Buffer']
-                })
-            ],
-            external: ['buffer']
-        },
-        commonjsOptions: {
-            transformMixedEsModules: true
         }
     }
 });

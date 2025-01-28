@@ -5,6 +5,7 @@ import createSvgSpritePlugin from "vite-plugin-svg-sprite";
 import restart from 'vite-plugin-restart';
 import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
+import inject from '@rollup/plugin-inject';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -58,6 +59,15 @@ export default defineConfig({
                     buffer: true
                 }),
                 NodeModulesPolyfillPlugin()
+            ]
+        }
+    },
+    build: {
+        rollupOptions: {
+            plugins: [
+                inject({
+                    Buffer: ['buffer', 'Buffer']
+                })
             ]
         }
     }

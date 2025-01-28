@@ -11,7 +11,7 @@ export function WithdrawResponse({ withdrawalStatus }: IWithdrawResponseBodyProp
     // const contentText = useSelector(selectLocalValue('pop.withdrawal.successText'));
     const successText = useSelector(selectLocalValue('pop.withdrawal.successText'));
     
-    const errorDefaultText = useSelector(selectLocalValue('pop.withdrawal.default'));
+    const errorDefaultText = useSelector(selectLocalValue('pop.withdrawal.defaultError'));
     const errorWalletText = useSelector(selectLocalValue('pop.withdrawal.errorWallet'));
     const errorAmountText = useSelector(selectLocalValue('pop.withdrawal.errorAmount'));
     // return contentText

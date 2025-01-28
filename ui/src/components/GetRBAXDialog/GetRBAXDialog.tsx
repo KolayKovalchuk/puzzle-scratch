@@ -71,17 +71,17 @@ export function GetRBAXDialogDialog({ isOpen, onCancel, onConfirm }: IGetRBAXDia
             </div>
             <Button
                 className={`${widestChildTargetClassName} ${styles.btn}`}
-                text={depositBtnText}
-                mode={ButtonType.Confirm}
-                style={{ width: btnWidth || 'auto' }}
-                onClick={onDepositBtnClick}
-            />
-            <Button
-                className={`${widestChildTargetClassName} ${styles.btn}`}
                 text={askBtnText}
                 mode={ButtonType.Confirm}
                 style={{ width: btnWidth || 'auto' }}
                 onClick={onAskBtnClick}
+            />
+            <Button
+                className={`${widestChildTargetClassName} ${styles.btn}`}
+                text={depositBtnText}
+                mode={ButtonType.Confirm}
+                style={{ width: btnWidth || 'auto' }}
+                onClick={onDepositBtnClick}
             />
         </div>
     </ModalDialog>);

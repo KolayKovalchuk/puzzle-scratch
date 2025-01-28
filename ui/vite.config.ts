@@ -6,6 +6,7 @@ import restart from 'vite-plugin-restart';
 import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
 import inject from '@rollup/plugin-inject';
+import { Buffer } from 'buffer';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -44,7 +45,8 @@ export default defineConfig({
             '@icons': path.resolve(__dirname, 'src/assets/icons'),
 
             //SCSS styles
-            '@styles': path.resolve(__dirname, 'src/styles')
+            '@styles': path.resolve(__dirname, 'src/styles'),
+            buffer: 'buffer'
         }
     },
     optimizeDeps: {
@@ -65,12 +67,14 @@ export default defineConfig({
     build: {
         rollupOptions: {
             plugins: [
-                inject({ Buffer: ['buffer/', 'Buffer'] })
+                inject({
+                    Buffer: ['buffer', 'Buffer']
+                })
             ],
-            external: ['buffer/', 'Buffer']
+            external: ['buffer']
+        },
+        commonjsOptions: {
+            transformMixedEsModules: true
         }
-        // commonjsOptions: {
-        //     transformMixedEsModules: true
-        // }
     }
 });

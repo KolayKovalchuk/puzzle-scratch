@@ -101,7 +101,9 @@ export function WithdrawDialog({ className, isOpen, onCancel, onConfirm }: IWith
         onCancel();
     }, [onCancel]);
 
-    const { isConfirmDisabled } = useIsConfirmBtnDisabled(withdrawalStatus, withdrawalForm);
+    const [isFormValid, setIsFormValid] = useState(false);
+
+    const { isConfirmDisabled } = useIsConfirmBtnDisabled(withdrawalStatus, withdrawalForm, isFormValid);
 
     const isLoading = isWithdrawRequestLoading || isBalanceLoading;
     const spinnerContainerClass = withdrawalStatus === WithdrawalRequestStatus.NotSent ? styles.absoluteSpinnerIconContainer : styles.relativeSpinnerIconContainer;
@@ -126,7 +128,7 @@ export function WithdrawDialog({ className, isOpen, onCancel, onConfirm }: IWith
                 </div>
             }
             { isStatusNotSent
-                ? <WithdrawBody onFormChange={onFormChange} className={`${withdrawBodyCalss} ${className || ''}`}/>
+                ? <WithdrawBody onFormChange={onFormChange} onFormValidChange={setIsFormValid} className={`${withdrawBodyCalss} ${className || ''}`}/>
                 : !isLoading ? <WithdrawResponse withdrawalStatus={withdrawalStatus}/> : null
             }
         </ModalDialog>

@@ -5,12 +5,14 @@ import { Icon } from '@components/shared/Icon';
 import { Input } from '@components/shared/Input/Input';
 import { selectMinRbaXWithdraw } from '@store/selectors/config.selectors';
 import { iconSign, selectLocalValue, selectLocalValueWithVars } from '@store/selectors/localization.selectors';
-import { ChangeEvent, useEffect, useMemo, useState } from 'react';
+import { getIsTonAddress } from '@utils/isTonAddress';
+import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 export interface IWithdrawBodyProps {
     className?: string;
     onFormChange: (state: IWithdrawalFormState) => void;
+    onFormValidChange?: (isValid: boolean) => void;
 }
 
 export interface IWithdrawalFormState {
@@ -19,11 +21,18 @@ export interface IWithdrawalFormState {
     tag: string;
 }
 
-export function WithdrawBody({ className, onFormChange }: IWithdrawBodyProps) {
+interface IFormValidState {
+    walletAddress: boolean;
+    amount: boolean;
+}
+
+export function WithdrawBody({ className, onFormChange, onFormValidChange }: IWithdrawBodyProps) {
     const addInstLabel = useSelector(selectLocalValue('txt.withdrawal.addInst'));
     const walletLabel = useSelector(selectLocalValue('txt.transfer.wallet'));
     const amountLabel = useSelector(selectLocalValue('txt.withdrawal.amount'));
     const tagLabel = useSelector(selectLocalValue('txt.transfer.tag'));
+    const wrongWalletLabel = useSelector(selectLocalValue('txt.withdrawal.wrongwallet'));
+    const insufficientLabel = useSelector(selectLocalValue('txt.withdrawal.insufficient'));
     const [termsPartials, setTermsPartials] = useState<string[]>([]);
 
     const minRbaXWithdraw = useSelector(selectMinRbaXWithdraw);
@@ -64,6 +73,11 @@ export function WithdrawBody({ className, onFormChange }: IWithdrawBodyProps) {
         amount: '',
         tag: '',
     });
+    const [formValidStatus, setFormValidStatus] = useState<IFormValidState>({
+        walletAddress: false,
+        amount: false,
+    });
+
 
     const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -75,6 +89,38 @@ export function WithdrawBody({ className, onFormChange }: IWithdrawBodyProps) {
         onFormChange(newState);
     };
 
+    useEffect(() => {
+        const isFormValid = Object.values(formValidStatus).every(Boolean);
+
+        if (onFormValidChange) {
+            onFormValidChange(isFormValid);
+        }
+
+    }, [formValidStatus]);
+
+    const validateWalletAddress = useCallback((value: string) => {
+        const isTonAddress = getIsTonAddress(value);
+        console.log('isTonAddress', value, isTonAddress);
+        
+        if (!isTonAddress) {
+            setFormValidStatus((prev) => ({ ...prev, walletAddress: false }));
+            return { isValid: false, validationErrorMsg: wrongWalletLabel };
+        }
+
+        setFormValidStatus((prev) => ({ ...prev, walletAddress: true }));
+        return { isValid: true };
+    }, [wrongWalletLabel]);
+
+    const valudaiteAmount = useCallback((value: string) => {
+        if (!value || Number(value) < Number(minRbaXWithdraw)) {
+            setFormValidStatus((prev) => ({ ...prev, amount: false }));
+            return { isValid: false, validationErrorMsg: insufficientLabel };
+        }
+
+        setFormValidStatus((prev) => ({ ...prev, amount: true }));
+        return { isValid: true };
+    }, [minRbaXWithdraw, insufficientLabel]);
+
     return (
         <div className={`${styles.container} ${className || ''}`}>
             <div className={styles.header}>{addInstLabel}</div>
@@ -82,11 +128,24 @@ export function WithdrawBody({ className, onFormChange }: IWithdrawBodyProps) {
             <form className={`${styles.withdrawFormContainer}`} >
                 <div className={styles.row}>
                     <div className={styles.label}>{walletLabel}</div>
-                    <Input name='walletAddress' className={styles.value} value={withdrawalForm.walletAddress} onChange={onInputChange} />
+                    <Input
+                        name='walletAddress'
+                        className={styles.value}
+                        value={withdrawalForm.walletAddress}
+                        onChange={onInputChange}
+                        validate={validateWalletAddress}
+                    />
                 </div>
                 <div className={styles.row}>
                     <div className={styles.label}>{amountLabel}</div>
-                    <Input name='amount' className={styles.value} type='number' value={withdrawalForm.amount} onChange={onInputChange} />
+                    <Input
+                        name='amount'
+                        className={styles.value}
+                        type='number'
+                        value={withdrawalForm.amount}
+                        onChange={onInputChange}
+                        validate={valudaiteAmount}
+                    />
                 </div>
                 <div className={styles.row}>
                     <div className={styles.label}>{tagLabel}</div>

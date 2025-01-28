@@ -1,6 +1,18 @@
 @use '@styles/colors';
 @use '@styles/mixins';
 
+.inputContainer {
+    width: 100%;
+
+    position: relative;
+
+    margin: 16px 0;
+
+    &.errorContier {
+        margin-bottom: 14px;
+    }
+}
+
 .input {
     width: 100%;
     padding: 10px;
@@ -34,4 +46,15 @@
     &.error {
         border-color: red;
     }
+}
+
+.validationError {
+    color: colors.$error-red;
+    font-size: 14px;
+
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    transform: translateY(100%);
 }

@@ -1,5 +1,5 @@
-import { DepositWithDialog } from '@components/DepositWithDialog/DepositWithDialog';
 import { useDepositWithDialog } from '@components/DepositWithDialog/hooks/useDepositWithDialog';
+import { GetRBAXDialogDialog } from '@components/GetRBAXDialog/GetRBAXDialog';
 import { BackButton } from '@components/shared/Button/BackButton';
 import { Button, ButtonGoldBorder, ButtonType } from '@components/shared/Button/Button';
 import { GameDescriptionPopup } from '@components/shared/GameDescriptionPopup/GameDescriptionPopup';
@@ -81,7 +81,7 @@ export function GameFooterBtn({ onPlay, onCancel, children, batchCardType, isPla
                 batchCardType={batchCardType}
             />
         }
-         <DepositWithDialog
+         <GetRBAXDialogDialog
             isOpen={isDepositDialogOpen}
             onCancel={closeDialog}
             onConfirm={closeDialog}

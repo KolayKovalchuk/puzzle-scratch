@@ -8,6 +8,9 @@ import { Wallet } from '@pages/Wallet/Wallet';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { ROUTES } from './routerConfig';
 import { Profile } from '@pages/Profile/Profile';
+import { MVSTMG } from '@pages/MVSTMG/MVSTMG';
+import { App } from '../App.tsx'
+
 // import { IceBox } from '@pages/IceBox';
 
 export interface IAppRouterProps {
@@ -29,6 +32,18 @@ export const AppRouter = ({}: IAppRouterProps) => {
             <Route path={ROUTES.Profile} element={<Profile />} />
 
             <Route path="*" element={<Navigate to={ROUTES.Home} />} />
+        </Routes>
+    );
+};
+
+export const CLICK_ID_PARAM = 'clickId';
+
+export const MVSTMGRouter = ({}: IAppRouterProps) => {
+    return (
+        <Routes>
+            <Route path={`${ROUTES.MVSTMG}/:${CLICK_ID_PARAM}`} element={<MVSTMG />} />
+
+            <Route path="*" element={<App />} />
         </Routes>
     );
 };

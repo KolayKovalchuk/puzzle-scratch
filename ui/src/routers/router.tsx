@@ -8,6 +8,9 @@ import { Wallet } from '@pages/Wallet/Wallet';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { ROUTES } from './routerConfig';
 import { Profile } from '@pages/Profile/Profile';
+import { MVSTMG } from '@pages/MVSTMG/MVSTMG';
+import { App } from '../App.tsx'
+
 // import { IceBox } from '@pages/IceBox';
 
 export interface IAppRouterProps {

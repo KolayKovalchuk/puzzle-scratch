@@ -67,6 +67,13 @@ export const selectBotUrl = createSelector(
     }
 )
 
+export const selectPixelFireUrl = createSelector(
+    selectConfigQueryData,
+    (config) => {
+        return config?.PIXEL_FIRE_URL
+    }
+)
+
 export const selectScratchCardTransitionTimeout = createSelector(
     selectConfigQueryData,
     (config) => {

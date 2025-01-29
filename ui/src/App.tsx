@@ -4,7 +4,7 @@ import styles from './App.module.scss';
 import { LoadingScreen } from '@components/LoadingScreen/LoadingScreen';
 import { useInitApp } from '@hooks/useInitApp';
 import { usePlaySound } from '@hooks/usePlaySound';
-import { AppRouter } from '@routers/router';
+import { AppRouter, MVSTMGRouter } from '@routers/router';
 import { ROUTES } from '@routers/routerConfig';
 import { selectUserAcceptedTerms, selectUserPreferredLocale } from '@store/selectors/user.selectors';
 import store from '@store/store';
@@ -54,7 +54,7 @@ export function Root() {
     return (
         <BrowserRouter>
             <Provider store={store}>
-                <App />
+                <MVSTMGRouter />
             </Provider>
         </BrowserRouter>
     )

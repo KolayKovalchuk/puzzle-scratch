@@ -1,7 +1,7 @@
 import { DepositWithDialog } from '@components/DepositWithDialog/DepositWithDialog'
 import { useDepositWithDialog } from '@components/DepositWithDialog/hooks/useDepositWithDialog'
 import { Footer } from '@components/Footer/Footer'
-import { Button, ButtonType, ButtonWithRibbon } from '@components/shared/Button'
+import { Button, ButtonType } from '@components/shared/Button'
 import { BackButton } from '@components/shared/Button/BackButton'
 import { Icon } from '@components/shared/Icon'
 import { SpinnerIcon } from '@components/shared/Icon/SpinnerIcon'
@@ -17,10 +17,10 @@ import { ITextStyle } from 'pixi.js-legacy'
 import { useCallback, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { WalletHistoryTable } from './components/WalletHistoryTable/WalletHistoryTable'
+import { WithdrawDialog } from './components/WithdrawDialog/WithdrawDialog'
+import { useWithdrawDialog } from './hooks/useWithdrawDialog'
 import { DepositWithDialogMode } from './Wallet.models'
 import styles from './Wallet.module.scss'
-import { useWithdrawDialog } from './hooks/useWithdrawDialog'
-import { WithdrawDialog } from './components/WithdrawDialog/WithdrawDialog'
 
 const headerStyles: Partial<ITextStyle> = {
     fontSize: 40,
@@ -83,8 +83,8 @@ export function Wallet() {
     return (<>
         {isLoading && <div className={styles.spinnerContainer}><SpinnerIcon name={robo_token_gold_no_shining} className={styles.spinnerIcon} /></div>}
         <div className={containerClass}>
-            <div className={styles.headerContianer}>
-                <BackButton />
+            <div className={styles.headerContainer}>
+                <BackButton className={styles.backButton}/>
 
                 <SecondaryStyledText
                     text={headerText}

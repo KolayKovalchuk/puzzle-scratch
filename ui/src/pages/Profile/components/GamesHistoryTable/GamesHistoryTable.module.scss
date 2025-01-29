@@ -1,0 +1,17 @@
+@use '@styles/mixins';
+
+.container {
+    margin-top: 20px;
+
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 0 10px;
+}
+
+.prizeWonCellContianer {
+    @include mixins.amountCellContianer;
+}

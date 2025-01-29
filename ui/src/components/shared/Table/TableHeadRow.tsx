@@ -11,10 +11,10 @@ export function TableHeadRow({ tHeadData, className = '' }: iTableProps) {
     if (!tHeadData) return <></>
 
     return (
-        <div className={styles.headRow}>
+        <div className={`${styles.headRow} tHeadRow`}>
             {tHeadData.map((headData) => {
                 return (
-                    <div key={headData.key} className={`${styles.headCellContainer} ${className} tHeadRow`}>
+                    <div key={headData.key} className={`${styles.headCellContainer} ${className} tHeadCell`}>
                         {headData.data}
                     </div>
                 )

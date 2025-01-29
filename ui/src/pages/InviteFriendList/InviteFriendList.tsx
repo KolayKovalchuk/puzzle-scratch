@@ -50,8 +50,8 @@ export function InviteFriendList({ className }: InviteFriendListProps) {
 
     return (<>
         <div className={`${styles.container} ${className}`} ref={targetRef}>
-            <div className={styles.header}>
-                <BackButton />
+            <div className={styles.headerContainer}>
+                <BackButton className={styles.backButton}/>
 
                 <SecondaryStyledText
                     text={inviteFriendBtnText}

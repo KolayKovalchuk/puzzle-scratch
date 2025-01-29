@@ -31,7 +31,7 @@ export type TextAlign = 'left' | 'center' | 'right'
 export interface IDropdownProps {
     className?: string
     placeholder?: string
-    selectedItem?: IDropdownItem
+    selectedItem?: IDropdownItem | null
     items: IDropdownItem[]
     onSelect: (item: IDropdownItem) => void
     onOpenClose?: (isOpen: boolean) => void

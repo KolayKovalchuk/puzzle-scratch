@@ -1,4 +1,4 @@
-@use '@styles/colors';
+@use '@styles/mixins';
 
 .historyTableContainer {
     margin-top: 30px;
@@ -13,32 +13,5 @@
 }
 
 .amountCellContianer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .roboTokenGoldIcon {
-        min-width: 30px;
-        width: 30px;
-        margin-right: 2px;
-    }
-
-    span {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-}
-
-.historyTable {
-    :global {
-        .tBody {
-            background: colors.$historyTableGraient;
-        }
-    }
-}
-
-    
-.tBody {
-    background: colors.$historyTableGraient;
+    @include mixins.amountCellContianer;
 }

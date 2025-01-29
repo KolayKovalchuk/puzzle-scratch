@@ -36,7 +36,7 @@ $header-border-radius: 20px;
     font-size: 20px;
     font-weight: bold;
     color: colors.$light-yellow;
-
+    padding: 0 1%;
 
     background-color: colors.$royal-purple;
 
@@ -65,4 +65,12 @@ $header-border-radius: 20px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    padding: 0 1%;
+}
+
+.gradientBodyTable {
+    .tBody {
+        background: colors.$historyTableGraient;
+    }
 }

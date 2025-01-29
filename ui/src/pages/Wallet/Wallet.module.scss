@@ -23,21 +23,8 @@
 
 }
 
-.headerContianer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    width: 100%;
-
-    position: relative;
-}
-
-.headerText {
-    width: initial;
-    height: initial;
-
-    margin: 0 auto;
+.headerContainer {
+    @include mixins.backBtnHeader;
 }
 
 .walletInfoContainer {
@@ -91,22 +78,7 @@
 }
 
 .spinnerContainer {
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
-
-.spinnerIcon {
-    width: 100px;
-    margin: auto;
-
-    top: 50%;
+    @include mixins.spinnerContainer;
 }
 
 .walletBtn {

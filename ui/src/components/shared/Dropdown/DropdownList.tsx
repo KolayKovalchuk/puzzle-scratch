@@ -15,7 +15,7 @@ export function DropdownList({
         <ul className={styles.dropdownList} style={{ maxHeight }}>
             {items.map((item, index) => (
                 <DropdownItem
-                    selected={selectedItem === item}
+                    selected={selectedItem?.text === item.text}
                     key={index}
                     item={item}
                     onClick={(item) => handleSelect(item)}

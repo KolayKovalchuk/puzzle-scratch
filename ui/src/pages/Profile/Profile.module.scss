@@ -1,0 +1,54 @@
+@use '@styles/mixins';
+@use '@styles/colors';
+
+.spinnerContainer {
+    @include mixins.spinnerContainer;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+    padding: 0 10px;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    @include mixins.fixedHeaderPadding;
+
+}
+
+.headerContainer {
+    @include mixins.backBtnHeader;
+}
+
+$marginBottom: 6px;
+
+.profileIcon {
+    @include mixins.icon-shadown;
+
+    & {
+        width: 46%;
+        margin-bottom: $marginBottom;
+    }
+}
+
+.userNameContainer {
+    @include mixins.styledContianer;
+
+    & {
+        text-align: center;
+        justify-content: center;
+        margin-bottom: 20px;
+
+        .userName {
+            color: colors.$light-yellow;
+            font-size: 30px;
+            font-weight: 1000;
+        }
+    }
+}

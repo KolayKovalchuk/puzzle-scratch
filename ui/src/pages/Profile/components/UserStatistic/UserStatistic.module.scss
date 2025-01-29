@@ -1,0 +1,42 @@
+@use '@styles/colors';
+
+.statisticContianer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+}
+
+.statisticRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    flex-wrap: nowrap;
+
+    min-height: 36px;
+
+    .statisticLabel {
+        color: colors.$light-yellow;
+        font-size: 20px;
+        font-weight: 1000;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+    }
+
+    .statisticValue {
+        font-size: 18px;
+        font-weight: 1000;
+        color: #fff;
+
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .roboTokenGoldIcon {
+        width: 14%;
+        min-width: 22px;
+    }
+}

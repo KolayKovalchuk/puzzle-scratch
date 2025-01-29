@@ -25,20 +25,14 @@ $border_radius: 20px;
     @include mixins.fixedHeaderPadding;
 }
 
-.header {
-    width: 95%;
-    height: 55px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: nowrap;
-    margin-bottom: -10px;
-}
+.headerContainer {
+    @include mixins.backBtnHeader;
+    max-height: 50px;
+    padding: 0 55px;
 
-.headerText {
-    position: relative;
-    top: 12%;
-    z-index: 10000;
+    .backButton {
+        left: 10px;
+    }
 }
 
 .body {

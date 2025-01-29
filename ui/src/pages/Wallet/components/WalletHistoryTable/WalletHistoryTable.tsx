@@ -4,15 +4,16 @@ import { useSelector } from 'react-redux'
 
 import { Icon } from '@components/shared/Icon'
 import { SecondaryStyledText } from '@components/shared/StyledText'
-import { ITableCellData, ITRowData, Table, TableCell } from '@components/shared/Table'
-import { selectLocalValue } from '@store/selectors/localization.selectors'
-import { formatLargeNumber, formatNumber } from '@utils/formatters/formatNumber'
+import { GradientBodyTable, ITableCellData, ITRowData, TableCell } from '@components/shared/Table'
 import { DepositWithDialogMode } from '@pages/Wallet/Wallet.models'
 import { useDWHistory } from '@services/api/depositWithdrawal.service'
+import { selectLocalValue } from '@store/selectors/localization.selectors'
+import { formatLargeNumber, formatNumber } from '@utils/formatters/formatNumber'
 
 import robo_token_gold_no_shining from '@icons/robo_token_gold_no_shining.svg'
 
 import styles from './WalletHistoryTable.module.scss'
+import { formatDate } from '@utils/formatDate'
 
 const historyLabelStyles: Partial<ITextStyle> = {
     fontSize: 30,
@@ -47,13 +48,7 @@ export function WalletHistoryTable({ mode }: IWalletHistoryTableProps) {
         return historyData.map((data, index) => ({
             key: `row-${index}`,
             cellData: [
-                {
-                    key: `cell-${index}-1`, data: new Date(data.date).toLocaleDateString('en-US', {
-                        month: '2-digit',
-                        day: '2-digit',
-                        year: '2-digit',
-                    })
-                },
+                { key: `cell-${index}-1`, data: formatDate(data.date) },
                 { key: `cell-${index}-2`, data: data.type ? withdrawLabel : depositLabel },
                 { key: `cell-${index}-3`, data: formatLargeNumber(data.amount) },
             ],
@@ -82,12 +77,11 @@ export function WalletHistoryTable({ mode }: IWalletHistoryTableProps) {
                 textStyles={historyLabelStyles}
             ></SecondaryStyledText>
 
-            <Table
+            <GradientBodyTable
                 className={styles.historyTable}
                 tHeadData={tHeadData}
                 tBodyData={tBodyData}
                 renderCell={renderCell}
-                noRowBg={true}
                 emptyText={noTransactionsLabel}
             />
         </div>

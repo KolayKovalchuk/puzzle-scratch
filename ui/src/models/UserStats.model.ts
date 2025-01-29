@@ -1,5 +1,6 @@
 export interface IRecentGame {
     cardType: string;
+    batchName: string;
     datePlayed: number;
     prizeWon: number;
 }

@@ -38,7 +38,7 @@ export function GamesHistoryTable ({ recentGames }: IGamesHistoryTableProps) {
         return recentGames.map((data, index) => ({
             key: `row-${index}`,
             cellData: [
-                { key: `cell-${index}-2`, data: data.cardType },
+                { key: `cell-${index}-2`, data: data.batchName || data.cardType },
                 { key: `cell-${index}-1`, data: formatDate(data.datePlayed) },
                 { key: `cell-${index}-3`, data: formatLargeNumber(data.prizeWon) },
             ],
@@ -52,10 +52,10 @@ export function GamesHistoryTable ({ recentGames }: IGamesHistoryTableProps) {
                 <span>{formatNumber(data.data as number)}</span>
             </div>)
 
-            return <TableCell key={index} data={cellContent} width={cellWidth} />
+            return <TableCell  className={styles.tableCell} key={index} data={cellContent} width={cellWidth} />
         }
 
-        return <TableCell key={index} data={data.data} width={cellWidth} />
+        return <TableCell className={styles.tableCell} key={index} data={data.data} width={cellWidth} />
     }, [tHeadData])
 
 

@@ -4,7 +4,7 @@ import styles from './App.module.scss';
 import { LoadingScreen } from '@components/LoadingScreen/LoadingScreen';
 import { useInitApp } from '@hooks/useInitApp';
 import { usePlaySound } from '@hooks/usePlaySound';
-import { AppRouter } from '@routers/router';
+import { AppRouter, MVSTMGRouter } from '@routers/router';
 import { ROUTES } from '@routers/routerConfig';
 import { selectUserAcceptedTerms, selectUserPreferredLocale } from '@store/selectors/user.selectors';
 import store from '@store/store';
@@ -12,7 +12,7 @@ import { useEffect } from 'react';
 import { Provider, useSelector } from 'react-redux';
 import { BrowserRouter, useLocation, useNavigate } from 'react-router-dom';
 
-function App() {
+export function App() {
     const {
         isLoaded,
     } = useInitApp();
@@ -50,11 +50,11 @@ function App() {
     )
 };
 
-function Root() {
+export function Root() {
     return (
         <BrowserRouter>
             <Provider store={store}>
-                <App />
+                <MVSTMGRouter />
             </Provider>
         </BrowserRouter>
     )

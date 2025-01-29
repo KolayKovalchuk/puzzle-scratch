@@ -1,10 +1,12 @@
 import { useFetchLocalizationData } from '@services/api/localization.service';
 import { useLoginUser } from '@services/auth.service';
+import { useSendPixelFire } from '@services/useSendPixelFire';
+import { useAssetsBundleLoader } from './useAssetsBundleLoader';
 import { useInitTwaSdk } from './useInitTwaSdk';
 import { useFontFaceObserver } from './useloadFont';
-import { useAssetsBundleLoader } from './useAssetsBundleLoader';
 
 export function useInitApp() {
+    useSendPixelFire();
     const {isLoaded: isUserLoggedIn} = useLoginUser();
     const [isLocLoaded] = useFetchLocalizationData()
     const isFontListLoaded = useFontFaceObserver(`Nunito`);

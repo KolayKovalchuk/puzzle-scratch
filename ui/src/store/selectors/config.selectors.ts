@@ -56,10 +56,21 @@ export const selectTelegramAppUrl = createSelector(
         return config?.TELEGRAM_APP_URL
     }
 )
+
+const VITE_TELEGRAM_BOT_URL = import.meta.env.VITE_TELEGRAM_BOT_URL
 export const selectBotUrl = createSelector(
     selectConfigQueryData,
     (config) => {
+        if (VITE_TELEGRAM_BOT_URL) return VITE_TELEGRAM_BOT_URL;
+
         return config?.TELEGRAM_BOT_URL
+    }
+)
+
+export const selectPixelFireUrl = createSelector(
+    selectConfigQueryData,
+    (config) => {
+        return config?.PIXEL_FIRE_URL
     }
 )
 

@@ -1582,5 +1582,113 @@
     "AR": "اسأل الأصدقاء",
     "FIL": "Tanungin ang mga Kaibigan",
     "HI": "मित्रों से पूछो"
+  },
+  {
+    "Key": "profile.header",
+    "EN": "Profile",
+    "UK": "",
+    "RU": "",
+    "pt-BR": "",
+    "VI": "",
+    "ES": "",
+    "AR": "",
+    "FIL": "",
+    "HI": ""
+  },
+  {
+    "Key": "profile.statistic.title",
+    "EN": "Statistic",
+    "UK": "",
+    "RU": "",
+    "pt-BR": "",
+    "VI": "",
+    "ES": "",
+    "AR": "",
+    "FIL": "",
+    "HI": ""
+  },
+  {
+    "Key": "profile.statistic.cardsPlayed",
+    "EN": "Cards played",
+    "UK": "",
+    "RU": "",
+    "pt-BR": "",
+    "VI": "",
+    "ES": "",
+    "AR": "",
+    "FIL": "",
+    "HI": ""
+  },
+  {
+    "Key": "profile.statistic.rbaxWon",
+    "EN": "RBAX won",
+    "UK": "",
+    "RU": "",
+    "pt-BR": "",
+    "VI": "",
+    "ES": "",
+    "AR": "",
+    "FIL": "",
+    "HI": ""
+  },
+  {
+    "Key": "profile.statistic.biggestWin",
+    "EN": "Biggest win",
+    "UK": "",
+    "RU": "",
+    "pt-BR": "",
+    "VI": "",
+    "ES": "",
+    "AR": "",
+    "FIL": "",
+    "HI": ""
+  },
+  {
+    "Key": "profile.gameHistory",
+    "EN": "Game history",
+    "UK": "",
+    "RU": "",
+    "pt-BR": "",
+    "VI": "",
+    "ES": "",
+    "AR": "",
+    "FIL": "",
+    "HI": ""
+  },
+  {
+    "Key": "profile.gameHistory.gameName",
+    "EN": "Game name",
+    "UK": "",
+    "RU": "",
+    "pt-BR": "",
+    "VI": "",
+    "ES": "",
+    "AR": "",
+    "FIL": "",
+    "HI": ""
+  },
+  {
+    "Key": "profile.gameHistory.date",
+    "EN": "Date",
+    "UK": "",
+    "RU": "",
+    "pt-BR": "",
+    "VI": "",
+    "ES": "",
+    "AR": "",
+    "FIL": "",
+    "HI": ""
+  },
+  {
+    "Key": "profile.gameHistory.prizeWon",
+    "EN": "Prize won",
+    "UK": "",
+    "RU": "",
+    "pt-BR": "",
+    "VI": "",
+    "ES": "",
+    "AR": "",
+    "FIL": "",
+    "HI": ""
   }
 ]

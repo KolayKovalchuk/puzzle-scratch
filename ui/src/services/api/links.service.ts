@@ -19,6 +19,7 @@ export async function postCreateShareLinkCode() {
 
 export const linkCodeParam = 'linkCode';
 export const refCodeParam = 'refCode';
+export const clickIdParam = 'clickId';
 
 export function getAppLinkWithParam(code: string, param: string) {
     const botUrl = selectBotUrl(store.getState()) || '';

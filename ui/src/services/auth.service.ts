@@ -61,7 +61,7 @@ export async function updateToken(tokenData: IUserAcceptTermsResponse) {
     }
 }
 
-function extractStartparams(start_param: string, paramName: string): string {
+export function extractStartparams(start_param: string, paramName: string): string {
     const prefix = `${paramName}=`;
     const index = start_param.indexOf(prefix);
     if (index !== -1) {

@@ -161,9 +161,12 @@ $todayDayCellMargin: calc($dayCellMargin * -1.5);
 }
 
 .headerText {
-    max-height: 34px;
-    min-height: 34px;
+    $height: 5%;
+    max-height: $height;
+    min-height: $height;
     width: 100%;
+    position: relative;
+    top: -1%;
 }
 
 .coinIcon {

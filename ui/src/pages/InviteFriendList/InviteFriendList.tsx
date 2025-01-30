@@ -77,7 +77,7 @@ export function InviteFriendList({ className }: InviteFriendListProps) {
                                 className={styles.btnText}
                                 textStyles={textStyles}
                                 text={inviteFriendBtnText}
-                                yShift={0.39}
+                                yShift={0.45}
                             />
                             <Icon name={invite_friend_icon} className={styles.inviteFriendIcon} />
                         </div>

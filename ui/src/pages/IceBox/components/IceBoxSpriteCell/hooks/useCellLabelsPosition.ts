@@ -21,7 +21,7 @@ export function useCellLabelsPosition(
         const priceContainerWidth = roboIconSize + priceTextMetrics.width;
 
         const priceNumberX = width / 2 - priceContainerWidth / 2;
-        const priceNumberY = winTextMetrics.height + 4;
+        const priceNumberY = winTextMetrics.height * 1.24;
 
         setPriceNumberPosition({ x: priceNumberX, y: priceNumberY });
         setRoboIconSize(roboIconSize)

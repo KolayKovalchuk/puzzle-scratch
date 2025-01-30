@@ -27,26 +27,6 @@ const headerStyles: Partial<ITextStyle> = {
     fontWeight: 'bold',
 }
 
-function useFixForArabicLocale() {
-    const userLocale = useSelector(selectUserPreferredLocale);
-    const [btnYShift, setBtnYShift] = useState(0.5);
-
-    const isArabicLocale = userLocale?.toLowerCase() === 'ar';
-
-    useEffect(() => {
-        if (isArabicLocale) {
-            setBtnYShift(0.4);
-        }
-
-    }, [isArabicLocale]);
-
-    return {
-        btnYShift,
-        fontSizeShift: isArabicLocale ? 0.7 : 1,
-    };
-}
-
-
 export function Wallet() {
     const headerText = useSelector(selectLocalValue('txt.wallet.wallet'))
     const balanceLabel = useSelector(selectLocalValue('txt.wallet.balance'))
@@ -71,12 +51,12 @@ export function Wallet() {
 
     const { userStats } = useGetUserStats();
 
-    const { btnYShift, fontSizeShift } = useFixForArabicLocale();
+    // const { btnYShift } = useFixForArabicLocale();
     const {
         textStylesWithFontSize,
         setDepositBtnFontSize,
         setWithdrawBtnFontSize,
-    } = useGetSmallestFontSize(fontSizeShift);
+    } = useGetSmallestFontSize();
 
     const containerClass = `${styles.container} ${isLoading ? styles.hidden : ''}`;
 
@@ -109,7 +89,7 @@ export function Wallet() {
                         text={depositLabel}
                         getTextSize={setDepositBtnFontSize}
                         textStyle={textStylesWithFontSize}
-                        yShift={btnYShift}
+                        // yShift={btnYShift}
                     ></Button>
                 </div>
                 <div className={styles.balanceInfoRow}>
@@ -127,7 +107,7 @@ export function Wallet() {
                         text={withdrawLabel}
                         getTextSize={setWithdrawBtnFontSize}
                         textStyle={textStylesWithFontSize}
-                        yShift={btnYShift}
+                        // yShift={btnYShift}
                     ></Button>
                 </div>
                 <div className={styles.balanceInfoRow}>

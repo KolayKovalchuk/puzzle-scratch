@@ -29,8 +29,10 @@ interface IFormValidState {
 export function WithdrawBody({ className, onFormChange, onFormValidChange }: IWithdrawBodyProps) {
     const addInstLabel = useSelector(selectLocalValue('txt.withdrawal.addInst'));
     const walletLabel = useSelector(selectLocalValue('txt.transfer.wallet'));
+    const walletPlaceholderLabel = useSelector(selectLocalValue('txt.transfer.walletPlaceholder'));
     const amountLabel = useSelector(selectLocalValue('txt.withdrawal.amount'));
     const tagLabel = useSelector(selectLocalValue('txt.transfer.tag'));
+    const tagPlaceholderLabel = useSelector(selectLocalValue('txt.transfer.tagPlaceholder'));
     const wrongWalletLabel = useSelector(selectLocalValue('txt.withdrawal.wrongwallet'));
     const insufficientLabel = useSelector(selectLocalValue('txt.withdrawal.insufficient'));
     const [termsPartials, setTermsPartials] = useState<string[]>([]);
@@ -134,6 +136,7 @@ export function WithdrawBody({ className, onFormChange, onFormValidChange }: IWi
                         value={withdrawalForm.walletAddress}
                         onChange={onInputChange}
                         validate={validateWalletAddress}
+                        placeholder={walletPlaceholderLabel}
                     />
                 </div>
                 <div className={styles.row}>
@@ -145,11 +148,18 @@ export function WithdrawBody({ className, onFormChange, onFormValidChange }: IWi
                         value={withdrawalForm.amount}
                         onChange={onInputChange}
                         validate={valudaiteAmount}
+                        placeholder={minRbaXWithdraw + '' || '10'}
                     />
                 </div>
                 <div className={styles.row}>
                     <div className={styles.label}>{tagLabel}</div>
-                    <Input name='tag' className={styles.value} value={withdrawalForm.tag} onChange={onInputChange} />
+                    <Input
+                        name='tag'
+                        className={styles.value}
+                        value={withdrawalForm.tag}
+                        onChange={onInputChange}
+                        placeholder={tagPlaceholderLabel}
+                    />
                 </div>
             </form>
 

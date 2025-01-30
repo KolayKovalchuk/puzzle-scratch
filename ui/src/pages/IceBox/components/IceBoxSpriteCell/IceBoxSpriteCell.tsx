@@ -3,7 +3,7 @@ import { DefaultTextStyleConfig, StyledTextPixiEl } from '@components/shared/Sty
 import { GameCellTextStyle } from '@components/shared/StyledText/components/GameCellStyledText';
 import { IIceBoxBundle } from '@config/iceBoxBundleConfig';
 import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
-import { Container, Graphics, Sprite } from '@pixi/react';
+import { Container, Sprite } from '@pixi/react';
 import { ITextStyle, TextStyle } from 'pixi.js-legacy';
 import { useCellLabelsPosition } from './hooks/useCellLabelsPosition';
 
@@ -68,12 +68,6 @@ export function IceBoxSpriteCell({ x, y, width, height, data }: IIceBoxSpriteCel
 
     return (
         <Container x={x} y={y - 8} width={width} height={height}>
-            <Graphics draw={(g) => {
-                g.clear();
-                g.beginFill(0x000000, 0.000000000001);
-                g.drawRect(0, 0, width, height);
-                g.endFill();
-            }} />
             <StyledTextPixiEl
                 dimensions={{ width, height }}
                 text={winNumber}
@@ -86,7 +80,7 @@ export function IceBoxSpriteCell({ x, y, width, height, data }: IIceBoxSpriteCel
             />
             <Container
                 width={priceContainerWidth}
-                height={roboIconSize + 4}
+                height={roboIconSize}
                 x={priceNumberPosition.x}
                 y={priceNumberPosition.y}
             >
@@ -99,14 +93,14 @@ export function IceBoxSpriteCell({ x, y, width, height, data }: IIceBoxSpriteCel
                 ></Sprite>
 
                 <StyledTextPixiEl
-                    dimensions={{ width: priceContainerWidth - roboIconSize, height: height - priceNumberPosition.y }}
+                    dimensions={{ width: priceContainerWidth - roboIconSize, height: roboIconSize }}
                     text={priceNumber}
                     textStyles={priceNumberTextStyleClass}
                     textFitCoefficient={1}
                     x={roboIconSize}
                     y={0}
                     // xShift={0.55}
-                    // valueForMeasure={'100'}
+                    valueForMeasure={'100'}
                     // shouldFitFontSize={false}
                 />
             </Container>

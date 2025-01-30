@@ -50,7 +50,7 @@ export function Profile({ }: IProfileProps) {
                 
                 <SecondaryStyledText
                     text={headerText}
-                    className={styles.header}
+                    className={styles.headerText}
                     textStyles={headerStyles}
                     />
             </div>

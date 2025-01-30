@@ -28,7 +28,7 @@ export function StyledText({
     anchor = 0.5,
     shouldFitFontSize = true,
     xShift = 0.5,
-    yShift = 0.5,
+    yShift = 0.55,
     getTextSize,
 }: IStyledTextProps) {
     const { containerRef, dimensions } = useContainerDimensions();

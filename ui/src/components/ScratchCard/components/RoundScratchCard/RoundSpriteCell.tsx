@@ -19,8 +19,8 @@ const textStyles: Partial<ITextStyle> = {
 
 const textStyleClass = new TextStyle(textStyles);
 
-export function RoundSpriteCell({ x, y, width, height, data, xShift = 0.5, yShift = 0.5 }: IRoundSpriteCellProps) {
-    const fontSize = useFitTextSize(data.textureName, width, textStyleClass);
+export function RoundSpriteCell({ x, y, width, height, data, xShift = 0.5, yShift = 0.55 }: IRoundSpriteCellProps) {
+    const fontSize = useFitTextSize(data.textureName, width, height, textStyleClass);
     textStyles.fontSize = fontSize;
 
     return (

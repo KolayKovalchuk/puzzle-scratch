@@ -32,7 +32,7 @@ export function StyledTextPixiEl({
     x = 0,
     y = 0,
     xShift = 0.5,
-    yShift = 0.35,
+    yShift = 0.5,
 
     shouldFitFontSize = true,
     valueForMeasure = text,
@@ -45,7 +45,9 @@ export function StyledTextPixiEl({
         ...textStyles,
     };
 
-    const fittedFontSize = useFitTextSize(valueForMeasure, dimensions.width * textFitCoefficient, textStyleConfig);
+    const targetWidth = dimensions.width * textFitCoefficient;
+    const targetHeight = dimensions.height * textFitCoefficient;
+    const fittedFontSize = useFitTextSize(valueForMeasure, targetWidth, targetHeight, textStyleConfig);
 
     if (shouldFitFontSize) {
         textStyleConfig.fontSize = fittedFontSize || textStyleConfig.fontSize;

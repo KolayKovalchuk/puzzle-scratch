@@ -148,7 +148,7 @@ export function SantaSac() {
                             // onScratchedEnought={onRoundCardScratched}
                             // onScratchStarted={onScratchStarted}
                             xShift={0.52}
-                            yShift={0.45}
+                            yShift={0.5}
                             isWinning={isBonusShining}
                         />
                     </div>

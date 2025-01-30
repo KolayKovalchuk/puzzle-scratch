@@ -4,12 +4,14 @@ import btn_3d_elipse from '@icons/btn_3d_elipse.svg';
 import { playSound } from '@store/actions/appState.actions';
 import store from '@store/store';
 import { ITextStyle } from 'pixi.js-legacy';
-import { CSSProperties, forwardRef, ReactNode, Ref, useCallback } from 'react';
+import { CSSProperties, forwardRef, ReactNode, Ref, useCallback, useEffect, useState } from 'react';
 import { Icon } from '../Icon';
 import { RegularStyledText } from '../StyledText';
 import { useButtonConfig } from './hooks/useButtonConfig';
 
 import styles from './Button.module.scss';
+import { useSelector } from 'react-redux';
+import { selectUserPreferredLocale } from '@store/selectors/user.selectors';
 
 
 export enum ButtonType {
@@ -39,6 +41,34 @@ export interface IButtonProps {
     getTextSize?: (textSize: string | number) => void;
 }
 
+
+function useFixForArabicLocale() {
+    const defaultBtnYShift = 0.55;
+
+    const arabicBtnYShift = 0.45;
+
+    const userLocale = useSelector(selectUserPreferredLocale);
+    const [btnYShift, setBtnYShift] = useState(defaultBtnYShift);
+
+    useEffect(() => {
+        const isArabicLocale = userLocale?.toLowerCase() === 'ar';
+        if (isArabicLocale) {
+            setBtnYShift(arabicBtnYShift);
+        } else {
+            setBtnYShift(defaultBtnYShift);
+        }
+
+    }, [
+        userLocale,
+        defaultBtnYShift,
+        arabicBtnYShift,
+    ]);
+
+    return {
+        btnYShift,
+    };
+}
+
 export function ButtonComponent({
     onClick,
     className,
@@ -46,7 +76,7 @@ export function ButtonComponent({
     iconName,
 
     text,
-    yShift = 0.5,
+    // yShift = 0.55,
     children,
     style,
     shouldFitFontSize = true,
@@ -58,6 +88,8 @@ export function ButtonComponent({
     getTextSize,
 }: IButtonProps, ref: Ref<HTMLButtonElement>) {
     const { className: buttonTypeClassName, textStyles } = useButtonConfig(mode, styles, isDisabled);
+
+    const { btnYShift } = useFixForArabicLocale();
 
     const renderContent = useCallback(() => {
         if (!!children) {
@@ -80,7 +112,7 @@ export function ButtonComponent({
                 }}
                 shouldFitFontSize={shouldFitFontSize}
                 getTextSize={getTextSize}
-                yShift={yShift}
+                yShift={btnYShift}
             ></RegularStyledText>
         );
     }, [
@@ -90,6 +122,7 @@ export function ButtonComponent({
         textStyles,
         shouldFitFontSize,
         textStyle,
+        btnYShift,
     ]);
 
     const iconContainerClassName = iconName ? styles.iconContainer : '';

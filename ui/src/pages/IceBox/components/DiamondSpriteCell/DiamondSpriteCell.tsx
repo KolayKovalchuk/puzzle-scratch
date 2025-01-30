@@ -22,7 +22,7 @@ export function DiamondSpriteCell({ x, y, width, height, data }: IDiamondSpriteC
             textStyles={textStyles}
             x={x}
             y={y}
-            yShift={0.5}
+            yShift={0.55}
             valueForMeasure={'1000'}
         />)
 };

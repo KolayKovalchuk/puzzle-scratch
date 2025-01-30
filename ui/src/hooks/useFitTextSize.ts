@@ -1,23 +1,31 @@
 import { ITextStyle, TextMetrics, TextStyle } from 'pixi.js-legacy';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
+
+const cache = new Map<string, number>();
 
 export function useFitTextSize(
     text: string,
     targetWidth: number,
     targetHeight: number,
-    textStyle: Partial<ITextStyle>) {
+    textStyle: Partial<ITextStyle>,
+    shouldFitFontSize: boolean = true
+) {
     const initialFontSize = typeof textStyle.fontSize === 'number' ? textStyle.fontSize : Number(textStyle.fontSize?.replace('px', ''));
-    // const [fontSize, setFontSize] = useState(initialFontSize);
+    const [fontSize, setFontSize] = useState(initialFontSize);
 
-    return useMemo(() => {
-        if (!targetWidth || !targetHeight || !text) return;
+    useEffect(() => {
+        if (!shouldFitFontSize || !targetWidth || !targetHeight || !text) return;
 
-        console.log('useFitTextSize', text, targetWidth, targetHeight, initialFontSize);
-        
+        const cacheKey = `${text}-${targetWidth}-${targetHeight}-${initialFontSize}`;
+        if (cache.has(cacheKey)) {
+            const cacheFontSize = cache.get(cacheKey);
+            if (cacheFontSize !== undefined) {
+                setFontSize(cacheFontSize);
+                return;
+            }
+        }
 
         const measureTextSize = (fontSize: number) => {
-            // console.log('measureTextSize', text, fontSize, targetWidth, targetHeight);
-            
             const style = new TextStyle({ ...textStyle, fontSize });
             const metrics = TextMetrics.measureText(text, style);
 
@@ -37,13 +45,9 @@ export function useFitTextSize(
             metrics = measureTextSize(currentFontSize);
         }
 
-        // if (currentFontSize === 0) {
-        //     console.warn(`Text '${text}' is too long to fit the target width:${targetWidth}`);
-        // }
+        setFontSize(currentFontSize);
+        cache.set(cacheKey, currentFontSize);
+    }, [text, targetWidth, targetHeight, initialFontSize, shouldFitFontSize]);
 
-        // setFontSize(currentFontSize);
-        return currentFontSize;
-    }, [text, targetWidth, targetHeight, initialFontSize]);
-
-    // return fontSize;
+    return fontSize;
 }

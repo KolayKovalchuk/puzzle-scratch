@@ -5,7 +5,6 @@ export const DefaultTextStyleConfig: Partial<ITextStyle> = {
     fontSize: 30,
     fontFamily: 'Nunito',
     fontWeight: '900',
-    leading: 0,
     lineHeight: 1,
 
     fill: ['#FFFFAB', '#FCB213'], // Gradient colors

@@ -8,6 +8,9 @@ import { iconSign, selectLocalValue, selectLocalValueWithVars } from '@store/sel
 import { getIsTonAddress } from '@utils/isTonAddress';
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { selectUserBalanceWithdrawable } from '@store/selectors/user.selectors';
+import { useValidateWalletAddress } from '../../hooks/useValidateWalletAddress';
+import { useValidateAmount } from '../../hooks/useValidateAmount';
 
 export interface IWithdrawBodyProps {
     className?: string;
@@ -21,7 +24,7 @@ export interface IWithdrawalFormState {
     tag: string;
 }
 
-interface IFormValidState {
+export interface IFormValidState {
     walletAddress: boolean;
     amount: boolean;
 }
@@ -33,8 +36,6 @@ export function WithdrawBody({ className, onFormChange, onFormValidChange }: IWi
     const amountLabel = useSelector(selectLocalValue('txt.withdrawal.amount'));
     const tagLabel = useSelector(selectLocalValue('txt.transfer.tag'));
     const tagPlaceholderLabel = useSelector(selectLocalValue('txt.transfer.tagPlaceholder'));
-    const wrongWalletLabel = useSelector(selectLocalValue('txt.withdrawal.wrongwallet'));
-    const insufficientLabel = useSelector(selectLocalValue('txt.withdrawal.insufficient'));
     const [termsPartials, setTermsPartials] = useState<string[]>([]);
 
     const minRbaXWithdraw = useSelector(selectMinRbaXWithdraw);
@@ -100,28 +101,8 @@ export function WithdrawBody({ className, onFormChange, onFormValidChange }: IWi
 
     }, [formValidStatus]);
 
-    const validateWalletAddress = useCallback((value: string) => {
-        const isTonAddress = getIsTonAddress(value);
-        console.log('isTonAddress', value, isTonAddress);
-        
-        if (!isTonAddress) {
-            setFormValidStatus((prev) => ({ ...prev, walletAddress: false }));
-            return { isValid: false, validationErrorMsg: wrongWalletLabel };
-        }
-
-        setFormValidStatus((prev) => ({ ...prev, walletAddress: true }));
-        return { isValid: true };
-    }, [wrongWalletLabel]);
-
-    const valudaiteAmount = useCallback((value: string) => {
-        if (!value || Number(value) < Number(minRbaXWithdraw)) {
-            setFormValidStatus((prev) => ({ ...prev, amount: false }));
-            return { isValid: false, validationErrorMsg: insufficientLabel };
-        }
-
-        setFormValidStatus((prev) => ({ ...prev, amount: true }));
-        return { isValid: true };
-    }, [minRbaXWithdraw, insufficientLabel]);
+    const { validateWalletAddress } = useValidateWalletAddress(setFormValidStatus);
+    const { valudaiteAmount } = useValidateAmount(setFormValidStatus);
 
     return (
         <div className={`${styles.container} ${className || ''}`}>

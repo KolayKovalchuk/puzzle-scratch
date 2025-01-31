@@ -41,26 +41,25 @@ export interface IButtonProps {
     getTextSize?: (textSize: string | number) => void;
 }
 
+export const defaultBtnYShift = 0.55;
 
-function useFixForArabicLocale() {
-    const defaultBtnYShift = 0.55;
-
+function useFixForArabicLocale(initialBtnYShift = defaultBtnYShift) {
     const arabicBtnYShift = 0.45;
 
     const userLocale = useSelector(selectUserPreferredLocale);
-    const [btnYShift, setBtnYShift] = useState(defaultBtnYShift);
+    const [btnYShift, setBtnYShift] = useState(initialBtnYShift);
 
     useEffect(() => {
         const isArabicLocale = userLocale?.toLowerCase() === 'ar';
         if (isArabicLocale) {
             setBtnYShift(arabicBtnYShift);
         } else {
-            setBtnYShift(defaultBtnYShift);
+            setBtnYShift(initialBtnYShift);
         }
 
     }, [
         userLocale,
-        defaultBtnYShift,
+        initialBtnYShift,
         arabicBtnYShift,
     ]);
 
@@ -76,7 +75,7 @@ export function ButtonComponent({
     iconName,
 
     text,
-    // yShift = 0.55,
+    yShift = defaultBtnYShift,
     children,
     style,
     shouldFitFontSize = true,
@@ -89,7 +88,7 @@ export function ButtonComponent({
 }: IButtonProps, ref: Ref<HTMLButtonElement>) {
     const { className: buttonTypeClassName, textStyles } = useButtonConfig(mode, styles, isDisabled);
 
-    const { btnYShift } = useFixForArabicLocale();
+    const { btnYShift } = useFixForArabicLocale(yShift);
 
     const renderContent = useCallback(() => {
         if (!!children) {

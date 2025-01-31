@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 import styles from './Header.module.scss'
 
-import { selectIsQaUser, selectUserAvatar, selectUserBalanceTotal } from '@store/selectors/user.selectors'
+import { selectUserAvatar, selectUserBalanceTotal } from '@store/selectors/user.selectors'
 
 import { WinStyledText } from '@components/shared/StyledText'
 import { ROUTES } from '@routers/routerConfig'
@@ -60,6 +60,7 @@ export function Header() {
                     <WinStyledText
                         text={lastWinLabel}
                         textStyles={{ fontSize: 20 }}
+                        shouldFitFontSize={false}
                     />
                 </div>
 

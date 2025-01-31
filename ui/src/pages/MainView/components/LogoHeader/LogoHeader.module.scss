@@ -3,22 +3,12 @@
     display: flex;
     position: relative;
     width: 110%;
-    margin-top: 4px;
     z-index: 100;
 
     .logoLabel {
         position: relative;
-        transform: translateX(-44%);
-        left: 50%;
-        z-index: 1;
-        width: 100%;
-        aspect-ratio: auto;
-    }
-
-    .starsHeaderBg {
-        position: absolute;
-        top: -18px;
-        z-index: 0;
-        aspect-ratio: 422 / 137;
+        width: 90%;
+        aspect-ratio: 1031/429;
+        left: 5%;
     }
 }

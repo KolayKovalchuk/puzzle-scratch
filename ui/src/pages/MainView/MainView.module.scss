@@ -20,13 +20,16 @@
     align-items: center;
     overflow: hidden;
 
+    margin-top: -1.5%;
+
     &.hidden {
         display: none;
     }
 }
 
 .logoHeader {
-    margin-bottom: -16px;
+    margin-top: -2%;
+    margin-bottom: -4%;
 
     @media screen and (max-width: 375px) {
         margin-bottom: -8px;

@@ -14,11 +14,11 @@ import { SystemErrorPopup } from './SystemErrorPopup';
 import styles from './LoadingScreen.module.scss';
 
 const poweredByTextStyles: Partial<ITextStyle> = {
-    fontSize: 20,
+    fontSize: 16,
 };
 
 const loadingTextStyles: Partial<ITextStyle> = {
-    fontSize: 25,
+    fontSize: 18,
 };
 
 export interface ILoadingScreenProps {

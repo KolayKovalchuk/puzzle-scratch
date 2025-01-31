@@ -5,7 +5,7 @@
 .contianer {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
     width: 100%;
@@ -14,12 +14,11 @@
     position: fixed;
     z-index: 1000000;
 
-    // display: none;
-
-    @include colors.main_radial_bg_gradient($width: 50%, $height: 30%, $y: 40%);
+    $y: 39%;
+    @include colors.main_radial_bg_gradient($width: 50%, $height: 30%, $y: 34%);
 
     @media screen and (max-width: 375px) {
-        @include colors.main_radial_bg_gradient($width: 50%, $height: 25%, $y: 35%);
+        @include colors.main_radial_bg_gradient($width: 50%, $height: 25%, $y: calc(#{$y} - 10%));
     }
     
     &.visible {
@@ -29,7 +28,7 @@
 
 
 .logoHeader {
-    margin-top: 50%;
+    margin-top: 40%;
 }
 
 .poweredByTextContainer {
@@ -38,7 +37,7 @@
     justify-content: space-between;
     align-items: center;
 
-    margin-top: 20px;
+    margin-bottom: 30%;
 }
 
 .poweredByText {
@@ -58,7 +57,7 @@
 
     width: 100%;
 
-    margin-bottom: 20px;
+    margin-bottom: 30%;
 }
 
 .loadingBar {

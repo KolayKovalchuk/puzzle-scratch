@@ -17,7 +17,7 @@ export function ProgressBar({ percentage, className }: IProgressBarProps) {
                     <LoaderStyledStyledText
                         className={styles.progressLabel}
                         text={`${percentage}%`}
-                        textFitCoefficient={1}
+                        textFitCoefficient={0.95}
                         valueForMeasure='100'
                     />
                 </div>

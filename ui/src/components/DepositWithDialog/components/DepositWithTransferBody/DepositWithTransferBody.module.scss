@@ -57,9 +57,11 @@
     }
 }
 
-.btn {
-    width: 45px;
-    min-width: 45px;
+$size: 45px;
+.copyBtn {
+    width: $size;
+    min-width: $size;
+    height: $size;
     margin-top: auto;
 }
 

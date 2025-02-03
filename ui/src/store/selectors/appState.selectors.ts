@@ -61,3 +61,10 @@ export const selectAppError = createSelector(
         return queryState?.error;
     }
 )
+
+export const selectClickIdParam = createSelector(
+    selectGame,
+    (queryState) => {
+        return queryState?.clickIdParam;
+    }
+)

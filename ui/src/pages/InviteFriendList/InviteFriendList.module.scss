@@ -110,6 +110,10 @@ $inviteFriendIconSize: 20px;
     left: calc($inviteFriendIconSize / -2);
     transform: translateY(-50%);
     top: 50%;
+
+    $padding: 5%;
+    padding-left: $padding;
+    padding-right: $padding;
 }
 
 .inviteFriendIcon {

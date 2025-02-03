@@ -1,5 +1,5 @@
 import { AppSounds } from '@config/sounds';
-import { BLINK_MATRIX_CELS, PLAY_SOUND, RESET_MATRIX_BLINK_COUNTER, SET_APP_ERROR, SHOW_AMOUNT_CHANGE_LABEL } from '@store/actions/appState.actions';
+import { BLINK_MATRIX_CELS, PLAY_SOUND, RESET_MATRIX_BLINK_COUNTER, SET_APP_ERROR, SET_CLICK_ID_PARAM, SHOW_AMOUNT_CHANGE_LABEL } from '@store/actions/appState.actions';
 
 export enum AppErrors {
     NoError = 'noError',
@@ -21,6 +21,8 @@ export interface IAppState {
 
     matrixBlinkCounter: number;
 
+    clickIdParam?: string | null;
+
     error: AppErrors;
 }
 
@@ -32,6 +34,8 @@ const initialState: IAppState = {
     duration: null,
     shouldStopAllSounds: true,
     soundPlayerCounter: 0,
+
+    clickIdParam: null,
 
     matrixBlinkCounter: 0,
 
@@ -73,6 +77,13 @@ export const appStateReducer = (state = initialState, action: any): IAppState =>
                 ...state,
                 error: action.payload,
             };
+
+        case SET_CLICK_ID_PARAM:
+            return {
+                ...state,
+                clickIdParam: action.payload,
+            };
+
         default:
             return state;
     }

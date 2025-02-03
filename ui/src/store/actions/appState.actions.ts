@@ -37,3 +37,10 @@ export const setAppError = (error: AppErrors) => ({
     type: SET_APP_ERROR,
     payload: error,
 })
+
+export const SET_CLICK_ID_PARAM = 'SET_CLICK_ID_PARAM';
+
+export const setClickIdParam = (clickIdParam: string) => ({
+    type: SET_CLICK_ID_PARAM,
+    payload: clickIdParam,
+})

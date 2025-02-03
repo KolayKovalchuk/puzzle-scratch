@@ -65,7 +65,7 @@ export function InviteFriendList({ className }: InviteFriendListProps) {
     textStyles.fill = 'white';
     textStyles.strokeThickness = 3;
     textStyles.letterSpacing = 2;
-    textStyles.fontSize = 28;
+    textStyles.fontSize = 24;
 
     const { targetRef } = useScrollTo();
     const { yShift } = useFixForHindiLocale();

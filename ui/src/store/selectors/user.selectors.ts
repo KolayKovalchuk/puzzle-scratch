@@ -1,5 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '../store';
+import { IClickId } from '@store/reducers/appState.reducer';
+import { clickIdSeparator } from '@services/useSendPixelFire';
 
 // Selector
 export const selectUser = (state: RootState) => {
@@ -86,7 +88,12 @@ export const selectIsQaUser = createSelector(
 
 export const selectUserClickId = createSelector(
     selectUser,
-    (queryState) => {
-        return queryState?.clickId
+    (queryState): IClickId => {
+        const [userClickId, scratchCounter] = (queryState?.clickId || '').split(clickIdSeparator);
+
+        return {
+            clickId: userClickId,
+            scratchCounter: parseInt(scratchCounter),
+        }
     }
 )

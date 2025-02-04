@@ -15,7 +15,6 @@ import { _applyForEachScratchCardRef, _getScratchedStateConfig } from './utils';
 
 let timeout: NodeJS.Timeout | null = null;
 let swipeTimeout: NodeJS.Timeout | null = null;
-let scratchCounter = 5;
 
 export function useScratchGame<CardData extends ICardData = ICardData>(
     batchId: string | undefined,
@@ -148,12 +147,8 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
 
         store.dispatch(blinkMatrixCels());
 
-        console.log('scratchCounter:', scratchCounter);
-        if (scratchCounter >= 0) scratchCounter--;
-        if (!scratchCounter) {
-            sendPixelFire();
-        }
-        
+        sendPixelFire();
+
         if (card?.winning) {
             setIsBigWinVisible(true);
 

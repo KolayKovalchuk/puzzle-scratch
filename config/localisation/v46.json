@@ -1249,15 +1249,15 @@
   },
   {
     "Key": "txt.withdrawal.terms",
-    "EN": "•Minimum withdrawal (<$icon1>) <$var1>.\n•Make sure that your wallet address is correct \n•0 Withdrawal fee\n•Withdrawal can take a 2 minutes",
-    "UK": "•Мінімальне виведення (<$icon1>) <$var1>.\n• Переконайтеся, що адреса вашого гаманця правильна \n•0 Комісія за зняття\n• Виведення може зайняти 2 хвилини",
-    "RU": "•Минимальная сумма вывода (<$icon1>) <$var1>.\n• Убедитесь, что адрес вашего кошелька верен. \n• 0 комиссия за снятие средств\n• Вывод средств может занять 2 минуты.",
-    "pt-BR": "•Retirada mínima (<$icon1>) <$var1>.\n•Certifique-se de que o endereço da sua carteira esteja correto \n•0 Taxa de retirada\n•A retirada pode levar 2 minutos",
-    "VI": "•Số tiền rút tối thiểu (<$icon1>) <$var1>.\n•Đảm bảo rằng địa chỉ ví của bạn là chính xác \n•0 Phí rút tiền\n•Việc rút tiền có thể mất 2 phút",
-    "ES": "•Retiro mínimo (<$icon1>) <$var1>.\n•Asegúrese de que la dirección de su billetera sea correcta \n•0 tarifa de retiro\n•La retirada puede tardar 2 minutos.",
-    "AR": "•الحد الأدنى للسحب (<$icon1>) <$var1>.\n•تأكد من صحة عنوان محفظتك \n•0 رسوم السحب\n• يمكن أن يستغرق السحب دقيقتين",
-    "FIL": "•Minimum na withdrawal (<$icon1>) <$var1>.\n•Tiyaking tama ang iyong wallet address \n•0 Bayad sa pag-withdraw\n• Maaaring tumagal ng 2 minuto ang pag-withdraw",
-    "HI": "•न्यूनतम निकासी (<$icon1>) <$var1>.\n•सुनिश्चित करें कि आपका वॉलेट पता सही है \n•0 निकासी शुल्क\n•निकासी में 2 मिनट का समय लग सकता है"
+    "EN": "• Minimum withdrawal (<$icon1>) <$var1>.\n• Max withdrawal (<$icon1>) <$var2>.\n• Make sure that your wallet address is correct \n• 0 Withdrawal fee\n• Withdrawal can take a 2 minutes\n• Cooldown between withdrawal is <$var3> days",
+    "UK": "• Мінімальне зняття (<$icon1>) <$var1>.\n• Максимальне виведення (<$icon1>) <$var2>.\n• Переконайтеся, що адреса вашого гаманця правильна \n• 0 Комісія за зняття\n• Виведення може зайняти 2 хвилини\n• Перезарядка між вилученням становить <$var3> днів",
+    "RU": "• Минимальный вывод (<$icon1>) <$var1>.\n• Максимальный вывод (<$icon1>) <$var2>.\n• Убедитесь, что адрес вашего кошелька указан правильно. \n• 0 комиссия за снятие средств\n• Вывод средств может занять 2 минуты.\n• Время восстановления между выводами средств составляет <$var3> дней.",
+    "pt-BR": "• Saque mínimo (<$icon1>) <$var1>.\n• Retirada máxima (<$icon1>) <$var2>.\n• Certifique-se de que o endereço da sua carteira esteja correto \n• 0 taxa de retirada\n• A retirada pode levar 2 minutos\n• O intervalo entre saques é de <$var3> dias",
+    "VI": "• Số tiền rút tối thiểu (<$icon1>) <$var1>.\n• Số tiền rút tối đa (<$icon1>) <$var2>.\n• Đảm bảo rằng địa chỉ ví của bạn là chính xác \n• 0 phí rút tiền\n• Rút tiền có thể mất 2 phút\n• Thời gian hồi chiêu giữa các lần rút tiền là <$var3> ngày",
+    "ES": "• Retiro mínimo (<$icon1>) <$var1>.\n• Retiro máximo (<$icon1>) <$var2>.\n• Asegúrese de que la dirección de su billetera sea correcta \n• 0 tarifa de retiro\n• La retirada puede tardar 2 minutos.\n• El tiempo de recuperación entre retiros es <$var3> días",
+    "AR": "• الحد الأدنى للسحب (<$icon1>) <$var1>.\n• الحد الأقصى للسحب (<$icon1>) <$var2>.\n• تأكد من صحة عنوان محفظتك \n• 0 رسوم السحب\n• يمكن أن يستغرق السحب دقيقتين\n• فترة التهدئة بين عمليات السحب هي <$var3> من الأيام",
+    "FIL": "• Minimum na withdrawal (<$icon1>) <$var1>.\n• Max withdrawal (<$icon1>) <$var2>.\n• Tiyaking tama ang iyong wallet address \n• 0 Bayad sa pag-withdraw\n• Maaaring tumagal ng 2 minuto ang withdrawal\n• Ang cooldown sa pagitan ng withdrawal ay <$var3> araw",
+    "HI": "• न्यूनतम निकासी (<$icon1>) <$var1>.\n• अधिकतम निकासी (<$icon1>) <$var2>.\n• सुनिश्चित करें कि आपका वॉलेट पता सही है \n• 0 निकासी शुल्क\n• निकासी में 2 मिनट का समय लग सकता है\n• निकासी के बीच कूलडाउन <$var3> दिन है"
   },
   {
     "Key": "pop.withdrawal.errortitle",
@@ -1681,15 +1681,15 @@
   },
   {
     "Key": "profile.gameHistory.gameName",
-    "EN": "Game name",
-    "UK": "Назва гри",
-    "RU": "Название игры",
-    "pt-BR": "Nome do jogo",
-    "VI": "Tên trò chơi",
-    "ES": "nombre del juego",
-    "AR": "اسم اللعبة",
-    "FIL": "Pangalan ng laro",
-    "HI": "गेम का नाम"
+    "EN": "Game",
+    "UK": "Гра",
+    "RU": "Игра",
+    "pt-BR": "Jogo",
+    "VI": "Trò chơi",
+    "ES": "Juego",
+    "AR": "لعبة",
+    "FIL": "Laro",
+    "HI": "खेल"
   },
   {
     "Key": "profile.gameHistory.date",
@@ -1705,15 +1705,15 @@
   },
   {
     "Key": "profile.gameHistory.prizeWon",
-    "EN": "Prize won",
-    "UK": "Приз виграний",
-    "RU": "Приз выигран",
-    "pt-BR": "Prêmio ganho",
-    "VI": "Giải thưởng đã giành được",
-    "ES": "Premio ganado",
-    "AR": "فاز بالجائزة",
-    "FIL": "Nanalo ng premyo",
-    "HI": "पुरस्कार जीता"
+    "EN": "Wins",
+    "UK": "Перемоги",
+    "RU": "Победы",
+    "pt-BR": "Vitórias",
+    "VI": "Thắng",
+    "ES": "gana",
+    "AR": "انتصارات",
+    "FIL": "Panalo",
+    "HI": "जीत"
   },
   {
     "Key": "profile.gameHistory.noGamesYet",
@@ -1741,14 +1741,14 @@
   },
   {
     "Key": "txt.withdrawal.cooldown",
-    "EN": "A withdrawal request can be submitted once your cooldown period from last submission has passed in:",
-    "UK": "Запит на відкликання можна надіслати після закінчення періоду відновлення з останнього надсилання через:",
-    "RU": "Запрос на вывод средств можно подать после того, как пройдет период восстановления с момента последней подачи:",
-    "pt-BR": "Uma solicitação de saque pode ser enviada assim que o período de espera do último envio tiver passado:",
-    "VI": "Yêu cầu rút tiền có thể được gửi sau khi thời gian hồi chiêu của bạn kể từ lần gửi cuối cùng đã trôi qua:",
-    "ES": "Se puede enviar una solicitud de retiro una vez que haya transcurrido el período de recuperación del último envío:",
-    "AR": "يمكن تقديم طلب السحب بمجرد مرور فترة التهدئة الخاصة بك منذ آخر إرسال:",
-    "FIL": "Maaaring magsumite ng kahilingan sa withdrawal kapag lumipas na ang iyong panahon ng paglamig mula sa huling pagsusumite sa:",
-    "HI": "अंतिम सबमिशन से आपकी कूलडाउन अवधि बीत जाने के बाद निकासी अनुरोध सबमिट किया जा सकता है:"
+    "EN": "A withdrawal request can be submitted once your cooldown period from last submission has passed in: <$var1>",
+    "UK": "Запит на відкликання можна надіслати після закінчення періоду відновлення з останнього надсилання в: <$var1>",
+    "RU": "Запрос на вывод средств можно отправить после того, как пройдет период восстановления с момента последней подачи: <$var1>",
+    "pt-BR": "Uma solicitação de saque pode ser enviada assim que o período de espera do último envio tiver passado: <$var1>",
+    "VI": "Yêu cầu rút tiền có thể được gửi sau khi thời gian hồi chiêu của bạn kể từ lần gửi cuối cùng đã trôi qua: <$var1>",
+    "ES": "Se puede enviar una solicitud de retiro una vez que haya transcurrido el período de recuperación del último envío: <$var1>",
+    "AR": "يمكن تقديم طلب السحب بمجرد مرور فترة التهدئة الخاصة بك منذ آخر إرسال: <$var1>",
+    "FIL": "Maaaring magsumite ng kahilingan sa withdrawal kapag lumipas na ang iyong cooldown period mula sa huling pagsusumite sa: <$var1>",
+    "HI": "अंतिम सबमिशन से आपकी कूलडाउन अवधि बीत जाने के बाद निकासी अनुरोध सबमिट किया जा सकता है: <$var1>"
   }
 ]

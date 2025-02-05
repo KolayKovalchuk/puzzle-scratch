@@ -4,7 +4,7 @@
   "TELEGRAM_APP_URL": "https://t.me/PuzzleScratchDEVbot/PuzzleScratch_DEV",
   "TELEGRAM_APP_DOMAIN": "https://puzzle-ui-dev-291ijd.cryptoscratch.gg/",
   "PIXEL_FIRE_URL": "https://offers-aryagames.affise.com/postback",
-  "LOCALISATION": "https://puzzle-config.storage.googleapis.com/localisation/v46.json",
+  "LOCALISATION": "https://puzzle-config.storage.googleapis.com/localisation/v47.json",
   "BOT_LOCALISATION": "https://puzzle-config.storage.googleapis.com/botLocalization/v6.json",
   "BOT_MSG_IMG_BASE_URL": "https://puzzle-config.storage.googleapis.com/botMsgImg/",
   "SCRATCH_CARD_TRANSITION_TIMEOUT_MS": 2000,

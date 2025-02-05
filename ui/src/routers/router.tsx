@@ -3,13 +3,11 @@ import { IceBox } from '@pages/IceBox/IceBox';
 import { InviteFriendList } from '@pages/InviteFriendList/InviteFriendList';
 import { LanguageSelect } from '@pages/LanguageSelect';
 import { MainView } from '@pages/MainView';
+import { Profile } from '@pages/Profile/Profile';
 import { SantaSac } from '@pages/SantaSac';
 import { Wallet } from '@pages/Wallet/Wallet';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { ROUTES } from './routerConfig';
-import { Profile } from '@pages/Profile/Profile';
-import { MVSTMG } from '@pages/MVSTMG/MVSTMG';
-import { App } from '../App.tsx'
 
 // import { IceBox } from '@pages/IceBox';
 

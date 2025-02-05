@@ -18,7 +18,6 @@ export interface IUser {
     notifications: INotification[];
     avatar: string;
     qa: boolean | null;
-    clickId: string | null;
 }
 
 export class User implements IUser {
@@ -34,7 +33,6 @@ export class User implements IUser {
     notifications: Notification[];
     avatar: string;
     qa: boolean | null;
-    clickId: string | null;
 
     constructor(data: IUser) {
         this.id = data.id;
@@ -49,7 +47,6 @@ export class User implements IUser {
         this.notifications = data.notifications.map(notification => new Notification(notification));
         this.avatar = data.avatar;
         this.qa = data.qa;
-        this.clickId = data.clickId || null;
     }
 
     toJSON() {
@@ -66,7 +63,6 @@ export class User implements IUser {
             notifications: this.notifications.map(notification => notification.toJSON()),
             avatar: this.avatar,
             qa: this.qa,
-            clickId: this.clickId,
         };
     }
 }

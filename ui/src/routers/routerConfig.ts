@@ -7,6 +7,4 @@ export enum ROUTES {
     Wallet = '/wallet',
     InviteFriends = '/invite-friends',
     Profile = '/profile',
-
-    MVSTMG = '/mvstmg',
 }

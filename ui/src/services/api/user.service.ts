@@ -33,6 +33,18 @@ export async function patchUserAcceptTerms(): Promise<IUserAcceptTermsResponse |
     }
 }
 
+export async function postUserClickId(clickId: string) {
+    try {
+        const response = await apiClient.post('/user/click', {
+            id: clickId,
+        });
+
+        console.log('ClickId updated successfully:', response.data);
+    } catch (error) {
+        console.error('Error updating user clickId:', error);
+    }
+}
+
 export async function selectUserLocale(locale: string) {
     const patchLocaleResult = await patchUserLocale(locale)
     

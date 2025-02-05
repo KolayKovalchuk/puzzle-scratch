@@ -83,3 +83,10 @@ export const selectIsQaUser = createSelector(
         return queryState?.qa
     }
 )
+
+export const selectUserClickId = createSelector(
+    selectUser,
+    (queryState) => {
+        return queryState?.clickId
+    }
+)

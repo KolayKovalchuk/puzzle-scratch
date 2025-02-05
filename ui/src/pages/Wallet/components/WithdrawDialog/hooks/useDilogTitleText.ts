@@ -15,6 +15,13 @@ export function useDilogTitleText(withdrawalStatus: WithdrawalRequestStatus) {
             case WithdrawalRequestStatus.Success:
                 setTitleText(successTitleText);
                 break;
+
+            case WithdrawalRequestStatus.WithdrawCooldownPeriod:
+                setTitleText(defaulTitleText);
+                break;
+
+            case WithdrawalRequestStatus.AddressInvalid:
+            case WithdrawalRequestStatus.WithdrawMaxAmountExceeded:
             case WithdrawalRequestStatus.InsufficientBalanceError:
             case WithdrawalRequestStatus.ValidationErrorError:
             case WithdrawalRequestStatus.DefaultError:

@@ -35,6 +35,7 @@ export async function patchUserAcceptTerms(): Promise<IUserAcceptTermsResponse |
 
 export async function postUserClickId(clickId: string) {
     try {
+        console.log('postUserClickId:', clickId);
         const response = await apiClient.post('/user/click', {
             id: clickId,
         });

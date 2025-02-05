@@ -2,24 +2,28 @@ import { selectLocalValue } from '@store/selectors/localization.selectors';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { WithdrawalRequestStatus } from '../../WithdrawDialog';
+import { CooldownBody } from '../CooldownBody/CooldownBody';
 
 export interface IWithdrawResponseBodyProps {
     withdrawalStatus: WithdrawalRequestStatus;
+    responseData: any;
 }
 
-export function WithdrawResponse({ withdrawalStatus }: IWithdrawResponseBodyProps) {
-    // const contentText = useSelector(selectLocalValue('pop.withdrawal.successText'));
+export function WithdrawResponse({ withdrawalStatus, responseData }: IWithdrawResponseBodyProps) {
     const successText = useSelector(selectLocalValue('pop.withdrawal.successText'));
-    
+
     const errorDefaultText = useSelector(selectLocalValue('pop.withdrawal.defaultError'));
     const errorWalletText = useSelector(selectLocalValue('pop.withdrawal.errorWallet'));
     const errorAmountText = useSelector(selectLocalValue('pop.withdrawal.errorAmount'));
-    // return contentText
 
     const dialogBody = useMemo(() => {
+
         switch (withdrawalStatus) {
             case WithdrawalRequestStatus.Success:
                 return successText;
+            case WithdrawalRequestStatus.WithdrawCooldownPeriod:
+                const cooldownTime = responseData?.cooldownExpiry;
+                return <CooldownBody cooldownTime={cooldownTime} />;
             case WithdrawalRequestStatus.InsufficientBalanceError:
                 return errorAmountText
             case WithdrawalRequestStatus.ValidationErrorError:
@@ -27,7 +31,13 @@ export function WithdrawResponse({ withdrawalStatus }: IWithdrawResponseBodyProp
             default:
                 return errorDefaultText;
         }
-    }, [withdrawalStatus, successText, errorDefaultText, errorWalletText, errorAmountText]);
+    }, [
+        withdrawalStatus,
+        successText,
+        errorDefaultText,
+        errorWalletText,
+        errorAmountText
+    ]);
 
     return dialogBody;
 }

@@ -1,16 +1,17 @@
 import { IScratchCardHandle } from '@components/ScratchCard';
 import { IScratchAnimationHandle } from '@components/shared/ScratchAnimation/ScratchAnimation';
 import { AppSounds } from '@config/sounds';
-import { IBuyBatchCardData, ICardData, WinType } from '@models/IBuyBatchCardData';
+import { useGetSounds, useStopWinSound } from '@hooks/usePlaySound';
+import { IBuyBatchCardData, ICardData } from '@models/IBuyBatchCardData';
+import { sendPixelFire } from '@services/useSendPixelFire';
 import { blinkMatrixCels, playSound, resetMatrixBlinkCounter } from '@store/actions/appState.actions';
 import { updateUserBalanceWithChangeAnimation } from '@store/actions/user.actions';
 import { selectScratchCardTransitionTimeout } from '@store/selectors/config.selectors';
 import store from '@store/store';
 import { RefObject, useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { _applyForEachScratchCardRef, _getScratchedStateConfig } from './utils';
 import { useBuyCardWithBalanceChange, useRedirectOnBatchFinished } from './hooks';
-import { useGetSounds, useStopWinSound } from '@hooks/usePlaySound';
+import { _applyForEachScratchCardRef, _getScratchedStateConfig } from './utils';
 
 let timeout: NodeJS.Timeout | null = null;
 let swipeTimeout: NodeJS.Timeout | null = null;
@@ -145,6 +146,8 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
         if (!card) return;
 
         store.dispatch(blinkMatrixCels());
+
+        sendPixelFire();
 
         if (card?.winning) {
             setIsBigWinVisible(true);

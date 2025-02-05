@@ -1741,14 +1741,14 @@
   },
   {
     "Key": "txt.withdrawal.cooldown",
-    "EN": "A withdrawal request can be submitted once your cooldown period from last submission has passed in: <$var1>",
-    "UK": "Запит на відкликання можна надіслати після закінчення періоду відновлення з останнього надсилання в: <$var1>",
-    "RU": "Запрос на вывод средств можно отправить после того, как пройдет период восстановления с момента последней подачи: <$var1>",
-    "pt-BR": "Uma solicitação de saque pode ser enviada assim que o período de espera do último envio tiver passado: <$var1>",
-    "VI": "Yêu cầu rút tiền có thể được gửi sau khi thời gian hồi chiêu của bạn kể từ lần gửi cuối cùng đã trôi qua: <$var1>",
-    "ES": "Se puede enviar una solicitud de retiro una vez que haya transcurrido el período de recuperación del último envío: <$var1>",
-    "AR": "يمكن تقديم طلب السحب بمجرد مرور فترة التهدئة الخاصة بك منذ آخر إرسال: <$var1>",
-    "FIL": "Maaaring magsumite ng kahilingan sa withdrawal kapag lumipas na ang iyong cooldown period mula sa huling pagsusumite sa: <$var1>",
-    "HI": "अंतिम सबमिशन से आपकी कूलडाउन अवधि बीत जाने के बाद निकासी अनुरोध सबमिट किया जा सकता है: <$var1>"
+    "EN": "A withdrawal request can be submitted once your cooldown period from last submission has passed in:",
+    "UK": "Запит на відкликання можна надіслати після закінчення періоду відновлення з останнього надсилання в:",
+    "RU": "Запрос на вывод средств можно отправить после того, как пройдет период восстановления с момента последней подачи:",
+    "pt-BR": "Uma solicitação de saque pode ser enviada assim que o período de espera do último envio tiver passado:",
+    "VI": "Yêu cầu rút tiền có thể được gửi sau khi thời gian hồi chiêu của bạn kể từ lần gửi cuối cùng đã trôi qua:",
+    "ES": "Se puede enviar una solicitud de retiro una vez que haya transcurrido el período de recuperación del último envío:",
+    "AR": "يمكن تقديم طلب السحب بمجرد مرور فترة التهدئة الخاصة بك منذ آخر إرسال:",
+    "FIL": "Maaaring magsumite ng kahilingan sa withdrawal kapag lumipas na ang iyong cooldown period mula sa huling pagsusumite sa:",
+    "HI": "अंतिम सबमिशन से आपकी कूलडाउन अवधि बीत जाने के बाद निकासी अनुरोध सबमिट किया जा सकता है:"
   }
 ]

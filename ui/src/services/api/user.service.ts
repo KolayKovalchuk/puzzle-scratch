@@ -40,8 +40,10 @@ export async function postUserClickId(clickId: string) {
         });
 
         console.log('ClickId updated successfully:', response.data);
+        return response.status === 200;
     } catch (error) {
         console.error('Error updating user clickId:', error);
+        return false;
     }
 }
 

@@ -1,5 +1,5 @@
 import { AppSounds } from '@config/sounds';
-import { AppErrors } from '@store/reducers/appState.reducer';
+import { AppErrors, IClickId } from '@store/reducers/appState.reducer';
 
 export const SHOW_AMOUNT_CHANGE_LABEL = 'SHOW_AMOUNT_CHANGE_LABEL';
 
@@ -40,7 +40,7 @@ export const setAppError = (error: AppErrors) => ({
 
 export const SET_CLICK_ID_PARAM = 'SET_CLICK_ID_PARAM';
 
-export const setClickIdParam = (clickIdParam: string) => ({
+export const setClickIdParam = (clickId: IClickId) => ({
     type: SET_CLICK_ID_PARAM,
-    payload: clickIdParam,
+    payload: clickId,
 })

@@ -7,6 +7,11 @@ export enum AppErrors {
     NoAvailableCards = 'NoAvailableCards',
 }
 
+export interface IClickId {
+    clickId: string | null;
+    scratchCounter: number;
+}
+
 // Initial State
 export interface IAppState {
     lastAmountChange: number;
@@ -19,11 +24,13 @@ export interface IAppState {
 
     matrixBlinkCounter: number;
 
-    clickIdParam?: string | null;
+    clickIdParam: IClickId;
 
     error: AppErrors;
 }
 
+
+export const initialScratchCounter = 5;
 const initialState: IAppState = {
     lastAmountChange: 0,
     prizeLabelCounter: 0,
@@ -33,7 +40,10 @@ const initialState: IAppState = {
     shouldStopAllSounds: true,
     soundPlayerCounter: 0,
 
-    clickIdParam: null,
+    clickIdParam: {
+        clickId: null,
+        scratchCounter: initialScratchCounter,
+    },
 
     matrixBlinkCounter: 0,
 
@@ -79,7 +89,10 @@ export const gameReducer = (state = initialState, action: any): IAppState => {
         case SET_CLICK_ID_PARAM:
             return {
                 ...state,
-                clickIdParam: action.payload,
+                clickIdParam: {
+                    clickId: action.payload.clickId,
+                    scratchCounter: action.payload.scratchCounter,
+                },
             };
 
         default:

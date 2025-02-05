@@ -16,6 +16,8 @@ function getLocKey(batchCardType: BatchCardType) {
     switch (batchCardType) {
         case BatchCardType.CANDY_MAZE:
             return 'puzzle.gallery.candymaze';
+        case BatchCardType.VEGAS_LOOT:
+            return 'puzzle.gallery.vegasloot';
         case BatchCardType.ICE_BOX:
             return 'puzzle.gallery.icebox';
         case BatchCardType.SANTA_SAC:

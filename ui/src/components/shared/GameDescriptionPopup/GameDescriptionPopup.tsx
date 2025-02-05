@@ -16,6 +16,8 @@ function getLocKey(batchCardType: BatchCardType) {
     switch (batchCardType) {
         case BatchCardType.CANDY_MAZE:
             return 'puzzle.info.candymaze';
+        case BatchCardType.VEGAS_LOOT:
+            return 'puzzle.info.vegasloot';
         case BatchCardType.ICE_BOX:
             return 'puzzle.info.icebox';
         case BatchCardType.SANTA_SAC:
@@ -25,7 +27,7 @@ function getLocKey(batchCardType: BatchCardType) {
 
 export function GameDescriptionPopup({ isOpen, onClose, batchCardType }: IGameDescriptionPopupProps) {
     const locKey = getLocKey(batchCardType);
-    const content = useSelector(selectLocalValue(locKey));
+    const content = useSelector(selectLocalValue(locKey || ''));
 
     return (
         <ModalDialog

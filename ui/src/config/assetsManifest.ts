@@ -5,6 +5,7 @@ import { SANTA_SAC_BUNDLE } from './santaSacBundleConfig';
 import { ICE_BOX_BUNDLE } from './iceBoxBundleConfig';
 import { COIN_ANIMATION_BUNDLE } from './coinAnimationBundleConfig';
 import { SCRATCH_ANIMATION_BUNDLE } from './scratchAnimationBundleConfig';
+import { VEGAS_LOOT_BUNDLE } from './vegasLootBundleConfig';
 
 export interface IScrathCardBundle extends IBundle {
     cover: Texture;
@@ -14,6 +15,7 @@ export interface IScrathCardBundle extends IBundle {
 export const ASSETS_MANIFEST: AssetsManifest = {
     bundles: [
         CANDY_MAZE_BUNDLE,
+        VEGAS_LOOT_BUNDLE,
         SANTA_SAC_BUNDLE,
         ICE_BOX_BUNDLE,
         COIN_ANIMATION_BUNDLE,

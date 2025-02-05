@@ -1,0 +1,14 @@
+@use '@styles/colors';
+@use '@styles/variables';
+@use '@styles/mixins';
+@use '@styles/game_mixins';
+@use '@styles/candy_maze_mixin';
+
+@include game_mixins.gameMixin;
+@include candy_maze_mixin.candyMazeMixin;
+
+.mainContainer {
+    background: url('/vegas_loot_bg.png') no-repeat;
+    background-size: cover;
+    background-position: center;
+}

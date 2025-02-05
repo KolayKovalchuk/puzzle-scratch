@@ -14,6 +14,9 @@ function getStyledHeaderType(cardType: BatchCardType) {
         case BatchCardType.CANDY_MAZE:
             return StyledHeaderType.PINK;
 
+        case BatchCardType.VEGAS_LOOT:
+            return StyledHeaderType.GREEN;
+
         case BatchCardType.SANTA_SAC:
             return StyledHeaderType.RED;
 
@@ -30,6 +33,9 @@ function getBatchCardClass(cardType: BatchCardType, styles: CSSModuleClasses) {
         case BatchCardType.CANDY_MAZE:
             return styles.pink;
 
+        case BatchCardType.VEGAS_LOOT:
+            return styles.green;
+
         case BatchCardType.SANTA_SAC:
             return styles.red;
 
@@ -45,6 +51,9 @@ function getBatchImageUrl(cardType: BatchCardType) {
 
         case BatchCardType.CANDY_MAZE:
             return '/candy_maze.png';
+
+        case BatchCardType.VEGAS_LOOT:
+            return '/vegas_loot.png';
 
         case BatchCardType.SANTA_SAC:
             return '/santa_sac.png';
@@ -71,6 +80,11 @@ export function useBatchCardHandler(batchCard: BatchCard, navigate: NavigateFunc
         case BatchCardType.CANDY_MAZE:
             return useCallback(() => {
                 navigate(`${ROUTES.CandyMaze}/${batchCard.batchId}`);
+            }, [navigate, batchCard]);
+
+        case BatchCardType.VEGAS_LOOT:
+            return useCallback(() => {
+                navigate(`${ROUTES.VegasLoot}/${batchCard.batchId}`);
             }, [navigate, batchCard]);
 
         case BatchCardType.SANTA_SAC:

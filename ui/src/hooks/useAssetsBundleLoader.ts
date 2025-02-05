@@ -12,12 +12,10 @@ export function useTexture(svgName: string) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<Error | null>(null);
 
-    // let texture = null;
     useEffect(() => {
         const loadTexture = async () => {
             try {
                 const url = `/scratchCard/${svgName}.svg`;
-                // const url = './assets/icons/candy_maze.png';
                 console.log('url', url);
 
                 const loadedTexture = await Texture.fromURL(url)
@@ -26,7 +24,6 @@ export function useTexture(svgName: string) {
                         return texture;
                     });
                 setTexture(loadedTexture);
-                // texture = loadedTexture;
             } catch (err) {
                 setError(err as Error);
             } finally {

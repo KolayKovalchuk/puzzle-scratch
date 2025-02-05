@@ -1,7 +1,8 @@
 export enum BatchCardType {
     ICE_BOX = 'ICE_BOX',
     CANDY_MAZE = 'CANDY_MAZE',
-    SANTA_SAC = 'SANTA_SAC'
+    SANTA_SAC = 'SANTA_SAC',
+    VEGAS_LOOT = 'VEGAS_LOOT'
 }
 
 export enum BatchStatus {

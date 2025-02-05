@@ -3,7 +3,7 @@ import { DefaultTextStyleConfig, RedStyledTextStyle } from '@components/shared/S
 import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
 import { Container, Sprite, Text } from '@pixi/react';
 import { TextStyle } from 'pixi.js-legacy';
-import { CandyMazeScratchItemsEnum, CandyMazeScratchTextItems } from '../../scratchItemsEnum';
+import { CandyMazeScratchItemsEnum, CandyMazeScratchTextItems } from '@pages/CandyMaze/scratchItemsEnum';
 
 export interface ICandyMazeSpriteCellData extends ISpriteCellData {
     textureName: string;

@@ -8,6 +8,7 @@ import { SantaSac } from '@pages/SantaSac';
 import { Wallet } from '@pages/Wallet/Wallet';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { ROUTES } from './routerConfig';
+import { VegasLoot } from '@pages/Vegas/VegasLoot';
 
 // import { IceBox } from '@pages/IceBox';
 
@@ -21,6 +22,7 @@ export const AppRouter = ({}: IAppRouterProps) => {
             <Route path={ROUTES.LanguageSelect} element={<LanguageSelect />} />
 
             <Route path={`${ROUTES.CandyMaze}/:batchId`} element={<CandyMaze />} />
+            <Route path={`${ROUTES.VegasLoot}/:batchId`} element={<VegasLoot />} />
             <Route path={`${ROUTES.SantaSac}/:batchId`} element={<SantaSac />} />
             <Route path={`${ROUTES.IceBox}/:batchId`} element={<IceBox />} />
 

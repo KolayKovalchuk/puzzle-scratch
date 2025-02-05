@@ -1,0 +1,45 @@
+@use '@styles/mixins';
+
+@mixin candyMazeMixin{
+    .headerLogoContainer {
+        margin: 2.45% auto;
+    }
+    
+    .headerIcon {
+        aspect-ratio: 1000/302;
+        z-index: 3;
+    }
+    
+    .scratchAreaContainer {
+        justify-content: flex-start;
+    }
+    
+    .animationContainer {
+        height: 92.5%;
+        margin-top: 4.0%;
+        width: 91.6%;
+    }
+    
+    .potentialPrizeContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        width: 56%;
+        min-height: 18.5%;
+        
+        position: relative;
+        top: 20px;
+        margin-top: -20px;
+        
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+        z-index: 3;
+        
+        position: relative;
+        
+        @include mixins.scratchCardBg;
+        
+        padding: 4px;
+    }
+}

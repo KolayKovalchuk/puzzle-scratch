@@ -1728,27 +1728,27 @@
     "HI": "अभी तक कोई जीत नहीं"
   },
   {
-    "Key": "txt.withdrawal.timer",
-    "EN": "<$var1> days and <$var2>:<$var3>",
-    "UK": "<$var1> днів і <$var2>:<$var3>",
-    "RU": "<$var1> дней и <$var2>:<$var3>",
-    "pt-BR": "<$var1> dias e <$var2>:<$var3>",
-    "VI": "<$var1> ngày và <$var2>:<$var3>",
-    "ES": "<$var1> días y <$var2>:<$var3>",
-    "AR": "أيام <$var1> و<$var2>:<$var3>",
-    "FIL": "<$var1> araw at <$var2>:<$var3>",
-    "HI": "<$var1> दिन और <$var2>:<$var3>"
-  },
-  {
     "Key": "txt.withdrawal.cooldown",
     "EN": "A withdrawal request can be submitted once your cooldown period from last submission has passed in:",
-    "UK": "Запит на відкликання можна надіслати після закінчення періоду відновлення з останнього надсилання в:",
-    "RU": "Запрос на вывод средств можно отправить после того, как пройдет период восстановления с момента последней подачи:",
+    "UK": "Запит на відкликання можна надіслати після закінчення періоду відновлення з останнього надсилання через:",
+    "RU": "Запрос на вывод средств можно подать после того, как пройдет период восстановления с момента последней подачи:",
     "pt-BR": "Uma solicitação de saque pode ser enviada assim que o período de espera do último envio tiver passado:",
     "VI": "Yêu cầu rút tiền có thể được gửi sau khi thời gian hồi chiêu của bạn kể từ lần gửi cuối cùng đã trôi qua:",
     "ES": "Se puede enviar una solicitud de retiro una vez que haya transcurrido el período de recuperación del último envío:",
     "AR": "يمكن تقديم طلب السحب بمجرد مرور فترة التهدئة الخاصة بك منذ آخر إرسال:",
     "FIL": "Maaaring magsumite ng kahilingan sa withdrawal kapag lumipas na ang iyong cooldown period mula sa huling pagsusumite sa:",
     "HI": "अंतिम सबमिशन से आपकी कूलडाउन अवधि बीत जाने के बाद निकासी अनुरोध सबमिट किया जा सकता है:"
+  },
+  {
+    "Key": "txt.withdrawal.cooldownTimer",
+    "EN": "<$var1>d <$var2>:<$var3>:<$var4>",
+    "UK": "<$var1>d <$var2>:<$var3>:<$var4>",
+    "RU": "<$var1>d <$var2>:<$var3>:<$var4>",
+    "pt-BR": "<$var1>d <$var2>:<$var3>:<$var4>",
+    "VI": "<$var1>d <$var2>:<$var3>:<$var4>",
+    "ES": "<$var1>d <$var2>:<$var3>:<$var4>",
+    "AR": "<$var1>d <$var2>:<$var3>:<$var4>",
+    "FIL": "<$var1>d <$var2>:<$var3>:<$var4>",
+    "HI": "<$var1>d <$var2>:<$var3>:<$var4>"
   }
 ]

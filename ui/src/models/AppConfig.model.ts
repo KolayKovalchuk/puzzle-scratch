@@ -3,7 +3,6 @@ export class AppConfig {
     TELEGRAM_BOT_URL: string;
     TELEGRAM_APP_URL: string;
     TELEGRAM_APP_DOMAIN: string;
-    PIXEL_FIRE_URL: string;
     LOCALISATION: string;
     BOT_LOCALISATION: string;
     SCRATCH_CARD_TRANSITION_TIMEOUT_MS: number;
@@ -21,7 +20,6 @@ export class AppConfig {
         this.TELEGRAM_BOT_URL = data.TELEGRAM_BOT_URL;
         this.TELEGRAM_APP_URL = data.TELEGRAM_APP_URL;
         this.TELEGRAM_APP_DOMAIN = data.TELEGRAM_APP_DOMAIN;
-        this.PIXEL_FIRE_URL = data.PIXEL_FIRE_URL;
         this.LOCALISATION = data.LOCALISATION;
         this.BOT_LOCALISATION = data.BOT_LOCALISATION;
         this.SCRATCH_CARD_TRANSITION_TIMEOUT_MS = data.SCRATCH_CARD_TRANSITION_TIMEOUT_MS;

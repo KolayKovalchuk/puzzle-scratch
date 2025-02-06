@@ -6,6 +6,4 @@ export enum ROUTES {
     IceBox = '/ice-box',
     Wallet = '/wallet',
     InviteFriends = '/invite-friends',
-
-    MVSTMG = '/mvstmg',
 }

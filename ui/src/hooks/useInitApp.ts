@@ -1,6 +1,6 @@
 import { useFetchLocalizationData } from '@services/api/localization.service';
 import { useLoginUser } from '@services/auth.service';
-import { useSaveClickId } from '@services/useSendPixelFire';
+import { useSaveClickId } from '@services/useSaveClickId';
 import { useAssetsBundleLoader } from './useAssetsBundleLoader';
 import { useInitTwaSdk } from './useInitTwaSdk';
 import { useFontFaceObserver } from './useloadFont';

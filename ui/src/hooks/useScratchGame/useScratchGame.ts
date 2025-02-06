@@ -3,7 +3,6 @@ import { IScratchAnimationHandle } from '@components/shared/ScratchAnimation/Scr
 import { AppSounds } from '@config/sounds';
 import { useGetSounds, useStopWinSound } from '@hooks/usePlaySound';
 import { IBuyBatchCardData, ICardData } from '@models/IBuyBatchCardData';
-import { sendPixelFire } from '@services/useSendPixelFire';
 import { blinkMatrixCels, playSound, resetMatrixBlinkCounter } from '@store/actions/appState.actions';
 import { updateUserBalanceWithChangeAnimation } from '@store/actions/user.actions';
 import { selectScratchCardTransitionTimeout } from '@store/selectors/config.selectors';
@@ -146,8 +145,6 @@ export function useScratchGame<CardData extends ICardData = ICardData>(
         if (!card) return;
 
         store.dispatch(blinkMatrixCels());
-
-        sendPixelFire();
 
         if (card?.winning) {
             setIsBigWinVisible(true);

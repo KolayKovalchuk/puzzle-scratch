@@ -10,10 +10,13 @@ export enum NotificationType {
     RBAX_GIFT_1_PER_X = 'RBAX_GIFT_1_PER_X', // 3. This message is shown when the user is collecting more than Y gifts a day.
     RBAX_GIFT_EXPIRED = 'RBAX_GIFT_EXPIRED', // link expired
 
+    AFF_LINK_TO_MANY = 'AFF_LINK_TO_MANY', // 1. This message will show if the player already collected the gift from the link.
+    AFF_LINK_AVAILABLE = 'AFF_LINK_AVAILABLE', // 1. This message will show if the player already collected the gift from the link.
+
     DEPOSIT = 'DEPOSIT',
 }
 
-export type NotificationData = IDaylyBonusData | IDepositSuccessData;
+export type NotificationData = IDaylyBonusData | IDepositSuccessData | IAffLinkAvailableData;
 
 export interface IDaylyBonusData {
     day: number;
@@ -21,6 +24,10 @@ export interface IDaylyBonusData {
 
 export interface IDepositSuccessData {
     rbaxDepositAmount: number;
+}
+
+export interface IAffLinkAvailableData {
+    bonusAmount: number;
 }
 
 export interface INotification<Data = NotificationData> {

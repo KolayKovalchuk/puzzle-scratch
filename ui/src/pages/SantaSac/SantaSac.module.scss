@@ -32,12 +32,13 @@
 
 .scratchAreaContainer {
     justify-content: flex-start;
+    z-index: 1000000;
 }
 
 .animationContainer {
-    height: 94.5%;
-    width: 91.6%;
-    margin-top: 2.6%;
+    height: 98%;
+    width: 98%;
+    margin-top: -1.8%;
 }
 
 .roundScratchCard {

@@ -45,15 +45,15 @@ $roundScratchCardWidth: 88px;
 
 .roundScratchCard {
     position: absolute;
-    top: -18.7%;
-    left: 0.1%;
+    top: -18.5%;
+    left: -0.3%;
 
     width: 23.5%;
 
     &.right {
-        top: -18.4%;
+        top: -18.2%;
         left: auto;
-        right: -0.9%;
+        right: -1.2%;
     }
 }
 
@@ -119,9 +119,9 @@ $roundScratchCardWidth: 88px;
 }
 
 .animationContainer {
-    height: 112%;
-    width: 96%;
-    margin-bottom: 5.4%;
+    height: 115.6%;
+    width: 98%;
+    margin-bottom: 3%;
 }
 
 .multiplierScratchCard {

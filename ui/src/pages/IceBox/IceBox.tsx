@@ -54,7 +54,7 @@ const daimondMatrixConfig: IGameMatrixConfig = {
 }
 
 const mainMatrixConfig: IGameMatrixConfig = {
-    cellPadding: 12,
+    cellPadding: 4,
     winningBgTextureYShiftCoef: 1.2,
 }
 

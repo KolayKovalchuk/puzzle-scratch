@@ -34,7 +34,7 @@ const topScratchCardMatrixConfig: IGameMatrixConfig = {
 }
 
 const mainMatrixConfig: IGameMatrixConfig = {
-    cellPadding: 22
+    cellPadding: 13
 }
 
 export function CandyMaze() {

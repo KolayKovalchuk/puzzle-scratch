@@ -42,7 +42,7 @@ const roundScratchCardMatrixConfig: IGameMatrixConfig = {
 }
 
 const mainScratchCardMatrixConfig: IGameMatrixConfig = {
-    cellPadding: 19
+    cellPadding: 13
 }
 
 export function SantaSac() {

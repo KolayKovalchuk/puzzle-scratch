@@ -30,6 +30,7 @@ export function StyledText({
     shouldFitVertically = true,
     xShift = 0.5,
     yShift = 0.55,
+    cacheKey,
     getTextSize,
 }: IStyledTextProps) {
     const { containerRef, dimensions } = useContainerDimensions();
@@ -60,6 +61,7 @@ export function StyledText({
                             shouldFitVertically={shouldFitVertically}
                             xShift={xShift}
                             yShift={yShift}
+                            cacheKey={cacheKey}
                             getTextSize={getTextSizeCb}
                         />
                     </Stage>
@@ -82,6 +84,7 @@ export function StyledText({
         anchor,
         shouldFitHorizontally,
         shouldFitVertically,
+        cacheKey,
         xShift,
         yShift,
         className,

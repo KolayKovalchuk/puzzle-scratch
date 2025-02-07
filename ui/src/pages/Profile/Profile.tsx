@@ -52,7 +52,8 @@ export function Profile({ }: IProfileProps) {
                     text={headerText}
                     className={styles.headerText}
                     textStyles={headerStyles}
-                    />
+                    cacheKey='profile-header'
+                />
             </div>
             <Icon className={styles.profileIcon}>
                 <img src={userAvatar} width='95%' height='95%' />
@@ -66,6 +67,7 @@ export function Profile({ }: IProfileProps) {
                 text={statisticText}
                 className={styles.header}
                 textStyles={statisticStyles}
+                cacheKey='profile-statistic-title'
             />
             <UserStatistic userStats={userStats}/>
             <LanguageSelectDropdown />

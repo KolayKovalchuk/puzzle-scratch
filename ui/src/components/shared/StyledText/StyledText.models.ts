@@ -16,6 +16,8 @@ export interface IStyledTextProps {
     xShift?: number
     yShift?: number
 
+    cacheKey?: string;
+
     valueForMeasure?: string,
 
     getTextSize?: (textSize: string | number) => void;

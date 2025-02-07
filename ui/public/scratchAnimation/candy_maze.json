@@ -1,13 +1,13 @@
 {
 "skeleton": {
-	"hash": "Qv6aD/6RzPQ",
+	"hash": "lqrVjslQ3+4",
 	"spine": "4.1.24",
 	"x": -471,
 	"y": -686,
-	"width": 942,
-	"height": 1121.2,
+	"width": 997,
+	"height": 1157.2,
 	"images": "./images/",
-	"audio": ""
+	"audio": "../../../Puzzle_scratch/win_1_5_x_0_5/spine/"
 },
 "bones": [
 	{ "name": "root", "y": -10 },
@@ -23,15 +23,15 @@
 		"name": "default",
 		"attachments": {
 			"sss_02": {
-				"sss_04": { "x": 405.99, "y": 4.24, "width": 546, "height": 129 },
-				"sss_05": { "x": 405.37, "y": 4.72, "width": 546, "height": 130 }
+				"sss_04": { "x": 405.99, "y": -24.24, "width": 546, "height": 129 },
+				"sss_05": { "x": 405.37, "y": -24.72, "width": 546, "height": 130 }
 			},
 			"s_": {
 				"s_": {
 					"y": -214,
-					"width": 942,
-					"height": 924,
-					"sequence": { "count": 22, "start": 0, "digits": 2 }
+					"width": 997,
+					"height": 996,
+					"sequence": { "count": 19, "start": 0, "digits": 2 }
 				}
 			}
 		}
@@ -42,8 +42,11 @@
 		"slots": {
 			"sss_02": {
 				"rgba": [
-					{ "time": 0.0, "color": "ffffffff" },
-					{ "time": 0.1, "color": "ffffff00" }
+					{ "time": 0.8, "color": "ffffffff" },
+					{ "time": 0.9333, "color": "ffffff00" }
+				],
+				"attachment": [
+					{ "time": 0.0333, "name": "sss_05" }
 				]
 			},
 			"s_": {

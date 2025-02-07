@@ -46,6 +46,7 @@ export function BigWinScreen({ winAmount, winType = WinType.M, className, onClic
                     className={styles.winAmount}
                     text={formatNumber(winAmount)}
                     textStyles={{ fontSize: 50 }}
+                    yShift={0.45}
                 />
             </div>
         </div>

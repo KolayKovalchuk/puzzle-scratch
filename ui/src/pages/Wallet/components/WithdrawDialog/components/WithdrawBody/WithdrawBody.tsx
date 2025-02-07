@@ -1,16 +1,15 @@
 import robo_token_gold_no_shining from '@icons/robo_token_gold_no_shining.svg';
 import styles from '../../WithdrawDialog.module.scss';
 
+import { Fragment } from 'react';
 import { Icon } from '@components/shared/Icon';
 import { Input } from '@components/shared/Input/Input';
-import { selectMinRbaXWithdraw } from '@store/selectors/config.selectors';
+import { selectCooldownPeriodForWithdraw, selectMaxRbaXWithdraw, selectMinRbaXWithdraw } from '@store/selectors/config.selectors';
 import { iconSign, selectLocalValue, selectLocalValueWithVars } from '@store/selectors/localization.selectors';
-import { getIsTonAddress } from '@utils/isTonAddress';
-import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
+import { ChangeEvent, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { selectUserBalanceWithdrawable } from '@store/selectors/user.selectors';
-import { useValidateWalletAddress } from '../../hooks/useValidateWalletAddress';
 import { useValidateAmount } from '../../hooks/useValidateAmount';
+import { useValidateWalletAddress } from '../../hooks/useValidateWalletAddress';
 
 export interface IWithdrawBodyProps {
     className?: string;
@@ -29,6 +28,21 @@ export interface IFormValidState {
     amount: boolean;
 }
 
+function useTermsLabel() {
+    const minRbaXWithdraw = useSelector(selectMinRbaXWithdraw);
+    const maxRbaXWithdraw = useSelector(selectMaxRbaXWithdraw);
+    const cooldownPeriodForWithdraw = useSelector(selectCooldownPeriodForWithdraw) || 0;
+    const cooldownPeriodForWithdrawInDays = useMemo(() => (cooldownPeriodForWithdraw / (1000 * 60 * 60 * 24)).toFixed(0), [cooldownPeriodForWithdraw]);
+
+    return useSelector(selectLocalValueWithVars(
+        { localizationKey: 'txt.withdrawal.terms' },
+        minRbaXWithdraw?.toString() || '',
+        maxRbaXWithdraw?.toString() || '',
+        cooldownPeriodForWithdrawInDays.toString() || '',
+    ));
+}
+
+
 export function WithdrawBody({ className, onFormChange, onFormValidChange }: IWithdrawBodyProps) {
     const addInstLabel = useSelector(selectLocalValue('txt.withdrawal.addInst'));
     const walletLabel = useSelector(selectLocalValue('txt.transfer.wallet'));
@@ -36,40 +50,43 @@ export function WithdrawBody({ className, onFormChange, onFormValidChange }: IWi
     const amountLabel = useSelector(selectLocalValue('txt.withdrawal.amount'));
     const tagLabel = useSelector(selectLocalValue('txt.transfer.tag'));
     const tagPlaceholderLabel = useSelector(selectLocalValue('txt.transfer.tagPlaceholder'));
-    const [termsPartials, setTermsPartials] = useState<string[]>([]);
+    // const [termsPartials, setTermsPartials] = useState<string[]>([]);
 
     const minRbaXWithdraw = useSelector(selectMinRbaXWithdraw);
-    const termsFirstItemLabel = useSelector(selectLocalValueWithVars(
-        { localizationKey: 'txt.withdrawal.terms' },
-        minRbaXWithdraw?.toString() || '',
-    ));
-
-    useEffect(() => {
-        const termsPartials = termsFirstItemLabel.split('•').filter(Boolean);
-        setTermsPartials(termsPartials);
-    }, [termsFirstItemLabel]);
+    const termsLabel = useTermsLabel();
 
     const listItems = useMemo(() => {
-        return termsPartials.map((partial, index) => {
-            if (!index) {
-                const iconPartials = partial.split(iconSign);
+        const termsPartials = termsLabel.split('•').filter(Boolean);
 
+        return termsPartials.map((partial, index) => {
+            const iconPartials = partial.split(iconSign);
+
+            if (iconPartials.length === 1) {
                 return (
-                    <li key={index} className={styles.listItem}>
-                        <div className={styles.roboTokenIconListItemContainer}>
-                            <span>{iconPartials[0]}</span>
-                            <Icon className={styles.roboTokenIcon} name={robo_token_gold_no_shining} />
-                            <span>{iconPartials[1]}</span>
-                        </div>
-                    </li>
+                    <li key={index} className={styles.listItem}>{partial}</li>
                 );
             }
 
             return (
-                <li key={index} className={styles.listItem}>{partial}</li>
+                <li key={index} className={styles.listItem}>
+                    <div className={styles.roboTokenIconListItemContainer}>
+                        {iconPartials.map((part, index) => {
+                            if (index <= iconPartials.length - 2) {
+                                return (
+                                    <Fragment key={index}>
+                                        <span>{part}</span>
+                                        <Icon className={styles.roboTokenIcon} name={robo_token_gold_no_shining} />
+                                    </Fragment>
+                                );
+                            }
+
+                            return <span key={index}>{part}</span>
+                        })}
+                    </div>
+                </li>
             );
         });
-    }, [termsPartials]);
+    }, [termsLabel]);
 
     const [withdrawalForm, setWithdrawalForm] = useState<IWithdrawalFormState>({
         walletAddress: '',

@@ -15,3 +15,37 @@
 .prizeWonCellContianer {
     @include mixins.amountCellContianer;
 }
+
+$padding-left: 2%;
+
+.headerCell {
+    flex: auto;
+    justify-content: flex-start;
+
+    &:first-child {
+        padding-left: $padding-left;
+    }
+}
+
+.tableCell {
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+    
+    &:first-child {
+        padding-left: $padding-left;
+    }
+
+    &:last-child {
+        justify-content: space-between;
+    }
+
+    .cellLabel {
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

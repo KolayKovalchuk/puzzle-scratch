@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { apiClient, useApiClient } from './api/api.service';
 import { apiLoginClient, useLoginApiClient } from './api/apiLogin.service';
-import { linkCodeParam, refCodeParam } from './api/links.service';
+import { linkCodeParam, msgIdParam, refCodeParam } from './api/links.service';
 
 
 let requestAuthInterceptor: number | null = null;
@@ -52,6 +52,7 @@ interface ILoginBody {
     local?: boolean,
     linkCode?: string | null,
     refCode?: string | null,
+    msgId?: string | null
 }
 
 export async function updateToken(tokenData: IUserAcceptTermsResponse) {
@@ -77,20 +78,24 @@ export async function loginUser() {
 
         const linkCode = extractStartparams(WebApp.initDataUnsafe.start_param || '', linkCodeParam);
         const refCode = extractStartparams(WebApp.initDataUnsafe.start_param || '', refCodeParam);
+        const msgId = extractStartparams(WebApp.initDataUnsafe.start_param || '', msgIdParam);
 
         const urlParams = new URLSearchParams(window.location.search);
         console.log('Current URL query params:', urlParams.toString());
 
         const linkCodeUrl = urlParams.get(linkCodeParam);
         const refCodeUrl = urlParams.get(refCodeParam);
+        const msgIdUrl = urlParams.get(msgIdParam);
 
         console.log('Link code from URL:', linkCodeUrl);
         console.log('Ref code from URL:', refCodeUrl);
+        console.log('Msg id from URL:', msgIdUrl);
 
         const body: ILoginBody = {
             initData: WebApp.initData,
             linkCode: linkCode || linkCodeUrl || null,
             refCode: refCode || refCodeUrl || null,
+            msgId: msgId || msgIdUrl || null
         }
 
         const isLocalDevMode = import.meta.env.VITE_IS_LOCAL_DEV_MODE

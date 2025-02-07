@@ -31,7 +31,8 @@ export interface IButtonProps {
     text?: string;
     yShift?: number;
     style?: CSSProperties;
-    shouldFitFontSize?: boolean;
+    shouldFitHorizontally?: boolean;
+    shouldFitVertically?: boolean;
     textStyle?: Partial<ITextStyle>;
 
     is3d?: boolean;
@@ -78,7 +79,8 @@ export function ButtonComponent({
     yShift = defaultBtnYShift,
     children,
     style,
-    shouldFitFontSize = true,
+    shouldFitHorizontally = true,
+    shouldFitVertically = true,
     textStyle = {},
 
     is3d = false,
@@ -109,7 +111,8 @@ export function ButtonComponent({
                     ...textStyles,
                     ...textStyle,
                 }}
-                shouldFitFontSize={shouldFitFontSize}
+                shouldFitHorizontally={shouldFitHorizontally}
+                shouldFitVertically={shouldFitVertically}
                 getTextSize={getTextSize}
                 yShift={btnYShift}
             ></RegularStyledText>
@@ -119,7 +122,8 @@ export function ButtonComponent({
         iconName,
         text,
         textStyles,
-        shouldFitFontSize,
+        shouldFitHorizontally,
+        shouldFitVertically,
         textStyle,
         btnYShift,
     ]);

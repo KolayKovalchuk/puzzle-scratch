@@ -60,7 +60,8 @@ export function Header() {
                     <WinStyledText
                         text={lastWinLabel}
                         textStyles={{ fontSize: 20 }}
-                        shouldFitFontSize={false}
+                        shouldFitHorizontally={false}
+                        shouldFitVertically={false}
                     />
                 </div>
 

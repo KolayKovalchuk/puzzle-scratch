@@ -1,6 +1,6 @@
 
 import { ITableCellData, ITRowData } from './Table.models';
-import { TableHeadRow } from "./TableHeadRow";
+import { ITableHeaderProps, TableHeadRow } from "./TableHeadRow";
 import { ITableRowProps, TableRow } from "./TableRow";
 
 import { selectLocalValue } from '@store/selectors/localization.selectors';
@@ -11,6 +11,7 @@ import styles from './Table.module.scss';
 export interface ITableProps {
     tHeadElement?: ReactNode;
     tHeadData?: ITableCellData[];
+    renderHeaderCell?: ITableHeaderProps['renderCell'];
 
     tBodyData: ITRowData[];
     renderCell?: ITableRowProps['renderCell'];
@@ -22,7 +23,17 @@ export interface ITableProps {
     bodyRef?: RefObject<HTMLDivElement>;
 }
 
-export function Table({ tHeadData, tHeadElement, tBodyData, renderCell, className, emptyText, noRowBg = false, bodyRef }: ITableProps) {
+export function Table({
+    tHeadData,
+    renderHeaderCell,
+    tHeadElement,
+    tBodyData,
+    renderCell,
+    className,
+    emptyText,
+    noRowBg = false,
+    bodyRef
+}: ITableProps) {
     const noData = useSelector(selectLocalValue('txt.table.emptyData'));
 
     if (!tBodyData.length) {
@@ -34,6 +45,7 @@ export function Table({ tHeadData, tHeadElement, tBodyData, renderCell, classNam
             {tHeadData
                 ? <TableHeadRow
                     tHeadData={tHeadData}
+                    renderCell={renderHeaderCell}
                 />
                 : tHeadElement}
             <div className={`${styles.tBody} tBody`} ref={bodyRef}>

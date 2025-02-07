@@ -9,7 +9,8 @@ export function useFitTextSize(
     targetHeight: number,
     textStyle: Partial<ITextStyle>,
     shouldFitHorizontally: boolean = true,
-    shouldFitVertically: boolean = true
+    shouldFitVertically: boolean = true,
+    cacheKey: string = '',
 ) {
     const initialFontSize = typeof textStyle.fontSize === 'number' ? textStyle.fontSize : Number(textStyle.fontSize?.replace('px', ''));
     const [fontSize, setFontSize] = useState(initialFontSize);
@@ -17,11 +18,16 @@ export function useFitTextSize(
     useEffect(() => {
         if (!targetWidth || !targetHeight || !text) return;
 
-        const cacheKey = `${text}-${targetWidth}-${targetHeight}-${initialFontSize}-${shouldFitHorizontally}-${shouldFitVertically}`;
+        const targetCacheKey = cacheKey
+            ? `${cacheKey}-${shouldFitHorizontally}-${shouldFitVertically}`
+            : `${text}-${targetWidth}-${targetHeight}-${initialFontSize}-${shouldFitHorizontally}-${shouldFitVertically}`;
 
-        if (cache.has(cacheKey)) {
-            const cacheFontSize = cache.get(cacheKey);
-            console.log('cacheFontSize',text, cacheFontSize);
+        console.log('targetCacheKey', targetCacheKey);
+        
+        if (cache.has(targetCacheKey)) {
+            const cacheFontSize = cache.get(targetCacheKey);
+
+            console.log('cacheFontSize', text, cacheFontSize);
             
             if (cacheFontSize !== undefined) {
                 setFontSize(cacheFontSize);
@@ -54,8 +60,16 @@ export function useFitTextSize(
         }
 
         setFontSize(currentFontSize);
-        cache.set(cacheKey, currentFontSize);
-    }, [text, targetWidth, targetHeight, initialFontSize, shouldFitHorizontally, shouldFitVertically]);
+        cache.set(targetCacheKey, currentFontSize);
+    }, [
+        text,
+        targetWidth,
+        targetHeight,
+        initialFontSize,
+        shouldFitHorizontally,
+        shouldFitVertically,
+        cacheKey,
+    ]);
 
     return fontSize;
 }

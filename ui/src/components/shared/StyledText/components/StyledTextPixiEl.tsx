@@ -18,6 +18,8 @@ export interface IStyledTextPixiElProps {
     xShift?: number;
     yShift?: number;
 
+    cacheKey?: string;
+
     shouldFitHorizontally?: boolean;
     shouldFitVertically?: boolean;
     getTextSize?: (textSize: string | number) => void;
@@ -29,11 +31,14 @@ export function StyledTextPixiEl({
     text,
     textStyles,
     textFitCoefficient = 1,
+
     anchor = 0.5,
     x = 0,
     y = 0,
     xShift = 0.5,
     yShift = 0.5,
+
+    cacheKey = '',
 
     shouldFitHorizontally = true,
     shouldFitVertically = true,
@@ -49,7 +54,15 @@ export function StyledTextPixiEl({
 
     const targetWidth = dimensions.width * textFitCoefficient;
     const targetHeight = dimensions.height * textFitCoefficient;
-    const fittedFontSize = useFitTextSize(valueForMeasure, targetWidth, targetHeight, textStyleConfig, shouldFitHorizontally, shouldFitVertically);
+    const fittedFontSize = useFitTextSize(
+        valueForMeasure,
+        targetWidth,
+        targetHeight,
+        textStyleConfig,
+        shouldFitHorizontally,
+        shouldFitVertically,
+        cacheKey,
+    );
 
     textStyleConfig.fontSize = fittedFontSize || textStyleConfig.fontSize;
 

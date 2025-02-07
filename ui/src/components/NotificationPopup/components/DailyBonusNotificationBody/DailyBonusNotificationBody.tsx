@@ -111,7 +111,8 @@ export function DailyBonusNotificationBody({ data }: IDailyBonusNotificationBody
                             <StyledText
                                 className={styles.bonusAmount}
                                 text={item.bonus + ''}
-                                shouldFitFontSize={false}
+                                shouldFitHorizontally={false}
+                                shouldFitVertically={false}
                                 textStyles={{ ...bonusAmountTextStyles, fontSize: footerFontSize }}
                             ></StyledText>
                         </div>

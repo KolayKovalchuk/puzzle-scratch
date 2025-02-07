@@ -26,7 +26,8 @@ export function StyledText({
     textStyles,
     textFitCoefficient = 1,
     anchor = 0.5,
-    shouldFitFontSize = true,
+    shouldFitHorizontally = true,
+    shouldFitVertically = true,
     xShift = 0.5,
     yShift = 0.55,
     getTextSize,
@@ -55,7 +56,8 @@ export function StyledText({
                             textStyles={textStyles}
                             textFitCoefficient={textFitCoefficient}
                             anchor={anchor}
-                            shouldFitFontSize={shouldFitFontSize}
+                            shouldFitHorizontally={shouldFitHorizontally}
+                            shouldFitVertically={shouldFitVertically}
                             xShift={xShift}
                             yShift={yShift}
                             getTextSize={getTextSizeCb}
@@ -78,7 +80,8 @@ export function StyledText({
         textStyles?.stroke,
         textFitCoefficient,
         anchor,
-        shouldFitFontSize,
+        shouldFitHorizontally,
+        shouldFitVertically,
         xShift,
         yShift,
         className,

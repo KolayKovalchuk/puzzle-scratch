@@ -26,9 +26,11 @@ export function StyledText({
     textStyles,
     textFitCoefficient = 1,
     anchor = 0.5,
-    shouldFitFontSize = true,
+    shouldFitHorizontally = true,
+    shouldFitVertically = true,
     xShift = 0.5,
     yShift = 0.55,
+    cacheKey,
     getTextSize,
 }: IStyledTextProps) {
     const { containerRef, dimensions } = useContainerDimensions();
@@ -55,9 +57,11 @@ export function StyledText({
                             textStyles={textStyles}
                             textFitCoefficient={textFitCoefficient}
                             anchor={anchor}
-                            shouldFitFontSize={shouldFitFontSize}
+                            shouldFitHorizontally={shouldFitHorizontally}
+                            shouldFitVertically={shouldFitVertically}
                             xShift={xShift}
                             yShift={yShift}
+                            cacheKey={cacheKey}
                             getTextSize={getTextSizeCb}
                         />
                     </Stage>
@@ -78,7 +82,9 @@ export function StyledText({
         textStyles?.stroke,
         textFitCoefficient,
         anchor,
-        shouldFitFontSize,
+        shouldFitHorizontally,
+        shouldFitVertically,
+        cacheKey,
         xShift,
         yShift,
         className,

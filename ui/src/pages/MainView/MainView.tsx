@@ -78,16 +78,14 @@ export function MainView() {
         {!isUserLoginNotificationsEmpty && <NotificationPopup
             isOpen={userLoginNotifications.length > 0}
             notification={userLoginNotifications[0]}
-            onConfirm={(notification) => {
-                removeLoginNotification(notification);
-            }}
+            onConfirm={removeLoginNotification}
+            onClose={removeLoginNotification}
         />}
         {isUserLoginNotificationsEmpty && !isNotificationsEmpty && <NotificationPopup
             isOpen={notifications.length > 0}
             notification={notifications[0]}
-            onConfirm={(notification) => {
-                removeNotification(notification);
-            }}
+            onConfirm={removeNotification}
+            onClose={removeNotification}
         />}
     </>);
 };

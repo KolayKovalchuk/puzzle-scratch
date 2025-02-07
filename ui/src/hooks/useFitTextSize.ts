@@ -8,17 +8,27 @@ export function useFitTextSize(
     targetWidth: number,
     targetHeight: number,
     textStyle: Partial<ITextStyle>,
-    shouldFitFontSize: boolean = true
+    shouldFitHorizontally: boolean = true,
+    shouldFitVertically: boolean = true,
+    cacheKey: string = '',
 ) {
     const initialFontSize = typeof textStyle.fontSize === 'number' ? textStyle.fontSize : Number(textStyle.fontSize?.replace('px', ''));
     const [fontSize, setFontSize] = useState(initialFontSize);
 
     useEffect(() => {
-        if (!shouldFitFontSize || !targetWidth || !targetHeight || !text) return;
+        if (!targetWidth || !targetHeight || !text) return;
 
-        const cacheKey = `${text}-${targetWidth}-${targetHeight}-${initialFontSize}`;
-        if (cache.has(cacheKey)) {
-            const cacheFontSize = cache.get(cacheKey);
+        const targetCacheKey = cacheKey
+            ? `${cacheKey}-${shouldFitHorizontally}-${shouldFitVertically}`
+            : `${text}-${targetWidth}-${targetHeight}-${initialFontSize}-${shouldFitHorizontally}-${shouldFitVertically}`;
+
+        console.log('targetCacheKey', targetCacheKey);
+        
+        if (cache.has(targetCacheKey)) {
+            const cacheFontSize = cache.get(targetCacheKey);
+
+            console.log('cacheFontSize', text, cacheFontSize);
+            
             if (cacheFontSize !== undefined) {
                 setFontSize(cacheFontSize);
                 return;
@@ -35,19 +45,31 @@ export function useFitTextSize(
         let currentFontSize = initialFontSize;
         let metrics = measureTextSize(currentFontSize);
 
-        while ((metrics.width > targetWidth) && currentFontSize > 0) {
-            currentFontSize -= 1;
-            metrics = measureTextSize(currentFontSize);
+        if (shouldFitHorizontally) {
+            while ((metrics.width > targetWidth) && currentFontSize > 0) {
+                currentFontSize -= 1;
+                metrics = measureTextSize(currentFontSize);
+            }
         }
 
-        while ((metrics.height > targetHeight) && currentFontSize > 0) {
-            currentFontSize -= 1;
-            metrics = measureTextSize(currentFontSize);
+        if (shouldFitVertically) {
+            while ((metrics.height > targetHeight) && currentFontSize > 0) {
+                currentFontSize -= 1;
+                metrics = measureTextSize(currentFontSize);
+            }
         }
 
         setFontSize(currentFontSize);
-        cache.set(cacheKey, currentFontSize);
-    }, [text, targetWidth, targetHeight, initialFontSize, shouldFitFontSize]);
+        cache.set(targetCacheKey, currentFontSize);
+    }, [
+        text,
+        targetWidth,
+        targetHeight,
+        initialFontSize,
+        shouldFitHorizontally,
+        shouldFitVertically,
+        cacheKey,
+    ]);
 
     return fontSize;
 }

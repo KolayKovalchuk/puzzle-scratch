@@ -62,3 +62,17 @@ export async function postCollectEmojiBonus() {
         return null
     }
 }
+
+export async function postCollectAffiliateBonus(code: string) {
+    try {
+        const response = await apiClient.post('/bonus/affiliate/collect?code=' + code);
+        const data: ICollectBonusResponse = response.data;
+
+        console.log('Affiliate bonus collected successfully:', data);
+
+        return data;
+    } catch (error) {
+        console.error('Error collecting Affiliate bonus:', error);
+        return null
+    }
+}

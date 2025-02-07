@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { INotification, Notification } from '@models/Notification.model';
 import { apiClient } from './api.service';
@@ -41,9 +41,9 @@ export function useGetNotifications(): IGetNotificationResponse  {
         fetchNotifications();
     }, []);
 
-    const removeNotification = (notification: INotification) => {
+    const removeNotification = useCallback((notification: INotification) => {
         setNotifications(notifications.filter(n => n !== notification));
-    }
+    }, [notifications]);
 
     return {
         isLoading,

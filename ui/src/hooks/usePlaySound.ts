@@ -78,10 +78,13 @@ export function usePlaySound() {
     const soundDuration = useSelector(selectSoundDuration);
 
     const playSound = useCallback(async (soundToPlay: Howl) => {
-        if (Howler.ctx.state === 'suspended') {
+        console.log('playSound 1', Howler.ctx.state);
+
+        if (Howler.ctx.state !== 'running') {
             await Howler.ctx.resume();
         }
 
+        console.log('playSound 2', Howler.ctx.state);
         soundToPlay.play();
     }, []);
 

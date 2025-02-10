@@ -73,6 +73,8 @@ $border-radius: 10px;
     overflow: hidden;
     overflow-y: auto;
 
+    background-color: colors.$light-violet;
+
     .dropdownListItem {
         background-color: colors.$dark-violet;
     }

@@ -1,81 +1,10 @@
-import { IBuyBatchCardData, ICardData, WinType } from '@models/IBuyBatchCardData';
+import { IBuyBatchCardData, ICardData } from '@models/IBuyBatchCardData';
 import { setAppError } from '@store/actions/appState.actions';
 import { AxiosError } from 'axios';
 import { useCallback, useState } from 'react';
 import { apiClient } from './api.service';
 import store from '@store/store';
 import { AppErrors } from '@store/reducers/appState.reducer';
-
-const cardMock: IBuyBatchCardData<ICardData> = {
-    "winning": 5,
-    "cardData": {
-        "matrix": [
-            [
-                "w1",
-                "1",
-                "2",
-                "8",
-                "6"
-            ],
-            [
-                "2",
-                "w3",
-                "5",
-                "8",
-                "2"
-            ],
-            [
-                "6",
-                "3",
-                "w4",
-                "8",
-                "1"
-            ],
-            [
-                "4",
-                "4",
-                "4",
-                "w5",
-                "4"
-            ],
-            [
-                "1",
-                "2",
-                "5",
-                "6",
-                "w6"
-            ]
-        ],
-        "winAmount": 5,
-        "potentialWin": 5,
-        "winningCells": [
-            [
-                3,
-                0
-            ],
-            [
-                3,
-                1
-            ],
-            [
-                3,
-                2
-            ],
-            [
-                3,
-                3
-            ],
-            [
-                3,
-                4
-            ]
-        ]
-    },
-    "batchId": "59e80b0b-6398-4448-9bb4-2a6d13fc9629",
-    "rbaxBalance": 1172880.09,
-    "rbaxBalanceBefore": 1172885.09,
-    "winType": WinType.S
-}
 
 export async function postBuyCard<CardData extends ICardData>(batchId: string) {
     try {
@@ -84,9 +13,7 @@ export async function postBuyCard<CardData extends ICardData>(batchId: string) {
 
         console.log('Card bought succesfully:', data);
 
-        // return data;
-
-        return cardMock;
+        return data;
     } catch (error) {
         console.error('Error buying batch card: ', error);
         throw error;

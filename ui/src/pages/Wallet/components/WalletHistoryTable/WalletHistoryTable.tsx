@@ -62,10 +62,10 @@ export function WalletHistoryTable({ mode }: IWalletHistoryTableProps) {
                 <span>{formatNumber(data.data as number)}</span>
             </div>)
 
-            return <TableCell key={index} data={cellContent} width={cellWidth} />
+            return <TableCell key={index} data={cellContent} width={cellWidth} className={styles.tableCell}/>
         }
 
-        return <TableCell key={index} data={data.data} width={cellWidth} />
+        return <TableCell key={index} data={data.data} width={cellWidth} className={styles.tableCell}/>
     }, [tHeadData])
 
 

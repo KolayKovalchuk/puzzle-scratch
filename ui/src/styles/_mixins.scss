@@ -120,24 +120,6 @@
     }
 }
 
-@mixin amountCellContianer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .roboTokenGoldIcon {
-        min-width: 30px;
-        width: 30px;
-        margin-right: 2px;
-    }
-
-    span {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-}
-
 @mixin backBtnHeader {
     display: flex;
     align-items: center;

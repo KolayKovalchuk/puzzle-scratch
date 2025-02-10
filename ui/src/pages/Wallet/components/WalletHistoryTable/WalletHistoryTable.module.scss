@@ -1,7 +1,7 @@
-@use '@styles/mixins';
+@use '@styles/table';
 
 .historyTableContainer {
-    margin-top: 30px;
+    margin-top: 5%;
 
     width: 100%;
 
@@ -13,5 +13,7 @@
 }
 
 .amountCellContianer {
-    @include mixins.amountCellContianer;
+    @include table.amountCellContianer;
 }
+
+@include table.historyTable;

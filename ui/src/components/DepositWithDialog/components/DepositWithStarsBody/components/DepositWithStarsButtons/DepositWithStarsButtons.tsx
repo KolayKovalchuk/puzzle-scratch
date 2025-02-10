@@ -19,6 +19,7 @@ export interface IDepositWithStarsButtonsProps {
 
 export function DepositWithStarsButtons({ starsConvertOptions, btnWidth, onOptionSelected }: IDepositWithStarsButtonsProps) {
     const { textStyles } = useButtonConfig(ButtonType.Confirm, styles);
+    textStyles.fontSize = 26;
 
     return (
         <div className={`${styles.btnContainer} ${!btnWidth ? styles.hidden : ''}`}>{

@@ -97,6 +97,7 @@ export function DepositWithTransferBody({ }: IDepositWithTransferBodyProps) {
                     items={supportedDepositWallets}
                     selectedItem={preselectedWallet}
                     onSelect={onWalletSelect}
+                    showSelectedItemInList={false}
                 />
             </div>
             {loading

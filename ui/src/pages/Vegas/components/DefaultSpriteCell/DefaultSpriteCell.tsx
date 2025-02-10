@@ -2,6 +2,7 @@ import { IMatrixCellProps, ISpriteCellData } from '@components/shared/IconMatrix
 import { RedStyledTextStyle, StyledTextPixiEl } from '@components/shared/StyledText';
 import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
 import { Container, Sprite } from '@pixi/react';
+import { ITextStyle } from 'pixi.js-legacy';
 import { useEffect, useState } from 'react';
 
 export interface IDefaultSpriteCellData extends ISpriteCellData {
@@ -10,6 +11,11 @@ export interface IDefaultSpriteCellData extends ISpriteCellData {
 }
 
 export interface IDefaultSpriteCellProps extends IMatrixCellProps<IDefaultSpriteCellData> {
+}
+
+const multiplayerTextStle: Partial<ITextStyle> = {
+    ...RedStyledTextStyle,
+    fontSize: 50,
 }
 
 export function DefaultSpriteCell({ x, y, width, height, data }: IDefaultSpriteCellProps) {
@@ -33,7 +39,7 @@ export function DefaultSpriteCell({ x, y, width, height, data }: IDefaultSpriteC
                 x={x}
                 y={y}
                 xShift={0.55}
-                textStyles={RedStyledTextStyle}
+                textStyles={multiplayerTextStle}
             />
         </Container>)
     }

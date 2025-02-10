@@ -1,4 +1,4 @@
-@use '@styles/mixins';
+@use '@styles/table';
 
 .container {
     margin-top: 20px;
@@ -13,39 +13,11 @@
 }
 
 .prizeWonCellContianer {
-    @include mixins.amountCellContianer;
+    @include table.amountCellContianer;
 }
 
-$padding-left: 2%;
+@include table.historyTable;
 
-.headerCell {
+div.headerCell {
     flex: auto;
-    justify-content: flex-start;
-
-    &:first-child {
-        padding-left: $padding-left;
-    }
-}
-
-.tableCell {
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    text-align: left;
-    
-    &:first-child {
-        padding-left: $padding-left;
-    }
-
-    &:last-child {
-        justify-content: space-between;
-    }
-
-    .cellLabel {
-        width: 100%;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
 }

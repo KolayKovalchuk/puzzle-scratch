@@ -14,10 +14,3 @@ export enum CandyMazeScratchItemsEnum {
     w5 = 'w5',
     cover = 'cover',
 }
-
-export const CandyMazeScratchTextItems = [
-    CandyMazeScratchItemsEnum.w2,
-    CandyMazeScratchItemsEnum.w3,
-    CandyMazeScratchItemsEnum.w4,
-    CandyMazeScratchItemsEnum.w5,
-];

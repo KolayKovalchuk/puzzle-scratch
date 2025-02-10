@@ -13,10 +13,3 @@ export enum VegasLootScratchItemsEnum {
     w5 = 'w5',
     cover = 'cover',
 }
-
-export const VegasLootScratchTextItems = [
-    VegasLootScratchItemsEnum.w2,
-    VegasLootScratchItemsEnum.w3,
-    VegasLootScratchItemsEnum.w4,
-    VegasLootScratchItemsEnum.w5,
-];

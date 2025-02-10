@@ -1,9 +1,8 @@
 import { IMatrixCellProps, ISpriteCellData } from '@components/shared/IconMatrix/IconMatrix.models';
-import { DefaultTextStyleConfig, RedStyledTextStyle } from '@components/shared/StyledText';
+import { RedStyledTextStyle, StyledTextPixiEl } from '@components/shared/StyledText';
 import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
 import { VegasLootScratchItemsEnum, VegasLootScratchTextItems } from '@pages/Vegas/scratchItemsEnum';
-import { Container, Sprite, Text } from '@pixi/react';
-import { TextStyle } from 'pixi.js-legacy';
+import { Container, Sprite } from '@pixi/react';
 
 export interface IVegasLootSpriteCellData extends ISpriteCellData {
     textureName: string;
@@ -13,11 +12,6 @@ export interface IVegasLootSpriteCellData extends ISpriteCellData {
 export interface IVegasLootSpriteCellProps extends IMatrixCellProps<IVegasLootSpriteCellData> {
 }
 
-const textStyleConfig: TextStyle = new TextStyle({
-    ...DefaultTextStyleConfig,
-    ...RedStyledTextStyle,
-});
-
 export function VegasLootSpriteCell({ x, y, width, height, data }: IVegasLootSpriteCellProps) {
     const { bundle, loading: isBundleLoading } = useLoadBundle(data.bundleName);
     const texture = bundle?.[data.textureName];
@@ -25,15 +19,16 @@ export function VegasLootSpriteCell({ x, y, width, height, data }: IVegasLootSpr
     if (VegasLootScratchTextItems.includes(data.textureName as VegasLootScratchItemsEnum)) {
         const text = data.textureName.replace('w', 'x');
 
-        const xShift = width * 0.1;
-        const yShift = height * 0.1 * -1;
-
-        const textX = x + xShift;
-        const textY = y + yShift;
-
         return (<Container>
-                <Text text={text} x={textX} y={textY} style={textStyleConfig} />
-            </Container>)
+            <StyledTextPixiEl
+                text={text}
+                dimensions={{ width, height }}
+                x={x}
+                y={y}
+                xShift={0.55}
+                textStyles={RedStyledTextStyle}
+            />
+        </Container>)
     }
 
     if (!bundle) return null

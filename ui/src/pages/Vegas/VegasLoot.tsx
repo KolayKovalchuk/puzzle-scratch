@@ -31,7 +31,7 @@ const topScratchCardMatrixConfig: IGameMatrixConfig = {
 }
 
 const mainMatrixConfig: IGameMatrixConfig = {
-    cellPadding: 10
+    cellPadding: 12
 }
 
 export function VegasLoot() {

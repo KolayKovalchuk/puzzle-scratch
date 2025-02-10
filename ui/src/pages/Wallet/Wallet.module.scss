@@ -1,4 +1,3 @@
-@use '@styles/colors';
 @use '@styles/mixins';
 
 .container {
@@ -8,7 +7,6 @@
 
     display: flex;
     flex-direction: column;
-    // justify-content: ;
     align-items: center;
     padding: 0 10px;
 
@@ -27,61 +25,6 @@
     @include mixins.backBtnHeader;
 }
 
-.walletInfoContainer {
-    display: flex;
-    flex-direction: column;
-
-    margin-top: 30px;
-
-    width: 100%;
-}
-
-.balanceInfoRow {
-    align-self: stretch;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    &:not(:last-child) {
-        margin-bottom: 10px;
-    }
-
-    .column {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        font-family: 'Nunito';
-    }
-
-    .balanceNameLabel {
-        color: colors.$light-yellow;
-        font-weight: bold;
-        font-size: 20px;
-    }
-    
-    .balanceAmountContainer {
-        display: flex;
-        align-items: center;
-        font-size: 18px;
-        color: #fff;
-        font-weight: bold;
-    }
-    
-    .roboTokenGoldIcon {
-        width: 14%;
-    }
-}
-
-.infoLabel {
-    justify-content: flex-end;
-}
-
 .spinnerContainer {
     @include mixins.spinnerContainer;
-}
-
-.walletBtn {
-    height: 80%;
-    min-width: 42%;
 }

@@ -49,7 +49,6 @@ export function SantaSac() {
     const { batchId } = useParams();
 
     const { batch, loading: isBatchLoading } = useGetBatchById(batchId || null);
-    // const { buyCard, card } = useBuyCard<ISantaSacCardData>();
 
     const bundleName = SANTA_SAC_BUNDLE.name
     const { bundle, loading: isBundleLoading } = useLoadBundle<ISantaSacBundle>(bundleName)
@@ -68,36 +67,16 @@ export function SantaSac() {
         isBigWinVisible,
         onBigWinClicked,
         onPlay,
-        // onSwipe,
         onScratchAnimationCompleted,
         card,
         isPlayBtnDisabled,
-        // onCardScratched,
-        // onScratchStarted,
     } = useScratchGame<ISantaSacCardData>(
         batchId,
-        // card,
-        // buyCard,
         scratchCardsRefConfig,
         scratchAnimationRef
     );
 
-    // const onMainCardScratched = useCallback(() => { onCardScratched('mainScratchCard') }, [])
-    // const onRoundCardScratched = useCallback(() => { onCardScratched('roundScratchCard') }, [])
-
     const renderSantaSacSpriteCell = useCallback((data: ISantaSacSpriteCellProps) => (<SantaSacSpriteCell {...data} />), []);
-
-    // const {
-    //     onTouchEnd,
-    //     onTouchMove,
-    //     onTouchStart,
-    //     onMouseDown,
-    //     onMouseMove,
-    //     onMouseUp,
-    // } = useSwipeAria({
-    //     onSwipedLeft: onSwipe,
-    //     onSwipedRight: onSwipe
-    // });
 
     const { data } = useSpriteCellData(card, bundleName)
 
@@ -118,12 +97,6 @@ export function SantaSac() {
                 <TopPrizeLabel className={styles.topPrizeLabel} topPrize={batch?.maxPrize || 0} />
 
                 <div className={`${styles.scratchAreaContainer} ${NO_TAP_SOUND_CLASS}`}
-                    // onTouchStart={onTouchStart}
-                    // onTouchEnd={onTouchEnd}
-                    // onTouchMove={onTouchMove}
-                    // onMouseDown={onMouseDown}
-                    // onMouseUp={onMouseUp}
-                    // onMouseMove={onMouseMove}
                     onClick={onPlay}
                 >
                     <div className={styles.animationContainer}>
@@ -145,8 +118,6 @@ export function SantaSac() {
                             bundleName={SANTA_SAC_BUNDLE.name}
                             bgTextureConfig={bgTextureConfig}
                             matrixConfig={roundScratchCardMatrixConfig}
-                            // onScratchedEnought={onRoundCardScratched}
-                            // onScratchStarted={onScratchStarted}
                             xShift={0.52}
                             yShift={0.5}
                             isWinning={isBonusShining}
@@ -166,9 +137,6 @@ export function SantaSac() {
                             sizeX={batch?.sizeX}
                             sizeY={batch?.sizeY}
                             matrixConfig={mainScratchCardMatrixConfig}
-
-                        // onScratchedEnought={onMainCardScratched}
-                        // onScratchStarted={onScratchStarted}
                         />
                     </div>
                 </div>

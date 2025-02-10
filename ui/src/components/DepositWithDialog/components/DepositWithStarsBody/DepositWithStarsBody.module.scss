@@ -1,7 +1,7 @@
 @use '../../DepositWithDialog.module.scss' as *;
 
 .btnContainer {
-    width: 100%;
+    width: 84%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -17,6 +17,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    max-width: 100%;
 
     @include depositBtn;
 }
@@ -27,3 +28,8 @@
     position: relative;
 }
 
+
+.btn .roboTokenGoldIcon {
+    transform: initial;
+    margin-right: -12%;
+}

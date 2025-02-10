@@ -255,11 +255,11 @@ export function IceBox() {
                         </div>
                     </div>
                 </div>
-                <GameFooterBtn batchCardType={batch?.cardType || null} onPlay={onPlay} isPlayBtnDisabled={isPlayBtnDisabled}>
+                <GameFooterBtn batchCardType={batch?.cardType || null} onPlay={onPlay} isPlayBtnDisabled={isPlayBtnDisabled} className={styles.footer}>
                     <Icon name={footer_stars} className={styles.footerStars} />
                 </GameFooterBtn>
             </div>
-            <Footer />
+            <Footer className={styles.mainFooter}/>
             {isBigWinVisible
                 && <BigWinScreen
                     winAmount={card?.winning || 0}

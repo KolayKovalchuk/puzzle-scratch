@@ -39,7 +39,7 @@ export function HeaderCell(
     { className, children }: IRenderHeaderCellProps
 ) {
     return (
-        <div className={`${tableStyles.headCellContainer} ${className || ''}`}>
+        <div className={`${tableStyles.headCellContainer} ${styles.headCellContainer} ${className || ''}`}>
             {children}
         </div>
     );

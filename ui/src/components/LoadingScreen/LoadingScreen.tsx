@@ -33,7 +33,10 @@ export function LoadingScreen({ isLoaded }: ILoadingScreenProps) {
 
     const appError = useSelector(selectAppError);
     const isGeoRestrictionVisible = appError === AppErrors.GeoRestriction;
-    const isSystemErrorVisible = appError === AppErrors.SystemError;
+
+    const isSystemErrorVisible = false;
+    // TODO: Uncomment this line to show the system error popup
+    // const isSystemErrorVisible = appError === AppErrors.SystemError;
 
     if (!isVisible) return null;
 

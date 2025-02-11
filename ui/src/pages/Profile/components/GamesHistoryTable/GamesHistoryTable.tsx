@@ -83,6 +83,7 @@ export function GamesHistoryTable({ recentGames }: IGamesHistoryTableProps) {
                 className={styles.headerText}
                 textStyles={titlelStyles}
                 cacheKey='profile-game-history'
+                shouldFitVertically={false}
             ></SecondaryStyledText>
 
             <GradientBodyTable

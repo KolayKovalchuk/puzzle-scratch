@@ -75,6 +75,7 @@ export function WalletHistoryTable({ mode }: IWalletHistoryTableProps) {
                 text={historyLabel}
                 className={styles.headerText}
                 textStyles={historyLabelStyles}
+                shouldFitVertically={false}
             ></SecondaryStyledText>
 
             <GradientBodyTable

@@ -14,13 +14,12 @@
     position: fixed;
     z-index: 1000000;
 
-    $y: 39%;
-    @include colors.main_radial_bg_gradient($width: 50%, $height: 30%, $y: 34%);
+    @include colors.main_view_bg($y: 36vh, $height: 22vh);
 
     @media screen and (max-width: 375px) {
-        @include colors.main_radial_bg_gradient($width: 50%, $height: 25%, $y: calc(#{$y} - 10%));
+        @include colors.main_view_bg($y: 30vh, $height: 22vh);
     }
-    
+
     &.visible {
         display: flex;
     }

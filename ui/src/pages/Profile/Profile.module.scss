@@ -19,7 +19,7 @@
     overflow-y: auto;
 
     @include mixins.fixedHeaderPadding;
-
+    @include colors.main_radial_bg_gradient($width: 60%, $height: 30vh, $y: 25vh);
 }
 
 .headerContainer {

@@ -19,10 +19,8 @@ $border_radius: 20px;
 
     overflow-x: clip;
 
-    border-top-left-radius: $border_radius;
-    border-top-right-radius: $border_radius;
-
     @include mixins.fixedHeaderPadding;
+    @include colors.main_radial_bg_gradient($width: 60%, $height: 30vh, $y: 25vh);
 }
 
 .headerContainer {

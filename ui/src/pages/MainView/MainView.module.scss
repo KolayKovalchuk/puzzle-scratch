@@ -4,12 +4,11 @@
 
 .mainContainer {
     @include mixins.fixedHeaderPadding;
+    @include colors.main_view_bg;
 
     & {
         width: 100%;
         height: 100%;
-        background: colors.$main_radial_bg_gradient;
-
         display: block;
     }
 }
@@ -54,6 +53,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background: colors.$dark-blue;
 }
 
 .footer {

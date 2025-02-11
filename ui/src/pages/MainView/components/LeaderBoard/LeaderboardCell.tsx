@@ -9,6 +9,9 @@ export interface ILeaderboardCellProps {
     isLargeNumber?: boolean;
 }
 
+import styles from './LeaderBoard.module.scss';
+
+
 export function LeaderboardCell({ cellData, className, isLargeNumber, cellWidth }: ILeaderboardCellProps) {
     if (typeof cellData === 'number' && isLargeNumber) {
         const title = formatNumber(cellData);
@@ -20,7 +23,7 @@ export function LeaderboardCell({ cellData, className, isLargeNumber, cellWidth 
         );
 
         return (
-            <TableCell data={cellContent} width={cellWidth} />
+            <TableCell data={cellContent} width={cellWidth} className={styles.cell}/>
         )
     }
 
@@ -31,6 +34,6 @@ export function LeaderboardCell({ cellData, className, isLargeNumber, cellWidth 
     );
 
     return (
-        <TableCell data={cellContent} width={cellWidth} />
+        <TableCell data={cellContent} width={cellWidth} className={styles.cell}/>
     );
 }

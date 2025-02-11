@@ -35,3 +35,28 @@ $arrow-margin: 2px;
         margin-left: $arrow-margin;
     }
 }
+
+.headCellContainer:first-child{
+    text-align: left;
+    justify-content: flex-start;
+    padding-left: 10px;
+}
+
+.headCellContainer:last-child {
+    justify-content: flex-end;
+    padding-right: 10px;
+}
+
+.cell {
+    &:first-child {
+        text-align: left;
+        justify-content: flex-start;
+        padding-left: 15px;
+        
+    }
+    &:last-child {
+        justify-content: flex-end;
+        text-align: right;
+        padding-right: 15px;
+    }
+}

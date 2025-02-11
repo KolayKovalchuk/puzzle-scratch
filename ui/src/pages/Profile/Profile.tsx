@@ -53,6 +53,7 @@ export function Profile({ }: IProfileProps) {
                     className={styles.headerText}
                     textStyles={headerStyles}
                     cacheKey='profile-header'
+                    shouldFitVertically={false}
                 />
             </div>
             <Icon className={styles.profileIcon}>
@@ -68,6 +69,7 @@ export function Profile({ }: IProfileProps) {
                 className={styles.header}
                 textStyles={statisticStyles}
                 cacheKey='profile-statistic-title'
+                shouldFitVertically={false}
             />
             <UserStatistic userStats={userStats}/>
             <LanguageSelectDropdown />

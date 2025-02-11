@@ -87,6 +87,7 @@ export function InviteFriendList({ className }: InviteFriendListProps) {
                     text={inviteFriendBtnText}
                     className={styles.headerText}
                     textStyles={headerLabelStyles}
+                    shouldFitVertically={false}
                 ></SecondaryStyledText>
             </div>
 

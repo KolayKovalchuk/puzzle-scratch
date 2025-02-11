@@ -44,6 +44,7 @@ export function Wallet() {
                     text={headerText}
                     className={styles.headerText}
                     textStyles={headerStyles}
+                    shouldFitVertically={false}
                 ></SecondaryStyledText>
             </div>
 

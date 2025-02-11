@@ -40,7 +40,7 @@ export const NotificationConfig: NotificationConfig = {
                 // TODO: handle error
             }
 
-            return response;
+            return true;
         },
     },
 

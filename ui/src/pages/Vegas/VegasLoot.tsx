@@ -23,7 +23,6 @@ import { GameFooterBtn } from '@components/GameFooterBtn/GameFooterBtn';
 import { IGameMatrixConfig } from '@components/shared/IconMatrix';
 import { IScratchAnimationHandle, ScratchAnimation, ScratchAnimationName } from '@components/shared/ScratchAnimation/ScratchAnimation';
 import { NO_TAP_SOUND_CLASS } from '@hooks/usePlaySound';
-import vegasLoot from '@icons/vegasLoot/vegasLoot.svg';
 import { ITopScratchSpriteCellProps, TopScratchSpriteCell } from '@components/TopScratchSpriteCell/TopScratchSpriteCell';
 
 const topScratchCardMatrixConfig: IGameMatrixConfig = {
@@ -85,7 +84,9 @@ export function VegasLoot() {
     return (
         <div className={`${styles.mainContainer} ${hiddenClass}`}>
             <div className={styles.headerLogoContainer}>
-                <Icon name={vegasLoot} className={styles.headerIcon} />
+                <Icon className={styles.headerIcon} >
+                    <img src={'/vegasLoot/vegas_logo.png'} width='100%' />
+                </Icon>
             </div>
             <div className={styles.content}>
                 <TopPrizeLabel topPrize={batch?.maxPrize || 0} />

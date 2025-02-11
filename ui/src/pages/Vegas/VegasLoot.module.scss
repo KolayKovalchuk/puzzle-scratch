@@ -8,7 +8,16 @@
 @include candy_maze_mixin.candyMazeMixin;
 
 .mainContainer {
-    background: url('/vegas_loot_bg.png') no-repeat;
+    background: url('/vegasLoot/vegas_loot_bg.png') no-repeat;
     background-size: cover;
-    background-position: center;
+    background-position: top;
+}
+
+.headerLogoContainer {
+    width: 60%;
+    max-height: 14.3%;
+}
+
+.headerIcon {
+    aspect-ratio: auto;
 }

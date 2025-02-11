@@ -3,10 +3,7 @@ import { ProgressBar } from '@components/shared/ProgressBar/ProgressBar';
 import { LoaderStyledStyledText } from '@components/shared/StyledText';
 import robo_token_double_border from '@icons/robo_token_double_border.svg';
 import { LogoHeader } from '@pages/MainView/components/LogoHeader/LogoHeader';
-import { AppErrors } from '@store/reducers/appState.reducer';
-import { selectAppError } from '@store/selectors/appState.selectors';
 import { ITextStyle } from 'pixi.js-legacy';
-import { useSelector } from 'react-redux';
 import { GeoRestrictionPopup } from './GeoRestrictionPopup';
 import { useLoadingPercentHook } from './hooks/useLoadingPercentHook';
 import { SystemErrorPopup } from './SystemErrorPopup';
@@ -31,11 +28,11 @@ export function LoadingScreen({ isLoaded }: ILoadingScreenProps) {
         percentage,
     } = useLoadingPercentHook(isLoaded);
 
-    const appError = useSelector(selectAppError);
-    const isGeoRestrictionVisible = appError === AppErrors.GeoRestriction;
-
+    const isGeoRestrictionVisible = false;
     const isSystemErrorVisible = false;
     // TODO: Uncomment this line to show the system error popup
+    // const appError = useSelector(selectAppError);
+    // const isGeoRestrictionVisible = appError === AppErrors.GeoRestriction;
     // const isSystemErrorVisible = appError === AppErrors.SystemError;
 
     if (!isVisible) return null;

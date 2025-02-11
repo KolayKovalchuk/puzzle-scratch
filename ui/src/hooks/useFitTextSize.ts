@@ -22,8 +22,6 @@ export function useFitTextSize(
             ? `${cacheKey}-${shouldFitHorizontally}-${shouldFitVertically}`
             : `${text}-${targetWidth}-${targetHeight}-${initialFontSize}-${shouldFitHorizontally}-${shouldFitVertically}`;
 
-        console.log('targetCacheKey', targetCacheKey);
-        
         if (cache.has(targetCacheKey)) {
             const cacheFontSize = cache.get(targetCacheKey);
 

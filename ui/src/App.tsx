@@ -2,7 +2,7 @@ import { Header } from '@components/Header';
 import styles from './App.module.scss';
 
 import { LoadingScreen } from '@components/LoadingScreen/LoadingScreen';
-import { useInitApp } from '@hooks/useInitApp';
+import { useInitApp } from '@hooks/initHooks/useInitApp';
 import { usePlaySound } from '@hooks/usePlaySound';
 import { AppRouter } from '@routers/router';
 import { ROUTES } from '@routers/routerConfig';

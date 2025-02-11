@@ -4,17 +4,18 @@ import { Button, IButtonProps } from './Button';
 import styles from './Button.module.scss';
 
 export interface IButtonWithRibbonProps extends IButtonProps {
-    ribbonLabel: string;
+    ribbonLabel?: string;
 }
 
 export function ButtonWithRibbon(props: IButtonWithRibbonProps) {
+    const ribbonLabel = props.ribbonLabel || 'COMING SOON';
     return (
         <div className={`${styles.ribbonBtnContainer} ${props.className}`}>
             <div className={styles.ribbonContainer}>
                 <Icon name={coming_soon} className={styles.ribbonIcon}></Icon>
                 <span
                     className={styles.ribbonText}
-                >{props.ribbonLabel}</span>
+                >{ribbonLabel}</span>
             </div>
             <Button {...props} className='' />
         </div>

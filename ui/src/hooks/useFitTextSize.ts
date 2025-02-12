@@ -25,8 +25,6 @@ export function useFitTextSize(
         if (cache.has(targetCacheKey)) {
             const cacheFontSize = cache.get(targetCacheKey);
 
-            console.log('cacheFontSize', text, cacheFontSize);
-            
             if (cacheFontSize !== undefined) {
                 setFontSize(cacheFontSize);
                 return;

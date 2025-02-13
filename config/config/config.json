@@ -3,7 +3,7 @@
   "TELEGRAM_BOT_URL": "https://t.me/CryptoScratchGGbot/",
   "TELEGRAM_APP_URL": "https://t.me/CryptoScratchGGbot/CryptoScratch",
   "TELEGRAM_APP_DOMAIN": "https://app.cryptoscratch.gg/",
-  "LOCALISATION": "https://puzzle-config.storage.googleapis.com/localisation/v49.json",
+  "LOCALISATION": "https://puzzle-config.storage.googleapis.com/localisation/v50.json",
   "BOT_LOCALISATION": "https://puzzle-config.storage.googleapis.com/botLocalization/v6.json",
   "BOT_MSG_IMG_BASE_URL": "https://puzzle-config.storage.googleapis.com/botMsgImg/",
   "SCRATCH_CARD_TRANSITION_TIMEOUT_MS": 2000,

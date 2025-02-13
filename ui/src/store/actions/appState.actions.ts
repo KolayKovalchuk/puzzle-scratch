@@ -37,3 +37,10 @@ export const setAppError = (error: AppErrors) => ({
     type: SET_APP_ERROR,
     payload: error,
 })
+
+export const SET_WITHDRAW_COOLDOWN_EXPIRY = 'SET_WITHDRAW_COOLDOWN_EXPIRY';
+
+export const setWithdrawCooldownExpiry = (cooldownExpiry: number | null) => ({
+    type: SET_WITHDRAW_COOLDOWN_EXPIRY,
+    payload: cooldownExpiry,
+})

@@ -21,6 +21,8 @@ export interface IAppState {
 
     matrixBlinkCounter: number;
 
+    withdrawCooldownExpiry: number | null;
+
     error: AppErrors;
 }
 
@@ -35,6 +37,8 @@ const initialState: IAppState = {
     soundPlayerCounter: 0,
 
     matrixBlinkCounter: 0,
+
+    withdrawCooldownExpiry: null,
 
     error: AppErrors.NoError,
 };
@@ -73,6 +77,12 @@ export const appStateReducer = (state = initialState, action: any): IAppState =>
             return {
                 ...state,
                 error: action.payload,
+            };
+
+        case 'SET_WITHDRAW_COOLDOWN_EXPIRY':
+            return {
+                ...state,
+                withdrawCooldownExpiry: action.payload,
             };
 
         default:

@@ -7,9 +7,10 @@ import { CooldownBody } from '../CooldownBody/CooldownBody';
 export interface IWithdrawResponseBodyProps {
     withdrawalStatus: WithdrawalRequestStatus;
     responseData: any;
+    onWithrawCooldownExpiry: (cooldownExpiry: number) => void
 }
 
-export function WithdrawResponse({ withdrawalStatus, responseData }: IWithdrawResponseBodyProps) {
+export function WithdrawResponse({ withdrawalStatus, responseData, onWithrawCooldownExpiry }: IWithdrawResponseBodyProps) {
     const successText = useSelector(selectLocalValue('pop.withdrawal.successText'));
 
     const errorDefaultText = useSelector(selectLocalValue('pop.withdrawal.defaultError'));
@@ -23,7 +24,7 @@ export function WithdrawResponse({ withdrawalStatus, responseData }: IWithdrawRe
                 return successText;
             case WithdrawalRequestStatus.WithdrawCooldownPeriod:
                 const cooldownTime = responseData?.cooldownExpiry;
-                return <CooldownBody cooldownTime={cooldownTime} />;
+                return <CooldownBody cooldownTime={cooldownTime} onWithrawCooldownExpiry={onWithrawCooldownExpiry}/>;
             case WithdrawalRequestStatus.InsufficientBalanceError:
                 return errorAmountText
             case WithdrawalRequestStatus.ValidationErrorError:

@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 
 export interface ICooldownBodyProps {
     cooldownTime: number;
+    onWithrawCooldownExpiry: (cooldownExpiry: number) => void
 }
 
 function getTileLeft(cooldownTime: number) {
@@ -15,7 +16,7 @@ function _addLeadingZero(value: number) {
     return value < 10 ? `0${value}` : value.toString();
 }
 
-export function CooldownBody({ cooldownTime }: ICooldownBodyProps) {
+export function CooldownBody({ cooldownTime, onWithrawCooldownExpiry }: ICooldownBodyProps) {
     const cooldownText = useSelector(selectLocalValue('txt.withdrawal.cooldown'));
     const [timeLeft, setTimeLeft] = useState(0);
     const [days, setDays] = useState('0');
@@ -26,7 +27,13 @@ export function CooldownBody({ cooldownTime }: ICooldownBodyProps) {
     useEffect(() => {
         if (!cooldownTime) return;
 
-        setTimeLeft(getTileLeft(cooldownTime));
+        const timeLeft = getTileLeft(cooldownTime);
+        setTimeLeft(timeLeft);
+
+        if (timeLeft <= 0) {
+            onWithrawCooldownExpiry(cooldownTime);
+        }
+
         const interval = setInterval(() => {
             const newTimeLeft = getTileLeft(cooldownTime);
             setTimeLeft(newTimeLeft);

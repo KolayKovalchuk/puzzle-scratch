@@ -1,14 +1,14 @@
+import robo_token_double_border from '@icons/robo_token_double_border.svg';
+import styles from './LoadingScreen.module.scss';
+
 import { Icon } from '@components/shared/Icon';
 import { ProgressBar } from '@components/shared/ProgressBar/ProgressBar';
 import { LoaderStyledStyledText } from '@components/shared/StyledText';
-import robo_token_double_border from '@icons/robo_token_double_border.svg';
 import { LogoHeader } from '@pages/MainView/components/LogoHeader/LogoHeader';
 import { ITextStyle } from 'pixi.js-legacy';
 import { GeoRestrictionPopup } from './GeoRestrictionPopup';
 import { useLoadingPercentHook } from './hooks/useLoadingPercentHook';
 import { SystemErrorPopup } from './SystemErrorPopup';
-
-import styles from './LoadingScreen.module.scss';
 
 const poweredByTextStyles: Partial<ITextStyle> = {
     fontSize: 16,
@@ -27,13 +27,6 @@ export function LoadingScreen({ isLoaded }: ILoadingScreenProps) {
         isVisible,
         percentage,
     } = useLoadingPercentHook(isLoaded);
-
-    const isGeoRestrictionVisible = false;
-    const isSystemErrorVisible = false;
-    // TODO: Uncomment this line to show the system error popup
-    // const appError = useSelector(selectAppError);
-    // const isGeoRestrictionVisible = appError === AppErrors.GeoRestriction;
-    // const isSystemErrorVisible = appError === AppErrors.SystemError;
 
     if (!isVisible) return null;
 
@@ -59,7 +52,7 @@ export function LoadingScreen({ isLoaded }: ILoadingScreenProps) {
                     textStyles={loadingTextStyles} />
             </div>
         </div>
-        <GeoRestrictionPopup isOpen={isGeoRestrictionVisible} className={styles.modalDialog}/>
-        <SystemErrorPopup isOpen={isSystemErrorVisible} className={styles.modalDialog}/>
+        <GeoRestrictionPopup className={styles.modalDialog}/>
+        <SystemErrorPopup className={styles.modalDialog}/>
     </>);
 }

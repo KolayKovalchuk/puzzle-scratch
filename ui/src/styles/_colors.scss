@@ -6,6 +6,7 @@ $royal-purple: #540f7a;
 $plum-purple: #4a0664;
 $vivid-violet: #A615CA;
 $light-violet: #561394;
+$dark-blue: #180132;
 $sky-blue: #1578CA;
 $light-sky-blue: #97C6FD;
 $bright-blue: #2C8AF6;
@@ -15,7 +16,7 @@ $medium-blue: #434DA0;
 $forest-green: #57B205;
 $lime-green: #97DB01;
 $dark-lime-green: #3D8100;
-$mint-green: #43EF90;
+$bright-green: #00E500;
 $burnt-orange: #B23305;
 $coral-red: #FE5E5E;
 $light-orchid: #E878FA;
@@ -23,28 +24,38 @@ $vivid-purple: #C431E8;
 $light-pink: #FF81F2;
 $light-yellow: #FFDD56;
 $deep-purple: #480978;
+$dark-purple: #380850;
 $crimson-red: #dc2436;
+$error-red: #FF4C4C;
 $light-gray: #DEDEDE;
 $medium-gray: #A1A3A1;
 
 
-$main_bg: linear-gradient(180deg, #380850 0%, #180132 100%);
-$main_radial_bg_gradient: radial-gradient(65% 50% at 50% 15%, #FB12D033 0%, #180132 100%),
-    linear-gradient(180deg, #380850 0%, #180132 100%);
+$main_bg: linear-gradient(180deg, $dark-purple 0%, $dark-blue 100%);
+$main_radial_bg_gradient: radial-gradient(65% 50% at 50% 15%, #FB12D033 0%, $dark-blue 100%),
+    linear-gradient(180deg, $dark-purple 0%, $dark-blue 100%);
 
 @mixin main_radial_bg_gradient($width: 65%, $height: 50%, $x: 50%, $y: 15%) {
     background: radial-gradient(
                 $width $height at $x $y,
-                    rgba($color: #FB12D0, $alpha: 0.4) 0%,
-                    rgba($color: #FB12D0, $alpha: 0.2) 50%,
-                    rgba($color: #FB12D0, $alpha: 0.15) 60%,
-                    rgba($color: #FB12D0, $alpha: 0.1) 70%,
+                    rgba($color: #FB12D0, $alpha: 0.23) 0%,
+                    rgba($color: #FB12D0, $alpha: 0.15) 50%,
+                    rgba($color: #FB12D0, $alpha: 0.12) 60%,
+                    rgba($color: #FB12D0, $alpha: 0.08) 70%,
                     rgba($color: #FB12D0, $alpha: 0.05) 80%,
                     rgba($color: #FB12D0, $alpha: 0.02) 90%,
                     rgba($color: #FB12D0, $alpha: 0.01) 100%
                 ),
-                linear-gradient(180deg, #380850 0%, #180132 100%);
+                linear-gradient(180deg, $dark-purple 0%, $dark-blue 100%);
     }
+
+@mixin main_view_bg($width: 50%, $height: 18vh, $x: 50%, $y: 12vh) {
+    @include main_radial_bg_gradient($width: 50%, $x: $x, $height: $height, $y: $y);
+
+    @media screen and (max-width: 375px) {
+        @include main_radial_bg_gradient($width: 50%, $x: $x, $height: $height, $y: calc(#{$y} + 3%));
+    }
+}
 
 
 $modal_dialog_bg: linear-gradient(180deg, #8458DB 0%, #585FCE 100%);

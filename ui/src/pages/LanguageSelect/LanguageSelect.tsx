@@ -13,18 +13,9 @@ import { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styles from './LanguageSelect.module.scss';
+import { useSupportLocaleItems } from '@hooks/useSupportLocaleItems';
 
 export interface ILanguageSelectProps {
-}
-
-function getSupportLocalesItems(supportLocales: string[]): IDropdownItem[] {
-    return supportLocales.map((locale) => {
-        return {
-            text: `lang.${locale.toLowerCase()}`,
-            icon: null,
-            data: locale
-        }
-    })
 }
 
 function getPreselectedLocale(
@@ -79,8 +70,7 @@ export function LanguageSelect({}: ILanguageSelectProps) {
         setIsTosApprovePopupOpen(false)
     }
 
-    const supportLocales = useSelector(selectSupportedLocales)
-    const supportLocaleItems = useMemo(() => getSupportLocalesItems(supportLocales), [supportLocales])
+    const supportLocaleItems = useSupportLocaleItems()
     const preferredLocaleState = useSelector(selectPreferredLocale)
     const telegramLocale = WebApp.initDataUnsafe.user?.language_code
     const preferredLocale: string | undefined = isPreferredLocaleSelected ? preferredLocaleState : telegramLocale

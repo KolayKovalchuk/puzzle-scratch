@@ -2,7 +2,7 @@ import { Header } from '@components/Header';
 import styles from './App.module.scss';
 
 import { LoadingScreen } from '@components/LoadingScreen/LoadingScreen';
-import { useInitApp } from '@hooks/useInitApp';
+import { useInitApp } from '@hooks/initHooks/useInitApp';
 import { usePlaySound } from '@hooks/usePlaySound';
 import { AppRouter } from '@routers/router';
 import { ROUTES } from '@routers/routerConfig';
@@ -11,10 +11,13 @@ import store from '@store/store';
 import { useEffect } from 'react';
 import { Provider, useSelector } from 'react-redux';
 import { BrowserRouter, useLocation, useNavigate } from 'react-router-dom';
+// import { settings } from 'pixi.js-legacy';
+// settings.RESOLUTION = 2;
 
 export function App() {
     const {
         isLoaded,
+        isFontListLoaded,
     } = useInitApp();
 
     const navigate = useNavigate();
@@ -35,9 +38,9 @@ export function App() {
 
     usePlaySound();
 
-    // if (!isFontListLoaded) {
-    //     return null;
-    // }
+    if (!isFontListLoaded) {
+        return null;
+    }
 
     return (
         <div className={styles.mainContainer}>

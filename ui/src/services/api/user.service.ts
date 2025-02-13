@@ -89,13 +89,20 @@ export async function getUserStats(): Promise<UserStats | null> {
 
 export function useGetUserStats() {
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [userStats, setUserStats] = useState<UserStats | null>(null);
+    const [userStats, setUserStats] = useState<UserStats>(new UserStats({
+        totalCardsPlayed: 0,
+        totalRbaxWon: 0,
+        biggestWin: 0,
+        recentGames: [],
+    }));
 
     useEffect(() => {
         async function fetchUserStats() {
             setIsLoading(true);
             const stats = await getUserStats();
-            setUserStats(stats);
+            if (stats) {
+                setUserStats(stats);
+            }
             setIsLoading(false);
         }
 

@@ -61,7 +61,7 @@ export function useGetSounds(soundName: AppSounds | null = null) {
     const stopSound = useCallback((soundName: AppSounds) => {
         soundDict[soundName]?.stop();
     }, [soundDict]);
-    
+
     return {
         getSound,
         stopAllSounds,
@@ -71,21 +71,24 @@ export function useGetSounds(soundName: AppSounds | null = null) {
     };
 }
 
-Howler.ctx.onstatechange = function() {
-    console.log('Howler.ctx.state:', Howler.ctx.state);
-
-    if (Howler.ctx.state === 'suspended') {
-        Howler.ctx.resume();
-    }
-};
-
 
 export function usePlaySound() {
     const soundPlayCounter = useSelector(selectSoundPlayerCounter);
     const shouldStopAllSounds = useSelector(selectShouldStopAllSounds);
     const soundDuration = useSelector(selectSoundDuration);
 
-    const playTapSound = useCallback((e: MouseEvent) => {
+    const playSound = useCallback(async (soundToPlay: Howl) => {
+        console.log('playSound 1', Howler.ctx.state);
+
+        if (Howler.ctx.state !== 'running') {
+            await Howler.ctx.resume();
+        }
+
+        console.log('playSound 2', Howler.ctx.state);
+        soundToPlay.play();
+    }, []);
+
+    const playTapSound = useCallback(async (e: MouseEvent) => {
         let targetElement: HTMLElement | null = e.target as HTMLElement;
         while (targetElement) {
             if (targetElement.classList.contains(NO_TAP_SOUND_CLASS)) {
@@ -94,7 +97,7 @@ export function usePlaySound() {
             targetElement = targetElement.parentElement;
         }
 
-        tapSound?.play();
+        playSound(tapSound);
     }, [tapSound]);
 
     const soundName = useSelector(selectSoundToPlay);
@@ -115,13 +118,15 @@ export function usePlaySound() {
             stopAllSounds(); // Stop the previous sound
         }
 
-        sound.play();
+        playSound(sound)
+            .then(() => {
+                if (soundDuration) {
+                    setTimeout(() => {
+                        sound.stop();
+                    }, soundDuration);
+                }
+            });
 
-        if (soundDuration) {
-            setTimeout(() => {
-                sound.stop();
-            }, soundDuration);
-        }
     }, [soundPlayCounter]);
 }
 

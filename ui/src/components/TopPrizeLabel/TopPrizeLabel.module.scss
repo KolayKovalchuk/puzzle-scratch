@@ -10,6 +10,11 @@
 
 .winAmountContainer {
     display: flex;
+    margin-bottom: -1%;
+}
+
+.winUpToLabel {
+    margin-bottom: -3%;
 }
 
 .roboTokenGoldIcon {
@@ -19,5 +24,6 @@
 
 .winAmount {
     position: relative;
+    top: -5%;
     left: -8px;
 }

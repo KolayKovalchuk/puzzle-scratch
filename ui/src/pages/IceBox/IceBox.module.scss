@@ -45,15 +45,15 @@ $roundScratchCardWidth: 88px;
 
 .roundScratchCard {
     position: absolute;
-    top: -18.7%;
-    left: 0.1%;
+    top: -16.5%;
+    left: -0.3%;
 
     width: 23.5%;
 
     &.right {
-        top: -18.4%;
+        top: -16.2%;
         left: auto;
-        right: -0.9%;
+        right: -1.2%;
     }
 }
 
@@ -74,9 +74,9 @@ $roundScratchCardWidth: 88px;
     position: relative;
     top: 0%;
     left: 1%;
-    width: 74%;
+    width: 78%;
 
-    min-height: 17.8%;
+    min-height: 17.5%;
 
     background: colors.$grayGradient;
     z-index: 3;
@@ -93,7 +93,7 @@ $roundScratchCardWidth: 88px;
         height: calc(100% - 4px);
 
         background: colors.$redGradient;
-        padding: 0 11%;
+        padding: 0 13%;
 
         .diamondIcon {
             flex: 1;
@@ -119,9 +119,9 @@ $roundScratchCardWidth: 88px;
 }
 
 .animationContainer {
-    height: 112%;
-    width: 96%;
-    margin-bottom: 5.4%;
+    height: 113.6%;
+    width: 98%;
+    margin-bottom: 3%;
 }
 
 .multiplierScratchCard {
@@ -153,10 +153,13 @@ $roundScratchCardWidth: 88px;
 }
 
 .footerStars {
-    width: 104vw;
+    width: 120%;
     position: absolute;
-    top: -6px;
-
-    aspect-ratio: 1030/348;
+    top: -18%;
+    aspect-ratio: 1030 / 270;
     z-index: 0;
+}
+
+.mainFooter {
+    z-index: 1;
 }

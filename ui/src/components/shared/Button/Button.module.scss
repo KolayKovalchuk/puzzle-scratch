@@ -105,7 +105,7 @@ div.btn3dContainer {
     height: $maxHeight;
     max-height: $maxHeight;
 
-    padding: 0px 20px;
+    padding: 4px 20px;
     border: none;
     border-radius: $borderRadius;
     color: #c6e9f2;
@@ -200,6 +200,7 @@ $iconSize: 45px;
 }
 
 .ribbonBtnContainer {
+    height: 100%;
     position: relative;
     .container {
         width: 100%;

@@ -97,6 +97,7 @@ export function DepositWithTransferBody({ }: IDepositWithTransferBodyProps) {
                     items={supportedDepositWallets}
                     selectedItem={preselectedWallet}
                     onSelect={onWalletSelect}
+                    showSelectedItemInList={false}
                 />
             </div>
             {loading
@@ -108,7 +109,7 @@ export function DepositWithTransferBody({ }: IDepositWithTransferBodyProps) {
                                 <span className={styles.label}>{walletLabel}</span>
                                 <span className={`${styles.value} ${styles.adrresValue}`}>{getWalletAddress()}</span>
                             </div>
-                            <CopyButton className={styles.btn} getCopyValue={getWalletAddress} showDialog={false} />
+                            <CopyButton className={styles.copyBtn} getCopyValue={getWalletAddress} showDialog={false} />
 
                         </div>
                         <div className={styles.row}>
@@ -116,7 +117,7 @@ export function DepositWithTransferBody({ }: IDepositWithTransferBodyProps) {
                                 <span className={styles.label}>{tagLabel}</span>
                                 <span className={styles.value}>{getTagAddress()}</span>
                             </div>
-                            <CopyButton className={styles.btn} getCopyValue={getTagAddress} showDialog={false} />
+                            <CopyButton className={styles.copyBtn} getCopyValue={getTagAddress} showDialog={false} />
                         </div>
                     </div>
                     {transferTermsMarkedList}

@@ -85,7 +85,12 @@ export function BatchCardComponent({ className, batchCard }: IBatchCardProps) {
                     <div className={styles.footer}>
                         <div className={styles.priceLabel}>
                             <Icon name={robo_token_no_bg} className={styles.token_icon}></Icon>
-                            <StyledText textStyles={{ fontSize }} className={styles.amount} text={batchCard.pricePerCard + ''}></StyledText>
+                            <StyledText
+                                textStyles={{ fontSize }}
+                                className={styles.amount}
+                                text={batchCard.pricePerCard + ''}
+                                textFitCoefficient={1.2}
+                            ></StyledText>
                         </div>
                         <Icon name={hint} className={styles.hint_icon} onClick={onHintIconClick}></Icon>
                     </div>

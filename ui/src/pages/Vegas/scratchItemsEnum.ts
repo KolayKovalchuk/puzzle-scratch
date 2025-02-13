@@ -1,0 +1,15 @@
+export enum VegasLootScratchItemsEnum {
+    bar = 'bar',
+    cherry = 'cherry',
+    crown = 'crown',
+    cup = 'cup',
+    diece = 'diece',
+    hearts = 'hearts',
+    seven = 'seven',
+    spades = 'spades',
+    w2 = 'w2',
+    w3 = 'w3',
+    w4 = 'w4',
+    w5 = 'w5',
+    cover = 'cover',
+}

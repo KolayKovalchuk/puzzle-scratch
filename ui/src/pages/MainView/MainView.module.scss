@@ -4,11 +4,11 @@
 
 .mainContainer {
     @include mixins.fixedHeaderPadding;
+    @include colors.main_view_bg;
 
     & {
         width: 100%;
-        background: colors.$main_radial_bg_gradient;
-
+        height: 100%;
         display: block;
     }
 }
@@ -20,13 +20,16 @@
     align-items: center;
     overflow: hidden;
 
+    margin-top: -1.5%;
+
     &.hidden {
         display: none;
     }
 }
 
 .logoHeader {
-    margin-bottom: -16px;
+    margin-top: -2%;
+    margin-bottom: -4%;
 
     @media screen and (max-width: 375px) {
         margin-bottom: -8px;
@@ -50,6 +53,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background: colors.$dark-blue;
 }
 
 .footer {

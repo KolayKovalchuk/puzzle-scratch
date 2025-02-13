@@ -30,10 +30,6 @@
 
 .logo {
     width: 9.8%;
-
-    .logoIcon {
-        cursor: default;
-    }
 }
 
 .icon {
@@ -45,25 +41,16 @@
 }
 
 .currency_info_container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    width: 40%;
-    aspect-ratio: 463/88;
-
-    padding: 10px 30px;
-
-    background-color: colors.$dark-violet;
-    box-shadow: colors.$pink-shadow;
-
-    border-radius: 30px;
-    cursor: pointer;
+    @include mixins.styledContianer;
+    & {
+        width: 40%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        
+        cursor: pointer;
+    }
 
     .token_icon {
         height: 100%;

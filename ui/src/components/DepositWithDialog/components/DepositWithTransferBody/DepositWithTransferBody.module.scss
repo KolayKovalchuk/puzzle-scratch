@@ -1,4 +1,5 @@
 @use '@styles/colors';
+@use '@styles/mixins';
 
 .container {
     display: flex;
@@ -56,35 +57,18 @@
     }
 }
 
-.btn {
-    width: 45px;
-    min-width: 45px;
+$size: 45px;
+.copyBtn {
+    width: $size;
+    min-width: $size;
+    height: $size;
     margin-top: auto;
 }
 
 .list {
-    text-align: left;
-    width: 100%;
-    padding: 0 20px;
-
-    .listItem {
-        &:not(:last-child) {
-            margin-bottom: 10px;
-        }
-    }
+    @include mixins.list;
 }
 
 .roboTokenIconListItemContainer {
-    display: flex;
-    align-items: center;
-    flex-wrap: nowrap;
-
-    span {
-        width: fit-content;
-        white-space: nowrap;
-    }
-
-    .roboTokenIcon {
-        width: 30px;
-    }
+    @include mixins.roboTokenIconListItemContainer;
 }

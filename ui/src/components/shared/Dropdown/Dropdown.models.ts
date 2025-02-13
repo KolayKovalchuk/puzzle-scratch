@@ -24,6 +24,8 @@ export interface IDropdownListProps {
     handleSelect: (item: IDropdownItem) => void
     locale?: string
     maxHeight?: number
+
+    showSelectedItemInList?: boolean
 }
 
 export type TextAlign = 'left' | 'center' | 'right'
@@ -31,10 +33,12 @@ export type TextAlign = 'left' | 'center' | 'right'
 export interface IDropdownProps {
     className?: string
     placeholder?: string
-    selectedItem?: IDropdownItem
+    selectedItem?: IDropdownItem | null
     items: IDropdownItem[]
     onSelect: (item: IDropdownItem) => void
     onOpenClose?: (isOpen: boolean) => void
     locale?: string
     textAlign?: TextAlign
+
+    showSelectedItemInList?: boolean
 }

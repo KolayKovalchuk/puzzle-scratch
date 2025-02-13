@@ -5,6 +5,8 @@ export enum AppErrors {
     NoError = 'noError',
     InsufficientBalance = 'InsufficientBalance',
     NoAvailableCards = 'NoAvailableCards',
+    GeoRestriction = 'GeoRestriction',
+    SystemError = 'SystemError',
 }
 
 // Initial State
@@ -38,7 +40,7 @@ const initialState: IAppState = {
 };
 
 // Reducer
-export const gameReducer = (state = initialState, action: any): IAppState => {
+export const appStateReducer = (state = initialState, action: any): IAppState => {
     switch (action.type) {
         case SHOW_AMOUNT_CHANGE_LABEL:
             return {

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 import styles from './Header.module.scss'
 
-import { selectIsQaUser, selectUserAvatar, selectUserBalanceTotal } from '@store/selectors/user.selectors'
+import { selectUserAvatar, selectUserBalanceTotal } from '@store/selectors/user.selectors'
 
 import { WinStyledText } from '@components/shared/StyledText'
 import { ROUTES } from '@routers/routerConfig'
@@ -26,17 +26,24 @@ export function Header() {
     const scratchCardTransitionTimeout = useSelector(selectScratchCardTransitionTimeout);
 
     const navigate = useNavigate();
-    const isQaUser = useSelector(selectIsQaUser);
 
     const openWallet = useCallback(() => {
         navigate(ROUTES.Wallet);
-    }, [navigate, isQaUser]);
+    }, [navigate]);
+
+    const openProfile = useCallback(() => {
+        navigate(ROUTES.Profile);
+    }, [navigate]);
+
+    const openHome = useCallback(() => {
+        navigate(ROUTES.Home);
+    }, [navigate]);
 
     const userAvatar = useSelector(selectUserAvatar);
 
     return (
         <div className={styles.mainContainer}>
-            <div className={styles.logo}>
+            <div className={styles.logo} onClick={openHome}>
                 <Icon name={logo} className={styles.logoIcon}></Icon>
             </div>
             <div className={styles.currency_info_container} onClick={openWallet}>
@@ -53,13 +60,15 @@ export function Header() {
                     <WinStyledText
                         text={lastWinLabel}
                         textStyles={{ fontSize: 20 }}
+                        shouldFitHorizontally={false}
+                        shouldFitVertically={false}
                     />
                 </div>
 
             </div>
             <div className={styles.profileContainer}>
                 <Icon name={wallet} iconSize='58%' className={styles.icon} onClick={openWallet}></Icon>
-                <Icon className={styles.icon}>
+                <Icon className={styles.icon} onClick={openProfile}z>
                     <img src={userAvatar} width='85%' height='85%' />
                 </Icon>
             </div>

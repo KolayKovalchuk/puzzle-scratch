@@ -18,7 +18,7 @@ import { BigWinScreen } from '@components/BigWinScreen/BigWinScreen';
 import { Footer } from '@components/Footer/Footer';
 import { useScratchGame } from '@hooks/useScratchGame/useScratchGame';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ITopScratchSpriteCellProps, TopScratchSpriteCell } from './components/TopScratchSpriteCell/TopScratchSpriteCell';
+import { ITopScratchSpriteCellProps, TopScratchSpriteCell } from '@components/TopScratchSpriteCell/TopScratchSpriteCell';
 
 import { GameFooterBtn } from '@components/GameFooterBtn/GameFooterBtn';
 import { IGameMatrixConfig } from '@components/shared/IconMatrix';
@@ -34,7 +34,7 @@ const topScratchCardMatrixConfig: IGameMatrixConfig = {
 }
 
 const mainMatrixConfig: IGameMatrixConfig = {
-    cellPadding: 22
+    cellPadding: 13
 }
 
 export function CandyMaze() {
@@ -168,8 +168,8 @@ export function CandyMaze() {
                     </div>
                 </div>
                 <GameFooterBtn batchCardType={batch?.cardType || null} onPlay={onPlay} isPlayBtnDisabled={isPlayBtnDisabled} />
-                <Footer />
             </div>
+            <Footer />
             {isBigWinVisible
                 && <BigWinScreen
                     winAmount={card?.winning || 0}

@@ -12,6 +12,9 @@ export class AppConfig {
     SYSTEM_MSG: string | null;
     SYSTEM_MSG_ONE_TIME: boolean;
     DAILY_BONUS: number[];
+    MIN_RBAX_WITHDRAW: number;
+    MAX_RBAX_WITHDRAW: number;
+    COOLDOWN_PERIOD_FOR_WITHDRAW: number;
     FRIENDS_BONUS: FriendsBonus;
     SEND_RBAX: SendRbax;
 
@@ -29,6 +32,9 @@ export class AppConfig {
         this.SYSTEM_MSG = data.SYSTEM_MSG;
         this.SYSTEM_MSG_ONE_TIME = data.SYSTEM_MSG_ONE_TIME;
         this.DAILY_BONUS = data.DAILY_BONUS;
+        this.MIN_RBAX_WITHDRAW = data.MIN_RBAX_WITHDRAW;
+        this.MAX_RBAX_WITHDRAW = data.MAX_RBAX_WITHDRAW;
+        this.COOLDOWN_PERIOD_FOR_WITHDRAW = data.COOLDOWN_PERIOD_FOR_WITHDRAW;
         this.FRIENDS_BONUS = new FriendsBonus(data.FRIENDS_BONUS);
         this.SEND_RBAX = new SendRbax(data.SEND_RBAX);
     }

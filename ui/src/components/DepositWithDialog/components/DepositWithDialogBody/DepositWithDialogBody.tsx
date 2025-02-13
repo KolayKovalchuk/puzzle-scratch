@@ -57,7 +57,10 @@ export function DepositWithDialogBody({ onSelectStars, onSelectTransfer }: IDepo
                     <RegularStyledText
                         text={transferBtnText}
                         className={styles.iconContainerBtnText}
-                        textStyles={textStyles} />
+                        textStyles={textStyles}
+                        shouldFitVertically={false}
+                        shouldFitHorizontally={false}
+                    />
                 </div>
             </Button>
         </div>

@@ -4,12 +4,14 @@ import btn_3d_elipse from '@icons/btn_3d_elipse.svg';
 import { playSound } from '@store/actions/appState.actions';
 import store from '@store/store';
 import { ITextStyle } from 'pixi.js-legacy';
-import { CSSProperties, forwardRef, ReactNode, Ref, useCallback } from 'react';
+import { CSSProperties, forwardRef, ReactNode, Ref, useCallback, useEffect, useState } from 'react';
 import { Icon } from '../Icon';
 import { RegularStyledText } from '../StyledText';
 import { useButtonConfig } from './hooks/useButtonConfig';
 
 import styles from './Button.module.scss';
+import { useSelector } from 'react-redux';
+import { selectUserPreferredLocale } from '@store/selectors/user.selectors';
 
 
 export enum ButtonType {
@@ -29,7 +31,8 @@ export interface IButtonProps {
     text?: string;
     yShift?: number;
     style?: CSSProperties;
-    shouldFitFontSize?: boolean;
+    shouldFitHorizontally?: boolean;
+    shouldFitVertically?: boolean;
     textStyle?: Partial<ITextStyle>;
 
     is3d?: boolean;
@@ -39,6 +42,33 @@ export interface IButtonProps {
     getTextSize?: (textSize: string | number) => void;
 }
 
+export const defaultBtnYShift = 0.55;
+
+function useFixForArabicLocale(initialBtnYShift = defaultBtnYShift) {
+    const arabicBtnYShift = 0.45;
+
+    const userLocale = useSelector(selectUserPreferredLocale);
+    const [btnYShift, setBtnYShift] = useState(initialBtnYShift);
+
+    useEffect(() => {
+        const isArabicLocale = userLocale?.toLowerCase() === 'ar';
+        if (isArabicLocale) {
+            setBtnYShift(arabicBtnYShift);
+        } else {
+            setBtnYShift(initialBtnYShift);
+        }
+
+    }, [
+        userLocale,
+        initialBtnYShift,
+        arabicBtnYShift,
+    ]);
+
+    return {
+        btnYShift,
+    };
+}
+
 export function ButtonComponent({
     onClick,
     className,
@@ -46,10 +76,11 @@ export function ButtonComponent({
     iconName,
 
     text,
-    yShift = 0.5,
+    yShift = defaultBtnYShift,
     children,
     style,
-    shouldFitFontSize = true,
+    shouldFitHorizontally = true,
+    shouldFitVertically = true,
     textStyle = {},
 
     is3d = false,
@@ -58,6 +89,8 @@ export function ButtonComponent({
     getTextSize,
 }: IButtonProps, ref: Ref<HTMLButtonElement>) {
     const { className: buttonTypeClassName, textStyles } = useButtonConfig(mode, styles, isDisabled);
+
+    const { btnYShift } = useFixForArabicLocale(yShift);
 
     const renderContent = useCallback(() => {
         if (!!children) {
@@ -78,9 +111,10 @@ export function ButtonComponent({
                     ...textStyles,
                     ...textStyle,
                 }}
-                shouldFitFontSize={shouldFitFontSize}
+                shouldFitHorizontally={shouldFitHorizontally}
+                shouldFitVertically={shouldFitVertically}
                 getTextSize={getTextSize}
-                yShift={yShift}
+                yShift={btnYShift}
             ></RegularStyledText>
         );
     }, [
@@ -88,8 +122,10 @@ export function ButtonComponent({
         iconName,
         text,
         textStyles,
-        shouldFitFontSize,
+        shouldFitHorizontally,
+        shouldFitVertically,
         textStyle,
+        btnYShift,
     ]);
 
     const iconContainerClassName = iconName ? styles.iconContainer : '';

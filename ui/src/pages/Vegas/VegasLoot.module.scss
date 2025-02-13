@@ -1,0 +1,23 @@
+@use '@styles/colors';
+@use '@styles/variables';
+@use '@styles/mixins';
+@use '@styles/game_mixins';
+@use '@styles/candy_maze_mixin';
+
+@include game_mixins.gameMixin;
+@include candy_maze_mixin.candyMazeMixin;
+
+.mainContainer {
+    background: url('/vegasLoot/vegas_loot_bg.png') no-repeat;
+    background-size: cover;
+    background-position: top;
+}
+
+.headerLogoContainer {
+    width: 60%;
+    max-height: 14.3%;
+}
+
+.headerIcon {
+    aspect-ratio: auto;
+}

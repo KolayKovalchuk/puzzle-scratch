@@ -1,21 +1,22 @@
-import { IDaylyBonusData, IDepositSuccessData, INotification, NotificationData, NotificationType } from '@models/Notification.model';
-import { postCollectDailyGift, postCollectEmojiBonus, postCollectGiftBonus, postCollectRefferalGift } from '@services/api/bonus.service';
+import { IAffLinkAvailableData, IDaylyBonusData, IDepositSuccessData, INotification, NotificationData, NotificationType } from '@models/Notification.model';
+import { updateUserBalance } from '@services/api/balance.service';
+import { postCollectAffiliateBonus, postCollectDailyGift, postCollectEmojiBonus, postCollectGiftBonus, postCollectRefferalGift } from '@services/api/bonus.service';
 import { updateUserBalanceWithChangeAnimation } from '@store/actions/user.actions';
 import store from '@store/store';
-import { ReactNode } from 'react';
+import { Dispatch, ReactNode, SetStateAction } from 'react';
+import { AffLinkAvailableBody } from './components/AffLinkAvailable/AffLinkAvailable';
 import { DailyBonusNotificationBody } from './components/DailyBonusNotificationBody/DailyBonusNotificationBody';
 import { OnePerXGiftBody } from './components/OnePerXGiftBody/OnePerXGiftBody';
 import { SuccessDepositBody } from './components/SuccessDepositBody/SuccessDepositBody';
 import { TooManyGifts } from './components/TooManyGiftsBody/TooManyGiftsBody';
-import { updateUserBalance } from '@services/api/balance.service';
 
 
 export interface NotificationConfigItem {
     title: string;
     content?: string;
     renderChildren?: (notificationData: NotificationData) => ReactNode;
-    agreeBtn: string;
-    agreeCallback?: (notification: INotification) => void | Promise<any>;
+    agreeBtn?: string;
+    agreeCallback?: (notification: INotification, setNotificationConfig: Dispatch<SetStateAction<NotificationConfigItem>>) => void | Promise<any>;
     declineBtn?: string;
     declineCallback?: (notification: INotification) => void | Promise<any>;
 }
@@ -39,7 +40,7 @@ export const NotificationConfig: NotificationConfig = {
                 // TODO: handle error
             }
 
-            return response;
+            return true;
         },
     },
 
@@ -126,7 +127,36 @@ export const NotificationConfig: NotificationConfig = {
         renderChildren: (data) => <SuccessDepositBody notificationData={data as IDepositSuccessData} />,
         agreeBtn: 'txt.btn.ok',
         agreeCallback: async () => {
-            updateUserBalance();
+            return await updateUserBalance();
         },
+    },
+
+
+
+    [NotificationType.AFF_LINK_AVAILABLE]: {
+        title: 'txt.affpop.title',
+        renderChildren: (data) => <AffLinkAvailableBody notificationData={data as IAffLinkAvailableData} />,
+        agreeBtn: 'txt.btn.collect',
+        agreeCallback: async (notification: INotification, setNotificationConfig: Dispatch<SetStateAction<NotificationConfigItem>>) => {
+            const response = await postCollectAffiliateBonus(notification.linkCode);
+
+            if (response?.newBalance) {
+                console.log('Affiliate bonus collected successfully:', response);
+                store.dispatch(updateUserBalanceWithChangeAnimation({ total: response.newBalance }, response.amount));
+            } else if (response?.collectLinkErrorStatus === NotificationType.RBAX_GIFT_EXPIRED) {
+                setNotificationConfig(NotificationConfig[NotificationType.RBAX_GIFT_EXPIRED]);
+                return false;
+            } else {
+                // TODO: handle error
+            }
+
+            return response;
+        },
+    },
+
+    [NotificationType.AFF_LINK_TO_MANY]: {
+        title: 'txt.affpop.title',
+        content: 'txt.affiliate.fail',
+        declineBtn: 'txt.btn.close',
     },
 };

@@ -1,0 +1,61 @@
+@mixin amountCellContianer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .roboTokenGoldIcon {
+        min-width: 30px;
+        width: 30px;
+        margin-right: 2px;
+    }
+
+    span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+@mixin headerCell {
+    flex: 1;
+    justify-content: flex-start;
+
+    &:first-child {
+        padding-left: 2%;
+    }
+}
+
+@mixin historyTable {
+    $padding-left: 2%;
+
+    .headerCell {
+        @include headerCell;
+    }
+
+    :global .tHeadCell {
+        @include headerCell;
+    }
+
+    .tableCell {
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        text-align: left;
+
+        &:first-child {
+            padding-left: $padding-left;
+        }
+
+        &:last-child {
+            justify-content: space-between;
+        }
+
+        .cellLabel {
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}

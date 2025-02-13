@@ -24,4 +24,9 @@
 
 .iconContainerBtnContent {
     padding-left: 20px;
+
+    .iconContainerBtnText {
+        position: relative;
+        top: 50%;
+    }
 }

@@ -1,21 +1,21 @@
-import { ITextStyle } from 'pixi.js-legacy';
-
 import { Icon } from '@components/shared/Icon';
 import { ProgressBar } from '@components/shared/ProgressBar/ProgressBar';
 import { LoaderStyledStyledText } from '@components/shared/StyledText';
+import robo_token_double_border from '@icons/robo_token_double_border.svg';
 import { LogoHeader } from '@pages/MainView/components/LogoHeader/LogoHeader';
+import { ITextStyle } from 'pixi.js-legacy';
+import { GeoRestrictionPopup } from './GeoRestrictionPopup';
 import { useLoadingPercentHook } from './hooks/useLoadingPercentHook';
+import { SystemErrorPopup } from './SystemErrorPopup';
 
 import styles from './LoadingScreen.module.scss';
 
-import robo_token_double_border from '@icons/robo_token_double_border.svg';
-
 const poweredByTextStyles: Partial<ITextStyle> = {
-    fontSize: 20,
+    fontSize: 16,
 };
 
 const loadingTextStyles: Partial<ITextStyle> = {
-    fontSize: 25,
+    fontSize: 18,
 };
 
 export interface ILoadingScreenProps {
@@ -28,9 +28,16 @@ export function LoadingScreen({ isLoaded }: ILoadingScreenProps) {
         percentage,
     } = useLoadingPercentHook(isLoaded);
 
+    const isGeoRestrictionVisible = false;
+    const isSystemErrorVisible = false;
+    // TODO: Uncomment this line to show the system error popup
+    // const appError = useSelector(selectAppError);
+    // const isGeoRestrictionVisible = appError === AppErrors.GeoRestriction;
+    // const isSystemErrorVisible = appError === AppErrors.SystemError;
+
     if (!isVisible) return null;
 
-    return (
+    return (<>
         <div className={styles.contianer}>
             <LogoHeader className={styles.logoHeader} />
 
@@ -52,5 +59,7 @@ export function LoadingScreen({ isLoaded }: ILoadingScreenProps) {
                     textStyles={loadingTextStyles} />
             </div>
         </div>
-    );
+        <GeoRestrictionPopup isOpen={isGeoRestrictionVisible} className={styles.modalDialog}/>
+        <SystemErrorPopup isOpen={isSystemErrorVisible} className={styles.modalDialog}/>
+    </>);
 }

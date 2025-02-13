@@ -10,9 +10,15 @@ export interface IStyledTextProps {
 
     anchor?: number;
 
-    shouldFitFontSize?: boolean;
+    shouldFitHorizontally?: boolean;
+    shouldFitVertically?: boolean;
+
     xShift?: number
     yShift?: number
+
+    cacheKey?: string;
+
+    valueForMeasure?: string,
 
     getTextSize?: (textSize: string | number) => void;
 }

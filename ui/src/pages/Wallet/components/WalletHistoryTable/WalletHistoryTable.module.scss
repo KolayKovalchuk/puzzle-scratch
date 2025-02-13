@@ -1,7 +1,7 @@
-@use '@styles/colors';
+@use '@styles/table';
 
 .historyTableContainer {
-    margin-top: 30px;
+    margin-top: 5%;
 
     width: 100%;
 
@@ -13,32 +13,7 @@
 }
 
 .amountCellContianer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .roboTokenGoldIcon {
-        min-width: 30px;
-        width: 30px;
-        margin-right: 2px;
-    }
-
-    span {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+    @include table.amountCellContianer;
 }
 
-.historyTable {
-    :global {
-        .tBody {
-            background: colors.$historyTableGraient;
-        }
-    }
-}
-
-    
-.tBody {
-    background: colors.$historyTableGraient;
-}
+@include table.historyTable;

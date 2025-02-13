@@ -2,13 +2,14 @@
 
 import { Icon } from '@components/shared/Icon';
 import { WinStyledText } from '@components/shared/StyledText';
+import { selectLocalValue } from '@store/selectors/localization.selectors';
+import { formatNumber } from '@utils/formatters/formatNumber';
+import { ITextStyle } from 'pixi.js-legacy';
+import { useSelector } from 'react-redux';
 
 import styles from './TopPrizeLabel.module.scss';
 
 import robo_token_gold from '@icons/robo_token_gold.svg';
-import { formatNumber } from '@utils/formatters/formatNumber';
-import { useSelector } from 'react-redux';
-import { selectLocalValue } from '@store/selectors/localization.selectors';
 
 
 export interface ITopPrizeLabelProps {
@@ -16,15 +17,28 @@ export interface ITopPrizeLabelProps {
     className?: string;
 }
 
+const winUpToTextStyles: Partial<ITextStyle> = {
+    fontSize: 20
+}
+
+const winAmountTextStyles: Partial<ITextStyle> = {
+    fontSize: 26
+}
+
 export function TopPrizeLabel({ topPrize, className }: ITopPrizeLabelProps) {
     const winUptoText = useSelector(selectLocalValue('txt.game.winUpTo')).toUpperCase();
 
     return (
         <div className={`${styles.container} ${className || ''}`}>
-            <WinStyledText text={winUptoText} textStyles={{ fontSize: 20 }} className={styles.winUpToLabel} />
+            <WinStyledText text={winUptoText} textStyles={winUpToTextStyles} className={styles.winUpToLabel} />
             <div className={styles.winAmountContainer}>
                 <Icon name={robo_token_gold} className={styles.roboTokenGoldIcon} />
-                <WinStyledText className={styles.winAmount} text={formatNumber(topPrize)} textStyles={{ fontSize: 26 }} />
+                <WinStyledText
+                    className={styles.winAmount}
+                    text={formatNumber(topPrize)}
+                    textStyles={winAmountTextStyles}
+                    shouldFitVertically={false}
+                />
             </div>
         </div>
     );

@@ -35,14 +35,12 @@ const headerTextStyles: Partial<ITextStyle> = {
     ...DefaultTextStyleConfig,
     ...GameCellTextStyle,
     dropShadow: false,
-    lineHeight: 1,
     strokeThickness: 2,
 }
 
 const bonusAmountTextStyles: Partial<ITextStyle> = {
     ...DefaultTextStyleConfig,
     dropShadow: false,
-    lineHeight: 1,
     strokeThickness: 2,
 }
 
@@ -113,7 +111,8 @@ export function DailyBonusNotificationBody({ data }: IDailyBonusNotificationBody
                             <StyledText
                                 className={styles.bonusAmount}
                                 text={item.bonus + ''}
-                                shouldFitFontSize={false}
+                                shouldFitHorizontally={false}
+                                shouldFitVertically={false}
                                 textStyles={{ ...bonusAmountTextStyles, fontSize: footerFontSize }}
                             ></StyledText>
                         </div>

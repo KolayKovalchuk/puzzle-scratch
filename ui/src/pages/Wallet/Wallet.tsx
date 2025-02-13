@@ -1,96 +1,44 @@
-import { DepositWithDialog } from '@components/DepositWithDialog/DepositWithDialog'
-import { useDepositWithDialog } from '@components/DepositWithDialog/hooks/useDepositWithDialog'
 import { Footer } from '@components/Footer/Footer'
-import { Button, ButtonType, ButtonWithRibbon } from '@components/shared/Button'
 import { BackButton } from '@components/shared/Button/BackButton'
-import { Icon } from '@components/shared/Icon'
 import { SpinnerIcon } from '@components/shared/Icon/SpinnerIcon'
 import { SecondaryStyledText } from '@components/shared/StyledText'
-import { useGetSmallestFontSize } from '@hooks/useGetSmallestFontSize'
 import robo_token_gold_no_shining from '@icons/robo_token_gold_no_shining.svg'
 import { useGetUserBalance } from '@services/api/balance.service'
+import { useGetUserStats } from '@services/api/user.service'
 import { selectLocalValue } from '@store/selectors/localization.selectors'
-import { selectUserBalanceTotal, selectUserBalanceWithdrawable, selectUserPreferredLocale } from '@store/selectors/user.selectors'
-import { formatNumber } from '@utils/formatters/formatNumber'
 import { ITextStyle } from 'pixi.js-legacy'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { WalletHistoryTable } from './components/WalletHistoryTable/WalletHistoryTable'
+import { WalletInfo } from './components/WalletInfo/WalletInfo'
 import { DepositWithDialogMode } from './Wallet.models'
 import styles from './Wallet.module.scss'
-import { useGetUserStats } from '@services/api/user.service'
 
 const headerStyles: Partial<ITextStyle> = {
     fontSize: 40,
     fontWeight: 'bold',
 }
 
-function useFixForArabicLocale(textStylesWithFontSize: Partial<ITextStyle>) {
-    const userLocale = useSelector(selectUserPreferredLocale);
-    const [btnYShift, setBtnYShift] = useState(0.5);
-    useEffect(() => {
-        if (userLocale?.toLowerCase() === 'ar') {
-            setBtnYShift(0.3);
-
-            if (!textStylesWithFontSize.fontSize) return;
-
-            const fontSizeShoft = 6;
-            if (typeof textStylesWithFontSize.fontSize === 'number') {
-                textStylesWithFontSize.fontSize = textStylesWithFontSize.fontSize - fontSizeShoft;
-            } else {
-
-                textStylesWithFontSize.fontSize = parseInt(textStylesWithFontSize.fontSize.replace('px', '')) - fontSizeShoft + 'px';
-            }
-        }
-
-    }, [userLocale, textStylesWithFontSize.fontSize]);
-
-    return { btnYShift };
-}
-
-
 export function Wallet() {
     const headerText = useSelector(selectLocalValue('txt.wallet.wallet'))
-    const balanceLabel = useSelector(selectLocalValue('txt.wallet.balance'))
-    const depositLabel = useSelector(selectLocalValue('txt.button.deposit'))
-    const withdrawableLabel = useSelector(selectLocalValue('txt.wallet.withdrawable'))
-    const withdrawLabel = useSelector(selectLocalValue('txt.button.withdraw'))
-    const winnignsLabel = useSelector(selectLocalValue('txt.wallet.winnigns'))
 
-    const totalAmount = useSelector(selectUserBalanceTotal) || 0;
-    const withdrawableAmount = useSelector(selectUserBalanceWithdrawable) || 0;
+    const { isLoading: isBalanceLoading } = useGetUserBalance();
 
     const [mode, setMode] = useState(DepositWithDialogMode.Select);
-
-    const { isLoading } = useGetUserBalance();
-
-    const { onDepositBtnClick, closeDialog, isDepositDialogOpen } = useDepositWithDialog();
-
     const onModeChanged = useCallback((mode: DepositWithDialogMode) => {
         setMode(mode);
-    }, [closeDialog]);
+    }, []);
 
-    const onWithdrawBtnClick = useCallback(() => {
-        console.log('Withdraw button clicked');
-    }, [])
+    const { userStats, isLoading: isUserStastLoading } = useGetUserStats();
 
-    const { userStats } = useGetUserStats();
-
-    const {
-        textStylesWithFontSize,
-        setDepositBtnFontSize,
-        setWithdrawBtnFontSize,
-    } = useGetSmallestFontSize();
-
+    const isLoading = isBalanceLoading || isUserStastLoading;
     const containerClass = `${styles.container} ${isLoading ? styles.hidden : ''}`;
-
-    const { btnYShift } = useFixForArabicLocale(textStylesWithFontSize);
 
     return (<>
         {isLoading && <div className={styles.spinnerContainer}><SpinnerIcon name={robo_token_gold_no_shining} className={styles.spinnerIcon} /></div>}
         <div className={containerClass}>
-            <div className={styles.headerContianer}>
-                <BackButton />
+            <div className={styles.headerContainer}>
+                <BackButton className={styles.backButton}/>
 
                 <SecondaryStyledText
                     text={headerText}
@@ -99,62 +47,8 @@ export function Wallet() {
                 ></SecondaryStyledText>
             </div>
 
-            <div className={styles.walletInfoContainer}>
-                <div className={styles.balanceInfoRow}>
-                    <div className={styles.column}>
-                        <div className={styles.balanceNameLabel}>{balanceLabel}</div>
-                        <div className={styles.balanceAmountContainer}>
-                            <Icon name={robo_token_gold_no_shining} className={styles.roboTokenGoldIcon} />
-                            <span className={styles.balanceAmount}>{formatNumber(totalAmount)}</span>
-                        </div>
-                    </div>
-                    <Button
-                        className={`${styles.walletBtn}`}
-                        mode={ButtonType.Confirm}
-                        onClick={onDepositBtnClick}
-                        text={depositLabel}
-                        getTextSize={(size) => setDepositBtnFontSize(size)}
-                        textStyle={textStylesWithFontSize}
-                        yShift={btnYShift}
-                    ></Button>
-                </div>
-                <div className={styles.balanceInfoRow}>
-                    <div className={styles.column}>
-                        <div className={styles.balanceNameLabel}>{withdrawableLabel}</div>
-                        <div className={styles.balanceAmountContainer}>
-                            <Icon name={robo_token_gold_no_shining} className={styles.roboTokenGoldIcon} />
-                            <span className={styles.balanceAmount}>{formatNumber(withdrawableAmount)}</span>
-                        </div>
-                    </div>
-                    <ButtonWithRibbon
-                        className={`${styles.walletBtn}`}
-                        mode={ButtonType.Confirm}
-                        onClick={onWithdrawBtnClick}
-                        text={withdrawLabel}
-                        getTextSize={(size) => setWithdrawBtnFontSize(size)}
-                        textStyle={textStylesWithFontSize}
-                        yShift={btnYShift}
-                        isDisabled={true}
-                        ribbonLabel='COMING SOON!'
-                    ></ButtonWithRibbon>
-                </div>
-                <div className={styles.balanceInfoRow}>
-                    <div className={styles.column}>
-                        <div className={styles.balanceNameLabel}>{winnignsLabel}</div>
-                    </div>
-                    <div className={`${styles.balanceAmountContainer} ${styles.infoLabel}`}>
-                        <Icon name={robo_token_gold_no_shining} className={styles.roboTokenGoldIcon} />
-                        <span className={styles.balanceAmount}>{formatNumber(userStats?.totalRbaxWon || 0)}</span>
-                    </div>
-                </div>
-            </div>
+            <WalletInfo userStats={userStats} onModeChanged={onModeChanged} />
             <WalletHistoryTable mode={mode} />
-            <DepositWithDialog
-                onModeChanged={onModeChanged}
-                isOpen={isDepositDialogOpen}
-                onCancel={closeDialog}
-                onConfirm={closeDialog}
-            />
             <Footer />
         </div >
     </>)

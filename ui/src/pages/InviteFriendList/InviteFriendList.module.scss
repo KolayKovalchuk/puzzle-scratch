@@ -19,26 +19,18 @@ $border_radius: 20px;
 
     overflow-x: clip;
 
-    border-top-left-radius: $border_radius;
-    border-top-right-radius: $border_radius;
-
     @include mixins.fixedHeaderPadding;
+    @include colors.main_radial_bg_gradient($width: 60%, $height: 30vh, $y: 25vh);
 }
 
-.header {
-    width: 95%;
-    height: 55px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: nowrap;
-    margin-bottom: -10px;
-}
+.headerContainer {
+    @include mixins.backBtnHeader;
+    max-height: 50px;
+    padding: 0 55px;
 
-.headerText {
-    position: relative;
-    top: 12%;
-    z-index: 10000;
+    .backButton {
+        left: 10px;
+    }
 }
 
 .body {
@@ -79,6 +71,10 @@ $bodyHeaderHeight: 130px;
 
 .btn {
     min-height: 60px;
+    
+    &.copyBtn button {
+        padding: 25%;
+    }
 }
 
 .headerBgIcon {
@@ -110,8 +106,12 @@ $inviteFriendIconSize: 20px;
     position: absolute;
     width: calc(100% - #{$inviteFriendIconSize});
     left: calc($inviteFriendIconSize / -2);
-    transform: translateY(-42.5%);
+    transform: translateY(-50%);
     top: 50%;
+
+    $padding: 3%;
+    padding-top: $padding;
+    padding-bottom: $padding;
 }
 
 .inviteFriendIcon {

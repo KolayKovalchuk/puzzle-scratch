@@ -22,6 +22,7 @@
 .topPrizeLabel {
     z-index: 5;
     margin-bottom: 2px;
+    z-index: 6;
 }
 
 .multiplierContainer {
@@ -32,18 +33,25 @@
 
 .scratchAreaContainer {
     justify-content: flex-start;
+    z-index: 5;
 }
 
 .animationContainer {
-    height: 94.5%;
-    width: 91.6%;
-    margin-top: 2.6%;
+    height: 98%;
+    width: 98%;
+    top: -0.2%;
 }
 
 .roundScratchCard {
-    aspect-ratio: 1/1;
-    width: 30.2222%;
+    aspect-ratio: 11/10;
+    width: 32%;
+    position: relative;
+    top: 3%;
 
+}
+
+.scratchCardContainer {
+    top: 0.5%;
 }
 
 .toyChainContainer {

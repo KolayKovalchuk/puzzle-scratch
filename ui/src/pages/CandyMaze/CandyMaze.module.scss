@@ -2,20 +2,13 @@
 @use '@styles/variables';
 @use '@styles/mixins';
 @use '@styles/game_mixins';
+@use '@styles/candy_maze_mixin';
 
 @include game_mixins.gameMixin;
+@include candy_maze_mixin.candyMazeMixin;
 
 .mainContainer {
     background: colors.$candy_maze_bg;
-}
-
-.headerLogoContainer {
-    margin: 2.45% auto;
-}
-
-.headerIcon {
-    aspect-ratio: 1000/302;
-    z-index: 3;
 }
 
 .candyCloudes {
@@ -57,37 +50,4 @@
         rgba(255, 255, 255, 1) 0%,
         rgba(255, 255, 255, 0) 60%
     );
-}
-
-.scratchAreaContainer {
-    justify-content: flex-start;
-}
-
-.animationContainer {
-    height: 92.5%;
-    margin-top: 4.0%;
-    width: 91.6%;
-}
-
-.potentialPrizeContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 56%;
-    min-height: 18.5%;
-
-    position: relative;
-    top: 20px;
-    margin-top: -20px;
-
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
-    z-index: 3;
-
-    position: relative;
-    
-    @include mixins.scratchCardBg;
-    
-    padding: 4px;
 }

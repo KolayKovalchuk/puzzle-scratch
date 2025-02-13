@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import createSvgSpritePlugin from "vite-plugin-svg-sprite";
 import restart from 'vite-plugin-restart';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -23,6 +24,11 @@ export default defineConfig({
                 './public/**/*', // Path to your JSON file
                 // Add more paths if needed
             ]
+        }),
+        nodePolyfills({
+            globals: {
+                Buffer: true
+            }
         })
     ],
     base: process.env.VITE_BASE_URL || '/',
@@ -41,7 +47,8 @@ export default defineConfig({
             '@icons': path.resolve(__dirname, 'src/assets/icons'),
 
             //SCSS styles
-            '@styles': path.resolve(__dirname, 'src/styles')
+            '@styles': path.resolve(__dirname, 'src/styles'),
+            buffer: 'buffer'
         }
     }
 });

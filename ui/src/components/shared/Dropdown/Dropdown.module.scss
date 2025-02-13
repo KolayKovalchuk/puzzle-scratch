@@ -73,6 +73,8 @@ $border-radius: 10px;
     overflow: hidden;
     overflow-y: auto;
 
+    background-color: colors.$light-violet;
+
     .dropdownListItem {
         background-color: colors.$dark-violet;
     }
@@ -111,10 +113,10 @@ $border-radius: 10px;
     width: 14px;
     position: absolute;
     right: 10px;
-    transform: rotate(90deg);
+    transform: rotate(-90deg);
 
 
     &.open {
-        transform: rotate(270deg);
+        transform: rotate(-270deg);
     }
 }

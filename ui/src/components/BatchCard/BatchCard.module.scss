@@ -56,14 +56,14 @@ $shadow_size: 0.1px;
     }
 
     &.green {
-        background: colors.$mint-green;
+        background: colors.$bright-green;
 
         &:hover {
-            @include card-shadown(colors.$mint-green);
+            @include card-shadown(colors.$bright-green);
         }
 
         .content {
-            background: colors.$mint-green;
+            background: colors.$bright-green;
         }
     }
 

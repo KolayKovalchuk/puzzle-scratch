@@ -3,7 +3,7 @@ import { DefaultTextStyleConfig, StyledTextPixiEl } from '@components/shared/Sty
 import { GameCellTextStyle } from '@components/shared/StyledText/components/GameCellStyledText';
 import { IIceBoxBundle } from '@config/iceBoxBundleConfig';
 import { useLoadBundle } from '@hooks/useAssetsBundleLoader';
-import { Container, Graphics, Sprite } from '@pixi/react';
+import { Container, Sprite } from '@pixi/react';
 import { ITextStyle, TextStyle } from 'pixi.js-legacy';
 import { useCellLabelsPosition } from './hooks/useCellLabelsPosition';
 
@@ -35,7 +35,7 @@ const priceNumberTextStyleClass = new TextStyle(priceNumberTextStyle);
 
 export function IceBoxSpriteCell({ x, y, width, height, data }: IIceBoxSpriteCellProps) {
     const [winNumber, priceNumber] = data.textureName.split(',');
-    
+
 
     const { bundle, loading } = useLoadBundle<IIceBoxBundle>(data.bundleName);
     const roboTokenBlueBorder = bundle?.roboTokenBlueBorder;
@@ -65,51 +65,42 @@ export function IceBoxSpriteCell({ x, y, width, height, data }: IIceBoxSpriteCel
         )
     }
 
+    const winNumberX = x;
+    const winNumberY = y - height * 0.24;
 
-    return (
-        <Container x={x} y={y - 8} width={width} height={height}>
-            <Graphics draw={(g) => {
-                g.clear();
-                g.beginFill(0x000000, 0.000000000001);
-                g.drawRect(0, 0, width, height);
-                g.endFill();
-            }} />
-            <StyledTextPixiEl
-                dimensions={{ width, height }}
-                text={winNumber}
-                textStyles={winNumberTextStyle}
-                textFitCoefficient={0.8}
-                x={0}
-                y={0}
-                xShift={0.55}
-                valueForMeasure={'1000'}
-            />
-            <Container
-                width={priceContainerWidth}
-                height={roboIconSize + 4}
-                x={priceNumberPosition.x}
-                y={priceNumberPosition.y}
-            >
-                <Sprite
-                    texture={roboTokenBlueBorder}
-                    x={0}
-                    y={0}
-                    width={roboIconSize}
-                    height={roboIconSize}
-                ></Sprite>
+    const roboIconX = x + priceNumberPosition.x;
+    const roboIconY = winNumberY + priceNumberPosition.y;
 
-                <StyledTextPixiEl
-                    dimensions={{ width: priceContainerWidth - roboIconSize, height: height - priceNumberPosition.y }}
-                    text={priceNumber}
-                    textStyles={priceNumberTextStyleClass}
-                    textFitCoefficient={1}
-                    x={roboIconSize}
-                    y={0}
-                    // xShift={0.55}
-                    // valueForMeasure={'100'}
-                    // shouldFitFontSize={false}
-                />
-            </Container>
-        </Container >
+    const priceNumberX = roboIconX + roboIconSize;
+    const priceNumberY = roboIconY;
+
+    return (<>
+        <StyledTextPixiEl
+            dimensions={{ width, height }}
+            text={winNumber}
+            textStyles={winNumberTextStyle}
+            textFitCoefficient={0.8}
+            x={winNumberX}
+            y={winNumberY}
+            xShift={0.55}
+            valueForMeasure={'1000'}
+        />
+        <Sprite
+            texture={roboTokenBlueBorder}
+            x={roboIconX}
+            y={roboIconY}
+            width={roboIconSize}
+            height={roboIconSize}
+        ></Sprite>
+        <StyledTextPixiEl
+            dimensions={{ width: priceContainerWidth - roboIconSize, height: roboIconSize }}
+            text={priceNumber}
+            textStyles={priceNumberTextStyleClass}
+            textFitCoefficient={1}
+            x={priceNumberX}
+            y={priceNumberY}
+            valueForMeasure={'100'}
+        />
+    </>
     )
 };

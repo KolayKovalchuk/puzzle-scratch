@@ -116,6 +116,27 @@ export const selectSendRBaxMaxUses = createSelector(
     }
 )
 
+export const selectMinRbaXWithdraw = createSelector(
+    selectConfigQueryData,
+    (config) => {
+        return config?.MIN_RBAX_WITHDRAW
+    }
+)
+
+export const selectMaxRbaXWithdraw = createSelector(
+    selectConfigQueryData,
+    (config) => {
+        return config?.MAX_RBAX_WITHDRAW
+    }
+)
+
+export const selectCooldownPeriodForWithdraw = createSelector(
+    selectConfigQueryData,
+    (config) => {
+        return config?.COOLDOWN_PERIOD_FOR_WITHDRAW
+    }
+)
+
 export const selectFriendsBonusConfig = createSelector(
     selectConfigQueryData,
     (config) => {

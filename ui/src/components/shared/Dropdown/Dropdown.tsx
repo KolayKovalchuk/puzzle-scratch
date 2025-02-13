@@ -26,6 +26,7 @@ export function Dropdown({
     onSelect,
     onOpenClose,
     textAlign = 'left',
+    showSelectedItemInList = true
 }: IDropdownProps) {
     const [selectedItem, setSelectedItem] = useState<IDropdownItem | null>(null)
     const [isOpen, setIsOpen] = useState(false)
@@ -78,6 +79,7 @@ export function Dropdown({
                     handleSelect={handleSelect}
                     locale={locale}
                     maxHeight={maxDropdownListHeight}
+                    showSelectedItemInList={showSelectedItemInList}
                 />)
             }
         </div>

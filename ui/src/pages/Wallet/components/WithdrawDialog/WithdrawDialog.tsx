@@ -13,6 +13,7 @@ import { WithdrawResponse } from './components/WithdrawResponse/WithdrawResponse
 import { useIsConfirmBtnDisabled } from './hooks/hooks';
 import { useConfirmBtnText } from './hooks/useConfirmBtnText';
 import { useDilogTitleText } from './hooks/useDilogTitleText';
+import { useWithrawCooldownExpiry } from './hooks/useWithrawCooldownExpiry';
 
 export interface IWithdrawDialogProps {
     className?: string;
@@ -39,6 +40,8 @@ export function WithdrawDialog({ className, isOpen, onCancel, onConfirm }: IWith
     const { titleText } = useDilogTitleText(withdrawalStatus);
     const { confirmBtnText } = useConfirmBtnText(withdrawalStatus);
     const closeBtnText = useSelector(selectLocalValue('txt.btn.close'));
+
+    const { onWithrawCooldownExpiry } = useWithrawCooldownExpiry(setWithdrawalStatus);
 
     const [withdrawalForm, setWithdrawalForm] = useState<IWithdrawalFormState>({
         walletAddress: '',
@@ -140,7 +143,7 @@ export function WithdrawDialog({ className, isOpen, onCancel, onConfirm }: IWith
             }
             { isStatusNotSent
                 ? <WithdrawBody onFormChange={onFormChange} onFormValidChange={setIsFormValid} className={`${withdrawBodyCalss} ${className || ''}`}/>
-                : !isLoading ? <WithdrawResponse withdrawalStatus={withdrawalStatus} responseData={errorData}/> : null
+                : !isLoading && <WithdrawResponse withdrawalStatus={withdrawalStatus} responseData={errorData} onWithrawCooldownExpiry={onWithrawCooldownExpiry}/>
             }
         </ModalDialog>
     );

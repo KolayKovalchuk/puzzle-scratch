@@ -1,4 +1,4 @@
-box.png
+box_updated.png
 size:2036,2036
 filter:Linear,Linear
 pma:true
@@ -13,7 +13,7 @@ bounds:1001,40,997,996
 ss_3
 bounds:2,2,141,36
 
-box_2.png
+box_2_updated.png
 size:2000,2000
 filter:Linear,Linear
 pma:true
@@ -26,7 +26,7 @@ bounds:1001,1002,997,996
 s_07
 bounds:1001,4,997,996
 
-box_3.png
+box_3_updated.png
 size:2000,2000
 filter:Linear,Linear
 pma:true
@@ -39,7 +39,7 @@ bounds:1001,1002,997,996
 s_11
 bounds:1001,4,997,996
 
-box_4.png
+box_4_updated.png
 size:2000,2000
 filter:Linear,Linear
 pma:true
@@ -52,7 +52,7 @@ bounds:1001,1002,997,996
 s_15
 bounds:1001,4,997,996
 
-box_5.png
+box_5_updated.png
 size:2000,2000
 filter:Linear,Linear
 pma:true

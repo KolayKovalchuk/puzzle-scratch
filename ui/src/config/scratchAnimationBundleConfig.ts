@@ -13,15 +13,15 @@ export const SCRATCH_ANIMATION_BUNDLE: AssetsBundle = {
     assets: [
         {
             alias: 'scratchCandyBox',
-            src: `${SCRATCH_ANIMATION_BUNDLE_BASE_PATH}/candy_maze.json`,
+            src: `${SCRATCH_ANIMATION_BUNDLE_BASE_PATH}/candy_maze_updated.json`,
         },
         {
             alias: 'scratchSantaSac',
-            src: `${SCRATCH_ANIMATION_BUNDLE_BASE_PATH}/santa_box.json`,
+            src: `${SCRATCH_ANIMATION_BUNDLE_BASE_PATH}/santa_box_updated.json`,
         },
         {
             alias: 'scratchIceBox',
-            src: `${SCRATCH_ANIMATION_BUNDLE_BASE_PATH}/ice_box.json`,
+            src: `${SCRATCH_ANIMATION_BUNDLE_BASE_PATH}/ice_box_updated.json`,
         },
     ],
 };

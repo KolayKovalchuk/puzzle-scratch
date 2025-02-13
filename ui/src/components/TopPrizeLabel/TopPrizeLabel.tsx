@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import styles from './TopPrizeLabel.module.scss';
 
 import robo_token_gold from '@icons/robo_token_gold.svg';
+import { useEffect, useState } from 'react';
 
 
 export interface ITopPrizeLabelProps {
@@ -27,6 +28,11 @@ const winAmountTextStyles: Partial<ITextStyle> = {
 
 export function TopPrizeLabel({ topPrize, className }: ITopPrizeLabelProps) {
     const winUptoText = useSelector(selectLocalValue('txt.game.winUpTo')).toUpperCase();
+    const [ formattedTopPrize, setFormattedTopPrize ] = useState<string>('');
+
+    useEffect(() => {
+        setFormattedTopPrize(formatNumber(topPrize));
+    }, [topPrize]);
 
     return (
         <div className={`${styles.container} ${className || ''}`}>
@@ -35,9 +41,10 @@ export function TopPrizeLabel({ topPrize, className }: ITopPrizeLabelProps) {
                 <Icon name={robo_token_gold} className={styles.roboTokenGoldIcon} />
                 <WinStyledText
                     className={styles.winAmount}
-                    text={formatNumber(topPrize)}
+                    text={formattedTopPrize}
                     textStyles={winAmountTextStyles}
                     shouldFitVertically={false}
+                    shouldFitHorizontally={false}
                 />
             </div>
         </div>

@@ -17,6 +17,9 @@ function getStyledHeaderType(cardType: BatchCardType) {
         case BatchCardType.VEGAS_LOOT:
             return StyledHeaderType.GREEN;
 
+        case BatchCardType.LUCKY_CLOVER:
+            return StyledHeaderType.RED;
+
         case BatchCardType.SANTA_SAC:
             return StyledHeaderType.RED;
 
@@ -36,6 +39,9 @@ function getBatchCardClass(cardType: BatchCardType, styles: CSSModuleClasses) {
         case BatchCardType.VEGAS_LOOT:
             return styles.green;
 
+        case BatchCardType.LUCKY_CLOVER:
+            return styles.red;
+
         case BatchCardType.SANTA_SAC:
             return styles.red;
 
@@ -54,6 +60,9 @@ function getBatchImageUrl(cardType: BatchCardType) {
 
         case BatchCardType.VEGAS_LOOT:
             return '/vegasLoot/vegas_loot_batch_cover.png';
+
+        case BatchCardType.LUCKY_CLOVER:
+            return '/luckyClover/lucky_clover_batch_cover.png';
 
         case BatchCardType.SANTA_SAC:
             return 'santaSac/santa_sac_batch_cover.png';
@@ -87,13 +96,18 @@ export function useBatchCardHandler(batchCard: BatchCard, navigate: NavigateFunc
                 navigate(`${ROUTES.VegasLoot}/${batchCard.batchId}`);
             }, [navigate, batchCard]);
 
+        case BatchCardType.LUCKY_CLOVER:
+            return useCallback(() => {
+                // navigate(`${ROUTES.LuckyClover}/${batchCard.batchId}`);
+            }, [navigate, batchCard]);
+
         case BatchCardType.SANTA_SAC:
             return useCallback(() => {
                 navigate(`${ROUTES.SantaSac}/${batchCard.batchId}`)
             }, [navigate]);
 
         default:
-            return useCallback(() => navigate(ROUTES.Home), [navigate]);
+            return useCallback(() => {}, []);
     }
 }
 

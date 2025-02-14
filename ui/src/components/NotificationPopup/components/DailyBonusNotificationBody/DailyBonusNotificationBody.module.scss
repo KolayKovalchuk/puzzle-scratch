@@ -194,7 +194,4 @@ $todayDayCellMargin: calc($dayCellMargin * -1.5);
 .bonusAmount {
     width: calc(100% - $roboIconSize);
     height: initial;
-
-    position: relative;
-    top: 2px;
 }

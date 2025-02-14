@@ -55,6 +55,12 @@ $header-border-radius: 20px;
     width: 100%;
 }
 
+.emptyRow {
+    & div.cell {
+        text-align: center;
+    }
+}
+
 .defaultRowBg {
     background: colors.$table_row_gradient;
 }

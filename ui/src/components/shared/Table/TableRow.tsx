@@ -21,12 +21,14 @@ export interface ITableRowProps {
     data: ITableCellData[];
     renderCell?: (data: ITableCellData, index: number, cellWidth: string) => ReactNode;
     noRowBg?: boolean;
+    className?: string;
 }
 
-export function TableRow({ data, renderCell, noRowBg = false }: ITableRowProps) {
+export function TableRow({ data, renderCell, className, noRowBg = false }: ITableRowProps) {
     const cellWidthPercent = `${100 / data.length}%`;
 
-    const rowClassName = `${styles.row} ${ noRowBg ? '' : styles.defaultRowBg } tRow`;
+    const rowBgClassName = noRowBg ? '' : styles.defaultRowBg;
+    const rowClassName = `${styles.row} ${rowBgClassName} ${className || ''} tRow`;
 
     return (
         <div className={rowClassName} >

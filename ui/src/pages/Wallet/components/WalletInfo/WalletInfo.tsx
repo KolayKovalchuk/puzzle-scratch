@@ -3,7 +3,7 @@ import styles from './WalletInfo.module.scss';
 
 import { DepositWithDialog } from '@components/DepositWithDialog/DepositWithDialog';
 import { useDepositWithDialog } from '@components/DepositWithDialog/hooks/useDepositWithDialog';
-import { Button, ButtonType, ButtonWithRibbon } from '@components/shared/Button';
+import { Button, ButtonType } from '@components/shared/Button';
 import { Icon } from '@components/shared/Icon';
 import { useGetSmallestFontSize } from '@hooks/useGetSmallestFontSize';
 import robo_token_gold_no_shining from '@icons/robo_token_gold_no_shining.svg';
@@ -74,15 +74,14 @@ export function WalletInfo({ userStats, onModeChanged }: IWalletInfoProps) {
                 </div>
                 <div className={styles.balanceInfoCell}>
 
-                    <ButtonWithRibbon
+                    <Button
                         className={`${styles.walletBtn}`}
                         mode={ButtonType.Confirm}
                         onClick={onWithdrawBtnClick}
                         text={withdrawLabel}
                         getTextSize={setWithdrawBtnFontSize}
                         textStyle={textStylesWithFontSize}
-                        isDisabled={true}
-                    ></ButtonWithRibbon>
+                    ></Button>
                 </div>
                 <div className={styles.balanceInfoCell}>
                     <div className={`${styles.balanceAmountContainer} ${styles.infoLabel}`}>

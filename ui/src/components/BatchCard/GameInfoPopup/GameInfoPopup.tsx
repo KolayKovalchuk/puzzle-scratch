@@ -22,12 +22,14 @@ function getLocKey(batchCardType: BatchCardType) {
             return 'puzzle.gallery.icebox';
         case BatchCardType.SANTA_SAC:
             return 'puzzle.gallery.santasac';
+        case BatchCardType.LUCKY_CLOVER:
+            return 'puzzle.gallery.luckyclover';
     }
 }
 
 export function GameInfoPopup({ isOpen, onClose, batchCardType }: IGameInfoPopupProps) {
     const locKey = getLocKey(batchCardType);
-    const content = useSelector(selectLocalValue(locKey));
+    const content = useSelector(selectLocalValue(locKey || ''));
 
     return (
         <ModalDialog

@@ -18,6 +18,8 @@ function getLocKey(batchCardType: BatchCardType) {
             return 'puzzle.info.candymaze';
         case BatchCardType.VEGAS_LOOT:
             return 'puzzle.info.vegasloot';
+        case BatchCardType.LUCKY_CLOVER:
+            return 'puzzle.info.luckyclover';
         case BatchCardType.ICE_BOX:
             return 'puzzle.info.icebox';
         case BatchCardType.SANTA_SAC:

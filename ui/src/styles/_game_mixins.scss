@@ -13,7 +13,6 @@
         overflow-y: auto;
         overflow-x: hidden;
         position: relative;
-        z-index: 10000;
 
         @include mixins.fixedHeaderPadding;
     }

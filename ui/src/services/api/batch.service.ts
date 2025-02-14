@@ -1,4 +1,4 @@
-import { BatchCard } from '@models/BatchCard.model';
+import { BatchCard, BatchCardType, BatchStatus } from '@models/BatchCard.model';
 import { apiClient } from './api.service';
 import { useEffect, useState } from 'react';
 
@@ -50,6 +50,24 @@ export function useGetBatchById(id: number | string | null): { batch: BatchCard 
     return { batch, loading };
 }
 
+const LuckyClowerMock: BatchCard = new BatchCard({
+    batchId: 'mockId',
+    batchName: 'Lucky Clover',
+    cardType: BatchCardType.LUCKY_CLOVER,
+    cardsCount: 0,
+    scratchedCards: 0,
+    totalCardsInBatch: 0,
+    winnersCount: 0,
+    wonPrizeSum: 0,
+    totalPotentialPrizes:0,
+    availablePrizes: 0,
+    pricePerCard: 10,
+    sizeX: 6,
+    sizeY: 6,
+    maxPrize: 2500,
+    status: BatchStatus.SCHEDULED,
+});
+
 export function useGetBatches(): [BatchCard[], boolean] {
     const [batches, setBatches] = useState<BatchCard[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
@@ -57,6 +75,7 @@ export function useGetBatches(): [BatchCard[], boolean] {
     useEffect(() => {
         const fetch = async () => {
             const batchList = await getBatches();
+            batchList.push(LuckyClowerMock);
             setBatches(batchList);
             setLoading(false);
         };

@@ -1,15 +1,12 @@
-import { RefObject, useEffect, useRef, useState } from 'react';
+import { RefObject, useLayoutEffect, useRef, useState } from 'react';
 
 export function useContainerDimensions<T extends Element = HTMLDivElement>(containerRef: RefObject<T> = useRef<T>(null)) {
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const observer = new ResizeObserver(entries => {
             for (let entry of entries) {
                 if (entry.target === containerRef.current) {
-
-                    // console.log('entry.contentRect.width', entry.contentRect.width);
-                    // console.log('entry.contentRect.height', entry.contentRect.height);
 
                     setDimensions({
                         width: entry.contentRect.width,

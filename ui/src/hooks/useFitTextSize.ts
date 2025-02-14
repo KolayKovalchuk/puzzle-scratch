@@ -1,5 +1,5 @@
 import { ITextStyle, TextMetrics, TextStyle } from 'pixi.js-legacy';
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 
 const cache = new Map<string, number>();
 
@@ -15,7 +15,7 @@ export function useFitTextSize(
     const initialFontSize = typeof textStyle.fontSize === 'number' ? textStyle.fontSize : Number(textStyle.fontSize?.replace('px', ''));
     const [fontSize, setFontSize] = useState(initialFontSize);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (!targetWidth || !targetHeight || !text) return;
 
         const targetCacheKey = cacheKey
@@ -25,8 +25,6 @@ export function useFitTextSize(
         if (cache.has(targetCacheKey)) {
             const cacheFontSize = cache.get(targetCacheKey);
 
-            console.log('cacheFontSize', text, cacheFontSize);
-            
             if (cacheFontSize !== undefined) {
                 setFontSize(cacheFontSize);
                 return;

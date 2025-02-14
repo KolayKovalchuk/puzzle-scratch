@@ -3,9 +3,11 @@ import ModalDialog from '@components/shared/ModalDialog/ModalDialog';
 import robo_token_gold_no_shining from '@icons/robo_token_gold_no_shining.svg';
 import { updateUserBalance } from '@services/api/balance.service';
 import { useSendWithdrawalRequest } from '@services/api/depositWithdrawal.service';
+import { setWithdrawCooldownExpiry } from '@store/actions/appState.actions';
 import { selectLocalValue } from '@store/selectors/localization.selectors';
+import store from '@store/store';
 import { AxiosError } from 'axios';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styles from './WithdrawDialog.module.scss';
 import { IWithdrawalFormState, WithdrawBody } from './components/WithdrawBody/WithdrawBody';
@@ -13,6 +15,7 @@ import { WithdrawResponse } from './components/WithdrawResponse/WithdrawResponse
 import { useIsConfirmBtnDisabled } from './hooks/hooks';
 import { useConfirmBtnText } from './hooks/useConfirmBtnText';
 import { useDilogTitleText } from './hooks/useDilogTitleText';
+import { useWithrawCooldownExpiry } from './hooks/useWithrawCooldownExpiry';
 
 export interface IWithdrawDialogProps {
     className?: string;
@@ -35,10 +38,11 @@ export enum WithdrawalRequestStatus {
 
 export function WithdrawDialog({ className, isOpen, onCancel, onConfirm }: IWithdrawDialogProps) {
     const [ withdrawalStatus, setWithdrawalStatus ] = useState<WithdrawalRequestStatus>(WithdrawalRequestStatus.NotSent);
-    const [ errorData, setErrorData ] = useState<any | null>(null);
     const { titleText } = useDilogTitleText(withdrawalStatus);
     const { confirmBtnText } = useConfirmBtnText(withdrawalStatus);
     const closeBtnText = useSelector(selectLocalValue('txt.btn.close'));
+
+    const { onWithrawCooldownExpiry, isCooldownExpired } = useWithrawCooldownExpiry(setWithdrawalStatus);
 
     const [withdrawalForm, setWithdrawalForm] = useState<IWithdrawalFormState>({
         walletAddress: '',
@@ -53,12 +57,22 @@ export function WithdrawDialog({ className, isOpen, onCancel, onConfirm }: IWith
     const { sendRequest, loading: isWithdrawRequestLoading } = useSendWithdrawalRequest();
     const [ isBalanceLoading, setIsBalanceLoading ] = useState(false);
 
+    const loadBalance = useCallback(async () => {
+        setIsBalanceLoading(true);
+        await updateUserBalance();
+        setIsBalanceLoading(false);
+    }, []);
+
+    useEffect(() => {
+        if (isOpen) {
+            loadBalance();
+        }
+    }, [isOpen]);
+
     const onConfirmCb = useCallback(async () => {
         try {
             if (withdrawalStatus === WithdrawalRequestStatus.Success) {
-                setIsBalanceLoading(true);
-                await updateUserBalance();
-                setIsBalanceLoading(false);
+                loadBalance();
                 setWithdrawalStatus(WithdrawalRequestStatus.NotSent);
                 onConfirm();
                 return;
@@ -71,12 +85,8 @@ export function WithdrawDialog({ className, isOpen, onCancel, onConfirm }: IWith
             );
             setWithdrawalStatus(WithdrawalRequestStatus.Success);
             console.log('Withdrawal request sent:', response);
-            setErrorData(null);
         } catch (error) {
             if (error instanceof AxiosError) {
-                const errorData = error.response?.data;
-                setErrorData(errorData);
-
                 switch (error.response?.data?.error) {
                     case WithdrawalRequestStatus.InsufficientBalanceError:
                         setWithdrawalStatus(WithdrawalRequestStatus.InsufficientBalanceError);
@@ -86,6 +96,7 @@ export function WithdrawDialog({ className, isOpen, onCancel, onConfirm }: IWith
                         break;
                     case WithdrawalRequestStatus.WithdrawCooldownPeriod:
                         setWithdrawalStatus(WithdrawalRequestStatus.WithdrawCooldownPeriod);
+                        store.dispatch(setWithdrawCooldownExpiry(error.response?.data?.cooldownExpiry));
                         break;
                     default:
                         setWithdrawalStatus(WithdrawalRequestStatus.DefaultError);
@@ -103,14 +114,19 @@ export function WithdrawDialog({ className, isOpen, onCancel, onConfirm }: IWith
     ]);
 
     const onCancelCb = useCallback(() => {
-        setWithdrawalStatus(WithdrawalRequestStatus.NotSent);
+        if (!isCooldownExpired) {
+            setWithdrawalStatus(WithdrawalRequestStatus.WithdrawCooldownPeriod);
+        } else {
+            setWithdrawalStatus(WithdrawalRequestStatus.NotSent);
+        }
+
         setWithdrawalForm({
             walletAddress: '',
             amount: '',
             tag: '',
         });
         onCancel();
-    }, [onCancel]);
+    }, [onCancel, isCooldownExpired]);
 
     const [isFormValid, setIsFormValid] = useState(false);
 
@@ -140,7 +156,7 @@ export function WithdrawDialog({ className, isOpen, onCancel, onConfirm }: IWith
             }
             { isStatusNotSent
                 ? <WithdrawBody onFormChange={onFormChange} onFormValidChange={setIsFormValid} className={`${withdrawBodyCalss} ${className || ''}`}/>
-                : !isLoading ? <WithdrawResponse withdrawalStatus={withdrawalStatus} responseData={errorData}/> : null
+                : !isLoading && <WithdrawResponse withdrawalStatus={withdrawalStatus} onWithrawCooldownExpiry={onWithrawCooldownExpiry}/>
             }
         </ModalDialog>
     );

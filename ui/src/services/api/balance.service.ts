@@ -1,14 +1,14 @@
 import { IUserBalance } from '@models/User.model';
 import { updateUserBalanceWithChangeAnimation } from '@store/actions/user.actions';
-import { selectUserBalanceTotal } from '@store/selectors/user.selectors';
 import store from '@store/store';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { apiClient } from './api.service';
+import { setWithdrawCooldownExpiry } from '@store/actions/appState.actions';
 
 export interface IUserBalanceResponse {
     totalBalance: number;
     withdrawableBalance: number;
+    cooldownExpiry: number;
 }
 
 export async function getUserBalance(): Promise<IUserBalanceResponse | null> {
@@ -32,6 +32,7 @@ export async function updateUserBalance() {
         }
         const balanceDiff = userBalance.total - (prevBalance || 0);
         store.dispatch(updateUserBalanceWithChangeAnimation(userBalance, balanceDiff));
+        store.dispatch(setWithdrawCooldownExpiry(userBalanceResponse?.cooldownExpiry || null));
 
         return userBalance;
 

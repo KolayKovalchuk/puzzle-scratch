@@ -65,17 +65,19 @@
     }
 }
 
-@mixin styledContianer {
+@mixin styledContianer($include-pink-shadow: false) {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    aspect-ratio: 463/88;
-
     padding: 10px 30px;
 
     background-color: colors.$dark-violet;
-    box-shadow: colors.$pink-shadow;
+    @if $include-pink-shadow {
+        box-shadow: colors.$pink-shadow;
+    } @else {
+        box-shadow: colors.$inset-shadow;
+    }
 
     border-radius: 30px;
 

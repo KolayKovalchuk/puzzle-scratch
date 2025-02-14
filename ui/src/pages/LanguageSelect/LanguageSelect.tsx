@@ -105,7 +105,12 @@ export function LanguageSelect({}: ILanguageSelectProps) {
     return (
         <div className={styles.container}>
             <div className={styles.headerContainer} ref={containerRef}>
-                <SecondaryStyledText text={headerText} className={styles.header} textStyles={headerStyles}></SecondaryStyledText>
+                <SecondaryStyledText
+                    text={headerText}
+                    className={styles.header}
+                    textStyles={headerStyles}
+                    shouldFitVertically={false}
+                ></SecondaryStyledText>
 
                 <div className={styles.h2}>{secondHeaderText}</div>
 

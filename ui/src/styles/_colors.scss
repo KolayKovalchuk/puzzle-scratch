@@ -36,18 +36,18 @@ $main_radial_bg_gradient: radial-gradient(65% 50% at 50% 15%, #FB12D033 0%, $dar
     linear-gradient(180deg, $dark-purple 0%, $dark-blue 100%);
 
 @mixin main_radial_bg_gradient($width: 65%, $height: 50%, $x: 50%, $y: 15%) {
-    background: radial-gradient(
-                $width $height at $x $y,
-                    rgba($color: #FB12D0, $alpha: 0.23) 0%,
-                    rgba($color: #FB12D0, $alpha: 0.15) 50%,
-                    rgba($color: #FB12D0, $alpha: 0.12) 60%,
-                    rgba($color: #FB12D0, $alpha: 0.08) 70%,
-                    rgba($color: #FB12D0, $alpha: 0.05) 80%,
-                    rgba($color: #FB12D0, $alpha: 0.02) 90%,
-                    rgba($color: #FB12D0, $alpha: 0.01) 100%
-                ),
-                linear-gradient(180deg, $dark-purple 0%, $dark-blue 100%);
+    & {
+        background: radial-gradient($width $height at $x $y,
+                rgba($color: #FB12D0, $alpha: 0.23) 0%,
+                rgba($color: #FB12D0, $alpha: 0.15) 50%,
+                rgba($color: #FB12D0, $alpha: 0.12) 60%,
+                rgba($color: #FB12D0, $alpha: 0.08) 70%,
+                rgba($color: #FB12D0, $alpha: 0.05) 80%,
+                rgba($color: #FB12D0, $alpha: 0.02) 90%,
+                rgba($color: #FB12D0, $alpha: 0.01) 100%),
+            linear-gradient(180deg, $dark-purple 0%, $dark-blue 100%);
     }
+}
 
 @mixin main_view_bg($width: 50%, $height: 18vh, $x: 50%, $y: 12vh) {
     @include main_radial_bg_gradient($width: 50%, $x: $x, $height: $height, $y: $y);
@@ -101,6 +101,9 @@ $btnGoldBorder: linear-gradient(180deg,
 $pink-shadow: 0 0 0px #BE2BDB99,
     0 0 5px #BE2BDB99,
     0px -2px 2px 0px #00000040 inset,
+    0px 2px 2px 0px #00000040 inset;
+
+$inset-shadow: 0px -2px 2px 0px #00000040 inset,
     0px 2px 2px 0px #00000040 inset;
 
 $table_row_gradient: linear-gradient(to right, $midnight-purple 0%, $plum-purple 50%, $midnight-purple 100%),

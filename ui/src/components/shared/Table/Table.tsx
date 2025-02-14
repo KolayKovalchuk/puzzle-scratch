@@ -4,7 +4,7 @@ import { ITableHeaderProps, TableHeadRow } from "./TableHeadRow";
 import { ITableRowProps, TableRow } from "./TableRow";
 
 import { selectLocalValue } from '@store/selectors/localization.selectors';
-import { ReactNode, RefObject } from 'react';
+import { ReactNode, RefObject, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styles from './Table.module.scss';
 
@@ -35,10 +35,18 @@ export function Table({
     bodyRef
 }: ITableProps) {
     const noData = useSelector(selectLocalValue('txt.table.emptyData'));
+    const [tableData, setTableData] = useState<ITRowData[]>([]);
+    const [rowClassName, setRowClassName] = useState('');
 
-    if (!tBodyData.length) {
-        tBodyData = [{ key: 1, cellData: [{ key: 1, data: emptyText || noData }] }];
-    }
+    useEffect(() => {
+        if (!tBodyData.length) {
+            setTableData([{ key: 1, cellData: [{ key: 1, data: emptyText || noData }] }]);
+            setRowClassName(styles.emptyRow);
+        } else {
+            setTableData(tBodyData);
+            setRowClassName('');
+        }
+    }, [tBodyData]);
 
     return (
         <div className={`${styles.table} ${className}`}>
@@ -49,8 +57,14 @@ export function Table({
                 />
                 : tHeadElement}
             <div className={`${styles.tBody} tBody`} ref={bodyRef}>
-                {tBodyData.map((rowData) => {
-                    return <TableRow key={rowData.key} data={rowData.cellData} renderCell={renderCell} noRowBg={noRowBg} />;
+                {tableData.map((rowData) => {
+                    return <TableRow
+                        className={rowClassName}
+                        key={rowData.key}
+                        data={rowData.cellData}
+                        renderCell={renderCell}
+                        noRowBg={noRowBg}
+                    />;
                 })}
             </div>
         </div>

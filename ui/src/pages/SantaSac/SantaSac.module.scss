@@ -12,7 +12,7 @@
 .headerLogoContainer {
     margin-top: -60px;
     margin-bottom: -28px;
-    z-index: 5;
+    z-index: 6;
 }
 
 .headerIcon {
@@ -21,13 +21,13 @@
 
 .topPrizeLabel {
     z-index: 5;
-    margin-bottom: 2px;
+    margin-bottom: 10px;
     z-index: 6;
 }
 
 .multiplierContainer {
     width: 100%;
-    margin-top: -1.8%;
+    margin-top: -8px;
     margin-bottom: -8%;
 }
 
@@ -40,6 +40,8 @@
     height: 98%;
     width: 98%;
     top: -0.2%;
+
+    aspect-ratio: 663/1;
 }
 
 .roundScratchCard {

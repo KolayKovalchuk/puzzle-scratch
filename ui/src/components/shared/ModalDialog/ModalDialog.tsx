@@ -7,7 +7,6 @@ import { playSound } from '@store/actions/appState.actions';
 import store from '@store/store';
 import { AppSounds } from '@config/sounds';
 
-import close_cross_icon from '@icons/close_cross_icon.svg';
 import styles from './ModalDialog.module.scss';
 
 
@@ -120,7 +119,9 @@ const ModalDialog: FC<ModalDialogProps> = ({
                         {modalDialogContent}
                     </StyledHeader>
                     : <>
-                        <Icon name={close_cross_icon} className={styles.closeCrossIcon} onClick={handleClose} />
+                        <Icon className={styles.closeCrossIcon} onClick={handleClose}>
+                            <img src="/close_cross_icon.png" width='100%'/>
+                        </Icon>
                         {modalDialogContent}
                     </>
                 }

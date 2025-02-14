@@ -23,9 +23,13 @@ export const selectSupportedLocales = createSelector(
 
 export const selectLocalizationDataItem = (localizationKey: string) => createSelector(
     selectLocalizationData,
-    (queryState) => queryState.find((data) => {
-        return data?.Key.toLowerCase() === localizationKey?.toLowerCase()
-    })
+    (queryState) => {
+        if (!queryState?.length || !localizationKey) return null
+
+        return queryState.find((data) => {
+            return data?.Key.toLowerCase() === localizationKey?.toLowerCase()
+        })
+    }
 )
 
 export const selectLocalValue = (localizationKey: string, locale?: string) => createSelector(

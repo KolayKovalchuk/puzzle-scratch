@@ -47,19 +47,19 @@ function getBatchCardClass(cardType: BatchCardType, styles: CSSModuleClasses) {
 function getBatchImageUrl(cardType: BatchCardType) {
     switch (cardType) {
         case BatchCardType.ICE_BOX:
-            return '/ice_box.png';
+            return 'iceBox/ice_box_batch_cover.png';
 
         case BatchCardType.CANDY_MAZE:
-            return '/candy_maze.png';
+            return 'candyMaze/candy_maze_batch_cover.png';
 
         case BatchCardType.VEGAS_LOOT:
-            return '/vegas_loot.png';
+            return '/vegasLoot/vegas_loot_batch_cover.png';
 
         case BatchCardType.SANTA_SAC:
-            return '/santa_sac.png';
+            return 'santaSac/santa_sac_batch_cover.png';
 
         default:
-            return '/ice_box.png';
+            return 'iceBox/ice_box_batch_cover.png';
     }
 }
 

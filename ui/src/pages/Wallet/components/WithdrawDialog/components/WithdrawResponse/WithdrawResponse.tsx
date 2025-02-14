@@ -6,7 +6,7 @@ import { CooldownBody } from '../CooldownBody/CooldownBody';
 
 export interface IWithdrawResponseBodyProps {
     withdrawalStatus: WithdrawalRequestStatus;
-    onWithrawCooldownExpiry: (cooldownExpiry: number) => void
+    onWithrawCooldownExpiry: (cooldownExpiry: number | null) => void
 }
 
 export function WithdrawResponse({ withdrawalStatus, onWithrawCooldownExpiry }: IWithdrawResponseBodyProps) {

@@ -81,8 +81,8 @@ export function StyledTextPixiEl({
                     anchor={anchor}
                     x={dimensions.width * xShift}
                     y={dimensions.height * yShift}
-                    resolution={8}
-                    roundPixels={true}
+                    resolution={6}
+                    roundPixels={false}
                     scale={1}
                 />
             </Container>

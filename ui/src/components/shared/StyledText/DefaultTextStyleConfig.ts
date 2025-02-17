@@ -18,7 +18,7 @@ export const DefaultTextStyleConfig: Partial<ITextStyle> = {
     dropShadow: true,
     dropShadowColor: 'rgba(0, 0, 0, 0.25)',
     dropShadowAlpha: 0.1,
-    dropShadowBlur: 1,
-    dropShadowAngle: Math.PI / 6,
-    dropShadowDistance: 4,
+    dropShadowBlur: 4,
+    dropShadowAngle: 1,
+    dropShadowDistance: 2,
 }

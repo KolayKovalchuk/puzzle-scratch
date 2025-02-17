@@ -80,7 +80,11 @@ export function StyledTextPixiEl({
                     style={textStyle}
                     anchor={anchor}
                     x={dimensions.width * xShift}
-                    y={dimensions.height * yShift} />
+                    y={dimensions.height * yShift}
+                    resolution={4}
+                    roundPixels={true}
+                    scale={1}
+                />
             </Container>
         );
     }

@@ -11,8 +11,6 @@ import store from '@store/store';
 import { useEffect } from 'react';
 import { Provider, useSelector } from 'react-redux';
 import { BrowserRouter, useLocation, useNavigate } from 'react-router-dom';
-import { settings } from 'pixi.js-legacy';
-settings.RESOLUTION = 2;
 
 export function App() {
     const {

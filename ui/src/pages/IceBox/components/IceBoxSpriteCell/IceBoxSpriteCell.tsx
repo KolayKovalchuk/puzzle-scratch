@@ -44,6 +44,7 @@ export function IceBoxSpriteCell({ x, y, width, height, data }: IIceBoxSpriteCel
     const {
         winNumberX,
         winNumberY,
+        winNumberHeight,
 
         priceContainerWidth,
         priceNumberX,
@@ -82,7 +83,7 @@ export function IceBoxSpriteCell({ x, y, width, height, data }: IIceBoxSpriteCel
 
     return (<>
         <StyledTextPixiEl
-            dimensions={{ width, height }}
+            dimensions={{ width, height: winNumberHeight }}
             text={winNumber}
             textStyles={winNumberTextStyle}
             textFitCoefficient={0.8}
@@ -91,6 +92,7 @@ export function IceBoxSpriteCell({ x, y, width, height, data }: IIceBoxSpriteCel
             xShift={0.55}
             yShift={0.55}
             valueForMeasure={'1000'}
+            shouldFitVertically={false}
         />
         <Sprite
             texture={roboTokenBlueBorder}
@@ -107,6 +109,7 @@ export function IceBoxSpriteCell({ x, y, width, height, data }: IIceBoxSpriteCel
             x={priceNumberX}
             y={priceNumberY}
             valueForMeasure={'100'}
+            shouldFitVertically={false}
         />
     </>
     )

@@ -3,10 +3,7 @@ import ModalDialog from '@components/shared/ModalDialog/ModalDialog';
 import robo_token_gold_no_shining from '@icons/robo_token_gold_no_shining.svg';
 import { updateUserBalance } from '@services/api/balance.service';
 import { useSendWithdrawalRequest } from '@services/api/depositWithdrawal.service';
-import { setWithdrawCooldownExpiry } from '@store/actions/appState.actions';
 import { selectLocalValue } from '@store/selectors/localization.selectors';
-import store from '@store/store';
-import { AxiosError } from 'axios';
 import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styles from './WithdrawDialog.module.scss';
@@ -16,6 +13,7 @@ import { useIsConfirmBtnDisabled } from './hooks/hooks';
 import { useConfirmBtnText } from './hooks/useConfirmBtnText';
 import { useDilogTitleText } from './hooks/useDilogTitleText';
 import { useWithrawCooldownExpiry } from './hooks/useWithrawCooldownExpiry';
+import { handleWithdrawError } from './utils/handleWithdrawError';
 
 export interface IWithdrawDialogProps {
     className?: string;
@@ -29,7 +27,9 @@ export enum WithdrawalRequestStatus {
     Success = 'Success',
 
     WithdrawMaxAmountExceeded = 'WithdrawMaxAmountExceeded',
+    WithdrawMinAmountExceeded = 'WithdrawMinAmountExceeded',
     AddressInvalid = 'AddressInvalid',
+
     WithdrawCooldownPeriod = 'WithdrawCooldownPeriod',
     InsufficientBalanceError = 'InsufficientBalance',
     ValidationErrorError = 'ValidationError',
@@ -86,24 +86,7 @@ export function WithdrawDialog({ className, isOpen, onCancel, onConfirm }: IWith
             setWithdrawalStatus(WithdrawalRequestStatus.Success);
             console.log('Withdrawal request sent:', response);
         } catch (error) {
-            if (error instanceof AxiosError) {
-                switch (error.response?.data?.error) {
-                    case WithdrawalRequestStatus.InsufficientBalanceError:
-                        setWithdrawalStatus(WithdrawalRequestStatus.InsufficientBalanceError);
-                        break;
-                    case WithdrawalRequestStatus.ValidationErrorError:
-                        setWithdrawalStatus(WithdrawalRequestStatus.ValidationErrorError);
-                        break;
-                    case WithdrawalRequestStatus.WithdrawCooldownPeriod:
-                        setWithdrawalStatus(WithdrawalRequestStatus.WithdrawCooldownPeriod);
-                        store.dispatch(setWithdrawCooldownExpiry(error.response?.data?.cooldownExpiry));
-                        break;
-                    default:
-                        setWithdrawalStatus(WithdrawalRequestStatus.DefaultError);
-                        break;
-                }
-            }
-            return;
+            handleWithdrawError(error, setWithdrawalStatus);
         }
 
     }, [

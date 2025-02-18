@@ -5,18 +5,19 @@ import { Dispatch, SetStateAction } from 'react';
 import { WithdrawalRequestStatus } from '../WithdrawDialog';
 
 export function handleWithdrawError(error: any, setWithdrawalStatus: Dispatch<SetStateAction<WithdrawalRequestStatus>>) {
-    if (error instanceof AxiosError) {
-        const errorMsg: string = error.response?.data?.message;
-        if (errorMsg && errorMsg.includes('amount to withdraw')) {
-            setWithdrawalStatus(WithdrawalRequestStatus.WithdrawMinAmountExceeded);
-            return;
-        }
+    const errorMsg: string = error.response?.data?.message;
 
+    if (error instanceof AxiosError) {
         switch (error.response?.data?.error) {
             case WithdrawalRequestStatus.InsufficientBalanceError:
                 setWithdrawalStatus(WithdrawalRequestStatus.InsufficientBalanceError);
                 break;
             case WithdrawalRequestStatus.ValidationErrorError:
+                if (errorMsg && errorMsg.includes('The minimum amount to withdraw')) {
+                    setWithdrawalStatus(WithdrawalRequestStatus.WithdrawMinAmountExceeded);
+                    break;
+                }
+
                 setWithdrawalStatus(WithdrawalRequestStatus.ValidationErrorError);
                 break;
             case WithdrawalRequestStatus.WithdrawCooldownPeriod:

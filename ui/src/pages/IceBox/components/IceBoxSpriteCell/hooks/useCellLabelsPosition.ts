@@ -15,22 +15,33 @@ export function useCellLabelsPosition(
     const [roboIconWidth, setRoboIconWidth] = useState(0);
     const [roboIconHeight, setRoboIconHeight] = useState(0);
     const [priceContainerWidth, setPriceContainerWidth] = useState(0);
+    const [winNumberHeight, setWinNumberHeight] = useState(0);
 
     useEffect(() => {
-        const winTextMetrics = TextMetrics.measureText(winNumber, winNumberTextStyleClass);
+        // const winTextMetrics = TextMetrics.measureText(winNumber, winNumberTextStyleClass);
         const priceTextMetrics = TextMetrics.measureText(priceNumber, priceNumberTextStyleClass);
         const roboIconWidth = width / 3.5;
         const roboIconHeight = roboIconWidth * 1.35;
         const priceContainerWidth = roboIconWidth + priceTextMetrics.width;
 
+        const winNumberHeight = height / 2;
+        setWinNumberHeight(winNumberHeight);
+
         setPriceNumberPositionShift({
             x: width / 2 - priceContainerWidth / 2,
-            y: winTextMetrics.height * 1.34
+            y: winNumberHeight * 0.9
         });
         setRoboIconWidth(roboIconWidth);
         setRoboIconHeight(roboIconHeight);
         setPriceContainerWidth(priceContainerWidth);
-    }, [winNumber, priceNumber, width, winNumberTextStyleClass, priceNumberTextStyleClass]);
+    }, [
+        winNumber,
+        priceNumber,
+        width,
+        height,
+        winNumberTextStyleClass,
+        priceNumberTextStyleClass
+    ]);
 
     const [winNumberX, setWinNumberX] = useState(0);
     const [winNumberY, setWinNumberY] = useState(0);
@@ -41,18 +52,27 @@ export function useCellLabelsPosition(
 
     useEffect(() => {
         setWinNumberX(x);
-        setWinNumberY(y - height * 0.24);
+        setWinNumberY(y);
         setRoboIconX(x + priceNumberPositionShift.x);
-        setRoboIconY(winNumberY + priceNumberPositionShift.y + roboIconHeight * 0.2);
+        setRoboIconY(winNumberY + priceNumberPositionShift.y);
         setPriceNumberX(roboIconX + roboIconWidth);
         setPriceNumberY(roboIconY);
     }, [
-        x, y, height, winNumberY, priceNumberPositionShift, roboIconHeight, roboIconWidth, roboIconY, roboIconX
+        x,
+        y,
+        height,
+        winNumberY,
+        priceNumberPositionShift,
+        roboIconHeight,
+        roboIconWidth,
+        roboIconY,
+        roboIconX
     ]);
 
     return {
         winNumberX,
         winNumberY,
+        winNumberHeight,
         priceContainerWidth,
         priceNumberX,
         priceNumberY,

@@ -111,9 +111,8 @@ export function SantaSac() {
                             <img className={styles.toyChainImg} src="/santaSac/christmassToyChain.png" />
                         </div>
                         <Icon name={round_multiplier} className={styles.roundMulriplierIcon} />
-                        {isLoading
-                            ? null
-                            : <RoundScratchCard
+                        <div className={styles.roundScratchCardContainer}>
+                            <RoundScratchCard
                                 ref={roundScratchCardRef}
                                 cellData={multiplierText}
                                 className={styles.roundScratchCard}
@@ -121,10 +120,10 @@ export function SantaSac() {
                                 bgTextureConfig={bgTextureConfig}
                                 matrixConfig={roundScratchCardMatrixConfig}
                                 xShift={0.52}
-                                yShift={0.475}
+                                yShift={0.47}
                                 isWinning={isBonusShining}
                             />
-                        }
+                        </div>
                     </div>
                     <div
                         className={styles.scratchCardContainer}

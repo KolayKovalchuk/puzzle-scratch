@@ -1,10 +1,10 @@
 import { IScratchCardHandle, IScratchCardProps, ScratchCard } from '../../ScratchCard';
 
+import { IGameMatrixConfig } from '@components/shared/IconMatrix';
 import { Graphics, Resource, Texture } from 'pixi.js-legacy';
 import { forwardRef, Ref, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import styles from './RoundScratchCard.module.scss';
-import { IRoundSpriteCellProps, RoundSpriteCell } from './RoundSpriteCell';
-import { IGameMatrixConfig, ISpriteCellData } from '@components/shared/IconMatrix';
+import { IRoundSpriteCellData, IRoundSpriteCellProps, RoundSpriteCell } from './RoundSpriteCell';
 
 export interface IRoundScratchCardProps extends Omit<IScratchCardProps, 'data' | 'renderCell'> {
     cellData: string;
@@ -23,10 +23,14 @@ const matrixConfig: IGameMatrixConfig = {
 }
 
 function RoundScratchCardComponent(props: IRoundScratchCardProps, ref: Ref<IRoundScratchCardHandle>) {
-    const [data, setData] = useState<Omit<ISpriteCellData, 'bundleName'>[][]>([[{ textureName: props.cellData, isWinning: props.isWinning }]])
+    const [data, setData] = useState<Omit<IRoundSpriteCellData, 'bundleName'>[][]>([[{ textureName: props.cellData, isWinning: props.isWinning }]])
 
     useEffect(() => {
-        setData([[{ textureName: props.cellData, isWinning: props.isWinning }]])
+        setData([[{
+            textureName: props.cellData,
+            isWinning: props.isWinning,
+            winningBgYShift: 0,
+        }]])
     }, [props.cellData, props.isWinning])
 
     const renderCell = useCallback((data: IRoundSpriteCellProps) => (

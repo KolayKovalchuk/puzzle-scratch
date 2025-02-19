@@ -1,9 +1,10 @@
 
+import { useAlphaBlinkingAnimation } from '@hooks/useAlphaBlinkingAnimation';
 import { useWinningBgConfig } from '@hooks/useWinningBgConfig';
 import { Sprite } from '@pixi/react';
-import { useAlphaBlinkingAnimation } from '@hooks/useAlphaBlinkingAnimation';
 import { Texture } from 'pixi.js-legacy';
 import { IGameMatrixDefaultConfig } from './hooks/useCellSize';
+import { useWinningBgPosition } from './hooks/useWinningBgPosition';
 
 interface IWinningBgProps {
     cellWidth: number;
@@ -13,6 +14,8 @@ interface IWinningBgProps {
 
     x: number;
     y: number;
+    xShift?: number;
+    yShift?: number;
 }
 
 export function WinningBg({
@@ -23,6 +26,8 @@ export function WinningBg({
 
     x,
     y,
+    xShift,
+    yShift,
 }: IWinningBgProps) {
     const {
         winningBgTextureWidth,
@@ -31,6 +36,7 @@ export function WinningBg({
         winningBgTextureY,
     } = useWinningBgConfig(cellWidth, config);
     const { alpha } = useAlphaBlinkingAnimation();
+    const { position } = useWinningBgPosition(x, y, xShift, yShift, winningBgTextureX, winningBgTextureY);
 
     if (!winningBgTexture || !isWinning) return null;
 
@@ -39,8 +45,8 @@ export function WinningBg({
             texture={winningBgTexture}
             width={winningBgTextureWidth}
             height={winningBgTextureHeight}
-            x={x + winningBgTextureX}
-            y={y + winningBgTextureY}
+            x={position.x}
+            y={position.y}
             alpha={alpha}
         />
     );

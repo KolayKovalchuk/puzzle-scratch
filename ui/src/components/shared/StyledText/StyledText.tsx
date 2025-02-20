@@ -32,6 +32,7 @@ export function StyledText({
     yShift = 0.55,
     cacheKey,
     getTextSize,
+    valueForMeasure
 }: IStyledTextProps) {
     const { containerRef, dimensions } = useContainerDimensions();
 
@@ -48,6 +49,10 @@ export function StyledText({
     return useMemo(() => {
         const placeHolderFontSize = fontSize || textStyles?.fontSize || DefaultTextStyleConfig.fontSize;
 
+        if (textStyles && textStyles.wordWrap && !textStyles.wordWrapWidth) {
+            textStyles.wordWrapWidth = dimensions.width;
+        }
+
         return (
             <div ref={containerRef} className={`${styles.container} ${className || ''}`} style={styleArg}>
                     <Stage className={styles.stageClass} width={dimensions.width} height={dimensions.height} options={{ backgroundAlpha: 0, forceCanvas: true }}>
@@ -63,6 +68,7 @@ export function StyledText({
                             yShift={yShift}
                             cacheKey={cacheKey}
                             getTextSize={getTextSizeCb}
+                            valueForMeasure={valueForMeasure}
                         />
                     </Stage>
                 <div
@@ -89,6 +95,7 @@ export function StyledText({
         yShift,
         className,
         styleArg,
+        valueForMeasure,
         getTextSize,
     ]);
 }

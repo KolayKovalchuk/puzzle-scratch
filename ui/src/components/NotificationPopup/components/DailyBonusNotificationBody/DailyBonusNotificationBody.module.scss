@@ -111,7 +111,11 @@ $todayDayCellMargin: calc($dayCellMargin * -1.5);
 
     &.todayArrowBlock {
         aspect-ratio: 290/365;
-        padding-top: 0;
+        padding-top: 0px;
+
+        &.fil {
+            padding-top: 4px;
+        }
 
         &.leftArrowBlock {
             background-image: url('/arrowBlocks/todayArrowBlockLeft.png');
@@ -181,7 +185,7 @@ $todayDayCellMargin: calc($dayCellMargin * -1.5);
 }
 
 .headerText {
-    width: 100%;
+    width: 99%;
     max-height: 30%;
     min-height: 20px;
     aspect-ratio: 44/24;

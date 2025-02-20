@@ -49,10 +49,14 @@
     aspect-ratio: 110/114;
     width: 33%;
     position: relative;
-    top: 2%;
+    top: 1%;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media screen and (max-width: 375px) {
+        top: 2%;
+    }
 }
 
 .roundScratchCard {

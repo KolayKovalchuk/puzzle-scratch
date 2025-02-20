@@ -91,6 +91,8 @@ export function DailyBonusNotificationBody({ data }: IDailyBonusNotificationBody
                     const isToday = isDayToday(index, data.day);
                     const footerFontSize = isToday ? 18 : 12;
                     const textFitCoefficient = isToday ? 0.9 : 1;
+                    const isMdIcon = index === 2;
+                    const coinIconMdClass = isMdIcon ? styles.md : '';
 
                     return (<div
                         key={index}
@@ -102,8 +104,9 @@ export function DailyBonusNotificationBody({ data }: IDailyBonusNotificationBody
                             text={item.headerText}
                             textStyles={headerTextStyles}
                             textFitCoefficient={textFitCoefficient}
+                            yShift={0.5}
                         />
-                        <div className={styles.coinIcon}>
+                        <div className={`${styles.coinIcon} ${coinIconMdClass}`}>
                             <Icon name={item.coinIconName} />
                         </div>
                         <div className={styles.dayContainerBonus}>

@@ -9,7 +9,7 @@ import { useWinningBgPosition } from './hooks/useWinningBgPosition';
 interface IWinningBgProps {
     cellWidth: number;
     config: IGameMatrixDefaultConfig;
-    winningBgTexture: Texture;
+    winningBgTexture: Texture | null;
     isWinning: boolean;
 
     x: number;

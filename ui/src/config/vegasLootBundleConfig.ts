@@ -20,7 +20,7 @@ export interface IVegasLootBundle extends IScrathCardBundle {
 }
 
 export const VEGAS_LOOT_BUNDLE: AssetsBundle = {
-    name: 'veganLoot',
+    name: 'vegasLoot',
     assets: [
         {
             alias: 'cover',

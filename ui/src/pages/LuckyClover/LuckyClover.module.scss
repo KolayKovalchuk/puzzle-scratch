@@ -1,0 +1,31 @@
+@use '@styles/colors';
+@use '@styles/variables';
+@use '@styles/mixins';
+@use '@styles/game_mixins';
+
+@include game_mixins.gameMixin;
+
+.mainContainer {
+    background: url('/luckyClover/lucky_clover_bg.png') no-repeat;
+    background-size: cover;
+    background-position: bottom;
+}
+
+.scratchCardContainer {
+    background: colors.$luckyCloverScratchCardGradient;
+}
+
+.topScratchCardContainer {
+    width: 90%;
+    padding: 4px;
+    height: 16%;
+}
+
+.headerLogoContainer {
+    width: 60%;
+    max-height: 14.3%;
+}
+
+.headerIcon {
+    aspect-ratio: auto;
+}

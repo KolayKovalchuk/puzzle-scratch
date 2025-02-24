@@ -48,7 +48,7 @@ export function IconMatrix({
                                 winningBgTexture={winningBgTexture}
                                 isWinning={cellData.isWinning}
                             />
-                            {renderCell({ data: cellData, x, y, width: cellWidth, height: cellHeight })}
+                            {renderCell({ data: cellData, x, y, width: cellWidth, height: cellHeight, colIndex, rowIndex })}
                         </Container>
                     )
                 }

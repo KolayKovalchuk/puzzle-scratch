@@ -1,24 +1,30 @@
-import { Text } from '@pixi/react';
-import { TextStyle } from 'pixi.js-legacy';
+import { ITextStyle, TextStyle } from 'pixi.js-legacy';
 import { IMatrixCellProps } from '../IconMatrix.models';
+import { DefaultTextStyleConfig, StyledTextPixiEl } from '@components/shared/StyledText';
+import { useEffect, useState } from 'react';
 
 export interface ITextCellProps extends IMatrixCellProps<string> {
-
+    textStyles?: ITextStyle;
 }
 
-export function TextCell({ x, y, data }: ITextCellProps) {
-    const textStyle = new TextStyle({
-        fill: 'black',
-        fontSize: 30,
-        fontWeight: 'bold'
-    });
+const defaultTextStyleConfig = new TextStyle(DefaultTextStyleConfig);
+
+export function TextCell({ x, y, width, height, data, textStyles }: ITextCellProps) {
+    const [textStyle, setTextStyle] = useState(defaultTextStyleConfig);
+
+    useEffect(() => {
+        if (textStyles) {
+            setTextStyle(new TextStyle(textStyles));
+        }
+    }, [textStyles]);
 
     return (
-        <Text
+        <StyledTextPixiEl
             x={x}
             y={y}
             text={data}
-            style={textStyle}
+            textStyles={textStyle}
+            dimensions={{ width, height }}
         />
     )
 };

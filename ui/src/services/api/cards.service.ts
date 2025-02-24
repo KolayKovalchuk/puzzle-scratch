@@ -1,4 +1,4 @@
-import { IBuyBatchCardData, ICardData } from '@models/IBuyBatchCardData';
+import { IBuyBatchCardData, ICardData, WinType } from '@models/IBuyBatchCardData';
 import { setAppError } from '@store/actions/appState.actions';
 import { AxiosError } from 'axios';
 import { useCallback, useState } from 'react';
@@ -6,14 +6,107 @@ import { apiClient } from './api.service';
 import store from '@store/store';
 import { AppErrors } from '@store/reducers/appState.reducer';
 
+const mock = {
+    "winning": 2,
+    "cardData": {
+        "win": 2,
+        "matrix": [
+            [
+                "0",
+                "4",
+                "0",
+                "0",
+                "98",
+                "0"
+            ],
+            [
+                "14",
+                "2",
+                "83",
+                "86",
+                "8",
+                "62"
+            ],
+            [
+                "0",
+                "16",
+                "0",
+                "0",
+                "55",
+                "0"
+            ],
+            [
+                "0",
+                "10",
+                "0",
+                "0",
+                "98",
+                "0"
+            ],
+            [
+                "86",
+                "50",
+                "51",
+                "9",
+                "5",
+                "57"
+            ],
+            [
+                "0",
+                "82",
+                "0",
+                "0",
+                "44",
+                "0"
+            ]
+        ],
+        "clovers": 1,
+        "winAmount": 2,
+        "winningLine": [
+            "16",
+            "83",
+            "14",
+            "26",
+            "4",
+            "91"
+        ],
+        "winningCells": [
+            [
+                1,
+                1
+            ],
+            [
+                1,
+                4
+            ],
+            [
+                4,
+                1
+            ],
+            [
+                4,
+                4
+            ],
+
+            [6,1],
+            [6,3]
+        ]
+    },
+    "batchId": "71f9e638-c2cc-477c-ba99-f2167cbe7409",
+    "rbaxBalance": 1165918.09,
+    "rbaxBalanceBefore": 1165926.09,
+    "winType": WinType.S
+}
+
 export async function postBuyCard<CardData extends ICardData>(batchId: string) {
     try {
-        const response = await apiClient.post('/cards/buy', { batchId });
-        const data: IBuyBatchCardData<CardData> = response.data;
+        // const response = await apiClient.post('/cards/buy', { batchId });
+        // const data: IBuyBatchCardData<CardData> = response.data;
 
-        console.log('Card bought succesfully:', data);
+        // console.log('Card bought succesfully:', data);
 
-        return data;
+        // return data;
+        return mock;
     } catch (error) {
         console.error('Error buying batch card: ', error);
         throw error;

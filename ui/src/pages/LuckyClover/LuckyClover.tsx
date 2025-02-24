@@ -98,7 +98,7 @@ export function LuckyClover() {
                     <div className={styles.animationContainer}>
                         <ScratchAnimation
                             ref={scratchAnimationRef}
-                            animationName={ScratchAnimationName.candy_action}
+                            animationName={ScratchAnimationName.clover_action}
                             onComplete={onScratchAnimationCompleted}
                         />
                     </div>

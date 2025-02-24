@@ -19,6 +19,10 @@ export enum ScratchAnimationName {
     ice_action = 'ise_action',
     ice_idle_start = 'ise_idle_start',
     ice_idle_end = 'ise_idle_end',
+
+    clover_action = 'clover_action',
+    clover_idle_start = 'clover_idle_start',
+    clover_idle_end = 'clover_idle_end',
 }
 
 export interface IScratchAnimationHandle {

@@ -15,8 +15,17 @@
     background: colors.$luckyCloverScratchCardGradient;
 }
 
+.animationContainer {
+    position: absolute;
+    z-index: 10;
+    width: 102%;
+    height: 100%;
+    top: 2%;
+    left: -0.5%;
+}
+
 .topScratchCardContainer {
-    width: 90%;
+    width: 94%;
     padding: 4px;
     height: 16%;
 }

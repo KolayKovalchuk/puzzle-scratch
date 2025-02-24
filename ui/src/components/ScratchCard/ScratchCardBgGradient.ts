@@ -51,4 +51,10 @@ export const redCardBgGradient: GradientConfig = [
     [1, '#3D0C0C'],
 ];
 
+export const luckyCloverCardBgGradient: GradientConfig = [
+    [0, '#FBC86C'],
+    [0.49, '#FDEFB0'],
+    [1, '#FDCD85'],
+];
+
 export const emptyGradientData: GradientConfig = []

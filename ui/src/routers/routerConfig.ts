@@ -5,6 +5,7 @@ export enum ROUTES {
     SantaSac = '/santa-sac',
     IceBox = '/ice-box',
     VegasLoot = '/vegas-loot',
+    LuckyClover = '/lucky-clover',
     Wallet = '/wallet',
     InviteFriends = '/invite-friends',
     Profile = '/profile',

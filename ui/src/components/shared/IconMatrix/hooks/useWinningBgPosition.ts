@@ -14,8 +14,8 @@ export function useWinningBgPosition(
     useEffect(() => {
         const xShiftValue = typeof xShift === 'number' ? xShift : 1;
         const yShiftValue = typeof yShift === 'number' ? yShift : 1;
-        const xPosition = (x + winningBgTextureX) * xShiftValue;
-        const yPosition = (y + winningBgTextureY) * yShiftValue;
+        const xPosition = x + winningBgTextureX * xShiftValue;
+        const yPosition = y + winningBgTextureY * yShiftValue;
         setPosition({ x: xPosition, y: yPosition });
     }, [x, y, xShift, yShift, winningBgTextureX, winningBgTextureY]);
 

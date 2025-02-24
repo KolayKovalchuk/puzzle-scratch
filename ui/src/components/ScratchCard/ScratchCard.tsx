@@ -9,7 +9,7 @@ import { useContainerDimensions } from '@hooks/useContainerDimensions';
 
 import { Application, ICanvas, Graphics as OriginGraphics, RenderTexture, Resource, Texture } from 'pixi.js-legacy';
 import { FC, forwardRef, ReactElement, ReactNode, Ref, useEffect, useImperativeHandle, useMemo, useRef } from 'react';
-import { GradientConfig } from './hooks/useGradientTexture';
+import { GradientConfig, useGradientTexture } from './hooks/useGradientTexture';
 import { useIsPercentAreaScratched } from './hooks/useIsAreaScratched';
 import { useRenderBgGraphics } from './hooks/useRenderBgGraphics';
 import { useScratchBrash } from './hooks/useScratchBrash';
@@ -62,11 +62,14 @@ export interface IScratchCardProps<CellProps extends IMatrixCellProps = IMatrixC
 
     gradientData?: GradientConfig,
     renderBg?(graphics: OriginGraphics, gradientTexture: Texture<Resource>, width: number, height: number): void
+    renderBgTexture?: (gradientTexture: Texture<Resource>, width: number, height: number) => ReactElement
 
     bgTextureConfig?: IBgTextureConfig
 
     matrixConfig?: IGameMatrixConfig
     coverMatrixConfig?: IGameMatrixConfig
+
+    winningBgTexture?: Texture | null
 }
 
 const ContextBridge = ({ children, Context, render }: { children: ReactNode, Context: any, render: (children: ReactNode) => ReactNode }) => {
@@ -113,7 +116,9 @@ function ScratchCardElComponent({
     onScratchStarted,
     renderCell,
     renderCoverCell,
-    renderBg
+    renderBg,
+    renderBgTexture,
+    winningBgTexture,
 }: IScratchCardProps, ref: Ref<IScratchCardHandle>) {
     const app = useApp();
     const { width, height } = app.screen;
@@ -163,7 +168,13 @@ function ScratchCardElComponent({
 
 
     const renderBgGraphics = useRenderBgGraphics(width, height, gradientData, renderBg);
+
+    const gradientTexture = useGradientTexture(width, height, gradientData);
     const renderCardBg = useMemo(() => {
+        if (renderBgTexture) {
+            return renderBgTexture(gradientTexture, width, height);
+        }
+
         const bgTextureConfig = {
             ...defaultBgTextureConfig,
             ...bgTextureConfigArg,
@@ -188,6 +199,8 @@ function ScratchCardElComponent({
     // if (!bundle || !coverData.length) return null
     if (!bundle) return null
 
+    const winningTexture = winningBgTexture || winningBgTexture === null ? winningBgTexture : bundle.winningMatrixCellBg;
+
     return (
         <Container width={width} height={height}>
             {renderCardBg}
@@ -205,7 +218,7 @@ function ScratchCardElComponent({
                     data={data}
                     config={{ cellPadding: 8, ...matrixConfig }}
                     renderCell={renderCell}
-                    winningBgTexture={bundle.winningMatrixCellBg}
+                    winningBgTexture={winningTexture}
                 />
             </Container>
         </Container>
@@ -263,11 +276,16 @@ function ScratchCardComponent(props: IScratchCardProps, ref: Ref<IScratchCardHan
 
         props.matrixConfig?.cellWidth,
         props.matrixConfig?.cellHeight,
+        props.matrixConfig?.cellPadding,
+        props.matrixConfig?.containerPadding,
+
         props.coverMatrixConfig?.cellWidth,
         props.coverMatrixConfig?.cellHeight,
 
         props.onScratchStarted,
         props.onScratchedEnought,
+
+        props.winningBgTexture,
     ]);
 
     return card;

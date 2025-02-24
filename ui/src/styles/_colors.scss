@@ -265,6 +265,13 @@ $historyTableGraient: radial-gradient(65% 50% at 50% 15%,
         96.9696968793869%,
         color.adjust(#571B6D, $lightness: -5%) 100%);
 
+$luckyCloverScratchCardGradient: linear-gradient(180deg,
+        #04890D 6%,
+        #176B43 20%,
+        #51A33F 51%,
+        #E7AA39 100%
+);
+
 $progressBorderBarBg: linear-gradient(to bottom,
         #FB6400 0%,
         #FFDA54 50%,

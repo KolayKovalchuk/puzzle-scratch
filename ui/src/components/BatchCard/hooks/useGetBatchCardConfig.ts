@@ -98,7 +98,7 @@ export function useBatchCardHandler(batchCard: BatchCard, navigate: NavigateFunc
 
         case BatchCardType.LUCKY_CLOVER:
             return useCallback(() => {
-                // navigate(`${ROUTES.LuckyClover}/${batchCard.batchId}`);
+                navigate(`${ROUTES.LuckyClover}/${batchCard.batchId}`);
             }, [navigate, batchCard]);
 
         case BatchCardType.SANTA_SAC:

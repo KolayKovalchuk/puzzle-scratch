@@ -5,8 +5,6 @@ import { ITextStyle, TextStyle } from 'pixi.js-legacy';
 
 export interface IRoundSpriteCellData extends ISpriteCellData {
     textureName: string;
-    winningBgXShift?: number;
-    winningBgYShift?: number;
 }
 
 export interface IRoundSpriteCellProps extends IMatrixCellProps<IRoundSpriteCellData> {

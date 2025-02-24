@@ -6,6 +6,7 @@ export interface IScratchAnimationBundle {
     scratchCandyBox: any;
     scratchSantaSac: any;
     scratchIceBox: any;
+    scratchLuckyClover: any;
 }
 
 export const SCRATCH_ANIMATION_BUNDLE: AssetsBundle = {
@@ -22,6 +23,10 @@ export const SCRATCH_ANIMATION_BUNDLE: AssetsBundle = {
         {
             alias: 'scratchIceBox',
             src: `${SCRATCH_ANIMATION_BUNDLE_BASE_PATH}/ice_box_updated.json`,
+        },
+        {
+            alias: 'scratchLuckyClover',
+            src: `${SCRATCH_ANIMATION_BUNDLE_BASE_PATH}/clover_box.json`,
         },
     ],
 };

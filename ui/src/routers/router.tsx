@@ -9,6 +9,7 @@ import { Wallet } from '@pages/Wallet/Wallet';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { ROUTES } from './routerConfig';
 import { VegasLoot } from '@pages/Vegas/VegasLoot';
+import { LuckyClover } from '@pages/LuckyClover/LuckyClover';
 
 // import { IceBox } from '@pages/IceBox';
 
@@ -25,6 +26,7 @@ export const AppRouter = ({}: IAppRouterProps) => {
             <Route path={`${ROUTES.VegasLoot}/:batchId`} element={<VegasLoot />} />
             <Route path={`${ROUTES.SantaSac}/:batchId`} element={<SantaSac />} />
             <Route path={`${ROUTES.IceBox}/:batchId`} element={<IceBox />} />
+            <Route path={`${ROUTES.LuckyClover}/:batchId`} element={<LuckyClover />} />
 
             <Route path={ROUTES.Wallet} element={<Wallet />} />
             <Route path={ROUTES.InviteFriends} element={<InviteFriendList />} />

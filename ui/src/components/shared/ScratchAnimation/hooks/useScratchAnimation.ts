@@ -13,6 +13,8 @@ function getScratchJson(bundle: IScratchAnimationBundle | null, animationName: S
             return bundle?.scratchSantaSac
         case ScratchAnimationName.ice_action:
             return bundle?.scratchIceBox
+        case ScratchAnimationName.clover_action:
+            return bundle?.scratchLuckyClover
         default:
             return null;
     }

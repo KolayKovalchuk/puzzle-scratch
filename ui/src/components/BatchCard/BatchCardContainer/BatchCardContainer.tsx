@@ -11,8 +11,6 @@ export function BatchCardContainer() {
         return <div className={styles.loadingContainer}>Loading...</div>;
     }
 
-    
-
     return (
         <div className={styles.container}>
             {

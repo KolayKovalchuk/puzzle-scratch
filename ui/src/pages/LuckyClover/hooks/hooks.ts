@@ -1,5 +1,6 @@
 import { WinStyledTextConfig } from '@components/shared/StyledText';
-import { ITextStyle } from 'pixi.js-legacy';
+import { getCacheKey, getCacheValue } from '@hooks/useFitTextSize';
+import { ITextStyle, TextMetrics, TextStyle } from 'pixi.js-legacy';
 import { useEffect, useMemo, useState } from 'react';
 
 export function useIsCenterCloverCell(colIndex: number, rowIndex: number) {
@@ -26,7 +27,7 @@ export function useCellTextStyles(isCenterCloverCell: boolean) {
         if (isCenterCloverCell) {
             setTextStyles({
                 ...textStyles,
-                fontSize: Math.round((defaultTextStyles.fontSize as number) * 0.7)
+                fontSize: Math.round((defaultTextStyles.fontSize as number) * 0.5)
             })
         } else {
             setTextStyles(defaultTextStyles)
@@ -61,13 +62,62 @@ function getCellTextShiftCoef(colIndex: number, rowIndex: number) {
     }
 }
 
-export function useCellTextPosition(colIndex: number, rowIndex: number, width: number, height: number, x: number, y: number) {
+function getRoboIconXShift(text: string, isCenterCloverCell: boolean, roboIconWidth: number) {
+    if (!isCenterCloverCell) return 0
+
+    const coef = text.length <= 3 ? 0.25 : 0.35;
+    return roboIconWidth * coef;
+}
+
+export function useCellTextPosition(
+    colIndex: number,
+    rowIndex: number,
+    width: number,
+    height: number,
+    x: number,
+    y: number,
+    isCenterCloverCell: boolean,
+    text: string,
+    textStyle: Partial<ITextStyle>,
+) {
+    const textSize = useMemo(() => {
+        const style = new TextStyle(textStyle);
+        console.log('style', text);
+
+        const metrics = TextMetrics.measureText(text.toString(), style);
+
+        return metrics;
+    }, [text, textStyle]);
+
     return useMemo(() => {
         const shiftConfig = getCellTextShiftCoef(colIndex, rowIndex);
 
+        const roboIconWidth = width * 0.6;
+        const roboIconHeight = roboIconWidth * 1.41;
+
+        const xShifted = x + (width * 0.5) + (width * shiftConfig.xShiftCoef) + getRoboIconXShift(text, isCenterCloverCell, roboIconWidth);
+        const yShifted = y + height * shiftConfig.yShiftCoef;
+
+        const roboIconX = xShifted - textSize?.width * 0.5 - roboIconWidth * 0.93;
+        const roboIconY = yShifted + (height - roboIconHeight) * 0.45;
+
         return {
-            x: x + width * shiftConfig.xShiftCoef,
-            y: y + height * shiftConfig.yShiftCoef
+            x: xShifted,
+            y: yShifted,
+            roboIconWidth,
+            roboIconHeight,
+            roboIconX,
+            roboIconY
         }
-    }, [colIndex, rowIndex, width, height, x, y]);
+    }, [
+        colIndex,
+        rowIndex,
+        width,
+        height,
+        x,
+        y,
+        textSize,
+        isCenterCloverCell,
+        text,
+    ]);
 }

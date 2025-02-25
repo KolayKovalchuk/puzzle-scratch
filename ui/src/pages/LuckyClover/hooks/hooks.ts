@@ -17,7 +17,7 @@ export function useIsCenterCloverCell(colIndex: number, rowIndex: number) {
 
 const defaultTextStyles: Partial<ITextStyle> = {
     ...WinStyledTextConfig,
-    fontSize: 27
+    fontSize: 24
 }
 
 export function useCellTextStyles(isCenterCloverCell: boolean) {
@@ -27,7 +27,7 @@ export function useCellTextStyles(isCenterCloverCell: boolean) {
         if (isCenterCloverCell) {
             setTextStyles({
                 ...textStyles,
-                fontSize: Math.round((defaultTextStyles.fontSize as number) * 0.5)
+                fontSize: Math.round((defaultTextStyles.fontSize as number) * 0.64)
             })
         } else {
             setTextStyles(defaultTextStyles)
@@ -62,10 +62,11 @@ function getCellTextShiftCoef(colIndex: number, rowIndex: number) {
     }
 }
 
-function getRoboIconXShift(text: string, isCenterCloverCell: boolean, roboIconWidth: number) {
+function getRoboIconXShift(isCenterCloverCell: boolean, roboIconWidth: number) {
     if (!isCenterCloverCell) return 0
 
-    const coef = text.length <= 3 ? 0.25 : 0.35;
+    // const coef = text.length <= 3 ? 0.25 : 0.35;
+    const coef = 0.25;
     return roboIconWidth * coef;
 }
 
@@ -95,7 +96,7 @@ export function useCellTextPosition(
         const roboIconWidth = width * 0.6;
         const roboIconHeight = roboIconWidth * 1.41;
 
-        const xShifted = x + (width * 0.5) + (width * shiftConfig.xShiftCoef) + getRoboIconXShift(text, isCenterCloverCell, roboIconWidth);
+        const xShifted = x + (width * 0.5) + (width * shiftConfig.xShiftCoef) + getRoboIconXShift(isCenterCloverCell, roboIconWidth);
         const yShifted = y + height * shiftConfig.yShiftCoef;
 
         const roboIconX = xShifted - textSize?.width * 0.5 - roboIconWidth * 0.93;

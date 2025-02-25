@@ -7,6 +7,7 @@ const LUCKY_CLOVER_BUNDLE_BASE_PATH = '/luckyClover';
 export interface ILuckyCloverBundle extends IScrathCardBundle {
     clover: Texture;
     luckyCloverTopCellBg: Texture;
+    roboTokenGoldNoShining: Texture;
 }
 
 export const LUCKY_CLOVER_BUNDLE: AssetsBundle = {
@@ -23,6 +24,10 @@ export const LUCKY_CLOVER_BUNDLE: AssetsBundle = {
         {
             alias: 'luckyCloverTopCellBg',
             src: `${LUCKY_CLOVER_BUNDLE_BASE_PATH}/lucky_clover_top_cell_bg.png`
+        },
+        {
+            alias: 'roboTokenGoldNoShining',
+            src: `/robo_token_gold_no_shining.png`
         }
     ],
 };

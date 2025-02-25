@@ -3,6 +3,21 @@ import { useLayoutEffect, useState } from 'react';
 
 const cache = new Map<string, number>();
 
+export function getCacheKey(
+    text: string,
+    targetWidth: number,
+    targetHeight: number,
+    initialFontSize: number,
+    shouldFitHorizontally: boolean,
+    shouldFitVertically: boolean,
+) {
+    return `${text}-${targetWidth}-${targetHeight}-${initialFontSize}-${shouldFitHorizontally}-${shouldFitVertically}`;
+}
+
+export function getCacheValue(cacheKey: string) {
+    return cache.get(cacheKey);
+}
+
 export function useFitTextSize(
     text: string,
     targetWidth: number,
@@ -20,7 +35,7 @@ export function useFitTextSize(
 
         const targetCacheKey = cacheKey
             ? `${cacheKey}-${shouldFitHorizontally}-${shouldFitVertically}`
-            : `${text}-${targetWidth}-${targetHeight}-${initialFontSize}-${shouldFitHorizontally}-${shouldFitVertically}`;
+            : getCacheKey(text, targetWidth, targetHeight, initialFontSize, shouldFitHorizontally, shouldFitVertically);
 
         if (cache.has(targetCacheKey)) {
             const cacheFontSize = cache.get(targetCacheKey);

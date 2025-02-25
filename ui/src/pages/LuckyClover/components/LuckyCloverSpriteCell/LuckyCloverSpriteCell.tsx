@@ -1,6 +1,8 @@
 import { IMatrixCellProps, ISpriteCellData } from '@components/shared/IconMatrix/IconMatrix.models';
 import { StyledTextPixiEl } from '@components/shared/StyledText';
 import { useCellTextPosition, useCellTextStyles, useIsCenterCloverCell } from '@pages/LuckyClover/hooks/hooks';
+import { formatNumber } from '@utils/formatters/formatNumber';
+import { useMemo } from 'react';
 
 export interface ILuckyCloverSpriteCellData extends ISpriteCellData {
 }
@@ -16,10 +18,12 @@ export function LuckyCloverSpriteCell({ x, y, width, height, data, colIndex, row
     const { isCenterCloverCell } = useIsCenterCloverCell(colIndex, rowIndex);
     const { textStyles } = useCellTextStyles(isCenterCloverCell);
 
+    const formattedValue = useMemo(() => formatNumber(Number(data.textureName)), [data.textureName]);
+
     return <StyledTextPixiEl
         x={xShifted}
         y={yShifted}
-        text={data.textureName}
+        text={formattedValue}
         textStyles={textStyles}
         dimensions={{ width, height }}
         valueForMeasure='99'

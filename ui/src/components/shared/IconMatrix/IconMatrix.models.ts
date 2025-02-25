@@ -5,6 +5,8 @@ export interface ISpriteCellData {
     textureName: string;
     bundleName: string;
     isWinning?: boolean;
+    winningBgXShift?: number;
+    winningBgYShift?: number;
 }
 
 export interface IMatrixCellProps<CellData = any> {
@@ -12,6 +14,8 @@ export interface IMatrixCellProps<CellData = any> {
     y: number;
     width: number;
     height: number;
+    colIndex: number;
+    rowIndex: number;
     data: CellData
 }
 
@@ -32,5 +36,5 @@ export interface IGameMatrixProps<CellProps extends IMatrixCellProps = IMatrixCe
     renderCell: (props: CellProps) => ReactElement<CellProps>
     data: CellProps['data'][][];      // 2D array of data for each cell
     config?: IGameMatrixConfig;
-    winningBgTexture: Texture;
+    winningBgTexture: Texture | null;
 }

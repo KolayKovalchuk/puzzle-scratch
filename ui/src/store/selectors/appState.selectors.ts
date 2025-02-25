@@ -61,3 +61,10 @@ export const selectAppError = createSelector(
         return queryState?.error;
     }
 )
+
+export const selectWithdrawCooldownExpiry = createSelector(
+    selectGame,
+    (queryState) => {
+        return queryState?.withdrawCooldownExpiry;
+    }
+)

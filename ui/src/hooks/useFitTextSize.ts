@@ -1,7 +1,22 @@
 import { ITextStyle, TextMetrics, TextStyle } from 'pixi.js-legacy';
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 
 const cache = new Map<string, number>();
+
+export function getCacheKey(
+    text: string,
+    targetWidth: number,
+    targetHeight: number,
+    initialFontSize: number,
+    shouldFitHorizontally: boolean,
+    shouldFitVertically: boolean,
+) {
+    return `${text}-${targetWidth}-${targetHeight}-${initialFontSize}-${shouldFitHorizontally}-${shouldFitVertically}`;
+}
+
+export function getCacheValue(cacheKey: string) {
+    return cache.get(cacheKey);
+}
 
 export function useFitTextSize(
     text: string,
@@ -15,18 +30,16 @@ export function useFitTextSize(
     const initialFontSize = typeof textStyle.fontSize === 'number' ? textStyle.fontSize : Number(textStyle.fontSize?.replace('px', ''));
     const [fontSize, setFontSize] = useState(initialFontSize);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (!targetWidth || !targetHeight || !text) return;
 
         const targetCacheKey = cacheKey
             ? `${cacheKey}-${shouldFitHorizontally}-${shouldFitVertically}`
-            : `${text}-${targetWidth}-${targetHeight}-${initialFontSize}-${shouldFitHorizontally}-${shouldFitVertically}`;
+            : getCacheKey(text, targetWidth, targetHeight, initialFontSize, shouldFitHorizontally, shouldFitVertically);
 
         if (cache.has(targetCacheKey)) {
             const cacheFontSize = cache.get(targetCacheKey);
 
-            console.log('cacheFontSize', text, cacheFontSize);
-            
             if (cacheFontSize !== undefined) {
                 setFontSize(cacheFontSize);
                 return;

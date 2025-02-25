@@ -1,9 +1,7 @@
 import { IGameMatrixDefaultConfig } from '@components/shared/IconMatrix/hooks/useCellSize';
 import { ICardData } from '@models/IBuyBatchCardData';
-import { selectMatrixBlinkCounter } from '@store/selectors/appState.selectors';
 import { isCellWinnings } from '@utils/isCellWinnings';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 
 export interface ICardBonusTypesDict {
     [key: string]: [number, number];
@@ -12,6 +10,7 @@ export interface ICardBonusTypesDict {
 export const CardsBonusTypesDict: ICardBonusTypesDict = {
     SantaSacBonus: [5,5],
     IceBoxDiamondBonus: [6, Infinity],
+    LuckyCloverTopBonus: [6, Infinity],
     IceBoxX2Bonus: [7,1],
     IceBoxX5Bonus: [8,1],
 }

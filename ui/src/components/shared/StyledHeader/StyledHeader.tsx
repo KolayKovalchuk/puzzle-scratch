@@ -63,7 +63,7 @@ export function StyledHeader({
                 style={{ width: height }}
             /> }
             <div className={styles.headerContainer} style={{ height: height }}>
-                <StyledText text={title} textStyles={{ fontSize }} textFitCoefficient={0.9} />
+                <StyledText text={title} textStyles={{ fontSize }} textFitCoefficient={0.9} yShift={0.5}/>
             </div>
             <div className={`${styles.content}`} style={{ marginTop: contentMarginTop }}>
                 {children}

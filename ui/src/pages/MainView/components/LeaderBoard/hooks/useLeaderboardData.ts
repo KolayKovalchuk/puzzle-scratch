@@ -6,6 +6,7 @@ import { LeaderboardTableMode } from '../LeaderBoard';
 
 export function getLeaderboardTableData(data: LeaderboardEntry[]): ITableData["tBodyData"] {
     return data
+        .filter((entry) => entry.totalWinning > 0)
         .sort((a, b) => a.position - b.position)
         .map((entry, index) => {
             return {

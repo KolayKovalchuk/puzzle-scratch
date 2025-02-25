@@ -8,7 +8,6 @@ import { Icon } from '@components/shared/Icon';
 import styles from '../../DepositWithStarsBody.module.scss';
 
 import robo_token_gold_no_shining from '@icons/robo_token_gold_no_shining.svg';
-import telegram_star from '@icons/telegram_star.svg';
 
 
 export interface IDepositWithStarsButtonsProps {
@@ -39,7 +38,9 @@ export function DepositWithStarsButtons({ starsConvertOptions, btnWidth, onOptio
                     >
                         <div className={styles.iconContainerBtnContent}>
                             <div className={styles.iconContainerBtnLabel}>
-                                <Icon name={telegram_star} className={`${styles.icon} ${styles.starIcon}`} />
+                                <Icon className={`${styles.icon} ${styles.starIcon}`}>
+                                    <img src='/telegram_star.png' alt="star" width='100%'/>
+                                </Icon>
                                 <RegularStyledText
                                     className={styles.iconContainerBtnText}
                                     textStyles={textStyles}

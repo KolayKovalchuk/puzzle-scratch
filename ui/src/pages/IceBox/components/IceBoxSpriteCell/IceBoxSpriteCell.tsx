@@ -41,10 +41,26 @@ export function IceBoxSpriteCell({ x, y, width, height, data }: IIceBoxSpriteCel
     const roboTokenBlueBorder = bundle?.roboTokenBlueBorder;
     const goldenDiamond = bundle?.goldenDiamond;
 
-    const { priceContainerWidth, priceNumberPosition, roboIconSize } = useCellLabelsPosition(
+    const {
+        winNumberX,
+        winNumberY,
+        winNumberHeight,
+
+        priceContainerWidth,
+        priceNumberX,
+        priceNumberY,
+
+        roboIconX,
+        roboIconY,
+        roboIconWidth,
+        roboIconHeight,
+    } = useCellLabelsPosition(
+        x,
+        y,
         winNumber,
         priceNumber,
         width,
+        height,
         winNumberTextStyleClass,
         priceNumberTextStyleClass
     );
@@ -65,41 +81,35 @@ export function IceBoxSpriteCell({ x, y, width, height, data }: IIceBoxSpriteCel
         )
     }
 
-    const winNumberX = x;
-    const winNumberY = y - height * 0.24;
-
-    const roboIconX = x + priceNumberPosition.x;
-    const roboIconY = winNumberY + priceNumberPosition.y;
-
-    const priceNumberX = roboIconX + roboIconSize;
-    const priceNumberY = roboIconY;
-
     return (<>
         <StyledTextPixiEl
-            dimensions={{ width, height }}
+            dimensions={{ width, height: winNumberHeight }}
             text={winNumber}
             textStyles={winNumberTextStyle}
             textFitCoefficient={0.8}
             x={winNumberX}
             y={winNumberY}
             xShift={0.55}
+            yShift={0.55}
             valueForMeasure={'1000'}
+            shouldFitVertically={false}
         />
         <Sprite
             texture={roboTokenBlueBorder}
             x={roboIconX}
             y={roboIconY}
-            width={roboIconSize}
-            height={roboIconSize}
+            width={roboIconWidth}
+            height={roboIconHeight}
         ></Sprite>
         <StyledTextPixiEl
-            dimensions={{ width: priceContainerWidth - roboIconSize, height: roboIconSize }}
+            dimensions={{ width: priceContainerWidth - roboIconWidth, height: roboIconHeight }}
             text={priceNumber}
             textStyles={priceNumberTextStyleClass}
             textFitCoefficient={1}
             x={priceNumberX}
             y={priceNumberY}
             valueForMeasure={'100'}
+            shouldFitVertically={false}
         />
     </>
     )

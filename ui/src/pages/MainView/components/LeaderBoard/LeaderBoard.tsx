@@ -42,6 +42,7 @@ export function LeaderBoard({ }: ILeaderBoardProps) {
                     text={headerText}
                     className={styles.header}
                     textStyles={headerStyles}
+                    shouldFitVertically={false}
                 />
             </div>
             <Table

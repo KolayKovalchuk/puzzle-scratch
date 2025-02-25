@@ -4,7 +4,12 @@ import { defaultConfig, useCellSize } from './hooks/useCellSize';
 import { IGameMatrixProps } from './IconMatrix.models';
 import { WinningBg } from './WinningBg';
 
-export function IconMatrix({ data = [], renderCell, config: configArg = defaultConfig, winningBgTexture }: IGameMatrixProps) {
+export function IconMatrix({
+    data = [],
+    renderCell,
+    config: configArg = defaultConfig,
+    winningBgTexture,
+}: IGameMatrixProps) {
     const config = { ...defaultConfig, ...configArg };
     const app = useApp();
     const { width: appWidth, height: appHeight } = app.screen;
@@ -36,12 +41,14 @@ export function IconMatrix({ data = [], renderCell, config: configArg = defaultC
                             <WinningBg
                                 x={x}
                                 y={y}
+                                xShift={cellData?.winningBgXShift}
+                                yShift={cellData?.winningBgYShift}
                                 cellWidth={cellWidth}
                                 config={config}
                                 winningBgTexture={winningBgTexture}
                                 isWinning={cellData.isWinning}
                             />
-                            {renderCell({ data: cellData, x, y, width: cellWidth, height: cellHeight })}
+                            {renderCell({ data: cellData, x, y, width: cellWidth, height: cellHeight, colIndex, rowIndex })}
                         </Container>
                     )
                 }

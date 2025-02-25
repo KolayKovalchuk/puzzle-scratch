@@ -33,6 +33,7 @@ $todayDayCellMargin: calc($dayCellMargin * -1.5);
     position: relative;
 
     max-height: 200px;
+    height: min-content;
 }
 
 .dayContainer {
@@ -51,16 +52,22 @@ $todayDayCellMargin: calc($dayCellMargin * -1.5);
 
     white-space: nowrap;
 
-    padding: $paddingBottom 10px;
+    padding: 8px 10px;
+    padding-bottom: $paddingBottom;
+    aspect-ratio: 257/197;
+
+    @media screen and (max-width: 375px) {
+        padding-top: 4px;
+    }
 
     &:not(:last-child) {
         margin-right: -$dayCellMargin;
     }
 
     &:not(.todayArrowBlock) {
-        $margin: 7%;
-        margin-top: $margin;
-        margin-bottom: $margin;
+        .headerText {
+            margin-bottom: 6px;
+        }
     }
 
     &.leftArrowBlock {
@@ -70,13 +77,18 @@ $todayDayCellMargin: calc($dayCellMargin * -1.5);
         .dayContainerBonus {
             right: 10%;
         }
+
+        .coinIcon {
+            left: -4%;
+        }
     }
 
     &.rightArrowBlock {
         background-image: url('/arrowBlocks/rightArrowBlock.png');
 
         .coinIcon {
-            left: 5%;
+            left: 7%;
+            top: -3px;
         }
     }
 
@@ -84,16 +96,27 @@ $todayDayCellMargin: calc($dayCellMargin * -1.5);
         background-image: url('/arrowBlocks/centerArrowBlock.png');
 
         .coinIcon {
-            left: 8%;
+            left: 5%;
+
+            &.md {
+                left: 2%;
+            }
         }
 
-        .dayContainerBonus,
-        .headerText {
+        .headerText,
+        .dayContainerBonus {
             right: 10%;
         }
     }
 
     &.todayArrowBlock {
+        aspect-ratio: 290/365;
+        padding-top: 0px;
+
+        &.fil {
+            padding-top: 4px;
+        }
+
         &.leftArrowBlock {
             background-image: url('/arrowBlocks/todayArrowBlockLeft.png');
             margin-right: $todayDayCellMargin;
@@ -113,6 +136,7 @@ $todayDayCellMargin: calc($dayCellMargin * -1.5);
             background-image: url('/arrowBlocks/todayArrowBlockCenter.png');
 
             .coinIcon {
+                top: -8px;
                 left: 20%;
             }
         }
@@ -138,6 +162,11 @@ $todayDayCellMargin: calc($dayCellMargin * -1.5);
             border-radius: 50px;
         }
 
+        .headerText {
+            max-height: 30%;
+            margin-bottom: 2px;
+        }
+
         .coinIcon {
             left: 15%;
             width: 84%;
@@ -150,29 +179,22 @@ $todayDayCellMargin: calc($dayCellMargin * -1.5);
     }
 }
 
-.headerText {
-    position: relative;
-    width: 100%;
-}
-
 .dayContainerBonus {
     position: relative;
     max-width: 100%;
 }
 
 .headerText {
-    $height: 5%;
-    max-height: $height;
-    min-height: $height;
-    width: 100%;
-    position: relative;
-    top: -1%;
+    width: 99%;
+    max-height: 30%;
+    min-height: 20px;
+    aspect-ratio: 44/24;
 }
 
 .coinIcon {
     position: relative;
     width: 90%;
-    top: -6px;
+    top: -4px;
 }
 
 
@@ -195,6 +217,5 @@ $todayDayCellMargin: calc($dayCellMargin * -1.5);
     width: calc(100% - $roboIconSize);
     height: initial;
 
-    position: relative;
-    top: 2px;
+    padding-right: 2px;
 }

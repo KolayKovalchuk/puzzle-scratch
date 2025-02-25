@@ -1,8 +1,8 @@
 import { useFitTextSize } from '@hooks/useFitTextSize';
 import { Container, Text } from '@pixi/react';
 import { ITextStyle, TextStyle } from 'pixi.js-legacy';
-import { DefaultTextStyleConfig } from '../DefaultTextStyleConfig';
 import { useEffect } from 'react';
+import { DefaultTextStyleConfig } from '../DefaultTextStyleConfig';
 
 
 export interface IStyledTextPixiElProps {
@@ -80,7 +80,11 @@ export function StyledTextPixiEl({
                     style={textStyle}
                     anchor={anchor}
                     x={dimensions.width * xShift}
-                    y={dimensions.height * yShift} />
+                    y={dimensions.height * yShift}
+                    resolution={8}
+                    roundPixels={true}
+                    scale={1}
+                />
             </Container>
         );
     }

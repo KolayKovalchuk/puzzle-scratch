@@ -1,93 +1,155 @@
 # Puzzle Scratch Telegram Bot Server
 
+This repository contains the server-side code for the Puzzle Scratch Telegram Bot.
 
+## Webhook
 
-## Getting started
+The bot server is deployed as a Google Cloud Function, and its URL is registered as the webhook URL in the Telegram API. This means that the bot is triggered by Telegram servers on each update.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## Cloud Functions
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+The app handles three cloud functions:
 
-## Add your files
+- **handleWebhook**: The main function that processes incoming updates from Telegram.
+- **setWebhook**: Resets the webhook URL via an HTTP trigger.
+- **getWebhook**: Returns the current webhook information.
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+## Prerequisites
 
-```
-cd existing_repo
-git remote add origin https://gitlab.com/rebel-bots/puzzle-scratch-telegram-bot-server.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitlab.com/rebel-bots/puzzle-scratch-telegram-bot-server/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+- Node.js (v14 or higher)
+- npm (v6 or higher)
+- Google Cloud SDK (for deployment)
 
 ## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+1. Clone the repository:
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+    ```sh
+    git clone git@gitlab.com:rebel-bots/puzzle-scratch-telegram-bot-server.git
+    cd puzzle-scratch-telegram-bot-server
+    ```
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+2. Install dependencies:
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+    ```sh
+    npm install
+    ```
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+3. Create a `.env` file in the root directory and add the environment variables described in the next section.
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+## Environment Variables
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+The following environment variables are set in the Google Cloud client interface:
 
-## License
-For open source projects, say how it is licensed.
+- `CONFIG_URL`: URL to fetch the bot configuration.
+- `BOT_TOKEN`: Telegram bot token.
+- `PUZZLE_GAME_SERVICE_URL` (not used in the local development environment): URL for the puzzle game service.
+- `TELEGRAM_WEB_HOOK_URL`: Webhook URL for the Telegram bot.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+The following environment variables should be added to the `.env` file for local development:
+
+- `CONFIG_URL`: URL to fetch the bot configuration.
+- `BOT_TOKEN`: Telegram bot token.
+- `TELEGRAM_WEB_HOOK_URL`: Webhook URL for your local server (best option is to use ngrok). In local dev enviroment used only if `IS_LOCAL_DEV_WEBHOOK` is true.
+- `IS_DEV`: Flag to indicate if the environment is development.
+- `IS_LOCAL_DEV`: Flag to indicate if the environment is local development.
+- `IS_LOCAL_DEV_WEBHOOK`: Flag to indicate if the webhook should be used instead of long polling locally.
+
+Other variables:
+- `TELEGRAM_INTERNAL_COMM_AUTH_TOKEN` (not used in the local development environment): Internal communication auth token for the puzzle game service API. This is set in the cloud function config build file.
+
+## Development
+
+To start the development server with hot-reloading (runs in long polling mode):
+
+```sh
+npm run start:dev
+```
+
+To start the local server with Google Cloud Functions Framework (runs in the same environment as Google Cloud Functions):
+
+```sh
+npm run start:local
+```
+
+To use the VSCode debugger, ensure you have the following configuration in `.vscode/launch.json`:
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Program",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/src/index.ts",
+      "preLaunchTask": "tsc: build - tsconfig.json",
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"]
+    }
+  ]
+}
+```
+
+## Build
+
+To build the project:
+
+```sh
+npm run build:ts
+```
+
+## Deployment
+
+To deploy the project to Google Cloud Functions, you need to authorize in Google Cloud SDK with a user who has access to the cloud project:
+
+```sh
+gcloud auth login
+```
+
+For production:
+
+```sh
+npm run build:deploy:prod
+```
+
+For development:
+
+```sh
+npm run build:deploy:dev
+```
+
+## Project Structure
+
+The project structure is organized as follows:
+
+```
+puzzle-scratch-telegram-bot-server/
+├── src/                        # Contains the source code for the bot and cloud functions
+│   ├── bot.ts                  # Bot configuration and handlers
+│   ├── index.ts                # Entry point for cloud functions
+│   ├── commands/               # Command handlers
+│   ├── models/                 # Data models and interfaces
+│   ├── services/               # Services for API calls and other functionalities
+│   ├── utils/                  # Utility functions
+│   └── ...                     # Other source files
+├── .env                        # Environment variables file
+├── .babelrc                    # Babel configuration file
+├── .gcloudignore               # Files to ignore when deploying to Google Cloud
+├── .gitignore                  # Files to ignore in Git
+├── .vscode/                    # VSCode configuration folder
+│   └── launch.json             # VSCode debugger configuration
+├── cloudfunction_config_dev.yml# Development environment build configuration
+├── cloudfunction_config.yml    # Production environment build configuration
+├── package.json                # Project dependencies and scripts
+├── tsconfig.json               # TypeScript configuration file
+└── ...                         # Other project files
+```
+
+## Configuration
+
+The configuration is fetched from a remote URL specified in the `CONFIG_URL` environment variable. The configuration includes various settings such as API URLs, localization data, and other bot-specific settings.
+
+## Localization
+
+Localization data is fetched from a remote URL specified in the configuration. The bot supports multiple languages and selects the appropriate language based on the user's locale.

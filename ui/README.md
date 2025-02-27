@@ -74,6 +74,13 @@ npm run serve:dev
 ```
 This will start the development server and you can view the application in your browser at `http://localhost:5173`.
 
+## Opening in Telegram Web App Environment
+To open the local development environment in the Telegram web app environment, follow these steps:
+
+1. Expose a local server to the internet securely with the same port as the app is serving on the local machine. The best option is to use the `ngrok` library.
+2. Using the Telegram bot `@BotFather`, create a Telegram web app with the remote server URL as the app URL.
+3. After that, the web app can be reached by the Telegram web app URL provided by Telegram.
+
 ## Building for Production
 To build the application for production, use the following command:
 ```sh

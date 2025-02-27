@@ -88,6 +88,14 @@ npm run build:prod
 ```
 The production-ready files will be generated in the `dist` directory.
 
+## Configuration
+
+The configuration is fetched from a remote URL specified in the `CONFIG_URL` environment variable. The configuration includes various settings such as API URLs, localization data, and other bot-specific settings.
+
+## Localization
+
+Localization data is fetched from a remote URL specified in the configuration. The bot supports multiple languages and selects the appropriate language based on the user's locale.
+
 ## Scripts Explanation
 - `build:dev`: Builds the application in development mode.
 - `build:prod`: Builds the application in production mode.

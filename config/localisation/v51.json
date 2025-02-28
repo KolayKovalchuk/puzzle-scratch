@@ -367,7 +367,7 @@
     "pt-BR": "Ocorreu um erro ao enviar os presentes. Por favor, tente novamente mais tarde.",
     "VI": "Đã xảy ra lỗi khi gửi quà. Vui lòng thử lại sau.",
     "ES": "Se ha producido un error al enviar los regalos. Inténtelo de nuevo más tarde.",
-    "AR": "حدث خطأ أثناء إرسال الهدايا. يرجى المحاولة مرة أخرى في وقت لاحق.",
+    "AR": "حدث خطأ أثناء إرسال الهدايا. يرجى المحاولة مرة أخرى لاحقا.",
     "FIL": "May naganap na error habang ipinapadala ang mga regalo. Pakisubukang muli mamaya.",
     "HI": "उपहार भेजते समय कोई त्रुटि हुई है. कृपया बाद में पुन: प्रयास करें।"
   },
@@ -1034,7 +1034,7 @@
   {
     "Key": "shop.stars.popup.success.title",
     "EN": "Deposit Successful",
-    "UK": "Депозит успішно",
+    "UK": "Депозит виконано",
     "RU": "Депозит успешен",
     "pt-BR": "Depósito bem-sucedido",
     "VI": "Gửi tiền thành công",
@@ -1190,7 +1190,7 @@
   {
     "Key": "txt.transfer.popup.success.title",
     "EN": "Deposit Successful",
-    "UK": "Депозит успішно",
+    "UK": "Депозит виконано",
     "RU": "Депозит успешен",
     "pt-BR": "Depósito bem-sucedido",
     "VI": "Gửi tiền thành công",
@@ -1254,7 +1254,7 @@
     "RU": "• Минимальный вывод (<$icon1>) <$var1>.\n• Максимальный вывод (<$icon1>) <$var2>.\n• Убедитесь, что адрес вашего кошелька верен. \n• 0 комиссия за снятие средств\n• Вывод средств может занять 2 минуты.\n• Время восстановления между выводами средств составляет <$var3> дней.",
     "pt-BR": "• Saque mínimo (<$icon1>) <$var1>.\n• Retirada máxima (<$icon1>) <$var2>.\n• Certifique-se de que o endereço da sua carteira esteja correto \n• 0 taxa de retirada\n• A retirada pode levar 2 minutos\n• O intervalo entre saques é de <$var3> dias",
     "VI": "• Số tiền rút tối thiểu (<$icon1>) <$var1>.\n• Số tiền rút tối đa (<$icon1>) <$var2>.\n• Đảm bảo rằng địa chỉ ví của bạn là chính xác \n• 0 phí rút tiền\n• Rút tiền có thể mất 2 phút\n• Thời gian hồi chiêu giữa các lần rút tiền là <$var3> ngày",
-    "ES": "• Retiro mínimo (<$icon1>) <$var1>.\n• Retiro máximo (<$icon1>) <$var2>.\n• Asegúrese de que la dirección de su billetera sea correcta \n• 0 tarifa de retiro\n• La retirada puede tardar 2 minutos.\n• El tiempo de recuperación entre retiros es <$var3> días",
+    "ES": "• Retiro mínimo (<$icon1>) <$var1>.\n• Retiro máximo (<$icon1>) <$var2>.\n• Asegúrese de que la dirección de su billetera sea correcta \n• 0 tarifa de retiro\n• La retirada puede tardar 2 minutos\n• El tiempo de recuperación entre retiros es <$var3> días",
     "AR": "• الحد الأدنى للسحب (<$icon1>) <$var1>.\n• الحد الأقصى للسحب (<$icon1>) <$var2>.\n• تأكد من صحة عنوان محفظتك \n• 0 رسوم السحب\n• يمكن أن يستغرق السحب دقيقتين\n• فترة التهدئة بين عمليات السحب هي <$var3> من الأيام",
     "FIL": "• Minimum na withdrawal (<$icon1>) <$var1>.\n• Max withdrawal (<$icon1>) <$var2>.\n• Tiyaking tama ang iyong wallet address \n• 0 Bayad sa pag-withdraw\n• Maaaring tumagal ng 2 minuto ang withdrawal\n• Ang cooldown sa pagitan ng withdrawal ay <$var3> araw",
     "HI": "• न्यूनतम निकासी (<$icon1>) <$var1>.\n• अधिकतम निकासी (<$icon1>) <$var2>.\n• सुनिश्चित करें कि आपका वॉलेट पता सही है \n• 0 निकासी शुल्क\n• निकासी में 2 मिनट का समय लग सकता है\n• निकासी के बीच कूलडाउन <$var3> दिन है"
@@ -1328,7 +1328,7 @@
     "VI": "Số tiền rút không chính xác.",
     "ES": "Monto de retiro incorrecto.",
     "AR": "مبلغ السحب غير صحيح.",
-    "FIL": "Maling halaga ng pag-withdraw.",
+    "FIL": "Maling halaga ng withdrawal.",
     "HI": "गलत निकासी राशि."
   },
   {
@@ -1432,7 +1432,7 @@
     "EN": "Get <$var1> RBAX for every <$var2> friends that accepts your invite! Only counts if your friend hasn't played Crypto Scratch yet.",
     "UK": "Отримайте <$var1> RBAX за кожного <$var2> друга, який прийме ваше запрошення! Враховується, лише якщо ваш друг ще не грав у Crypto Scratch.",
     "RU": "Получите <$var1> RBAX за каждого <$var2> друга, принявшего ваше приглашение! Засчитывается только в том случае, если ваш друг еще не играл в Crypto Scratch.",
-    "pt-BR": "Ganhe <$var1> RBAX para cada <$var2> amigo que aceitar seu convite! Só conta se o seu amigo ainda não jogou Crypto Scratch.",
+    "pt-BR": "Receba <$var1> RBAX para cada <$var2> amigo que aceitar seu convite! Só conta se o seu amigo ainda não jogou Crypto Scratch.",
     "VI": "Nhận <$var1> RBAX cho mỗi người bạn <$var2> chấp nhận lời mời của bạn! Chỉ tính nếu bạn của bạn chưa chơi Crypto Scratch.",
     "ES": "¡Obtén <$var1> RBAX por cada <$var2> amigo que acepte tu invitación! Solo cuenta si tu amigo aún no ha jugado Crypto Scratch.",
     "AR": "احصل على <$var1> RBAX لكل أصدقاء <$var2> يقبلون دعوتك! يتم احتسابها فقط إذا لم يلعب صديقك Crypto Scratch بعد.",
@@ -1490,7 +1490,7 @@
   {
     "Key": "txt.deposit.action",
     "EN": "Deposit",
-    "UK": "депозит",
+    "UK": "Депозит",
     "RU": "Депозит",
     "pt-BR": "Depósito",
     "VI": "Tiền gửi",
@@ -1586,7 +1586,7 @@
   {
     "Key": "txt.outofrbax.btn.deposit",
     "EN": "Deposit",
-    "UK": "депозит",
+    "UK": "Депозит",
     "RU": "Депозит",
     "pt-BR": "Depósito",
     "VI": "Tiền gửi",
@@ -1602,7 +1602,7 @@
     "RU": "Спросите друзей",
     "pt-BR": "Pergunte aos amigos",
     "VI": "Hỏi bạn bè",
-    "ES": "Pregúntale a tus amigos",
+    "ES": "Preguntar a amigos",
     "AR": "اسأل الأصدقاء",
     "FIL": "Tanungin ang mga Kaibigan",
     "HI": "मित्रों से पूछो"
@@ -1801,26 +1801,26 @@
   },
   {
     "Key": "puzzle.info.luckyclover",
-    "EN": "Vegas Loot brings you the excitement of the glamourus Vegas experience! Win the prize in the prize box if same symbols appear in a side-to-side, top-to-bottom, or diagonal lines. If the multiplier symbol is a part of a winning line, your multi-luck will pay-off! by multiplying your winnings!",
-    "UK": "",
-    "RU": "",
-    "pt-BR": "",
-    "VI": "",
-    "ES": "",
-    "AR": "",
-    "FIL": "",
-    "HI": ""
+    "EN": "Lucky Clover Game brings you the thrill of chasing fortune! Every card has 6 lucky random numbers. Each clover holds a prize and 4 numbers. If 4 numbers of the clover appears in the winning numbers, you win the prize stated in the middle of the clover! Good luck!",
+    "UK": "Гра Lucky Clover дарує вам азарт у погоні за удачею! Кожна картка містить 6 випадкових щасливих чисел. Кожен конюшина містить приз і 4 числа. Якщо 4 числа конюшини з’являться серед виграшних чисел, ви виграєте приз, зазначений у центрі конюшини! Удачі!",
+    "RU": "Игра Lucky Clover приносит вам азарт в погоне за удачей! В каждой карточке 6 случайных счастливых чисел. Каждый клевер содержит приз и 4 числа. Если 4 числа клевера совпадут с выигрышными числами, вы получите приз, указанный в центре клевера! Удачи!",
+    "pt-BR": "O jogo Lucky Clover traz a emoção de perseguir a fortuna! Cada cartão tem 6 números aleatórios da sorte. Cada trevo contém um prêmio e 4 números. Se os 4 números do trevo aparecerem entre os números vencedores, você ganha o prêmio indicado no centro do trevo! Boa sorte!",
+    "VI": "Trò chơi Lucky Clover mang đến cho bạn cảm giác hồi hộp khi theo đuổi vận may! Mỗi thẻ có 6 số may mắn ngẫu nhiên. Mỗi cỏ ba lá chứa một giải thưởng và 4 số. Nếu 4 số của cỏ ba lá xuất hiện trong dãy số trúng thưởng, bạn sẽ giành được giải thưởng ghi ở giữa cỏ ba lá! Chúc may mắn!",
+    "ES": "¡El juego Lucky Clover te trae la emoción de perseguir la fortuna! Cada carta tiene 6 números de la suerte aleatorios. Cada trébol contiene un premio y 4 números. Si los 4 números del trébol aparecen en los números ganadores, ganas el premio indicado en el centro del trébol. ¡Buena suerte!",
+    "AR": "لعبة Lucky Clover تمنحك إثارة مطاردة الحظ! تحتوي كل بطاقة على 6 أرقام عشوائية محظوظة. يحتوي كل نبات النفل على جائزة و4 أرقام. إذا ظهرت 4 أرقام من النفل ضمن الأرقام الفائزة، تفوز بالجائزة المذكورة في وسط النفل! حظًا سعيدًا!",
+    "FIL": "Ang Lucky Clover Game ay magdadala sa iyo ng kilig ng paghahabol sa swerte! Ang bawat card ay may 6 na random na maswerteng numero. Ang bawat clover ay may premyo at 4 na numero. Kung ang 4 na numero ng clover ay lumitaw sa winning numbers, panalo ka ng premyong nakasaad sa gitna ng clover! Good luck!",
+    "HI": "Lucky Clover गेम आपको किस्मत की तलाश का रोमांच देता है! हर कार्ड में 6 भाग्यशाली यादृच्छिक संख्याएँ होती हैं। प्रत्येक तिपतिया घास में एक पुरस्कार और 4 संख्याएँ होती हैं। यदि तिपतिया घास की 4 संख्याएँ विजेता संख्याओं में आती हैं, तो आप तिपतिया घास के बीच में उल्लिखित पुरस्कार जीतते हैं! शुभकामनाएँ!"
   },
   {
     "Key": "puzzle.gallery.luckyclover",
-    "EN": "This deck holds prizes in the amount of 33,000 RBAX!\nDo you feel lucky? 10,000 cards in batch.",
-    "UK": "",
-    "RU": "",
-    "pt-BR": "",
-    "VI": "",
-    "ES": "",
-    "AR": "",
-    "FIL": "",
-    "HI": ""
+    "EN": "This deck holds prizes in the amount of 30,000 RBAX! with 10,000 cards in batch. \"Luck is believing you're lucky.\" —Tennessee Williams",
+    "UK": "Ця колода містить призи на суму 30,000 RBAX! У випуску 10,000 карток. «Удача – це вірити в свою удачу.» —Теннессі Вільямс",
+    "RU": "Эта колода содержит призы на сумму 30,000 RBAX! В тираже 10,000 карт. «Удача – это верить в свою удачу.» —Теннесси Уильямс",
+    "pt-BR": "Este baralho contém prêmios no valor de 30.000 RBAX! Com 10.000 cartões no lote. \"Sorte é acreditar que você é sortudo.\" —Tennessee Williams",
+    "VI": "Bộ bài này có tổng giải thưởng trị giá 30.000 RBAX! Với 10.000 thẻ trong đợt phát hành. \"May mắn là tin rằng bạn may mắn.\" —Tennessee Williams",
+    "ES": "Este mazo contiene premios por un total de 30,000 RBAX! Con 10,000 cartas en la tirada. \"La suerte es creer que tienes suerte.\" —Tennessee Williams",
+    "AR": "تحتوي هذه المجموعة على جوائز بقيمة 30,000 RBAX! مع 10,000 بطاقة في الدفعة. \"الحظ هو أن تؤمن بأنك محظوظ.\" —تينيسي ويليامز",
+    "FIL": "Ang deck na ito ay may mga premyo na nagkakahalaga ng 30,000 RBAX! May 10,000 cards sa batch. \"Ang swerte ay paniniwala na ikaw ay maswerte.\" —Tennessee Williams",
+    "HI": "इस डेक में 30,000 RBAX के पुरस्कार हैं! 10,000 कार्ड बैच में हैं। \"किस्मत यह मानना है कि आप भाग्यशाली हैं।\" —टेनेसी विलियम्स"
   }
 ]

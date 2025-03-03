@@ -11,7 +11,7 @@ import { UserStats } from '@models/UserStats.model';
 import { useWithdrawDialog } from '@pages/Wallet/hooks/useWithdrawDialog';
 import { DepositWithDialogMode } from '@pages/Wallet/Wallet.models';
 import { selectLocalValue } from '@store/selectors/localization.selectors';
-import { selectUserBalanceTotal, selectUserBalanceWithdrawable } from '@store/selectors/user.selectors';
+import { selectIsQaUser, selectUserBalanceTotal, selectUserBalanceWithdrawable } from '@store/selectors/user.selectors';
 import { formatNumber } from '@utils/formatters/formatNumber';
 import { WithdrawDialog } from '../WithdrawDialog/WithdrawDialog';
 
@@ -39,6 +39,7 @@ export function WalletInfo({ userStats, onModeChanged }: IWalletInfoProps) {
 
     const { onDepositBtnClick, closeDialog, isDepositDialogOpen } = useDepositWithDialog();
     const { onWithdrawBtnClick, closeDialog: closeWithdrawDialog, isWithdrawDialogOpen } = useWithdrawDialog();
+    const isQaUser = useSelector(selectIsQaUser);
 
     return (<>
         <div className={styles.walletInfoContainer}>
@@ -81,7 +82,7 @@ export function WalletInfo({ userStats, onModeChanged }: IWalletInfoProps) {
                         text={withdrawLabel}
                         getTextSize={setWithdrawBtnFontSize}
                         textStyle={textStylesWithFontSize}
-                        isDisabled={true}
+                        isDisabled={!isQaUser}
                     ></ButtonWithRibbon>
                 </div>
                 <div className={styles.balanceInfoCell}>

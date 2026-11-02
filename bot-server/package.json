@@ -1,0 +1,40 @@
+{
+  "name": "puzzle-scratch-telegram-bot-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --exec babel-node ./src/index.ts --extensions .ts",
+    "start:dev": "NODE_ENV=development npm start",
+    "start:prod": "NODE_ENV=production npm start",
+    "start:local": "functions-framework --source=dist --target=handleWebhook",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:ts": "babel src -d dist --extensions \".ts\" && cp package.json dist/",
+    "build:watch": "nodemon --exec babel src -d dist --extensions \".ts\"",
+    "deploy:prod": "gcloud builds submit --config ./cloudfunction_config.yml .",
+    "deploy:dev": "gcloud builds submit --config ./cloudfunction_config_dev.yml .",
+    "build:deploy:prod": "npm run build:ts && npm run deploy:prod",
+    "build:deploy:dev": "npm run build:ts && npm run deploy:dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.0",
+    "@babel/node": "^7.21.0",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-typescript": "^7.26.0",
+    "@types/node": "^22.10.1",
+    "nodemon": "^3.0.1",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.4.2",
+    "axios": "^1.7.9",
+    "axios-retry": "^4.5.0",
+    "dotenv": "^16.4.7",
+    "google-auth-library": "^9.15.0",
+    "telegraf": "^4.16.3"
+  }
+}
